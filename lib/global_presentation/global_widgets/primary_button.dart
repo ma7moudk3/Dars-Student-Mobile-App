@@ -7,12 +7,16 @@ class PrimaryButton extends StatelessWidget {
   final Color? fontColor;
   final double? fontSize, width;
   final FontWeight fontWeight;
+  final BorderSide? borderSide;
+  final BorderRadiusGeometry? borderRadius;
   const PrimaryButton({
     Key? key,
     required this.onPressed,
     required this.title,
     this.color,
     this.width,
+    this.borderSide,
+    this.borderRadius,
     this.fontSize = 13,
     this.fontWeight = FontWeightManager.light,
     this.fontColor = Colors.white,
@@ -26,10 +30,13 @@ class PrimaryButton extends StatelessWidget {
       child: ElevatedButton(
         onPressed: onPressed,
         style: ElevatedButton.styleFrom(
+          splashFactory: NoSplash.splashFactory,
           backgroundColor: color ?? (ColorManager.primary),
           shape: RoundedRectangleBorder(
-              borderRadius: BorderRadius.circular(8.h),
-              side: BorderSide(color: ColorManager.primary, width: 1.5)),
+            borderRadius: borderRadius ?? BorderRadius.circular(8.h),
+            side: borderSide ??
+                BorderSide(color: ColorManager.primary, width: 1.5),
+          ),
           elevation: 0,
         ),
         child: PrimaryText(

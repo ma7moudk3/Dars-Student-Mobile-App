@@ -16,6 +16,8 @@ class LocaleKeys {
   static const contentRight = 'contentRight';
   static const skip = 'skip';
   static const next = 'next';
+  static const sign_in_now = 'sign_in_now';
+  static const sign_up_new_account = 'sign_up_new_account';
 }
 
 class Locales {
@@ -23,8 +25,10 @@ class Locales {
     'error': 'حدث خطأ ما',
     'password': 'كلمة المرور',
     'hessaApp': 'تطبيق حصة',
-    'contentRight': 'جميع الحقوق محفوظة 2021',
+    'contentRight': 'جميع الحقوق محفوظة ',
     'skip': 'تخطي',
     'next': 'التالي',
+    'sign_in_now': 'سجّل دخول الآن',
+    'sign_up_new_account': 'تسجيل مستخدم جديد',
   };
 }

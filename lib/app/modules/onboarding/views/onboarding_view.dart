@@ -1,5 +1,5 @@
 import 'package:hessa_student/app/constants/exports.dart';
-import 'package:hessa_student/app/modules/login/views/login_view.dart';
+import 'package:hessa_student/app/modules/login_or_sign_up/views/login_or_sign_up_view.dart';
 import 'package:hessa_student/app/modules/onboarding/widgets/intro_slider.dart';
 import 'package:hessa_student/app/modules/onboarding/widgets/intro_slider_item.dart';
 import 'package:hessa_student/app/routes/app_pages.dart';
@@ -50,7 +50,9 @@ class OnboardingView extends GetView<OnboardingController> {
           height: 33.h,
           child: PrimaryButton(
             onPressed: () async {
-              await Get.offAllNamed(Routes.LOGIN);
+              await Get.toNamed(Routes.LOGIN_OR_SIGN_UP, arguments: {
+                "isFromOnboarding": true,
+              });
             },
             title: LocaleKeys.skip,
             color: Colors.transparent,
@@ -58,7 +60,7 @@ class OnboardingView extends GetView<OnboardingController> {
           ),
         ),
       ),
-      onDone: const LoginView(),
+      onDone: const LoginOrSignUpView(),
       unselectedDotColor: ColorManager.grey.withOpacity(0.5),
       selectedDotColor: ColorManager.primary,
       //onDone: const HomeView(),
@@ -85,12 +87,13 @@ class OnboardingView extends GetView<OnboardingController> {
                   ]),
                 ),
                 Positioned(
-                    bottom: -1,
-                    child: SvgPicture.asset(
-                      controller.introList[index]["curve"],
-                      width: Get.width,
-                      fit: BoxFit.cover,
-                    ))
+                  bottom: -1,
+                  child: SvgPicture.asset(
+                    controller.introList[index]["curve"],
+                    width: Get.width,
+                    fit: BoxFit.cover,
+                  ),
+                ),
               ],
             ),
             title: controller.introList[index]["title"],
