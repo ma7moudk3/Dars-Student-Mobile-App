@@ -1,5 +1,5 @@
-import 'package:hessa_teacher/app/constants/exports.dart';
-import 'package:hessa_teacher/global_presentation/global_features/theme_manager.dart';
+import 'package:hessa_student/app/constants/exports.dart';
+import 'package:hessa_student/global_presentation/global_features/theme_manager.dart';
 
 class PrimaryText extends StatelessWidget {
   final String text;

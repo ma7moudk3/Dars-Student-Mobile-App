@@ -1,4 +1,4 @@
-# hessa_teacher
+# hessa_student
 
 Hessa Teacher App
 

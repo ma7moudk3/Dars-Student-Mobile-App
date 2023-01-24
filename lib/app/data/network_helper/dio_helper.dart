@@ -3,12 +3,12 @@
 import 'dart:async';
 import 'dart:developer';
 import 'dart:io';
-import 'package:hessa_teacher/app/constants/links.dart';
-import 'package:hessa_teacher/app/data/cache_helper.dart';
-import 'package:hessa_teacher/app/data/network_helper/strings.dart';
+import 'package:hessa_student/app/constants/links.dart';
+import 'package:hessa_student/app/data/cache_helper.dart';
+import 'package:hessa_student/app/data/network_helper/strings.dart';
 import 'package:dio/dio.dart';
 import 'package:get/get.dart' as getx;
-import 'package:hessa_teacher/generated/locales.g.dart';
+import 'package:hessa_student/generated/locales.g.dart';
 
 import '../../../../global_presentation/global_widgets/custom_snack_bar.dart';
 import 'api_exception.dart';
@@ -136,7 +136,7 @@ class DioHelper {
       required Function(ApiException)? onError,
       Function(int value, int progress)? onReceiveProgress,
       Function? onLoading,
-      bool ishessa_teacherLink = false}) async {
+      bool ishessa_studentLink = false}) async {
     try {
       // 1) indicate loading state
       onLoading?.call();
@@ -149,7 +149,7 @@ class DioHelper {
         queryParameters["lang"] = getx.Get.locale?.languageCode ?? "ar";
       }
 
-      if (ishessa_teacherLink == false) {
+      if (ishessa_studentLink == false) {
         response = await _dio
             .get(
               url,

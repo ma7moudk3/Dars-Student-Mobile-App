@@ -1,4 +1,4 @@
-import 'package:hessa_teacher/app/constants/exports.dart';
+import 'package:hessa_student/app/constants/exports.dart';
 
 class CustomRow extends StatelessWidget {
   const CustomRow({

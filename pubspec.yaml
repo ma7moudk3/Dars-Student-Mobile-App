@@ -1,7 +1,7 @@
-name: hessa_teacher
+name: hessa_student
 version: 1.0.0+1
 publish_to: none
-description: Hessa Teacher App
+description: Hessa Student App
 environment: 
   sdk: '>=2.18.6 <3.0.0'
 
@@ -20,7 +20,7 @@ dev_dependencies:
   flutter_lints: ^2.0.0
   flutter_test: 
     sdk: flutter
-
+  change_app_package_name: ^0.1.3
 flutter: 
   uses-material-design: true
 
