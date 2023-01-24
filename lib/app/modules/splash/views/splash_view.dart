@@ -22,7 +22,7 @@ class SplashView extends GetView<SplashController> {
             ),
           ),
           Positioned(
-            bottom: 65.h,
+            bottom: 15.h,
             left: 90.w,
             right: 90.w,
             child: PrimaryText(

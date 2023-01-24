@@ -1,4 +1,5 @@
 import 'package:get/get.dart';
+import 'package:hessa_student/app/data/cache_helper.dart';
 
 import '../../../routes/app_pages.dart';
 
@@ -13,8 +14,18 @@ class SplashController extends GetxController {
       positionBottom.value = 0;
       scale.value = 1;
     });
-    await Future.delayed(const Duration(milliseconds: 1700), () async {
-      await Get.offAllNamed(Routes.ONBOARDING);
+    await Future.delayed(const Duration(seconds: 2), () async {
+      if (CacheHelper.instance.getFirstTimeOpenedApp()) {
+        await Get.offNamed(Routes.ONBOARDING);
+      } else {
+        if (CacheHelper.instance.authenticated()) {
+          // await Get.offNamed(Routes.BOTTOM_NAV_BAR);
+        } else {
+          await Get.offNamed(Routes.LOGIN_OR_SIGN_UP, arguments: {
+            "isFromOnboarding": false,
+          });
+        }
+      }
     });
   }
 }

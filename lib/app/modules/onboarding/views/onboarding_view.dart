@@ -1,4 +1,5 @@
 import 'package:hessa_student/app/constants/exports.dart';
+import 'package:hessa_student/app/data/cache_helper.dart';
 import 'package:hessa_student/app/modules/login_or_sign_up/views/login_or_sign_up_view.dart';
 import 'package:hessa_student/app/modules/onboarding/widgets/intro_slider.dart';
 import 'package:hessa_student/app/modules/onboarding/widgets/intro_slider_item.dart';
@@ -50,6 +51,7 @@ class OnboardingView extends GetView<OnboardingController> {
           height: 33.h,
           child: PrimaryButton(
             onPressed: () async {
+              await CacheHelper.instance.setFirstTimeOpenedApp(false);
               await Get.toNamed(Routes.LOGIN_OR_SIGN_UP, arguments: {
                 "isFromOnboarding": true,
               });

@@ -23,6 +23,13 @@ class CacheHelper {
     return _sharedPreferences.getString('token') ?? '';
   }
 
+  Future setFirstTimeOpenedApp(bool firstTime) async {
+    await _sharedPreferences.setBool('first_time', firstTime);
+  }
+
+  bool getFirstTimeOpenedApp() {
+    return _sharedPreferences.getBool('first_time') ?? true;
+  }
 
   Future setBaseLink(String link) async {
     await _sharedPreferences.setString('base_link', link);
@@ -71,7 +78,6 @@ class CacheHelper {
   String getuserDisplayName() {
     return _sharedPreferences.getString('userDisplayName') ?? '';
   }
-
 
   Future setUserMobileNo(String email) async {
     await _sharedPreferences.setString('mobile', email);
