@@ -1,23 +1,19 @@
 import 'package:get/get.dart';
+import 'package:hessa_student/app/routes/app_pages.dart';
 
 class SplashController extends GetxController {
-  //TODO: Implement SplashController
+  RxDouble positionBottom = Get.height.obs;
+  RxDouble scale = 0.0.obs;
 
-  final count = 0.obs;
   @override
   void onInit() {
     super.onInit();
+    Future.delayed(const Duration(milliseconds: 500), () async {
+      positionBottom.value = 0;
+      scale.value = 1;
+    });
+    Future.delayed(const Duration(milliseconds: 1700), () async {
+      await Get.offAllNamed(Routes.ONBOARDING);
+    });
   }
-
-  @override
-  void onReady() {
-    super.onReady();
-  }
-
-  @override
-  void onClose() {
-    super.onClose();
-  }
-
-  void increment() => count.value++;
 }

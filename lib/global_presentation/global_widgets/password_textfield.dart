@@ -1,28 +1,31 @@
-import '../../app/constants/exports.dart';
 
+
+import 'package:hessa_student/app/constants/exports.dart';
+import 'package:hessa_student/generated/locales.g.dart';
 
 import '../global_features/theme_manager.dart';
 
 class PasswordTextField extends StatefulWidget {
   final String? hintText;
+  final String? title;
   final TextEditingController? controller;
   final FormFieldValidator<String>? validator;
   final Function(String)? onFieldSubmitted;
-  final InputBorder? focusedBorder;
-  final InputBorder? enabledBorder;
-  final FocusNode focusNode;
-  final double leftOrRightPadding;
-  const PasswordTextField({
-    Key? key,
-    required this.hintText,
-    required this.controller,
-    this.enabledBorder,
-    this.focusedBorder,
-    this.validator,
-    this.leftOrRightPadding = 0.0,
-    this.onFieldSubmitted,
-    required this.focusNode,
-  }) : super(key: key);
+  final TextInputType keyboardType;
+  final int? maxLength;
+  final FocusNode? focusNode;
+
+  const PasswordTextField(
+      {Key? key,
+      required this.hintText,
+      required this.controller,
+      this.validator,
+      this.onFieldSubmitted,
+      this.title,
+      this.focusNode,
+      this.keyboardType = TextInputType.visiblePassword,
+      this.maxLength})
+      : super(key: key);
 
   @override
   State<PasswordTextField> createState() => _PasswordTextFieldState();
@@ -30,72 +33,81 @@ class PasswordTextField extends StatefulWidget {
 
 class _PasswordTextFieldState extends State<PasswordTextField> {
   bool visiblePassword = false;
-  Color color = ColorManager.white;
-  Color borderColor = Colors.transparent;
 
   @override
   Widget build(BuildContext context) {
-    // TextStyle hintStyle = GoogleFonts.tajawal(
-    //     textStyle: TextStyle(
-    //   color: ColorManager.greyC1,
-    //   fontSize: 14.sp,
-    //   fontWeight: FontWeightManager.bold,
-    //   fontFamily: FontConstants.fontFamily,
-    // ));
+    var hintStyle = TextStyle(
+      color: ColorManager.grey,
+      fontSize: 14.sp,
+    );
 
-    // TextStyle style = TextStyle(
-    //   fontSize: 14.sp,
-    //   fontWeight: FontWeightManager.bold,
-    //   fontFamily: FontConstants.fontFamily,
-    // );
-    widget.focusNode.addListener(() {
-      if (widget.focusNode.hasFocus) {
-        color = Colors.white;
-        borderColor = ColorManager.primary;
-      } else {
-        color = ColorManager.white;
-        borderColor = Colors.transparent;
-      }
-      setState(() {});
-    });
+    var errorStyle = TextStyle(
+      color: Colors.red,
+      fontSize: 14.sp,
+    );
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        PrimaryText(
+          widget.title ?? LocaleKeys.password.tr,
+        ),
+        SizedBox(
+          height: 10.h,
+        ),
+        /*
+                    decoration: BoxDecoration(
+              borderRadius: appType == AppType.customer
+                  ? const BorderRadius.all(Radius.circular(50))
+                  : const BorderRadius.all(Radius.circular(8.0)),
+              color: isDarkMoodEnabled()
+                  ? ColorManager.darkAccent
+                  : ColorManager.white,
 
-    return Container(
-      height: 60.h,
-      decoration: BoxDecoration(
-        borderRadius: const BorderRadius.all(Radius.circular(8.0)),
-        color: color,
-        border: Border.all(color: borderColor),
-      ),
-      child: Center(
-        child: TextFormField(
-          focusNode: widget.focusNode,
+        */
+        TextFormField(
           controller: widget.controller,
-          cursorColor: ColorManager.primary,
-         // style: style,
-          textDirection: Get.locale!.languageCode == "ar"
-              ? TextDirection.rtl
-              : TextDirection.ltr,
-          keyboardType: TextInputType.visiblePassword,
+          focusNode: widget.focusNode,
+          maxLength: widget.maxLength,
+          cursorColor: isDarkMoodEnabled()
+              ? ColorManager.darkPrimary
+              : ColorManager.fontColor,
+          style: TextStyle(
+              color:
+                  isDarkMoodEnabled() ? Colors.white : ColorManager.fontColor),
+          keyboardType: widget.keyboardType,
           obscureText: !visiblePassword,
           onFieldSubmitted: widget.onFieldSubmitted ?? (v) {},
           decoration: InputDecoration(
             focusColor: ColorManager.primary,
+            errorMaxLines: 2,
+            fillColor: isDarkMoodEnabled()
+                ? ColorManager.darkAccent
+                : ColorManager.white,
+            filled: true,
+            counterText: "",
             hoverColor: ColorManager.primary,
-          //  hintStyle: hintStyle,
-            hintTextDirection: Get.locale!.languageCode == "ar"
-                ? TextDirection.rtl
-                : TextDirection.ltr,
-            focusedBorder: widget.focusedBorder,
-            enabledBorder: widget.enabledBorder,
+            errorStyle: TextStyle(
+                        fontFamily: "NRT",
+                        color: ColorManager.red,
+                        fontSize: 13.sp,
+                      )
+                   ,
+            hintStyle:  TextStyle(
+                        fontFamily: "NRT",
+                        color: ColorManager.grey,
+                        fontSize: 14.sp,
+                      )
+                   ,
+            border: isDarkMoodEnabled()
+                ? const OutlineInputBorder(
+                  borderSide: BorderSide.none,
+                    borderRadius:  BorderRadius.all(Radius.circular(8.0)),
+                  )
+                : OutlineInputBorder(borderRadius: BorderRadius.circular(8)),
+            contentPadding: const EdgeInsets.fromLTRB(20.0, 10.0, 20.0, 10.0),
             prefixIcon: Icon(
               Icons.lock_outline,
-              color: (widget.focusNode != null)
-                  ? widget.focusNode.hasFocus
-                      ? (isDarkMoodEnabled()
-                          ? ColorManager.accent
-                          : ColorManager.grey)
-                      : ColorManager.grey
-                  : ColorManager.grey,
+              color: ColorManager.grey,
               size: 23.w,
             ),
             suffixIcon: IconButton(
@@ -106,31 +118,19 @@ class _PasswordTextFieldState extends State<PasswordTextField> {
               },
               icon: visiblePassword
                   ? Icon(
-                      Icons.visibility_off_outlined,
-                      color: (widget.focusNode != null)
-                          ? widget.focusNode.hasFocus
-                              ? (isDarkMoodEnabled()
-                                  ? ColorManager.accent
-                                  : ColorManager.grey)
-                              : ColorManager.grey
-                          : ColorManager.grey,
+                      Icons.visibility_off,
+                      color: ColorManager.grey,
                     )
                   : Icon(
-                      Icons.visibility_outlined,
-                      color: (widget.focusNode != null)
-                          ? widget.focusNode.hasFocus
-                              ? (isDarkMoodEnabled()
-                                  ? ColorManager.accent
-                                  : ColorManager.grey)
-                              : ColorManager.grey
-                          : ColorManager.grey,
+                      Icons.visibility,
+                      color: ColorManager.grey,
                     ),
             ),
             hintText: widget.hintText!.isNotEmpty ? widget.hintText!.tr : '',
           ),
           validator: widget.validator,
         ),
-      ),
+      ],
     );
   }
 }

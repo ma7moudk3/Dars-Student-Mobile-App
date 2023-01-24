@@ -11,10 +11,20 @@ class AppTranslation {
 class LocaleKeys {
   LocaleKeys._();
   static const error = 'error';
+  static const password = 'password';
+  static const hessaApp = 'hessaApp';
+  static const contentRight = 'contentRight';
+  static const skip = 'skip';
+  static const next = 'next';
 }
 
 class Locales {
   static const ar = {
     'error': 'حدث خطأ ما',
+    'password': 'كلمة المرور',
+    'hessaApp': 'تطبيق حصة',
+    'contentRight': 'جميع الحقوق محفوظة 2021',
+    'skip': 'تخطي',
+    'next': 'التالي',
   };
 }

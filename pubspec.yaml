@@ -24,3 +24,19 @@ dev_dependencies:
 flutter: 
   uses-material-design: true
 
+  assets: 
+    - assets/images/
+    - assets/svg/
+    - assets/fonts/
+    - assets/langs/
+  fonts:
+    - family: Expo
+      fonts:
+        - asset: assets/fonts/Expo-Arabic-Bold.ttf
+          weight: 800
+        - asset: assets/fonts/Expo-Arabic-Book.ttf
+          weight: 700
+        - asset: assets/fonts/Expo-Arabic-Medium.ttf
+          weight: 600
+        - asset: assets/fonts/Expo-Arabic-Light.ttf
+          weight: 500

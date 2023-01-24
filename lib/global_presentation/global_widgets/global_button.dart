@@ -15,7 +15,7 @@ class GlobalButton extends StatelessWidget {
     this.width,
     this.fontSize = 15,
     this.height,
-    this.fontWeight = FontWeightManager.regular,
+    this.fontWeight = FontWeightManager.medium,
   }) : super(key: key);
 
   final GestureTapCallback? onTap;

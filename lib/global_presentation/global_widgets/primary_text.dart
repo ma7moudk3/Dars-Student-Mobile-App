@@ -1,5 +1,6 @@
+// ignore_for_file: must_be_immutable
+
 import 'package:hessa_student/app/constants/exports.dart';
-import 'package:hessa_student/global_presentation/global_features/theme_manager.dart';
 
 class PrimaryText extends StatelessWidget {
   final String text;
@@ -17,7 +18,7 @@ class PrimaryText extends StatelessWidget {
     Key? key,
     this.fontSize = 13,
     this.color,
-    this.fontWeight = FontWeight.normal,
+    this.fontWeight = FontWeightManager.light,
     this.textAlign,
     this.overflow = TextOverflow.visible,
     this.maxLines = 5,
@@ -32,13 +33,11 @@ class PrimaryText extends StatelessWidget {
         Get.locale == const Locale("ar") ? TextAlign.right : TextAlign.left;
 
     TextStyle style = TextStyle(
-      color: !isDarkMoodEnabled()
-          ? (color ?? ColorManager.fontColor)
-          : ((hasSpecificColor == true) ? color : ColorManager.white),
-      fontSize: (fontSize - 1).sp,
+      color: color,
+      fontSize: (fontSize).sp,
       fontWeight: fontWeight,
       height: height,
-      //  fontFamily: FontConstants.fontFamily,
+      fontFamily: FontConstants.fontFamily,
       decoration: lineThrow ? TextDecoration.lineThrough : TextDecoration.none,
     );
     return Text(

@@ -1,8 +1,9 @@
+// ignore_for_file: public_member_api_docs, sort_constructors_first
+import 'package:hessa_student/app/constants/exports.dart';
 
+import '../global_features/theme_manager.dart';
 
-import '../../app/constants/exports.dart';
-
-class PrimaryTextField extends StatefulWidget {
+class PrimaryTextField extends StatelessWidget {
   final String? hintText;
   final TextEditingController? controller;
   final FormFieldValidator<String>? validator;
@@ -13,114 +14,102 @@ class PrimaryTextField extends StatefulWidget {
   final Function(String)? onFieldSubmitted;
   final bool readOnly;
   final bool? multiLines;
-  final InputBorder? focusedBorder;
-  final InputBorder? enabledBorder;
-  final int noOfLines;
+  final String title;
   final int? maxLength;
-  final FocusNode focusNode;
   final void Function(String)? onChanged;
+
   const PrimaryTextField({
     Key? key,
-    this.hintText,
+    required this.hintText,
     required this.controller,
     this.validator,
     this.keyboardType = TextInputType.text,
     this.prefixIcon,
-    this.onTap,
-    this.focusedBorder,
-    this.noOfLines = 10,
-    this.enabledBorder,
-    this.readOnly = false,
-    this.onFieldSubmitted,
     this.suffixIcon,
+    this.onTap,
+    this.onFieldSubmitted,
+    this.readOnly = false,
     this.multiLines = false,
+    required this.title,
     this.maxLength,
-    required this.focusNode,
     this.onChanged,
   }) : super(key: key);
 
   @override
-  State<PrimaryTextField> createState() => _PrimaryTextFieldState();
-}
-
-class _PrimaryTextFieldState extends State<PrimaryTextField> {
-  Color color = ColorManager.white;
-  Color borderColor = Colors.transparent;
-
-  @override
   Widget build(BuildContext context) {
-    widget.focusNode.addListener(() {
-      if (widget.focusNode.hasFocus) {
-        color = Colors.white;
-        borderColor = ColorManager.primary;
-      } else {
-        color = ColorManager.white;
-        borderColor = Colors.transparent;
-      }
-      setState(() {});
-    });
-
-    // TextStyle hintStyle = GoogleFonts.tajawal(
-    //     textStyle: TextStyle(
-    //   color: ColorManager.greyC1,
-    //   fontSize: 14.sp,
-    //   fontWeight: FontWeightManager.bold,
-    //   fontFamily: FontConstants.fontFamily,
-    // ));
-
-    // TextStyle style = TextStyle(
-    //   color: ColorManager.fontColor,
-    //   fontSize: 14.sp,
-    //   fontWeight: FontWeightManager.bold,
-    //   fontFamily: FontConstants.fontFamily,
-    // );
-
-    return Container(
-      height: 60.h,
-      padding: const EdgeInsets.symmetric(horizontal: 10),
-      decoration: BoxDecoration(
-          borderRadius: BorderRadius.all(Radius.circular(10.h)),
-          color: color,
-          border: Border.all(color: borderColor)),
-      child: Center(
-        child: TextFormField(
-          focusNode: widget.focusNode,
-          controller: widget.controller,
-          maxLength: widget.maxLength,
-          readOnly: widget.readOnly,
-          maxLines: widget.multiLines! ? widget.noOfLines : 1,
-          cursorColor: ColorManager.fontColor,
-       //   style: style,
-          keyboardType: widget.keyboardType,
-          onTap: widget.onTap ?? () {},
-          onChanged: widget.onChanged,
-          onFieldSubmitted: widget.onFieldSubmitted ?? (String value) {},
+    var hintStyle = TextStyle(
+      color: ColorManager.grey,
+      fontSize: 14.sp,
+    );
+    var errorStyle = TextStyle(
+      color: Colors.red,
+      fontSize: 14.sp,
+    );
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        title.isNotEmpty
+            ? Column(
+                children: [
+                  PrimaryText(
+                    title,
+                  ),
+                  SizedBox(
+                    height: 10.h,
+                  ),
+                ],
+              )
+            : const SizedBox.shrink(),
+        TextFormField(
+          controller: controller,
+          readOnly: readOnly,
+          maxLength: maxLength,
+          maxLines: multiLines! ? 10 : 1,
+          cursorColor: isDarkMoodEnabled()
+              ? ColorManager.darkPrimary
+              : ColorManager.fontColor,
+          style: TextStyle(
+              color:
+                  isDarkMoodEnabled() ? Colors.white : ColorManager.fontColor),
+          keyboardType: keyboardType,
+          onTap: onTap ?? () {},
+          onChanged: onChanged,
+          onFieldSubmitted: onFieldSubmitted ?? (v) {},
           decoration: InputDecoration(
-            suffixIcon: widget.suffixIcon,
-            counter: const Offstage(),
-            prefixIcon: widget.prefixIcon,
+            prefixIcon: prefixIcon,
+            suffixIcon: suffixIcon,
             focusColor: ColorManager.primary,
-            prefixIconConstraints: BoxConstraints(
-              minWidth: 25.w,
-            ),
-            suffixIconConstraints: BoxConstraints(
-              minWidth: 25.w,
-            ),
-            focusedBorder: InputBorder.none,
-            enabledBorder: InputBorder.none,
+            errorMaxLines: 2,
+            fillColor: isDarkMoodEnabled()
+                ? ColorManager.darkAccent
+                : ColorManager.white,
+            filled: true,
+            border: isDarkMoodEnabled()
+                ? const OutlineInputBorder(
+                    borderSide: BorderSide.none,
+                    borderRadius: BorderRadius.all(Radius.circular(8.0)),
+                  )
+                : OutlineInputBorder(borderRadius: BorderRadius.circular(8)),
             hoverColor: ColorManager.primary,
-            hintText: widget.hintText ?? "",
-            //hintStyle: hintStyle,
-            border: UnderlineInputBorder(
-              borderSide: BorderSide(color: ColorManager.grey),
+            errorStyle: TextStyle(
+              fontFamily: FontConstants.fontFamily,
+              color: ColorManager.red,
+              fontSize: 13.sp,
             ),
+            hintText: hintText!.isNotEmpty ? hintText!.tr : '',
+            hintStyle: TextStyle(
+              fontFamily: FontConstants.fontFamily,
+              color: ColorManager.grey,
+              fontSize: 14.sp,
+            ),
+            contentPadding: const EdgeInsets.fromLTRB(20.0, 10.0, 20.0, 10.0),
           ),
-          validator: widget.validator ??
-              (String? value) {
+          validator: validator ??
+              (v) {
                 return null;
               },
         ),
-      ),
+      ],
     );
   }
 }

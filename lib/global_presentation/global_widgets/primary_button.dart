@@ -14,7 +14,7 @@ class PrimaryButton extends StatelessWidget {
     this.color,
     this.width,
     this.fontSize = 13,
-    this.fontWeight = FontWeightManager.bold,
+    this.fontWeight = FontWeightManager.light,
     this.fontColor = Colors.white,
   }) : super(key: key);
 
@@ -26,10 +26,10 @@ class PrimaryButton extends StatelessWidget {
       child: ElevatedButton(
         onPressed: onPressed,
         style: ElevatedButton.styleFrom(
-          backgroundColor: color ?? (ColorManager.accent),
+          backgroundColor: color ?? (ColorManager.primary),
           shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(8.h),
-          ),
+              borderRadius: BorderRadius.circular(8.h),
+              side: BorderSide(color: ColorManager.primary, width: 1.5)),
           elevation: 0,
         ),
         child: PrimaryText(
