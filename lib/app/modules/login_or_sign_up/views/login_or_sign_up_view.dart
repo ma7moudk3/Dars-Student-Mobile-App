@@ -16,17 +16,29 @@ class LoginOrSignUpView extends GetView<LoginOrSignUpController> {
       },
       child: Stack(
         children: [
-          Container(
-            decoration: BoxDecoration(
-              image: DecorationImage(
-                image: AssetImage(ImagesManager.loginBackground),
-                fit: BoxFit.cover,
+          GetBuilder<LoginOrSignUpController>(
+              builder: (LoginOrSignUpController controller) {
+            return AnimatedSwitcher(
+              duration: const Duration(milliseconds: 900),
+              transitionBuilder: (Widget child, Animation<double> animation) {
+                return FadeTransition(opacity: animation, child: child);
+              },
+              child: Container(
+                key: UniqueKey(),
+                height: Get.height,
+                width: Get.width,
+                decoration: BoxDecoration(
+                  image: DecorationImage(
+                    image: AssetImage(controller.loginBackgroundImage),
+                    fit: BoxFit.cover,
+                  ),
+                ),
+                child: Container(
+                  color: ColorManager.black.withOpacity(0.60),
+                ),
               ),
-            ),
-            child: Container(
-              color: ColorManager.black.withOpacity(0.60),
-            ),
-          ),
+            );
+          }),
           Scaffold(
             backgroundColor: ColorManager.transparent,
             body: SafeArea(
