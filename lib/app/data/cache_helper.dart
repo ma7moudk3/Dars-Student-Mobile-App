@@ -1,15 +1,13 @@
-import 'dart:convert';
-import 'dart:developer';
 import 'package:shared_preferences/shared_preferences.dart';
 
-class CacheController {
-  CacheController._() {
+class CacheHelper {
+  CacheHelper._() {
     init();
   }
 
-  static final CacheController _instance = CacheController._();
+  static final CacheHelper _instance = CacheHelper._();
 
-  static CacheController get instance => _instance;
+  static CacheHelper get instance => _instance;
 
   late SharedPreferences _sharedPreferences;
 

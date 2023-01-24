@@ -143,8 +143,7 @@ class DioHelper {
       // 2) try to perform http request
       late Response response;
       headers ??= {};
-      headers["Authorization"] =
-          "Bearer ${CacheController.instance.getToken()}";
+      headers["Authorization"] = "Bearer ${CacheHelper.instance.getToken()}";
       if (queryParameters != null) {
         queryParameters["lang"] = getx.Get.locale?.languageCode ?? "ar";
       }
