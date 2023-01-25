@@ -1,4 +1,5 @@
 import 'package:flutter/services.dart';
+import 'package:hessa_student/app/constants/constants.dart';
 import 'package:hessa_student/app/constants/exports.dart';
 import 'package:hessa_student/generated/locales.g.dart';
 import 'package:hessa_student/global_presentation/global_features/theme_manager.dart';
@@ -16,12 +17,13 @@ void main() async {
     ScreenUtilInit(
       designSize: const Size(375, 812),
       builder: (BuildContext context, Widget? child) {
+        const languageCode = "ar";
         return GetMaterialApp(
-          title: "Hessa Student App",
+          title: applicationName,
           debugShowCheckedModeBanner: false,
           initialRoute: AppPages.INITIAL,
           getPages: AppPages.routes,
-          locale: const Locale("ar"),
+          locale: const Locale(languageCode),
           theme: getApplicationTheme(),
           translationsKeys: AppTranslation.translations,
         );

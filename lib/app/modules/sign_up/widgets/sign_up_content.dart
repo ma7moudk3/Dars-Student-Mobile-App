@@ -339,7 +339,13 @@ class SignUpContent extends GetView<SignUpController> {
                               (states) =>
                                   ColorManager.primary.withOpacity(0.08)),
                         ),
-                        onPressed: () async => await Get.toNamed(Routes.LOGIN),
+                        onPressed: () async {
+                          if (Get.previousRoute == Routes.LOGIN) {
+                            Get.back();
+                          } else {
+                            await Get.toNamed(Routes.LOGIN);
+                          }
+                        },
                         child: PrimaryText(
                           LocaleKeys.login.tr,
                           color: ColorManager.primary,

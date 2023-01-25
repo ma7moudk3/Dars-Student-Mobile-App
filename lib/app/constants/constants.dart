@@ -1,2 +1,1 @@
-const cartBoxKey = "cart";
-const favoriteBoxKey = "favorite";
+const applicationName = "Hessa Student App";

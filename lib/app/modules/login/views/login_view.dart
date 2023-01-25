@@ -79,7 +79,7 @@ class LoginView extends GetView<LoginController> {
                   ),
                 ),
                 Positioned(
-                  bottom: 75.h,
+                  bottom: 55.h,
                   left: 18.w,
                   right: 18.w,
                   child: const LoginContent(),

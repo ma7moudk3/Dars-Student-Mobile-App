@@ -15,8 +15,6 @@ class LoginContent extends GetView<LoginController> {
   @override
   Widget build(BuildContext context) {
     return SingleChildScrollView(
-      // physics: const AlwaysScrollableScrollPhysics(),
-      // clipBehavior: Clip.none,
       child: Form(
         key: controller.formKey,
         child: Container(
@@ -276,7 +274,13 @@ class LoginContent extends GetView<LoginController> {
                         overlayColor: MaterialStateColor.resolveWith(
                             (states) => ColorManager.primary.withOpacity(0.08)),
                       ),
-                      onPressed: () async => await Get.toNamed(Routes.SIGN_UP),
+                      onPressed: () async {
+                        if (Get.previousRoute == Routes.SIGN_UP) {
+                          Get.back();
+                        } else {
+                          await Get.toNamed(Routes.SIGN_UP);
+                        }
+                      },
                       child: PrimaryText(
                         LocaleKeys.sign_up_new_account.tr,
                         color: ColorManager.primary,

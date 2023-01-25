@@ -55,8 +55,8 @@ class SignUpView extends GetView<SignUpController> {
                   top: 0,
                   child: Visibility(
                     visible: Get.arguments != null &&
-                        Get.arguments['isFromLoginInOrSignUp'] != null &&
-                        Get.arguments['isFromLoginInOrSignUp'] == true,
+                        (Get.arguments['isFromLoginInOrSignUp'] != null &&
+                            Get.arguments['isFromLoginInOrSignUp'] == true),
                     child: Padding(
                       padding: EdgeInsets.symmetric(
                           horizontal: 16.w, vertical: 15.h),

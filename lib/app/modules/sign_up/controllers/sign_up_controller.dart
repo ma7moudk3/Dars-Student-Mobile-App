@@ -7,7 +7,6 @@ class SignUpController extends GetxController {
       passwordController,
       confimationPasswordController,
       phoneController;
-  final GlobalKey<FormState> formKey = GlobalKey();
   FocusNode fullNameFocusNode = FocusNode(),
       emailFocusNode = FocusNode(),
       passwordFocusNode = FocusNode(),
@@ -18,6 +17,7 @@ class SignUpController extends GetxController {
       passwordErrorIconColor,
       confimationPasswordErrorIconColor;
   bool tosIsAgreed = false;
+  final GlobalKey<FormState> formKey = GlobalKey();
 
   @override
   void onInit() {

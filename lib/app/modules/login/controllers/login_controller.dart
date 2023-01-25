@@ -2,11 +2,11 @@ import '../../../../generated/locales.g.dart';
 import '../../../constants/exports.dart';
 
 class LoginController extends GetxController {
-  final GlobalKey<FormState> formKey = GlobalKey();
   FocusNode emailFocusNode = FocusNode();
   FocusNode passwordFocusNode = FocusNode();
   late TextEditingController emailController, passwordController;
   Color? emailErrorIconColor, passwordErrorIconColor;
+  final GlobalKey<FormState> formKey = GlobalKey();
 
   @override
   void onInit() {
