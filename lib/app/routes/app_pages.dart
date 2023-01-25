@@ -16,6 +16,8 @@ import '../modules/sign_up/bindings/sign_up_binding.dart';
 import '../modules/sign_up/views/sign_up_view.dart';
 import '../modules/splash/bindings/splash_binding.dart';
 import '../modules/splash/views/splash_view.dart';
+import '../modules/static_page/bindings/static_page_binding.dart';
+import '../modules/static_page/views/static_page_view.dart';
 
 // ignore_for_file: constant_identifier_names
 
@@ -82,6 +84,11 @@ class AppPages {
       binding: ForgotPasswordBinding(),
       transition: Transition.cupertino,
       transitionDuration: const Duration(milliseconds: 400),
+    ),
+    GetPage(
+      name: _Paths.STATIC_PAGE,
+      page: () => StaticPageView(),
+      binding: StaticPageBinding(),
     ),
   ];
 }

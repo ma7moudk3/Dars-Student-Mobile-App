@@ -39,6 +39,19 @@ class LocaleKeys {
   static const sign_up_new_account = 'sign_up_new_account';
   static const password_must_be_at_least_6_characters =
       'password_must_be_at_least_6_characters';
+  static const make_a_featured_account = 'make_a_featured_account';
+  static const welcome_in_hessa = 'welcome_in_hessa';
+  static const gender = 'gender';
+  static const full_name = 'full_name';
+  static const enter_full_name = 'enter_full_name';
+  static const confirm_password = 'confirm_password';
+  static const agree_with = 'agree_with';
+  static const terms_and_conditions = 'terms_and_conditions';
+  static const for_hessa = 'for_hessa';
+  static const please_enter_fullname = 'please_enter_fullname';
+  static const check_your_full_name = 'check_your_full_name';
+  static const please_enter_confirm_password = 'please_enter_confirm_password';
+  static const check_confirm_password = 'check_confirm_password';
 }
 
 class Locales {
@@ -72,5 +85,18 @@ class Locales {
     'sign_up_new_account': 'تسجيل مستخدم جديد',
     'password_must_be_at_least_6_characters':
         'كلمة المرور يجب أن تكون 6 أحرف على الأقل',
+    'make_a_featured_account': 'قم بإنشاء حساب مميز',
+    'welcome_in_hessa': 'مرحبا بقدومك إلى حِصّة',
+    'gender': 'الجنس',
+    'full_name': 'الاسم الكامل',
+    'enter_full_name': 'أدخل الاسم الكامل',
+    'confirm_password': 'تأكيد كلمة المرور',
+    'agree_with': 'الموافقة على جميع ',
+    'terms_and_conditions': 'الشروط والأحكام',
+    'for_hessa': 'لحصة',
+    'please_enter_fullname': 'الرجاء ادخال الاسم الكامل',
+    'check_your_full_name': 'تحقق من اسمك الكامل',
+    'please_enter_confirm_password': 'الرجاء إدخال كلمة مرور مطابقة',
+    'check_confirm_password': 'تحقق من أنك أدخلت كلمة مرور مطابقة',
   };
 }

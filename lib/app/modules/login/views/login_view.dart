@@ -31,7 +31,7 @@ class LoginView extends GetView<LoginController> {
               children: [
                 Positioned(
                   right: 16.w,
-                  top: 99.h,
+                  top: 90.h,
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     mainAxisAlignment: MainAxisAlignment.start,
@@ -79,10 +79,21 @@ class LoginView extends GetView<LoginController> {
                   ),
                 ),
                 Positioned(
-                  bottom: 38.h,
+                  bottom: 75.h,
                   left: 18.w,
                   right: 18.w,
                   child: const LoginContent(),
+                ),
+                Positioned(
+                  bottom: 13.h,
+                  left: 110.w,
+                  right: 110.w,
+                  child: PrimaryText(
+                    "${LocaleKeys.contentRight.tr}${DateTime.now().year.toString()}",
+                    fontSize: 12.sp,
+                    fontWeight: FontWeightManager.light,
+                    color: Colors.white,
+                  ),
                 ),
               ],
             ),

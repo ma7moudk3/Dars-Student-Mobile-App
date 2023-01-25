@@ -127,7 +127,9 @@ class LoginOrSignUpView extends GetView<LoginOrSignUpController> {
                           PrimaryButton(
                             color: ColorManager.transparent,
                             onPressed: () async {
-                              await Get.toNamed(Routes.SIGN_UP);
+                              await Get.toNamed(Routes.SIGN_UP, arguments: {
+                                "isFromLoginInOrSignUp": true,
+                              });
                             },
                             borderRadius: BorderRadius.circular(15.h),
                             title: LocaleKeys.sign_up_new_account,

@@ -4,7 +4,7 @@ import 'package:get/get.dart';
 
 class LoginOrSignUpController extends GetxController {
   String loginBackgroundImage =
-      "assets/images/login_or_sign_up_background1.png";
+      "assets/images/login_or_sign_up/login_or_sign_up_background1.png";
   int count = 1;
   int numberOfLoginBackgroundImages = 3;
   // login_or_sign_up_background1.png
@@ -26,7 +26,7 @@ class LoginOrSignUpController extends GetxController {
       count = 1;
     }
     loginBackgroundImage =
-        "assets/images/login_or_sign_up_background$count.png";
+        "assets/images/login_or_sign_up/login_or_sign_up_background$count.png";
     update();
   }
 

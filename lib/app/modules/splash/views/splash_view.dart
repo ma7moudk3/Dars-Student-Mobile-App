@@ -8,6 +8,7 @@ class SplashView extends GetView<SplashController> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: ColorManager.primary,
+      resizeToAvoidBottomInset: false,
       body: Stack(
         children: [
           Obx(
