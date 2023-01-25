@@ -5,12 +5,14 @@ class SignUpController extends GetxController {
   late TextEditingController fullNameController,
       emailController,
       passwordController,
-      confimationPasswordController;
+      confimationPasswordController,
+      phoneController;
   final GlobalKey<FormState> formKey = GlobalKey();
   FocusNode fullNameFocusNode = FocusNode(),
       emailFocusNode = FocusNode(),
       passwordFocusNode = FocusNode(),
-      confimationPasswordFocusNode = FocusNode();
+      confimationPasswordFocusNode = FocusNode(),
+      phoneFocusNode = FocusNode();
   Color? fullNameErrorIconColor,
       emailErrorIconColor,
       passwordErrorIconColor,
@@ -23,10 +25,12 @@ class SignUpController extends GetxController {
     emailController = TextEditingController();
     passwordController = TextEditingController();
     confimationPasswordController = TextEditingController();
+    phoneController = TextEditingController();
     fullNameFocusNode.addListener(() => update());
     emailFocusNode.addListener(() => update());
     passwordFocusNode.addListener(() => update());
     confimationPasswordFocusNode.addListener(() => update());
+    phoneFocusNode.addListener(() => update());
     super.onInit();
   }
 

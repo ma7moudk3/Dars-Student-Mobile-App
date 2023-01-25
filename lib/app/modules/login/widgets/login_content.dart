@@ -1,5 +1,7 @@
 import 'dart:developer';
 
+import 'package:flutter_keyboard_visibility/flutter_keyboard_visibility.dart';
+
 import '../../../../generated/locales.g.dart';
 import '../../../constants/exports.dart';
 import '../../../core/helper_functions.dart';
@@ -283,6 +285,14 @@ class LoginContent extends GetView<LoginController> {
                     ),
                   ],
                 ),
+                KeyboardVisibilityBuilder(
+                    builder: (BuildContext context, bool isKeyboardVisibile) {
+                  if (isKeyboardVisibile) {
+                    return SizedBox(height: 30.h);
+                  } else {
+                    return const SizedBox();
+                  }
+                }),
               ],
             );
           }),

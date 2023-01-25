@@ -29,7 +29,7 @@ class SignUpView extends GetView<SignUpController> {
               children: [
                 Positioned(
                   right: 16.w,
-                  top: 99.h,
+                  top: 85.h,
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     mainAxisAlignment: MainAxisAlignment.start,

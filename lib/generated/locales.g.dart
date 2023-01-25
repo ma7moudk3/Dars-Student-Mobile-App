@@ -36,6 +36,7 @@ class LocaleKeys {
   static const login = 'login';
   static const or = 'or';
   static const dont_have_an_account = 'dont_have_an_account';
+  static const do_have_an_account = 'do_have_an_account';
   static const sign_up_new_account = 'sign_up_new_account';
   static const password_must_be_at_least_6_characters =
       'password_must_be_at_least_6_characters';
@@ -52,6 +53,9 @@ class LocaleKeys {
   static const check_your_full_name = 'check_your_full_name';
   static const please_enter_confirm_password = 'please_enter_confirm_password';
   static const check_confirm_password = 'check_confirm_password';
+  static const check_tos_agreement = 'check_tos_agreement';
+  static const phone_number = 'phone_number';
+  static const invalid_phone_number = 'invalid_phone_number';
 }
 
 class Locales {
@@ -82,6 +86,7 @@ class Locales {
     'login': 'تسجيل الدخول',
     'or': 'أو',
     'dont_have_an_account': 'ليس لديك حساب؟',
+    'do_have_an_account': 'هل لديك حساب؟',
     'sign_up_new_account': 'تسجيل مستخدم جديد',
     'password_must_be_at_least_6_characters':
         'كلمة المرور يجب أن تكون 6 أحرف على الأقل',
@@ -98,5 +103,9 @@ class Locales {
     'check_your_full_name': 'تحقق من اسمك الكامل',
     'please_enter_confirm_password': 'الرجاء إدخال كلمة مرور مطابقة',
     'check_confirm_password': 'تحقق من أنك أدخلت كلمة مرور مطابقة',
+    'check_tos_agreement':
+        'تحقق من أنك وافقت على سياسة الخصوصية وشروط الاستخدام',
+    'phone_number': 'رقم الهاتف',
+    'invalid_phone_number': 'رقم الهاتف غير صحيح',
   };
 }

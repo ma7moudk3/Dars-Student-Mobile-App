@@ -1,8 +1,10 @@
 import 'dart:developer';
 
+import 'package:flutter_keyboard_visibility/flutter_keyboard_visibility.dart';
 import 'package:hessa_student/app/modules/sign_up/controllers/sign_up_controller.dart';
 
 import '../../../../generated/locales.g.dart';
+import '../../../../global_presentation/global_widgets/intl_phone_number_widget.dart';
 import '../../../constants/exports.dart';
 import '../../../core/helper_functions.dart';
 import '../../../routes/app_pages.dart';
@@ -18,7 +20,8 @@ class SignUpContent extends GetView<SignUpController> {
       child: Form(
         key: controller.formKey,
         child: Container(
-          padding: EdgeInsets.symmetric(horizontal: 15.w, vertical: 28.h),
+          padding:
+              EdgeInsets.only(left: 15.w, right: 15.w, top: 20.h, bottom: 10.h),
           width: 355.w,
           decoration: BoxDecoration(
             color: ColorManager.white,
@@ -49,7 +52,7 @@ class SignUpContent extends GetView<SignUpController> {
                       ),
                     ],
                   ),
-                  SizedBox(height: 14.h),
+                  SizedBox(height: 18.h),
                   PrimaryTextField(
                     cursorColor: ColorManager.primary,
                     focusNode: controller.fullNameFocusNode,
@@ -84,6 +87,10 @@ class SignUpContent extends GetView<SignUpController> {
                     ),
                     validator: (String? fullName) =>
                         controller.validateEmail(fullName),
+                  ),
+                  IntlPhoneNumberTextField(
+                    controller: controller.phoneController,
+                    focusNode: controller.phoneFocusNode,
                   ),
                   SizedBox(height: 10.h),
                   PrimaryTextField(
@@ -316,117 +323,12 @@ class SignUpContent extends GetView<SignUpController> {
                     title: LocaleKeys.login.tr,
                     fontSize: 14.sp,
                   ),
-                  SizedBox(height: 25.h),
-                  Visibility(
-                    // visible: controller.countryCode.toLowerCase() == "ps" ||
-                    //     controller.countryCode.toLowerCase() == "il" ||
-                    //     controller.countryCode.toLowerCase() == "jo" ||
-                    //     controller.countryCode.toLowerCase() == "eg",
-                    visible: true,
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      mainAxisSize: MainAxisSize.max,
-                      children: [
-                        // Visibility(
-                        //   visible: GetPlatform.isIOS,
-                        //   child: Row(
-                        //     children: [
-                        //       SizedBox(width: 15.w),
-                        //       GestureDetector(
-                        //         behavior: HitTestBehavior.opaque,
-                        //         onTap: () async {
-                        //           if (await checkInternetConnection(
-                        //               timeout: 10)) {
-                        //             // apple login code
-                        //           } else {
-                        //             Get.toNamed(Routes.CONNECTION_FAILED);
-                        //           }
-                        //         },
-                        //         child: Container(
-                        //          height: 52.h,
-                        //          width: 75.w,
-                        //           decoration: BoxDecoration(
-                        //             border: Border.all(
-                        //                 width: 1, color: ColorManager.grey),
-                        //             borderRadius: BorderRadius.circular(15),
-                        //           ),
-                        //           child: Center(
-                        //             child: SvgPicture.asset(
-                        //               ImagesManager.appleLogo,
-                        //               height: 30.h,
-                        //               width: 30.w,
-                        //               color: isDarkMoodEnabled()
-                        //                   ? ColorManager.white
-                        //                   : null,
-                        //             ),
-                        //           ),
-                        //         ),
-                        //       ),
-                        //     ],
-                        //   ),
-                        // ),
-                        GestureDetector(
-                          behavior: HitTestBehavior.opaque,
-                          onTap: () async {
-                            if (await checkInternetConnection(timeout: 10)) {
-                              // await controller.facebookLogin();
-                            } else {
-                              Get.toNamed(Routes.CONNECTION_FAILED);
-                            }
-                          },
-                          child: Container(
-                            height: 52.h,
-                            width: 75.w,
-                            decoration: BoxDecoration(
-                              border: Border.all(
-                                  width: 1, color: ColorManager.grey),
-                              borderRadius: BorderRadius.circular(15),
-                            ),
-                            child: Center(
-                              child: SvgPicture.asset(
-                                ImagesManager.facebookLogo,
-                                height: 30.h,
-                                width: 30.w,
-                              ),
-                            ),
-                          ),
-                        ),
-                        SizedBox(width: 15.w),
-                        GestureDetector(
-                          behavior: HitTestBehavior.opaque,
-                          onTap: () async {
-                            if (await checkInternetConnection(timeout: 10)) {
-                              // await controller.googleLogin();
-                            } else {
-                              Get.toNamed(Routes.CONNECTION_FAILED);
-                            }
-                          },
-                          child: Container(
-                            height: 52.h,
-                            width: 75.w,
-                            decoration: BoxDecoration(
-                              border: Border.all(
-                                  width: 1, color: ColorManager.grey),
-                              borderRadius: BorderRadius.circular(15),
-                            ),
-                            child: Center(
-                              child: SvgPicture.asset(
-                                ImagesManager.googleLogo,
-                                height: 30.h,
-                                width: 30.w,
-                              ),
-                            ),
-                          ),
-                        ),
-                      ],
-                    ),
-                  ),
                   SizedBox(height: 10.h),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                       PrimaryText(
-                        LocaleKeys.dont_have_an_account.tr,
+                        LocaleKeys.do_have_an_account.tr,
                         color: ColorManager.fontColor,
                         fontWeight: FontWeightManager.softLight,
                         fontSize: 14.sp,
@@ -437,16 +339,23 @@ class SignUpContent extends GetView<SignUpController> {
                               (states) =>
                                   ColorManager.primary.withOpacity(0.08)),
                         ),
-                        onPressed: () async =>
-                            await Get.toNamed(Routes.SIGN_UP),
+                        onPressed: () async => await Get.toNamed(Routes.LOGIN),
                         child: PrimaryText(
-                          LocaleKeys.sign_up_new_account.tr,
+                          LocaleKeys.login.tr,
                           color: ColorManager.primary,
                           fontSize: 13.sp,
                         ),
                       ),
                     ],
                   ),
+                  KeyboardVisibilityBuilder(
+                      builder: (BuildContext context, bool isKeyboardVisibile) {
+                    if (isKeyboardVisibile) {
+                      return SizedBox(height: 180.h);
+                    } else {
+                      return const SizedBox.shrink();
+                    }
+                  }),
                 ],
               ),
             );
