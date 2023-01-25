@@ -100,6 +100,7 @@ class PrimaryTextField extends StatelessWidget {
             errorBorder: errorBorder,
             prefixIcon: prefixIcon,
             suffixIcon: suffixIcon,
+          
             focusColor: ColorManager.primary,
             errorMaxLines: 2,
             fillColor: isDarkMoodEnabled()

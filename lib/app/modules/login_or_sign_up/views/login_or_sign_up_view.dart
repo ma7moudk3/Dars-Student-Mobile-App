@@ -9,6 +9,7 @@ class LoginOrSignUpView extends GetView<LoginOrSignUpController> {
 
   @override
   Widget build(BuildContext context) {
+    Get.put(LoginOrSignUpController());
     return WillPopScope(
       onWillPop: () async {
         Get.back();
@@ -115,7 +116,9 @@ class LoginOrSignUpView extends GetView<LoginOrSignUpController> {
                         children: [
                           PrimaryButton(
                             onPressed: () async {
-                              await Get.toNamed(Routes.LOGIN);
+                              await Get.toNamed(Routes.LOGIN, arguments: {
+                                "isFromLoginInOrSignUp": true,
+                              });
                             },
                             borderRadius: BorderRadius.circular(15.h),
                             title: LocaleKeys.sign_in_now,

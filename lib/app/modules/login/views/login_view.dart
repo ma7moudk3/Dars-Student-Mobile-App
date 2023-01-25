@@ -53,6 +53,32 @@ class LoginView extends GetView<LoginController> {
                   ),
                 ),
                 Positioned(
+                  right: 0,
+                  top: 0,
+                  child: Visibility(
+                    visible: Get.arguments != null &&
+                        Get.arguments['isFromLoginInOrSignUp'] != null &&
+                        Get.arguments['isFromLoginInOrSignUp'] == true,
+                    child: Padding(
+                      padding: EdgeInsets.symmetric(
+                          horizontal: 16.w, vertical: 15.h),
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          IconButton(
+                            onPressed: () => Get.back(),
+                            icon: Icon(
+                              Icons.arrow_back_rounded,
+                              color: ColorManager.white,
+                              size: 25,
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                  ),
+                ),
+                Positioned(
                   bottom: 38.h,
                   left: 18.w,
                   right: 18.w,
