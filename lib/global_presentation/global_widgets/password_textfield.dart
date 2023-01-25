@@ -1,5 +1,3 @@
-
-
 import 'package:hessa_student/app/constants/exports.dart';
 import 'package:hessa_student/generated/locales.g.dart';
 
@@ -12,7 +10,15 @@ class PasswordTextField extends StatefulWidget {
   final FormFieldValidator<String>? validator;
   final Function(String)? onFieldSubmitted;
   final TextInputType keyboardType;
+  final Color? cursorColor;
+  final InputBorder? disabledBorder;
+  final InputBorder? enabledBorder;
+  final BorderRadius? borderRadius;
+  final InputBorder? focusedBorder;
+  final InputBorder? errorBorder;
+  final BorderSide borderSide;
   final int? maxLength;
+  final Widget? prefixIcon;
   final FocusNode? focusNode;
 
   const PasswordTextField(
@@ -22,7 +28,15 @@ class PasswordTextField extends StatefulWidget {
       this.validator,
       this.onFieldSubmitted,
       this.title,
+      this.borderRadius,
+      this.prefixIcon,
+      this.cursorColor,
+      this.borderSide = const BorderSide(),
       this.focusNode,
+      this.disabledBorder,
+      this.enabledBorder,
+      this.focusedBorder,
+      this.errorBorder,
       this.keyboardType = TextInputType.visiblePassword,
       this.maxLength})
       : super(key: key);
@@ -51,9 +65,7 @@ class _PasswordTextFieldState extends State<PasswordTextField> {
         PrimaryText(
           widget.title ?? LocaleKeys.password.tr,
         ),
-        SizedBox(
-          height: 10.h,
-        ),
+        SizedBox(height: 10.h),
         /*
                     decoration: BoxDecoration(
               borderRadius: appType == AppType.customer
@@ -68,9 +80,10 @@ class _PasswordTextFieldState extends State<PasswordTextField> {
           controller: widget.controller,
           focusNode: widget.focusNode,
           maxLength: widget.maxLength,
-          cursorColor: isDarkMoodEnabled()
-              ? ColorManager.darkPrimary
-              : ColorManager.fontColor,
+          cursorColor: widget.cursorColor ??
+              (isDarkMoodEnabled()
+                  ? ColorManager.darkPrimary
+                  : ColorManager.fontColor),
           style: TextStyle(
               color:
                   isDarkMoodEnabled() ? Colors.white : ColorManager.fontColor),
@@ -78,6 +91,10 @@ class _PasswordTextFieldState extends State<PasswordTextField> {
           obscureText: !visiblePassword,
           onFieldSubmitted: widget.onFieldSubmitted ?? (v) {},
           decoration: InputDecoration(
+            disabledBorder: widget.disabledBorder,
+            enabledBorder: widget.enabledBorder,
+            focusedBorder: widget.focusedBorder,
+            errorBorder: widget.errorBorder,
             focusColor: ColorManager.primary,
             errorMaxLines: 2,
             fillColor: isDarkMoodEnabled()
@@ -87,29 +104,37 @@ class _PasswordTextFieldState extends State<PasswordTextField> {
             counterText: "",
             hoverColor: ColorManager.primary,
             errorStyle: TextStyle(
-                        fontFamily: "NRT",
-                        color: ColorManager.red,
-                        fontSize: 13.sp,
-                      )
-                   ,
-            hintStyle:  TextStyle(
-                        fontFamily: "NRT",
-                        color: ColorManager.grey,
-                        fontSize: 14.sp,
-                      )
-                   ,
-            border: isDarkMoodEnabled()
-                ? const OutlineInputBorder(
-                  borderSide: BorderSide.none,
-                    borderRadius:  BorderRadius.all(Radius.circular(8.0)),
-                  )
-                : OutlineInputBorder(borderRadius: BorderRadius.circular(8)),
-            contentPadding: const EdgeInsets.fromLTRB(20.0, 10.0, 20.0, 10.0),
-            prefixIcon: Icon(
-              Icons.lock_outline,
-              color: ColorManager.grey,
-              size: 23.w,
+              fontFamily: FontConstants.fontFamily,
+              color: ColorManager.red,
+              fontSize: 13.sp,
             ),
+            hintStyle: TextStyle(
+              fontFamily: FontConstants.fontFamily,
+              color: ColorManager.grey,
+              fontSize: 14.sp,
+            ),
+            border: isDarkMoodEnabled()
+                ? OutlineInputBorder(
+                    borderSide: widget.borderSide,
+                    borderRadius: widget.borderRadius ??
+                        const BorderRadius.all(
+                          Radius.circular(8.0),
+                        ),
+                  )
+                : OutlineInputBorder(
+                    borderSide: widget.borderSide,
+                    borderRadius: widget.borderRadius ??
+                        const BorderRadius.all(
+                          Radius.circular(8.0),
+                        ),
+                  ),
+            contentPadding: const EdgeInsets.fromLTRB(20.0, 10.0, 20.0, 10.0),
+            prefixIcon: widget.prefixIcon ??
+                Icon(
+                  Icons.lock_outline,
+                  color: ColorManager.grey,
+                  size: 23.w,
+                ),
             suffixIcon: IconButton(
               onPressed: () {
                 setState(() {

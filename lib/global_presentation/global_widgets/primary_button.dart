@@ -33,7 +33,7 @@ class PrimaryButton extends StatelessWidget {
           splashFactory: NoSplash.splashFactory,
           backgroundColor: color ?? (ColorManager.primary),
           shape: RoundedRectangleBorder(
-            borderRadius: borderRadius ?? BorderRadius.circular(8.h),
+            borderRadius: borderRadius ?? BorderRadius.circular(15.h),
             side: borderSide ??
                 BorderSide(color: ColorManager.primary, width: 1.5),
           ),

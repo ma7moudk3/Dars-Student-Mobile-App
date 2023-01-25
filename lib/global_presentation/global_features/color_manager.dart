@@ -16,7 +16,7 @@ class ColorManager {
   static Color darkGrey2 = HexColor.fromHex("#9F9F9F");
   static Color cardColor = HexColor.fromHex("#F9F9F9");
   static Color primaryOpacity70 = HexColor.fromHex("#B3ED9728");
-  static Color fontColor = HexColor.fromHex("#3B3B3B");
+  static Color fontColor = HexColor.fromHex("#2B2B2B");
   static Color fontColor2 = HexColor.fromHex("#262626");
   static Color fontColor3 = HexColor.fromHex("#555555");
   static Color fontColor4 = HexColor.fromHex("#5B5B5B");
@@ -53,6 +53,7 @@ class ColorManager {
   static Color grey11 = HexColor.fromHex('#A0A0A0');
   static Color borderGrey = HexColor.fromHex('#EFEFEF');
   static Color borderColor = HexColor.fromHex('#808080');
+  static Color borderColor2 = HexColor.fromHex('#BEBABA');
   static Color shadow = HexColor.fromHex('#4B545A');
   static Color bottomNavBarTitleGrey = HexColor.fromHex('#8B8989');
   static Color bottomNavBarIconGrey = HexColor.fromHex('#C3C5CC');

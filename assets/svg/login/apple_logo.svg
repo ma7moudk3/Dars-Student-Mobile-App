@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="22.05" height="26.188" viewBox="0 0 22.05 26.188">
+  <defs>
+    <clipPath id="clip-path">
+      <rect id="Rectangle_7081" data-name="Rectangle 7081" width="22.05" height="26.188" transform="translate(22.05 26.188) rotate(180)" fill="#fff"/>
+    </clipPath>
+  </defs>
+  <g id="apple_logo" transform="translate(0 0)" clip-path="url(#clip-path)">
+    <path id="Path_58659" data-name="Path 58659" d="M310.522,162.134c-1.419,1.377-2.985,1.163-4.478.513a5.674,5.674,0,0,0-4.714,0c-2.087.9-3.195.639-4.452-.513-7.1-7.306-6.049-18.436,2.016-18.855,1.956.1,3.326,1.081,4.478,1.163,1.713-.348,3.352-1.346,5.185-1.215a6.316,6.316,0,0,1,4.95,2.611,5.757,5.757,0,0,0,.7,10.37,14.72,14.72,0,0,1-3.692,5.945ZM303.215,143.2a5.962,5.962,0,0,1,5.447-6.18C309.079,140.765,305.258,143.567,303.215,143.2Z" transform="translate(-292.166 -136.994)" fill="#141f1f"/>
+  </g>
+</svg>

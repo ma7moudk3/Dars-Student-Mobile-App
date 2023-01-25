@@ -3,12 +3,13 @@ import 'dart:async';
 import 'package:get/get.dart';
 
 class LoginOrSignUpController extends GetxController {
-  String loginBackgroundImage = "assets/images/login_background1.png";
+  String loginBackgroundImage =
+      "assets/images/login_or_sign_up_background1.png";
   int count = 1;
   int numberOfLoginBackgroundImages = 3;
-  // login_background1.png
-  // login_background2.png
-  // login_background3.png
+  // login_or_sign_up_background1.png
+  // login_or_sign_up_background2.png
+  // login_or_sign_up_background3.png
   Timer? timer;
 
   @override
@@ -24,7 +25,8 @@ class LoginOrSignUpController extends GetxController {
     } else {
       count = 1;
     }
-    loginBackgroundImage = "assets/images/login_background$count.png";
+    loginBackgroundImage =
+        "assets/images/login_or_sign_up_background$count.png";
     update();
   }
 

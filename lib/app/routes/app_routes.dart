@@ -9,6 +9,8 @@ abstract class Routes {
   static const LOGIN_OR_SIGN_UP = _Paths.LOGIN_OR_SIGN_UP;
   static const LOGIN = _Paths.LOGIN;
   static const SIGN_UP = _Paths.SIGN_UP;
+  static const CONNECTION_FAILED = _Paths.CONNECTION_FAILED;
+  static const FORGOT_PASSWORD = _Paths.FORGOT_PASSWORD;
 }
 
 abstract class _Paths {
@@ -19,4 +21,6 @@ abstract class _Paths {
   static const LOGIN_OR_SIGN_UP = '/login-or-sign-up';
   static const LOGIN = '/login';
   static const SIGN_UP = '/sign-up';
+  static const CONNECTION_FAILED = '/connection-failed';
+  static const FORGOT_PASSWORD = '/forgot-password';
 }
