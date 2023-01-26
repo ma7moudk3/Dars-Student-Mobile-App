@@ -15,6 +15,7 @@ class SignUpContent extends GetView<SignUpController> {
   }) : super(key: key);
   @override
   Widget build(BuildContext context) {
+    Get.put(() => SignUpController());
     return SizedBox(
       height: Get.height / 1.4,
       child: Form(
@@ -226,7 +227,6 @@ class SignUpContent extends GetView<SignUpController> {
                             .then((bool internetStatus) async {
                           if (internetStatus == true) {
                             log('sign up');
-                            // await controller.login();
                           } else {
                             await Get.toNamed(Routes.CONNECTION_FAILED);
                           }
@@ -353,7 +353,6 @@ class SignUpContent extends GetView<SignUpController> {
                             .then((bool internetStatus) async {
                           if (internetStatus == true) {
                             log('sign up');
-                            // await controller.login();
                           } else {
                             await Get.toNamed(Routes.CONNECTION_FAILED);
                           }
@@ -361,7 +360,7 @@ class SignUpContent extends GetView<SignUpController> {
                       }
                     },
                     borderRadius: BorderRadius.circular(15.h),
-                    title: LocaleKeys.login.tr,
+                    title: LocaleKeys.sign_up_new_account.tr,
                     fontSize: 14.sp,
                   ),
                   SizedBox(height: 10.h),

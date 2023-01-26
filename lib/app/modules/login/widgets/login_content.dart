@@ -14,6 +14,7 @@ class LoginContent extends GetView<LoginController> {
   }) : super(key: key);
   @override
   Widget build(BuildContext context) {
+    Get.put(() => LoginController());
     return SingleChildScrollView(
       child: Form(
         key: controller.formKey,
@@ -290,12 +291,11 @@ class LoginContent extends GetView<LoginController> {
                   ],
                 ),
                 KeyboardVisibilityBuilder(
-                    builder: (BuildContext context, bool isKeyboardVisibile) {
-                  if (isKeyboardVisibile) {
-                    return SizedBox(height: 30.h);
-                  } else {
-                    return const SizedBox();
-                  }
+                    builder: (BuildContext context, bool isKeyboardVisible) {
+                  return AnimatedContainer(
+                      duration: const Duration(milliseconds: 300),
+                      curve: Curves.easeOut,
+                      height: isKeyboardVisible ? Get.height * 0.13 : 0);
                 }),
               ],
             );

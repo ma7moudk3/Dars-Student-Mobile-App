@@ -29,70 +29,83 @@ class IntlPhoneNumberTextField extends StatelessWidget {
         SizedBox(height: 10.h),
         PrimaryText(LocaleKeys.phone_number),
         SizedBox(height: 5.h),
-        IntlPhoneField(
-          initialValue: palestineValue,
-          initialCountryCode: 'PS',
-          dropdownTextStyle: textStyle,
-          dropdownIcon: Icon(
-            Icons.arrow_drop_down,
-            color: ColorManager.primary,
-          ),
-          focusNode: focusNode,
-          cursorColor: ColorManager.primary,
-          pickerDialogStyle: PickerDialogStyle(
-            searchFieldInputDecoration: InputDecoration(
+        Directionality(
+          textDirection: TextDirection.ltr,
+          child: IntlPhoneField(
+            initialValue: palestineValue,
+            invalidNumberMessage: LocaleKeys.invalid_phone_number.tr,
+            initialCountryCode: 'PS',
+            dropdownTextStyle: textStyle,
+            dropdownIcon: Icon(
+              Icons.arrow_drop_down,
+              color: ColorManager.primary,
+            ),
+            focusNode: focusNode,
+            cursorColor: ColorManager.primary,
+            pickerDialogStyle: PickerDialogStyle(
+              searchFieldInputDecoration: InputDecoration(
+                enabledBorder: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(14),
+                  borderSide: BorderSide(color: ColorManager.borderColor2),
+                ),
+                counterStyle: textStyle,
+                border: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(14),
+                  borderSide: BorderSide(color: ColorManager.borderColor2),
+                ),
+                focusedBorder: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(14),
+                  borderSide: BorderSide(color: ColorManager.primary),
+                ),
+                errorBorder: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(14),
+                  borderSide: BorderSide(color: ColorManager.red),
+                ),
+              ),
+              backgroundColor: ColorManager.white,
+              countryCodeStyle: textStyle,
+              countryNameStyle: textStyle,
+            ),
+            controller: controller,
+            decoration: InputDecoration(
+              contentPadding: const EdgeInsets.fromLTRB(20.0, 10.0, 20.0, 10.0),
+              hintMaxLines: null,
+              counterText: "",
+              hintText: "(599)     21     11    96",
+              hintStyle: TextStyle(
+                color: ColorManager.borderColor2,
+                fontSize: (14).sp,
+                fontWeight: FontWeightManager.softLight,
+                fontFamily: FontConstants.fontFamily,
+              ),
+              errorStyle: TextStyle(
+                color: ColorManager.red,
+                fontSize: (11).sp,
+                fontWeight: FontWeightManager.softLight,
+                fontFamily: FontConstants.fontFamily,
+              ),
               enabledBorder: OutlineInputBorder(
                 borderRadius: BorderRadius.circular(14),
                 borderSide: BorderSide(color: ColorManager.borderColor2),
-              ),
-              counterStyle: textStyle,
-              border: OutlineInputBorder(
-                borderRadius: BorderRadius.circular(14),
-                borderSide: BorderSide(color: ColorManager.borderColor2),
-              ),
-              focusedBorder: OutlineInputBorder(
-                borderRadius: BorderRadius.circular(14),
-                borderSide: BorderSide(color: ColorManager.primary),
               ),
               errorBorder: OutlineInputBorder(
                 borderRadius: BorderRadius.circular(14),
                 borderSide: BorderSide(color: ColorManager.red),
               ),
-            ),
-            backgroundColor: ColorManager.white,
-            countryCodeStyle: textStyle,
-            countryNameStyle: textStyle,
-          ),
-          controller: controller,
-          decoration: InputDecoration(
-            errorStyle: TextStyle(
-              color: ColorManager.red,
-              fontSize: (11).sp,
-              fontWeight: FontWeightManager.softLight,
-              fontFamily: FontConstants.fontFamily,
-            ),
-            enabledBorder: OutlineInputBorder(
-              borderRadius: BorderRadius.circular(14),
-              borderSide: BorderSide(color: ColorManager.borderColor2),
-            ),
-            errorBorder: OutlineInputBorder(
-              borderRadius: BorderRadius.circular(14),
-              borderSide: BorderSide(color: ColorManager.red),
-            ),
-            labelText: LocaleKeys.phone_number.tr,
-            labelStyle: TextStyle(
-              color: ColorManager.borderColor2,
-              fontSize: (14).sp,
-              fontWeight: FontWeightManager.softLight,
-              fontFamily: FontConstants.fontFamily,
-            ),
-            focusedBorder: OutlineInputBorder(
-              borderRadius: BorderRadius.circular(14),
-              borderSide: BorderSide(color: ColorManager.primary),
-            ),
-            border: OutlineInputBorder(
-              borderRadius: BorderRadius.circular(14),
-              borderSide: BorderSide(color: ColorManager.primary),
+              labelStyle: TextStyle(
+                color: ColorManager.borderColor2,
+                fontSize: (14).sp,
+                fontWeight: FontWeightManager.softLight,
+                fontFamily: FontConstants.fontFamily,
+              ),
+              focusedBorder: OutlineInputBorder(
+                borderRadius: BorderRadius.circular(14),
+                borderSide: BorderSide(color: ColorManager.primary),
+              ),
+              border: OutlineInputBorder(
+                borderRadius: BorderRadius.circular(14),
+                borderSide: BorderSide(color: ColorManager.primary),
+              ),
             ),
           ),
         ),

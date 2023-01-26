@@ -1,3 +1,4 @@
+import 'package:flutter_keyboard_visibility/flutter_keyboard_visibility.dart';
 import 'package:hessa_student/app/constants/exports.dart';
 
 import '../../../../generated/locales.g.dart';
@@ -29,29 +30,32 @@ class LoginView extends GetView<LoginController> {
             child: Stack(
               clipBehavior: Clip.none,
               children: [
-                Positioned(
-                  right: 16.w,
-                  top: 90.h,
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    mainAxisAlignment: MainAxisAlignment.start,
-                    children: [
-                      PrimaryText(
-                        LocaleKeys.do_your_sign_in,
-                        fontSize: 18.sp,
-                        fontWeight: FontWeightManager.medium,
-                        color: ColorManager.white,
-                      ),
-                      SizedBox(height: 5.h),
-                      PrimaryText(
-                        LocaleKeys.welcome_in_hessa_we_missed_you,
-                        fontSize: 14.sp,
-                        fontWeight: FontWeightManager.softLight,
-                        color: ColorManager.white,
-                      ),
-                    ],
-                  ),
-                ),
+                KeyboardVisibilityBuilder(
+                    builder: (BuildContext context, bool isKeyboardVisible) {
+                  return Positioned(
+                    right: 16.w,
+                    top: isKeyboardVisible ? 55.h : 90.h,
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      mainAxisAlignment: MainAxisAlignment.start,
+                      children: [
+                        PrimaryText(
+                          LocaleKeys.do_your_sign_in,
+                          fontSize: 18.sp,
+                          fontWeight: FontWeightManager.medium,
+                          color: ColorManager.white,
+                        ),
+                        SizedBox(height: 5.h),
+                        PrimaryText(
+                          LocaleKeys.welcome_in_hessa_we_missed_you,
+                          fontSize: 14.sp,
+                          fontWeight: FontWeightManager.softLight,
+                          color: ColorManager.white,
+                        ),
+                      ],
+                    ),
+                  );
+                }),
                 Positioned(
                   right: 0,
                   top: 0,
