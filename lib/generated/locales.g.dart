@@ -58,6 +58,26 @@ class LocaleKeys {
   static const invalid_phone_number = 'invalid_phone_number';
   static const male = 'male';
   static const female = 'female';
+  static const home = 'home';
+  static const orders = 'orders';
+  static const messages = 'messages';
+  static const profile = 'profile';
+  static const search = 'search';
+  static const what_are_you_looking_for_today =
+      'what_are_you_looking_for_today';
+  static const notifications = 'notifications';
+  static const settings = 'settings';
+  static const logout = 'logout';
+  static const edit_profile = 'edit_profile';
+  static const change_password = 'change_password';
+  static const change_language = 'change_language';
+  static const order_new_hessa = 'order_new_hessa';
+  static const hessa_teachers = 'hessa_teachers';
+  static const recent_orders = 'recent_orders';
+  static const no_orders_currently = 'no_orders_currently';
+  static const you_can_add_new_hessa_order = 'you_can_add_new_hessa_order';
+  static const more = 'more';
+  static const welcome = 'welcome';
 }
 
 class Locales {
@@ -111,5 +131,24 @@ class Locales {
     'invalid_phone_number': 'رقم الهاتف غير صحيح',
     'male': 'ذكر',
     'female': 'أنثى',
+    'home': 'الرئيسية',
+    'orders': 'الطلبات',
+    'messages': 'الرسائل',
+    'profile': 'البروفايل',
+    'search': 'بحث',
+    'what_are_you_looking_for_today': 'ما الذي تبحث عنه اليوم',
+    'notifications': 'الإشعارات',
+    'settings': 'الإعدادات',
+    'logout': 'تسجيل الخروج',
+    'edit_profile': 'تعديل الملف الشخصي',
+    'change_password': 'تغيير كلمة المرور',
+    'change_language': 'تغيير اللغة',
+    'order_new_hessa': 'طلب حصة جديدة',
+    'hessa_teachers': 'مدرسي حصة',
+    'recent_orders': 'أحدث طلباتك',
+    'no_orders_currently': 'لا يوجد لديك طلبات حالياً',
+    'you_can_add_new_hessa_order': 'يمكنك إضافة طلب حصة جديد ',
+    'more': 'المزيد',
+    'welcome': 'مرحباً',
   };
 }

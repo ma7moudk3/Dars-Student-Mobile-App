@@ -16,9 +16,9 @@ dependencies:
   dio: ^4.0.6
   shared_preferences: ^2.0.17
   intl: ^0.18.0
-  translator: ^0.1.7
   intl_phone_field: ^3.1.0
   flutter_keyboard_visibility: ^5.4.0
+  animated_bottom_navigation_bar: ^1.1.0+1
 
 dev_dependencies: 
   flutter_lints: ^2.0.0
@@ -34,6 +34,7 @@ flutter:
     - assets/images/general_images/
     - assets/svg/
     - assets/svg/login/
+    - assets/svg/icons/
     - assets/fonts/
     - assets/langs/
   fonts:

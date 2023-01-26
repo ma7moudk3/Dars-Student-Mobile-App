@@ -12,6 +12,10 @@ abstract class Routes {
   static const CONNECTION_FAILED = _Paths.CONNECTION_FAILED;
   static const FORGOT_PASSWORD = _Paths.FORGOT_PASSWORD;
   static const STATIC_PAGE = _Paths.STATIC_PAGE;
+  static const BOTTOM_NAV_BAR = _Paths.BOTTOM_NAV_BAR;
+  static const PROFILE = _Paths.PROFILE;
+  static const MESSAGES = _Paths.MESSAGES;
+  static const ORDERS = _Paths.ORDERS;
 }
 
 abstract class _Paths {
@@ -25,4 +29,8 @@ abstract class _Paths {
   static const CONNECTION_FAILED = '/connection-failed';
   static const FORGOT_PASSWORD = '/forgot-password';
   static const STATIC_PAGE = '/static-page';
+  static const BOTTOM_NAV_BAR = '/bottom-nav-bar';
+  static const PROFILE = '/profile';
+  static const MESSAGES = '/messages';
+  static const ORDERS = '/orders';
 }

@@ -1,5 +1,7 @@
 import 'package:get/get.dart';
 
+import '../modules/bottom_nav_bar/bindings/bottom_nav_bar_binding.dart';
+import '../modules/bottom_nav_bar/views/bottom_nav_bar_view.dart';
 import '../modules/connection_failed/bindings/connection_failed_binding.dart';
 import '../modules/connection_failed/views/connection_failed_view.dart';
 import '../modules/forgot_password/bindings/forgot_password_binding.dart';
@@ -10,8 +12,14 @@ import '../modules/login/bindings/login_binding.dart';
 import '../modules/login/views/login_view.dart';
 import '../modules/login_or_sign_up/bindings/login_or_sign_up_binding.dart';
 import '../modules/login_or_sign_up/views/login_or_sign_up_view.dart';
+import '../modules/messages/bindings/messages_binding.dart';
+import '../modules/messages/views/messages_view.dart';
 import '../modules/onboarding/bindings/onboarding_binding.dart';
 import '../modules/onboarding/views/onboarding_view.dart';
+import '../modules/orders/bindings/orders_binding.dart';
+import '../modules/orders/views/orders_view.dart';
+import '../modules/profile/bindings/profile_binding.dart';
+import '../modules/profile/views/profile_view.dart';
 import '../modules/sign_up/bindings/sign_up_binding.dart';
 import '../modules/sign_up/views/sign_up_view.dart';
 import '../modules/splash/bindings/splash_binding.dart';
@@ -89,6 +97,30 @@ class AppPages {
       name: _Paths.STATIC_PAGE,
       page: () => StaticPageView(),
       binding: StaticPageBinding(),
+      transition: Transition.cupertino,
+      transitionDuration: const Duration(milliseconds: 400),
+    ),
+    GetPage(
+      name: _Paths.BOTTOM_NAV_BAR,
+      page: () => BottomNavBarView(),
+      binding: BottomNavBarBinding(),
+      transition: Transition.cupertino,
+      transitionDuration: const Duration(milliseconds: 400),
+    ),
+    GetPage(
+      name: _Paths.PROFILE,
+      page: () => ProfileView(),
+      binding: ProfileBinding(),
+    ),
+    GetPage(
+      name: _Paths.MESSAGES,
+      page: () => MessagesView(),
+      binding: MessagesBinding(),
+    ),
+    GetPage(
+      name: _Paths.ORDERS,
+      page: () => OrdersView(),
+      binding: OrdersBinding(),
     ),
   ];
 }

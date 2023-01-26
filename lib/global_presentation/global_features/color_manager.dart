@@ -21,6 +21,7 @@ class ColorManager {
   static Color fontColor3 = HexColor.fromHex("#555555");
   static Color fontColor4 = HexColor.fromHex("#5B5B5B");
   static Color fontColor5 = HexColor.fromHex("#3A3A3A");
+  static Color fontColor6 = HexColor.fromHex("#D6D4D4");
   static Color appBarFontColor = HexColor.fromHex("#333333");
   static Color greyFontColor = HexColor.fromHex("#4A4A4A");
   static Color greyFontColor2 = HexColor.fromHex("#8F8E8E");
@@ -28,6 +29,7 @@ class ColorManager {
   static Color yellow = HexColor.fromHex("#FFCB42");
   static Color lightYellow = HexColor.fromHex("#FFF6DB");
   static Color textFieldColor = HexColor.fromHex('#000000').withOpacity(0.08);
+  static Color dividerColor = HexColor.fromHex('##E6E6E6');
 
   // new colors
   static Color black = HexColor.fromHex("#2B2B2B");
@@ -69,6 +71,7 @@ class ColorManager {
   static Color navy = HexColor.fromHex('#000080');
   static Color purple = HexColor.fromHex('#92AAF2');
   static Color brown = HexColor.fromHex('#FCAA6A');
+  static Color fontColor7 = HexColor.fromHex('#BEBABA');
 
   // Dark Theme
   static Color scaffoldDarkColor = HexColor.fromHex("#16202A");
