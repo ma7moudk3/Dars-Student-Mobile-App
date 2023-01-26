@@ -31,7 +31,6 @@ flutter:
   assets: 
     - assets/images/
     - assets/images/login_or_sign_up/
-    - assets/images/general_images/
     - assets/svg/
     - assets/svg/login/
     - assets/svg/icons/

@@ -10,7 +10,7 @@ class ImagesManager {
   static String loginBackground = "assets/images/login_background.png";
   static String signUpBackground = "assets/images/sign_up_background.png";
   static String noInernetConnection =
-      "assets/images/general_images/connection_failed.png";
+      "assets/images/connection_failed.png";
   static String googleLogo = "assets/svg/login/google_logo.svg";
   static String facebookLogo = "assets/svg/login/facebook_logo.svg";
   static String appleLogo = "assets/svg/login/apple_logo.svg";
@@ -23,6 +23,5 @@ class ImagesManager {
   static String avatar = "assets/images/avatar.png";
   static String notebookIcon = "assets/svg/icons/notebook.svg";
   static String teachersIcon = "assets/svg/icons/teachers.svg";
-  static String noOrdersBackground = "assets/svg/no_orders_background.svg";
   static String noOrders = "assets/svg/no_orders.svg";
 }

@@ -4,8 +4,11 @@ import '../../../constants/exports.dart';
 import '../controllers/home_controller.dart';
 
 class OrderWidget extends GetView<HomeController> {
+  final bool isFirst;
+
   const OrderWidget({
     Key? key,
+    this.isFirst = false,
   }) : super(key: key);
 
   @override
@@ -17,7 +20,7 @@ class OrderWidget extends GetView<HomeController> {
       },
       child: Container(
         height: 186.h,
-        margin: EdgeInsets.only(top: 10.h),
+        margin: isFirst ? null : EdgeInsets.only(top: 10.h),
         padding: EdgeInsets.symmetric(horizontal: 16.w, vertical: 16.h),
         decoration: BoxDecoration(
           color: const Color(0xfeffffff),
@@ -169,7 +172,8 @@ class OrderWidget extends GetView<HomeController> {
                     height: 26.h,
                     decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(8),
-                      color: ColorManager.green.withOpacity(0.15), // badge color >> could be red
+                      color: ColorManager.green
+                          .withOpacity(0.15), // badge color >> could be red
                     ),
                     child: Center(
                       child: PrimaryText(

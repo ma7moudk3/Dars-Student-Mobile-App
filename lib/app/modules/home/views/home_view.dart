@@ -123,10 +123,23 @@ class HomeView extends GetView<HomeController> {
                             child: Column(
                               children: [
                                 SvgPicture.asset(
-                                    ImagesManager.noOrdersBackground),
-                                SvgPicture.asset(
                                   ImagesManager.noOrders,
+                                  width: 120.w,
+                                  height: 125.h,
                                 ),
+                                PrimaryText(
+                                  LocaleKeys.no_orders_currently.tr,
+                                  fontSize: 16.sp,
+                                  fontWeight: FontWeightManager.light,
+                                  color: ColorManager.fontColor,
+                                ),
+                                PrimaryText(
+                                  LocaleKeys.you_can_add_new_hessa_order.tr,
+                                  fontSize: 16.sp,
+                                  fontWeight: FontWeightManager.light,
+                                  color: ColorManager.grey5,
+                                ),
+                                SizedBox(height: 15.h),
                               ],
                             ),
                           );
@@ -139,7 +152,7 @@ class HomeView extends GetView<HomeController> {
                               if (index == controller.orders.length) {
                                 return SizedBox(height: 20.h);
                               }
-                              return const OrderWidget();
+                              return OrderWidget(isFirst: index == 0);
                             },
                           );
                         }
