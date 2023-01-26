@@ -41,5 +41,7 @@
     "check_confirm_password": "تحقق من أنك أدخلت كلمة مرور مطابقة",
     "check_tos_agreement": "تحقق من أنك وافقت على سياسة الخصوصية وشروط الاستخدام",
     "phone_number": "رقم الهاتف",
-    "invalid_phone_number" : "رقم الهاتف غير صحيح"
+    "invalid_phone_number": "رقم الهاتف غير صحيح",
+    "male": "ذكر",
+    "female": "أنثى"
 }

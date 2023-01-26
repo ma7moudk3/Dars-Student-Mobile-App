@@ -50,6 +50,47 @@ class SignUpContent extends GetView<SignUpController> {
                         fontWeight: FontWeightManager.light,
                         fontSize: 14.sp,
                       ),
+                      SizedBox(width: 10.w),
+                      Row(
+                        children: List.generate(3, (int index) {
+                          if (index == 1) {
+                            return SizedBox(width: 10.w);
+                          }
+                          return GestureDetector(
+                            onTap: () {
+                              controller.changeGender(index);
+                            },
+                            child: Container(
+                              width: 60.w,
+                              height: 31.h,
+                              decoration: BoxDecoration(
+                                color: controller.gender == index
+                                    ? ColorManager.primary
+                                    : ColorManager.transparent,
+                                borderRadius: BorderRadius.circular(8),
+                                border: controller.gender != index
+                                    ? Border.all(
+                                        color: ColorManager.primary,
+                                        width: 1,
+                                      )
+                                    : null,
+                                boxShadow: const [],
+                              ),
+                              child: Center(
+                                child: PrimaryText(
+                                  index == 0
+                                      ? LocaleKeys.male
+                                      : LocaleKeys.female,
+                                  color: controller.gender == index
+                                      ? ColorManager.white
+                                      : ColorManager.borderColor,
+                                  fontWeight: FontWeightManager.light,
+                                ),
+                              ),
+                            ),
+                          );
+                        }),
+                      ),
                     ],
                   ),
                   SizedBox(height: 18.h),

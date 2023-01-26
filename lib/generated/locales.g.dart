@@ -56,6 +56,8 @@ class LocaleKeys {
   static const check_tos_agreement = 'check_tos_agreement';
   static const phone_number = 'phone_number';
   static const invalid_phone_number = 'invalid_phone_number';
+  static const male = 'male';
+  static const female = 'female';
 }
 
 class Locales {
@@ -107,5 +109,7 @@ class Locales {
         'تحقق من أنك وافقت على سياسة الخصوصية وشروط الاستخدام',
     'phone_number': 'رقم الهاتف',
     'invalid_phone_number': 'رقم الهاتف غير صحيح',
+    'male': 'ذكر',
+    'female': 'أنثى',
   };
 }
