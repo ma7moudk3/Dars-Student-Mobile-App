@@ -51,8 +51,10 @@ class LocaleKeys {
   static const for_hessa = 'for_hessa';
   static const please_enter_fullname = 'please_enter_fullname';
   static const please_enter_teacher_name = 'please_enter_teacher_name';
+  static const please_enter_dependent_name = 'please_enter_dependent_name';
   static const check_your_full_name = 'check_your_full_name';
   static const check_teacher_name = 'check_teacher_name';
+  static const check_dependent_name = 'check_dependent_name';
   static const please_enter_confirm_password = 'please_enter_confirm_password';
   static const check_confirm_password = 'check_confirm_password';
   static const check_tos_agreement = 'check_tos_agreement';
@@ -104,6 +106,7 @@ class LocaleKeys {
   static const choose_location = 'choose_location';
   static const teacher_name = 'teacher_name';
   static const write_teacher_name = 'write_teacher_name';
+  static const write_dependent_name = 'write_dependent_name';
   static const notes = 'notes';
   static const write_down_you_notes = 'write_down_you_notes';
   static const choose_hessa_date = 'choose_hessa_date';
@@ -111,6 +114,19 @@ class LocaleKeys {
   static const submit_form = 'submit_form';
   static const from = 'from';
   static const to = 'to';
+  static const dependents_title = 'dependents_title';
+  static const there_are_no_dependents = 'there_are_no_dependents';
+  static const you_can_add_new_dependent = 'you_can_add_new_dependent';
+  static const add_dependent_or_son = 'add_dependent_or_son';
+  static const add_dependent = 'add_dependent';
+  static const name = 'name';
+  static const person_picture = 'person_picture';
+  static const upload_picture_or_pdf = 'upload_picture_or_pdf';
+  static const date_of_birth = 'date_of_birth';
+  static const choose_date_of_birth = 'choose_date_of_birth';
+  static const please_enter_dob = 'please_enter_dob';
+  static const check_dependent_dob = 'check_dependent_dob';
+  static const confirm = 'confirm';
 }
 
 class Locales {
@@ -153,11 +169,13 @@ class Locales {
     'confirm_password': 'تأكيد كلمة المرور',
     'agree_with': 'الموافقة على جميع ',
     'terms_and_conditions': 'الشروط والأحكام',
-    'for_hessa': 'لحصة',
+    'for_hessa': 'لحِصّة',
     'please_enter_fullname': 'الرجاء ادخال الاسم الكامل',
     'please_enter_teacher_name': 'الرجاء ادخال اسم المدرّس',
+    'please_enter_dependent_name': 'الرجاء ادخال اسم التابع',
     'check_your_full_name': 'تحقق من اسمك الكامل',
     'check_teacher_name': 'تحقق من اسم المدرّس',
+    'check_dependent_name': 'تحقق من اسم التابع',
     'please_enter_confirm_password': 'الرجاء إدخال كلمة مرور مطابقة',
     'check_confirm_password': 'تحقق من أنك أدخلت كلمة مرور مطابقة',
     'check_tos_agreement':
@@ -210,6 +228,7 @@ class Locales {
     'choose_location': 'اختر الموقع الجغرافي',
     'teacher_name': 'اسم المدرّس',
     'write_teacher_name': 'اكتب اسم المدرّس',
+    'write_dependent_name': 'اكتب اسم التابع',
     'notes': 'ملاحظات',
     'write_down_you_notes': 'قم بتدوين ملاحظاتك هنا',
     'choose_hessa_date': 'اختر تاريخ الحصة',
@@ -217,5 +236,18 @@ class Locales {
     'submit_form': 'إرسال الطلب',
     'from': 'من',
     'to': 'إلى',
+    'dependents_title': 'التابعين',
+    'there_are_no_dependents': 'لا يوجد لديك تابعين/أبنائك',
+    'you_can_add_new_dependent': 'يمكنك إضافة تابعين جدد الآن',
+    'add_dependent_or_son': 'إضافة تابع/ابن',
+    'add_dependent': 'إضافة تابع',
+    'name': 'الاسم',
+    'person_picture': 'صورة شخصية',
+    'upload_picture_or_pdf': 'رفع صورة / PDF',
+    'date_of_birth': 'تاريخ الميلاد',
+    'choose_date_of_birth': 'اختر تاريخ ميلاد التابع',
+    'please_enter_dob': 'الرجاء إدخال تاريخ الميلاد',
+    'check_dependent_dob': 'يجب أن يكون عمر التابع 10 أعواماً على الأقل',
+    'confirm': 'تأكيد',
   };
 }

@@ -144,7 +144,7 @@ class PrimaryTextField extends StatelessWidget {
             hintText: hintText!.isNotEmpty ? hintText!.tr : '',
             hintStyle: hintStyle,
             contentPadding: contentPadding ??
-                const EdgeInsets.fromLTRB(20.0, 10.0, 20.0, 10.0),
+                const EdgeInsets.fromLTRB(10.0, 10.0, 20.0, 10.0),
           ),
           validator: validator ??
               (String? value) {

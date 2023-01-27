@@ -116,9 +116,9 @@ class HessaDateAndTimePickerWidget extends GetView<OrderHessaController> {
                       activeBorderColor: ColorManager.fontColor,
                       timeBlock: 30,
                       onRangeCompleted: (TimeRangeResult? range) {
-                        if (Get.isBottomSheetOpen!) {
-                          Get.back();
-                        }
+                        // if (Get.isBottomSheetOpen!) {
+                        //   Get.back();
+                        // }
                         controller.changeHessaTime(range);
                       },
                     ),

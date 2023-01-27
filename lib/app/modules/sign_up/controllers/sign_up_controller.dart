@@ -40,6 +40,21 @@ class SignUpController extends GetxController {
     super.onInit();
   }
 
+  @override
+  void dispose() {
+    fullNameController.dispose();
+    emailController.dispose();
+    passwordController.dispose();
+    confimationPasswordController.dispose();
+    phoneController.dispose();
+    fullNameFocusNode.dispose();
+    emailFocusNode.dispose();
+    passwordFocusNode.dispose();
+    confimationPasswordFocusNode.dispose();
+    phoneFocusNode.dispose();
+    super.dispose();
+  }
+
   void toggleTermsOfUse({bool? isAgreed}) {
     tosIsAgreed = isAgreed ?? !tosIsAgreed;
     update();
@@ -49,6 +64,7 @@ class SignUpController extends GetxController {
     String pattern = r'^[0-9]+$';
     RegExp regExp = RegExp(pattern);
     if (fullName == null || fullName.isEmpty) {
+      fullNameErrorIconColor = Colors.red;
       return LocaleKeys.please_enter_fullname.tr;
       // } else if (!regExp.hasMatch(fullName)) {
       // if (!fullName.contains(" ")) {
@@ -57,10 +73,13 @@ class SignUpController extends GetxController {
       //   return null;
       // }
     } else if (regExp.hasMatch(fullName)) {
+      fullNameErrorIconColor = Colors.red;
       return LocaleKeys.check_your_full_name.tr;
     } else {
-      return null;
+      fullNameErrorIconColor = null;
     }
+    update();
+    return null;
   }
 
   String? validateEmail(String? email) {

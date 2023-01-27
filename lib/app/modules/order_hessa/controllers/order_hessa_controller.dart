@@ -14,8 +14,10 @@ class OrderHessaController extends GetxController {
   late TextEditingController hessaDateController,
       hessaTimeController,
       locationController,
-      teacherNameController, notesController;
+      teacherNameController,
+      notesController;
   DateTime hessaDate = DateTime.now();
+  Color? teacherNameErrorIconColor;
   TimeRangeResult? hessaTimeRange;
 
   void changeHessaDate(DateTime hessaDate) {
@@ -34,6 +36,7 @@ class OrderHessaController extends GetxController {
     String pattern = r'^[0-9]+$';
     RegExp regExp = RegExp(pattern);
     if (teacherName == null || teacherName.isEmpty) {
+      teacherNameErrorIconColor = Colors.red;
       return LocaleKeys.please_enter_teacher_name.tr;
       // } else if (!regExp.hasMatch(fullName)) {
       // if (!fullName.contains(" ")) {
@@ -42,10 +45,13 @@ class OrderHessaController extends GetxController {
       //   return null;
       // }
     } else if (regExp.hasMatch(teacherName)) {
+      teacherNameErrorIconColor = Colors.red;
       return LocaleKeys.check_teacher_name.tr;
     } else {
-      return null;
+      teacherNameErrorIconColor = null;
     }
+    update();
+    return null;
   }
 
   void changeHessaTime(TimeRangeResult? rangeResult) {
@@ -83,19 +89,16 @@ class OrderHessaController extends GetxController {
 
   void changeSessionWay(int value) {
     sessionWay = value;
-    log("Session Way: $sessionWay");
     update();
   }
 
   void changeTeacherGender(int value) {
     teacherGender = value;
-    log("Teacher Gender $teacherGender");
     update();
   }
 
   void changeOrderType(int value) {
     orderType = value;
-    log("Order Type $orderType");
     update();
   }
 

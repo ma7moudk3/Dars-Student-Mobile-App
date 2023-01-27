@@ -1,4 +1,5 @@
 import 'package:hessa_student/app/constants/exports.dart';
+import 'package:hessa_student/app/routes/app_pages.dart';
 import 'package:hessa_student/generated/locales.g.dart';
 import 'package:hessa_student/global_presentation/global_widgets/dotted_border.dart';
 import 'package:hessa_student/global_presentation/global_widgets/global_dropdown.dart';
@@ -92,7 +93,7 @@ class OrderHessaView extends GetView<OrderHessaController> {
                             SizedBox(height: 12.h),
                             GestureDetector(
                               onTap: () async {
-                                // do something
+                                await Get.toNamed(Routes.DEPENDENTS);
                               },
                               child: DottedBorder(
                                 color: ColorManager.borderColor2,
@@ -510,8 +511,10 @@ class OrderHessaView extends GetView<OrderHessaController> {
                                 margin: EdgeInsets.only(left: 10.w),
                                 child: SvgPicture.asset(
                                   ImagesManager.addTeacherIcon,
+                                  color: controller.teacherNameErrorIconColor,
                                 ),
                               ),
+                              borderRadius: BorderRadius.circular(14),
                               suffixIconConstraints: BoxConstraints(
                                 minHeight: 20.h,
                                 minWidth: 20.w,
@@ -542,10 +545,11 @@ class OrderHessaView extends GetView<OrderHessaController> {
                               fontSize: 14.sp,
                               multiLines: true,
                               maxLines: 8,
-                              contentPadding:
-                                  const EdgeInsets.fromLTRB(20.0, 20.0, 20.0, 10.0),
+                              contentPadding: const EdgeInsets.fromLTRB(
+                                  20.0, 20.0, 20.0, 10.0),
                               controller: controller.notesController,
                               title: LocaleKeys.notes,
+                              borderRadius: BorderRadius.circular(14),
                               titleFontWeight: FontWeightManager.softLight,
                               onTap: () async {},
                               enabledBorder: OutlineInputBorder(

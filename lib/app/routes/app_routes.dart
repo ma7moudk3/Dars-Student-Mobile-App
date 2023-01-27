@@ -17,6 +17,8 @@ abstract class Routes {
   static const MESSAGES = _Paths.MESSAGES;
   static const ORDERS = _Paths.ORDERS;
   static const ORDER_HESSA = _Paths.ORDER_HESSA;
+  static const DEPENDENTS = _Paths.DEPENDENTS;
+  static const ADD_NEW_DEPENDENT = _Paths.ADD_NEW_DEPENDENT;
 }
 
 abstract class _Paths {
@@ -35,4 +37,6 @@ abstract class _Paths {
   static const MESSAGES = '/messages';
   static const ORDERS = '/orders';
   static const ORDER_HESSA = '/order-hessa';
+  static const DEPENDENTS = '/dependents';
+  static const ADD_NEW_DEPENDENT = '/add-new-dependent';
 }

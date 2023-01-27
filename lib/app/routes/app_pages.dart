@@ -1,9 +1,13 @@
 import 'package:get/get.dart';
 
+import '../modules/add_new_dependent/bindings/add_new_dependent_binding.dart';
+import '../modules/add_new_dependent/views/add_new_dependent_view.dart';
 import '../modules/bottom_nav_bar/bindings/bottom_nav_bar_binding.dart';
 import '../modules/bottom_nav_bar/views/bottom_nav_bar_view.dart';
 import '../modules/connection_failed/bindings/connection_failed_binding.dart';
 import '../modules/connection_failed/views/connection_failed_view.dart';
+import '../modules/dependents/bindings/dependents_binding.dart';
+import '../modules/dependents/views/dependents_view.dart';
 import '../modules/forgot_password/bindings/forgot_password_binding.dart';
 import '../modules/forgot_password/views/forgot_password_view.dart';
 import '../modules/home/bindings/home_binding.dart';
@@ -128,6 +132,16 @@ class AppPages {
       name: _Paths.ORDER_HESSA,
       page: () => OrderHessaView(),
       binding: OrderHessaBinding(),
+    ),
+    GetPage(
+      name: _Paths.DEPENDENTS,
+      page: () => DependentsView(),
+      binding: DependentsBinding(),
+    ),
+    GetPage(
+      name: _Paths.ADD_NEW_DEPENDENT,
+      page: () => AddNewDependentView(),
+      binding: AddNewDependentBinding(),
     ),
   ];
 }
