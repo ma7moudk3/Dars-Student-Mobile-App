@@ -50,7 +50,9 @@ class LocaleKeys {
   static const terms_and_conditions = 'terms_and_conditions';
   static const for_hessa = 'for_hessa';
   static const please_enter_fullname = 'please_enter_fullname';
+  static const please_enter_teacher_name = 'please_enter_teacher_name';
   static const check_your_full_name = 'check_your_full_name';
+  static const check_teacher_name = 'check_teacher_name';
   static const please_enter_confirm_password = 'please_enter_confirm_password';
   static const check_confirm_password = 'check_confirm_password';
   static const check_tos_agreement = 'check_tos_agreement';
@@ -78,6 +80,37 @@ class LocaleKeys {
   static const you_can_add_new_hessa_order = 'you_can_add_new_hessa_order';
   static const more = 'more';
   static const welcome = 'welcome';
+  static const order_hessa = 'order_hessa';
+  static const fill_the_student_form = 'fill_the_student_form';
+  static const student_name = 'student_name';
+  static const add_student = 'add_student';
+  static const studying_class = 'studying_class';
+  static const choose_studying_class = 'choose_studying_class';
+  static const studying_subject = 'studying_subject';
+  static const choose_studying_subject = 'choose_studying_subject';
+  static const session_way = 'session_way';
+  static const face_to_face = 'face_to_face';
+  static const electronic = 'electronic';
+  static const both = 'both';
+  static const teacher_gender = 'teacher_gender';
+  static const order_type = 'order_type';
+  static const one_hessa = 'one_hessa';
+  static const school_package = 'school_package';
+  static const school_package_description = 'school_package_description';
+  static const hessa_duration = 'hessa_duration';
+  static const choose_hessa_duration = 'choose_hessa_duration';
+  static const hessa_time_and_date = 'hessa_time_and_date';
+  static const location = 'location';
+  static const choose_location = 'choose_location';
+  static const teacher_name = 'teacher_name';
+  static const write_teacher_name = 'write_teacher_name';
+  static const notes = 'notes';
+  static const write_down_you_notes = 'write_down_you_notes';
+  static const choose_hessa_date = 'choose_hessa_date';
+  static const choose_hessa_time = 'choose_hessa_time';
+  static const submit_form = 'submit_form';
+  static const from = 'from';
+  static const to = 'to';
 }
 
 class Locales {
@@ -122,7 +155,9 @@ class Locales {
     'terms_and_conditions': 'الشروط والأحكام',
     'for_hessa': 'لحصة',
     'please_enter_fullname': 'الرجاء ادخال الاسم الكامل',
+    'please_enter_teacher_name': 'الرجاء ادخال اسم المدرّس',
     'check_your_full_name': 'تحقق من اسمك الكامل',
+    'check_teacher_name': 'تحقق من اسم المدرّس',
     'please_enter_confirm_password': 'الرجاء إدخال كلمة مرور مطابقة',
     'check_confirm_password': 'تحقق من أنك أدخلت كلمة مرور مطابقة',
     'check_tos_agreement':
@@ -144,11 +179,43 @@ class Locales {
     'change_password': 'تغيير كلمة المرور',
     'change_language': 'تغيير اللغة',
     'order_new_hessa': 'طلب حصة جديدة',
-    'hessa_teachers': 'مدرسي حصة',
+    'hessa_teachers': 'مدرسيّ حصة',
     'recent_orders': 'أحدث طلباتك',
     'no_orders_currently': 'لا يوجد لديك طلبات حالياً',
     'you_can_add_new_hessa_order': 'يمكنك إضافة طلب حصة جديد ',
     'more': 'المزيد',
     'welcome': 'مرحباً',
+    'order_hessa': 'طلب حصة',
+    'fill_the_student_form':
+        'قم بتعبئة المعلومات الخاصة بطالب المدرسة لاستكمال الطلب الخاص بك',
+    'student_name': 'اسم الطالب',
+    'add_student': 'إضافة طالب',
+    'studying_class': 'الصف الدراسي',
+    'choose_studying_class': 'اختر الصف الدراسي',
+    'studying_subject': 'المادة الدراسية',
+    'choose_studying_subject': 'اختر المادة الدراسية',
+    'session_way': 'طريقة الجلسة',
+    'face_to_face': 'وجاهي',
+    'electronic': 'إلكتروني',
+    'both': 'أيهما',
+    'teacher_gender': 'جنس المدرّس المطلوب',
+    'order_type': 'نوع الطلب المراد',
+    'one_hessa': 'حصة واحدة',
+    'school_package': 'حقيبة مدرسية',
+    'school_package_description': 'حصص مستمرة تصل لمدة 20 ساعة تدريسية',
+    'hessa_duration': 'مدة الحصة',
+    'choose_hessa_duration': 'اختر مدة الحصة',
+    'hessa_time_and_date': 'تاريخ ووقت الحصة',
+    'location': 'الموقع الجغرافي',
+    'choose_location': 'اختر الموقع الجغرافي',
+    'teacher_name': 'اسم المدرّس',
+    'write_teacher_name': 'اكتب اسم المدرّس',
+    'notes': 'ملاحظات',
+    'write_down_you_notes': 'قم بتدوين ملاحظاتك هنا',
+    'choose_hessa_date': 'اختر تاريخ الحصة',
+    'choose_hessa_time': 'اختر وقت الحصة',
+    'submit_form': 'إرسال الطلب',
+    'from': 'من',
+    'to': 'إلى',
   };
 }

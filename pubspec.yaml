@@ -19,6 +19,7 @@ dependencies:
   intl_phone_field: ^3.1.0
   flutter_keyboard_visibility: ^5.4.0
   animated_bottom_navigation_bar: ^1.1.0+1
+  time_range: ^1.1.0
 
 dev_dependencies: 
   flutter_lints: ^2.0.0

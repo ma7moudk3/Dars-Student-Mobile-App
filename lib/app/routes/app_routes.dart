@@ -16,6 +16,7 @@ abstract class Routes {
   static const PROFILE = _Paths.PROFILE;
   static const MESSAGES = _Paths.MESSAGES;
   static const ORDERS = _Paths.ORDERS;
+  static const ORDER_HESSA = _Paths.ORDER_HESSA;
 }
 
 abstract class _Paths {
@@ -33,4 +34,5 @@ abstract class _Paths {
   static const PROFILE = '/profile';
   static const MESSAGES = '/messages';
   static const ORDERS = '/orders';
+  static const ORDER_HESSA = '/order-hessa';
 }

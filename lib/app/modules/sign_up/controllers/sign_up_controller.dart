@@ -18,7 +18,7 @@ class SignUpController extends GetxController {
       confimationPasswordErrorIconColor;
   bool tosIsAgreed = false;
   final GlobalKey<FormState> formKey = GlobalKey();
-  int gender = 0; // 1 male , 0 female
+  int gender = 0; // 0 male , 1 female
 
   void changeGender(int genderValue) {
     gender = genderValue;

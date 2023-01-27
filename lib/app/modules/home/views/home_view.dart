@@ -1,8 +1,10 @@
 import 'dart:developer';
 
 import 'package:hessa_student/app/constants/exports.dart';
+import 'package:hessa_student/app/routes/app_pages.dart';
 import 'package:hessa_student/generated/locales.g.dart';
 
+import '../../../../global_presentation/global_widgets/custom_app_bar.dart';
 import '../controllers/home_controller.dart';
 import '../widgets/hessa_grid_view_item.dart';
 import '../widgets/order_widget.dart';
@@ -16,43 +18,7 @@ class HomeView extends GetView<HomeController> {
       body: SingleChildScrollView(
         child: Column(
           children: [
-            Container(
-              width: Get.width,
-              height: 96.h,
-              decoration: BoxDecoration(
-                borderRadius: const BorderRadius.vertical(
-                  bottom: Radius.circular(20.0),
-                ),
-                color: Colors.white,
-                boxShadow: [
-                  BoxShadow(
-                    color: Colors.black.withOpacity(0.08),
-                    offset: const Offset(0, 1.0),
-                    blurRadius: 10.0,
-                  ),
-                ],
-              ),
-              child: SafeArea(
-                child: Center(
-                  child: Row(
-                    crossAxisAlignment: CrossAxisAlignment.center,
-                    children: [
-                      SizedBox(width: 20.w),
-                      SvgPicture.asset(ImagesManager.notificationIcon),
-                      const Spacer(),
-                      PrimaryText(
-                        LocaleKeys.home,
-                        fontSize: 18,
-                        fontWeight: FontWeightManager.light,
-                      ),
-                      const Spacer(),
-                      SvgPicture.asset(ImagesManager.searchIcon),
-                      SizedBox(width: 20.w),
-                    ],
-                  ),
-                ),
-              ),
-            ),
+            const CustomAppBar(),
             SizedBox(height: 26.h),
             Padding(
               padding: EdgeInsets.symmetric(horizontal: 16.w),
@@ -60,7 +26,7 @@ class HomeView extends GetView<HomeController> {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   const ProfileInfoWidget(),
-                  SizedBox(height: 30.h),
+                  SizedBox(height: 25.h),
                   PrimaryText(
                     "${LocaleKeys.welcome.tr} وليد علي ..",
                     fontSize: 16.sp,
@@ -77,13 +43,15 @@ class HomeView extends GetView<HomeController> {
                   GridView.count(
                     crossAxisCount: 2,
                     shrinkWrap: true,
+                    crossAxisSpacing: 15.w,
+                    mainAxisSpacing: 15.h,
                     physics: const NeverScrollableScrollPhysics(),
                     children: [
                       HessaGridViewItem(
                         imagePath: ImagesManager.notebookIcon,
                         title: LocaleKeys.order_new_hessa.tr,
                         onTap: () async {
-                          log('order_new_hessa');
+                          await Get.toNamed(Routes.ORDER_HESSA);
                         },
                         iconBackgroundColor: ColorManager.primary,
                       ),
@@ -97,7 +65,7 @@ class HomeView extends GetView<HomeController> {
                       ),
                     ],
                   ),
-                  SizedBox(height: 10.h),
+                  SizedBox(height: 25.h),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
@@ -118,7 +86,7 @@ class HomeView extends GetView<HomeController> {
                   GetBuilder<HomeController>(
                       init: HomeController(),
                       builder: (HomeController controller) {
-                        if (controller.orders.isEmpty) {
+                        if (controller.orders.isNotEmpty) {
                           return Center(
                             child: Column(
                               children: [

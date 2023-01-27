@@ -16,6 +16,8 @@ import '../modules/messages/bindings/messages_binding.dart';
 import '../modules/messages/views/messages_view.dart';
 import '../modules/onboarding/bindings/onboarding_binding.dart';
 import '../modules/onboarding/views/onboarding_view.dart';
+import '../modules/order_hessa/bindings/order_hessa_binding.dart';
+import '../modules/order_hessa/views/order_hessa_view.dart';
 import '../modules/orders/bindings/orders_binding.dart';
 import '../modules/orders/views/orders_view.dart';
 import '../modules/profile/bindings/profile_binding.dart';
@@ -121,6 +123,11 @@ class AppPages {
       name: _Paths.ORDERS,
       page: () => OrdersView(),
       binding: OrdersBinding(),
+    ),
+    GetPage(
+      name: _Paths.ORDER_HESSA,
+      page: () => OrderHessaView(),
+      binding: OrderHessaBinding(),
     ),
   ];
 }

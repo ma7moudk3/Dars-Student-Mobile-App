@@ -12,20 +12,27 @@ class PrimaryTextField extends StatelessWidget {
   final Widget? suffixIcon;
   final VoidCallback? onTap;
   final Color? cursorColor;
-  final InputBorder? disabledBorder;
+  final Color? ifReadOnlyTextColor;
   final BorderRadius? borderRadius;
   final BorderSide borderSide;
+  final InputBorder? disabledBorder;
   final InputBorder? enabledBorder;
+  final int? maxLines;
   final InputBorder? focusedBorder;
   final InputBorder? errorBorder;
   final FocusNode? focusNode;
+  final double? fontSize;
+  final BoxConstraints? suffixIconConstraints, prefixIconConstraints;
+  final double titleFontSize;
   final Function(String)? onFieldSubmitted;
   final bool readOnly;
   final bool? multiLines;
   final String title;
+  final Color? titleColor;
+  final FontWeight titleFontWeight;
   final int? maxLength;
   final void Function(String)? onChanged;
-
+  final EdgeInsetsGeometry? contentPadding;
   const PrimaryTextField({
     Key? key,
     required this.hintText,
@@ -33,9 +40,16 @@ class PrimaryTextField extends StatelessWidget {
     this.validator,
     this.keyboardType = TextInputType.text,
     this.cursorColor,
+    this.suffixIconConstraints,
+    this.prefixIconConstraints,
+    this.ifReadOnlyTextColor,
     this.prefixIcon,
+    this.maxLines,
     this.borderRadius,
     this.suffixIcon,
+    this.fontSize,
+    this.titleFontSize = 13,
+    this.contentPadding,
     this.borderSide = const BorderSide(),
     this.onTap,
     this.disabledBorder,
@@ -47,6 +61,8 @@ class PrimaryTextField extends StatelessWidget {
     this.readOnly = false,
     this.multiLines = false,
     required this.title,
+    this.titleColor,
+    this.titleFontWeight = FontWeightManager.light,
     this.maxLength,
     this.onChanged,
   }) : super(key: key);
@@ -55,11 +71,13 @@ class PrimaryTextField extends StatelessWidget {
   Widget build(BuildContext context) {
     var hintStyle = TextStyle(
       color: ColorManager.grey,
+      fontFamily: FontConstants.fontFamily,
       fontSize: 14.sp,
     );
     var errorStyle = TextStyle(
-      color: Colors.red,
-      fontSize: 14.sp,
+      fontFamily: FontConstants.fontFamily,
+      color: ColorManager.red,
+      fontSize: 12.sp,
     );
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
@@ -69,10 +87,11 @@ class PrimaryTextField extends StatelessWidget {
                 children: [
                   PrimaryText(
                     title,
+                    fontSize: titleFontSize.sp,
+                    fontWeight: titleFontWeight,
+                    color: titleColor,
                   ),
-                  SizedBox(
-                    height: 10.h,
-                  ),
+                  SizedBox(height: 10.h),
                 ],
               )
             : const SizedBox.shrink(),
@@ -81,14 +100,18 @@ class PrimaryTextField extends StatelessWidget {
           readOnly: readOnly,
           focusNode: focusNode,
           maxLength: maxLength,
-          maxLines: multiLines! ? 10 : 1,
+          maxLines: multiLines! ? (maxLines ?? 10) : 1,
           cursorColor: cursorColor ??
               (isDarkMoodEnabled()
                   ? ColorManager.darkPrimary
                   : ColorManager.fontColor),
           style: TextStyle(
-              color:
-                  isDarkMoodEnabled() ? Colors.white : ColorManager.fontColor),
+            color: isDarkMoodEnabled()
+                ? Colors.white
+                : ifReadOnlyTextColor ?? ColorManager.fontColor,
+            fontSize: fontSize,
+            fontFamily: FontConstants.fontFamily,
+          ),
           keyboardType: keyboardType,
           onTap: onTap ?? () {},
           onChanged: onChanged,
@@ -99,8 +122,9 @@ class PrimaryTextField extends StatelessWidget {
             enabledBorder: enabledBorder,
             errorBorder: errorBorder,
             prefixIcon: prefixIcon,
+            prefixIconConstraints: prefixIconConstraints,
             suffixIcon: suffixIcon,
-          
+            suffixIconConstraints: suffixIconConstraints,
             focusColor: ColorManager.primary,
             errorMaxLines: 2,
             fillColor: isDarkMoodEnabled()
@@ -116,18 +140,11 @@ class PrimaryTextField extends StatelessWidget {
                     borderRadius: borderRadius ?? BorderRadius.circular(8),
                     borderSide: borderSide),
             hoverColor: ColorManager.primary,
-            errorStyle: TextStyle(
-              fontFamily: FontConstants.fontFamily,
-              color: ColorManager.red,
-              fontSize: 12.sp,
-            ),
+            errorStyle: errorStyle,
             hintText: hintText!.isNotEmpty ? hintText!.tr : '',
-            hintStyle: TextStyle(
-              fontFamily: FontConstants.fontFamily,
-              color: ColorManager.grey,
-              fontSize: 14.sp,
-            ),
-            contentPadding: const EdgeInsets.fromLTRB(20.0, 10.0, 20.0, 10.0),
+            hintStyle: hintStyle,
+            contentPadding: contentPadding ??
+                const EdgeInsets.fromLTRB(20.0, 10.0, 20.0, 10.0),
           ),
           validator: validator ??
               (String? value) {

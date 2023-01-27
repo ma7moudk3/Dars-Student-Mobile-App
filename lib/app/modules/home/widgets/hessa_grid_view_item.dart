@@ -20,49 +20,46 @@ class HessaGridViewItem extends GetView<HomeController> {
     return GestureDetector(
       behavior: HitTestBehavior.opaque,
       onTap: onTap,
-      child: Padding(
-        padding: EdgeInsets.only(left: 5.w, right: 5.w, bottom: 10.h),
-        child: Container(
-          decoration: BoxDecoration(
-            color: ColorManager.white,
-            borderRadius: BorderRadius.circular(15),
-            boxShadow: const [
-              BoxShadow(
-                color: Color(0x1a000000),
-                offset: Offset(0, 1),
-                blurRadius: 8,
+      child: Container(
+        decoration: BoxDecoration(
+          color: ColorManager.white,
+          borderRadius: BorderRadius.circular(15),
+          boxShadow: const [
+            BoxShadow(
+              color: Color(0x1a000000),
+              offset: Offset(0, 1),
+              blurRadius: 8,
+            ),
+          ],
+        ),
+        child: Column(
+          children: [
+            const Spacer(),
+            Container(
+              width: 70.w,
+              height: 70.h,
+              decoration: BoxDecoration(
+                color: iconBackgroundColor.withOpacity(0.15),
+                borderRadius: BorderRadius.circular(20),
               ),
-            ],
-          ),
-          child: Column(
-            children: [
-              const Spacer(),
-              Container(
-                width: 70.w,
-                height: 70.h,
-                decoration: BoxDecoration(
-                  color: iconBackgroundColor.withOpacity(0.15),
-                  borderRadius: BorderRadius.circular(20),
-                ),
-                child: Center(
-                  child: SvgPicture.asset(
-                    imagePath,
-                    width: 40.w,
-                    height: 40.h,
-                    color: iconBackgroundColor,
-                  ),
+              child: Center(
+                child: SvgPicture.asset(
+                  imagePath,
+                  width: 40.w,
+                  height: 40.h,
+                  color: iconBackgroundColor,
                 ),
               ),
-              const SizedBox(height: 10),
-              PrimaryText(
-                title,
-                fontSize: 16.sp,
-                fontWeight: FontWeightManager.softLight,
-                color: ColorManager.fontColor,
-              ),
-              const Spacer(),
-            ],
-          ),
+            ),
+            const SizedBox(height: 10),
+            PrimaryText(
+              title,
+              fontSize: 16.sp,
+              fontWeight: FontWeightManager.softLight,
+              color: ColorManager.fontColor,
+            ),
+            const Spacer(),
+          ],
         ),
       ),
     );

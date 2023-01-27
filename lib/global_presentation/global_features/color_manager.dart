@@ -56,6 +56,7 @@ class ColorManager {
   static Color borderGrey = HexColor.fromHex('#EFEFEF');
   static Color borderColor = HexColor.fromHex('#808080');
   static Color borderColor2 = HexColor.fromHex('#BEBABA');
+  static Color borderColor3 = HexColor.fromHex("#EBEBEB");
   static Color shadow = HexColor.fromHex('#4B545A');
   static Color bottomNavBarTitleGrey = HexColor.fromHex('#8B8989');
   static Color bottomNavBarIconGrey = HexColor.fromHex('#C3C5CC');
