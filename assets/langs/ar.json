@@ -116,5 +116,6 @@
     "confirm": "تأكيد",
     "save": "حفظ",
     "note": "مُلاحظة",
-    "dependents_list": "قائمة التابعين"
+    "dependents_list": "قائمة التابعين",
+    "no_teacher_found" : "لم يتم العثور على مدرسين"
 }

@@ -5,7 +5,10 @@ import 'package:hessa_student/global_presentation/global_widgets/dotted_border.d
 import 'package:hessa_student/global_presentation/global_widgets/global_dropdown.dart';
 
 import '../../../../global_presentation/global_widgets/custom_app_bar.dart';
+import '../../../../global_presentation/global_widgets/typeahead/cupertino_flutter_typeahead.dart';
 import '../controllers/order_hessa_controller.dart';
+import '../data/models/teacher.dart';
+import '../widgets/dependents_list_bottom_sheet_content.dart';
 import '../widgets/hessa_date_time_picker_widget.dart';
 
 class OrderHessaView extends GetView<OrderHessaController> {
@@ -104,252 +107,7 @@ class OrderHessaView extends GetView<OrderHessaController> {
                                         topRight: Radius.circular(20),
                                       ),
                                     ),
-                                    Padding(
-                                      padding: EdgeInsets.symmetric(
-                                        horizontal: 5.w,
-                                        vertical: 16.h,
-                                      ),
-                                      child: Column(
-                                        crossAxisAlignment:
-                                            CrossAxisAlignment.start,
-                                        mainAxisSize: MainAxisSize.min,
-                                        children: [
-                                          Center(
-                                            child: Container(
-                                              width: 26.w,
-                                              height: 6.h,
-                                              decoration: BoxDecoration(
-                                                borderRadius:
-                                                    BorderRadius.circular(15),
-                                                color:
-                                                    ColorManager.borderColor3,
-                                              ),
-                                            ),
-                                          ),
-                                          Container(
-                                            height: (Get.height * 0.5).h,
-                                            padding: EdgeInsets.only(
-                                              left: 16.w,
-                                              right: 16.w,
-                                              top: 16.h,
-                                            ),
-                                            decoration: BoxDecoration(
-                                              borderRadius:
-                                                  BorderRadius.circular(10),
-                                              color: ColorManager.white,
-                                            ),
-                                            child: Column(
-                                              crossAxisAlignment:
-                                                  CrossAxisAlignment.start,
-                                              children: [
-                                                PrimaryText(
-                                                  LocaleKeys.dependents_list,
-                                                  fontSize: 14.sp,
-                                                  fontWeight:
-                                                      FontWeightManager.book,
-                                                ),
-                                                SizedBox(height: 30.h),
-                                                Expanded(
-                                                  child: SingleChildScrollView(
-                                                    child: ListView.builder(
-                                                        itemCount: controller
-                                                            .dependentsController
-                                                            .dummyDependents
-                                                            .length,
-                                                        shrinkWrap: true,
-                                                        physics:
-                                                            const NeverScrollableScrollPhysics(),
-                                                        itemBuilder:
-                                                            (BuildContext
-                                                                    context,
-                                                                int index) {
-                                                          return Padding(
-                                                            padding: EdgeInsets
-                                                                .symmetric(
-                                                                    vertical:
-                                                                        5.h),
-                                                            child: Column(
-                                                              children: [
-                                                                Row(
-                                                                  children: [
-                                                                    GestureDetector(
-                                                                      onTap:
-                                                                          () async {},
-                                                                      child:
-                                                                          Container(
-                                                                        height:
-                                                                            19.h,
-                                                                        width:
-                                                                            19.w,
-                                                                        decoration:
-                                                                            BoxDecoration(
-                                                                          borderRadius:
-                                                                              BorderRadius.circular(8),
-                                                                          border:
-                                                                              Border.all(
-                                                                            color:
-                                                                                ColorManager.primary,
-                                                                            width:
-                                                                                2.w,
-                                                                          ),
-                                                                        ),
-                                                                        child:
-                                                                            Center(
-                                                                          child:
-                                                                              Icon(
-                                                                            Icons.check_rounded,
-                                                                            color:
-                                                                                ColorManager.primary,
-                                                                            size:
-                                                                                13.sp,
-                                                                          ),
-                                                                        ),
-                                                                      ),
-                                                                    ),
-                                                                    SizedBox(
-                                                                        width: 10
-                                                                            .w),
-                                                                    Container(
-                                                                      width:
-                                                                          65.w,
-                                                                      height:
-                                                                          65.h,
-                                                                      decoration:
-                                                                          BoxDecoration(
-                                                                        image:
-                                                                            DecorationImage(
-                                                                          image: AssetImage(controller
-                                                                              .dependentsController
-                                                                              .dummyDependents[index]["dependent_image"]),
-                                                                          fit: BoxFit
-                                                                              .cover,
-                                                                        ),
-                                                                        border:
-                                                                            Border.all(
-                                                                          width:
-                                                                              1,
-                                                                          color:
-                                                                              ColorManager.primary,
-                                                                        ),
-                                                                        borderRadius:
-                                                                            BorderRadius.circular(20),
-                                                                      ),
-                                                                    ),
-                                                                    SizedBox(
-                                                                        width: 10
-                                                                            .w),
-                                                                    Column(
-                                                                      crossAxisAlignment:
-                                                                          CrossAxisAlignment
-                                                                              .start,
-                                                                      children: [
-                                                                        PrimaryText(
-                                                                          controller
-                                                                              .dependentsController
-                                                                              .dummyDependents[index]["dependent_name"],
-                                                                        ),
-                                                                        SizedBox(
-                                                                          height:
-                                                                              15.h,
-                                                                        ),
-                                                                        Row(
-                                                                          children: [
-                                                                            SvgPicture.asset(ImagesManager.classIcon),
-                                                                            SizedBox(width: 5.w),
-                                                                            PrimaryText(
-                                                                              controller.dependentsController.dummyDependents[index]["class"],
-                                                                              fontSize: 14.sp,
-                                                                              color: ColorManager.fontColor7,
-                                                                              fontWeight: FontWeightManager.softLight,
-                                                                            ),
-                                                                          ],
-                                                                        ),
-                                                                      ],
-                                                                    ),
-                                                                    const Spacer(),
-                                                                    GestureDetector(
-                                                                      onTap:
-                                                                          () {},
-                                                                      child: SvgPicture
-                                                                          .asset(
-                                                                        ImagesManager
-                                                                            .deleteIcon,
-                                                                      ),
-                                                                    ),
-                                                                  ],
-                                                                ),
-                                                                SizedBox(
-                                                                    height:
-                                                                        15.h),
-                                                                Visibility(
-                                                                  visible: index !=
-                                                                      (controller
-                                                                              .dependentsController
-                                                                              .dummyDependents
-                                                                              .length -
-                                                                          1),
-                                                                  child:
-                                                                      Divider(
-                                                                    color: ColorManager
-                                                                        .borderColor3,
-                                                                    thickness:
-                                                                        1,
-                                                                  ),
-                                                                ),
-                                                              ],
-                                                            ),
-                                                          );
-                                                        }),
-                                                  ),
-                                                ),
-                                                SizedBox(height: 10.h),
-                                                Row(
-                                                  mainAxisAlignment:
-                                                      MainAxisAlignment
-                                                          .spaceBetween,
-                                                  children: [
-                                                    PrimaryButton(
-                                                      width: 265.w,
-                                                      onPressed: () =>
-                                                          Get.back(),
-                                                      title: LocaleKeys.save.tr,
-                                                    ),
-                                                    GestureDetector(
-                                                      onTap: () async {
-                                                        await Get.toNamed(
-                                                          Routes
-                                                              .ADD_NEW_DEPENDENT,
-                                                        );
-                                                      },
-                                                      child: Container(
-                                                        width: 48.w,
-                                                        height: 50.h,
-                                                        decoration:
-                                                            BoxDecoration(
-                                                          color: ColorManager
-                                                              .green,
-                                                          borderRadius:
-                                                              BorderRadius
-                                                                  .circular(15),
-                                                        ),
-                                                        child: Center(
-                                                          child: Icon(
-                                                            Icons.add_rounded,
-                                                            color: ColorManager
-                                                                .white,
-                                                            size: 25.sp,
-                                                          ),
-                                                        ),
-                                                      ),
-                                                    ),
-                                                  ],
-                                                ),
-                                              ],
-                                            ),
-                                          ),
-                                        ],
-                                      ),
-                                    ),
+                                    const DependentsListBottomSheetContent(),
                                   );
                                 } else {
                                   await Get.toNamed(Routes.DEPENDENTS);
@@ -762,42 +520,233 @@ class OrderHessaView extends GetView<OrderHessaController> {
                               hintText: LocaleKeys.choose_location,
                             ),
                             SizedBox(height: 12.h),
-                            PrimaryTextField(
+                            // PrimaryTextField(
+                            //   onChanged: (String? searchValue) async {
+                            //     controller.searchTeacher(
+                            //         searchValue: searchValue ?? "");
+                            //   },
+                            //   fontSize: 14.sp,
+                            //   controller: controller.teacherNameController,
+                            //   title: LocaleKeys.teacher_name,
+                            //   titleFontWeight: FontWeightManager.softLight,
+                            //   onTap: () async {},
+                            //   suffixIcon: Container(
+                            //     margin: EdgeInsets.only(left: 10.w),
+                            //     child: SvgPicture.asset(
+                            //       ImagesManager.addTeacherIcon,
+                            //       color: controller.teacherNameErrorIconColor,
+                            //     ),
+                            //   ),
+                            //   borderRadius: BorderRadius.circular(14),
+                            //   suffixIconConstraints: BoxConstraints(
+                            //     minHeight: 20.h,
+                            //     minWidth: 20.w,
+                            //   ),
+                            //   enabledBorder: OutlineInputBorder(
+                            //     borderRadius: BorderRadius.circular(14),
+                            //     borderSide: BorderSide(
+                            //         color: ColorManager.borderColor2),
+                            //   ),
+                            //   focusedBorder: OutlineInputBorder(
+                            //     borderRadius: BorderRadius.circular(14),
+                            //     borderSide:
+                            //         BorderSide(color: ColorManager.primary),
+                            //   ),
+                            //   errorBorder: OutlineInputBorder(
+                            //     borderRadius: BorderRadius.circular(14),
+                            //     borderSide: BorderSide(color: ColorManager.red),
+                            //   ),
+                            //   borderSide: BorderSide(
+                            //     color: ColorManager.primary,
+                            //   ),
+                            //   hintText: LocaleKeys.write_teacher_name,
+                            //   validator: (String? teacherName) =>
+                            //       controller.validateTeacherName(teacherName),
+                            // ),
+                            PrimaryText(
+                              LocaleKeys.teacher_name,
                               fontSize: 14.sp,
-                              controller: controller.teacherNameController,
-                              title: LocaleKeys.teacher_name,
-                              titleFontWeight: FontWeightManager.softLight,
-                              onTap: () async {},
-                              suffixIcon: Container(
-                                margin: EdgeInsets.only(left: 10.w),
-                                child: SvgPicture.asset(
-                                  ImagesManager.addTeacherIcon,
-                                  color: controller.teacherNameErrorIconColor,
+                              fontWeight: FontWeightManager.softLight,
+                              color: ColorManager.fontColor,
+                            ),
+                            SizedBox(height: 12.h),
+                            CupertinoTypeAheadFormField(
+                              hideOnError: true,
+                              getImmediateSuggestions: true,
+                              suggestionsBoxController:
+                                  controller.suggestionsBoxController,
+                              textFieldConfiguration:
+                                  CupertinoTextFieldConfiguration(
+                                controller: controller.teacherNameController,
+                                decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.circular(15),
+                                  border: Border.all(
+                                    color: ColorManager.borderColor2,
+                                  ),
                                 ),
+                                cursorColor: ColorManager.primary,
+                                enableSuggestions: true,
+                                maxLines: 1,
+                                enableInteractiveSelection: true,
+                                padding: const EdgeInsets.fromLTRB(
+                                    10.0, 15.0, 20.0, 15.0),
+                                style: TextStyle(
+                                  color: ColorManager.fontColor,
+                                  fontSize: 14.sp,
+                                  fontFamily: FontConstants.fontFamily,
+                                ),
+                                suffix: Container(
+                                  margin: EdgeInsets.only(left: 10.w),
+                                  child: SvgPicture.asset(
+                                    ImagesManager.addTeacherIcon,
+                                    color: controller.teacherNameErrorIconColor,
+                                  ),
+                                ),
+                                placeholder: LocaleKeys.write_teacher_name.tr,
                               ),
-                              borderRadius: BorderRadius.circular(14),
-                              suffixIconConstraints: BoxConstraints(
-                                minHeight: 20.h,
-                                minWidth: 20.w,
-                              ),
-                              enabledBorder: OutlineInputBorder(
-                                borderRadius: BorderRadius.circular(14),
-                                borderSide: BorderSide(
-                                    color: ColorManager.borderColor2),
-                              ),
-                              focusedBorder: OutlineInputBorder(
-                                borderRadius: BorderRadius.circular(14),
-                                borderSide:
-                                    BorderSide(color: ColorManager.primary),
-                              ),
-                              errorBorder: OutlineInputBorder(
-                                borderRadius: BorderRadius.circular(14),
-                                borderSide: BorderSide(color: ColorManager.red),
-                              ),
-                              borderSide: BorderSide(
-                                color: ColorManager.primary,
-                              ),
-                              hintText: LocaleKeys.write_teacher_name,
+                              suggestionsCallback: (String searchValue) {
+                                return controller
+                                    .searchTeacher(searchValue: searchValue)
+                                    .toList();
+                              },
+                              hideOnEmpty: true,
+                              transitionBuilder:
+                                  (context, suggestionsBox, controller) {
+                                return suggestionsBox;
+                              },
+                              itemBuilder:
+                                  (BuildContext context, Teacher teacher) {
+                                return Padding(
+                                  padding: const EdgeInsets.all(5.0),
+                                  child: Column(
+                                    children: [
+                                      Row(
+                                        crossAxisAlignment:
+                                            CrossAxisAlignment.end,
+                                        children: [
+                                          Container(
+                                            width: 50.w,
+                                            height: 50.h,
+                                            decoration: BoxDecoration(
+                                              image: DecorationImage(
+                                                image:
+                                                    AssetImage(teacher.picture),
+                                                fit: BoxFit.cover,
+                                              ),
+                                              border: Border.all(
+                                                width: 1,
+                                                color: ColorManager.primary,
+                                              ),
+                                              borderRadius:
+                                                  BorderRadius.circular(20),
+                                            ),
+                                          ),
+                                          SizedBox(width: 10.w),
+                                          Expanded(
+                                            child: Column(
+                                              children: [
+                                                Row(
+                                                  mainAxisSize:
+                                                      MainAxisSize.min,
+                                                  mainAxisAlignment:
+                                                      MainAxisAlignment.end,
+                                                  children: [
+                                                    PrimaryText(
+                                                      teacher.name,
+                                                      color: ColorManager
+                                                          .fontColor,
+                                                    ),
+                                                    const Spacer(),
+                                                    Row(
+                                                      mainAxisSize:
+                                                          MainAxisSize.min,
+                                                      mainAxisAlignment:
+                                                          MainAxisAlignment.end,
+                                                      children: [
+                                                        Icon(
+                                                          Icons.star,
+                                                          color: ColorManager
+                                                              .orange,
+                                                          size: 14.sp,
+                                                        ),
+                                                        SizedBox(
+                                                          width: 40.w,
+                                                          child: PrimaryText(
+                                                            "4.5",
+                                                            color: ColorManager
+                                                                .fontColor,
+                                                            fontSize: 12.sp,
+                                                            maxLines: 1,
+                                                            overflow:
+                                                                TextOverflow
+                                                                    .ellipsis,
+                                                          ),
+                                                        ),
+                                                      ],
+                                                    ),
+                                                  ],
+                                                ),
+                                                SizedBox(height: 5.h),
+                                                Row(
+                                                  mainAxisSize:
+                                                      MainAxisSize.min,
+                                                  mainAxisAlignment:
+                                                      MainAxisAlignment.end,
+                                                  children: [
+                                                    PrimaryText(
+                                                      teacher.subjects
+                                                          .map((String
+                                                                  subject) =>
+                                                              subject
+                                                                  .toString())
+                                                          .join(", "),
+                                                      color:
+                                                          ColorManager.primary,
+                                                      fontWeight:
+                                                          FontWeightManager
+                                                              .softLight,
+                                                      fontSize: 11.sp,
+                                                    ),
+                                                    const Spacer(),
+                                                    PrimaryText(
+                                                      teacher.address,
+                                                      color: ColorManager
+                                                          .fontColor7,
+                                                      fontSize: 12.sp,
+                                                      maxLines: 1,
+                                                      overflow:
+                                                          TextOverflow.ellipsis,
+                                                    ),
+                                                  ],
+                                                ),
+                                              ],
+                                            ),
+                                          ),
+                                        ],
+                                      ),
+                                      SizedBox(height: 10.h),
+                                      Divider(
+                                        color: ColorManager.borderColor3,
+                                        thickness: 1,
+                                      ),
+                                    ],
+                                  ),
+                                );
+                              },
+                              noItemsFoundBuilder: (BuildContext context) {
+                                return PrimaryText(
+                                  LocaleKeys.no_teacher_found,
+                                );
+                              },
+                              onSuggestionSelected: (Teacher teacher) {
+                                controller.selectTeacher(teacher);
+                              },
+                              errorBuilder: (context, error) {
+                                return PrimaryText(
+                                  error.toString(),
+                                  color: ColorManager.red,
+                                );
+                              },
                               validator: (String? teacherName) =>
                                   controller.validateTeacherName(teacherName),
                             ),
@@ -832,6 +781,7 @@ class OrderHessaView extends GetView<OrderHessaController> {
                               ),
                               hintText: LocaleKeys.write_down_you_notes,
                             ),
+                            const SizedBox(height: 10.0),
                           ],
                         ),
                       ),

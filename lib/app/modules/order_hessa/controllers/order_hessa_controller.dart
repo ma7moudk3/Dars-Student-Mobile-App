@@ -6,7 +6,9 @@ import 'package:intl/intl.dart';
 import 'package:syncfusion_flutter_datepicker/datepicker.dart';
 import 'package:time_range/time_range.dart';
 import '../../../../generated/locales.g.dart';
+import '../../../../global_presentation/global_widgets/typeahead/cupertino_flutter_typeahead.dart';
 import '../../../constants/exports.dart';
+import '../data/models/teacher.dart';
 
 extension IsAtMaximumYears on DateTime {
   bool isAtMaximumYears(int years) {
@@ -36,11 +38,135 @@ class OrderHessaController extends GetxController {
   FocusNode hessaDateFocusNode = FocusNode(), hessaTimeFocusNode = FocusNode();
   DependentsController dependentsController =
       Get.put<DependentsController>(DependentsController());
+  final CupertinoSuggestionsBoxController suggestionsBoxController =
+      CupertinoSuggestionsBoxController();
+
+  Teacher? chosenTeacher;
   void changeHessaDate(DateRangePickerSelectionChangedArgs hessaDate) {
     log(hessaDate.value.toString());
     this.hessaDate = hessaDate.value;
     hessaDateController.text =
         DateFormat("dd MMMM yyyy", "ar_SA").format(hessaDate.value);
+    update();
+  }
+
+  List<Teacher> teachers = [
+    Teacher(
+      name: "وليد علي",
+      subjects: ["فيزياء", "رياضيات", "علوم"],
+      address: "رام الله، الضفة",
+      picture: ImagesManager.avatar,
+    ),
+    Teacher(
+      name: "ولاء يوسف",
+      subjects: ["فيزياء", "رياضيات", "علوم"],
+      address: "رام الله، الضفة",
+      picture: ImagesManager.avatar,
+    ),
+    Teacher(
+      name: "Ahmed Alashi",
+      subjects: ["فيزياء", "رياضيات", "علوم"],
+      address: "رام الله، الضفة",
+      picture: ImagesManager.avatar,
+    ),
+    Teacher(
+      name: "Abdullah Alashi",
+      subjects: ["فيزياء", "رياضيات", "علوم"],
+      address: "رام الله، الضفة",
+      picture: ImagesManager.avatar,
+    ),
+    Teacher(
+      name: "Abdullah Alashi",
+      subjects: ["فيزياء", "رياضيات", "علوم"],
+      address: "رام الله، الضفة",
+      picture: ImagesManager.avatar,
+    ),
+    Teacher(
+      name: "Abdullah Alashi",
+      subjects: ["فيزياء", "رياضيات", "علوم"],
+      address: "رام الله، الضفة",
+      picture: ImagesManager.avatar,
+    ),
+    Teacher(
+      name: "Abdullah Alashi",
+      subjects: ["فيزياء", "رياضيات", "علوم"],
+      address: "رام الله، الضفة",
+      picture: ImagesManager.avatar,
+    ),
+    Teacher(
+      name: "Abdullah Alashi",
+      subjects: ["فيزياء", "رياضيات", "علوم"],
+      address: "رام الله، الضفة",
+      picture: ImagesManager.avatar,
+    ),
+    Teacher(
+      name: "Abdullah Alashi",
+      subjects: ["فيزياء", "رياضيات", "علوم"],
+      address: "رام الله، الضفة",
+      picture: ImagesManager.avatar,
+    ),
+    Teacher(
+      name: "Abdullah Alashi",
+      subjects: ["فيزياء", "رياضيات", "علوم"],
+      address: "رام الله، الضفة",
+      picture: ImagesManager.avatar,
+    ),
+    Teacher(
+      name: "Abdullah Alashi",
+      subjects: ["فيزياء", "رياضيات", "علوم"],
+      address: "رام الله، الضفة",
+      picture: ImagesManager.avatar,
+    ),
+    Teacher(
+      name: "Abdullah Alashi",
+      subjects: ["فيزياء", "رياضيات", "علوم"],
+      address: "رام الله، الضفة",
+      picture: ImagesManager.avatar,
+    ),
+    Teacher(
+      name: "Abdullah Alashi",
+      subjects: ["فيزياء", "رياضيات", "علوم"],
+      address: "رام الله، الضفة",
+      picture: ImagesManager.avatar,
+    ),
+    Teacher(
+      name: "Abdullah Alashi",
+      subjects: ["فيزياء", "رياضيات", "علوم"],
+      address: "رام الله، الضفة",
+      picture: ImagesManager.avatar,
+    ),
+    Teacher(
+      name: "Abdullah Alashi",
+      subjects: ["فيزياء", "رياضيات", "علوم"],
+      address: "رام الله، الضفة",
+      picture: ImagesManager.avatar,
+    ),
+    Teacher(
+      name: "Abdullah Alashi",
+      subjects: ["فيزياء", "رياضيات", "علوم"],
+      address: "رام الله، الضفة",
+      picture: ImagesManager.avatar,
+    ),
+  ];
+
+  List<Teacher> foundedTeachers = [];
+
+  List<Teacher> searchTeacher({required String searchValue}) {
+    return foundedTeachers = teachers
+        .where((Teacher teacher) =>
+            teacher.name.toLowerCase().contains(searchValue) ||
+            teacher.address.toLowerCase().contains(searchValue) ||
+            teacher.subjects.any((String subject) =>
+                subject.toLowerCase().contains(searchValue)))
+        .toList();
+    // for (Teacher teacher in foundedTeachers) {
+    //   log("Teacher name: ${teacher.name}");
+    // }
+  }
+
+  void selectTeacher(Teacher teacher) {
+    teacherNameController.text = teacher.name;
+    chosenTeacher = teacher;
     update();
   }
 

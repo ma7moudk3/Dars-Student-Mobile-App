@@ -132,6 +132,7 @@ class LocaleKeys {
   static const save = 'save';
   static const note = 'note';
   static const dependents_list = 'dependents_list';
+  static const no_teacher_found = 'no_teacher_found';
 }
 
 class Locales {
@@ -259,5 +260,6 @@ class Locales {
     'save': 'حفظ',
     'note': 'مُلاحظة',
     'dependents_list': 'قائمة التابعين',
+    'no_teacher_found': 'لم يتم العثور على مدرسين',
   };
 }
