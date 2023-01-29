@@ -119,5 +119,9 @@
     "save": "حفظ",
     "note": "مُلاحظة",
     "dependents_list": "قائمة التابعين",
-    "no_teacher_found" : "لم يتم العثور على مدرسين"
+    "no_teacher_found": "لم يتم العثور على مدرسين",
+    "camera": "الكاميرا",
+    "gallery": "المعرض",
+    "file": "ملف",
+    "close": "إغلاق"
 }

@@ -1,5 +1,8 @@
 import 'dart:developer';
+import 'dart:io';
 
+import 'package:file_picker/file_picker.dart';
+import 'package:image_picker/image_picker.dart';
 import 'package:intl/intl.dart';
 import 'package:syncfusion_flutter_datepicker/datepicker.dart';
 
@@ -31,6 +34,35 @@ class AddNewDependentController extends GetxController {
       dateOfBirthIconErrorColor;
   int dependentGender = 0; // 0 male, 1 female
 
+  Future handleImageSelection({required ImageSource imageSource}) async {
+    final result = await ImagePicker().pickImage(
+      imageQuality: 70,
+      maxWidth: 1440,
+      source: imageSource,
+    );
+    if (result != null) {
+      final file = File(result.path);
+      final size = file.lengthSync();
+      final bytes = await result.readAsBytes();
+      final image = await decodeImageFromList(bytes);
+      final name = result.name;
+    }
+    update();
+  }
+
+  Future handleFileSelection() async {
+    final result = await FilePicker.platform.pickFiles(
+      type: FileType.any,
+    );
+    if (result != null && result.files.single.path != null) {
+      final name = result.files.single.name;
+      final filePath = result.files.single.path!;
+      final file = File(filePath);
+      
+    }
+    update();
+  }
+
   @override
   void onInit() {
     nameController = TextEditingController();
@@ -45,7 +77,8 @@ class AddNewDependentController extends GetxController {
 
   String? validateDateOfBirth(String? dateOfBirth) {
     if (dateOfBirth != null && dateOfBirth.isNotEmpty) {
-      DateTime tempDateTime = DateFormat("dd MMMM yyyy", "ar_SA").parse(dateOfBirth);
+      DateTime tempDateTime =
+          DateFormat("dd MMMM yyyy", "ar_SA").parse(dateOfBirth);
       if (dateOfBirth.isEmpty) {
         dateOfBirthIconErrorColor = Colors.red;
         return LocaleKeys.please_enter_dob.tr;
@@ -67,7 +100,8 @@ class AddNewDependentController extends GetxController {
   void changeDate(DateRangePickerSelectionChangedArgs dateAndTime) {
     log(dateAndTime.value.toString());
     dateOfBirth = dateAndTime.value;
-    dateOfBirthController.text = DateFormat("dd MMMM yyyy", "ar_SA").format(dateOfBirth);
+    dateOfBirthController.text =
+        DateFormat("dd MMMM yyyy", "ar_SA").format(dateOfBirth);
     update();
   }
 

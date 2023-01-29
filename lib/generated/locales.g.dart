@@ -135,6 +135,10 @@ class LocaleKeys {
   static const note = 'note';
   static const dependents_list = 'dependents_list';
   static const no_teacher_found = 'no_teacher_found';
+  static const camera = 'camera';
+  static const gallery = 'gallery';
+  static const file = 'file';
+  static const close = 'close';
 }
 
 class Locales {
@@ -265,5 +269,9 @@ class Locales {
     'note': 'مُلاحظة',
     'dependents_list': 'قائمة التابعين',
     'no_teacher_found': 'لم يتم العثور على مدرسين',
+    'camera': 'الكاميرا',
+    'gallery': 'المعرض',
+    'file': 'ملف',
+    'close': 'إغلاق',
   };
 }

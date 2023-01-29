@@ -1,4 +1,8 @@
+import 'dart:io';
+
+import 'package:flutter/cupertino.dart';
 import 'package:hessa_student/app/constants/exports.dart';
+import 'package:image_picker/image_picker.dart';
 import 'package:syncfusion_flutter_datepicker/datepicker.dart';
 import '../../../../generated/locales.g.dart';
 import '../../../../global_presentation/global_widgets/custom_app_bar.dart';
@@ -10,6 +14,113 @@ class AddNewDependentView extends GetView<AddNewDependentController> {
 
   @override
   Widget build(BuildContext context) {
+    bool isFileFunctionalityNeeded = true;
+
+    Future handleAttachmentPressed() async {
+      if (Platform.isIOS) {
+        showCupertinoModalPopup(
+            context: context,
+            builder: (BuildContext context) {
+              return CupertinoActionSheet(
+                actions: [
+                  CupertinoActionSheetAction(
+                    child: PrimaryText(LocaleKeys.camera),
+                    onPressed: () async {
+                      Get.back();
+                      await controller.handleImageSelection(
+                          imageSource: ImageSource.camera);
+                    },
+                  ),
+                  CupertinoActionSheetAction(
+                    child: PrimaryText(LocaleKeys.gallery),
+                    onPressed: () async {
+                      Get.back();
+                      await controller.handleImageSelection(
+                          imageSource: ImageSource.gallery);
+                    },
+                  ),
+                  Visibility(
+                    visible: isFileFunctionalityNeeded,
+                    child: CupertinoActionSheetAction(
+                      child: PrimaryText(LocaleKeys.file),
+                      onPressed: () async {
+                        Get.back();
+                        await controller.handleFileSelection();
+                      },
+                    ),
+                  ),
+                  CupertinoActionSheetAction(
+                    child: PrimaryText(LocaleKeys.close.tr),
+                    onPressed: () {
+                      Get.back();
+                    },
+                  ),
+                ],
+              );
+            });
+      } else {
+        Get.bottomSheet(
+          Padding(
+            padding: EdgeInsets.symmetric(horizontal: 16.w, vertical: 20.h),
+            child: SizedBox(
+              height: isFileFunctionalityNeeded == true
+                  ? Get.height * 0.20
+                  : Get.height * 0.13,
+              child: ListView(
+                children: [
+                  ListTile(
+                    leading: const Icon(
+                      Icons.camera_alt_rounded,
+                      size: 25,
+                    ),
+                    title: PrimaryText("camera".tr),
+                    onTap: () async {
+                      Get.back();
+                      await controller.handleImageSelection(
+                          imageSource: ImageSource.camera);
+                    },
+                  ),
+                  ListTile(
+                    leading: const Icon(
+                      Icons.photo_rounded,
+                      size: 25,
+                    ),
+                    title: PrimaryText("gallery".tr),
+                    onTap: () async {
+                      Get.back();
+                      await controller.handleImageSelection(
+                          imageSource: ImageSource.gallery);
+                    },
+                  ),
+                  Visibility(
+                    visible: isFileFunctionalityNeeded,
+                    child: ListTile(
+                      // the file functionality is not required at the moment
+                      leading: const Icon(
+                        Icons.file_present_rounded,
+                        size: 25,
+                      ),
+                      title: PrimaryText("file".tr),
+                      onTap: () async {
+                        Get.back();
+                        await controller.handleFileSelection();
+                      },
+                    ),
+                  ),
+                ],
+              ),
+            ),
+          ),
+          shape: const RoundedRectangleBorder(
+            borderRadius: BorderRadius.only(
+              topLeft: Radius.circular(20),
+              topRight: Radius.circular(20),
+            ),
+          ),
+          backgroundColor: ColorManager.white,
+        );
+      }
+    }
     return Scaffold(
       appBar: CustomAppBar(
         title: LocaleKeys.add_dependent,
@@ -111,7 +222,9 @@ class AddNewDependentView extends GetView<AddNewDependentController> {
                             title: LocaleKeys.person_picture,
                             focusNode: controller.uplpoadPictureFileFocusNode,
                             titleFontWeight: FontWeightManager.softLight,
-                            onTap: () async {},
+                            onTap: () async {
+                              handleAttachmentPressed();
+                            },
                             suffixIcon: Container(
                               margin: EdgeInsets.symmetric(horizontal: 14.w),
                               child: SvgPicture.asset(
