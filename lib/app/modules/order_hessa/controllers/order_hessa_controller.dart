@@ -2,9 +2,19 @@ import 'dart:developer';
 
 import 'package:intl/date_symbol_data_local.dart';
 import 'package:intl/intl.dart';
+import 'package:syncfusion_flutter_datepicker/datepicker.dart';
 import 'package:time_range/time_range.dart';
 import '../../../../generated/locales.g.dart';
 import '../../../constants/exports.dart';
+
+extension IsAtMaximumYears on DateTime {
+  bool isAtMaximumYears(int years) {
+    DateTime now = DateTime.now();
+    DateTime boundaryDate = DateTime(now.year - years, now.month, now.day);
+    DateTime thisDate = DateTime(year, month, day);
+    return thisDate.compareTo(boundaryDate) >= 0;
+  }
+}
 
 class OrderHessaController extends GetxController {
   final GlobalKey<FormState> formKey = GlobalKey<FormState>();
@@ -17,19 +27,56 @@ class OrderHessaController extends GetxController {
       teacherNameController,
       notesController;
   DateTime hessaDate = DateTime.now();
-  Color? teacherNameErrorIconColor;
+  Color? teacherNameErrorIconColor,
+      hessaDateErrorIconColor,
+      hessaTimeErrorIconColor;
   TimeRangeResult? hessaTimeRange;
+  late DateRangePickerController hessaDateRangeController;
+  FocusNode hessaDateFocusNode = FocusNode(), hessaTimeFocusNode = FocusNode();
 
-  void changeHessaDate(DateTime hessaDate) {
-    this.hessaDate = hessaDate;
+  void changeHessaDate(DateRangePickerSelectionChangedArgs hessaDate) {
+    log(hessaDate.value.toString());
+    this.hessaDate = hessaDate.value;
     hessaDateController.text =
-        DateFormat("dd MMMM yyyy", "ar_SA").format(hessaDate);
+        DateFormat("dd MMMM yyyy", "ar_SA").format(hessaDate.value);
     update();
   }
 
   void changeLocation(String location) {
     locationController.text = location;
     update();
+  }
+
+  String? validateHessaDate(String? hessaDate) {
+    if (hessaDate != null && hessaDate.isNotEmpty) {
+      DateTime tempDateTime =
+          DateFormat("dd MMMM yyyy", "ar_SA").parse(hessaDate);
+      if (hessaDate.isEmpty) {
+        hessaDateErrorIconColor = Colors.red;
+        return LocaleKeys.please_enter_hessa_date.tr;
+      } else if (!tempDateTime.isAtMaximumYears(1)) {
+        hessaDateErrorIconColor = Colors.red;
+        return LocaleKeys.check_hessa_date.tr;
+      } else {
+        hessaDateErrorIconColor = null;
+      }
+    } else {
+      hessaDateErrorIconColor = Colors.red;
+      return LocaleKeys.please_enter_hessa_date.tr;
+    }
+    update();
+    return null;
+  }
+
+  String? validateHessaTime(String? hessaTime) {
+    if (hessaTime != null && hessaTime.isNotEmpty) {
+      hessaTimeErrorIconColor = null;
+    } else {
+      hessaTimeErrorIconColor = Colors.red;
+      return LocaleKeys.please_enter_hessa_date.tr;
+    }
+    update();
+    return null;
   }
 
   String? validateTeacherName(String? teacherName) {
@@ -69,21 +116,27 @@ class OrderHessaController extends GetxController {
   @override
   void onInit() async {
     hessaDateController = TextEditingController();
+    hessaDateRangeController = DateRangePickerController();
     hessaTimeController = TextEditingController();
     locationController = TextEditingController();
     teacherNameController = TextEditingController();
     notesController = TextEditingController();
     await initializeDateFormatting("ar_SA", null);
+    hessaDateFocusNode.addListener(() => update());
+    hessaTimeFocusNode.addListener(() => update());
     super.onInit();
   }
 
   @override
   void dispose() {
     hessaDateController.dispose();
+    hessaDateRangeController.dispose();
     hessaTimeController.dispose();
     locationController.dispose();
     teacherNameController.dispose();
     notesController.dispose();
+    hessaDateFocusNode.dispose();
+    hessaTimeFocusNode.dispose();
     super.dispose();
   }
 

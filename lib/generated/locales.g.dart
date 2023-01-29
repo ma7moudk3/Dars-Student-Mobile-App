@@ -125,8 +125,12 @@ class LocaleKeys {
   static const date_of_birth = 'date_of_birth';
   static const choose_date_of_birth = 'choose_date_of_birth';
   static const please_enter_dob = 'please_enter_dob';
+  static const please_enter_hessa_date = 'please_enter_hessa_date';
   static const check_dependent_dob = 'check_dependent_dob';
+  static const check_hessa_date = 'check_hessa_date';
   static const confirm = 'confirm';
+  static const save = 'save';
+  static const note = 'note';
 }
 
 class Locales {
@@ -247,7 +251,11 @@ class Locales {
     'date_of_birth': 'تاريخ الميلاد',
     'choose_date_of_birth': 'اختر تاريخ ميلاد التابع',
     'please_enter_dob': 'الرجاء إدخال تاريخ الميلاد',
+    'please_enter_hessa_date': 'الرجاء إدخال تاريخ الحصة',
     'check_dependent_dob': 'يجب أن يكون عمر التابع 10 أعواماً على الأقل',
+    'check_hessa_date': 'يجب أن يكون تاريخ الحصة الى بعدَ سنة كحد أقصى',
     'confirm': 'تأكيد',
+    'save': 'حفظ',
+    'note': 'مُلاحظة',
   };
 }

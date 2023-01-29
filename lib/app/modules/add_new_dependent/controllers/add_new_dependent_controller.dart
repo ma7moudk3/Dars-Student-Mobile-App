@@ -1,4 +1,7 @@
+import 'dart:developer';
+
 import 'package:intl/intl.dart';
+import 'package:syncfusion_flutter_datepicker/datepicker.dart';
 
 import '../../../../generated/locales.g.dart';
 import '../../../constants/exports.dart';
@@ -17,6 +20,8 @@ class AddNewDependentController extends GetxController {
   late TextEditingController nameController,
       uplpoadPictureFileController,
       dateOfBirthController;
+  late DateRangePickerController dateOfBirthRangeController;
+
   FocusNode nameFocusNode = FocusNode(),
       uplpoadPictureFileFocusNode = FocusNode(),
       dateOfBirthFocusNode = FocusNode();
@@ -31,6 +36,7 @@ class AddNewDependentController extends GetxController {
     nameController = TextEditingController();
     uplpoadPictureFileController = TextEditingController();
     dateOfBirthController = TextEditingController();
+    dateOfBirthRangeController = DateRangePickerController();
     nameFocusNode.addListener(() => update());
     uplpoadPictureFileFocusNode.addListener(() => update());
     dateOfBirthFocusNode.addListener(() => update());
@@ -39,7 +45,7 @@ class AddNewDependentController extends GetxController {
 
   String? validateDateOfBirth(String? dateOfBirth) {
     if (dateOfBirth != null && dateOfBirth.isNotEmpty) {
-      DateTime tempDateTime = DateFormat("dd/MM/yyyy").parse(dateOfBirth);
+      DateTime tempDateTime = DateFormat("dd MMMM yyyy", "ar_SA").parse(dateOfBirth);
       if (dateOfBirth.isEmpty) {
         dateOfBirthIconErrorColor = Colors.red;
         return LocaleKeys.please_enter_dob.tr;
@@ -58,9 +64,10 @@ class AddNewDependentController extends GetxController {
     return null;
   }
 
-  void changeDate(DateTime? dateAndTime) {
-    dateOfBirth = dateAndTime!;
-    dateOfBirthController.text = DateFormat("dd/MM/yyyy").format(dateOfBirth);
+  void changeDate(DateRangePickerSelectionChangedArgs dateAndTime) {
+    log(dateAndTime.value.toString());
+    dateOfBirth = dateAndTime.value;
+    dateOfBirthController.text = DateFormat("dd MMMM yyyy", "ar_SA").format(dateOfBirth);
     update();
   }
 
@@ -99,6 +106,7 @@ class AddNewDependentController extends GetxController {
     nameFocusNode.dispose();
     uplpoadPictureFileFocusNode.dispose();
     dateOfBirthFocusNode.dispose();
+    dateOfBirthRangeController.dispose();
     super.dispose();
   }
 

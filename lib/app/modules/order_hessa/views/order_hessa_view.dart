@@ -116,13 +116,14 @@ class OrderHessaView extends GetView<OrderHessaController> {
                                         Offset(0, size.height - cardRadius),
                                         radius: Radius.circular(cardRadius))
                                     ..lineTo(0, cardRadius)
-                                    ..arcToPoint(Offset(cardRadius, 0),
-                                        radius: Radius.circular(cardRadius));
+                                    ..arcToPoint(
+                                      Offset(cardRadius, 0),
+                                      radius: Radius.circular(cardRadius),
+                                    );
                                 },
                                 dashPattern: const [8, 4],
                                 child: ClipRRect(
-                                  borderRadius: const BorderRadius.all(
-                                      Radius.circular(12)),
+                                  borderRadius: BorderRadius.circular(12),
                                   child: SizedBox(
                                     height: 50.h,
                                     width: Get.width,

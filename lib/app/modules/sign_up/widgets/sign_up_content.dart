@@ -128,7 +128,7 @@ class SignUpContent extends GetView<SignUpController> {
                           : ColorManager.borderColor2,
                     ),
                     validator: (String? fullName) =>
-                        controller.validateEmail(fullName),
+                        controller.validateFullName(fullName),
                   ),
                   IntlPhoneNumberTextField(
                     controller: controller.phoneController,

@@ -1,5 +1,5 @@
-import 'package:flutter/cupertino.dart';
 import 'package:hessa_student/app/constants/exports.dart';
+import 'package:syncfusion_flutter_datepicker/datepicker.dart';
 import '../../../../generated/locales.g.dart';
 import '../../../../global_presentation/global_widgets/custom_app_bar.dart';
 import '../../../../global_presentation/global_widgets/global_dropdown.dart';
@@ -163,17 +163,178 @@ class AddNewDependentView extends GetView<AddNewDependentController> {
                             focusNode: controller.dateOfBirthFocusNode,
                             titleFontWeight: FontWeightManager.softLight,
                             onTap: () async {
+                              DateTime maxdate = DateTime(
+                                DateTime.now().year - 10,
+                                DateTime.now().month,
+                                DateTime.now().day,
+                              );
                               await Get.bottomSheet(
-                                SizedBox(
-                                  height: 200.h,
-                                  child: CupertinoDatePicker(
-                                    backgroundColor: ColorManager.white,
-                                    mode: CupertinoDatePickerMode.date,
-                                    initialDateTime: controller.dateOfBirth,
-                                    maximumDate: DateTime.now(),
-                                    onDateTimeChanged: (DateTime date) {
-                                      controller.changeDate(date);
-                                    },
+                                isScrollControlled: true,
+                                shape: const RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.only(
+                                    topLeft: Radius.circular(20),
+                                    topRight: Radius.circular(20),
+                                  ),
+                                ),
+                                Padding(
+                                  padding: EdgeInsets.symmetric(
+                                    horizontal: 5.w,
+                                    vertical: 16.h,
+                                  ),
+                                  child: Column(
+                                    mainAxisSize: MainAxisSize.min,
+                                    children: [
+                                      Center(
+                                        child: Container(
+                                          width: 26.w,
+                                          height: 6.h,
+                                          decoration: BoxDecoration(
+                                              borderRadius:
+                                                  BorderRadius.circular(10),
+                                              color: ColorManager.borderColor3),
+                                        ),
+                                      ),
+                                      Container(
+                                        padding: EdgeInsets.symmetric(
+                                          horizontal: 16.w,
+                                          vertical: 16.h,
+                                        ),
+                                        height: Get.height * 0.5.h,
+                                        child: SfDateRangePicker(
+                                          onSelectionChanged:
+                                              (DateRangePickerSelectionChangedArgs
+                                                  dateRangePickerSelectionChangedArgs) {
+                                            controller.changeDate(
+                                                dateRangePickerSelectionChangedArgs);
+                                          },
+                                          monthViewSettings:
+                                              const DateRangePickerMonthViewSettings(
+                                                  showTrailingAndLeadingDates:
+                                                      true),
+                                          enableMultiView: false,
+                                          selectionMode:
+                                              DateRangePickerSelectionMode
+                                                  .single,
+                                          allowViewNavigation: true,
+                                          view: DateRangePickerView.month,
+                                          enablePastDates: true,
+                                          maxDate: maxdate,
+                                          showNavigationArrow: true,
+                                          todayHighlightColor: ColorManager
+                                              .primary
+                                              .withOpacity(0.1),
+                                          selectionShape:
+                                              DateRangePickerSelectionShape
+                                                  .rectangle,
+                                          selectionColor: ColorManager.primary
+                                              .withOpacity(0.15),
+                                          selectionRadius: 20,
+                                          selectionTextStyle: TextStyle(
+                                            color: ColorManager.primary,
+                                            fontSize: (14).sp,
+                                            fontWeight:
+                                                FontWeightManager.softLight,
+                                            fontFamily:
+                                                FontConstants.fontFamily,
+                                          ),
+                                          backgroundColor: ColorManager.white,
+                                          controller: controller
+                                              .dateOfBirthRangeController,
+                                          navigationMode:
+                                              DateRangePickerNavigationMode
+                                                  .snap,
+                                          initialDisplayDate:
+                                              controller.dateOfBirth,
+                                          headerStyle:
+                                              DateRangePickerHeaderStyle(
+                                            textAlign: TextAlign.center,
+                                            textStyle: TextStyle(
+                                              color: ColorManager.fontColor,
+                                              fontSize: (14).sp,
+                                              fontWeight:
+                                                  FontWeightManager.light,
+                                              fontFamily:
+                                                  FontConstants.fontFamily,
+                                            ),
+                                          ),
+                                          rangeTextStyle: TextStyle(
+                                            color: ColorManager.fontColor,
+                                            fontSize: (14).sp,
+                                            fontWeight: FontWeightManager.light,
+                                            fontFamily:
+                                                FontConstants.fontFamily,
+                                          ),
+                                          monthCellStyle:
+                                              DateRangePickerMonthCellStyle(
+                                            textStyle: TextStyle(
+                                              color: ColorManager.fontColor,
+                                              fontSize: (14).sp,
+                                              fontWeight:
+                                                  FontWeightManager.softLight,
+                                              fontFamily:
+                                                  FontConstants.fontFamily,
+                                            ),
+                                            todayTextStyle: TextStyle(
+                                              color: ColorManager.fontColor,
+                                              fontSize: (14).sp,
+                                              fontWeight:
+                                                  FontWeightManager.softLight,
+                                              fontFamily:
+                                                  FontConstants.fontFamily,
+                                            ),
+                                            todayCellDecoration: BoxDecoration(
+                                              color: ColorManager.white,
+                                              borderRadius:
+                                                  BorderRadius.circular(10),
+                                            ),
+                                            disabledDatesTextStyle: TextStyle(
+                                              color: ColorManager.grey,
+                                              fontSize: (14).sp,
+                                              fontWeight:
+                                                  FontWeightManager.softLight,
+                                              fontFamily:
+                                                  FontConstants.fontFamily,
+                                            ),
+                                            cellDecoration: BoxDecoration(
+                                              color: ColorManager.white,
+                                              borderRadius:
+                                                  BorderRadius.circular(10),
+                                            ),
+                                          ),
+                                        ),
+                                      ),
+                                      SizedBox(height: 10.h),
+                                      Padding(
+                                        padding: EdgeInsets.symmetric(
+                                            horizontal: 16.w),
+                                        child: Row(
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.start,
+                                          children: [
+                                            PrimaryText(
+                                              "${LocaleKeys.note.tr}: ",
+                                              color: ColorManager.red,
+                                            ),
+                                            PrimaryText(
+                                              LocaleKeys.check_dependent_dob,
+                                              fontWeight:
+                                                  FontWeightManager.softLight,
+                                            ),
+                                          ],
+                                        ),
+                                      ),
+                                      SizedBox(height: 10.h),
+                                      Padding(
+                                        padding: EdgeInsets.symmetric(
+                                          horizontal: 16.w,
+                                          vertical: 10.h,
+                                        ),
+                                        child: PrimaryButton(
+                                          onPressed: () => Get.back(),
+                                          title: LocaleKeys.save.tr,
+                                        ),
+                                      )
+                                    ],
                                   ),
                                 ),
                                 backgroundColor: ColorManager.white,
