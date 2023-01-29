@@ -11,26 +11,26 @@ class AddNewDependentView extends GetView<AddNewDependentController> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: CustomAppBar(
+        title: LocaleKeys.add_dependent,
+        leading: GestureDetector(
+          onTap: () {
+            Get.back();
+          },
+          behavior: HitTestBehavior.opaque,
+          child: Icon(
+            Icons.arrow_back_ios,
+            color: ColorManager.fontColor,
+            size: 20,
+          ),
+        ),
+        action: const SizedBox.shrink(),
+      ),
       body: GetBuilder<AddNewDependentController>(
           builder: (AddNewDependentController controller) {
         return SingleChildScrollView(
           child: Column(
             children: [
-              CustomAppBar(
-                title: LocaleKeys.add_dependent,
-                leading: GestureDetector(
-                  onTap: () {
-                    Get.back();
-                  },
-                  behavior: HitTestBehavior.opaque,
-                  child: Icon(
-                    Icons.arrow_back_ios,
-                    color: ColorManager.fontColor,
-                    size: 20,
-                  ),
-                ),
-                action: const SizedBox.shrink(),
-              ),
               SizedBox(height: 32.h),
               Padding(
                 padding: EdgeInsets.only(left: 16.w, right: 16.w),

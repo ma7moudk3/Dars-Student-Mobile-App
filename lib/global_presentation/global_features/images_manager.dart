@@ -28,6 +28,8 @@ class ImagesManager {
   static String addTeacherIcon = "assets/svg/icons/addTeacher.svg";
   static String dependentIcon = "assets/svg/icons/dependent.svg";
   static String uploadFileIcon = "assets/svg/icons/upload_file.svg";
+  static String classIcon = "assets/svg/icons/class.svg";
+  static String deleteIcon = "assets/svg/icons/delete.svg";
   static String noOrders = "assets/svg/no_orders.svg";
   static String dependents = "assets/svg/dependents.svg";
 }

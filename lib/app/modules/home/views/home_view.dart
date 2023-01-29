@@ -15,10 +15,10 @@ class HomeView extends GetView<HomeController> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: const CustomAppBar(),
       body: SingleChildScrollView(
         child: Column(
           children: [
-            const CustomAppBar(),
             SizedBox(height: 26.h),
             Padding(
               padding: EdgeInsets.symmetric(horizontal: 16.w),
@@ -40,6 +40,7 @@ class HomeView extends GetView<HomeController> {
                     fontWeight: FontWeightManager.softLight,
                     color: ColorManager.fontColor,
                   ),
+                  SizedBox(height: 20.h),
                   GridView.count(
                     crossAxisCount: 2,
                     shrinkWrap: true,
@@ -86,7 +87,7 @@ class HomeView extends GetView<HomeController> {
                   GetBuilder<HomeController>(
                       init: HomeController(),
                       builder: (HomeController controller) {
-                        if (controller.orders.isNotEmpty) {
+                        if (controller.orders.isEmpty) {
                           return Center(
                             child: Column(
                               children: [
@@ -112,16 +113,21 @@ class HomeView extends GetView<HomeController> {
                             ),
                           );
                         } else {
-                          return ListView.builder(
-                            itemCount: controller.orders.length + 1,
-                            shrinkWrap: true,
-                            physics: const NeverScrollableScrollPhysics(),
-                            itemBuilder: (BuildContext context, int index) {
-                              if (index == controller.orders.length) {
-                                return SizedBox(height: 20.h);
-                              }
-                              return OrderWidget(isFirst: index == 0);
-                            },
+                          return Column(
+                            children: [
+                              SizedBox(height: 20.h),
+                              ListView.builder(
+                                itemCount: controller.orders.length + 1,
+                                shrinkWrap: true,
+                                physics: const NeverScrollableScrollPhysics(),
+                                itemBuilder: (BuildContext context, int index) {
+                                  if (index == controller.orders.length) {
+                                    return SizedBox(height: 20.h);
+                                  }
+                                  return OrderWidget(isFirst: index == 0);
+                                },
+                              ),
+                            ],
                           );
                         }
                       })

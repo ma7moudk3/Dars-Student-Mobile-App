@@ -131,6 +131,7 @@ class LocaleKeys {
   static const confirm = 'confirm';
   static const save = 'save';
   static const note = 'note';
+  static const dependents_list = 'dependents_list';
 }
 
 class Locales {
@@ -257,5 +258,6 @@ class Locales {
     'confirm': 'تأكيد',
     'save': 'حفظ',
     'note': 'مُلاحظة',
+    'dependents_list': 'قائمة التابعين',
   };
 }

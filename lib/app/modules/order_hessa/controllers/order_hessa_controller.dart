@@ -1,5 +1,6 @@
 import 'dart:developer';
 
+import 'package:hessa_student/app/modules/dependents/controllers/dependents_controller.dart';
 import 'package:intl/date_symbol_data_local.dart';
 import 'package:intl/intl.dart';
 import 'package:syncfusion_flutter_datepicker/datepicker.dart';
@@ -33,7 +34,8 @@ class OrderHessaController extends GetxController {
   TimeRangeResult? hessaTimeRange;
   late DateRangePickerController hessaDateRangeController;
   FocusNode hessaDateFocusNode = FocusNode(), hessaTimeFocusNode = FocusNode();
-
+  DependentsController dependentsController =
+      Get.put<DependentsController>(DependentsController());
   void changeHessaDate(DateRangePickerSelectionChangedArgs hessaDate) {
     log(hessaDate.value.toString());
     this.hessaDate = hessaDate.value;

@@ -1,7 +1,7 @@
 import '../../app/constants/exports.dart';
 import '../../generated/locales.g.dart';
 
-class CustomAppBar extends StatelessWidget {
+class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
   const CustomAppBar({
     Key? key,
     this.title,
@@ -53,4 +53,7 @@ class CustomAppBar extends StatelessWidget {
       ),
     );
   }
+
+  @override
+  Size get preferredSize => const Size.fromHeight(130);
 }
