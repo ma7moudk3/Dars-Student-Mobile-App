@@ -175,6 +175,7 @@ class HessaDateAndTimePickerWidget extends GetView<OrderHessaController> {
               ),
               child: Column(
                 mainAxisSize: MainAxisSize.min,
+                crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Center(
                     child: Container(
@@ -186,11 +187,12 @@ class HessaDateAndTimePickerWidget extends GetView<OrderHessaController> {
                     ),
                   ),
                   Container(
-                    padding: EdgeInsets.symmetric(
-                      horizontal: 16.w,
-                      vertical: 16.h,
+                    padding: EdgeInsets.only(
+                      left: 16.w,
+                      right: 16.w,
+                      top: 16.h,
                     ),
-                    height: Get.height * 0.3.h,
+                    height: Get.height * 0.28.h,
                     child: TimeRange(
                       fromTitle: PrimaryText(
                         "${LocaleKeys.from.tr}:",
@@ -230,6 +232,52 @@ class HessaDateAndTimePickerWidget extends GetView<OrderHessaController> {
                         // }
                         controller.changeHessaTime(range);
                       },
+                    ),
+                  ),
+                  Visibility(
+                    visible: controller.hessaDateController.text.isNotEmpty,
+                    child: Column(
+                      children: [
+                        Padding(
+                          padding: EdgeInsets.symmetric(horizontal: 16.w),
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              PrimaryText(
+                                LocaleKeys.hessa_date.tr,
+                                color: ColorManager.fontColor,
+                                fontSize: 14.sp,
+                                fontWeight: FontWeightManager.softLight,
+                              ),
+                              SizedBox(height: 10.h),
+                              Row(
+                                children: [
+                                  Container(
+                                    margin: EdgeInsets.only(left: 5.w),
+                                    child: SvgPicture.asset(
+                                      ImagesManager.calendarIcon,
+                                      color: controller.hessaDateErrorIconColor,
+                                    ),
+                                  ),
+                                  PrimaryText(
+                                    controller.hessaDateController.text,
+                                    color: ColorManager.grey,
+                                    fontSize: 14.sp,
+                                  ),
+                                ],
+                              ),
+                            ],
+                          ),
+                        ),
+                        SizedBox(height: 20.h),
+                      ],
+                    ),
+                  ),
+                  Padding(
+                    padding: EdgeInsets.symmetric(horizontal: 16.w),
+                    child: PrimaryButton(
+                      onPressed: () => Get.back(),
+                      title: LocaleKeys.save.tr,
                     ),
                   ),
                 ],

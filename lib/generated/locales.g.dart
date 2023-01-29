@@ -102,6 +102,7 @@ class LocaleKeys {
   static const hessa_duration = 'hessa_duration';
   static const choose_hessa_duration = 'choose_hessa_duration';
   static const hessa_time_and_date = 'hessa_time_and_date';
+  static const hessa_date = 'hessa_date';
   static const location = 'location';
   static const choose_location = 'choose_location';
   static const teacher_name = 'teacher_name';
@@ -230,6 +231,7 @@ class Locales {
     'hessa_duration': 'مدة الحصة',
     'choose_hessa_duration': 'اختر مدة الحصة',
     'hessa_time_and_date': 'تاريخ ووقت الحصة',
+    'hessa_date': 'تاريخ الحصة المختارة',
     'location': 'الموقع الجغرافي',
     'choose_location': 'اختر الموقع الجغرافي',
     'teacher_name': 'اسم المدرّس',

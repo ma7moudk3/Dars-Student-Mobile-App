@@ -67,8 +67,8 @@ class DependentsListBottomSheetContent extends GetView<OrderHessaController> {
                                     GestureDetector(
                                       onTap: () async {},
                                       child: Container(
-                                        height: 19.h,
-                                        width: 19.w,
+                                        height: 22.h,
+                                        width: 20.w,
                                         decoration: BoxDecoration(
                                           borderRadius:
                                               BorderRadius.circular(8),
