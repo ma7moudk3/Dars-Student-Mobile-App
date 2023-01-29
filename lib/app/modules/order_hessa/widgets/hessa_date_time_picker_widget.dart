@@ -234,44 +234,79 @@ class HessaDateAndTimePickerWidget extends GetView<OrderHessaController> {
                       },
                     ),
                   ),
-                  Visibility(
-                    visible: controller.hessaDateController.text.isNotEmpty,
-                    child: Column(
-                      children: [
-                        Padding(
-                          padding: EdgeInsets.symmetric(horizontal: 16.w),
-                          child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              PrimaryText(
-                                LocaleKeys.hessa_date.tr,
-                                color: ColorManager.fontColor,
-                                fontSize: 14.sp,
-                                fontWeight: FontWeightManager.softLight,
-                              ),
-                              SizedBox(height: 10.h),
-                              Row(
+                  GetBuilder<OrderHessaController>(
+                    builder: (OrderHessaController controller) {
+                      return Visibility(
+                        visible: controller.hessaDateController.text.isNotEmpty,
+                        child: Column(
+                          children: [
+                            Padding(
+                              padding: EdgeInsets.symmetric(horizontal: 16.w),
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
-                                  Container(
-                                    margin: EdgeInsets.only(left: 5.w),
-                                    child: SvgPicture.asset(
-                                      ImagesManager.calendarIcon,
-                                      color: controller.hessaDateErrorIconColor,
-                                    ),
-                                  ),
                                   PrimaryText(
-                                    controller.hessaDateController.text,
-                                    color: ColorManager.grey,
+                                    controller.hessaTimeController.text.isEmpty
+                                        ? LocaleKeys.chosen_hessa_date.tr
+                                        : LocaleKeys.chosen_hessa_time_and_date.tr,
+                                    color: ColorManager.fontColor,
                                     fontSize: 14.sp,
+                                    fontWeight: FontWeightManager.softLight,
+                                  ),
+                                  SizedBox(height: 10.h),
+                                  Row(
+                                    children: [
+                                      Row(
+                                        children: [
+                                          Container(
+                                            margin: EdgeInsets.only(left: 5.w),
+                                            child: SvgPicture.asset(
+                                              ImagesManager.calendarIcon,
+                                              color: controller
+                                                  .hessaDateErrorIconColor,
+                                            ),
+                                          ),
+                                          PrimaryText(
+                                            controller.hessaDateController.text,
+                                            color: ColorManager.grey,
+                                            fontSize: 14.sp,
+                                          ),
+                                        ],
+                                      ),
+                                      Visibility(
+                                        visible: controller
+                                            .hessaTimeController.text.isNotEmpty,
+                                        child: Row(
+                                          children: [
+                                            SizedBox(width: 5.w),
+                                            Container(
+                                              margin: EdgeInsets.all(5.w),
+                                              child: Icon(
+                                                Icons.access_time,
+                                                color: controller
+                                                        .hessaTimeErrorIconColor ??
+                                                    ColorManager.yellow,
+                                                size: 22.sp,
+                                              ),
+                                            ),
+                                            PrimaryText(
+                                              controller.hessaTimeController.text,
+                                              color: ColorManager.grey,
+                                              fontSize: 14.sp,
+                                            ),
+                                          ],
+                                        ),
+                                      ),
+                                    ],
                                   ),
                                 ],
                               ),
-                            ],
-                          ),
+                            ),
+                            SizedBox(height: 20.h),
+                          ],
                         ),
-                        SizedBox(height: 20.h),
-                      ],
-                    ),
+                      );
+                    }
                   ),
                   Padding(
                     padding: EdgeInsets.symmetric(horizontal: 16.w),
