@@ -34,6 +34,8 @@ import '../modules/splash/bindings/splash_binding.dart';
 import '../modules/splash/views/splash_view.dart';
 import '../modules/static_page/bindings/static_page_binding.dart';
 import '../modules/static_page/views/static_page_view.dart';
+import '../modules/technical_support/bindings/technical_support_binding.dart';
+import '../modules/technical_support/views/technical_support_view.dart';
 
 // ignore_for_file: constant_identifier_names
 
@@ -75,7 +77,7 @@ class AppPages {
     ),
     GetPage(
       name: _Paths.LOGIN,
-      page: () =>  const LoginView(),
+      page: () => const LoginView(),
       binding: LoginBinding(),
       transition: Transition.cupertino,
       transitionDuration: const Duration(milliseconds: 400),
@@ -149,6 +151,11 @@ class AppPages {
       name: _Paths.SETTINGS,
       page: () => SettingsView(),
       binding: SettingsBinding(),
+    ),
+    GetPage(
+      name: _Paths.TECHNICAL_SUPPORT,
+      page: () => TechnicalSupportView(),
+      binding: TechnicalSupportBinding(),
     ),
   ];
 }

@@ -177,7 +177,7 @@ class AddNewDependentView extends GetView<AddNewDependentController> {
                             prefixIcon: Container(
                               margin: EdgeInsets.symmetric(horizontal: 14.w),
                               child: SvgPicture.asset(
-                                ImagesManager.dependentIcon,
+                                ImagesManager.personIcon,
                                 width: 22.w,
                                 height: 22.h,
                                 color: controller.nameIconErrorColor ??

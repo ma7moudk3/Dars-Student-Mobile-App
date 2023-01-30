@@ -4,6 +4,7 @@ import '../../../../generated/locales.g.dart';
 import '../../../../global_presentation/global_widgets/custom_app_bar.dart';
 import '../../../constants/exports.dart';
 import '../../../core/helper_functions.dart';
+import '../../../routes/app_pages.dart';
 import '../../profile/widgets/more_item.dart';
 import '../controllers/settings_controller.dart';
 import '../widgets/change_password_bottom_sheet_content.dart';
@@ -63,7 +64,7 @@ class SettingsView extends GetView<SettingsController> {
               iconPath: ImagesManager.headphoneIcon,
               color: ColorManager.primaryLight.withOpacity(0.15),
               iconColor: ColorManager.primaryLight,
-              onTap: () async => log('Technical Support'),
+              onTap: () async => await Get.toNamed(Routes.TECHNICAL_SUPPORT),
             ),
             moreDivider(),
             MoreItem(

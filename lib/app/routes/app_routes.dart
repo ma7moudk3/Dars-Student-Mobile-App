@@ -20,6 +20,7 @@ abstract class Routes {
   static const DEPENDENTS = _Paths.DEPENDENTS;
   static const ADD_NEW_DEPENDENT = _Paths.ADD_NEW_DEPENDENT;
   static const SETTINGS = _Paths.SETTINGS;
+  static const TECHNICAL_SUPPORT = _Paths.TECHNICAL_SUPPORT;
 }
 
 abstract class _Paths {
@@ -41,4 +42,5 @@ abstract class _Paths {
   static const DEPENDENTS = '/dependents';
   static const ADD_NEW_DEPENDENT = '/add-new-dependent';
   static const SETTINGS = '/settings';
+  static const TECHNICAL_SUPPORT = '/technical-support';
 }

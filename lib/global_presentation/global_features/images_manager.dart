@@ -26,7 +26,7 @@ class ImagesManager {
   static String categoryIcon = "assets/svg/icons/category.svg";
   static String calendarIcon = "assets/svg/icons/calendar.svg";
   static String addTeacherIcon = "assets/svg/icons/addTeacher.svg";
-  static String dependentIcon = "assets/svg/icons/dependent.svg";
+  static String personIcon = "assets/svg/icons/dependent.svg";
   static String uploadFileIcon = "assets/svg/icons/upload_file.svg";
   static String classIcon = "assets/svg/icons/class.svg";
   static String deleteIcon = "assets/svg/icons/delete.svg";

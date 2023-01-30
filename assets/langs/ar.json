@@ -34,6 +34,7 @@
     "full_name": "الاسم الكامل",
     "enter_full_name": "أدخل الاسم الكامل",
     "confirm_password": "تأكيد كلمة المرور",
+    "write_full_name": "اكتب الاسم الكامل",
     "agree_with": "الموافقة على جميع ",
     "terms_and_conditions": "الشروط والأحكام",
     "for_hessa": "لحِصّة",
@@ -142,6 +143,12 @@
     "no": "لا",
     "ok": "موافق",
     "technical_support": "الدعم الفني والمساعدة",
+    "title_technical_support": "الدعم الفني",
+    "contact_us": "تواصل معنا ...",
+    "do_not_hesitate_to_contact_us": "لا تتردد في التواصل معنا للحصول على المساعدة",
+    "send": "إرسال",
+    "message_content": "نص الرسالة",
+    "how_can_we_help_you": "كيف يمكننا مساعدتك؟",
     "privacy_policy": "سياسة الخصوصية",
     "abous_hessa": "عن حصة",
     "please_enter_old_password": "الرجاء إدخال كلمة المرور القديمة",
@@ -155,5 +162,7 @@
     "area": "المنطقة",
     "enter_area": "اكتب المنطقة",
     "current_address": "العنوان الحالي",
-    "enter_current_address": "اكتب العنوان الحالي"
+    "enter_current_address": "اكتب العنوان الحالي",
+    "please_enter_message_content": "الرجاء إدخال نص الرسالة ...",
+    "check_message_content": "تحقق من نص الرسالة المُدخل"
 }

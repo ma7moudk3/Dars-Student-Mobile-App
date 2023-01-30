@@ -48,6 +48,7 @@ class LocaleKeys {
   static const full_name = 'full_name';
   static const enter_full_name = 'enter_full_name';
   static const confirm_password = 'confirm_password';
+  static const write_full_name = 'write_full_name';
   static const agree_with = 'agree_with';
   static const terms_and_conditions = 'terms_and_conditions';
   static const for_hessa = 'for_hessa';
@@ -157,6 +158,12 @@ class LocaleKeys {
   static const no = 'no';
   static const ok = 'ok';
   static const technical_support = 'technical_support';
+  static const title_technical_support = 'title_technical_support';
+  static const contact_us = 'contact_us';
+  static const do_not_hesitate_to_contact_us = 'do_not_hesitate_to_contact_us';
+  static const send = 'send';
+  static const message_content = 'message_content';
+  static const how_can_we_help_you = 'how_can_we_help_you';
   static const privacy_policy = 'privacy_policy';
   static const abous_hessa = 'abous_hessa';
   static const please_enter_old_password = 'please_enter_old_password';
@@ -171,6 +178,8 @@ class LocaleKeys {
   static const enter_area = 'enter_area';
   static const current_address = 'current_address';
   static const enter_current_address = 'enter_current_address';
+  static const please_enter_message_content = 'please_enter_message_content';
+  static const check_message_content = 'check_message_content';
 }
 
 class Locales {
@@ -213,6 +222,7 @@ class Locales {
     'full_name': 'الاسم الكامل',
     'enter_full_name': 'أدخل الاسم الكامل',
     'confirm_password': 'تأكيد كلمة المرور',
+    'write_full_name': 'اكتب الاسم الكامل',
     'agree_with': 'الموافقة على جميع ',
     'terms_and_conditions': 'الشروط والأحكام',
     'for_hessa': 'لحِصّة',
@@ -323,6 +333,13 @@ class Locales {
     'no': 'لا',
     'ok': 'موافق',
     'technical_support': 'الدعم الفني والمساعدة',
+    'title_technical_support': 'الدعم الفني',
+    'contact_us': 'تواصل معنا ...',
+    'do_not_hesitate_to_contact_us':
+        'لا تتردد في التواصل معنا للحصول على المساعدة',
+    'send': 'إرسال',
+    'message_content': 'نص الرسالة',
+    'how_can_we_help_you': 'كيف يمكننا مساعدتك؟',
     'privacy_policy': 'سياسة الخصوصية',
     'abous_hessa': 'عن حصة',
     'please_enter_old_password': 'الرجاء إدخال كلمة المرور القديمة',
@@ -337,5 +354,7 @@ class Locales {
     'enter_area': 'اكتب المنطقة',
     'current_address': 'العنوان الحالي',
     'enter_current_address': 'اكتب العنوان الحالي',
+    'please_enter_message_content': 'الرجاء إدخال نص الرسالة ...',
+    'check_message_content': 'تحقق من نص الرسالة المُدخل',
   };
 }
