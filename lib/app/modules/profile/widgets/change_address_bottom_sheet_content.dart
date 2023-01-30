@@ -167,6 +167,7 @@ class ChangeAddressBottomSheetContent extends GetView<ProfileController> {
                         ),
                         const Spacer(),
                         PrimaryButton(
+                          height: 50.h,
                           width: Get.width,
                           onPressed: () async {
                             if (controller.formKey.currentState!.validate()) {

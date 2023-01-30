@@ -1,4 +1,3 @@
-import 'dart:developer';
 
 import 'package:flutter_keyboard_visibility/flutter_keyboard_visibility.dart';
 
@@ -40,6 +39,7 @@ class LoginContent extends GetView<LoginController> {
                 PrimaryTextField(
                   cursorColor: ColorManager.primary,
                   focusNode: controller.emailFocusNode,
+                  fontSize: 14.sp,
                   prefixIcon: Icon(
                     Icons.email_outlined,
                     size: 25,
@@ -77,10 +77,9 @@ class LoginContent extends GetView<LoginController> {
                       await checkInternetConnection(timeout: 5)
                           .then((bool internetStatus) async {
                         if (internetStatus == true) {
-                          log('logged in');
+                          print('logged in');
                           // await controller.login();
-                          await Get.toNamed(
-                              Routes.BOTTOM_NAV_BAR); // for testing
+                          Get.toNamed(Routes.BOTTOM_NAV_BAR); // for testing
                         } else {
                           await Get.toNamed(Routes.CONNECTION_FAILED);
                         }
@@ -145,10 +144,9 @@ class LoginContent extends GetView<LoginController> {
                       await checkInternetConnection(timeout: 10)
                           .then((bool internetStatus) async {
                         if (internetStatus == true) {
-                          log('logged in');
+                          print('logged in');
                           // await controller.login();
-                          await Get.toNamed(
-                              Routes.BOTTOM_NAV_BAR); // for testing
+                          Get.toNamed(Routes.BOTTOM_NAV_BAR); // for testing
                         } else {
                           await Get.toNamed(Routes.CONNECTION_FAILED);
                         }

@@ -27,7 +27,7 @@ Future<bool> checkInternetConnection({required int timeout}) async {
     }
   } on SocketException catch (_) {
     log('not connected');
-    return false;
+    print('not connected: $_');
   }
   return false;
 }

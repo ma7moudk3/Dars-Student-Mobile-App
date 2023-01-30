@@ -5,7 +5,7 @@ class PrimaryButton extends StatelessWidget {
   final String? title;
   final Color? color;
   final Color? fontColor;
-  final double? fontSize, width;
+  final double? fontSize, width, height;
   final FontWeight fontWeight;
   final BorderSide? borderSide;
   final BorderRadiusGeometry? borderRadius;
@@ -15,6 +15,7 @@ class PrimaryButton extends StatelessWidget {
     required this.title,
     this.color,
     this.width,
+    this.height,
     this.borderSide,
     this.borderRadius,
     this.fontSize = 13,
@@ -26,7 +27,7 @@ class PrimaryButton extends StatelessWidget {
   Widget build(BuildContext context) {
     return SizedBox(
       width: width ?? Get.width,
-      height: 55.h,
+      height: height ?? 55.h,
       child: ElevatedButton(
         onPressed: onPressed,
         style: ElevatedButton.styleFrom(
