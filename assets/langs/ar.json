@@ -38,9 +38,13 @@
     "terms_and_conditions": "الشروط والأحكام",
     "for_hessa": "لحِصّة",
     "please_enter_fullname": "الرجاء ادخال الاسم الكامل",
+    "please_enter_area": "الرجاء ادخال المنطقة",
+    "please_enter_current_address": "الرجاء ادخال العنوان الحالي",
     "please_enter_teacher_name": "الرجاء ادخال اسم المدرّس",
     "please_enter_dependent_name": "الرجاء ادخال اسم التابع",
     "check_your_full_name": "تحقق من اسمك الكامل",
+    "check_area": "تحقق من المنطقة المُدخلة",
+    "check_current_address": "تحقق من العنوان الحالي المُدخل",
     "check_teacher_name": "تحقق من اسم المدرّس",
     "check_dependent_name": "تحقق من اسم التابع",
     "please_enter_confirm_password": "الرجاء إدخال كلمة مرور مطابقة",
@@ -144,5 +148,12 @@
     "new_password": "كلمة المرور الجديدة",
     "enter_new_password": "أدخل كلمة المرور الجديدة",
     "confirm_new_password": "تأكيد كلمة المرور الجديدة",
-    "enter_confirmation_password": "أدخل كلمة مرور مطابقة"
+    "enter_confirmation_password": "أدخل كلمة مرور مطابقة",
+    "change_address": "تعديل العنوان",
+    "city": "المدينة",
+    "choose_city": "اختر المدينة",
+    "area": "المنطقة",
+    "enter_area": "اكتب المنطقة",
+    "current_address": "العنوان الحالي",
+    "enter_current_address": "اكتب العنوان الحالي"
 }

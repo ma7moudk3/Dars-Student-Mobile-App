@@ -52,9 +52,13 @@ class LocaleKeys {
   static const terms_and_conditions = 'terms_and_conditions';
   static const for_hessa = 'for_hessa';
   static const please_enter_fullname = 'please_enter_fullname';
+  static const please_enter_area = 'please_enter_area';
+  static const please_enter_current_address = 'please_enter_current_address';
   static const please_enter_teacher_name = 'please_enter_teacher_name';
   static const please_enter_dependent_name = 'please_enter_dependent_name';
   static const check_your_full_name = 'check_your_full_name';
+  static const check_area = 'check_area';
+  static const check_current_address = 'check_current_address';
   static const check_teacher_name = 'check_teacher_name';
   static const check_dependent_name = 'check_dependent_name';
   static const please_enter_confirm_password = 'please_enter_confirm_password';
@@ -160,6 +164,13 @@ class LocaleKeys {
   static const enter_new_password = 'enter_new_password';
   static const confirm_new_password = 'confirm_new_password';
   static const enter_confirmation_password = 'enter_confirmation_password';
+  static const change_address = 'change_address';
+  static const city = 'city';
+  static const choose_city = 'choose_city';
+  static const area = 'area';
+  static const enter_area = 'enter_area';
+  static const current_address = 'current_address';
+  static const enter_current_address = 'enter_current_address';
 }
 
 class Locales {
@@ -206,9 +217,13 @@ class Locales {
     'terms_and_conditions': 'الشروط والأحكام',
     'for_hessa': 'لحِصّة',
     'please_enter_fullname': 'الرجاء ادخال الاسم الكامل',
+    'please_enter_area': 'الرجاء ادخال المنطقة',
+    'please_enter_current_address': 'الرجاء ادخال العنوان الحالي',
     'please_enter_teacher_name': 'الرجاء ادخال اسم المدرّس',
     'please_enter_dependent_name': 'الرجاء ادخال اسم التابع',
     'check_your_full_name': 'تحقق من اسمك الكامل',
+    'check_area': 'تحقق من المنطقة المُدخلة',
+    'check_current_address': 'تحقق من العنوان الحالي المُدخل',
     'check_teacher_name': 'تحقق من اسم المدرّس',
     'check_dependent_name': 'تحقق من اسم التابع',
     'please_enter_confirm_password': 'الرجاء إدخال كلمة مرور مطابقة',
@@ -315,5 +330,12 @@ class Locales {
     'enter_new_password': 'أدخل كلمة المرور الجديدة',
     'confirm_new_password': 'تأكيد كلمة المرور الجديدة',
     'enter_confirmation_password': 'أدخل كلمة مرور مطابقة',
+    'change_address': 'تعديل العنوان',
+    'city': 'المدينة',
+    'choose_city': 'اختر المدينة',
+    'area': 'المنطقة',
+    'enter_area': 'اكتب المنطقة',
+    'current_address': 'العنوان الحالي',
+    'enter_current_address': 'اكتب العنوان الحالي',
   };
 }

@@ -8,6 +8,7 @@ import '../../../../global_presentation/global_widgets/custom_app_bar.dart';
 import '../../../constants/exports.dart';
 import '../../../core/helper_functions.dart';
 import '../controllers/profile_controller.dart';
+import '../widgets/change_address_bottom_sheet_content.dart';
 import '../widgets/logout_dialog_content.dart';
 import '../widgets/more_item.dart';
 import '../widgets/profile_info_widget.dart';
@@ -87,7 +88,19 @@ class ProfileView extends GetView<ProfileController> {
                     iconPath: ImagesManager.locationIcon,
                     color: ColorManager.primaryLight.withOpacity(0.15),
                     iconColor: ColorManager.primaryLight,
-                    onTap: () => log("address"),
+                    onTap: () async {
+                      await Get.bottomSheet(
+                        backgroundColor: ColorManager.white,
+                        isScrollControlled: true,
+                        shape: const RoundedRectangleBorder(
+                          borderRadius: BorderRadius.only(
+                            topLeft: Radius.circular(20),
+                            topRight: Radius.circular(20),
+                          ),
+                        ),
+                        const ChangeAddressBottomSheetContent(),
+                      );
+                    },
                   ),
                   moreDivider(),
                   MoreItem(
