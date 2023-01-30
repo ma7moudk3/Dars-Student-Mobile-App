@@ -20,6 +20,9 @@ class PasswordTextField extends StatefulWidget {
   final int? maxLength;
   final Widget? prefixIcon;
   final FocusNode? focusNode;
+  final double? titleFontSize;
+  final FontWeight? titleFontWeight;
+  final double? titleSpacing;
 
   const PasswordTextField(
       {Key? key,
@@ -28,8 +31,11 @@ class PasswordTextField extends StatefulWidget {
       this.validator,
       this.onFieldSubmitted,
       this.title,
+      this.titleSpacing,
       this.borderRadius,
       this.prefixIcon,
+      this.titleFontSize,
+      this.titleFontWeight,
       this.cursorColor,
       this.borderSide = const BorderSide(),
       this.focusNode,
@@ -64,8 +70,10 @@ class _PasswordTextFieldState extends State<PasswordTextField> {
       children: [
         PrimaryText(
           widget.title ?? LocaleKeys.password.tr,
+          fontWeight: widget.titleFontWeight ?? FontWeightManager.light,
+          fontSize: widget.titleFontSize ?? 13,
         ),
-        SizedBox(height: 10.h),
+        SizedBox(height: (widget.titleSpacing ?? 10).h),
         /*
                     decoration: BoxDecoration(
               borderRadius: appType == AppType.customer

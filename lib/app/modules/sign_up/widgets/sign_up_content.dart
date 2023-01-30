@@ -397,7 +397,7 @@ class SignUpContent extends GetView<SignUpController> {
                   KeyboardVisibilityBuilder(
                       builder: (BuildContext context, bool isKeyboardVisibile) {
                     if (isKeyboardVisibile) {
-                      return SizedBox(height: 180.h);
+                      return SizedBox(height: 185.h);
                     } else {
                       return const SizedBox.shrink();
                     }

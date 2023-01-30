@@ -29,7 +29,11 @@ class SignUpView extends GetView<SignUpController> {
               children: [
                 Positioned(
                   right: 16.w,
-                  top: 85.h,
+                  top: Get.arguments != null &&
+                          (Get.arguments['isFromLoginInOrSignUp'] != null &&
+                              Get.arguments['isFromLoginInOrSignUp'] == true)
+                      ? 80.h
+                      : 75.h,
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     mainAxisAlignment: MainAxisAlignment.start,
@@ -77,7 +81,7 @@ class SignUpView extends GetView<SignUpController> {
                   ),
                 ),
                 Positioned(
-                  bottom: 20.h,
+                  bottom: 15.h,
                   left: 18.w,
                   right: 18.w,
                   child: const SignUpContent(),

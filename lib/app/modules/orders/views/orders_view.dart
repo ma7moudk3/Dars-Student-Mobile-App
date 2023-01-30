@@ -1,7 +1,8 @@
-import 'package:flutter/material.dart';
-
-import 'package:get/get.dart';
-
+import '../../../../generated/locales.g.dart';
+import '../../../../global_presentation/global_widgets/custom_app_bar.dart';
+import '../../../constants/exports.dart';
+import '../../../routes/app_pages.dart';
+import '../../home/widgets/order_widget.dart';
 import '../controllers/orders_controller.dart';
 
 class OrdersView extends GetView<OrdersController> {
@@ -9,15 +10,54 @@ class OrdersView extends GetView<OrdersController> {
 
   @override
   Widget build(BuildContext context) {
+    Get.put(() => OrdersController());
     return Scaffold(
-      appBar: AppBar(
-        title: const Text('OrdersView'),
-        centerTitle: true,
+      appBar: CustomAppBar(
+        title: LocaleKeys.order_hessa,
+        action: GestureDetector(
+          behavior: HitTestBehavior.opaque,
+          onTap: () async {
+            await Get.toNamed(Routes.ORDER_HESSA);
+          },
+          child: Container(
+            width: 20.w,
+            height: 20.h,
+            decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(5),
+              border: Border.all(
+                color: ColorManager.primary,
+                width: 2,
+              ),
+            ),
+            child: Center(
+              child: Icon(
+                Icons.add_rounded,
+                color: ColorManager.primary,
+                size: 15.sp,
+              ),
+            ),
+          ),
+        ),
       ),
-      body: const Center(
-        child: Text(
-          'OrdersView is working',
-          style: TextStyle(fontSize: 20),
+      body: SingleChildScrollView(
+        child: Padding(
+          padding: EdgeInsets.symmetric(horizontal: 16.w),
+          child: Column(
+            children: [
+              SizedBox(height: 20.h),
+              ListView.builder(
+                itemCount: 9 + 1,
+                shrinkWrap: true,
+                physics: const NeverScrollableScrollPhysics(),
+                itemBuilder: (BuildContext context, int index) {
+                  if (index == 9) {
+                    return SizedBox(height: 20.h);
+                  }
+                  return OrderWidget(isFirst: index == 0);
+                },
+              ),
+            ],
+          ),
         ),
       ),
     );

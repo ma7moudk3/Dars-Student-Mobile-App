@@ -3,8 +3,8 @@ import 'dart:developer';
 import '../../../constants/exports.dart';
 import '../controllers/home_controller.dart';
 
-class ProfileInfoWidget extends GetView<HomeController> {
-  const ProfileInfoWidget({
+class HomeProfileInfoWidget extends GetView<HomeController> {
+  const HomeProfileInfoWidget({
     Key? key,
   }) : super(key: key);
 

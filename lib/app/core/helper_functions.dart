@@ -3,6 +3,8 @@ import 'dart:io';
 
 import 'package:intl/intl.dart';
 
+import '../constants/exports.dart';
+
 
 String formatTimeOfDay(DateTime? dateAndTime) {
   final format = DateFormat.jm();
@@ -29,3 +31,10 @@ Future<bool> checkInternetConnection({required int timeout}) async {
   }
   return false;
 }
+
+ Divider moreDivider() {
+    return Divider(
+      thickness: 1.3,
+      color: ColorManager.grey5.withOpacity(0.1),
+    );
+  }

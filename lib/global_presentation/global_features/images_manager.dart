@@ -30,6 +30,19 @@ class ImagesManager {
   static String uploadFileIcon = "assets/svg/icons/upload_file.svg";
   static String classIcon = "assets/svg/icons/class.svg";
   static String deleteIcon = "assets/svg/icons/delete.svg";
+  static String settingsIcon = "assets/svg/icons/settings.svg";
+  static String editProfileIcon = "assets/svg/icons/edit_profile.svg";
+  static String profileDataIcon = "assets/svg/icons/profile_data.svg";
+  static String locationIcon = "assets/svg/icons/location.svg";
+  static String walletIcon = "assets/svg/icons/wallet.svg";
+  static String peopleIcon = "assets/svg/icons/people.svg";
+  static String logoutIcon = "assets/svg/icons/logout.svg";
+  static String exclamationMarkIcon = "assets/svg/icons/exclamation_mark.svg";
+  static String lockIcon = "assets/svg/icons/lock.svg";
+  static String shieldIcon = "assets/svg/icons/shield.svg";
+  static String questionsIcon = "assets/svg/icons/questions.svg";
+  static String headphoneIcon = "assets/svg/icons/headphone.svg";
+  static String aboutHessaIcon = "assets/svg/icons/about_hessa.svg";
   static String noOrders = "assets/svg/no_orders.svg";
   static String dependents = "assets/svg/dependents.svg";
 }

@@ -23,6 +23,14 @@ class CacheHelper {
     return _sharedPreferences.getString('token') ?? '';
   }
 
+  Future setFcmToken(String token) async {
+    await _sharedPreferences.setString('fcm_token', token);
+  }
+
+  String getFcmToken() {
+    return _sharedPreferences.getString('fcm_token') ?? '';
+  }
+
   Future setFirstTimeOpenedApp(bool firstTime) async {
     await _sharedPreferences.setBool('first_time', firstTime);
   }

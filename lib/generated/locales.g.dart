@@ -12,6 +12,7 @@ class LocaleKeys {
   LocaleKeys._();
   static const error = 'error';
   static const password = 'password';
+  static const old_password = 'old_password';
   static const hessaApp = 'hessaApp';
   static const contentRight = 'contentRight';
   static const skip = 'skip';
@@ -23,6 +24,7 @@ class LocaleKeys {
   static const email = 'email';
   static const enter_email = 'enter_email';
   static const enter_password = 'enter_password';
+  static const enter_old_password = 'enter_old_password';
   static const please_enter_email = 'please_enter_email';
   static const please_enter_valid_email = 'please_enter_valid_email';
   static const please_enter_password = 'please_enter_password';
@@ -70,6 +72,7 @@ class LocaleKeys {
   static const what_are_you_looking_for_today =
       'what_are_you_looking_for_today';
   static const notifications = 'notifications';
+  static const toggle_notifications = 'toggle_notifications';
   static const settings = 'settings';
   static const logout = 'logout';
   static const edit_profile = 'edit_profile';
@@ -139,12 +142,31 @@ class LocaleKeys {
   static const gallery = 'gallery';
   static const file = 'file';
   static const close = 'close';
+  static const personal_profile = 'personal_profile';
+  static const last_seen = 'last_seen';
+  static const personal_information = 'personal_information';
+  static const address = 'address';
+  static const wallet = 'wallet';
+  static const dependents = 'dependents';
+  static const settings_and_help = 'settings_and_help';
+  static const wanna_logout = 'wanna_logout';
+  static const no = 'no';
+  static const ok = 'ok';
+  static const technical_support = 'technical_support';
+  static const privacy_policy = 'privacy_policy';
+  static const abous_hessa = 'abous_hessa';
+  static const please_enter_old_password = 'please_enter_old_password';
+  static const new_password = 'new_password';
+  static const enter_new_password = 'enter_new_password';
+  static const confirm_new_password = 'confirm_new_password';
+  static const enter_confirmation_password = 'enter_confirmation_password';
 }
 
 class Locales {
   static const ar = {
     'error': 'حدث خطأ ما',
     'password': 'كلمة المرور',
+    'old_password': 'كلمة المرور القديمة',
     'hessaApp': 'تطبيق حصة',
     'contentRight': 'جميع الحقوق محفوظة ',
     'skip': 'تخطي',
@@ -155,6 +177,7 @@ class Locales {
     'email': 'البريد الإلكتروني',
     'enter_email': 'عنوان البريد الإلكتروني',
     'enter_password': 'أدخل كلمة المرور',
+    'enter_old_password': 'أدخل كلمة المرور القديمة',
     'please_enter_email': 'الرجاء إدخال البريد الإلكتروني',
     'please_enter_valid_email':
         'البريد الالكتروني غير صحيح , يرجى المحاولة مرة اخرى',
@@ -203,6 +226,7 @@ class Locales {
     'search': 'بحث',
     'what_are_you_looking_for_today': 'ما الذي تبحث عنه اليوم',
     'notifications': 'الإشعارات',
+    'toggle_notifications': 'تفعيل الإشعارات',
     'settings': 'الإعدادات',
     'logout': 'تسجيل الخروج',
     'edit_profile': 'تعديل الملف الشخصي',
@@ -273,5 +297,23 @@ class Locales {
     'gallery': 'المعرض',
     'file': 'ملف',
     'close': 'إغلاق',
+    'personal_profile': 'الملف الشخصي',
+    'last_seen': 'آخر ظهور',
+    'personal_information': 'البيانات الشخصية',
+    'address': 'العنوان',
+    'wallet': 'المحفظة',
+    'dependents': 'التابعين',
+    'settings_and_help': 'الإعدادات والمساعدة',
+    'wanna_logout': 'هل أنت متأكد أنك تريد تسجيل الخروج؟',
+    'no': 'لا',
+    'ok': 'موافق',
+    'technical_support': 'الدعم الفني والمساعدة',
+    'privacy_policy': 'سياسة الخصوصية',
+    'abous_hessa': 'عن حصة',
+    'please_enter_old_password': 'الرجاء إدخال كلمة المرور القديمة',
+    'new_password': 'كلمة المرور الجديدة',
+    'enter_new_password': 'أدخل كلمة المرور الجديدة',
+    'confirm_new_password': 'تأكيد كلمة المرور الجديدة',
+    'enter_confirmation_password': 'أدخل كلمة مرور مطابقة',
   };
 }

@@ -5,6 +5,7 @@ class ColorManager {
 
   static Color primary = HexColor.fromHex("#5B83F9");
   static Color primaryLight = HexColor.fromHex("#8BA7FA");
+  static Color primaryDark = HexColor.fromHex("#200E32");
   static Color accent = HexColor.fromHex("#DF040E");
   static Color accentLight = HexColor.fromHex("#FEF6ED");
   static Color greenIcon = HexColor.fromHex("#23B180");

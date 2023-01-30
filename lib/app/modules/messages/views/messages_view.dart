@@ -9,6 +9,7 @@ class MessagesView extends GetView<MessagesController> {
 
   @override
   Widget build(BuildContext context) {
+    Get.put(() => MessagesController());
     return Scaffold(
       appBar: AppBar(
         title: const Text('MessagesView'),

@@ -6,7 +6,6 @@ class BottomNavBarView extends GetView<BottomNavBarController> {
   const BottomNavBarView({Key? key}) : super(key: key);
   @override
   Widget build(BuildContext context) {
-    Get.put(BottomNavBarController());
     return Scaffold(
       body: Obx(() => controller.screens[controller.bottomNavIndex.value]),
       bottomNavigationBar: GetX<BottomNavBarController>(builder: (controller) {

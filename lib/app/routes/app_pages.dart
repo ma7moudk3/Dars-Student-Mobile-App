@@ -26,6 +26,8 @@ import '../modules/orders/bindings/orders_binding.dart';
 import '../modules/orders/views/orders_view.dart';
 import '../modules/profile/bindings/profile_binding.dart';
 import '../modules/profile/views/profile_view.dart';
+import '../modules/settings/bindings/settings_binding.dart';
+import '../modules/settings/views/settings_view.dart';
 import '../modules/sign_up/bindings/sign_up_binding.dart';
 import '../modules/sign_up/views/sign_up_view.dart';
 import '../modules/splash/bindings/splash_binding.dart';
@@ -73,7 +75,7 @@ class AppPages {
     ),
     GetPage(
       name: _Paths.LOGIN,
-      page: () => const LoginView(),
+      page: () =>  const LoginView(),
       binding: LoginBinding(),
       transition: Transition.cupertino,
       transitionDuration: const Duration(milliseconds: 400),
@@ -108,40 +110,45 @@ class AppPages {
     ),
     GetPage(
       name: _Paths.BOTTOM_NAV_BAR,
-      page: () => BottomNavBarView(),
+      page: () => const BottomNavBarView(),
       binding: BottomNavBarBinding(),
       transition: Transition.cupertino,
       transitionDuration: const Duration(milliseconds: 400),
     ),
     GetPage(
       name: _Paths.PROFILE,
-      page: () => ProfileView(),
+      page: () => const ProfileView(),
       binding: ProfileBinding(),
     ),
     GetPage(
       name: _Paths.MESSAGES,
-      page: () => MessagesView(),
+      page: () => const MessagesView(),
       binding: MessagesBinding(),
     ),
     GetPage(
       name: _Paths.ORDERS,
-      page: () => OrdersView(),
+      page: () => const OrdersView(),
       binding: OrdersBinding(),
     ),
     GetPage(
       name: _Paths.ORDER_HESSA,
-      page: () => OrderHessaView(),
+      page: () => const OrderHessaView(),
       binding: OrderHessaBinding(),
     ),
     GetPage(
       name: _Paths.DEPENDENTS,
-      page: () => DependentsView(),
+      page: () => const DependentsView(),
       binding: DependentsBinding(),
     ),
     GetPage(
       name: _Paths.ADD_NEW_DEPENDENT,
-      page: () => AddNewDependentView(),
+      page: () => const AddNewDependentView(),
       binding: AddNewDependentBinding(),
+    ),
+    GetPage(
+      name: _Paths.SETTINGS,
+      page: () => SettingsView(),
+      binding: SettingsBinding(),
     ),
   ];
 }

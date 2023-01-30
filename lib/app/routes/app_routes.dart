@@ -19,6 +19,7 @@ abstract class Routes {
   static const ORDER_HESSA = _Paths.ORDER_HESSA;
   static const DEPENDENTS = _Paths.DEPENDENTS;
   static const ADD_NEW_DEPENDENT = _Paths.ADD_NEW_DEPENDENT;
+  static const SETTINGS = _Paths.SETTINGS;
 }
 
 abstract class _Paths {
@@ -39,4 +40,5 @@ abstract class _Paths {
   static const ORDER_HESSA = '/order-hessa';
   static const DEPENDENTS = '/dependents';
   static const ADD_NEW_DEPENDENT = '/add-new-dependent';
+  static const SETTINGS = '/settings';
 }

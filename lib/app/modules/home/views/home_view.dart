@@ -8,12 +8,13 @@ import '../../../../global_presentation/global_widgets/custom_app_bar.dart';
 import '../controllers/home_controller.dart';
 import '../widgets/hessa_grid_view_item.dart';
 import '../widgets/order_widget.dart';
-import '../widgets/profile_info.dart';
+import '../widgets/home_profile_info_widget.dart';
 
 class HomeView extends GetView<HomeController> {
   const HomeView({Key? key}) : super(key: key);
   @override
   Widget build(BuildContext context) {
+    Get.put(() => HomeController());
     return Scaffold(
       appBar: const CustomAppBar(),
       body: SingleChildScrollView(
@@ -25,7 +26,7 @@ class HomeView extends GetView<HomeController> {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  const ProfileInfoWidget(),
+                  const HomeProfileInfoWidget(),
                   SizedBox(height: 25.h),
                   PrimaryText(
                     "${LocaleKeys.welcome.tr} وليد علي ..",

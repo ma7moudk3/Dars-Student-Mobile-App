@@ -33,26 +33,36 @@ class LoginView extends GetView<LoginController> {
                 KeyboardVisibilityBuilder(
                     builder: (BuildContext context, bool isKeyboardVisible) {
                   return Positioned(
-                    right: 16.w,
-                    top: isKeyboardVisible ? 55.h : 90.h,
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      mainAxisAlignment: MainAxisAlignment.start,
-                      children: [
-                        PrimaryText(
-                          LocaleKeys.do_your_sign_in,
-                          fontSize: 18.sp,
-                          fontWeight: FontWeightManager.medium,
-                          color: ColorManager.white,
-                        ),
-                        SizedBox(height: 5.h),
-                        PrimaryText(
-                          LocaleKeys.welcome_in_hessa_we_missed_you,
-                          fontSize: 14.sp,
-                          fontWeight: FontWeightManager.softLight,
-                          color: ColorManager.white,
-                        ),
-                      ],
+                    right: 16.w,  
+                    top: isKeyboardVisible ? 25.h : 75.h,
+                    child: Visibility(
+                      visible: isKeyboardVisible
+                          ? (Get.arguments != null &&
+                                  Get.arguments['isFromLoginInOrSignUp'] !=
+                                      null &&
+                                  Get.arguments['isFromLoginInOrSignUp'])
+                              ? false
+                              : true
+                          : true,
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        mainAxisAlignment: MainAxisAlignment.start,
+                        children: [
+                          PrimaryText(
+                            LocaleKeys.do_your_sign_in,
+                            fontSize: 18.sp,
+                            fontWeight: FontWeightManager.medium,
+                            color: ColorManager.white,
+                          ),
+                          SizedBox(height: 5.h),
+                          PrimaryText(
+                            LocaleKeys.welcome_in_hessa_we_missed_you,
+                            fontSize: 14.sp,
+                            fontWeight: FontWeightManager.softLight,
+                            color: ColorManager.white,
+                          ),
+                        ],
+                      ),
                     ),
                   );
                 }),
@@ -62,7 +72,7 @@ class LoginView extends GetView<LoginController> {
                   child: Visibility(
                     visible: Get.arguments != null &&
                         Get.arguments['isFromLoginInOrSignUp'] != null &&
-                        Get.arguments['isFromLoginInOrSignUp'] == true,
+                        Get.arguments['isFromLoginInOrSignUp'],
                     child: Padding(
                       padding: EdgeInsets.symmetric(
                           horizontal: 16.w, vertical: 15.h),

@@ -1,20 +1,30 @@
 import 'package:get/get.dart';
+import 'package:hessa_student/app/data/cache_helper.dart';
 
 class ProfileController extends GetxController {
-  //TODO: Implement ProfileController
+  bool isNotified =
+      CacheHelper.instance.getFcmToken().isNotEmpty ? true : false;
 
-  final count = 0.obs;
-  @override
-  void onInit() {
-    super.onInit();
-  }
-
-  @override
-  void onReady() {
-    super.onReady();
+  Future<void> toggleNotifications(bool value) async {
+    isNotified = value;
+    if (isNotified) {
+      // await sendFcmToken().then((value) {
+      //   if (Get.isDialogOpen!) {
+      //     Get.back();
+      //   }
+      // });
+    } else {
+      // await FirebaseMessaging.instance.deleteToken().then((value) async {
+      //   await CacheController.instance.setFcmToken("").then((value) {
+      //     if (Get.isDialogOpen!) {
+      //       Get.back();
+      //     }
+      //   });
+      // });
+    }
+    update();
   }
 
   @override
   void onClose() {}
-  void increment() => count.value++;
 }
