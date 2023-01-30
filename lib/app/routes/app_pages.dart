@@ -10,6 +10,8 @@ import '../modules/dependents/bindings/dependents_binding.dart';
 import '../modules/dependents/views/dependents_view.dart';
 import '../modules/forgot_password/bindings/forgot_password_binding.dart';
 import '../modules/forgot_password/views/forgot_password_view.dart';
+import '../modules/hessa_teachers/bindings/hessa_teachers_binding.dart';
+import '../modules/hessa_teachers/views/hessa_teachers_view.dart';
 import '../modules/home/bindings/home_binding.dart';
 import '../modules/home/views/home_view.dart';
 import '../modules/login/bindings/login_binding.dart';
@@ -18,6 +20,8 @@ import '../modules/login_or_sign_up/bindings/login_or_sign_up_binding.dart';
 import '../modules/login_or_sign_up/views/login_or_sign_up_view.dart';
 import '../modules/messages/bindings/messages_binding.dart';
 import '../modules/messages/views/messages_view.dart';
+import '../modules/notifications/bindings/notifications_binding.dart';
+import '../modules/notifications/views/notifications_view.dart';
 import '../modules/onboarding/bindings/onboarding_binding.dart';
 import '../modules/onboarding/views/onboarding_view.dart';
 import '../modules/order_hessa/bindings/order_hessa_binding.dart';
@@ -156,6 +160,16 @@ class AppPages {
       name: _Paths.TECHNICAL_SUPPORT,
       page: () => TechnicalSupportView(),
       binding: TechnicalSupportBinding(),
+    ),
+    GetPage(
+      name: _Paths.NOTIFICATIONS,
+      page: () => NotificationsView(),
+      binding: NotificationsBinding(),
+    ),
+    GetPage(
+      name: _Paths.HESSA_TEACHERS,
+      page: () => HessaTeachersView(),
+      binding: HessaTeachersBinding(),
     ),
   ];
 }

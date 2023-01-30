@@ -43,6 +43,11 @@ class ImagesManager {
   static String questionsIcon = "assets/svg/icons/questions.svg";
   static String headphoneIcon = "assets/svg/icons/headphone.svg";
   static String aboutHessaIcon = "assets/svg/icons/about_hessa.svg";
+  static String checkIcon = "assets/svg/icons/check.svg";
+  static String wrongIcon = "assets/svg/icons/wrong.svg";
+  static String creditCardIcon = "assets/svg/icons/credit_card.svg";
+  static String smileIcon = "assets/svg/icons/smile.svg";
   static String noOrders = "assets/svg/no_orders.svg";
+  static String hessaLogo = "assets/svg/hessa_logo.svg";
   static String dependents = "assets/svg/dependents.svg";
 }

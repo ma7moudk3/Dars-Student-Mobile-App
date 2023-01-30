@@ -1,4 +1,3 @@
-import 'dart:developer';
 
 import 'package:hessa_student/app/constants/exports.dart';
 import 'package:hessa_student/app/routes/app_pages.dart';
@@ -61,7 +60,7 @@ class HomeView extends GetView<HomeController> {
                         imagePath: ImagesManager.teachersIcon,
                         title: LocaleKeys.hessa_teachers.tr,
                         onTap: () async {
-                          log('hessa_teachers');
+                          await Get.toNamed(Routes.HESSA_TEACHERS);
                         },
                         iconBackgroundColor: ColorManager.yellow,
                       ),

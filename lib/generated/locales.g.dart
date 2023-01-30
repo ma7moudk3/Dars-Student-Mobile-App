@@ -163,6 +163,7 @@ class LocaleKeys {
   static const do_not_hesitate_to_contact_us = 'do_not_hesitate_to_contact_us';
   static const send = 'send';
   static const message_content = 'message_content';
+  static const you_should_login = 'you_should_login';
   static const how_can_we_help_you = 'how_can_we_help_you';
   static const privacy_policy = 'privacy_policy';
   static const abous_hessa = 'abous_hessa';
@@ -339,6 +340,7 @@ class Locales {
         'لا تتردد في التواصل معنا للحصول على المساعدة',
     'send': 'إرسال',
     'message_content': 'نص الرسالة',
+    'you_should_login': '! يجب عليك تسجيل الدخول',
     'how_can_we_help_you': 'كيف يمكننا مساعدتك؟',
     'privacy_policy': 'سياسة الخصوصية',
     'abous_hessa': 'عن حصة',

@@ -21,6 +21,8 @@ abstract class Routes {
   static const ADD_NEW_DEPENDENT = _Paths.ADD_NEW_DEPENDENT;
   static const SETTINGS = _Paths.SETTINGS;
   static const TECHNICAL_SUPPORT = _Paths.TECHNICAL_SUPPORT;
+  static const NOTIFICATIONS = _Paths.NOTIFICATIONS;
+  static const HESSA_TEACHERS = _Paths.HESSA_TEACHERS;
 }
 
 abstract class _Paths {
@@ -43,4 +45,6 @@ abstract class _Paths {
   static const ADD_NEW_DEPENDENT = '/add-new-dependent';
   static const SETTINGS = '/settings';
   static const TECHNICAL_SUPPORT = '/technical-support';
+  static const NOTIFICATIONS = '/notifications';
+  static const HESSA_TEACHERS = '/hessa-teachers';
 }

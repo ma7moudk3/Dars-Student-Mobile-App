@@ -1,3 +1,5 @@
+import 'package:hessa_student/app/routes/app_pages.dart';
+
 import '../../app/constants/exports.dart';
 import '../../generated/locales.g.dart';
 
@@ -37,7 +39,11 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
               SizedBox(width: 20.w),
-              leading ?? SvgPicture.asset(ImagesManager.notificationIcon),
+              leading ??
+                  GestureDetector(
+                    onTap: () async => await Get.toNamed(Routes.NOTIFICATIONS),
+                    child: SvgPicture.asset(ImagesManager.notificationIcon),
+                  ),
               const Spacer(),
               PrimaryText(
                 title ?? LocaleKeys.home,
