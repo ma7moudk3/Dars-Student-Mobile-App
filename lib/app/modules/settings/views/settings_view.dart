@@ -53,7 +53,7 @@ class SettingsView extends GetView<SettingsController> {
                     ),
                   ),
                   const ChangePasswordBottomSheetContent(),
-                );
+                ).whenComplete(() => controller.clearData());
               },
             ),
             moreDivider(),

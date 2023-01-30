@@ -31,6 +31,14 @@ class ProfileController extends GetxController {
     update();
   }
 
+  void clearData() {
+    areaController.clear();
+    currentAddressController.clear();
+    areaFocusNode.unfocus();
+    currentAddressFocusNode.unfocus();
+    update();
+  }
+
   String? validateArea(String? area) {
     String pattern = r'^[0-9]+$';
     RegExp regExp = RegExp(pattern);

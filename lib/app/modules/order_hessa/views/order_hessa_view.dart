@@ -38,7 +38,7 @@ class OrderHessaView extends GetView<OrderHessaController> {
             children: [
               SizedBox(height: 26.h),
               Padding(
-                padding: EdgeInsets.only(left: 16.w, right: 16.w, bottom: 20.h),
+                padding: EdgeInsets.only(left: 16.w, right: 16.w, bottom: 30.h),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [

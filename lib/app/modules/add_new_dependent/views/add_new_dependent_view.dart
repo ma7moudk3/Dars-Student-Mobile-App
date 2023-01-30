@@ -121,6 +121,7 @@ class AddNewDependentView extends GetView<AddNewDependentController> {
         );
       }
     }
+
     return Scaffold(
       appBar: CustomAppBar(
         title: LocaleKeys.add_dependent,
@@ -634,7 +635,8 @@ class AddNewDependentView extends GetView<AddNewDependentController> {
               ),
               SizedBox(height: 25.h),
               Padding(
-                padding: EdgeInsets.only(left: 16.w, right: 16.w, bottom: 20.h),
+                padding: EdgeInsets.only(
+                    left: 16.w, right: 16.w, bottom: Get.height * 0.08.h),
                 child: PrimaryButton(
                   onPressed: () async {
                     if (controller.formKey.currentState!.validate()) {

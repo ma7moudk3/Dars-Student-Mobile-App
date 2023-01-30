@@ -99,7 +99,7 @@ class ProfileView extends GetView<ProfileController> {
                           ),
                         ),
                         const ChangeAddressBottomSheetContent(),
-                      );
+                      ).whenComplete(() => controller.clearData());
                     },
                   ),
                   moreDivider(),

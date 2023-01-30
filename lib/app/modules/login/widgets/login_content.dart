@@ -79,6 +79,8 @@ class LoginContent extends GetView<LoginController> {
                         if (internetStatus == true) {
                           log('logged in');
                           // await controller.login();
+                          await Get.toNamed(
+                              Routes.BOTTOM_NAV_BAR); // for testing
                         } else {
                           await Get.toNamed(Routes.CONNECTION_FAILED);
                         }
@@ -145,6 +147,8 @@ class LoginContent extends GetView<LoginController> {
                         if (internetStatus == true) {
                           log('logged in');
                           // await controller.login();
+                          await Get.toNamed(
+                              Routes.BOTTOM_NAV_BAR); // for testing
                         } else {
                           await Get.toNamed(Routes.CONNECTION_FAILED);
                         }
