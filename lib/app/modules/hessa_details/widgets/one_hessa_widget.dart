@@ -151,114 +151,211 @@ class OneHessaWidget extends GetView<HessaDetailsController> {
                 physics: const NeverScrollableScrollPhysics(),
                 shrinkWrap: true,
                 itemBuilder: (BuildContext context, int index) {
-                  return Container(
-                    width: Get.width,
-                    padding: EdgeInsets.symmetric(
-                      horizontal: 16.w,
-                      vertical: 10.h,
-                    ),
-                    margin: EdgeInsets.only(bottom: 15.h),
-                    decoration: BoxDecoration(
-                      color: ColorManager.white,
-                      borderRadius: BorderRadius.circular(14.0),
-                      boxShadow: const [
-                        BoxShadow(
-                          color: Color(0x1a000000),
-                          offset: Offset(0, 1),
-                          blurRadius: 8,
+                  return GestureDetector(
+                    onTap: () async {
+                      await Get.bottomSheet(
+                        backgroundColor: ColorManager.white,
+                        isScrollControlled: true,
+                        shape: const RoundedRectangleBorder(
+                          borderRadius: BorderRadius.only(
+                            topLeft: Radius.circular(20),
+                            topRight: Radius.circular(20),
+                          ),
                         ),
-                      ],
-                    ),
-                    child: Padding(
-                      padding: const EdgeInsets.all(5.0),
-                      child: Column(
-                        children: [
-                          Row(
-                            crossAxisAlignment: CrossAxisAlignment.end,
+                        Padding(
+                          padding: EdgeInsets.symmetric(
+                            horizontal: 5.w,
+                            vertical: 20.h,
+                          ),
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.center,
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            mainAxisSize: MainAxisSize.min,
                             children: [
+                              Center(
+                                child: Container(
+                                  width: 26.w,
+                                  height: 6.h,
+                                  decoration: BoxDecoration(
+                                    borderRadius: BorderRadius.circular(15),
+                                    color: ColorManager.borderColor3,
+                                  ),
+                                ),
+                              ),
+                              SizedBox(height: 20.h),
                               Container(
-                                width: 50.w,
-                                height: 50.h,
+                                width: 58.w,
+                                height: 65.h,
                                 decoration: BoxDecoration(
                                   image: DecorationImage(
                                     image: AssetImage(ImagesManager.avatar),
                                     fit: BoxFit.cover,
                                   ),
-                                  border: Border.all(
-                                    width: 1,
-                                    color: ColorManager.primary,
-                                  ),
                                   borderRadius: BorderRadius.circular(20),
                                 ),
                               ),
-                              SizedBox(width: 10.w),
-                              Expanded(
-                                child: Column(
+                              SizedBox(height: 5.h),
+                              PrimaryText(
+                                'محمد عبد الله',
+                                fontSize: 14.sp,
+                                fontWeight: FontWeightManager.softLight,
+                              ),
+                              PrimaryText(
+                                'نابلس - القدس',
+                                fontSize: 14.sp,
+                                color: ColorManager.fontColor7,
+                                fontWeight: FontWeightManager.softLight,
+                              ),
+                              SizedBox(height: 20.h),
+                              Padding(
+                                padding: EdgeInsets.symmetric(horizontal: 20.w),
+                                child: Row(
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceBetween,
                                   children: [
-                                    Row(
-                                      mainAxisSize: MainAxisSize.min,
-                                      mainAxisAlignment: MainAxisAlignment.end,
-                                      children: [
-                                        PrimaryText(
-                                          "سارة محمد",
-                                          color: ColorManager.fontColor,
-                                        ),
-                                        const Spacer(),
-                                        Row(
-                                          mainAxisSize: MainAxisSize.min,
-                                          mainAxisAlignment:
-                                              MainAxisAlignment.end,
-                                          children: [
-                                            Icon(
-                                              Icons.star,
-                                              color: ColorManager.orange,
-                                              size: 14.sp,
-                                            ),
-                                            SizedBox(
-                                              width: 40.w,
-                                              child: PrimaryText(
-                                                "4.5",
-                                                color: ColorManager.fontColor,
-                                                fontSize: 12.sp,
-                                                maxLines: 1,
-                                                overflow: TextOverflow.ellipsis,
-                                              ),
-                                            ),
-                                          ],
-                                        ),
-                                      ],
+                                    PrimaryButton(
+                                      width: 265.w,
+                                      onPressed: () => Get.back(),
+                                      title: LocaleKeys.approve_teacher.tr,
                                     ),
-                                    SizedBox(height: 5.h),
-                                    Row(
-                                      mainAxisSize: MainAxisSize.min,
-                                      mainAxisAlignment: MainAxisAlignment.end,
-                                      children: [
-                                        PrimaryText(
-                                          ["رياضيات", "علوم", "فيزياء"]
-                                              .map((String subject) =>
-                                                  subject.toString())
-                                              .join(", "),
-                                          color: ColorManager.primary,
-                                          fontWeight:
-                                              FontWeightManager.softLight,
-                                          fontSize: 11.sp,
+                                    GestureDetector(
+                                      onTap: () async {},
+                                      child: Container(
+                                        width: 48.w,
+                                        height: 50.h,
+                                        decoration: BoxDecoration(
+                                          color: ColorManager.yellow,
+                                          borderRadius:
+                                              BorderRadius.circular(15),
                                         ),
-                                        const Spacer(),
-                                        PrimaryText(
-                                          "مدرسة العلمين",
-                                          color: ColorManager.fontColor7,
-                                          fontSize: 12.sp,
-                                          maxLines: 1,
-                                          overflow: TextOverflow.ellipsis,
+                                        child: Center(
+                                          child: SvgPicture.asset(
+                                            ImagesManager.messagingIcon,
+                                            color: ColorManager.white,
+                                          ),
                                         ),
-                                      ],
+                                      ),
                                     ),
                                   ],
                                 ),
                               ),
                             ],
                           ),
+                        ),
+                      );
+                    },
+                    child: Container(
+                      width: Get.width,
+                      padding: EdgeInsets.symmetric(
+                        horizontal: 16.w,
+                        vertical: 10.h,
+                      ),
+                      margin: EdgeInsets.only(bottom: 15.h),
+                      decoration: BoxDecoration(
+                        color: ColorManager.white,
+                        borderRadius: BorderRadius.circular(14.0),
+                        boxShadow: const [
+                          BoxShadow(
+                            color: Color(0x1a000000),
+                            offset: Offset(0, 1),
+                            blurRadius: 8,
+                          ),
                         ],
+                      ),
+                      child: Padding(
+                        padding: const EdgeInsets.all(5.0),
+                        child: Column(
+                          children: [
+                            Row(
+                              crossAxisAlignment: CrossAxisAlignment.end,
+                              children: [
+                                Container(
+                                  width: 50.w,
+                                  height: 50.h,
+                                  decoration: BoxDecoration(
+                                    image: DecorationImage(
+                                      image: AssetImage(ImagesManager.avatar),
+                                      fit: BoxFit.cover,
+                                    ),
+                                    border: Border.all(
+                                      width: 1,
+                                      color: ColorManager.primary,
+                                    ),
+                                    borderRadius: BorderRadius.circular(20),
+                                  ),
+                                ),
+                                SizedBox(width: 10.w),
+                                Expanded(
+                                  child: Column(
+                                    children: [
+                                      Row(
+                                        mainAxisSize: MainAxisSize.min,
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.end,
+                                        children: [
+                                          PrimaryText(
+                                            "سارة محمد",
+                                            color: ColorManager.fontColor,
+                                          ),
+                                          const Spacer(),
+                                          Row(
+                                            mainAxisSize: MainAxisSize.min,
+                                            mainAxisAlignment:
+                                                MainAxisAlignment.end,
+                                            children: [
+                                              Icon(
+                                                Icons.star,
+                                                color: ColorManager.orange,
+                                                size: 14.sp,
+                                              ),
+                                              SizedBox(
+                                                width: 40.w,
+                                                child: PrimaryText(
+                                                  "4.5",
+                                                  color: ColorManager.fontColor,
+                                                  fontSize: 12.sp,
+                                                  maxLines: 1,
+                                                  overflow:
+                                                      TextOverflow.ellipsis,
+                                                ),
+                                              ),
+                                            ],
+                                          ),
+                                        ],
+                                      ),
+                                      SizedBox(height: 5.h),
+                                      Row(
+                                        mainAxisSize: MainAxisSize.min,
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.end,
+                                        children: [
+                                          PrimaryText(
+                                            ["رياضيات", "علوم", "فيزياء"]
+                                                .map((String subject) =>
+                                                    subject.toString())
+                                                .join(", "),
+                                            color: ColorManager.primary,
+                                            fontWeight:
+                                                FontWeightManager.softLight,
+                                            fontSize: 11.sp,
+                                          ),
+                                          const Spacer(),
+                                          PrimaryText(
+                                            "مدرسة العلمين",
+                                            color: ColorManager.fontColor7,
+                                            fontSize: 12.sp,
+                                            maxLines: 1,
+                                            overflow: TextOverflow.ellipsis,
+                                          ),
+                                        ],
+                                      ),
+                                    ],
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ],
+                        ),
                       ),
                     ),
                   );

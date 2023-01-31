@@ -193,6 +193,7 @@ class LocaleKeys {
   static const cancel_hessa = 'cancel_hessa';
   static const hessa_started = 'hessa_started';
   static const intersted_teachers = 'intersted_teachers';
+  static const approve_teacher = 'approve_teacher';
 }
 
 class Locales {
@@ -382,5 +383,6 @@ class Locales {
     'cancel_hessa': 'إلغاء الحصة',
     'hessa_started': 'بدأت الحصة',
     'intersted_teachers': 'مدرسين مهتمين بتقديم الحصة',
+    'approve_teacher': 'اعتماد المدرّس',
   };
 }

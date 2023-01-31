@@ -177,5 +177,6 @@
     "teacher": "المدرس",
     "cancel_hessa": "إلغاء الحصة",
     "hessa_started": "بدأت الحصة",
-    "intersted_teachers": "مدرسين مهتمين بتقديم الحصة"
+    "intersted_teachers": "مدرسين مهتمين بتقديم الحصة",
+    "approve_teacher" : "اعتماد المدرّس"
 }
