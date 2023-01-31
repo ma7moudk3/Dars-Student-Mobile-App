@@ -10,6 +10,8 @@ import '../modules/dependents/bindings/dependents_binding.dart';
 import '../modules/dependents/views/dependents_view.dart';
 import '../modules/forgot_password/bindings/forgot_password_binding.dart';
 import '../modules/forgot_password/views/forgot_password_view.dart';
+import '../modules/hessa_details/bindings/hessa_details_binding.dart';
+import '../modules/hessa_details/views/hessa_details_view.dart';
 import '../modules/hessa_teachers/bindings/hessa_teachers_binding.dart';
 import '../modules/hessa_teachers/views/hessa_teachers_view.dart';
 import '../modules/home/bindings/home_binding.dart';
@@ -38,6 +40,8 @@ import '../modules/splash/bindings/splash_binding.dart';
 import '../modules/splash/views/splash_view.dart';
 import '../modules/static_page/bindings/static_page_binding.dart';
 import '../modules/static_page/views/static_page_view.dart';
+import '../modules/teacher_details/bindings/teacher_details_binding.dart';
+import '../modules/teacher_details/views/teacher_details_view.dart';
 import '../modules/technical_support/bindings/technical_support_binding.dart';
 import '../modules/technical_support/views/technical_support_view.dart';
 
@@ -125,51 +129,85 @@ class AppPages {
       name: _Paths.PROFILE,
       page: () => const ProfileView(),
       binding: ProfileBinding(),
+      transition: Transition.cupertino,
+      transitionDuration: const Duration(milliseconds: 400),
     ),
     GetPage(
       name: _Paths.MESSAGES,
       page: () => const MessagesView(),
       binding: MessagesBinding(),
+      transition: Transition.cupertino,
+      transitionDuration: const Duration(milliseconds: 400),
     ),
     GetPage(
       name: _Paths.ORDERS,
       page: () => const OrdersView(),
       binding: OrdersBinding(),
+      transition: Transition.cupertino,
+      transitionDuration: const Duration(milliseconds: 400),
     ),
     GetPage(
       name: _Paths.ORDER_HESSA,
       page: () => const OrderHessaView(),
       binding: OrderHessaBinding(),
+      transition: Transition.cupertino,
+      transitionDuration: const Duration(milliseconds: 400),
     ),
     GetPage(
       name: _Paths.DEPENDENTS,
       page: () => const DependentsView(),
       binding: DependentsBinding(),
+      transition: Transition.cupertino,
+      transitionDuration: const Duration(milliseconds: 400),
     ),
     GetPage(
       name: _Paths.ADD_NEW_DEPENDENT,
       page: () => const AddNewDependentView(),
       binding: AddNewDependentBinding(),
+      transition: Transition.cupertino,
+      transitionDuration: const Duration(milliseconds: 400),
     ),
     GetPage(
       name: _Paths.SETTINGS,
-      page: () => SettingsView(),
+      page: () => const SettingsView(),
       binding: SettingsBinding(),
+      transition: Transition.cupertino,
+      transitionDuration: const Duration(milliseconds: 400),
     ),
     GetPage(
       name: _Paths.TECHNICAL_SUPPORT,
-      page: () => TechnicalSupportView(),
+      page: () => const TechnicalSupportView(),
       binding: TechnicalSupportBinding(),
+      transition: Transition.cupertino,
+      transitionDuration: const Duration(milliseconds: 400),
     ),
     GetPage(
       name: _Paths.NOTIFICATIONS,
-      page: () => NotificationsView(),
+      page: () => const NotificationsView(),
       binding: NotificationsBinding(),
+      transition: Transition.cupertino,
+      transitionDuration: const Duration(milliseconds: 400),
     ),
     GetPage(
       name: _Paths.HESSA_TEACHERS,
       page: () => HessaTeachersView(),
       binding: HessaTeachersBinding(),
+      transition: Transition.cupertino,
+      transitionDuration: const Duration(milliseconds: 400),
+    ),
+    GetPage(
+      name: _Paths.HESSA_DETAILS,
+      page: () => const HessaDetailsView(),
+      binding: HessaDetailsBinding(),
+      transition: Transition.cupertino,
+      transitionDuration: const Duration(milliseconds: 400),
+    ),
+    GetPage(
+      name: _Paths.TEACHER_DETAILS,
+      page: () => TeacherDetailsView(),
+      binding: TeacherDetailsBinding(),
+      transition: Transition.cupertino,
+      transitionDuration: const Duration(milliseconds: 400),
     ),
   ];
 }

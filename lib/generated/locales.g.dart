@@ -181,6 +181,18 @@ class LocaleKeys {
   static const enter_current_address = 'enter_current_address';
   static const please_enter_message_content = 'please_enter_message_content';
   static const check_message_content = 'check_message_content';
+  static const hessa_details = 'hessa_details';
+  static const studying_hour = 'studying_hour';
+  static const hessa = 'hessa';
+  static const timing = 'timing';
+  static const date = 'date';
+  static const session = 'session';
+  static const hessa_type = 'hessa_type';
+  static const participant_students = 'participant_students';
+  static const teacher = 'teacher';
+  static const cancel_hessa = 'cancel_hessa';
+  static const hessa_started = 'hessa_started';
+  static const intersted_teachers = 'intersted_teachers';
 }
 
 class Locales {
@@ -358,5 +370,17 @@ class Locales {
     'enter_current_address': 'اكتب العنوان الحالي',
     'please_enter_message_content': 'الرجاء إدخال نص الرسالة ...',
     'check_message_content': 'تحقق من نص الرسالة المُدخل',
+    'hessa_details': 'تفاصيل الحصة',
+    'studying_hour': 'ساعة تدريسية',
+    'hessa': 'الحصة',
+    'timing': 'التوقيت',
+    'date': 'التاريخ',
+    'session': 'الجلسة',
+    'hessa_type': 'نوع الحصة',
+    'participant_students': 'الطلاب المشاركين',
+    'teacher': 'المدرس',
+    'cancel_hessa': 'إلغاء الحصة',
+    'hessa_started': 'بدأت الحصة',
+    'intersted_teachers': 'مدرسين مهتمين بتقديم الحصة',
   };
 }

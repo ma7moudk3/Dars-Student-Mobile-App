@@ -39,6 +39,7 @@ class ColorManager {
   static Color darkBlue = HexColor.fromHex("#6AB8FC");
   static Color blue = HexColor.fromHex("#53C1EF");
   static Color blue2 = HexColor.fromHex("#57D2D6");
+  static Color blueLight = HexColor.fromHex("#EEF2FF");
   static Color white = HexColor.fromHex("#FFFFFF");
   static Color transparent = Colors.transparent;
   static Color error = HexColor.fromHex("#E94125");

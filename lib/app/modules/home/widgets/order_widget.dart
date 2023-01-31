@@ -1,5 +1,6 @@
-import 'dart:developer';
+import 'package:hessa_student/app/routes/app_pages.dart';
 
+import '../../../constants/constants.dart';
 import '../../../constants/exports.dart';
 import '../controllers/home_controller.dart';
 
@@ -16,7 +17,9 @@ class OrderWidget extends GetView<HomeController> {
     return GestureDetector(
       behavior: HitTestBehavior.opaque,
       onTap: () async {
-        log('order clicked');
+        await Get.toNamed(Routes.HESSA_DETAILS, arguments: {
+          "hessa_type": HessaType.oneHessa, // temporary
+        });
       },
       child: Container(
         height: 186.h,
@@ -53,8 +56,8 @@ class OrderWidget extends GetView<HomeController> {
                       fontWeight: FontWeightManager.light,
                     ),
                     PrimaryText(
-                      'مارس',
-                      fontSize: 14.sp,
+                      'ديسمبر',
+                      fontSize: 12.5.sp,
                       color: ColorManager.primary,
                       fontWeight: FontWeightManager.softLight,
                     ),

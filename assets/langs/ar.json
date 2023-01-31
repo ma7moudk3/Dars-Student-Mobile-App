@@ -165,5 +165,17 @@
     "current_address": "العنوان الحالي",
     "enter_current_address": "اكتب العنوان الحالي",
     "please_enter_message_content": "الرجاء إدخال نص الرسالة ...",
-    "check_message_content": "تحقق من نص الرسالة المُدخل"
+    "check_message_content": "تحقق من نص الرسالة المُدخل",
+    "hessa_details": "تفاصيل الحصة",
+    "studying_hour": "ساعة تدريسية",
+    "hessa": "الحصة",
+    "timing": "التوقيت",
+    "date": "التاريخ",
+    "session": "الجلسة",
+    "hessa_type": "نوع الحصة",
+    "participant_students": "الطلاب المشاركين",
+    "teacher": "المدرس",
+    "cancel_hessa": "إلغاء الحصة",
+    "hessa_started": "بدأت الحصة",
+    "intersted_teachers": "مدرسين مهتمين بتقديم الحصة"
 }

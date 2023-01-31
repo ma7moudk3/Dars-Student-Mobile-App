@@ -47,6 +47,15 @@ class ImagesManager {
   static String wrongIcon = "assets/svg/icons/wrong.svg";
   static String creditCardIcon = "assets/svg/icons/credit_card.svg";
   static String smileIcon = "assets/svg/icons/smile.svg";
+  static String lumbPencilIcon = "assets/svg/icons/lumb_pencil.svg";
+  static String clockIocn = "assets/svg/icons/clock.svg";
+  static String tvIcon = "assets/svg/icons/tv.svg";
+  static String boardIcon = "assets/svg/icons/board.svg";
+  static String addressIcon = "assets/svg/icons/address.svg";
+  static String timerIcon = "assets/svg/icons/timer.svg";
+  static String heartIcon = "assets/svg/icons/heart.svg";
+  static String messagingIcon = "assets/svg/icons/messaging.svg";
+  static String qualificationIcon = "assets/svg/icons/qualification.svg";
   static String noOrders = "assets/svg/no_orders.svg";
   static String hessaLogo = "assets/svg/hessa_logo.svg";
   static String dependents = "assets/svg/dependents.svg";

@@ -9,6 +9,7 @@ class PrimaryButton extends StatelessWidget {
   final FontWeight fontWeight;
   final BorderSide? borderSide;
   final BorderRadiusGeometry? borderRadius;
+  final bool isDisabled;
   const PrimaryButton({
     Key? key,
     required this.onPressed,
@@ -16,6 +17,7 @@ class PrimaryButton extends StatelessWidget {
     this.color,
     this.width,
     this.height,
+    this.isDisabled = false,
     this.borderSide,
     this.borderRadius,
     this.fontSize = 13,
@@ -29,21 +31,27 @@ class PrimaryButton extends StatelessWidget {
       width: width ?? Get.width,
       height: height ?? 55.h,
       child: ElevatedButton(
-        onPressed: onPressed,
+        onPressed: isDisabled ? null : onPressed,
         style: ElevatedButton.styleFrom(
           splashFactory: NoSplash.splashFactory,
-          backgroundColor: color ?? (ColorManager.primary),
+          backgroundColor: isDisabled
+              ? ColorManager.fontColor6.withOpacity(0.4)
+              : (color ?? (ColorManager.primary)),
           shape: RoundedRectangleBorder(
             borderRadius: borderRadius ?? BorderRadius.circular(15.h),
-            side: borderSide ??
-                BorderSide(color: ColorManager.primary, width: 1.5),
+            side: isDisabled
+                ? BorderSide.none
+                : (borderSide ??
+                    BorderSide(color: ColorManager.primary, width: 1.5)),
           ),
+          foregroundColor:
+              isDisabled ? ColorManager.fontColor6.withOpacity(0.4) : null,
           elevation: 0,
         ),
         child: PrimaryText(
           title!,
           fontSize: fontSize!.sp,
-          color: fontColor,
+          color: isDisabled ? ColorManager.fontColor7 : fontColor,
           fontWeight: fontWeight,
         ),
       ),
