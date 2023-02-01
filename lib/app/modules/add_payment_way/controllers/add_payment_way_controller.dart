@@ -22,6 +22,10 @@ class AddPaymentWayController extends GetxController {
     cardNumberController = TextEditingController();
     cardExpiryDateController = TextEditingController();
     cardCvvController = TextEditingController();
+    cardHolderNameController.addListener(() => update());
+    cardNumberController.addListener(() => update());
+    cardExpiryDateController.addListener(() => update());
+    cardCvvController.addListener(() => update());
     super.onInit();
   }
 
@@ -108,7 +112,7 @@ class AddPaymentWayController extends GetxController {
     if (cardNumber == null || cardNumber.isEmpty) {
       return LocaleKeys.please_enter_card_number.tr;
     } else if (cardNumber.length < 19) {
-      return LocaleKeys.card_number_should_be_19_digits.tr;
+      return LocaleKeys.card_number_should_be_16_digits.tr;
     }
     return null;
   }

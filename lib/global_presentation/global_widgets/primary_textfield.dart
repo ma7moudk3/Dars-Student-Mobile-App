@@ -123,7 +123,9 @@ class PrimaryTextField extends StatelessWidget {
                 : ifReadOnlyTextColor ?? ColorManager.fontColor,
             fontSize: fontSize,
             fontFamily: FontConstants.fontFamily,
+            
           ),
+          textDirection: textDirection,
           keyboardType: keyboardType,
           onTap: onTap ?? () {},
           onChanged: onChanged,

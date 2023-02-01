@@ -134,8 +134,8 @@ class LocaleKeys {
   static const card_holder = 'card_holder';
   static const write_card_holder = 'write_card_holder';
   static const add = 'add';
-  static const card_number_should_be_19_digits =
-      'card_number_should_be_19_digits';
+  static const card_number_should_be_16_digits =
+      'card_number_should_be_16_digits';
   static const please_enter_card_number = 'please_enter_card_number';
   static const check_card_number = 'check_card_number';
   static const write_down_you_notes = 'write_down_you_notes';
@@ -389,7 +389,7 @@ class Locales {
     'card_holder': 'اسم صاحب البطاقة',
     'write_card_holder': 'اكتب اسم صاحب البطاقة',
     'add': 'إضافة',
-    'card_number_should_be_19_digits': 'رقم البطاقة يجب أن يكون 19 رقم',
+    'card_number_should_be_16_digits': 'رقم البطاقة يجب أن يكون 16 رقم',
     'please_enter_card_number': 'الرجاء إدخال رقم البطاقة',
     'check_card_number': 'الرجاء التأكد من رقم البطاقة',
     'write_down_you_notes': 'قم بتدوين ملاحظاتك هنا',

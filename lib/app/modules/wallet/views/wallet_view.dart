@@ -51,18 +51,14 @@ class WalletView extends GetView<WalletController> {
                       imagePath: ImagesManager.moneyIcon,
                       title: LocaleKeys.paid_amounts.tr,
                       cash: 400,
-                      onTap: () async {
-                        await Get.toNamed(Routes.ORDER_HESSA);
-                      },
+                      onTap: () async {},
                       iconBackgroundColor: ColorManager.yellow,
                     ),
                     WalletGridViewItem(
                       imagePath: ImagesManager.walletIcon,
                       title: LocaleKeys.my_hessa_balance.tr,
                       cash: 950.6,
-                      onTap: () async {
-                        await Get.toNamed(Routes.HESSA_TEACHERS);
-                      },
+                      onTap: () async {},
                       iconBackgroundColor: ColorManager.primary,
                     ),
                   ],

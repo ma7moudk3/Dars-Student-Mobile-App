@@ -14,11 +14,13 @@ class PrimaryText extends StatelessWidget {
   final double height;
   final double? letterSpacing;
   final bool hasSpecificColor;
+  final TextDirection? textDirection;
   PrimaryText(
     this.text, {
     Key? key,
     this.fontSize = 13,
     this.color,
+    this.textDirection,
     this.fontWeight = FontWeightManager.light,
     this.textAlign,
     this.overflow = TextOverflow.visible,
@@ -48,9 +50,10 @@ class PrimaryText extends StatelessWidget {
       textAlign: textAlign,
       overflow: overflow,
       maxLines: maxLines,
-      textDirection: Get.locale == const Locale("ar")
-          ? TextDirection.rtl
-          : TextDirection.ltr,
+      textDirection: textDirection ??
+          (Get.locale == const Locale("ar")
+              ? TextDirection.rtl
+              : TextDirection.ltr),
       style: style,
     );
   }

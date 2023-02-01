@@ -4,7 +4,14 @@ import '../controllers/wallet_controller.dart';
 class VisaCardWidget extends GetView<WalletController> {
   const VisaCardWidget({
     super.key,
+    this.isAddCard = false,
+    this.cardHolderName,
+    this.cardNumber,
+    this.expDate,
   });
+
+  final bool isAddCard;
+  final String? cardNumber, cardHolderName, expDate;
 
   @override
   Widget build(BuildContext context) {
@@ -45,9 +52,12 @@ class VisaCardWidget extends GetView<WalletController> {
               ],
             ),
             PrimaryText(
-              "3384 4003 4885 2334",
+              cardNumber != null && cardNumber!.isNotEmpty
+                  ? cardNumber!
+                  : (isAddCard ? "XXXX XXXX XXXX XXXX" : "3384 4003 4885 2334"),
               fontSize: 18.sp,
               fontWeight: FontWeightManager.softLight,
+              textDirection: TextDirection.ltr,
             ),
             Column(
               crossAxisAlignment: CrossAxisAlignment.start,
@@ -75,12 +85,18 @@ class VisaCardWidget extends GetView<WalletController> {
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     PrimaryText(
-                      "Waleed .A",
+                      cardHolderName != null && cardHolderName!.isNotEmpty
+                          ? cardHolderName!
+                          : (isAddCard ? "Some Name" : "Waleed .A"),
                       fontSize: 16.sp,
                       fontWeight: FontWeightManager.softLight,
                     ),
                     PrimaryText(
-                      "${DateTime.now().month}/${DateTime.now().year}",
+                      expDate != null && expDate!.isNotEmpty
+                          ? expDate!
+                          : (isAddCard
+                              ? "MM/YY"
+                              : "${DateTime.now().month}/${DateTime.now().year}"),
                       fontSize: 16.sp,
                       fontWeight: FontWeightManager.softLight,
                     ),

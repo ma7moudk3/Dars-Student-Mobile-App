@@ -46,7 +46,12 @@ class AddPaymentWayView extends GetView<AddPaymentWayController> {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   SizedBox(height: 20.h),
-                  const VisaCardWidget(),
+                  VisaCardWidget(
+                    isAddCard: true,
+                    cardHolderName: controller.cardHolderNameController.text,
+                    cardNumber: controller.cardNumberController.text,
+                    expDate: controller.cardExpiryDateController.text,
+                  ),
                   SizedBox(height: 30.h),
                   PrimaryTextField(
                     fontSize: 14.sp,
@@ -122,10 +127,9 @@ class AddPaymentWayView extends GetView<AddPaymentWayController> {
                       LengthLimitingTextInputFormatter(19),
                       CardNumberFormatter(),
                     ],
-                    textInputAction: TextInputAction.done,
-                    textDirection: TextDirection.ltr,
                     controller: controller.cardNumberController,
                     title: LocaleKeys.card_number.tr,
+                    textDirection: TextDirection.ltr,
                     borderRadius: BorderRadius.circular(14),
                     titleFontWeight: FontWeightManager.softLight,
                     onTap: () async {
