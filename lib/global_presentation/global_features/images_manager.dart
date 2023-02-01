@@ -9,8 +9,7 @@ class ImagesManager {
       "assets/images/login_or_sign_up/login_background3.png";
   static String loginBackground = "assets/images/login_background.png";
   static String signUpBackground = "assets/images/sign_up_background.png";
-  static String noInernetConnection =
-      "assets/images/connection_failed.png";
+  static String noInernetConnection = "assets/images/connection_failed.png";
   static String googleLogo = "assets/svg/login/google_logo.svg";
   static String facebookLogo = "assets/svg/login/facebook_logo.svg";
   static String appleLogo = "assets/svg/login/apple_logo.svg";
@@ -60,7 +59,8 @@ class ImagesManager {
   static String heartIcon = "assets/svg/icons/heart.svg";
   static String messagingIcon = "assets/svg/icons/messaging.svg";
   static String starFilledIcon = "assets/svg/icons/star_filled.svg";
-  static String starFilledRoundedIcon = "assets/svg/icons/star_filled_rounded.svg";
+  static String starFilledRoundedIcon =
+      "assets/svg/icons/star_filled_rounded.svg";
   static String starUnfilledIcon = "assets/svg/icons/star_unfilled.svg";
   static String cancelHessaIcon = "assets/svg/icons/cancel.svg";
   static String filterIcon = "assets/svg/icons/filter.svg";
@@ -70,6 +70,9 @@ class ImagesManager {
   static String noOrders = "assets/svg/no_orders.svg";
   static String teacherRating = "assets/svg/teacher_rating.svg";
   static String hessaLogo = "assets/svg/hessa_logo.svg";
+  static String whatsappIcon = "assets/svg/icons/whatsapp.svg";
+  static String instagramIcon = "assets/svg/icons/instagram.svg";
+  static String facebookIcon = "assets/svg/icons/facebook.svg";
   static String descendingIcon = "assets/svg/icons/descending.svg";
   static String dependents = "assets/svg/dependents.svg";
 }

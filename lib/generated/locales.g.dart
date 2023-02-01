@@ -166,7 +166,7 @@ class LocaleKeys {
   static const you_should_login = 'you_should_login';
   static const how_can_we_help_you = 'how_can_we_help_you';
   static const privacy_policy = 'privacy_policy';
-  static const abous_hessa = 'abous_hessa';
+  static const about_hessa = 'about_hessa';
   static const please_enter_old_password = 'please_enter_old_password';
   static const new_password = 'new_password';
   static const enter_new_password = 'enter_new_password';
@@ -188,6 +188,9 @@ class LocaleKeys {
   static const date = 'date';
   static const session = 'session';
   static const hessa_type = 'hessa_type';
+  static const follow_us = 'follow_us';
+  static const teachers_list = 'teachers_list';
+  static const explore_hessa_teachers = 'explore_hessa_teachers';
   static const participant_students = 'participant_students';
   static const teacher = 'teacher';
   static const cancel_hessa = 'cancel_hessa';
@@ -218,6 +221,9 @@ class LocaleKeys {
   static const rate = 'rate';
   static const how_was_your_experience_with_the_teacher =
       'how_was_your_experience_with_the_teacher';
+  static const you_cannot_cancel_this_hessa = 'you_cannot_cancel_this_hessa';
+  static const due_to_the_starting_time_of_the_hessa =
+      'due_to_the_starting_time_of_the_hessa';
   static const to_help_you_please_enter_canceling_hessa_reason =
       'to_help_you_please_enter_canceling_hessa_reason';
 }
@@ -382,7 +388,7 @@ class Locales {
     'you_should_login': '! يجب عليك تسجيل الدخول',
     'how_can_we_help_you': 'كيف يمكننا مساعدتك؟',
     'privacy_policy': 'سياسة الخصوصية',
-    'abous_hessa': 'عن حصة',
+    'about_hessa': 'عن حصة',
     'please_enter_old_password': 'الرجاء إدخال كلمة المرور القديمة',
     'new_password': 'كلمة المرور الجديدة',
     'enter_new_password': 'أدخل كلمة المرور الجديدة',
@@ -404,6 +410,9 @@ class Locales {
     'date': 'التاريخ',
     'session': 'الجلسة',
     'hessa_type': 'نوع الحصة',
+    'follow_us': 'تابعنا',
+    'teachers_list': 'قائمة المعلمين',
+    'explore_hessa_teachers': 'استكشف معلمين حصة',
     'participant_students': 'الطلاب المشاركين',
     'teacher': 'المدرس',
     'cancel_hessa': 'إلغاء الحصة',
@@ -433,6 +442,9 @@ class Locales {
     'teacher_rating': 'تقييم المدرس',
     'rate': 'تقييم',
     'how_was_your_experience_with_the_teacher': 'كيف كانت تجربتك مع المدرس؟',
+    'you_cannot_cancel_this_hessa': 'لا يمكنك إلغاء هذه الحصة!',
+    'due_to_the_starting_time_of_the_hessa':
+        'لا يمكنك الغاء الحصة و ذلك لاقتراب بدء موعد الحصة',
     'to_help_you_please_enter_canceling_hessa_reason':
         'لمساعدتك يرجى أن توضح لنا سبب الغاء الحصة',
   };

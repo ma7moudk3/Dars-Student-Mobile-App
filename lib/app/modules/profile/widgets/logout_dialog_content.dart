@@ -14,7 +14,7 @@ class LogoutDialogContent extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Material(
-      borderRadius: BorderRadius.circular(20),
+      borderRadius: BorderRadius.circular(15),
       color: ColorManager.white,
       child: Padding(
         padding: EdgeInsets.symmetric(vertical: 30.h),

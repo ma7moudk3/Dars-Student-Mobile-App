@@ -1,4 +1,3 @@
-
 import 'package:hessa_student/app/constants/exports.dart';
 import 'package:hessa_student/app/modules/hessa_details/widgets/one_hessa_widget.dart';
 import '../../../../generated/locales.g.dart';
@@ -34,7 +33,7 @@ class HessaDetailsView extends GetView<HessaDetailsController> {
           if (controller.hessaType == HessaType.oneHessa) {
             return const OneHessaWidget();
           } else {
-            // Should be HessaType.studyingPackage
+            // HessaType.studyingPackage
             return const StudyingPackageWidget();
           }
         }),

@@ -96,7 +96,7 @@ class TeacherDetailsView extends GetView<TeacherDetailsController> {
                 children: [
                   PrimaryButton(
                     width: 280.w,
-                    onPressed: () => Get.back(),
+                    onPressed: () {},
                     title: LocaleKeys.approve_teacher.tr,
                   ),
                   GestureDetector(

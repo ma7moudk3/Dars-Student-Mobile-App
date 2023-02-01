@@ -90,11 +90,11 @@ class SettingsView extends GetView<SettingsController> {
             MoreItem(
               textSettingsColor: ColorManager.fontColor2,
               settingsColor: ColorManager.white,
-              title: LocaleKeys.abous_hessa.tr,
+              title: LocaleKeys.about_hessa.tr,
               iconPath: ImagesManager.aboutHessaIcon,
               color: ColorManager.primaryLight.withOpacity(0.15),
               iconColor: ColorManager.primaryLight,
-              onTap: () async => log('About Hessa'),
+              onTap: () async => await Get.toNamed(Routes.ABOUT_HESSA),
             ),
           ],
         ),

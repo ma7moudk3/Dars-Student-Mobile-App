@@ -1,5 +1,7 @@
 import 'package:get/get.dart';
 
+import '../modules/about_hessa/bindings/about_hessa_binding.dart';
+import '../modules/about_hessa/views/about_hessa_view.dart';
 import '../modules/add_new_dependent/bindings/add_new_dependent_binding.dart';
 import '../modules/add_new_dependent/views/add_new_dependent_view.dart';
 import '../modules/bottom_nav_bar/bindings/bottom_nav_bar_binding.dart';
@@ -208,6 +210,11 @@ class AppPages {
       binding: TeacherDetailsBinding(),
       transition: Transition.cupertino,
       transitionDuration: const Duration(milliseconds: 400),
+    ),
+    GetPage(
+      name: _Paths.ABOUT_HESSA,
+      page: () => AboutHessaView(),
+      binding: AboutHessaBinding(),
     ),
   ];
 }

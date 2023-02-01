@@ -25,6 +25,7 @@ abstract class Routes {
   static const HESSA_TEACHERS = _Paths.HESSA_TEACHERS;
   static const HESSA_DETAILS = _Paths.HESSA_DETAILS;
   static const TEACHER_DETAILS = _Paths.TEACHER_DETAILS;
+  static const ABOUT_HESSA = _Paths.ABOUT_HESSA;
 }
 
 abstract class _Paths {
@@ -51,4 +52,5 @@ abstract class _Paths {
   static const HESSA_TEACHERS = '/hessa-teachers';
   static const HESSA_DETAILS = '/hessa-details';
   static const TEACHER_DETAILS = '/teacher-details';
+  static const ABOUT_HESSA = '/about-hessa';
 }

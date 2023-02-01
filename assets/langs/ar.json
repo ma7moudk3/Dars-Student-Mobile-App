@@ -151,7 +151,7 @@
     "you_should_login": "! يجب عليك تسجيل الدخول",
     "how_can_we_help_you": "كيف يمكننا مساعدتك؟",
     "privacy_policy": "سياسة الخصوصية",
-    "abous_hessa": "عن حصة",
+    "about_hessa": "عن حصة",
     "please_enter_old_password": "الرجاء إدخال كلمة المرور القديمة",
     "new_password": "كلمة المرور الجديدة",
     "enter_new_password": "أدخل كلمة المرور الجديدة",
@@ -173,6 +173,9 @@
     "date": "التاريخ",
     "session": "الجلسة",
     "hessa_type": "نوع الحصة",
+    "follow_us": "تابعنا",
+    "teachers_list": "قائمة المعلمين",
+    "explore_hessa_teachers": "استكشف معلمين حصة",
     "participant_students": "الطلاب المشاركين",
     "teacher": "المدرس",
     "cancel_hessa": "إلغاء الحصة",
@@ -202,5 +205,7 @@
     "teacher_rating": "تقييم المدرس",
     "rate": "تقييم",
     "how_was_your_experience_with_the_teacher": "كيف كانت تجربتك مع المدرس؟",
+    "you_cannot_cancel_this_hessa": "لا يمكنك إلغاء هذه الحصة!",
+    "due_to_the_starting_time_of_the_hessa": "لا يمكنك الغاء الحصة و ذلك لاقتراب بدء موعد الحصة",
     "to_help_you_please_enter_canceling_hessa_reason": "لمساعدتك يرجى أن توضح لنا سبب الغاء الحصة"
 }

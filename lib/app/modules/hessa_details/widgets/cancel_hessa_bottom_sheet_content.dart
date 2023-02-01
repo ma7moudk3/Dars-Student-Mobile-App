@@ -2,6 +2,7 @@ import 'package:hessa_student/app/modules/hessa_details/controllers/hessa_detail
 
 import '../../../../generated/locales.g.dart';
 import '../../../constants/exports.dart';
+import 'you_cant_cancel_hessa_dialog_content.dart';
 
 class CancelHessaBottomSheetContent extends GetView<HessaDetailsController> {
   const CancelHessaBottomSheetContent({
@@ -36,7 +37,6 @@ class CancelHessaBottomSheetContent extends GetView<HessaDetailsController> {
                   left: 16.w,
                   right: 16.w,
                   top: 16.h,
-                  bottom: 16.h,
                 ),
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(10),
@@ -74,8 +74,8 @@ class CancelHessaBottomSheetContent extends GetView<HessaDetailsController> {
                           fontSize: 14.sp,
                           multiLines: true,
                           maxLines: 6,
-                          contentPadding:
-                              const EdgeInsets.fromLTRB(20.0, 20.0, 20.0, 10.0),
+                          contentPadding: const EdgeInsets.fromLTRB(
+                              20.0, 20.0, 20.0, 10.0),
                           controller: controller.cancelReasonController,
                           title: "",
                           borderRadius: BorderRadius.circular(14),
@@ -88,7 +88,8 @@ class CancelHessaBottomSheetContent extends GetView<HessaDetailsController> {
                           ),
                           focusedBorder: OutlineInputBorder(
                             borderRadius: BorderRadius.circular(14),
-                            borderSide: BorderSide(color: ColorManager.primary),
+                            borderSide:
+                                BorderSide(color: ColorManager.primary),
                           ),
                           errorBorder: OutlineInputBorder(
                             borderRadius: BorderRadius.circular(14),
@@ -110,10 +111,29 @@ class CancelHessaBottomSheetContent extends GetView<HessaDetailsController> {
                               onPressed: () async {
                                 if (controller.formKey.currentState!
                                     .validate()) {
-                                  controller.clearData();
-
-                                  Get.back(); // currently
                                   // await controller.cancelHessa();
+                                  // or currently you can't cancel hessa dialog
+                                  Get.back();
+                                  await Get.dialog(
+                                    Container(
+                                      color:
+                                          ColorManager.black.withOpacity(0.1),
+                                      height: 230.h,
+                                      width: 312.w,
+                                      child: Center(
+                                        child: Container(
+                                          width: Get.width,
+                                          margin: EdgeInsets.symmetric(
+                                            horizontal: 18.w,
+                                          ),
+                                          child:
+                                              const CannotCancelHessaDialogContent(),
+                                        ),
+                                      ),
+                                    ),
+                                    transitionCurve: Curves.easeInOutBack,
+                                    barrierDismissible: true,
+                                  );
                                 }
                               },
                               title: LocaleKeys.cofirm_canceling.tr,
