@@ -37,6 +37,25 @@ class HessaDetailsController extends GetxController {
   HessaType hessaType = Get.arguments != null
       ? Get.arguments["hessa_type"] ?? HessaType.oneHessa
       : HessaType.oneHessa;
+  final GlobalKey<FormState> formKey = GlobalKey<FormState>();
+  late TextEditingController cancelReasonController;
+
+  @override
+  void onInit() {
+    cancelReasonController = TextEditingController();
+    super.onInit();
+  }
+
+  @override
+  void dispose() {
+    cancelReasonController.dispose();
+    super.dispose();
+  }
+
+  void clearData() {
+    cancelReasonController.clear();
+    update();
+  }
 
   @override
   void onClose() {}

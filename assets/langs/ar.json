@@ -178,5 +178,16 @@
     "cancel_hessa": "إلغاء الحصة",
     "hessa_started": "بدأت الحصة",
     "intersted_teachers": "مدرسين مهتمين بتقديم الحصة",
-    "approve_teacher" : "اعتماد المدرّس"
+    "approve_teacher": "اعتماد المدرّس",
+    "confirm_canceling_hessa": "تأكيد الغاء الحصة",
+    "canceling_hessa_reason": "سبب الغاء الحصة",
+    "cofirm_canceling": "تأكيد الإلغاء",
+    "back": "رجوع",
+    "search_for_teacher": "ابحث عن مدرس",
+    "search_filter": "فلتر البحث",
+    "choose": "اختر",
+    "academic_learning": "تعليم الأكاديمي",
+    "skill": "مهارة",
+    "choose_skill" : "اختر المهارة",
+    "to_help_you_please_enter_canceling_hessa_reason": "لمساعدتك يرجى أن توضح لنا سبب الغاء الحصة"
 }

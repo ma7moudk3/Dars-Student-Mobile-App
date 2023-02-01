@@ -68,7 +68,7 @@ class HessaDateAndTimePickerWidget extends GetView<OrderHessaController> {
                       horizontal: 16.w,
                       vertical: 16.h,
                     ),
-                    height: Get.height * 0.5.h,
+                    height: (Get.height * 0.5).h,
                     child: SfDateRangePicker(
                       onSelectionChanged: (DateRangePickerSelectionChangedArgs
                           dateRangePickerSelectionChangedArgs) {
@@ -92,7 +92,7 @@ class HessaDateAndTimePickerWidget extends GetView<OrderHessaController> {
                       selectionRadius: 20,
                       selectionTextStyle: TextStyle(
                         color: ColorManager.primary,
-                        fontSize: (14).sp,
+                        fontSize: 14.sp,
                         fontWeight: FontWeightManager.softLight,
                         fontFamily: FontConstants.fontFamily,
                       ),
@@ -104,27 +104,27 @@ class HessaDateAndTimePickerWidget extends GetView<OrderHessaController> {
                         textAlign: TextAlign.center,
                         textStyle: TextStyle(
                           color: ColorManager.fontColor,
-                          fontSize: (14).sp,
+                          fontSize: 14.sp,
                           fontWeight: FontWeightManager.light,
                           fontFamily: FontConstants.fontFamily,
                         ),
                       ),
                       rangeTextStyle: TextStyle(
                         color: ColorManager.fontColor,
-                        fontSize: (14).sp,
+                        fontSize: 14.sp,
                         fontWeight: FontWeightManager.light,
                         fontFamily: FontConstants.fontFamily,
                       ),
                       monthCellStyle: DateRangePickerMonthCellStyle(
                         textStyle: TextStyle(
                           color: ColorManager.fontColor,
-                          fontSize: (14).sp,
+                          fontSize: 14.sp,
                           fontWeight: FontWeightManager.softLight,
                           fontFamily: FontConstants.fontFamily,
                         ),
                         todayTextStyle: TextStyle(
                           color: ColorManager.fontColor,
-                          fontSize: (14).sp,
+                          fontSize: 14.sp,
                           fontWeight: FontWeightManager.softLight,
                           fontFamily: FontConstants.fontFamily,
                         ),
@@ -134,7 +134,7 @@ class HessaDateAndTimePickerWidget extends GetView<OrderHessaController> {
                         ),
                         disabledDatesTextStyle: TextStyle(
                           color: ColorManager.grey,
-                          fontSize: (14).sp,
+                          fontSize: 14.sp,
                           fontWeight: FontWeightManager.softLight,
                           fontFamily: FontConstants.fontFamily,
                         ),
@@ -207,13 +207,13 @@ class HessaDateAndTimePickerWidget extends GetView<OrderHessaController> {
                       titlePadding: 20,
                       textStyle: TextStyle(
                         color: ColorManager.fontColor5,
-                        fontSize: (14).sp,
+                        fontSize: 14.sp,
                         fontWeight: FontWeightManager.softLight,
                         fontFamily: FontConstants.fontFamily,
                       ),
                       activeTextStyle: TextStyle(
                         color: ColorManager.white,
-                        fontSize: (14).sp,
+                        fontSize: 14.sp,
                         fontWeight: FontWeightManager.bold,
                         fontFamily: FontConstants.fontFamily,
                       ),

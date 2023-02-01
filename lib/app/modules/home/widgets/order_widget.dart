@@ -1,3 +1,4 @@
+import 'package:hessa_student/app/core/helper_functions.dart';
 import 'package:hessa_student/app/routes/app_pages.dart';
 
 import '../../../constants/constants.dart';
@@ -18,7 +19,8 @@ class OrderWidget extends GetView<HomeController> {
       behavior: HitTestBehavior.opaque,
       onTap: () async {
         await Get.toNamed(Routes.HESSA_DETAILS, arguments: {
-          "hessa_type": HessaType.oneHessa, // temporary
+          "hessa_type": [HessaType.oneHessa, HessaType.studyingPackage]
+              .randomItem(), // temporarily :)
         });
       },
       child: Container(

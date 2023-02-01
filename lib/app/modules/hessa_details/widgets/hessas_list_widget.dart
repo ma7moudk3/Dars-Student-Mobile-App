@@ -16,7 +16,6 @@ class HessasListWidget extends GetView<HessaDetailsController> {
     return ListView.builder(
         itemCount: 2,
         shrinkWrap: true,
-        addAutomaticKeepAlives: true,
         physics: const NeverScrollableScrollPhysics(),
         itemBuilder: (BuildContext context, int index) {
           return Column(
@@ -89,7 +88,10 @@ class HessasListWidget extends GetView<HessaDetailsController> {
                   );
                 }),
               ),
-              SizedBox(height: 20.h),
+              Visibility(
+                visible: index != 1, // index != length - 1 (last index)
+                child: SizedBox(height: 20.h),
+              ),
             ],
           );
         });

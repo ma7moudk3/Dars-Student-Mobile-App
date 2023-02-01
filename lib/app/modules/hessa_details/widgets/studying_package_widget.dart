@@ -28,7 +28,7 @@ class StudyingPackageWidget extends GetView<HessaDetailsController> {
               Container(
                 padding: EdgeInsets.symmetric(horizontal: 16.w, vertical: 16.h),
                 width: Get.width,
-                height: 226.h,
+                height: 230.h,
                 decoration: BoxDecoration(
                   color: const Color(0xfffafafa),
                   borderRadius: BorderRadius.circular(14.0),
@@ -220,7 +220,7 @@ class StudyingPackageWidget extends GetView<HessaDetailsController> {
                 isDisabled: true, // to be changed later
                 title: LocaleKeys.cancel_hessa.tr,
               ),
-              SizedBox(height: 25.h),
+              SizedBox(height: 65.h),
             ],
           ),
         ),

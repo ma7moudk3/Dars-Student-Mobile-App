@@ -194,6 +194,18 @@ class LocaleKeys {
   static const hessa_started = 'hessa_started';
   static const intersted_teachers = 'intersted_teachers';
   static const approve_teacher = 'approve_teacher';
+  static const confirm_canceling_hessa = 'confirm_canceling_hessa';
+  static const canceling_hessa_reason = 'canceling_hessa_reason';
+  static const cofirm_canceling = 'cofirm_canceling';
+  static const back = 'back';
+  static const search_for_teacher = 'search_for_teacher';
+  static const search_filter = 'search_filter';
+  static const choose = 'choose';
+  static const academic_learning = 'academic_learning';
+  static const skill = 'skill';
+  static const choose_skill = 'choose_skill';
+  static const to_help_you_please_enter_canceling_hessa_reason =
+      'to_help_you_please_enter_canceling_hessa_reason';
 }
 
 class Locales {
@@ -384,5 +396,17 @@ class Locales {
     'hessa_started': 'بدأت الحصة',
     'intersted_teachers': 'مدرسين مهتمين بتقديم الحصة',
     'approve_teacher': 'اعتماد المدرّس',
+    'confirm_canceling_hessa': 'تأكيد الغاء الحصة',
+    'canceling_hessa_reason': 'سبب الغاء الحصة',
+    'cofirm_canceling': 'تأكيد الإلغاء',
+    'back': 'رجوع',
+    'search_for_teacher': 'ابحث عن مدرس',
+    'search_filter': 'فلتر البحث',
+    'choose': 'اختر',
+    'academic_learning': 'تعليم الأكاديمي',
+    'skill': 'مهارة',
+    'choose_skill': 'اختر المهارة',
+    'to_help_you_please_enter_canceling_hessa_reason':
+        'لمساعدتك يرجى أن توضح لنا سبب الغاء الحصة',
   };
 }

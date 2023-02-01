@@ -4,6 +4,7 @@ import '../../../../generated/locales.g.dart';
 import '../../../constants/exports.dart';
 import '../../../core/helper_functions.dart';
 import '../controllers/hessa_details_controller.dart';
+import 'cancel_hessa_bottom_sheet_content.dart';
 import 'hessa_property_widget.dart';
 
 class OneHessaWidget extends GetView<HessaDetailsController> {
@@ -368,12 +369,23 @@ class OneHessaWidget extends GetView<HessaDetailsController> {
           padding: EdgeInsets.only(
             left: 16.w,
             right: 16.w,
-            bottom: 25.h,
-            top: 16.h,
+            bottom: Get.height * 0.075.h,
           ),
           child: PrimaryButton(
-            onPressed: () {},
-            isDisabled: true, // to be changed later
+            onPressed: () async {
+              await Get.bottomSheet(
+                isScrollControlled: true,
+                shape: const RoundedRectangleBorder(
+                  borderRadius: BorderRadius.only(
+                    topLeft: Radius.circular(20),
+                    topRight: Radius.circular(20),
+                  ),
+                ),
+                const CancelHessaBottomSheetContent(),
+                backgroundColor: ColorManager.white,
+              ).whenComplete(() => controller.clearData());
+            },
+            // isDisabled: true, // to be changed later
             title: LocaleKeys.cancel_hessa.tr,
           ),
         ),

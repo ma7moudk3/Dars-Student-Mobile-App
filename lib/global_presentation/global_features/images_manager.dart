@@ -55,6 +55,8 @@ class ImagesManager {
   static String timerIcon = "assets/svg/icons/timer.svg";
   static String heartIcon = "assets/svg/icons/heart.svg";
   static String messagingIcon = "assets/svg/icons/messaging.svg";
+  static String cancelHessaIcon = "assets/svg/icons/cancel.svg";
+  static String filterIcon = "assets/svg/icons/filter.svg";
   static String qualificationIcon = "assets/svg/icons/qualification.svg";
   static String noOrders = "assets/svg/no_orders.svg";
   static String hessaLogo = "assets/svg/hessa_logo.svg";

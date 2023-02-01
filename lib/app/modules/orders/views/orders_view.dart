@@ -1,4 +1,3 @@
-import 'package:hessa_student/app/constants/constants.dart';
 
 import '../../../../generated/locales.g.dart';
 import '../../../../global_presentation/global_widgets/custom_app_bar.dart';
@@ -19,9 +18,7 @@ class OrdersView extends GetView<OrdersController> {
         action: GestureDetector(
           behavior: HitTestBehavior.opaque,
           onTap: () async {
-            await Get.toNamed(Routes.HESSA_DETAILS, arguments: {
-              "hessa_type": HessaType.studyingPackage, // temporary
-            });
+            await Get.toNamed(Routes.ORDER_HESSA);
           },
           child: Container(
             width: 20.w,

@@ -1,10 +1,10 @@
-import 'dart:developer';
+import 'dart:developer' as developer;
 import 'dart:io';
+import 'dart:math';
 
 import 'package:intl/intl.dart';
 
 import '../constants/exports.dart';
-
 
 String formatTimeOfDay(DateTime? dateAndTime) {
   final format = DateFormat.jm();
@@ -26,15 +26,23 @@ Future<bool> checkInternetConnection({required int timeout}) async {
       return true;
     }
   } on SocketException catch (_) {
-    log('not connected');
+    developer.log('not connected');
     print('not connected: $_');
   }
   return false;
 }
 
- Divider moreDivider() {
-    return Divider(
-      thickness: 1.3,
-      color: ColorManager.grey5.withOpacity(0.1),
-    );
+Divider moreDivider(
+    {double thickness = 1.3, double? height, double opacity = 0.1}) {
+  return Divider(
+    thickness: thickness,
+    height: height,
+    color: ColorManager.grey5.withOpacity(opacity),
+  );
+}
+
+extension RandomListItem<T> on List<T> {
+  T randomItem() {
+    return this[Random().nextInt(length)];
   }
+}
