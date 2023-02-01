@@ -19,9 +19,11 @@ class SettingsController extends GetxController {
   String? validateOldPassword(String? oldPasswordFieldValue) {
     if (oldPasswordFieldValue == null || oldPasswordFieldValue.isEmpty) {
       oldPasswordErrorIconColor = Colors.red;
+      update();
       return LocaleKeys.please_enter_old_password.tr;
     } else if (oldPasswordFieldValue.length < 6) {
       oldPasswordErrorIconColor = Colors.red;
+      update();
       return LocaleKeys.password_must_be_at_least_6_characters.tr;
     } else {
       oldPasswordErrorIconColor = null;
@@ -33,9 +35,11 @@ class SettingsController extends GetxController {
   String? validateNewPassword(String? passwordFieldValue) {
     if (passwordFieldValue == null || passwordFieldValue.isEmpty) {
       newPasswordErrorIconColor = Colors.red;
+      update();
       return LocaleKeys.please_enter_password.tr;
     } else if (passwordFieldValue.length < 6) {
       newPasswordErrorIconColor = Colors.red;
+      update();
       return LocaleKeys.password_must_be_at_least_6_characters.tr;
     } else {
       newPasswordErrorIconColor = null;
@@ -48,9 +52,11 @@ class SettingsController extends GetxController {
     if (confirmPasswordFieldValue == null ||
         confirmPasswordFieldValue.isEmpty) {
       confirmPasswordErrorIconColor = Colors.red;
+    update();
       return LocaleKeys.please_enter_confirm_password.tr;
     } else if (confirmPasswordFieldValue != newPasswordController.text) {
       confirmPasswordErrorIconColor = Colors.red;
+    update();
       return LocaleKeys.check_confirm_password.tr;
     } else {
       newPasswordErrorIconColor = null;

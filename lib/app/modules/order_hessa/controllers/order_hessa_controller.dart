@@ -157,15 +157,18 @@ class OrderHessaController extends GetxController {
           DateFormat("dd MMMM yyyy", "ar_SA").parse(hessaDate);
       if (hessaDate.isEmpty) {
         hessaDateErrorIconColor = Colors.red;
+        update();
         return LocaleKeys.please_enter_hessa_date.tr;
       } else if (!tempDateTime.isAtMaximumYears(1)) {
         hessaDateErrorIconColor = Colors.red;
+        update();
         return LocaleKeys.check_hessa_date.tr;
       } else {
         hessaDateErrorIconColor = null;
       }
     } else {
       hessaDateErrorIconColor = Colors.red;
+      update();
       return LocaleKeys.please_enter_hessa_date.tr;
     }
     update();
@@ -177,6 +180,7 @@ class OrderHessaController extends GetxController {
       hessaTimeErrorIconColor = null;
     } else {
       hessaTimeErrorIconColor = Colors.red;
+      update();
       return LocaleKeys.please_enter_hessa_date.tr;
     }
     update();
@@ -188,6 +192,7 @@ class OrderHessaController extends GetxController {
     RegExp regExp = RegExp(pattern);
     if (teacherName == null || teacherName.isEmpty) {
       teacherNameErrorIconColor = Colors.red;
+      update();
       return LocaleKeys.please_enter_teacher_name.tr;
       // } else if (!regExp.hasMatch(fullName)) {
       // if (!fullName.contains(" ")) {
@@ -197,6 +202,7 @@ class OrderHessaController extends GetxController {
       // }
     } else if (regExp.hasMatch(teacherName)) {
       teacherNameErrorIconColor = Colors.red;
+      update();
       return LocaleKeys.check_teacher_name.tr;
     } else {
       teacherNameErrorIconColor = null;

@@ -6,8 +6,7 @@ class TechnicalSupportController extends GetxController {
   late TextEditingController fullNameController,
       messageController,
       emailController;
-  FocusNode fullNameFocusNode = FocusNode(),
-      emailFocusNode = FocusNode();
+  FocusNode fullNameFocusNode = FocusNode(), emailFocusNode = FocusNode();
   Color? fullNameIconErrorColor, emailIconErrorColor;
 
   String? validateFullName(String? fullName) {
@@ -15,9 +14,11 @@ class TechnicalSupportController extends GetxController {
     RegExp regExp = RegExp(pattern);
     if (fullName == null || fullName.isEmpty) {
       fullNameIconErrorColor = Colors.red;
+      update();
       return LocaleKeys.please_enter_fullname.tr;
     } else if (regExp.hasMatch(fullName)) {
       fullNameIconErrorColor = Colors.red;
+      update();
       return LocaleKeys.check_your_full_name.tr;
     } else {
       fullNameIconErrorColor = null;
@@ -25,7 +26,7 @@ class TechnicalSupportController extends GetxController {
     update();
     return null;
   }
-  
+
   String? validateMessage(String? message) {
     String pattern = r'^[0-9]+$';
     RegExp regExp = RegExp(pattern);
@@ -41,9 +42,11 @@ class TechnicalSupportController extends GetxController {
   String? validateEmail(String? email) {
     if (email == null || email.isEmpty) {
       emailIconErrorColor = Colors.red;
+      update();
       return LocaleKeys.please_enter_email.tr;
     } else if (email.isEmail == false) {
       emailIconErrorColor = Colors.red;
+      update();
       return LocaleKeys.please_enter_valid_email.tr;
     } else {
       emailIconErrorColor = null;

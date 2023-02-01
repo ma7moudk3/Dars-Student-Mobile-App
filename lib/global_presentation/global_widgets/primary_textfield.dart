@@ -1,4 +1,5 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
+import 'package:flutter/services.dart';
 import 'package:hessa_student/app/constants/exports.dart';
 
 import '../global_features/theme_manager.dart';
@@ -12,11 +13,13 @@ class PrimaryTextField extends StatelessWidget {
   final Widget? suffixIcon;
   final VoidCallback? onTap;
   final Color? cursorColor;
+  final String? counterText;
   final Color? ifReadOnlyTextColor;
   final BorderRadius? borderRadius;
   final BorderSide borderSide;
   final InputBorder? disabledBorder;
   final InputBorder? enabledBorder;
+  final List<TextInputFormatter>? inputFormatters;
   final int? maxLines;
   final InputBorder? focusedBorder;
   final InputBorder? errorBorder;
@@ -33,6 +36,9 @@ class PrimaryTextField extends StatelessWidget {
   final int? maxLength;
   final void Function(String)? onChanged;
   final EdgeInsetsGeometry? contentPadding;
+  final TextDirection? textDirection;
+  final TextInputAction? textInputAction;
+
   const PrimaryTextField({
     Key? key,
     required this.hintText,
@@ -40,13 +46,17 @@ class PrimaryTextField extends StatelessWidget {
     this.validator,
     this.keyboardType = TextInputType.text,
     this.cursorColor,
+    this.textInputAction,
     this.suffixIconConstraints,
+    this.inputFormatters,
     this.prefixIconConstraints,
     this.ifReadOnlyTextColor,
+    this.textDirection,
     this.prefixIcon,
     this.maxLines,
     this.borderRadius,
     this.suffixIcon,
+    this.counterText,
     this.fontSize,
     this.titleFontSize = 13,
     this.contentPadding,
@@ -97,8 +107,10 @@ class PrimaryTextField extends StatelessWidget {
             : const SizedBox.shrink(),
         TextFormField(
           controller: controller,
+          inputFormatters: inputFormatters,
           readOnly: readOnly,
           focusNode: focusNode,
+          textInputAction: textInputAction,
           maxLength: maxLength,
           maxLines: multiLines! ? (maxLines ?? 10) : 1,
           cursorColor: cursorColor ??
@@ -141,11 +153,15 @@ class PrimaryTextField extends StatelessWidget {
                     borderSide: borderSide),
             hoverColor: ColorManager.primary,
             errorStyle: errorStyle,
+            counterText: counterText,
             hintText: hintText!.isNotEmpty ? hintText!.tr : '',
             hintStyle: hintStyle,
             contentPadding: contentPadding ??
                 const EdgeInsets.fromLTRB(10.0, 10.0, 20.0, 10.0),
           ),
+          textAlign: textDirection == TextDirection.rtl
+              ? TextAlign.right
+              : TextAlign.left,
           validator: validator ??
               (String? value) {
                 return null;

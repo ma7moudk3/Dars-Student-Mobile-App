@@ -82,49 +82,55 @@ class WalletView extends GetView<WalletController> {
                   children: [
                     const VisaCardWidget(),
                     SizedBox(height: 16.h),
-                    Container(
-                      width: Get.width,
-                      height: 50.h,
-                      decoration: BoxDecoration(
-                        color: ColorManager.primary,
-                        borderRadius: BorderRadius.circular(14.0),
-                        boxShadow: const [
-                          BoxShadow(
-                            color: Color(0x1a000000),
-                            offset: Offset(0, 1),
-                            blurRadius: 8,
-                          ),
-                        ],
-                      ),
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          Container(
-                            width: 20.w,
-                            height: 20.h,
-                            decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(8),
-                              border: Border.all(
-                                color: ColorManager.white,
-                                width: 2,
+                    GestureDetector(
+                      behavior: HitTestBehavior.opaque,
+                      onTap: () async {
+                        await Get.toNamed(Routes.ADD_PAYMENT_WAY);
+                      },
+                      child: Container(
+                        width: Get.width,
+                        height: 50.h,
+                        decoration: BoxDecoration(
+                          color: ColorManager.primary,
+                          borderRadius: BorderRadius.circular(14.0),
+                          boxShadow: const [
+                            BoxShadow(
+                              color: Color(0x1a000000),
+                              offset: Offset(0, 1),
+                              blurRadius: 8,
+                            ),
+                          ],
+                        ),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            Container(
+                              width: 20.w,
+                              height: 20.h,
+                              decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(8),
+                                border: Border.all(
+                                  color: ColorManager.white,
+                                  width: 2,
+                                ),
+                              ),
+                              child: Center(
+                                child: Icon(
+                                  Icons.add_rounded,
+                                  color: ColorManager.white,
+                                  size: 14,
+                                ),
                               ),
                             ),
-                            child: Center(
-                              child: Icon(
-                                Icons.add_rounded,
-                                color: ColorManager.white,
-                                size: 14,
-                              ),
+                            SizedBox(width: 12.w),
+                            PrimaryText(
+                              LocaleKeys.add_new_payment_method.tr,
+                              fontSize: 14.sp,
+                              fontWeight: FontWeightManager.softLight,
+                              color: ColorManager.white,
                             ),
-                          ),
-                          SizedBox(width: 12.w),
-                          PrimaryText(
-                            LocaleKeys.add_new_payment_method.tr,
-                            fontSize: 14.sp,
-                            fontWeight: FontWeightManager.softLight,
-                            color: ColorManager.white,
-                          ),
-                        ],
+                          ],
+                        ),
                       ),
                     ),
                   ],

@@ -65,6 +65,7 @@ class SignUpController extends GetxController {
     RegExp regExp = RegExp(pattern);
     if (fullName == null || fullName.isEmpty) {
       fullNameErrorIconColor = Colors.red;
+      update();
       return LocaleKeys.please_enter_fullname.tr;
       // } else if (!regExp.hasMatch(fullName)) {
       // if (!fullName.contains(" ")) {
@@ -74,6 +75,7 @@ class SignUpController extends GetxController {
       // }
     } else if (regExp.hasMatch(fullName)) {
       fullNameErrorIconColor = Colors.red;
+      update();
       return LocaleKeys.check_your_full_name.tr;
     } else {
       fullNameErrorIconColor = null;
@@ -85,9 +87,11 @@ class SignUpController extends GetxController {
   String? validateEmail(String? email) {
     if (email == null || email.isEmpty) {
       emailErrorIconColor = Colors.red;
+      update();
       return LocaleKeys.please_enter_email.tr;
     } else if (email.isEmail == false) {
       emailErrorIconColor = Colors.red;
+      update();
       return LocaleKeys.please_enter_valid_email.tr;
     } else {
       emailErrorIconColor = null;
@@ -99,9 +103,11 @@ class SignUpController extends GetxController {
   String? validatePassword(String? passwordFieldValue) {
     if (passwordFieldValue == null || passwordFieldValue.isEmpty) {
       passwordErrorIconColor = Colors.red;
+      update();
       return LocaleKeys.please_enter_password.tr;
     } else if (passwordFieldValue.length < 6) {
       passwordErrorIconColor = Colors.red;
+      update();
       return LocaleKeys.password_must_be_at_least_6_characters.tr;
     } else {
       passwordErrorIconColor = null;
@@ -114,9 +120,11 @@ class SignUpController extends GetxController {
     if (confirmPasswordFieldValue == null ||
         confirmPasswordFieldValue.isEmpty) {
       confimationPasswordErrorIconColor = Colors.red;
+      update();
       return LocaleKeys.please_enter_confirm_password.tr;
     } else if (confirmPasswordFieldValue != passwordController.text) {
       confimationPasswordErrorIconColor = Colors.red;
+      update();
       return LocaleKeys.check_confirm_password.tr;
     } else {
       passwordErrorIconColor = null;

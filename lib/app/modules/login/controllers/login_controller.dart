@@ -27,9 +27,11 @@ class LoginController extends GetxController {
   String? validateEmail(String? email) {
     if (email == null || email.isEmpty) {
       emailErrorIconColor = Colors.red;
+      update();
       return LocaleKeys.please_enter_email.tr;
     } else if (email.isEmail == false) {
       emailErrorIconColor = Colors.red;
+      update();
       return LocaleKeys.please_enter_valid_email.tr;
     } else {
       emailErrorIconColor = null;
@@ -41,9 +43,11 @@ class LoginController extends GetxController {
   String? validatePassword(String? passwordFieldValue) {
     if (passwordFieldValue == null || passwordFieldValue.isEmpty) {
       passwordErrorIconColor = Colors.red;
+      update();
       return LocaleKeys.please_enter_password.tr;
     } else if (passwordFieldValue.length < 6) {
       passwordErrorIconColor = Colors.red;
+      update();
       return LocaleKeys.password_must_be_at_least_6_characters.tr;
     } else {
       passwordErrorIconColor = null;

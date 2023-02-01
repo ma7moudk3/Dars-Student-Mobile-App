@@ -58,7 +58,6 @@ class AddNewDependentController extends GetxController {
       final name = result.files.single.name;
       final filePath = result.files.single.path!;
       final file = File(filePath);
-      
     }
     update();
   }
@@ -81,16 +80,19 @@ class AddNewDependentController extends GetxController {
           DateFormat("dd MMMM yyyy", "ar_SA").parse(dateOfBirth);
       if (dateOfBirth.isEmpty) {
         dateOfBirthIconErrorColor = Colors.red;
+        update();
         return LocaleKeys.please_enter_dob.tr;
       } else if (!tempDateTime.isAtLeastYearsOld(10)) {
         // at least 10 years dependent can be registered ..
         dateOfBirthIconErrorColor = Colors.red;
+        update();
         return LocaleKeys.check_dependent_dob.tr;
       } else {
         dateOfBirthIconErrorColor = null;
       }
     } else {
       dateOfBirthIconErrorColor = Colors.red;
+      update();
       return LocaleKeys.please_enter_dob.tr;
     }
     update();
@@ -115,6 +117,7 @@ class AddNewDependentController extends GetxController {
     RegExp regExp = RegExp(pattern);
     if (dependentName == null || dependentName.isEmpty) {
       nameIconErrorColor = Colors.red;
+      update();
       return LocaleKeys.please_enter_dependent_name.tr;
       // } else if (!regExp.hasMatch(fullName)) {
       // if (!fullName.contains(" ")) {
@@ -124,6 +127,7 @@ class AddNewDependentController extends GetxController {
       // }
     } else if (regExp.hasMatch(dependentName)) {
       nameIconErrorColor = Colors.red;
+      update();
       return LocaleKeys.check_dependent_name.tr;
     } else {
       nameIconErrorColor = null;

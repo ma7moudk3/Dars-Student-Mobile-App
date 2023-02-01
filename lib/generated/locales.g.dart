@@ -45,6 +45,7 @@ class LocaleKeys {
   static const remaining = 'remaining';
   static const view_all = 'view_all';
   static const add_new_payment_method = 'add_new_payment_method';
+  static const adding_new_payment_method = 'adding_new_payment_method';
   static const dont_have_an_account = 'dont_have_an_account';
   static const do_have_an_account = 'do_have_an_account';
   static const sign_up_new_account = 'sign_up_new_account';
@@ -126,7 +127,22 @@ class LocaleKeys {
   static const write_teacher_name = 'write_teacher_name';
   static const write_dependent_name = 'write_dependent_name';
   static const notes = 'notes';
+  static const card_type = 'card_type';
+  static const card_number = 'card_number';
+  static const write_card_number = 'write_card_number';
+  static const choose_card_type = 'choose_card_type';
+  static const card_holder = 'card_holder';
+  static const write_card_holder = 'write_card_holder';
+  static const add = 'add';
+  static const card_number_should_be_19_digits =
+      'card_number_should_be_19_digits';
+  static const please_enter_card_number = 'please_enter_card_number';
+  static const check_card_number = 'check_card_number';
   static const write_down_you_notes = 'write_down_you_notes';
+  static const please_enter_card_holder_name = 'please_enter_card_holder_name';
+  static const check_card_holder_name = 'check_card_holder_name';
+  static const card_holder_name_should_have_space =
+      'card_holder_name_should_have_space';
   static const choose_hessa_date = 'choose_hessa_date';
   static const choose_hessa_time = 'choose_hessa_time';
   static const submit_form = 'submit_form';
@@ -197,11 +213,19 @@ class LocaleKeys {
   static const session = 'session';
   static const hessa_type = 'hessa_type';
   static const follow_us = 'follow_us';
+  static const expiry_date = 'expiry_date';
+  static const choose_expiry_date = 'choose_expiry_date';
+  static const enter_card_expiry_date = 'enter_card_expiry_date';
+  static const expiry_month_invalid = 'expiry_month_invalid';
+  static const expiry_year_invalid = 'expiry_year_invalid';
+  static const card_has_expired = 'card_has_expired';
   static const teachers_list = 'teachers_list';
   static const explore_hessa_teachers = 'explore_hessa_teachers';
   static const participant_students = 'participant_students';
   static const teacher = 'teacher';
   static const cancel_hessa = 'cancel_hessa';
+  static const please_enter_cvv = 'please_enter_cvv';
+  static const cvv_is_invalid = 'cvv_is_invalid';
   static const hessa_started = 'hessa_started';
   static const intersted_teachers = 'intersted_teachers';
   static const approve_teacher = 'approve_teacher';
@@ -273,6 +297,7 @@ class Locales {
     'remaining': 'متبقي',
     'view_all': 'مشاهدة الكل',
     'add_new_payment_method': 'أضف طريقة دفع جديدة',
+    'adding_new_payment_method': 'إضافة طريقة دفع',
     'dont_have_an_account': 'ليس لديك حساب؟',
     'do_have_an_account': 'هل لديك حساب؟',
     'sign_up_new_account': 'تسجيل مستخدم جديد',
@@ -355,7 +380,21 @@ class Locales {
     'write_teacher_name': 'اكتب اسم المدرّس',
     'write_dependent_name': 'اكتب اسم التابع',
     'notes': 'ملاحظات',
+    'card_type': 'نوع البطاقة',
+    'card_number': 'رقم البطاقة',
+    'write_card_number': 'اكتب رقم البطاقة',
+    'choose_card_type': 'اختر نوع البطاقة',
+    'card_holder': 'اسم صاحب البطاقة',
+    'write_card_holder': 'اكتب اسم صاحب البطاقة',
+    'add': 'إضافة',
+    'card_number_should_be_19_digits': 'رقم البطاقة يجب أن يكون 19 رقم',
+    'please_enter_card_number': 'الرجاء إدخال رقم البطاقة',
+    'check_card_number': 'الرجاء التأكد من رقم البطاقة',
     'write_down_you_notes': 'قم بتدوين ملاحظاتك هنا',
+    'please_enter_card_holder_name': 'الرجاء إدخال اسم صاحب البطاقة',
+    'check_card_holder_name': 'الرجاء التأكد من اسم صاحب البطاقة',
+    'card_holder_name_should_have_space':
+        'اسم صاحب البطاقة يجب أن يحتوي على مسافة مثلاً: Ahmed Alashi',
     'choose_hessa_date': 'اختر تاريخ الحصة',
     'choose_hessa_time': 'اختر وقت الحصة',
     'submit_form': 'إرسال الطلب',
@@ -427,11 +466,19 @@ class Locales {
     'session': 'الجلسة',
     'hessa_type': 'نوع الحصة',
     'follow_us': 'تابعنا',
+    'expiry_date': 'تاريخ الانتهاء',
+    'choose_expiry_date': 'اختر تاريخ الانتهاء',
+    'enter_card_expiry_date': 'أدخل تاريخ الانتهاء',
+    'expiry_month_invalid': 'شهر الانتهاء غير صالح',
+    'expiry_year_invalid': 'سنة الانتهاء غير صالحة',
+    'card_has_expired': 'انتهت صلاحية البطاقة',
     'teachers_list': 'قائمة المعلمين',
     'explore_hessa_teachers': 'استكشف معلمين حصة',
     'participant_students': 'الطلاب المشاركين',
     'teacher': 'المدرس',
     'cancel_hessa': 'إلغاء الحصة',
+    'please_enter_cvv': 'أدخل CVV',
+    'cvv_is_invalid': 'CVV غير صالح',
     'hessa_started': 'بدأت الحصة',
     'intersted_teachers': 'مدرسين مهتمين بتقديم الحصة',
     'approve_teacher': 'اعتماد المدرّس',
