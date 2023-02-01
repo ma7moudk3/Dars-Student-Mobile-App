@@ -199,5 +199,8 @@
     "classes": "الصفوف",
     "skills": "المهارات",
     "rating_previous_hessas": "تقييم الحصص السابقة",
+    "teacher_rating": "تقييم المدرس",
+    "rate": "تقييم",
+    "how_was_your_experience_with_the_teacher": "كيف كانت تجربتك مع المدرس؟",
     "to_help_you_please_enter_canceling_hessa_reason": "لمساعدتك يرجى أن توضح لنا سبب الغاء الحصة"
 }

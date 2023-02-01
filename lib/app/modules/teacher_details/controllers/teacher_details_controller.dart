@@ -4,6 +4,8 @@ import '../../../../generated/locales.g.dart';
 import '../../../../global_presentation/global_features/images_manager.dart';
 
 class TeacherDetailsController extends GetxController {
+  int currentStar = -1;
+
   List<Map<String, dynamic>> teacherProperties = [
     {
       "icon": ImagesManager.flagIcon,
@@ -26,6 +28,11 @@ class TeacherDetailsController extends GetxController {
       "title": LocaleKeys.skill.tr,
     },
   ];
+
+  void changeCurrentStar(int value) {
+    currentStar = value;
+    update();
+  }
 
   @override
   void onClose() {}

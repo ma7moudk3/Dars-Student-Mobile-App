@@ -74,6 +74,7 @@ class ColorManager {
   static Color navy = HexColor.fromHex('#000080');
   static Color purple = HexColor.fromHex('#92AAF2');
   static Color brown = HexColor.fromHex('#FCAA6A');
+  static Color rateGrey = HexColor.fromHex('#BEC5DB');
   static Color fontColor7 = HexColor.fromHex('#BEBABA');
 
   // Dark Theme

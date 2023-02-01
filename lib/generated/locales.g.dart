@@ -214,6 +214,10 @@ class LocaleKeys {
   static const classes = 'classes';
   static const skills = 'skills';
   static const rating_previous_hessas = 'rating_previous_hessas';
+  static const teacher_rating = 'teacher_rating';
+  static const rate = 'rate';
+  static const how_was_your_experience_with_the_teacher =
+      'how_was_your_experience_with_the_teacher';
   static const to_help_you_please_enter_canceling_hessa_reason =
       'to_help_you_please_enter_canceling_hessa_reason';
 }
@@ -426,6 +430,9 @@ class Locales {
     'classes': 'الصفوف',
     'skills': 'المهارات',
     'rating_previous_hessas': 'تقييم الحصص السابقة',
+    'teacher_rating': 'تقييم المدرس',
+    'rate': 'تقييم',
+    'how_was_your_experience_with_the_teacher': 'كيف كانت تجربتك مع المدرس؟',
     'to_help_you_please_enter_canceling_hessa_reason':
         'لمساعدتك يرجى أن توضح لنا سبب الغاء الحصة',
   };

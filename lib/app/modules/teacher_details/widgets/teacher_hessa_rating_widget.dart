@@ -31,11 +31,11 @@ class TeacherHessaRating extends GetView<TeacherDetailsController> {
                         child: (5 - 4) >
                                 index // (5 - 4) is because the index start from 0 and from the left to the right
                             ? SvgPicture.asset(
-                                ImagesManager.starUnfilled,
+                                ImagesManager.starUnfilledIcon,
                                 height: 15.h,
                               )
                             : SvgPicture.asset(
-                                ImagesManager.starFilled,
+                                ImagesManager.starFilledIcon,
                                 height: 15.h,
                               ),
                       ),

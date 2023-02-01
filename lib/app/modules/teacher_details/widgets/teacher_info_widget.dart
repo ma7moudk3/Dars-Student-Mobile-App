@@ -1,5 +1,6 @@
 import '../../../constants/exports.dart';
 import '../controllers/teacher_details_controller.dart';
+import 'teacher_rating_bottom_sheet_content.dart';
 
 class TeacherInfo extends GetView<TeacherDetailsController> {
   const TeacherInfo({
@@ -57,7 +58,19 @@ class TeacherInfo extends GetView<TeacherDetailsController> {
         ),
         const Spacer(),
         GestureDetector(
-          onTap: () async {},
+          onTap: () async {
+            await Get.bottomSheet(
+              isScrollControlled: true,
+              shape: const RoundedRectangleBorder(
+                borderRadius: BorderRadius.only(
+                  topLeft: Radius.circular(20),
+                  topRight: Radius.circular(20),
+                ),
+              ),
+              backgroundColor: ColorManager.white,
+              const TeacherRatingBottomSheetContent(),
+            );
+          },
           child: Container(
             width: 48.w,
             height: 50.h,
