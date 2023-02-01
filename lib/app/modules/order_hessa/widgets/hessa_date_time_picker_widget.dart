@@ -370,6 +370,7 @@ class HessaDateAndTimePickerWidget extends GetView<OrderHessaController> {
       borderSide: BorderSide(
         color: ColorManager.primary,
       ),
+      textDirection: TextDirection.rtl,
       hintText: index == 0
           ? LocaleKeys.choose_hessa_date
           : LocaleKeys.choose_hessa_time,
