@@ -206,6 +206,14 @@ class LocaleKeys {
   static const choose_skill = 'choose_skill';
   static const search_results = 'search_results';
   static const most_requested = 'most_requested';
+  static const brief = 'brief';
+  static const about_teacher = 'about_teacher';
+  static const education_level = 'education_level';
+  static const major = 'major';
+  static const subjects = 'subjects';
+  static const classes = 'classes';
+  static const skills = 'skills';
+  static const rating_previous_hessas = 'rating_previous_hessas';
   static const to_help_you_please_enter_canceling_hessa_reason =
       'to_help_you_please_enter_canceling_hessa_reason';
 }
@@ -410,6 +418,14 @@ class Locales {
     'choose_skill': 'اختر المهارة',
     'search_results': 'نتائج البحث',
     'most_requested': 'الأكثر طلباً',
+    'brief': 'نُبذة',
+    'about_teacher': 'عن المدرس',
+    'education_level': 'المستوى التعليمي',
+    'major': 'التخصص',
+    'subjects': 'المواد',
+    'classes': 'الصفوف',
+    'skills': 'المهارات',
+    'rating_previous_hessas': 'تقييم الحصص السابقة',
     'to_help_you_please_enter_canceling_hessa_reason':
         'لمساعدتك يرجى أن توضح لنا سبب الغاء الحصة',
   };

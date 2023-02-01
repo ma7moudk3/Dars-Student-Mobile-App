@@ -48,7 +48,7 @@ class ColorManager {
   static Color grey2 = HexColor.fromHex("#696969");
   static Color grey3 = HexColor.fromHex('#4D4D4D');
   static Color grey4 = HexColor.fromHex('#F8F8F8');
-  static Color grey5 = HexColor.fromHex('##707070');
+  static Color grey5 = HexColor.fromHex('#707070');
   static Color grey6 = HexColor.fromHex('#E1E1E1');
   static Color grey7 = HexColor.fromHex('#F2F2F2');
   static Color grey8 = HexColor.fromHex('#585858');

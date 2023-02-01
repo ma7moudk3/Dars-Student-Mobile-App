@@ -190,6 +190,14 @@
     "skill": "مهارة",
     "choose_skill": "اختر المهارة",
     "search_results": "نتائج البحث",
-    "most_requested" : "الأكثر طلباً",
+    "most_requested": "الأكثر طلباً",
+    "brief": "نُبذة",
+    "about_teacher": "عن المدرس",
+    "education_level": "المستوى التعليمي",
+    "major": "التخصص",
+    "subjects": "المواد",
+    "classes": "الصفوف",
+    "skills": "المهارات",
+    "rating_previous_hessas": "تقييم الحصص السابقة",
     "to_help_you_please_enter_canceling_hessa_reason": "لمساعدتك يرجى أن توضح لنا سبب الغاء الحصة"
 }

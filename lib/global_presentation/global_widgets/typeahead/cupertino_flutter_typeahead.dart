@@ -636,13 +636,10 @@ class _CupertinoTypeAheadFieldState<T> extends State<CupertinoTypeAheadField<T>>
   void didChangeDependencies() {
     super.didChangeDependencies();
     ScrollableState? scrollableState = Scrollable.of(context);
-    if (scrollableState != null) {
-      // The TypeAheadField is inside a scrollable widget
-      _scrollPosition = scrollableState.position;
+    _scrollPosition = scrollableState.position;
 
-      _scrollPosition!.removeListener(_scrollResizeListener);
-      _scrollPosition!.isScrollingNotifier.addListener(_scrollResizeListener);
-    }
+    _scrollPosition!.removeListener(_scrollResizeListener);
+    _scrollPosition!.isScrollingNotifier.addListener(_scrollResizeListener);
   }
 
   void _scrollResizeListener() {
@@ -1360,7 +1357,7 @@ class _CupertinoSuggestionsBox {
     if (isOpened) return;
     assert(_overlayEntry != null);
     resize();
-    Overlay.of(context)!.insert(_overlayEntry!);
+    Overlay.of(context).insert(_overlayEntry!);
     isOpened = true;
   }
 
