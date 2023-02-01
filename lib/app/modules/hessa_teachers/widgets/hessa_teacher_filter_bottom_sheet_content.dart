@@ -115,7 +115,7 @@ class HessaTeacherFilterBottomSheetContent
                                   height: 22.h,
                                   width: 20.w,
                                   decoration: BoxDecoration(
-                                    borderRadius: BorderRadius.circular(8),
+                                    shape: BoxShape.circle,
                                     border: Border.all(
                                       color: controller.teacherFilterFactor ==
                                               index
@@ -127,9 +127,9 @@ class HessaTeacherFilterBottomSheetContent
                                   child: controller.teacherFilterFactor == index
                                       ? Center(
                                           child: Icon(
-                                            Icons.check_rounded,
+                                            Icons.circle,
                                             color: ColorManager.primary,
-                                            size: 13.sp,
+                                            size: 8.sp,
                                           ),
                                         )
                                       : null,

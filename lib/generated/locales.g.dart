@@ -204,6 +204,8 @@ class LocaleKeys {
   static const academic_learning = 'academic_learning';
   static const skill = 'skill';
   static const choose_skill = 'choose_skill';
+  static const search_results = 'search_results';
+  static const most_requested = 'most_requested';
   static const to_help_you_please_enter_canceling_hessa_reason =
       'to_help_you_please_enter_canceling_hessa_reason';
 }
@@ -406,6 +408,8 @@ class Locales {
     'academic_learning': 'تعليم الأكاديمي',
     'skill': 'مهارة',
     'choose_skill': 'اختر المهارة',
+    'search_results': 'نتائج البحث',
+    'most_requested': 'الأكثر طلباً',
     'to_help_you_please_enter_canceling_hessa_reason':
         'لمساعدتك يرجى أن توضح لنا سبب الغاء الحصة',
   };

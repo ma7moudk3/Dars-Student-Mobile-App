@@ -60,5 +60,6 @@ class ImagesManager {
   static String qualificationIcon = "assets/svg/icons/qualification.svg";
   static String noOrders = "assets/svg/no_orders.svg";
   static String hessaLogo = "assets/svg/hessa_logo.svg";
+  static String descendingIcon = "assets/svg/icons/descending.svg";
   static String dependents = "assets/svg/dependents.svg";
 }

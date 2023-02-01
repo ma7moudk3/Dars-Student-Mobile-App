@@ -64,11 +64,153 @@ class HessaTeachersView extends GetView<HessaTeachersController> {
                 },
               ),
             ),
-            SizedBox(height: 20.h),
-            const Center(
-              child: Text(
-                'HessaTeachersView is working',
-                style: TextStyle(fontSize: 20),
+            SizedBox(height: 25.h),
+            Padding(
+              padding: EdgeInsets.symmetric(horizontal: 16.w),
+              child: Column(
+                children: [
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      PrimaryText(
+                        LocaleKeys.search_results,
+                        fontSize: 16.sp,
+                      ),
+                      Row(
+                        children: [
+                          PrimaryText(
+                            LocaleKeys.most_requested,
+                            fontSize: 16.sp,
+                            color: ColorManager.fontColor7,
+                          ),
+                          SizedBox(width: 5.w),
+                          GestureDetector(
+                            onTap: () {},
+                            child: SvgPicture.asset(
+                              ImagesManager.descendingIcon,
+                            ),
+                          ),
+                        ],
+                      ),
+                    ],
+                  ),
+                ],
+              ),
+            ),
+            SizedBox(height: 25.h),
+            Padding(
+              padding: EdgeInsets.symmetric(horizontal: 16.w),
+              child: ListView.builder(
+                itemCount: 3,
+                shrinkWrap: true,
+                physics: const NeverScrollableScrollPhysics(),
+                itemBuilder: (BuildContext context, int index) {
+                  return Container(
+                    padding:
+                        EdgeInsets.symmetric(horizontal: 16.w, vertical: 12.h),
+                    margin: EdgeInsets.only(bottom: 16.h),
+                    width: Get.width,
+                    decoration: BoxDecoration(
+                      color: const Color(0xfeffffff),
+                      borderRadius: BorderRadius.circular(14.0),
+                      boxShadow: const [
+                        BoxShadow(
+                          color: Color(0x1a000000),
+                          offset: Offset(0, 1),
+                          blurRadius: 8,
+                        ),
+                      ],
+                    ),
+                    child: Column(
+                      children: [
+                        Row(
+                          crossAxisAlignment: CrossAxisAlignment.end,
+                          children: [
+                            Container(
+                              width: 50.w,
+                              height: 50.h,
+                              decoration: BoxDecoration(
+                                image: DecorationImage(
+                                  image: AssetImage(ImagesManager.avatar),
+                                  fit: BoxFit.cover,
+                                ),
+                                border: Border.all(
+                                  width: 1,
+                                  color: ColorManager.primary,
+                                ),
+                                borderRadius: BorderRadius.circular(20),
+                              ),
+                            ),
+                            SizedBox(width: 10.w),
+                            Expanded(
+                              child: Column(
+                                children: [
+                                  Row(
+                                    mainAxisSize: MainAxisSize.min,
+                                    mainAxisAlignment: MainAxisAlignment.end,
+                                    children: [
+                                      PrimaryText(
+                                        "وليد علي",
+                                        color: ColorManager.fontColor,
+                                      ),
+                                      const Spacer(),
+                                      Row(
+                                        mainAxisSize: MainAxisSize.min,
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.end,
+                                        children: [
+                                          Icon(
+                                            Icons.star,
+                                            color: ColorManager.orange,
+                                            size: 14.sp,
+                                          ),
+                                          SizedBox(
+                                            width: 40.w,
+                                            child: PrimaryText(
+                                              "4.5",
+                                              color: ColorManager.fontColor,
+                                              fontSize: 12.sp,
+                                              maxLines: 1,
+                                              overflow: TextOverflow.ellipsis,
+                                            ),
+                                          ),
+                                        ],
+                                      ),
+                                    ],
+                                  ),
+                                  SizedBox(height: 5.h),
+                                  Row(
+                                    mainAxisSize: MainAxisSize.min,
+                                    mainAxisAlignment: MainAxisAlignment.end,
+                                    children: [
+                                      PrimaryText(
+                                        ["رياضيات", "علوم", "فيزياء"]
+                                            .map((String subject) =>
+                                                subject.toString())
+                                            .join(", "),
+                                        color: ColorManager.primary,
+                                        fontWeight: FontWeightManager.softLight,
+                                        fontSize: 11.sp,
+                                      ),
+                                      const Spacer(),
+                                      PrimaryText(
+                                        "نابلس - الخليل",
+                                        color: ColorManager.fontColor7,
+                                        fontSize: 12.sp,
+                                        maxLines: 1,
+                                        overflow: TextOverflow.ellipsis,
+                                      ),
+                                    ],
+                                  ),
+                                ],
+                              ),
+                            ),
+                          ],
+                        ),
+                      ],
+                    ),
+                  );
+                },
               ),
             ),
           ],

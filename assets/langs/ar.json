@@ -188,6 +188,8 @@
     "choose": "اختر",
     "academic_learning": "تعليم الأكاديمي",
     "skill": "مهارة",
-    "choose_skill" : "اختر المهارة",
+    "choose_skill": "اختر المهارة",
+    "search_results": "نتائج البحث",
+    "most_requested" : "الأكثر طلباً",
     "to_help_you_please_enter_canceling_hessa_reason": "لمساعدتك يرجى أن توضح لنا سبب الغاء الحصة"
 }
