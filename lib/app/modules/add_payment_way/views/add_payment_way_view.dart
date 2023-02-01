@@ -55,7 +55,8 @@ class AddPaymentWayView extends GetView<AddPaymentWayController> {
                     controller: controller.cardTypeController,
                     prefixIcon: Icon(
                       Icons.arrow_drop_down_rounded,
-                      color: ColorManager.borderColor2,
+                      color: controller.cardTypeErrorIconColor ??
+                          ColorManager.borderColor2,
                     ),
                     title: LocaleKeys.card_type,
                     borderRadius: BorderRadius.circular(14),
@@ -79,6 +80,8 @@ class AddPaymentWayView extends GetView<AddPaymentWayController> {
                       color: ColorManager.primary,
                     ),
                     hintText: LocaleKeys.choose_card_type.tr,
+                    validator: (String? value) =>
+                        controller.validateCardType(value),
                   ),
                   SizedBox(height: 20.h),
                   PrimaryTextField(
@@ -112,49 +115,45 @@ class AddPaymentWayView extends GetView<AddPaymentWayController> {
                         controller.validateCardHolderName(value),
                   ),
                   SizedBox(height: 20.h),
-                  GetBuilder<AddPaymentWayController>(
-                      builder: (AddPaymentWayController controller) {
-                    return PrimaryTextField(
-                      fontSize: 14.sp,
-                      inputFormatters: [
-                        FilteringTextInputFormatter.digitsOnly,
-                        LengthLimitingTextInputFormatter(19),
-                        CardNumberFormatter(),
-                      ],
-                      textInputAction: TextInputAction.done,
-                      textDirection: TextDirection.ltr,
-                      controller: controller.cardNumberController,
-                      title: LocaleKeys.card_number.tr,
+                  PrimaryTextField(
+                    fontSize: 14.sp,
+                    inputFormatters: [
+                      FilteringTextInputFormatter.digitsOnly,
+                      LengthLimitingTextInputFormatter(19),
+                      CardNumberFormatter(),
+                    ],
+                    textInputAction: TextInputAction.done,
+                    textDirection: TextDirection.ltr,
+                    controller: controller.cardNumberController,
+                    title: LocaleKeys.card_number.tr,
+                    borderRadius: BorderRadius.circular(14),
+                    titleFontWeight: FontWeightManager.softLight,
+                    onTap: () async {
+                      log('asd');
+                    },
+                    contentPadding: EdgeInsets.symmetric(horizontal: 16.w),
+                    keyboardType: TextInputType.number,
+                    enabledBorder: OutlineInputBorder(
                       borderRadius: BorderRadius.circular(14),
-                      titleFontWeight: FontWeightManager.softLight,
-                      onTap: () async {
-                        log('asd');
-                      },
-                      contentPadding: EdgeInsets.symmetric(horizontal: 16.w),
-                      keyboardType: TextInputType.number,
-                      enabledBorder: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(14),
-                        borderSide:
-                            BorderSide(color: ColorManager.borderColor2),
-                      ),
-                      counterText: "",
-                      focusedBorder: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(14),
-                        borderSide: BorderSide(color: ColorManager.primary),
-                      ),
-                      errorBorder: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(14),
-                        borderSide: BorderSide(color: ColorManager.red),
-                      ),
-                      borderSide: BorderSide(
-                        color: ColorManager.primary,
-                      ),
-                      hintText: "3384 4003 4885 2334",
-                      maxLength: 19,
-                      validator: (String? value) =>
-                          controller.validateCardNumber(value),
-                    );
-                  }),
+                      borderSide: BorderSide(color: ColorManager.borderColor2),
+                    ),
+                    counterText: "",
+                    focusedBorder: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(14),
+                      borderSide: BorderSide(color: ColorManager.primary),
+                    ),
+                    errorBorder: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(14),
+                      borderSide: BorderSide(color: ColorManager.red),
+                    ),
+                    borderSide: BorderSide(
+                      color: ColorManager.primary,
+                    ),
+                    hintText: "3384 4003 4885 2334",
+                    maxLength: 19,
+                    validator: (String? value) =>
+                        controller.validateCardNumber(value),
+                  ),
                   SizedBox(height: 20.h),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,

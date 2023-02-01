@@ -226,6 +226,8 @@ class LocaleKeys {
   static const cancel_hessa = 'cancel_hessa';
   static const please_enter_cvv = 'please_enter_cvv';
   static const cvv_is_invalid = 'cvv_is_invalid';
+  static const please_choose_card_type = 'please_choose_card_type';
+  static const check_card_type = 'check_card_type';
   static const hessa_started = 'hessa_started';
   static const intersted_teachers = 'intersted_teachers';
   static const approve_teacher = 'approve_teacher';
@@ -479,6 +481,8 @@ class Locales {
     'cancel_hessa': 'إلغاء الحصة',
     'please_enter_cvv': 'أدخل CVV',
     'cvv_is_invalid': 'CVV غير صالح',
+    'please_choose_card_type': 'إختر نوع البطاقة',
+    'check_card_type': 'تحقق من نوع البطاقة',
     'hessa_started': 'بدأت الحصة',
     'intersted_teachers': 'مدرسين مهتمين بتقديم الحصة',
     'approve_teacher': 'اعتماد المدرّس',

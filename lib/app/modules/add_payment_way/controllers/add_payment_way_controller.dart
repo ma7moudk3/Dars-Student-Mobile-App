@@ -13,7 +13,7 @@ class AddPaymentWayController extends GetxController {
       cardCvvController;
 
   FocusNode expiryDateFocusNode = FocusNode();
-  Color? expiryDateErrorIconColor;
+  Color? expiryDateErrorIconColor, cardTypeErrorIconColor;
 
   @override
   void onInit() {
@@ -66,6 +66,23 @@ class AddPaymentWayController extends GetxController {
       return LocaleKeys.card_has_expired.tr;
     }
     expiryDateErrorIconColor = null;
+    update();
+    return null;
+  }
+
+  String? validateCardType(String? cardType) {
+    String pattern = r'^[0-9]+$';
+    RegExp regExp = RegExp(pattern);
+    if (cardType == null || cardType.isEmpty) {
+      cardTypeErrorIconColor = Colors.red;
+      update();
+      return LocaleKeys.please_choose_card_type.tr;
+    } else if (regExp.hasMatch(cardType)) {
+      cardTypeErrorIconColor = Colors.red;
+      update();
+      return LocaleKeys.check_card_type.tr;
+    }
+    cardTypeErrorIconColor = null;
     update();
     return null;
   }
