@@ -4,6 +4,8 @@ import '../modules/about_hessa/bindings/about_hessa_binding.dart';
 import '../modules/about_hessa/views/about_hessa_view.dart';
 import '../modules/add_new_dependent/bindings/add_new_dependent_binding.dart';
 import '../modules/add_new_dependent/views/add_new_dependent_view.dart';
+import '../modules/add_payment_way/bindings/add_payment_way_binding.dart';
+import '../modules/add_payment_way/views/add_payment_way_view.dart';
 import '../modules/bottom_nav_bar/bindings/bottom_nav_bar_binding.dart';
 import '../modules/bottom_nav_bar/views/bottom_nav_bar_view.dart';
 import '../modules/connection_failed/bindings/connection_failed_binding.dart';
@@ -46,6 +48,8 @@ import '../modules/teacher_details/bindings/teacher_details_binding.dart';
 import '../modules/teacher_details/views/teacher_details_view.dart';
 import '../modules/technical_support/bindings/technical_support_binding.dart';
 import '../modules/technical_support/views/technical_support_view.dart';
+import '../modules/wallet/bindings/wallet_binding.dart';
+import '../modules/wallet/views/wallet_view.dart';
 
 // ignore_for_file: constant_identifier_names
 
@@ -215,6 +219,16 @@ class AppPages {
       name: _Paths.ABOUT_HESSA,
       page: () => AboutHessaView(),
       binding: AboutHessaBinding(),
+    ),
+    GetPage(
+      name: _Paths.WALLET,
+      page: () => WalletView(),
+      binding: WalletBinding(),
+    ),
+    GetPage(
+      name: _Paths.ADD_PAYMENT_WAY,
+      page: () => AddPaymentWayView(),
+      binding: AddPaymentWayBinding(),
     ),
   ];
 }

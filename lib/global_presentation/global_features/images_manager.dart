@@ -21,6 +21,7 @@ class ImagesManager {
   static String profileIcon = "assets/svg/icons/profile.svg";
   static String avatar = "assets/images/avatar.png";
   static String notebookIcon = "assets/svg/icons/notebook.svg";
+  static String moneyIcon = "assets/svg/icons/money.svg";
   static String teachersIcon = "assets/svg/icons/teachers.svg";
   static String categoryIcon = "assets/svg/icons/category.svg";
   static String calendarIcon = "assets/svg/icons/calendar.svg";
@@ -42,6 +43,7 @@ class ImagesManager {
   static String lockIcon = "assets/svg/icons/lock.svg";
   static String shieldIcon = "assets/svg/icons/shield.svg";
   static String questionsIcon = "assets/svg/icons/questions.svg";
+  static String visaIcon = "assets/svg/icons/visa.svg";
   static String headphoneIcon = "assets/svg/icons/headphone.svg";
   static String aboutHessaIcon = "assets/svg/icons/about_hessa.svg";
   static String checkIcon = "assets/svg/icons/check.svg";

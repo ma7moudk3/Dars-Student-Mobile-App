@@ -12,6 +12,7 @@ class PrimaryText extends StatelessWidget {
   final int maxLines;
   final bool lineThrow;
   final double height;
+  final double? letterSpacing;
   final bool hasSpecificColor;
   PrimaryText(
     this.text, {
@@ -23,6 +24,7 @@ class PrimaryText extends StatelessWidget {
     this.overflow = TextOverflow.visible,
     this.maxLines = 5,
     this.hasSpecificColor = false,
+    this.letterSpacing,
     this.lineThrow = false,
     this.height = 1.5,
   }) : super(key: key);
@@ -37,6 +39,7 @@ class PrimaryText extends StatelessWidget {
       fontSize: (fontSize).sp,
       fontWeight: fontWeight,
       height: height,
+      letterSpacing: letterSpacing,
       fontFamily: FontConstants.fontFamily,
       decoration: lineThrow ? TextDecoration.lineThrough : TextDecoration.none,
     );

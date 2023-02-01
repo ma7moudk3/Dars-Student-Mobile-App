@@ -26,6 +26,8 @@ abstract class Routes {
   static const HESSA_DETAILS = _Paths.HESSA_DETAILS;
   static const TEACHER_DETAILS = _Paths.TEACHER_DETAILS;
   static const ABOUT_HESSA = _Paths.ABOUT_HESSA;
+  static const WALLET = _Paths.WALLET;
+  static const ADD_PAYMENT_WAY = _Paths.ADD_PAYMENT_WAY;
 }
 
 abstract class _Paths {
@@ -53,4 +55,6 @@ abstract class _Paths {
   static const HESSA_DETAILS = '/hessa-details';
   static const TEACHER_DETAILS = '/teacher-details';
   static const ABOUT_HESSA = '/about-hessa';
+  static const WALLET = '/wallet';
+  static const ADD_PAYMENT_WAY = '/add-payment-way';
 }

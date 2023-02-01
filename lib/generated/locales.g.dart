@@ -34,9 +34,17 @@ class LocaleKeys {
   static const check_your_internet_connection =
       'check_your_internet_connection';
   static const retry = 'retry';
+  static const paid_amounts = 'paid_amounts';
+  static const my_hessa_balance = 'my_hessa_balance';
+  static const payment_ways = 'payment_ways';
   static const forgot_password = 'forgot_password';
   static const login = 'login';
   static const or = 'or';
+  static const payments = 'payments';
+  static const shekel = 'shekel';
+  static const remaining = 'remaining';
+  static const view_all = 'view_all';
+  static const add_new_payment_method = 'add_new_payment_method';
   static const dont_have_an_account = 'dont_have_an_account';
   static const do_have_an_account = 'do_have_an_account';
   static const sign_up_new_account = 'sign_up_new_account';
@@ -254,9 +262,17 @@ class Locales {
     'no_internet_connection': 'لا يوجد اتصال بالإنترنت',
     'check_your_internet_connection': 'تحقق من اتصال الإنترنت الخاص بك',
     'retry': 'إعادة المحاولة',
+    'paid_amounts': 'المبالغ المدفوعة',
+    'my_hessa_balance': 'رصيدي في حِصّة',
+    'payment_ways': 'طرق الدفع',
     'forgot_password': 'نسيت كلمة المرور!',
     'login': 'تسجيل الدخول',
     'or': 'أو',
+    'payments': 'المدفوعات',
+    'shekel': 'شيكل',
+    'remaining': 'متبقي',
+    'view_all': 'مشاهدة الكل',
+    'add_new_payment_method': 'أضف طريقة دفع جديدة',
     'dont_have_an_account': 'ليس لديك حساب؟',
     'do_have_an_account': 'هل لديك حساب؟',
     'sign_up_new_account': 'تسجيل مستخدم جديد',

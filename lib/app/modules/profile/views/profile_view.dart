@@ -110,7 +110,7 @@ class ProfileView extends GetView<ProfileController> {
                     iconPath: ImagesManager.walletIcon,
                     color: ColorManager.primaryLight.withOpacity(0.15),
                     iconColor: ColorManager.primaryLight,
-                    onTap: () => log("wallet"),
+                    onTap: () async => await Get.toNamed(Routes.WALLET),
                   ),
                   moreDivider(),
                   MoreItem(
