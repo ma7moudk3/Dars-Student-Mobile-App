@@ -1,9 +1,9 @@
-
 import 'package:flutter_slidable/flutter_slidable.dart';
 
 import '../../../../global_presentation/global_widgets/inner_shadow_widget.dart';
 import '../../../constants/exports.dart';
 import '../../../core/helper_functions.dart';
+import '../../../routes/app_pages.dart';
 import '../controllers/messages_controller.dart';
 
 class Message extends GetView<MessagesController> {
@@ -58,7 +58,7 @@ class Message extends GetView<MessagesController> {
           child: GestureDetector(
             behavior: HitTestBehavior.opaque,
             onTap: () async {
-              // await Get.toNamed(Routes.CHAT);
+              await Get.toNamed(Routes.CHAT);
             },
             child: Padding(
               padding: EdgeInsets.symmetric(vertical: 10.h),

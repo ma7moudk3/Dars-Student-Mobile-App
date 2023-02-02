@@ -185,6 +185,7 @@ class LocaleKeys {
   static const minutes = 'minutes';
   static const week = 'week';
   static const weeks = 'weeks';
+  static const swip_to_delete = 'swip_to_delete';
   static const today = 'today';
   static const second = 'second';
   static const seconds = 'seconds';
@@ -463,6 +464,7 @@ class Locales {
     'minutes': 'دقائق',
     'week': 'أسبوع',
     'weeks': 'أسابيع',
+    'swip_to_delete': 'اسحب لليمين للحذف',
     'today': 'اليوم',
     'second': 'ثانية',
     'seconds': 'ثواني',

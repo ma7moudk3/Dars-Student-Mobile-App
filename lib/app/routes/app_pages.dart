@@ -8,6 +8,8 @@ import '../modules/add_payment_way/bindings/add_payment_way_binding.dart';
 import '../modules/add_payment_way/views/add_payment_way_view.dart';
 import '../modules/bottom_nav_bar/bindings/bottom_nav_bar_binding.dart';
 import '../modules/bottom_nav_bar/views/bottom_nav_bar_view.dart';
+import '../modules/chat/bindings/chat_binding.dart';
+import '../modules/chat/views/chat_view.dart';
 import '../modules/connection_failed/bindings/connection_failed_binding.dart';
 import '../modules/connection_failed/views/connection_failed_view.dart';
 import '../modules/dependents/bindings/dependents_binding.dart';
@@ -34,8 +36,6 @@ import '../modules/order_hessa/bindings/order_hessa_binding.dart';
 import '../modules/order_hessa/views/order_hessa_view.dart';
 import '../modules/orders/bindings/orders_binding.dart';
 import '../modules/orders/views/orders_view.dart';
-import '../modules/static_page/bindings/static_page_binding.dart';
-import '../modules/static_page/views/static_page_view.dart';
 import '../modules/profile/bindings/profile_binding.dart';
 import '../modules/profile/views/profile_view.dart';
 import '../modules/settings/bindings/settings_binding.dart';
@@ -44,6 +44,8 @@ import '../modules/sign_up/bindings/sign_up_binding.dart';
 import '../modules/sign_up/views/sign_up_view.dart';
 import '../modules/splash/bindings/splash_binding.dart';
 import '../modules/splash/views/splash_view.dart';
+import '../modules/static_page/bindings/static_page_binding.dart';
+import '../modules/static_page/views/static_page_view.dart';
 import '../modules/teacher_details/bindings/teacher_details_binding.dart';
 import '../modules/teacher_details/views/teacher_details_view.dart';
 import '../modules/technical_support/bindings/technical_support_binding.dart';
@@ -233,6 +235,13 @@ class AppPages {
       name: _Paths.STATIC_PAGE,
       page: () => const StaticPageView(),
       binding: StaticPageBinding(),
+      transition: Transition.cupertino,
+      transitionDuration: const Duration(milliseconds: 400),
+    ),
+    GetPage(
+      name: _Paths.CHAT,
+      page: () => ChatView(),
+      binding: ChatBinding(),
       transition: Transition.cupertino,
       transitionDuration: const Duration(milliseconds: 400),
     ),
