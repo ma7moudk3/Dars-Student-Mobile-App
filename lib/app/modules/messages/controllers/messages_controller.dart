@@ -2,7 +2,7 @@
 import '../../../constants/exports.dart';
 
 class MessagesController extends GetxController {
-  int length = 9;
+  int length = 10;
 
   void deleteMessage() {
     length--;

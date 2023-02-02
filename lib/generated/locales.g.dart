@@ -25,6 +25,10 @@ class LocaleKeys {
   static const enter_email = 'enter_email';
   static const enter_password = 'enter_password';
   static const enter_old_password = 'enter_old_password';
+  static const no_messages_yet = 'no_messages_yet';
+  static const nothing_to_see_here = 'nothing_to_see_here';
+  static const start_a_conversation_with_any_of_the_teachers =
+      'start_a_conversation_with_any_of_the_teachers';
   static const please_enter_email = 'please_enter_email';
   static const please_enter_valid_email = 'please_enter_valid_email';
   static const please_enter_password = 'please_enter_password';
@@ -303,6 +307,10 @@ class Locales {
     'enter_email': 'عنوان البريد الإلكتروني',
     'enter_password': 'أدخل كلمة المرور',
     'enter_old_password': 'أدخل كلمة المرور القديمة',
+    'no_messages_yet': 'لا توجد رسائل بعد',
+    'nothing_to_see_here': 'لا يوجد شيء لعرضه هنا',
+    'start_a_conversation_with_any_of_the_teachers':
+        'ابدأ محادثة مع أي من المعلمين. ستظهر دردشاتك هنا',
     'please_enter_email': 'الرجاء إدخال البريد الإلكتروني',
     'please_enter_valid_email':
         'البريد الالكتروني غير صحيح , يرجى المحاولة مرة اخرى',
