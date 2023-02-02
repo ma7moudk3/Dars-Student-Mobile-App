@@ -310,12 +310,10 @@ class SignUpContent extends GetView<SignUpController> {
                             fontWeight: FontWeightManager.softLight,
                           ),
                           GestureDetector(
-                            onTap: () {
-                              Get.toNamed(Routes.STATIC_PAGE, arguments: {
+                            onTap: () async {
+                              await Get.toNamed(Routes.STATIC_PAGE, arguments: {
                                 "pageTitle": LocaleKeys.terms_and_conditions.tr,
-                                "pageId": Get.locale!.languageCode != "ar"
-                                    ? 5267
-                                    : 5267,
+                                "pageId": 659,
                               });
                             },
                             child: PrimaryText(

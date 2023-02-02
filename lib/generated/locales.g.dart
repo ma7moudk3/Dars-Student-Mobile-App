@@ -131,6 +131,7 @@ class LocaleKeys {
   static const card_number = 'card_number';
   static const write_card_number = 'write_card_number';
   static const choose_card_type = 'choose_card_type';
+  static const choosing_card_type = 'choosing_card_type';
   static const card_holder = 'card_holder';
   static const write_card_holder = 'write_card_holder';
   static const add = 'add';
@@ -170,7 +171,13 @@ class LocaleKeys {
   static const camera = 'camera';
   static const gallery = 'gallery';
   static const file = 'file';
+  static const privacy_policy_in_hessa = 'privacy_policy_in_hessa';
+  static const terms_and_conditions_in_hessa = 'terms_and_conditions_in_hessa';
   static const close = 'close';
+  static const mada_card = 'mada_card';
+  static const last_updated = 'last_updated';
+  static const visa_card = 'visa_card';
+  static const master_card = 'master_card';
   static const personal_profile = 'personal_profile';
   static const last_seen = 'last_seen';
   static const personal_information = 'personal_information';
@@ -386,6 +393,7 @@ class Locales {
     'card_number': 'رقم البطاقة',
     'write_card_number': 'اكتب رقم البطاقة',
     'choose_card_type': 'اختر نوع البطاقة',
+    'choosing_card_type': 'اختيار نوع البطاقة',
     'card_holder': 'اسم صاحب البطاقة',
     'write_card_holder': 'اكتب اسم صاحب البطاقة',
     'add': 'إضافة',
@@ -424,7 +432,13 @@ class Locales {
     'camera': 'الكاميرا',
     'gallery': 'المعرض',
     'file': 'ملف',
+    'privacy_policy_in_hessa': 'سياسة الخصوصية في حصة',
+    'terms_and_conditions_in_hessa': 'الشروط والأحكام في حصة',
     'close': 'إغلاق',
+    'mada_card': 'بطاقة مدى',
+    'last_updated': 'آخر تحديث',
+    'visa_card': 'فيزا كارد',
+    'master_card': 'ماستر كارد',
     'personal_profile': 'الملف الشخصي',
     'last_seen': 'آخر ظهور',
     'personal_information': 'البيانات الشخصية',

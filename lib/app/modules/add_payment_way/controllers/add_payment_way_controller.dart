@@ -1,3 +1,4 @@
+import 'package:hessa_student/app/constants/constants.dart';
 import 'package:hessa_student/app/constants/exports.dart';
 
 import '../../../../generated/locales.g.dart';
@@ -14,6 +15,33 @@ class AddPaymentWayController extends GetxController {
 
   FocusNode expiryDateFocusNode = FocusNode();
   Color? expiryDateErrorIconColor, cardTypeErrorIconColor;
+
+  CardType? cardType;
+
+  List<Map<String, dynamic>> cardTypes = [
+    {
+      "type": CardType.madaCard,
+      "image": ImagesManager.madaIcon,
+      "title": LocaleKeys.mada_card.tr,
+    },
+    {
+      "type": CardType.visaCard,
+      "image": ImagesManager.visaCardIcon,
+      "title": LocaleKeys.visa_card.tr,
+    },
+    {
+      "type": CardType.masterCard,
+      "image": ImagesManager.masterCardIcon,
+      "title": LocaleKeys.master_card.tr,
+    },
+  ];
+
+  void selectCardType(int index) {
+    cardType = cardTypes[index]["type"];
+    cardTypeController.text = cardTypes[index]["title"];
+    cardTypeErrorIconColor = null;
+    update();
+  }
 
   @override
   void onInit() {

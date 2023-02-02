@@ -87,7 +87,7 @@ class VisaCardWidget extends GetView<WalletController> {
                     PrimaryText(
                       cardHolderName != null && cardHolderName!.isNotEmpty
                           ? cardHolderName!
-                          : (isAddCard ? "Some Name" : "Waleed .A"),
+                          : (isAddCard ? "FirstName LastName" : "Waleed .A"),
                       fontSize: 16.sp,
                       fontWeight: FontWeightManager.softLight,
                     ),

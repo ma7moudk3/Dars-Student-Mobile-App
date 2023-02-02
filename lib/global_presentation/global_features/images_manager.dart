@@ -44,6 +44,9 @@ class ImagesManager {
   static String shieldIcon = "assets/svg/icons/shield.svg";
   static String questionsIcon = "assets/svg/icons/questions.svg";
   static String visaIcon = "assets/svg/icons/visa.svg";
+  static String visaCardIcon = "assets/svg/icons/visa_card.svg";
+  static String madaIcon = "assets/svg/icons/mada.svg";
+  static String masterCardIcon = "assets/svg/icons/master_card.svg";
   static String headphoneIcon = "assets/svg/icons/headphone.svg";
   static String aboutHessaIcon = "assets/svg/icons/about_hessa.svg";
   static String checkIcon = "assets/svg/icons/check.svg";

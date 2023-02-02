@@ -1,20 +1,8 @@
 import 'package:get/get.dart';
 
 class StaticPageController extends GetxController {
-  //TODO: Implement StaticPageController
-
-  final count = 0.obs;
-  @override
-  void onInit() {
-    super.onInit();
-  }
-
-  @override
-  void onReady() {
-    super.onReady();
-  }
-
+  String pageTitle =
+      Get.arguments != null ? Get.arguments['pageTitle'] ?? "" : "";
   @override
   void onClose() {}
-  void increment() => count.value++;
 }

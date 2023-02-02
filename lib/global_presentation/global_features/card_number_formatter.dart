@@ -1,6 +1,5 @@
 import 'package:flutter/services.dart';
 
-import '../../app/constants/exports.dart';
 
 class CardNumberFormatter extends TextInputFormatter {
   @override

@@ -1,5 +1,3 @@
-import 'dart:developer';
-
 import '../../../../generated/locales.g.dart';
 import '../../../../global_presentation/global_widgets/custom_app_bar.dart';
 import '../../../constants/exports.dart';
@@ -74,7 +72,11 @@ class SettingsView extends GetView<SettingsController> {
               iconPath: ImagesManager.shieldIcon,
               color: ColorManager.primaryLight.withOpacity(0.15),
               iconColor: ColorManager.primaryLight,
-              onTap: () async => log('Privacy Policy'),
+              onTap: () async =>
+                  await Get.toNamed(Routes.STATIC_PAGE, arguments: {
+                "pageTitle": LocaleKeys.privacy_policy_in_hessa.tr,
+                "pageId": 659,
+              }),
             ),
             moreDivider(),
             MoreItem(
@@ -84,7 +86,11 @@ class SettingsView extends GetView<SettingsController> {
               iconPath: ImagesManager.questionsIcon,
               color: ColorManager.primaryLight.withOpacity(0.15),
               iconColor: ColorManager.primaryLight,
-              onTap: () async => log('Terms and Conditions'),
+              onTap: () async =>
+                  await Get.toNamed(Routes.STATIC_PAGE, arguments: {
+                "pageTitle": LocaleKeys.terms_and_conditions_in_hessa.tr,
+                "pageId": 659,
+              }),
             ),
             moreDivider(),
             MoreItem(

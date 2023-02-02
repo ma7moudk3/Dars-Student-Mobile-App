@@ -34,6 +34,8 @@ import '../modules/order_hessa/bindings/order_hessa_binding.dart';
 import '../modules/order_hessa/views/order_hessa_view.dart';
 import '../modules/orders/bindings/orders_binding.dart';
 import '../modules/orders/views/orders_view.dart';
+import '../modules/static_page/bindings/static_page_binding.dart';
+import '../modules/static_page/views/static_page_view.dart';
 import '../modules/profile/bindings/profile_binding.dart';
 import '../modules/profile/views/profile_view.dart';
 import '../modules/settings/bindings/settings_binding.dart';
@@ -42,8 +44,6 @@ import '../modules/sign_up/bindings/sign_up_binding.dart';
 import '../modules/sign_up/views/sign_up_view.dart';
 import '../modules/splash/bindings/splash_binding.dart';
 import '../modules/splash/views/splash_view.dart';
-import '../modules/static_page/bindings/static_page_binding.dart';
-import '../modules/static_page/views/static_page_view.dart';
 import '../modules/teacher_details/bindings/teacher_details_binding.dart';
 import '../modules/teacher_details/views/teacher_details_view.dart';
 import '../modules/technical_support/bindings/technical_support_binding.dart';
@@ -114,13 +114,6 @@ class AppPages {
       name: _Paths.FORGOT_PASSWORD,
       page: () => ForgotPasswordView(),
       binding: ForgotPasswordBinding(),
-      transition: Transition.cupertino,
-      transitionDuration: const Duration(milliseconds: 400),
-    ),
-    GetPage(
-      name: _Paths.STATIC_PAGE,
-      page: () => StaticPageView(),
-      binding: StaticPageBinding(),
       transition: Transition.cupertino,
       transitionDuration: const Duration(milliseconds: 400),
     ),
@@ -196,7 +189,7 @@ class AppPages {
     ),
     GetPage(
       name: _Paths.HESSA_TEACHERS,
-      page: () => HessaTeachersView(),
+      page: () => const HessaTeachersView(),
       binding: HessaTeachersBinding(),
       transition: Transition.cupertino,
       transitionDuration: const Duration(milliseconds: 400),
@@ -210,25 +203,38 @@ class AppPages {
     ),
     GetPage(
       name: _Paths.TEACHER_DETAILS,
-      page: () => TeacherDetailsView(),
+      page: () => const TeacherDetailsView(),
       binding: TeacherDetailsBinding(),
       transition: Transition.cupertino,
       transitionDuration: const Duration(milliseconds: 400),
     ),
     GetPage(
       name: _Paths.ABOUT_HESSA,
-      page: () => AboutHessaView(),
+      page: () => const AboutHessaView(),
       binding: AboutHessaBinding(),
+      transition: Transition.cupertino,
+      transitionDuration: const Duration(milliseconds: 400),
     ),
     GetPage(
       name: _Paths.WALLET,
-      page: () => WalletView(),
+      page: () => const WalletView(),
       binding: WalletBinding(),
+      transition: Transition.cupertino,
+      transitionDuration: const Duration(milliseconds: 400),
     ),
     GetPage(
       name: _Paths.ADD_PAYMENT_WAY,
-      page: () => AddPaymentWayView(),
+      page: () => const AddPaymentWayView(),
       binding: AddPaymentWayBinding(),
+      transition: Transition.cupertino,
+      transitionDuration: const Duration(milliseconds: 400),
+    ),
+    GetPage(
+      name: _Paths.STATIC_PAGE,
+      page: () => const StaticPageView(),
+      binding: StaticPageBinding(),
+      transition: Transition.cupertino,
+      transitionDuration: const Duration(milliseconds: 400),
     ),
   ];
 }

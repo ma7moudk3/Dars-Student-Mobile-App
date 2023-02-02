@@ -1,5 +1,3 @@
-import 'dart:developer';
-
 import 'package:flutter/services.dart';
 import 'package:hessa_student/app/modules/wallet/widgets/visa_card_widget.dart';
 
@@ -9,6 +7,7 @@ import '../../../../global_presentation/global_features/card_number_formatter.da
 import '../../../../global_presentation/global_widgets/custom_app_bar.dart';
 import '../../../constants/exports.dart';
 import '../controllers/add_payment_way_controller.dart';
+import '../widgets/payment_ways_bottom_sheet_content.dart';
 
 class AddPaymentWayView extends GetView<AddPaymentWayController> {
   const AddPaymentWayView({super.key});
@@ -67,7 +66,17 @@ class AddPaymentWayView extends GetView<AddPaymentWayController> {
                     borderRadius: BorderRadius.circular(14),
                     titleFontWeight: FontWeightManager.softLight,
                     onTap: () async {
-                      log('asd');
+                      await Get.bottomSheet(
+                        backgroundColor: ColorManager.white,
+                        isScrollControlled: true,
+                        shape: const RoundedRectangleBorder(
+                          borderRadius: BorderRadius.only(
+                            topLeft: Radius.circular(20),
+                            topRight: Radius.circular(20),
+                          ),
+                        ),
+                        const PaymentWaysBottomSheetContent(),
+                      );
                     },
                     enabledBorder: OutlineInputBorder(
                       borderRadius: BorderRadius.circular(14),
@@ -97,9 +106,6 @@ class AddPaymentWayView extends GetView<AddPaymentWayController> {
                     title: LocaleKeys.card_holder.tr,
                     borderRadius: BorderRadius.circular(14),
                     titleFontWeight: FontWeightManager.softLight,
-                    onTap: () async {
-                      log('asd');
-                    },
                     enabledBorder: OutlineInputBorder(
                       borderRadius: BorderRadius.circular(14),
                       borderSide: BorderSide(color: ColorManager.borderColor2),
@@ -132,9 +138,6 @@ class AddPaymentWayView extends GetView<AddPaymentWayController> {
                     textDirection: TextDirection.ltr,
                     borderRadius: BorderRadius.circular(14),
                     titleFontWeight: FontWeightManager.softLight,
-                    onTap: () async {
-                      log('asd');
-                    },
                     contentPadding: EdgeInsets.symmetric(horizontal: 16.w),
                     keyboardType: TextInputType.number,
                     enabledBorder: OutlineInputBorder(

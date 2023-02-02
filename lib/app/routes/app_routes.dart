@@ -11,7 +11,6 @@ abstract class Routes {
   static const SIGN_UP = _Paths.SIGN_UP;
   static const CONNECTION_FAILED = _Paths.CONNECTION_FAILED;
   static const FORGOT_PASSWORD = _Paths.FORGOT_PASSWORD;
-  static const STATIC_PAGE = _Paths.STATIC_PAGE;
   static const BOTTOM_NAV_BAR = _Paths.BOTTOM_NAV_BAR;
   static const PROFILE = _Paths.PROFILE;
   static const MESSAGES = _Paths.MESSAGES;
@@ -28,6 +27,7 @@ abstract class Routes {
   static const ABOUT_HESSA = _Paths.ABOUT_HESSA;
   static const WALLET = _Paths.WALLET;
   static const ADD_PAYMENT_WAY = _Paths.ADD_PAYMENT_WAY;
+  static const STATIC_PAGE = _Paths.STATIC_PAGE;
 }
 
 abstract class _Paths {
@@ -40,7 +40,6 @@ abstract class _Paths {
   static const SIGN_UP = '/sign-up';
   static const CONNECTION_FAILED = '/connection-failed';
   static const FORGOT_PASSWORD = '/forgot-password';
-  static const STATIC_PAGE = '/static-page';
   static const BOTTOM_NAV_BAR = '/bottom-nav-bar';
   static const PROFILE = '/profile';
   static const MESSAGES = '/messages';
@@ -57,4 +56,5 @@ abstract class _Paths {
   static const ABOUT_HESSA = '/about-hessa';
   static const WALLET = '/wallet';
   static const ADD_PAYMENT_WAY = '/add-payment-way';
+  static const STATIC_PAGE = '/static-page';
 }

@@ -304,7 +304,6 @@ class DioHelper {
           )) ??
           _handleError(Strings.serverNotResponding.tr);
     } catch (error) {
-      log("asd");
       // unexpected error for example (parsing json error)
       onError?.call(ApiException(
             message: error.toString(),
