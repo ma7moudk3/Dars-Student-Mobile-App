@@ -42,7 +42,31 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
               leading ??
                   GestureDetector(
                     onTap: () async => await Get.toNamed(Routes.NOTIFICATIONS),
-                    child: SvgPicture.asset(ImagesManager.notificationIcon),
+                    child: Stack(
+                      children: [
+                        SvgPicture.asset(
+                          ImagesManager.notificationIcon,
+                        ),
+                        Positioned(
+                          top: 0,
+                          right: 0,
+                          child: Container(
+                            width: 10.w,
+                            height: 10.h,
+                            decoration: BoxDecoration(
+                              color: ColorManager.yellow,
+                              shape: BoxShape.circle,
+                              border: const Border.fromBorderSide(
+                                BorderSide(
+                                  color: Colors.white,
+                                  width: 1,
+                                ),
+                              ),
+                            ),
+                          ),
+                        ),
+                      ],
+                    ),
                   ),
               const Spacer(),
               PrimaryText(

@@ -1,20 +1,13 @@
-import 'package:get/get.dart';
+import '../../../constants/exports.dart';
 
 class MessagesController extends GetxController {
-  //TODO: Implement MessagesController
+  int length = 9;
 
-  final count = 0.obs;
-  @override
-  void onInit() {
-    super.onInit();
-  }
-
-  @override
-  void onReady() {
-    super.onReady();
+  void deleteMessage() {
+    length--;
+    update();
   }
 
   @override
   void onClose() {}
-  void increment() => count.value++;
 }

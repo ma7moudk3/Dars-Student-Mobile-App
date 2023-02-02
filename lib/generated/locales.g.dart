@@ -173,6 +173,23 @@ class LocaleKeys {
   static const file = 'file';
   static const privacy_policy_in_hessa = 'privacy_policy_in_hessa';
   static const terms_and_conditions_in_hessa = 'terms_and_conditions_in_hessa';
+  static const year = 'year';
+  static const years = 'years';
+  static const month = 'month';
+  static const months = 'months';
+  static const day = 'day';
+  static const days = 'days';
+  static const hour = 'hour';
+  static const hours = 'hours';
+  static const minute = 'minute';
+  static const minutes = 'minutes';
+  static const week = 'week';
+  static const weeks = 'weeks';
+  static const today = 'today';
+  static const second = 'second';
+  static const seconds = 'seconds';
+  static const ago = 'ago';
+  static const just_now = 'just_now';
   static const close = 'close';
   static const mada_card = 'mada_card';
   static const last_updated = 'last_updated';
@@ -434,6 +451,23 @@ class Locales {
     'file': 'ملف',
     'privacy_policy_in_hessa': 'سياسة الخصوصية في حصة',
     'terms_and_conditions_in_hessa': 'الشروط والأحكام في حصة',
+    'year': 'سنة',
+    'years': 'سنوات',
+    'month': 'شهر',
+    'months': 'شهور',
+    'day': 'يوم',
+    'days': 'أيام',
+    'hour': 'ساعة',
+    'hours': 'ساعات',
+    'minute': 'دقيقة',
+    'minutes': 'دقائق',
+    'week': 'أسبوع',
+    'weeks': 'أسابيع',
+    'today': 'اليوم',
+    'second': 'ثانية',
+    'seconds': 'ثواني',
+    'ago': 'منذ',
+    'just_now': 'الآن',
     'close': 'إغلاق',
     'mada_card': 'بطاقة مدى',
     'last_updated': 'آخر تحديث',
