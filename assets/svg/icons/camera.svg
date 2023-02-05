@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="27.517" height="24.732" viewBox="0 0 27.517 24.732">
+  <g id="Camera" transform="translate(0 0)">
+    <path id="Stroke_1" data-name="Stroke 1" d="M20.937,4.725h0a1.353,1.353,0,0,1-1.224-.775C19.31,3.095,18.8,2,18.493,1.407A2.356,2.356,0,0,0,16.311,0c-.017,0-6.587,0-6.6,0A2.357,2.357,0,0,0,7.524,1.407C7.221,2,6.708,3.095,6.3,3.95a1.355,1.355,0,0,1-1.224.775h0A5.08,5.08,0,0,0,0,9.8v8.348a5.081,5.081,0,0,0,5.081,5.08H20.937a5.08,5.08,0,0,0,5.08-5.08V9.8A5.079,5.079,0,0,0,20.937,4.725Z" transform="translate(0.75 0.75)" fill="none" stroke="#fff" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" stroke-width="1.5"/>
+    <path id="Stroke_3" data-name="Stroke 3" d="M0,4.475A4.47,4.47,0,1,0,4.475,0,4.486,4.486,0,0,0,0,4.475Z" transform="translate(9.288 9.754)" fill="none" stroke="#fff" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" stroke-width="1.5"/>
+    <path id="Fill_5" data-name="Fill 5" d="M1.269,2.806a1.525,1.525,0,0,1-.42-.11A1.418,1.418,0,0,1,.4,2.385,1.435,1.435,0,0,1,0,1.407,1.366,1.366,0,0,1,.116.853,1.431,1.431,0,0,1,.447.372,1.609,1.609,0,0,1,.875.1,1.438,1.438,0,0,1,2.4.4a1.353,1.353,0,0,1,.267.367L2.7.851a1.37,1.37,0,0,1,.117.556A1.429,1.429,0,0,1,2.4,2.4a1.4,1.4,0,0,1-.856.407l-.14.007Z" transform="translate(19.384 8.133)" fill="none" stroke="#fff" stroke-width="1"/>
+  </g>
+</svg>

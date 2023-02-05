@@ -160,9 +160,11 @@ class PrimaryTextField extends StatelessWidget {
             contentPadding: contentPadding ??
                 const EdgeInsets.fromLTRB(10.0, 10.0, 20.0, 10.0),
           ),
-          textAlign: textDirection == TextDirection.rtl
-              ? TextAlign.right
-              : TextAlign.left,
+          textAlign: textDirection != null
+              ? (textDirection == TextDirection.rtl
+                  ? TextAlign.right
+                  : TextAlign.left)
+              : TextAlign.right,
           validator: validator ??
               (String? value) {
                 return null;

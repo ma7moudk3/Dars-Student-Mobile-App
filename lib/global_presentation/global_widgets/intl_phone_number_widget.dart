@@ -79,7 +79,7 @@ class IntlPhoneNumberTextField extends StatelessWidget {
               contentPadding: const EdgeInsets.fromLTRB(20.0, 10.0, 20.0, 10.0),
               hintMaxLines: null,
               counterText: "",
-              hintText: "(599)     21     11    96",
+              hintText: "(59 | 56) XXXXXXX",
               hintStyle: TextStyle(
                 color: ColorManager.borderColor2,
                 fontSize: (14).sp,

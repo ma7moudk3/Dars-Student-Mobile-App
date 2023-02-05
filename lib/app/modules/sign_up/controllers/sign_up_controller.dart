@@ -101,6 +101,8 @@ class SignUpController extends GetxController {
         update();
         return LocaleKeys.should_have_space.tr;
       } else {
+        fullNameErrorIconColor = null;
+        update();
         return null;
       }
     } else if (regExp.hasMatch(fullName)) {
