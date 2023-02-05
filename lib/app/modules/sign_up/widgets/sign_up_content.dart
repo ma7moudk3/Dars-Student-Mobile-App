@@ -310,6 +310,8 @@ class SignUpContent extends GetView<SignUpController> {
                             onTap: () async {
                               await Get.toNamed(Routes.STATIC_PAGE, arguments: {
                                 "pageTitle": LocaleKeys.terms_and_conditions.tr,
+                                "pageSubTitle":
+                                    LocaleKeys.terms_and_conditions_in_hessa.tr,
                                 "pageId": 659,
                               });
                             },

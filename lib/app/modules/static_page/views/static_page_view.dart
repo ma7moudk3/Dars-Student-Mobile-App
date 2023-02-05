@@ -12,7 +12,7 @@ class StaticPageView extends GetView<StaticPageController> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: CustomAppBar(
-        title: LocaleKeys.privacy_policy,
+        title: controller.pageTitle,
         leading: GestureDetector(
           onTap: () {
             Get.back();
@@ -52,7 +52,7 @@ class StaticPageView extends GetView<StaticPageController> {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       PrimaryText(
-                        controller.pageTitle,
+                        controller.pageSubTitle,
                         fontSize: 16.sp,
                         fontWeight: FontWeightManager.light,
                       ),

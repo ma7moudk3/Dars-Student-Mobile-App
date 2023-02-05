@@ -74,7 +74,8 @@ class SettingsView extends GetView<SettingsController> {
               iconColor: ColorManager.primaryLight,
               onTap: () async =>
                   await Get.toNamed(Routes.STATIC_PAGE, arguments: {
-                "pageTitle": LocaleKeys.privacy_policy_in_hessa.tr,
+                "pageTitle": LocaleKeys.privacy_policy.tr,
+                "pageSubTitle": LocaleKeys.privacy_policy_in_hessa.tr,
                 "pageId": 659,
               }),
             ),
@@ -88,7 +89,8 @@ class SettingsView extends GetView<SettingsController> {
               iconColor: ColorManager.primaryLight,
               onTap: () async =>
                   await Get.toNamed(Routes.STATIC_PAGE, arguments: {
-                "pageTitle": LocaleKeys.terms_and_conditions_in_hessa.tr,
+                "pageTitle": LocaleKeys.terms_and_conditions.tr,
+                "pageSubTitle": LocaleKeys.terms_and_conditions_in_hessa.tr,
                 "pageId": 659,
               }),
             ),
