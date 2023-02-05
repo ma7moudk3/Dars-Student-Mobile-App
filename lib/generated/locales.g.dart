@@ -233,6 +233,9 @@ class LocaleKeys {
   static const resend_code_after = 'resend_code_after';
   static const resend_code = 'resend_code';
   static const check_pin = 'check_pin';
+  static const you_do_not_have_notifications_at_the_present_time =
+      'you_do_not_have_notifications_at_the_present_time';
+  static const no_notifications = 'no_notifications';
   static const enter_the_verification_code_here =
       'enter_the_verification_code_here';
   static const please_enter_the_verification_code =
@@ -537,6 +540,9 @@ class Locales {
     'resend_code_after': 'إعادة إرسال الكود بعد',
     'resend_code': 'إعادة إرسال الكود',
     'check_pin': 'تحقّق',
+    'you_do_not_have_notifications_at_the_present_time':
+        'لا يوجد لديك إشعارات في الوقت الحالي',
+    'no_notifications': 'لا يوجد إشعارات',
     'enter_the_verification_code_here': 'ادخل رمز التحقق هنا',
     'please_enter_the_verification_code': 'الرجاء إدخال رمز التحقق',
     'check_pin_code': 'تحقق من رمز التحقق',

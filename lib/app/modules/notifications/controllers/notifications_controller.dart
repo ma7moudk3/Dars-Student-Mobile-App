@@ -12,7 +12,7 @@ class NotificationsController extends GetxController {
   //     getNotifications(page: pageKey);
   //   });
   // }
-
+  List<String> notificationsList = [];
   Future checkInternet() async {
     await checkInternetConnection(timeout: 10)
         .then((bool internetStatus) async {

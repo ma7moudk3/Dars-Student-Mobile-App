@@ -32,6 +32,30 @@ class NotificationsView extends GetView<NotificationsController> {
       body: GetX<NotificationsController>(
           builder: (NotificationsController controller) {
         if (controller.isInternetConnected.value == true) {
+          if (controller.notificationsList.isEmpty) {
+            return Center(
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  SvgPicture.asset(ImagesManager.noNotifications),
+                  SizedBox(height: 45.h),
+                  PrimaryText(
+                    LocaleKeys.no_notifications.tr,
+                    fontSize: 18.sp,
+                    fontWeight: FontWeightManager.light,
+                  ),
+                  SizedBox(height: 10.h),
+                  PrimaryText(
+                    LocaleKeys.you_do_not_have_notifications_at_the_present_time.tr,
+                    fontSize: 16.sp,
+                    fontWeight: FontWeightManager.light,
+                    color: ColorManager.fontColor7,
+                    textAlign: TextAlign.center,
+                  ),
+                ],
+              ),
+            );
+          }
           return RefreshIndicator(
             color: ColorManager.white,
             backgroundColor: ColorManager.primary,

@@ -1,3 +1,7 @@
+import 'dart:io';
+
+import 'package:flutter/cupertino.dart';
+import 'package:image_picker/image_picker.dart';
 import 'package:intl_phone_field/phone_number.dart';
 
 import '../../../../generated/locales.g.dart';
@@ -77,13 +81,87 @@ class EditProfileView extends GetView<EditProfileController> {
                         children: [
                           GestureDetector(
                             behavior: HitTestBehavior.opaque,
-                            onTap: () async {},
+                            onTap: () async {
+                              if (Platform.isIOS) {
+                                showCupertinoModalPopup(
+                                    context: context,
+                                    builder: (BuildContext context) {
+                                      return CupertinoActionSheet(
+                                        actions: [
+                                          CupertinoActionSheetAction(
+                                            child: PrimaryText(
+                                                LocaleKeys.camera.tr),
+                                            onPressed: () async {
+                                              Get.back();
+                                              await controller.pickImage(
+                                                  ImageSource.camera);
+                                            },
+                                          ),
+                                          CupertinoActionSheetAction(
+                                            child: PrimaryText(
+                                                LocaleKeys.gallery.tr),
+                                            onPressed: () async {
+                                              Get.back();
+                                              await controller.pickImage(
+                                                  ImageSource.gallery);
+                                            },
+                                          ),
+                                        ],
+                                      );
+                                    });
+                              } else {
+                                Get.bottomSheet(
+                                  shape: const RoundedRectangleBorder(
+                                    borderRadius: BorderRadius.only(
+                                      topLeft: Radius.circular(20),
+                                      topRight: Radius.circular(20),
+                                    ),
+                                  ),
+                                  Padding(
+                                    padding: EdgeInsets.symmetric(
+                                        horizontal: 16.w, vertical: 20.h),
+                                    child: SizedBox(
+                                      height: Get.height * 0.13,
+                                      child: ListView(
+                                        children: [
+                                          ListTile(
+                                            leading: const Icon(
+                                                Icons.camera_alt_rounded),
+                                            title: PrimaryText(
+                                                LocaleKeys.camera.tr),
+                                            onTap: () async {
+                                              Get.back();
+                                              await controller.pickImage(
+                                                  ImageSource.camera);
+                                            },
+                                          ),
+                                          ListTile(
+                                            leading:
+                                                const Icon(Icons.photo_rounded),
+                                            title: PrimaryText(
+                                                LocaleKeys.gallery.tr),
+                                            onTap: () async {
+                                              Get.back();
+                                              await controller.pickImage(
+                                                  ImageSource.gallery);
+                                            },
+                                          ),
+                                        ],
+                                      ),
+                                    ),
+                                  ),
+                                  backgroundColor: ColorManager.white,
+                                );
+                              }
+                            },
                             child: Container(
                               width: 100.w,
                               height: 100.h,
                               decoration: BoxDecoration(
                                 image: DecorationImage(
-                                  image: AssetImage(ImagesManager.avatar),
+                                  image: controller.image != null
+                                      ? FileImage(controller.image!) as ImageProvider
+                                      : AssetImage(ImagesManager.avatar),
                                   fit: BoxFit.cover,
                                   colorFilter: ColorFilter.mode(
                                     ColorManager.black.withOpacity(0.1),

@@ -1,3 +1,6 @@
+import 'dart:io';
+
+import 'package:image_picker/image_picker.dart';
 import 'package:intl_phone_field/phone_number.dart';
 
 import '../../../../generated/locales.g.dart';
@@ -14,6 +17,8 @@ class EditProfileController extends GetxController {
   Color? fullNameErrorIconColor, emailErrorIconColor;
   String? phoneNumber;
   int gender = 0; // 0 male, 1 female
+  File? image;
+
   @override
   void onInit() {
     fullNameController = TextEditingController();
@@ -27,6 +32,15 @@ class EditProfileController extends GetxController {
 
   void changeGender(int genderValue) {
     gender = genderValue;
+    update();
+  }
+
+  Future pickImage(ImageSource imageSource) async {
+    ImagePicker imagePicker = ImagePicker();
+    XFile? pickedImage = await imagePicker.pickImage(source: imageSource);
+    if (pickedImage != null) {
+      image = File(pickedImage.path);
+    }
     update();
   }
 
