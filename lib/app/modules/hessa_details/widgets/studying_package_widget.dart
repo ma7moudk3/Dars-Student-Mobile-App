@@ -25,6 +25,7 @@ class StudyingPackageWidget extends GetView<HessaDetailsController> {
               const StudyingHoursHessa(),
               SizedBox(height: 20.h),
               const HessasListWidget(),
+              SizedBox(height: 20.h),
               Container(
                 padding: EdgeInsets.symmetric(horizontal: 16.w, vertical: 16.h),
                 width: Get.width,
