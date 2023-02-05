@@ -3,6 +3,7 @@ import '../../app/constants/exports.dart';
 
 ThemeData getApplicationTheme() {
   return ThemeData(
+    useMaterial3: true,
     // main colors of the app
     primaryColor: ColorManager.primary,
     primaryColorLight: ColorManager.primaryOpacity70,
@@ -28,6 +29,7 @@ ThemeData getApplicationTheme() {
 ThemeData getDarkTheme() {
   return ThemeData(
     // main colors of the app
+    useMaterial3: true,
     primaryColor: ColorManager.primary,
     primaryColorLight: ColorManager.primaryOpacity70,
     disabledColor: ColorManager.grey,

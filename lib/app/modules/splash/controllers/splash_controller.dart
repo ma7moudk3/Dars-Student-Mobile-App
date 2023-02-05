@@ -19,12 +19,12 @@ class SplashController extends GetxController {
         await Get.offNamed(Routes.ONBOARDING);
       } else {
         if (CacheHelper.instance.authenticated()) {
-          // await Get.offNamed(Routes.BOTTOM_NAV_BAR);
+          await Get.offNamed(Routes.BOTTOM_NAV_BAR);
         } else {
-          await Get.offNamed(Routes.BOTTOM_NAV_BAR); // just temporarily :)
-          // await Get.offNamed(Routes.LOGIN_OR_SIGN_UP, arguments: {
-          //   "isFromOnboarding": false,
-          // });
+          // await Get.offNamed(Routes.BOTTOM_NAV_BAR); // just temporarily :)
+          await Get.offNamed(Routes.LOGIN_OR_SIGN_UP, arguments: {
+            "isFromOnboarding": false,
+          });
         }
       }
     });
