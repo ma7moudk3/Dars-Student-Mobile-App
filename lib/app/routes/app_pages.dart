@@ -38,6 +38,8 @@ import '../modules/orders/bindings/orders_binding.dart';
 import '../modules/orders/views/orders_view.dart';
 import '../modules/profile/bindings/profile_binding.dart';
 import '../modules/profile/views/profile_view.dart';
+import '../modules/reset_password/bindings/reset_password_binding.dart';
+import '../modules/reset_password/views/reset_password_view.dart';
 import '../modules/settings/bindings/settings_binding.dart';
 import '../modules/settings/views/settings_view.dart';
 import '../modules/sign_up/bindings/sign_up_binding.dart';
@@ -50,6 +52,8 @@ import '../modules/teacher_details/bindings/teacher_details_binding.dart';
 import '../modules/teacher_details/views/teacher_details_view.dart';
 import '../modules/technical_support/bindings/technical_support_binding.dart';
 import '../modules/technical_support/views/technical_support_view.dart';
+import '../modules/verify_otp/bindings/verify_otp_binding.dart';
+import '../modules/verify_otp/views/verify_otp_view.dart';
 import '../modules/wallet/bindings/wallet_binding.dart';
 import '../modules/wallet/views/wallet_view.dart';
 
@@ -244,6 +248,16 @@ class AppPages {
       binding: ChatBinding(),
       transition: Transition.cupertino,
       transitionDuration: const Duration(milliseconds: 400),
+    ),
+    GetPage(
+      name: _Paths.VERIFY_OTP,
+      page: () => VerifyOtpView(),
+      binding: VerifyOtpBinding(),
+    ),
+    GetPage(
+      name: _Paths.RESET_PASSWORD,
+      page: () => ResetPasswordView(),
+      binding: ResetPasswordBinding(),
     ),
   ];
 }

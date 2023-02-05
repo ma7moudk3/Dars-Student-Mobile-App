@@ -39,12 +39,20 @@ class LocaleKeys {
       'check_your_internet_connection';
   static const retry = 'retry';
   static const paid_amounts = 'paid_amounts';
+  static const forgot_password_email_link_sent =
+      'forgot_password_email_link_sent';
+  static const revise_your_email_to_restore_password =
+      'revise_your_email_to_restore_password';
   static const my_hessa_balance = 'my_hessa_balance';
+  static const new_password = 'new_password';
   static const payment_ways = 'payment_ways';
+  static const do_you_forgot_password = 'do_you_forgot_password';
+  static const reset_password = 'reset_password';
   static const forgot_password = 'forgot_password';
   static const login = 'login';
   static const or = 'or';
   static const payments = 'payments';
+  static const restore = 'restore';
   static const shekel = 'shekel';
   static const remaining = 'remaining';
   static const view_all = 'view_all';
@@ -221,9 +229,19 @@ class LocaleKeys {
   static const you_should_login = 'you_should_login';
   static const how_can_we_help_you = 'how_can_we_help_you';
   static const privacy_policy = 'privacy_policy';
+  static const otp = 'otp';
+  static const resend_code_after = 'resend_code_after';
+  static const resend_code = 'resend_code';
+  static const check_pin = 'check_pin';
+  static const enter_the_verification_code_here =
+      'enter_the_verification_code_here';
+  static const please_enter_the_verification_code =
+      'please_enter_the_verification_code';
+  static const check_pin_code = 'check_pin_code';
+  static const the_verification_code_has_been_sent_to_the_phone_number =
+      'the_verification_code_has_been_sent_to_the_phone_number';
   static const about_hessa = 'about_hessa';
   static const please_enter_old_password = 'please_enter_old_password';
-  static const new_password = 'new_password';
   static const enter_new_password = 'enter_new_password';
   static const confirm_new_password = 'confirm_new_password';
   static const enter_confirmation_password = 'enter_confirmation_password';
@@ -324,12 +342,19 @@ class Locales {
     'check_your_internet_connection': 'تحقق من اتصال الإنترنت الخاص بك',
     'retry': 'إعادة المحاولة',
     'paid_amounts': 'المبالغ المدفوعة',
+    'forgot_password_email_link_sent': 'تم إرسال البريد الإلكتروني',
+    'revise_your_email_to_restore_password':
+        'يرجى مراجعة بريدك الإلكتروني لإعادة تعيين كلمة المرور',
     'my_hessa_balance': 'رصيدي في حِصّة',
+    'new_password': 'كلمة المرور الجديدة',
     'payment_ways': 'طرق الدفع',
-    'forgot_password': 'نسيت كلمة المرور!',
+    'do_you_forgot_password': 'هل نسيت كلمة المرور؟',
+    'reset_password': 'إعادة تعيين كلمة المرور',
+    'forgot_password': 'نسيت كلمة المرور',
     'login': 'تسجيل الدخول',
     'or': 'أو',
     'payments': 'المدفوعات',
+    'restore': 'استعادة',
     'shekel': 'شيكل',
     'remaining': 'متبقي',
     'view_all': 'مشاهدة الكل',
@@ -508,9 +533,17 @@ class Locales {
     'you_should_login': '! يجب عليك تسجيل الدخول',
     'how_can_we_help_you': 'كيف يمكننا مساعدتك؟',
     'privacy_policy': 'سياسة الخصوصية',
+    'otp': 'رمز التحقق',
+    'resend_code_after': 'إعادة إرسال الكود بعد',
+    'resend_code': 'إعادة إرسال الكود',
+    'check_pin': 'تحقّق',
+    'enter_the_verification_code_here': 'ادخل رمز التحقق هنا',
+    'please_enter_the_verification_code': 'الرجاء إدخال رمز التحقق',
+    'check_pin_code': 'تحقق من رمز التحقق',
+    'the_verification_code_has_been_sent_to_the_phone_number':
+        'تم إرسال رمز التحقق إلى رقم الهاتف',
     'about_hessa': 'عن حصة',
     'please_enter_old_password': 'الرجاء إدخال كلمة المرور القديمة',
-    'new_password': 'كلمة المرور الجديدة',
     'enter_new_password': 'أدخل كلمة المرور الجديدة',
     'confirm_new_password': 'تأكيد كلمة المرور الجديدة',
     'enter_confirmation_password': 'أدخل كلمة مرور مطابقة',

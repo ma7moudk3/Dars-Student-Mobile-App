@@ -157,7 +157,7 @@ class SignUpController extends GetxController {
       update();
       return LocaleKeys.check_confirm_password.tr;
     } else {
-      passwordErrorIconColor = null;
+      confimationPasswordErrorIconColor = null;
     }
     update();
     return null;

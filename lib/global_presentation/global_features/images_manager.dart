@@ -78,6 +78,11 @@ class ImagesManager {
   static String whatsappIcon = "assets/svg/icons/whatsapp.svg";
   static String instagramIcon = "assets/svg/icons/instagram.svg";
   static String facebookIcon = "assets/svg/icons/facebook.svg";
+  static String emailVerificationSentIcon = "assets/svg/icons/email_verification_sent.svg";
   static String descendingIcon = "assets/svg/icons/descending.svg";
   static String dependents = "assets/svg/dependents.svg";
+  static String forgotPassword = "assets/svg/forgot_password.svg";
+  static String resetPassword = "assets/svg/reset_password.svg";
+  static String lockPassword = "assets/svg/lock_password.svg";
+  static String otp = "assets/svg/otp.svg";
 }

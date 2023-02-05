@@ -128,7 +128,7 @@ class LoginContent extends GetView<LoginController> {
                       onTap: () async =>
                           await Get.toNamed(Routes.FORGOT_PASSWORD),
                       child: PrimaryText(
-                        LocaleKeys.forgot_password,
+                        LocaleKeys.do_you_forgot_password,
                         color: ColorManager.fontColor,
                         fontWeight: FontWeightManager.softLight,
                         fontSize: 13,

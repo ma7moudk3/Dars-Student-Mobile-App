@@ -29,6 +29,8 @@ abstract class Routes {
   static const ADD_PAYMENT_WAY = _Paths.ADD_PAYMENT_WAY;
   static const STATIC_PAGE = _Paths.STATIC_PAGE;
   static const CHAT = _Paths.CHAT;
+  static const VERIFY_OTP = _Paths.VERIFY_OTP;
+  static const RESET_PASSWORD = _Paths.RESET_PASSWORD;
 }
 
 abstract class _Paths {
@@ -59,4 +61,6 @@ abstract class _Paths {
   static const ADD_PAYMENT_WAY = '/add-payment-way';
   static const STATIC_PAGE = '/static-page';
   static const CHAT = '/chat';
+  static const VERIFY_OTP = '/verify-otp';
+  static const RESET_PASSWORD = '/reset-password';
 }

@@ -15,11 +15,15 @@ class PrimaryText extends StatelessWidget {
   final double? letterSpacing;
   final bool hasSpecificColor;
   final TextDirection? textDirection;
+  final TextDecoration? textDecoration;
+  final Color? decorationColor;
   PrimaryText(
     this.text, {
     Key? key,
     this.fontSize = 13,
     this.color,
+    this.textDecoration,
+    this.decorationColor,
     this.textDirection,
     this.fontWeight = FontWeightManager.light,
     this.textAlign,
@@ -43,7 +47,9 @@ class PrimaryText extends StatelessWidget {
       height: height,
       letterSpacing: letterSpacing,
       fontFamily: FontConstants.fontFamily,
-      decoration: lineThrow ? TextDecoration.lineThrough : TextDecoration.none,
+      decoration: textDecoration ??
+          (lineThrow ? TextDecoration.lineThrough : TextDecoration.none),
+      decorationColor: decorationColor,
     );
     return Text(
       text.tr,
