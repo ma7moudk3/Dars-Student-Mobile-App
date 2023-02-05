@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
+
 class CustomSnackBar {
   static showCustomSnackBar(
       {required String title, required String message, Duration? duration}) {

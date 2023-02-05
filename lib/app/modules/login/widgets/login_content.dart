@@ -1,4 +1,3 @@
-
 import 'package:flutter_keyboard_visibility/flutter_keyboard_visibility.dart';
 
 import '../../../../generated/locales.g.dart';

@@ -1,5 +1,8 @@
+import 'dart:developer';
+
 import 'package:intl_phone_field/country_picker_dialog.dart';
 import 'package:intl_phone_field/intl_phone_field.dart';
+import 'package:intl_phone_field/phone_number.dart';
 
 import '../../app/constants/exports.dart';
 import '../../generated/locales.g.dart';
@@ -7,11 +10,12 @@ import '../../generated/locales.g.dart';
 class IntlPhoneNumberTextField extends StatelessWidget {
   final TextEditingController? controller;
   final FocusNode? focusNode;
-
+  final void Function(PhoneNumber)? onChanged;
   const IntlPhoneNumberTextField({
     Key? key,
     this.controller,
     this.focusNode,
+    this.onChanged,
   }) : super(key: key);
 
   @override
@@ -33,9 +37,13 @@ class IntlPhoneNumberTextField extends StatelessWidget {
           textDirection: TextDirection.ltr,
           child: IntlPhoneField(
             initialValue: palestineValue,
+            onChanged: onChanged,
             invalidNumberMessage: LocaleKeys.invalid_phone_number.tr,
             initialCountryCode: 'PS',
             dropdownTextStyle: textStyle,
+            onCountryChanged: (country) {
+              log(country.dialCode.toString());
+            },
             dropdownIcon: Icon(
               Icons.arrow_drop_down,
               color: ColorManager.primary,

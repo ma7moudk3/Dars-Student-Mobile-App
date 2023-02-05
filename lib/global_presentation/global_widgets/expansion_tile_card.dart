@@ -384,8 +384,7 @@ class ExpansionTileCardState extends State<ExpansionTileCard>
                     color: ColorManager.borderColor2,
                   ),
                   Padding(
-                    padding:
-                        EdgeInsets.only(left: 16.w, right: 16.w),
+                    padding: EdgeInsets.only(left: 16.w, right: 16.w),
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: widget.children,

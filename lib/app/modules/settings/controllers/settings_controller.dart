@@ -52,11 +52,11 @@ class SettingsController extends GetxController {
     if (confirmPasswordFieldValue == null ||
         confirmPasswordFieldValue.isEmpty) {
       confirmPasswordErrorIconColor = Colors.red;
-    update();
+      update();
       return LocaleKeys.please_enter_confirm_password.tr;
     } else if (confirmPasswordFieldValue != newPasswordController.text) {
       confirmPasswordErrorIconColor = Colors.red;
-    update();
+      update();
       return LocaleKeys.check_confirm_password.tr;
     } else {
       newPasswordErrorIconColor = null;

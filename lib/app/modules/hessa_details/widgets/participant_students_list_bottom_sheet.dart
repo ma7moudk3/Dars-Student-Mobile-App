@@ -32,11 +32,7 @@ class ParticipantListBottomSheetContent
           ),
           Container(
             height: (Get.height * 0.5).h,
-            padding: EdgeInsets.only(
-              left: 16.w,
-              right: 16.w,
-              top: 16.h
-            ),
+            padding: EdgeInsets.only(left: 16.w, right: 16.w, top: 16.h),
             decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(10),
               color: ColorManager.white,

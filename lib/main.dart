@@ -7,14 +7,17 @@ import 'package:hessa_student/global_presentation/global_features/theme_manager.
 import 'package:syncfusion_localizations/syncfusion_localizations.dart';
 
 import 'app/data/cache_helper.dart';
+import 'app/data/network_helper/dio_helper.dart';
 import 'app/routes/app_pages.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await CacheHelper.instance.init();
+  // await Firebase.initializeApp();
   SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(
     statusBarColor: ColorManager.transparent, // transparent status bar
   ));
+  DioHelper.init();
   runApp(
     ScreenUtilInit(
       designSize: const Size(375, 812),

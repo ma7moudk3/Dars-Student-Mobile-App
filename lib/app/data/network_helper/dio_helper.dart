@@ -1,16 +1,18 @@
-// ignore_for_file: constant_identifier_names, non_constant_identifier_names
+// ignore_for_file: constant_identifier_names
 
 import 'dart:async';
 import 'dart:developer';
 import 'dart:io';
-import 'package:hessa_student/app/constants/links.dart';
-import 'package:hessa_student/app/data/cache_helper.dart';
-import 'package:hessa_student/app/data/network_helper/strings.dart';
+import 'package:dio/adapter.dart';
 import 'package:dio/dio.dart';
 import 'package:get/get.dart' as getx;
-import 'package:hessa_student/generated/locales.g.dart';
+import 'package:hessa_student/app/data/network_helper/strings.dart';
+import 'package:logger/logger.dart';
 
 import '../../../../global_presentation/global_widgets/custom_snack_bar.dart';
+import '../../../generated/locales.g.dart';
+import '../../constants/links.dart';
+import '../../routes/app_pages.dart';
 import 'api_exception.dart';
 
 class DioHelper {
@@ -23,11 +25,16 @@ class DioHelper {
         receiveDataWhenStatusError: true,
       ),
     );
-
     _dio.interceptors.add(dioLoggerInterceptor);
+    (_dio.httpClientAdapter as DefaultHttpClientAdapter).onHttpClientCreate =
+        (HttpClient client) {
+      client.badCertificateCallback =
+          (X509Certificate cert, String host, int port) => true;
+      return client;
+    };
   }
 
-  static const int TIME_OUT_DURATION = 180000;
+  static const int TIME_OUT_DURATION = 10000;
 
   static post(
     String url, {
@@ -44,8 +51,6 @@ class DioHelper {
   }) async {
     try {
       // 1) indicate loading state
-      queryParameters ??= {};
-      queryParameters["lang"] = getx.Get.locale?.languageCode ?? "ar";
       onLoading?.call();
       // 2) try to perform http request
       var response = await _dio.post(
@@ -60,55 +65,70 @@ class DioHelper {
             sendTimeout: TIME_OUT_DURATION),
       );
       // 3) return response (api done successfully)
-      await onSuccess.call(response);
+
+      if (response.data.isNotEmpty) {
+        await onSuccess.call(response);
+      } else {
+        log("post");
+        // CustomSnackBar.showCustomErrorSnackBar(
+        //     message: LocaleKeys.something_went_wrong.tr,
+        //     title: LocaleKeys.error.tr);
+      }
     } on DioError catch (error) {
       // dio error (api reach the server but not performed successfully
       // no internet connection
 
       log("onError $onError");
-      if (error.message.toLowerCase().contains('socket')) {
-        onError?.call(ApiException(
-              message: Strings.noInternetConnection.tr,
-              url: Links.baseLink + url,
-            )) ??
-            _handleError(Strings.noInternetConnection.tr);
+      if (error.message.toLowerCase().contains('socket') ||
+          error.message.toLowerCase().contains("connection abort")) {
+        getx.Get.toNamed(Routes.CONNECTION_FAILED);
+        log("here 1");
+        // onError?.call(ApiException(
+        //       message: Strings.noInternetConnection.tr,
+        //       url: Links.baseLink + url,
+        //     )) ??
+        //     _handleError(Strings.noInternetConnection.tr);
       }
 
       // no response
-      if (error.response == null) {
+      if (error.response == null &&
+          !error.message.toLowerCase().contains("connection abort")) {
         var exception = ApiException(
           url: Links.baseLink + url,
           message: error.message,
+          response: error.response,
         );
         return onError?.call(exception) ?? handleApiError(exception);
       }
 
       // check if the error is 500 (server problem)
       if (error.response?.statusCode == 500) {
+        log("Error: ${error.response}");
         var exception = ApiException(
           message: Strings.serverError.tr,
           url: Links.baseLink + url,
           statusCode: 500,
+          response: error.response,
         );
         return onError?.call(exception) ?? handleApiError(exception);
       }
 
       var exception = ApiException(
-        message: (error.response!.data["message"].toString()) != "null"
-            ? (error.response!.data["message"].toString())
-            : "",
+        message: error.response!.data["message"] ?? error.message,
         url: Links.baseLink + url,
+        response: error.response,
         statusCode: error.response?.statusCode ?? 404,
       );
       return onError?.call(exception) ?? handleApiError(exception);
     } on SocketException {
       // No internet connection
       log("No internet connection");
-      onError?.call(ApiException(
-            message: Strings.noInternetConnection.tr,
-            url: Links.baseLink + url,
-          )) ??
-          _handleError(Strings.noInternetConnection.tr);
+      getx.Get.toNamed(Routes.CONNECTION_FAILED);
+      // onError?.call(ApiException(
+      //       message: Strings.noInternetConnection.tr,
+      //       url: Links.baseLink + url,
+      //     )) ??
+      //     _handleError(Strings.noInternetConnection.tr);
     } on TimeoutException {
       // Api call went out of time
       log("Api call went out of time");
@@ -129,57 +149,47 @@ class DioHelper {
   }
 
   // GET request
-  static get(String url,
-      {Map<String, dynamic>? headers,
-      Map<String, dynamic>? queryParameters,
-      required Function(Response response) onSuccess,
-      required Function(ApiException)? onError,
-      Function(int value, int progress)? onReceiveProgress,
-      Function? onLoading,
-      bool ishessa_studentLink = false}) async {
+  static get(
+    String url, {
+    Map<String, dynamic>? headers,
+    Map<String, dynamic>? queryParameters,
+    required Function(Response response) onSuccess,
+    required Function(ApiException)? onError,
+    Function(int value, int progress)? onReceiveProgress,
+    Function? onLoading,
+  }) async {
     try {
       // 1) indicate loading state
       onLoading?.call();
       // 2) try to perform http request
-      late Response response;
-      headers ??= {};
-      headers["Authorization"] = "Bearer ${CacheHelper.instance.getToken()}";
-      if (queryParameters != null) {
-        queryParameters["lang"] = getx.Get.locale?.languageCode ?? "ar";
-      }
-
-      if (ishessa_studentLink == false) {
-        response = await _dio
-            .get(
-              url,
-              onReceiveProgress: onReceiveProgress,
-              queryParameters: queryParameters,
-              options: Options(
-                headers: headers,
-              ),
-            )
-            .timeout(const Duration(seconds: TIME_OUT_DURATION));
+      var response = await _dio
+          .get(
+            url,
+            onReceiveProgress: onReceiveProgress,
+            queryParameters: queryParameters,
+            options: Options(
+              headers: headers,
+            ),
+          )
+          .timeout(const Duration(seconds: TIME_OUT_DURATION));
+      if (response.data.isNotEmpty) {
+        await onSuccess(response);
       } else {
-        response = await _dio
-            .get(
-              url,
-              onReceiveProgress: onReceiveProgress,
-              queryParameters: queryParameters,
-              options: Options(
-                headers: headers,
-              ),
-            )
-            .timeout(const Duration(seconds: TIME_OUT_DURATION));
+        print("get");
+        // CustomSnackBar.showCustomErrorSnackBar(
+        //     message: LocaleKeys.something_went_wrong.tr,
+        //     title: LocaleKeys.error.tr);
       }
-      await onSuccess(response);
     } on DioError catch (error) {
       log("Dio Error");
       if (error.message.toLowerCase().contains('socket')) {
-        onError?.call(ApiException(
-              message: Strings.noInternetConnection,
-              url: url,
-            )) ??
-            _handleError(Strings.noInternetConnection);
+        log("here 2");
+        getx.Get.toNamed(Routes.CONNECTION_FAILED);
+        // onError?.call(ApiException(
+        //       message: Strings.noInternetConnection,
+        //       url: url,
+        //     )) ??
+        //     _handleError(Strings.noInternetConnection);
       }
       if (error.response == null) {
         var exception = ApiException(
@@ -194,18 +204,20 @@ class DioHelper {
           url: url,
           statusCode: 500,
         );
+
         return onError?.call(exception) ?? handleApiError(exception);
       }
     } on SocketException {
       log("SocketException");
-
-      onError?.call(ApiException(
-            message: Strings.noInternetConnection,
-            url: url,
-          )) ??
-          _handleError(Strings.noInternetConnection);
+      log("here 2-2");
+      getx.Get.toNamed(Routes.CONNECTION_FAILED);
+      // onError?.call(ApiException(
+      //       message: Strings.noInternetConnection,
+      //       url: url,
+      //     )) ??
+      //     _handleError(Strings.noInternetConnection);
     } on TimeoutException {
-      log("SocketException");
+      log("TimeoutException");
 
       onError?.call(ApiException(
             message: Strings.serverNotResponding,
@@ -252,23 +264,32 @@ class DioHelper {
             sendTimeout: TIME_OUT_DURATION),
       );
       // 3) return response (api done successfully)
-      await onSuccess.call(response);
+      if (response.data.isNotEmpty) {
+        await onSuccess.call(response);
+      } else {
+        log("put");
+        // CustomSnackBar.showCustomErrorSnackBar(
+        //     message: LocaleKeys.something_went_wrong.tr,
+        //     title: LocaleKeys.error.tr);
+      }
     } on DioError catch (error) {
       // dio error (api reach the server but not performed successfully
       // no internet connection
       if (error.message.toLowerCase().contains('socket')) {
-        onError?.call(ApiException(
-              message: Strings.noInternetConnection.tr,
-              url: url,
-            )) ??
-            _handleError(Strings.noInternetConnection.tr);
+        log("here 3");
+        getx.Get.toNamed(Routes.CONNECTION_FAILED);
+        // onError?.call(ApiException(
+        //       message: Strings.noInternetConnection.tr,
+        //       url: url,
+        //     )) ??
+        // _handleError(Strings.noInternetConnection.tr);
       }
 
       // no response
       if (error.response == null) {
         var exception = ApiException(
           url: url,
-          message: error.message,
+          message: LocaleKeys.something_went_wrong.tr,
         );
         return onError?.call(exception) ?? handleApiError(exception);
       }
@@ -291,11 +312,13 @@ class DioHelper {
       return onError?.call(exception) ?? handleApiError(exception);
     } on SocketException {
       // No internet connection
-      onError?.call(ApiException(
-            message: Strings.noInternetConnection.tr,
-            url: url,
-          )) ??
-          _handleError(Strings.noInternetConnection.tr);
+      log("here 3-3");
+      getx.Get.toNamed(Routes.CONNECTION_FAILED);
+      // onError?.call(ApiException(
+      //       message: Strings.noInternetConnection.tr,
+      //       url: url,
+      //     )) ??
+      //     _handleError(Strings.noInternetConnection.tr);
     } on TimeoutException {
       // Api call went out of time
       onError?.call(ApiException(
@@ -306,10 +329,10 @@ class DioHelper {
     } catch (error) {
       // unexpected error for example (parsing json error)
       onError?.call(ApiException(
-            message: error.toString(),
+            message: LocaleKeys.something_went_wrong.tr,
             url: url,
           )) ??
-          _handleError(error.toString());
+          _handleError(LocaleKeys.something_went_wrong.tr);
     }
   }
 
@@ -342,11 +365,12 @@ class DioHelper {
       // dio error (api reach the server but not performed successfully
       // no internet connection
       if (error.message.toLowerCase().contains('socket')) {
-        onError?.call(ApiException(
-              message: Strings.noInternetConnection.tr,
-              url: url,
-            )) ??
-            _handleError(Strings.noInternetConnection.tr);
+        getx.Get.toNamed(Routes.CONNECTION_FAILED);
+        // onError?.call(ApiException(
+        //       message: Strings.noInternetConnection.tr,
+        //       url: url,
+        //     )) ??
+        //     _handleError(Strings.noInternetConnection.tr);
       }
 
       // no response
@@ -376,11 +400,12 @@ class DioHelper {
       return onError?.call(exception) ?? handleApiError(exception);
     } on SocketException {
       // No internet connection
-      onError?.call(ApiException(
-            message: Strings.noInternetConnection.tr,
-            url: url,
-          )) ??
-          _handleError(Strings.noInternetConnection.tr);
+      getx.Get.toNamed(Routes.CONNECTION_FAILED);
+      // onError?.call(ApiException(
+      //       message: Strings.noInternetConnection.tr,
+      //       url: url,
+      //     )) ??
+      //     _handleError(Strings.noInternetConnection.tr);
     } on TimeoutException {
       // Api call went out of time
       onError?.call(ApiException(
@@ -420,12 +445,12 @@ class DioHelper {
   }
 
   static handleApiError(ApiException apiException) {
+    log("apiException message: ${apiException.message}");
     if (getx.Get.isDialogOpen!) {
       getx.Get.back();
-      getx.Get.back();
     }
-    String msg =
-        apiException.response?.data?['message'] ?? apiException.message;
+    String msg = apiException.response?.data?["error"]['message'] ??
+        LocaleKeys.something_went_wrong.tr;
     log("msg1  $msg");
     CustomSnackBar.showCustomErrorSnackBar(
         message: msg, title: LocaleKeys.error.tr);
@@ -433,7 +458,6 @@ class DioHelper {
 
   static _handleError(String msg) {
     if (getx.Get.isDialogOpen!) {
-      getx.Get.back();
       getx.Get.back();
     }
     log("msg2  $msg");
@@ -449,20 +473,33 @@ final dioLoggerInterceptor =
   options.headers.forEach((key, value) {
     headers += "| $key: $value";
   });
-
-  log("┌------------------------------------------------------------------------------");
-  log('''| [DIO] Request: ${options.method} ${options.uri}
+  var loggerNoStack = Logger(
+    printer: PrettyPrinter(methodCount: 0),
+  );
+  loggerNoStack.d(
+      "┌------------------------------------------------------------------------------");
+  loggerNoStack.i('''| [DIO] Request: ${options.method} ${options.uri}
 | ${options.data.toString()}
 | Headers:\n$headers''');
-  log("├------------------------------------------------------------------------------");
+  loggerNoStack.d(
+      "├------------------------------------------------------------------------------");
   handler.next(options); //continue
 }, onResponse: (Response response, handler) async {
-  log("| [DIO] Response [code ${response.statusCode}]: ${response.data.toString()}");
-  log("└------------------------------------------------------------------------------");
+  var loggerNoStack = Logger(
+    printer: PrettyPrinter(methodCount: 0),
+  );
+  loggerNoStack.i(response.data);
+  loggerNoStack.d(
+      "└------------------------------------------------------------------------------");
   handler.next(response);
   // return response; // continue
 }, onError: (DioError error, handler) async {
-  log("| [DIO] Error: ${error.error}: ${error.response.toString()}");
-  log("└------------------------------------------------------------------------------");
+  var loggerNoStack = Logger(
+    printer: PrettyPrinter(methodCount: 0),
+  );
+  loggerNoStack
+      .i("| [DIO] Error: ${error.error}: ${error.response.toString()}");
+  loggerNoStack.d(
+      "└------------------------------------------------------------------------------");
   handler.next(error); //continue
 });

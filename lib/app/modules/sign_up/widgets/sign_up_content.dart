@@ -1,9 +1,9 @@
-import 'dart:developer';
-
 import 'package:flutter_keyboard_visibility/flutter_keyboard_visibility.dart';
 import 'package:hessa_student/app/modules/sign_up/controllers/sign_up_controller.dart';
+import 'package:intl_phone_field/phone_number.dart';
 
 import '../../../../generated/locales.g.dart';
+import '../../../../global_presentation/global_widgets/custom_snack_bar.dart';
 import '../../../../global_presentation/global_widgets/intl_phone_number_widget.dart';
 import '../../../constants/exports.dart';
 import '../../../core/helper_functions.dart';
@@ -133,6 +133,8 @@ class SignUpContent extends GetView<SignUpController> {
                   IntlPhoneNumberTextField(
                     controller: controller.phoneController,
                     focusNode: controller.phoneFocusNode,
+                    onChanged: (PhoneNumber phoneNumber) =>
+                        controller.changePhoneNumber(phoneNumber),
                   ),
                   SizedBox(height: 10.h),
                   PrimaryTextField(
@@ -167,24 +169,12 @@ class SignUpContent extends GetView<SignUpController> {
                           ? ColorManager.primary
                           : ColorManager.borderColor2,
                     ),
+                    fontSize: 14.5.sp,
                     validator: (String? email) =>
                         controller.validateEmail(email),
                   ),
                   SizedBox(height: 10.h),
                   PasswordTextField(
-                    onFieldSubmitted: (String? value) async {
-                      if (controller.formKey.currentState!.validate()) {
-                        await checkInternetConnection(timeout: 5)
-                            .then((bool internetStatus) async {
-                          if (internetStatus == true) {
-                            log('sign up');
-                            // await controller.login();
-                          } else {
-                            await Get.toNamed(Routes.CONNECTION_FAILED);
-                          }
-                        });
-                      }
-                    },
                     errorBorder: OutlineInputBorder(
                       borderRadius: BorderRadius.circular(14),
                       borderSide: BorderSide(color: ColorManager.red),
@@ -222,15 +212,22 @@ class SignUpContent extends GetView<SignUpController> {
                   SizedBox(height: 10.h),
                   PasswordTextField(
                     onFieldSubmitted: (String? value) async {
-                      if (controller.formKey.currentState!.validate()) {
-                        await checkInternetConnection(timeout: 5)
-                            .then((bool internetStatus) async {
-                          if (internetStatus == true) {
-                            log('sign up');
-                          } else {
-                            await Get.toNamed(Routes.CONNECTION_FAILED);
-                          }
-                        });
+                      if (controller.formKey.currentState!.validate() &&
+                          controller.phoneNumber != null) {
+                        if (controller.tosIsAgreed) {
+                          await checkInternetConnection(timeout: 5)
+                              .then((bool internetStatus) async {
+                            if (internetStatus == true) {
+                              await controller.register();
+                            } else {
+                              await Get.toNamed(Routes.CONNECTION_FAILED);
+                            }
+                          });
+                        } else {
+                          CustomSnackBar.showCustomToast(
+                              message: LocaleKeys.check_tos_agreement.tr,
+                              color: ColorManager.primary);
+                        }
                       }
                     },
                     errorBorder: OutlineInputBorder(
@@ -346,15 +343,22 @@ class SignUpContent extends GetView<SignUpController> {
                   SizedBox(height: 20.h),
                   PrimaryButton(
                     onPressed: () async {
-                      if (controller.formKey.currentState!.validate()) {
-                        await checkInternetConnection(timeout: 10)
-                            .then((bool internetStatus) async {
-                          if (internetStatus == true) {
-                            log('sign up');
-                          } else {
-                            await Get.toNamed(Routes.CONNECTION_FAILED);
-                          }
-                        });
+                      if (controller.formKey.currentState!.validate() &&
+                          controller.phoneNumber != null) {
+                        if (controller.tosIsAgreed) {
+                          await checkInternetConnection(timeout: 5)
+                              .then((bool internetStatus) async {
+                            if (internetStatus == true) {
+                              await controller.register();
+                            } else {
+                              await Get.toNamed(Routes.CONNECTION_FAILED);
+                            }
+                          });
+                        } else {
+                          CustomSnackBar.showCustomToast(
+                              message: LocaleKeys.check_tos_agreement.tr,
+                              color: ColorManager.primary);
+                        }
                       }
                     },
                     borderRadius: BorderRadius.circular(15.h),

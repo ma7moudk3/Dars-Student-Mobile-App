@@ -33,7 +33,7 @@ class LoginView extends GetView<LoginController> {
                 KeyboardVisibilityBuilder(
                     builder: (BuildContext context, bool isKeyboardVisible) {
                   return Positioned(
-                    right: 16.w,  
+                    right: 16.w,
                     top: isKeyboardVisible ? 25.h : 75.h,
                     child: Visibility(
                       visible: isKeyboardVisible
@@ -100,8 +100,8 @@ class LoginView extends GetView<LoginController> {
                 ),
                 Positioned(
                   bottom: 15.h,
-                  left: 110.w,
-                  right: 110.w,
+                  left: 105.w,
+                  right: 105.w,
                   child: PrimaryText(
                     "${LocaleKeys.contentRight.tr}${DateTime.now().year.toString()}",
                     fontSize: 12.sp,

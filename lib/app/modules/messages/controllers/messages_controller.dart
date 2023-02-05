@@ -1,4 +1,3 @@
-
 import '../../../constants/exports.dart';
 
 class MessagesController extends GetxController {
@@ -8,7 +7,7 @@ class MessagesController extends GetxController {
     length--;
     update();
   }
-  
+
   @override
   void onClose() {}
 }

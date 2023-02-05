@@ -97,8 +97,8 @@ class LoginOrSignUpView extends GetView<LoginOrSignUpController> {
                   ),
                   Positioned(
                     bottom: 15.h,
-                    left: 110.w,
-                    right: 110.w,
+                    left: 105.w,
+                    right: 105.w,
                     child: PrimaryText(
                       "${LocaleKeys.contentRight.tr}${DateTime.now().year.toString()}",
                       fontSize: 12.sp,

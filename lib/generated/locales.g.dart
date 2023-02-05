@@ -80,6 +80,7 @@ class LocaleKeys {
   static const check_tos_agreement = 'check_tos_agreement';
   static const phone_number = 'phone_number';
   static const invalid_phone_number = 'invalid_phone_number';
+  static const something_went_wrong = 'something_went_wrong';
   static const male = 'male';
   static const female = 'female';
   static const home = 'home';
@@ -148,6 +149,7 @@ class LocaleKeys {
   static const check_card_holder_name = 'check_card_holder_name';
   static const card_holder_name_should_have_space =
       'card_holder_name_should_have_space';
+  static const should_have_space = 'should_have_space';
   static const choose_hessa_date = 'choose_hessa_date';
   static const choose_hessa_time = 'choose_hessa_time';
   static const submit_form = 'submit_form';
@@ -364,6 +366,7 @@ class Locales {
         'تحقق من أنك وافقت على سياسة الخصوصية وشروط الاستخدام',
     'phone_number': 'رقم الهاتف',
     'invalid_phone_number': 'رقم الهاتف غير صحيح',
+    'something_went_wrong': 'حدث خطأ ما',
     'male': 'ذكر',
     'female': 'أنثى',
     'home': 'الرئيسية',
@@ -431,6 +434,8 @@ class Locales {
     'check_card_holder_name': 'الرجاء التأكد من اسم صاحب البطاقة',
     'card_holder_name_should_have_space':
         'اسم صاحب البطاقة يجب أن يحتوي على مسافة مثلاً: Ahmed Alashi',
+    'should_have_space':
+        'الاسم الكامل يجب أن يحتوي على مسافة مثلاً: أحمد محمود',
     'choose_hessa_date': 'اختر تاريخ الحصة',
     'choose_hessa_time': 'اختر وقت الحصة',
     'submit_form': 'إرسال الطلب',

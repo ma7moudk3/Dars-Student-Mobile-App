@@ -1,4 +1,3 @@
-
 import '../../app/constants/exports.dart';
 
 ThemeData getApplicationTheme() {

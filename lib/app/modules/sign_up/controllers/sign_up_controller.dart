@@ -1,5 +1,9 @@
+import 'package:intl_phone_field/phone_number.dart';
+
 import '../../../../generated/locales.g.dart';
 import '../../../constants/exports.dart';
+import '../data/repos/sign_up_repo.dart';
+import '../data/repos/sign_up_repo_implement.dart';
 
 class SignUpController extends GetxController {
   late TextEditingController fullNameController,
@@ -12,6 +16,7 @@ class SignUpController extends GetxController {
       passwordFocusNode = FocusNode(),
       confimationPasswordFocusNode = FocusNode(),
       phoneFocusNode = FocusNode();
+  final SignUpRepo _signUpRepo = SignUpRepoImplement();
   Color? fullNameErrorIconColor,
       emailErrorIconColor,
       passwordErrorIconColor,
@@ -19,9 +24,14 @@ class SignUpController extends GetxController {
   bool tosIsAgreed = false;
   final GlobalKey<FormState> formKey = GlobalKey();
   int gender = 0; // 0 male , 1 female
-
+  String? phoneNumber;
   void changeGender(int genderValue) {
     gender = genderValue;
+    update();
+  }
+
+  void changePhoneNumber(PhoneNumber number) {
+    phoneNumber = number.completeNumber.toString();
     update();
   }
 
@@ -38,6 +48,24 @@ class SignUpController extends GetxController {
     confimationPasswordFocusNode.addListener(() => update());
     phoneFocusNode.addListener(() => update());
     super.onInit();
+  }
+
+  Future<int?> register() async {
+    int? status;
+    await _signUpRepo
+        .register(
+      emailAddress: emailController.text,
+      captchaResponse: "",
+      fullName: fullNameController.text,
+      password: passwordController.text,
+      gender: gender.toString(),
+      phoneNumber: phoneNumber ?? "",
+    )
+        .then((int? statusCode) async {
+      status = statusCode;
+      if (status != null && status == 200) {}
+    });
+    return status;
   }
 
   @override
@@ -67,12 +95,14 @@ class SignUpController extends GetxController {
       fullNameErrorIconColor = Colors.red;
       update();
       return LocaleKeys.please_enter_fullname.tr;
-      // } else if (!regExp.hasMatch(fullName)) {
-      // if (!fullName.contains(" ")) {
-      //   return LocaleKeys.should_have_space.tr;
-      // } else {
-      //   return null;
-      // }
+    } else if (!regExp.hasMatch(fullName)) {
+      if (!fullName.contains(" ")) {
+        fullNameErrorIconColor = Colors.red;
+        update();
+        return LocaleKeys.should_have_space.tr;
+      } else {
+        return null;
+      }
     } else if (regExp.hasMatch(fullName)) {
       fullNameErrorIconColor = Colors.red;
       update();
