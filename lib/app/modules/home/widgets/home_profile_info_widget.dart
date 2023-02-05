@@ -1,6 +1,6 @@
-import 'dart:developer';
 
 import '../../../constants/exports.dart';
+import '../../bottom_nav_bar/controllers/bottom_nav_bar_controller.dart';
 import '../controllers/home_controller.dart';
 
 class HomeProfileInfoWidget extends GetView<HomeController> {
@@ -11,9 +11,10 @@ class HomeProfileInfoWidget extends GetView<HomeController> {
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      behavior: HitTestBehavior.opaque,
+      behavior: HitTestBehavior.deferToChild,
       onTap: () async {
-        log('ProfileInfo clicked');
+        final BottomNavBarController bottomNavBarController = Get.find();
+        bottomNavBarController.bottomNavIndex.value = 3; // profile
       },
       child: Row(
         children: [

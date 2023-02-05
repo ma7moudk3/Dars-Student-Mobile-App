@@ -32,7 +32,9 @@ class ProfileView extends GetView<ProfileController> {
         ),
         action: GestureDetector(
           behavior: HitTestBehavior.opaque,
-          onTap: () async {},
+          onTap: () async {
+            await Get.toNamed(Routes.EDIT_PROFILE);
+          },
           child: SvgPicture.asset(
             ImagesManager.editProfileIcon,
           ),

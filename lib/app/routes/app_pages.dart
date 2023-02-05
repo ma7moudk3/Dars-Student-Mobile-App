@@ -14,6 +14,8 @@ import '../modules/connection_failed/bindings/connection_failed_binding.dart';
 import '../modules/connection_failed/views/connection_failed_view.dart';
 import '../modules/dependents/bindings/dependents_binding.dart';
 import '../modules/dependents/views/dependents_view.dart';
+import '../modules/edit_profile/bindings/edit_profile_binding.dart';
+import '../modules/edit_profile/views/edit_profile_view.dart';
 import '../modules/forgot_password/bindings/forgot_password_binding.dart';
 import '../modules/forgot_password/views/forgot_password_view.dart';
 import '../modules/hessa_details/bindings/hessa_details_binding.dart';
@@ -118,7 +120,7 @@ class AppPages {
     ),
     GetPage(
       name: _Paths.FORGOT_PASSWORD,
-      page: () => ForgotPasswordView(),
+      page: () => const ForgotPasswordView(),
       binding: ForgotPasswordBinding(),
       transition: Transition.cupertino,
       transitionDuration: const Duration(milliseconds: 400),
@@ -251,13 +253,24 @@ class AppPages {
     ),
     GetPage(
       name: _Paths.VERIFY_OTP,
-      page: () => VerifyOtpView(),
+      page: () => const VerifyOtpView(),
       binding: VerifyOtpBinding(),
+      transition: Transition.cupertino,
+      transitionDuration: const Duration(milliseconds: 400),
     ),
     GetPage(
       name: _Paths.RESET_PASSWORD,
-      page: () => ResetPasswordView(),
+      page: () => const ResetPasswordView(),
       binding: ResetPasswordBinding(),
+      transition: Transition.cupertino,
+      transitionDuration: const Duration(milliseconds: 400),
+    ),
+    GetPage(
+      name: _Paths.EDIT_PROFILE,
+      page: () => const EditProfileView(),
+      binding: EditProfileBinding(),
+      transition: Transition.cupertino,
+      transitionDuration: const Duration(milliseconds: 400),
     ),
   ];
 }

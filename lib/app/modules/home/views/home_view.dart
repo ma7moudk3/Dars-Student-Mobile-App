@@ -1,6 +1,9 @@
 import 'package:hessa_student/app/constants/exports.dart';
+import 'package:hessa_student/app/modules/bottom_nav_bar/controllers/bottom_nav_bar_controller.dart';
 import 'package:hessa_student/app/routes/app_pages.dart';
 import 'package:hessa_student/generated/locales.g.dart';
+import 'package:hessa_student/global_presentation/global_features/lotties_manager.dart';
+import 'package:lottie/lottie.dart';
 
 import '../../../../global_presentation/global_widgets/custom_app_bar.dart';
 import '../controllers/home_controller.dart';
@@ -26,11 +29,34 @@ class HomeView extends GetView<HomeController> {
                 children: [
                   const HomeProfileInfoWidget(),
                   SizedBox(height: 25.h),
-                  PrimaryText(
-                    "${LocaleKeys.welcome.tr} وليد علي ..",
-                    fontSize: 16.sp,
-                    fontWeight: FontWeightManager.light,
-                    color: ColorManager.grey5,
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.start,
+                    crossAxisAlignment: CrossAxisAlignment.end,
+                    children: [
+                      PrimaryText(
+                        "${LocaleKeys.welcome.tr} وليد علي ",
+                        fontSize: 16.sp,
+                        fontWeight: FontWeightManager.light,
+                        color: ColorManager.grey5,
+                      ),
+                      Transform(
+                        transform: Matrix4.rotationY(
+                            Get.locale!.languageCode != "ar" ? 0 : 3.14),
+                        alignment: Alignment.bottomCenter,
+                        child: Lottie.asset(
+                          LottiesManager.hi,
+                          width: 32.w,
+                          animate: true,
+                          reverse: true,
+                        ),
+                      ),
+                      // PrimaryText(
+                      //   "...",
+                      //   fontSize: 16.sp,
+                      //   fontWeight: FontWeightManager.light,
+                      //   color: ColorManager.grey5,
+                      // ),
+                    ],
                   ),
                   SizedBox(height: 5.h),
                   PrimaryText(
@@ -75,11 +101,20 @@ class HomeView extends GetView<HomeController> {
                         fontWeight: FontWeightManager.light,
                         color: ColorManager.fontColor,
                       ),
-                      PrimaryText(
-                        LocaleKeys.more,
-                        fontSize: 15.sp,
-                        fontWeight: FontWeightManager.light,
-                        color: ColorManager.primary,
+                      GestureDetector(
+                        behavior: HitTestBehavior.opaque,
+                        onTap: () async {
+                          final BottomNavBarController bottomNavBarController =
+                              Get.find();
+                          bottomNavBarController.bottomNavIndex.value =
+                              1; // orders
+                        },
+                        child: PrimaryText(
+                          LocaleKeys.more,
+                          fontSize: 15.sp,
+                          fontWeight: FontWeightManager.light,
+                          color: ColorManager.primary,
+                        ),
                       ),
                     ],
                   ),
