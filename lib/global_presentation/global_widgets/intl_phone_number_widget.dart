@@ -1,5 +1,6 @@
 import 'dart:developer';
 
+import 'package:flutter/services.dart';
 import 'package:intl_phone_field/country_picker_dialog.dart';
 import 'package:intl_phone_field/intl_phone_field.dart';
 import 'package:intl_phone_field/phone_number.dart';
@@ -37,7 +38,13 @@ class IntlPhoneNumberTextField extends StatelessWidget {
           textDirection: TextDirection.ltr,
           child: IntlPhoneField(
             initialValue: palestineValue,
+            inputFormatters: [
+              FilteringTextInputFormatter.allow(RegExp('[0-9]')),
+              FilteringTextInputFormatter.deny(RegExp(r'^0+')),
+              LengthLimitingTextInputFormatter(9)
+            ],
             onChanged: onChanged,
+            countries: const ['PS', 'IL'],
             invalidNumberMessage: LocaleKeys.invalid_phone_number.tr,
             initialCountryCode: 'PS',
             dropdownTextStyle: textStyle,
@@ -79,7 +86,8 @@ class IntlPhoneNumberTextField extends StatelessWidget {
               contentPadding: const EdgeInsets.fromLTRB(20.0, 10.0, 20.0, 10.0),
               hintMaxLines: null,
               counterText: "",
-              hintText: "(59 | 56) XXXXXXX",
+              // hintText:  "(59 | 56) XXXXXXX",
+              hintText: LocaleKeys.enter_phone_number.tr,
               hintStyle: TextStyle(
                 color: ColorManager.borderColor2,
                 fontSize: (14).sp,

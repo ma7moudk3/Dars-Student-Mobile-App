@@ -54,7 +54,7 @@ class LogoutDialogContent extends StatelessWidget {
                   onPressed: () async {
                     if (await checkInternetConnection(timeout: 10)) {
                       showLoadingDialog();
-                      await CacheHelper.instance.setToken("");
+                      await CacheHelper.instance.setAccessToken("");
                       await CacheHelper.instance.setFcmToken("");
                       // await FirebaseMessaging.instance.deleteToken();
                       await CacheHelper.instance.setAuthed(false);

@@ -15,12 +15,28 @@ class CacheHelper {
     _sharedPreferences = await SharedPreferences.getInstance();
   }
 
-  Future setToken(String token) async {
-    await _sharedPreferences.setString('token', token);
+  Future setAccessToken(String token) async {
+    await _sharedPreferences.setString('access_token', token);
   }
 
-  String getToken() {
-    return _sharedPreferences.getString('token') ?? '';
+  String getAccessToken() {
+    return _sharedPreferences.getString('access_token') ?? '';
+  }
+
+  Future setIsEmailAndPhoneConfirmed(bool isConfirmed) async {
+    await _sharedPreferences.setBool('confirmed', isConfirmed);
+  }
+
+  bool getIsEmailAndPhoneConfirmed() {
+    return _sharedPreferences.getBool('confirmed') ?? false;
+  }
+
+  Future setRefreshToken(String token) async {
+    await _sharedPreferences.setString('refresh_token', token);
+  }
+
+  String getRefreshToken() {
+    return _sharedPreferences.getString('refresh_token') ?? '';
   }
 
   Future setFcmToken(String token) async {

@@ -25,7 +25,10 @@ class LocaleKeys {
   static const enter_email = 'enter_email';
   static const enter_password = 'enter_password';
   static const enter_old_password = 'enter_old_password';
+  static const enjoy_the_app = 'enjoy_the_app';
   static const no_messages_yet = 'no_messages_yet';
+  static const welcoming = 'welcoming';
+  static const welcome_back = 'welcome_back';
   static const no_messages_to_see_here = 'no_messages_to_see_here';
   static const start_a_conversation_with_any_of_the_teachers =
       'start_a_conversation_with_any_of_the_teachers';
@@ -87,6 +90,7 @@ class LocaleKeys {
   static const check_confirm_password = 'check_confirm_password';
   static const check_tos_agreement = 'check_tos_agreement';
   static const phone_number = 'phone_number';
+  static const enter_phone_number = 'enter_phone_number';
   static const invalid_phone_number = 'invalid_phone_number';
   static const something_went_wrong = 'something_went_wrong';
   static const male = 'male';
@@ -334,7 +338,10 @@ class Locales {
     'enter_email': 'عنوان البريد الإلكتروني',
     'enter_password': 'أدخل كلمة المرور',
     'enter_old_password': 'أدخل كلمة المرور القديمة',
+    'enjoy_the_app': 'استمتع مع حصة',
     'no_messages_yet': 'لا توجد رسائل بعد',
+    'welcoming': 'يسعدنا رؤيتك مرة أخرى',
+    'welcome_back': 'نأمل أن تكون قد قضيت وقتًا رائعًا\nونحن سعداء بالعودة',
     'no_messages_to_see_here': 'لا يوجد رسائل لعرضها هنا',
     'start_a_conversation_with_any_of_the_teachers':
         'ابدأ محادثة مع أي من المعلمين. ستظهر دردشاتك هنا',
@@ -397,6 +404,7 @@ class Locales {
     'check_tos_agreement':
         'تحقق من أنك وافقت على سياسة الخصوصية وشروط الاستخدام',
     'phone_number': 'رقم الهاتف',
+    'enter_phone_number': 'أدخل رقم الهاتف',
     'invalid_phone_number': 'رقم الهاتف غير صحيح',
     'something_went_wrong': 'حدث خطأ ما',
     'male': 'ذكر',

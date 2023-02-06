@@ -56,6 +56,8 @@ import '../modules/teacher_details/bindings/teacher_details_binding.dart';
 import '../modules/teacher_details/views/teacher_details_view.dart';
 import '../modules/technical_support/bindings/technical_support_binding.dart';
 import '../modules/technical_support/views/technical_support_view.dart';
+import '../modules/verify_account/bindings/verify_account_binding.dart';
+import '../modules/verify_account/views/verify_account_view.dart';
 import '../modules/verify_otp/bindings/verify_otp_binding.dart';
 import '../modules/verify_otp/views/verify_otp_view.dart';
 import '../modules/wallet/bindings/wallet_binding.dart';
@@ -278,6 +280,11 @@ class AppPages {
       name: _Paths.PROFILE_INFORMATION,
       page: () => ProfileInformationView(),
       binding: ProfileInformationBinding(),
+    ),
+    GetPage(
+      name: _Paths.VERIFY_ACCOUNT,
+      page: () => VerifyAccountView(),
+      binding: VerifyAccountBinding(),
     ),
   ];
 }

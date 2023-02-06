@@ -1,14 +1,14 @@
-import 'error.dart';
+import 'result.dart';
 
-class SignUpHttpError {
-  dynamic result;
+class CurrentUserInfo {
+  Result? result;
   dynamic targetUrl;
   bool? success;
-  Error? error;
+  dynamic error;
   bool? unAuthorizedRequest;
   bool? abp;
 
-  SignUpHttpError({
+  CurrentUserInfo({
     this.result,
     this.targetUrl,
     this.success,
@@ -17,24 +17,24 @@ class SignUpHttpError {
     this.abp,
   });
 
-  factory SignUpHttpError.fromJson(Map<String, dynamic> json) {
-    return SignUpHttpError(
-      result: json['result'] as dynamic,
+  factory CurrentUserInfo.fromJson(Map<String, dynamic> json) {
+    return CurrentUserInfo(
+      result: json['result'] == null
+          ? null
+          : Result.fromJson(json['result'] as Map<String, dynamic>),
       targetUrl: json['targetUrl'] as dynamic,
       success: json['success'] as bool?,
-      error: json['error'] == null
-          ? null
-          : Error.fromJson(json['error'] as Map<String, dynamic>),
+      error: json['error'] as dynamic,
       unAuthorizedRequest: json['unAuthorizedRequest'] as bool?,
       abp: json['__abp'] as bool?,
     );
   }
 
   Map<String, dynamic> toJson() => {
-        'result': result,
+        'result': result?.toJson(),
         'targetUrl': targetUrl,
         'success': success,
-        'error': error?.toJson(),
+        'error': error,
         'unAuthorizedRequest': unAuthorizedRequest,
         '__abp': abp,
       };

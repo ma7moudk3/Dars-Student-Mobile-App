@@ -1,3 +1,5 @@
+import 'package:hessa_student/app/modules/login/data/models/current_user_info/current_user_info.dart';
+
 abstract class SignUpRepo {
   Future<int?> register({
     required String gender,

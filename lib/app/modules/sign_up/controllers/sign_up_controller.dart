@@ -2,6 +2,7 @@ import 'package:intl_phone_field/phone_number.dart';
 
 import '../../../../generated/locales.g.dart';
 import '../../../constants/exports.dart';
+import '../../../routes/app_pages.dart';
 import '../data/repos/sign_up_repo.dart';
 import '../data/repos/sign_up_repo_implement.dart';
 
@@ -63,7 +64,13 @@ class SignUpController extends GetxController {
     )
         .then((int? statusCode) async {
       status = statusCode;
-      if (status != null && status == 200) {}
+      if (status != null && status == 200) {
+        if (Get.previousRoute == Routes.LOGIN) {
+          Get.back();
+        } else {
+          await Get.offNamed(Routes.LOGIN);
+        }
+      }
     });
     return status;
   }

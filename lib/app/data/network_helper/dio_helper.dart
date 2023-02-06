@@ -449,7 +449,7 @@ class DioHelper {
     if (getx.Get.isDialogOpen!) {
       getx.Get.back();
     }
-    String msg = apiException.response?.data?["error"]['message'] ??
+    String msg = (apiException.response?.data?["error"]['message']) ??
         LocaleKeys.something_went_wrong.tr;
     log("msg1  $msg");
     CustomSnackBar.showCustomErrorSnackBar(

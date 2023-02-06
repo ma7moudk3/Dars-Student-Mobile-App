@@ -76,9 +76,7 @@ class LoginContent extends GetView<LoginController> {
                       await checkInternetConnection(timeout: 5)
                           .then((bool internetStatus) async {
                         if (internetStatus == true) {
-                          print('logged in');
-                          // await controller.login();
-                          Get.toNamed(Routes.BOTTOM_NAV_BAR); // for testing
+                          await controller.login();
                         } else {
                           await Get.toNamed(Routes.CONNECTION_FAILED);
                         }
@@ -143,9 +141,7 @@ class LoginContent extends GetView<LoginController> {
                       await checkInternetConnection(timeout: 10)
                           .then((bool internetStatus) async {
                         if (internetStatus == true) {
-                          print('logged in');
-                          // await controller.login();
-                          Get.toNamed(Routes.BOTTOM_NAV_BAR); // for testing
+                          await controller.login();
                         } else {
                           await Get.toNamed(Routes.CONNECTION_FAILED);
                         }

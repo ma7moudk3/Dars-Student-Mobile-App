@@ -1,5 +1,7 @@
 import 'dart:developer';
 import 'dart:math' as math;
+import 'package:hessa_student/app/modules/login/data/models/current_user_info/current_user_info.dart';
+
 import '../../../../../global_presentation/global_widgets/loading.dart';
 import '../../../../constants/exports.dart';
 import '../../../../constants/links.dart';
@@ -42,18 +44,18 @@ class SignUpRepoImplement extends SignUpRepo {
     await DioHelper.post(headers: headers, Links.register, data: data,
         onSuccess: (response) async {
       statusCode = response.statusCode;
-      log(response.data);
+      log(response.data.toString());
       if (Get.isDialogOpen!) {
         Get.back();
       }
     }, onError: (response) {
       statusCode = response.statusCode;
-      // SignUpHttpError error = SignUpHttpError.fromJson(response.response!.data);
-      
       if (Get.isDialogOpen!) {
         Get.back();
       }
     });
     return statusCode;
   }
+
+
 }
