@@ -26,7 +26,7 @@ class LocaleKeys {
   static const enter_password = 'enter_password';
   static const enter_old_password = 'enter_old_password';
   static const no_messages_yet = 'no_messages_yet';
-  static const nothing_to_see_here = 'nothing_to_see_here';
+  static const no_messages_to_see_here = 'no_messages_to_see_here';
   static const start_a_conversation_with_any_of_the_teachers =
       'start_a_conversation_with_any_of_the_teachers';
   static const please_enter_email = 'please_enter_email';
@@ -231,6 +231,10 @@ class LocaleKeys {
   static const privacy_policy = 'privacy_policy';
   static const otp = 'otp';
   static const resend_code_after = 'resend_code_after';
+  static const no_transaction_has_been_made_on_your_payments =
+      'no_transaction_has_been_made_on_your_payments';
+  static const please_complete_your_profile_information_to_benefit_from_hessa_services =
+      'please_complete_your_profile_information_to_benefit_from_hessa_services';
   static const resend_code = 'resend_code';
   static const check_pin = 'check_pin';
   static const you_do_not_have_notifications_at_the_present_time =
@@ -331,7 +335,7 @@ class Locales {
     'enter_password': 'أدخل كلمة المرور',
     'enter_old_password': 'أدخل كلمة المرور القديمة',
     'no_messages_yet': 'لا توجد رسائل بعد',
-    'nothing_to_see_here': 'لا يوجد شيء لعرضه هنا',
+    'no_messages_to_see_here': 'لا يوجد رسائل لعرضها هنا',
     'start_a_conversation_with_any_of_the_teachers':
         'ابدأ محادثة مع أي من المعلمين. ستظهر دردشاتك هنا',
     'please_enter_email': 'الرجاء إدخال البريد الإلكتروني',
@@ -538,6 +542,10 @@ class Locales {
     'privacy_policy': 'سياسة الخصوصية',
     'otp': 'رمز التحقق',
     'resend_code_after': 'إعادة إرسال الكود بعد',
+    'no_transaction_has_been_made_on_your_payments':
+        'لم يتم إجراء أي حركة على مدفوعاتك!',
+    'please_complete_your_profile_information_to_benefit_from_hessa_services':
+        'يرجى إكمال معلومات الملف الشخصي لتتمكن من الاستفادة من خدمات حصة',
     'resend_code': 'إعادة إرسال الكود',
     'check_pin': 'تحقّق',
     'you_do_not_have_notifications_at_the_present_time':

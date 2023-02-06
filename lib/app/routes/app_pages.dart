@@ -40,6 +40,8 @@ import '../modules/orders/bindings/orders_binding.dart';
 import '../modules/orders/views/orders_view.dart';
 import '../modules/profile/bindings/profile_binding.dart';
 import '../modules/profile/views/profile_view.dart';
+import '../modules/profile_information/bindings/profile_information_binding.dart';
+import '../modules/profile_information/views/profile_information_view.dart';
 import '../modules/reset_password/bindings/reset_password_binding.dart';
 import '../modules/reset_password/views/reset_password_view.dart';
 import '../modules/settings/bindings/settings_binding.dart';
@@ -271,6 +273,11 @@ class AppPages {
       binding: EditProfileBinding(),
       transition: Transition.cupertino,
       transitionDuration: const Duration(milliseconds: 400),
+    ),
+    GetPage(
+      name: _Paths.PROFILE_INFORMATION,
+      page: () => ProfileInformationView(),
+      binding: ProfileInformationBinding(),
     ),
   ];
 }

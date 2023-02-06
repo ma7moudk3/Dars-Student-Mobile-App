@@ -79,7 +79,8 @@ class ProfileView extends GetView<ProfileController> {
                     iconPath: ImagesManager.profileDataIcon,
                     color: ColorManager.primaryLight.withOpacity(0.15),
                     iconColor: ColorManager.primaryLight,
-                    onTap: () => log("personal information"),
+                    onTap: () async =>
+                        await Get.toNamed(Routes.PROFILE_INFORMATION),
                   ),
                   moreDivider(),
                   MoreItem(

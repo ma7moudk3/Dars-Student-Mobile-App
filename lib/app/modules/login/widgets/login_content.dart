@@ -296,7 +296,7 @@ class LoginContent extends GetView<LoginController> {
                   return AnimatedContainer(
                       duration: const Duration(milliseconds: 300),
                       curve: Curves.easeOut,
-                      height: isKeyboardVisible ? Get.height * 0.13 : 0);
+                      height: isKeyboardVisible ? Get.height * 0.08 : 0);
                 }),
               ],
             );

@@ -168,6 +168,29 @@ class AddNewDependentView extends GetView<AddNewDependentController> {
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
+                          Visibility(
+                            visible: controller.image != null,
+                            child: Center(
+                              child: Container(
+                                width: 75.w,
+                                height: 75.h,
+                                decoration: BoxDecoration(
+                                  image: DecorationImage(
+                                    image: controller.image != null
+                                        ? FileImage(controller.image!)
+                                            as ImageProvider
+                                        : AssetImage(ImagesManager.avatar),
+                                    fit: BoxFit.cover,
+                                  ),
+                                  border: Border.all(
+                                    width: 1,
+                                    color: ColorManager.primary,
+                                  ),
+                                  shape: BoxShape.circle,
+                                ),
+                              ),
+                            ),
+                          ),
                           PrimaryTextField(
                             fontSize: 14.sp,
                             controller: controller.nameController,
@@ -220,6 +243,7 @@ class AddNewDependentView extends GetView<AddNewDependentController> {
                             readOnly: true,
                             ifReadOnlyTextColor: ColorManager.fontColor7,
                             controller: controller.uplpoadPictureFileController,
+                            textDirection: TextDirection.ltr,
                             title: LocaleKeys.person_picture,
                             focusNode: controller.uplpoadPictureFileFocusNode,
                             titleFontWeight: FontWeightManager.softLight,

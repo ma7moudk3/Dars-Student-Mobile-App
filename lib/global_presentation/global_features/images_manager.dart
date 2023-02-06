@@ -63,6 +63,8 @@ class ImagesManager {
   static String timerIcon = "assets/svg/icons/timer.svg";
   static String heartIcon = "assets/svg/icons/heart.svg";
   static String messagingIcon = "assets/svg/icons/messaging.svg";
+  static String noMessages = "assets/svg/no_messages.svg";
+  static String noPayments = "assets/svg/no_payments.svg";
   static String starFilledIcon = "assets/svg/icons/star_filled.svg";
   static String starFilledRoundedIcon =
       "assets/svg/icons/star_filled_rounded.svg";

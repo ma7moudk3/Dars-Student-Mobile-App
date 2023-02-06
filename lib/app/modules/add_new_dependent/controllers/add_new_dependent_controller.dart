@@ -24,7 +24,7 @@ class AddNewDependentController extends GetxController {
       uplpoadPictureFileController,
       dateOfBirthController;
   late DateRangePickerController dateOfBirthRangeController;
-
+  File? image;
   FocusNode nameFocusNode = FocusNode(),
       uplpoadPictureFileFocusNode = FocusNode(),
       dateOfBirthFocusNode = FocusNode();
@@ -35,7 +35,7 @@ class AddNewDependentController extends GetxController {
   int dependentGender = 0; // 0 male, 1 female
 
   Future handleImageSelection({required ImageSource imageSource}) async {
-    final result = await ImagePicker().pickImage(
+    XFile? result = await ImagePicker().pickImage(
       imageQuality: 70,
       maxWidth: 1440,
       source: imageSource,
@@ -46,18 +46,29 @@ class AddNewDependentController extends GetxController {
       final bytes = await result.readAsBytes();
       final image = await decodeImageFromList(bytes);
       final name = result.name;
+      uplpoadPictureFileController.clear();
+      this.image = File(file.path);
+      String tempFileName = this.image!.path.split("image_picker").last;
+      uplpoadPictureFileController.text = tempFileName.replaceAll(tempFileName,
+          "${DateFormat("yyyy-MM-dd HH:mm:ss").format(DateTime.now())}.${tempFileName.split(".").last}");
     }
     update();
   }
 
   Future handleFileSelection() async {
-    final result = await FilePicker.platform.pickFiles(
-      type: FileType.any,
+    FilePickerResult? result = await FilePicker.platform.pickFiles(
+      type: FileType.custom,
+      allowedExtensions: ['pdf'],
     );
+    String? fileName;
     if (result != null && result.files.single.path != null) {
       final name = result.files.single.name;
       final filePath = result.files.single.path!;
       final file = File(filePath);
+      fileName = file.path.split('/').last;
+      image = null;
+      uplpoadPictureFileController.text = fileName;
+      // log(lookupMimeType(filePath).toString());
     }
     update();
   }

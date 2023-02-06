@@ -34,7 +34,7 @@ class MessagesView extends GetView<MessagesController> {
                     ),
                   ],
                 ),
-                child: controller.length > 0 // to be changed later 
+                child: controller.length == 0 // to be changed later
                     ? ListView.builder(
                         itemCount: controller.length,
                         shrinkWrap: true,
@@ -49,14 +49,14 @@ class MessagesView extends GetView<MessagesController> {
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
                           SvgPicture.asset(
-                            ImagesManager.messagingIcon,
+                            ImagesManager.noMessages,
                             width: 150.w,
                             height: 150.h,
-                            color: ColorManager.grey5.withOpacity(1),
                           ),
-                          SizedBox(height: 12.h),
+                          SizedBox(height: 20.h),
                           PrimaryText(
-                            LocaleKeys.nothing_to_see_here.tr,
+                            LocaleKeys.no_messages_to_see_here.tr,
+                            color: ColorManager.accent,
                             fontSize: 18.sp,
                           ),
                           SizedBox(height: 8.h),
@@ -66,7 +66,6 @@ class MessagesView extends GetView<MessagesController> {
                                 .tr,
                             fontSize: 16.sp,
                             textAlign: TextAlign.center,
-                            color: ColorManager.fontColor7,
                           ),
                         ],
                       ),
