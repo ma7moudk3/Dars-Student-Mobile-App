@@ -1,4 +1,6 @@
 import 'package:hessa_student/app/constants/exports.dart';
+import 'package:intl_phone_field/countries.dart';
+import 'package:intl_phone_field/phone_number.dart';
 
 import '../../../../generated/locales.g.dart';
 import '../../../../global_presentation/global_widgets/custom_app_bar.dart';
@@ -11,6 +13,7 @@ class VerifyAccountView extends GetView<VerifyAccountController> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      resizeToAvoidBottomInset: false,
       appBar: CustomAppBar(
         title: LocaleKeys.verify_account.tr,
         leading: const SizedBox.shrink(),
@@ -19,19 +22,21 @@ class VerifyAccountView extends GetView<VerifyAccountController> {
       body: Padding(
         padding: EdgeInsets.symmetric(horizontal: 20.w),
         child: GetX<VerifyAccountController>(
-          builder: (VerifyAccountController controller) {
-            return Column(
-              crossAxisAlignment: CrossAxisAlignment.center,
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                SvgPicture.asset(
-                  ImagesManager.hessaLogo,
-                  width: 120.w,
-                  height: 120.h,
-                ),
-                SizedBox(height: 20.h),
-                Visibility(
-                  visible: !controller.isEmailConfirmed.value,
+            builder: (VerifyAccountController controller) {
+          return Column(
+            crossAxisAlignment: CrossAxisAlignment.center,
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              SvgPicture.asset(
+                ImagesManager.hessaLogo,
+                width: 120.w,
+                height: 120.h,
+              ),
+              SizedBox(height: 20.h),
+              Visibility(
+                visible: !controller.isEmailConfirmed.value,
+                child: Form(
+                  key: controller.emailForm,
                   child: Column(
                     children: [
                       PrimaryTextField(
@@ -50,7 +55,8 @@ class VerifyAccountView extends GetView<VerifyAccountController> {
                         hintText: LocaleKeys.enter_email.tr,
                         enabledBorder: OutlineInputBorder(
                           borderRadius: BorderRadius.circular(14),
-                          borderSide: BorderSide(color: ColorManager.borderColor2),
+                          borderSide:
+                              BorderSide(color: ColorManager.borderColor2),
                         ),
                         focusedBorder: OutlineInputBorder(
                           borderRadius: BorderRadius.circular(14),
@@ -77,39 +83,53 @@ class VerifyAccountView extends GetView<VerifyAccountController> {
                     ],
                   ),
                 ),
-                Visibility(
-                  visible: !controller.isPhoneNumberConfirmed.value,
+              ),
+              Visibility(
+                visible: !controller.isPhoneNumberConfirmed.value,
+                child: Form(
+                  key: controller.phoneForm,
                   child: Column(
                     children: [
                       IntlPhoneNumberTextField(
                         controller: controller.phoneNumberController,
                         focusNode: controller.phoneNumberFocusNode,
-                        readOnly: true,
+                        validator: (PhoneNumber? phoneNumber) async =>
+                            controller.validatePhoneNumber(phoneNumber != null
+                                ? phoneNumber.completeNumber
+                                : ""),
+                        onChanged: (PhoneNumber number) =>
+                            controller.changePhoneNumber(number),
+                        onCountryChanged: (Country country) =>
+                            controller.changeCountry(country),
+                        initialValue: controller.dialCode ?? "+970",
+                        initialCountryCode: controller.countryCode ?? "PS",
                       ),
                       SizedBox(height: 20.h),
                       PrimaryButton(
                         onPressed: () async {
-                          await controller.sendOTPPhoneNumber();
+                          if (controller.phoneForm.currentState!.validate()) {
+                            await controller.sendOTPPhoneNumber();
+                          }
                         },
                         title: LocaleKeys.verify_phone_number.tr,
                       ),
                     ],
                   ),
                 ),
-                SizedBox(height: 50.h),
-                PrimaryButton(
-                  width: 150.w,
-                  onPressed: () async {
-                    await controller.logout();
-                  },
-                  title: LocaleKeys.logout.tr,
-                  borderSide: BorderSide.none,
-                  color: ColorManager.red,
-                ),
-              ],
-            );
-          }
-        ),
+              ),
+              SizedBox(height: 50.h),
+              PrimaryButton(
+                width: 150.w,
+                onPressed: () async {
+                  await controller.logout();
+                },
+                title: LocaleKeys.logout.tr,
+                borderSide: BorderSide.none,
+                color: ColorManager.red,
+              ),
+            ],
+          );
+        }),
       ),
     );
   }

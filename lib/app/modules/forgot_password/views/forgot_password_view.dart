@@ -1,10 +1,11 @@
 import 'package:flutter_keyboard_visibility/flutter_keyboard_visibility.dart';
+import 'package:hessa_student/app/core/helper_functions.dart';
+import 'package:hessa_student/app/routes/app_pages.dart';
 
 import '../../../../generated/locales.g.dart';
 import '../../../../global_presentation/global_widgets/custom_app_bar.dart';
 import '../../../constants/exports.dart';
 import '../controllers/forgot_password_controller.dart';
-import '../widgets/email_verification_sent_dialog_content.dart';
 
 class ForgotPasswordView extends GetView<ForgotPasswordController> {
   const ForgotPasswordView({super.key});
@@ -104,26 +105,11 @@ class ForgotPasswordView extends GetView<ForgotPasswordController> {
                           PrimaryButton(
                             onPressed: () async {
                               if (controller.formKey.currentState!.validate()) {
-                                await Get.dialog(
-                                  Container(
-                                    color: ColorManager.black.withOpacity(0.1),
-                                    height: 140.h,
-                                    width: 140.w,
-                                    child: Center(
-                                      child: Container(
-                                        width: Get.width,
-                                        margin: EdgeInsets.symmetric(
-                                          horizontal: 18.w,
-                                        ),
-                                        child:
-                                            const EmailVerificationSentDialogContent(),
-                                      ),
-                                    ),
-                                  ),
-                                  arguments: {
-                                    'email': controller.emailController.text,
-                                  },
-                                );
+                                if (await checkInternetConnection(timeout: 5)) {
+                                  await controller.sendPasswordResetCode();
+                                } else {
+                                  await Get.toNamed(Routes.CONNECTION_FAILED);
+                                }
                               }
                             },
                             fontSize: 15.sp,

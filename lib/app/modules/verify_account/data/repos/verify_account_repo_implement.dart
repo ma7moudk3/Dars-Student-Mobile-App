@@ -14,6 +14,7 @@ class VerifyAccountRepoImplement extends VerifyAccountRepo {
   Future<GenerateOtpCode> sendOTP({
     String? phoneNumber,
     String? emailAddress,
+    bool isPhoneChanged = false,
   }) async {
     GenerateOtpCode generateOtpCode = GenerateOtpCode();
     Map<String, dynamic> data = emailAddress != null
@@ -24,7 +25,7 @@ class VerifyAccountRepoImplement extends VerifyAccountRepo {
           }
         : {
             "phoneNumber": phoneNumber,
-            "operationType": 4,
+            "operationType": isPhoneChanged ? 2 : 4,
             "verificationMethod": 0,
           };
     Map<String, dynamic> headers = {

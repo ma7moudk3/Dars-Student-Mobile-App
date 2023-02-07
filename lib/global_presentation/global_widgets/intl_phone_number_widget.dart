@@ -1,6 +1,8 @@
+import 'dart:async';
 import 'dart:developer';
 
 import 'package:flutter/services.dart';
+import 'package:intl_phone_field/countries.dart';
 import 'package:intl_phone_field/country_picker_dialog.dart';
 import 'package:intl_phone_field/intl_phone_field.dart';
 import 'package:intl_phone_field/phone_number.dart';
@@ -12,13 +14,21 @@ class IntlPhoneNumberTextField extends StatelessWidget {
   final TextEditingController? controller;
   final FocusNode? focusNode;
   final void Function(PhoneNumber)? onChanged;
-  final bool readOnly;
+  final void Function(Country)? onCountryChanged;
+  final FutureOr<String?> Function(PhoneNumber?)? validator;
+  final bool readOnly, enabled;
+  final String initialValue, initialCountryCode;
   const IntlPhoneNumberTextField({
     Key? key,
     this.controller,
+    this.initialValue = "+970",
+    this.initialCountryCode = "PS",
     this.focusNode,
+    this.validator,
     this.readOnly = false,
+    this.enabled = true,
     this.onChanged,
+    this.onCountryChanged,
   }) : super(key: key);
 
   @override
@@ -29,7 +39,6 @@ class IntlPhoneNumberTextField extends StatelessWidget {
       fontWeight: FontWeightManager.softLight,
       fontFamily: FontConstants.fontFamily,
     );
-    var palestineValue = "+970";
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
@@ -39,11 +48,11 @@ class IntlPhoneNumberTextField extends StatelessWidget {
         Directionality(
           textDirection: TextDirection.ltr,
           child: IntlPhoneField(
+            validator: validator,
             readOnly: readOnly,
-            enabled: !readOnly,
+            enabled: enabled,
             style: textStyle,
-
-            initialValue: palestineValue,
+            initialValue: initialValue,
             inputFormatters: [
               FilteringTextInputFormatter.allow(RegExp('[0-9]')),
               FilteringTextInputFormatter.deny(RegExp(r'^0+')),
@@ -52,11 +61,12 @@ class IntlPhoneNumberTextField extends StatelessWidget {
             onChanged: onChanged,
             countries: const ['PS', 'IL'],
             invalidNumberMessage: LocaleKeys.invalid_phone_number.tr,
-            initialCountryCode: 'PS',
+            initialCountryCode: initialCountryCode,
             dropdownTextStyle: textStyle,
-            onCountryChanged: (country) {
-              log(country.dialCode.toString());
-            },
+            onCountryChanged: onCountryChanged ??
+                (Country country) {
+                  log(country.dialCode.toString());
+                },
             dropdownIcon: Icon(
               Icons.arrow_drop_down,
               color: ColorManager.primary,

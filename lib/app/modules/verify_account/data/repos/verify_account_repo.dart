@@ -5,6 +5,7 @@ abstract class VerifyAccountRepo {
   Future<GenerateOtpCode> sendOTP({
     String? phoneNumber,
     String? emailAddress,
+    bool isPhoneChanged = false,
   });
 
   Future<int> logout();
