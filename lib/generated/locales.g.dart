@@ -247,10 +247,12 @@ class LocaleKeys {
       'you_do_not_have_notifications_at_the_present_time';
   static const no_notifications = 'no_notifications';
   static const verify_account = 'verify_account';
+  static const back_backward = 'back_backward';
   static const enter_the_verification_code_here =
       'enter_the_verification_code_here';
   static const please_enter_the_verification_code =
       'please_enter_the_verification_code';
+  static const wanna_back = 'wanna_back';
   static const check_pin_code = 'check_pin_code';
   static const the_verification_code_has_been_sent_to_the_phone_number =
       'the_verification_code_has_been_sent_to_the_phone_number';
@@ -571,8 +573,10 @@ class Locales {
         'لا يوجد لديك إشعارات في الوقت الحالي',
     'no_notifications': 'لا يوجد إشعارات',
     'verify_account': 'تحقق من الحساب',
+    'back_backward': 'الرجوع للخلف',
     'enter_the_verification_code_here': 'ادخل رمز التحقق هنا',
     'please_enter_the_verification_code': 'الرجاء إدخال رمز التحقق',
+    'wanna_back': 'هل أنت متأكد أنك تريد العودة؟',
     'check_pin_code': 'تحقق من رمز التحقق',
     'the_verification_code_has_been_sent_to_the_phone_number':
         'تم إرسال رمز التحقق إلى رقم الهاتف',

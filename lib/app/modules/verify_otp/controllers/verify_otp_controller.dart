@@ -20,7 +20,6 @@ class VerifyOtpController extends GetxController {
   int start = 60;
   String? email;
   String? phoneNumber;
-  bool isResetPassword = false;
   final VerifyAccountRepo _verifyAccountRepo = VerifyAccountRepoImplement();
   GenerateOtpCode generateOtpCode = GenerateOtpCode();
   VerifyOtpResponse verifyOtpResponse = VerifyOtpResponse();
@@ -29,7 +28,6 @@ class VerifyOtpController extends GetxController {
     if (Get.arguments != null) {
       email = Get.arguments["email"] ?? "";
       phoneNumber = Get.arguments["phoneNumber"] ?? "";
-      isResetPassword = Get.arguments["isResetPassword"] ?? false;
     }
     pinController = TextEditingController();
     pinFocusNode.addListener(() => update);
