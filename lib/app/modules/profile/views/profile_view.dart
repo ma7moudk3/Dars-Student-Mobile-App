@@ -145,7 +145,7 @@ class ProfileView extends GetView<ProfileController> {
                     iconColor: ColorManager.red,
                     action: const SizedBox.shrink(),
                     onTap: () async {
-                      Get.dialog(
+                      await Get.dialog(
                         Container(
                           color: ColorManager.black.withOpacity(0.1),
                           height: 140.h,

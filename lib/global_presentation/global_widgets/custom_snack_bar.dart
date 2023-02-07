@@ -1,21 +1,43 @@
-import 'package:flutter/material.dart';
-import 'package:get/get.dart';
+import 'package:hessa_student/app/constants/exports.dart';
 
 class CustomSnackBar {
   static showCustomSnackBar(
       {required String title, required String message, Duration? duration}) {
-    Get.snackbar(
-      title.tr,
-      message.tr,
+    Get.rawSnackbar(
+      snackPosition: SnackPosition.TOP,
+      titleText: PrimaryText(
+        title.tr,
+        color: Colors.white,
+        fontSize: 14.sp,
+      ),
+      snackStyle: SnackStyle.FLOATING,
+      borderRadius: 25,
+      messageText: PrimaryText(
+        message.tr,
+        color: ColorManager.white,
+        fontSize: 13.sp,
+        fontWeight: FontWeightManager.softLight,
+      ),
       duration: duration ?? const Duration(seconds: 3),
       margin: const EdgeInsets.only(top: 10, left: 10, right: 10),
-      colorText: Colors.white,
       backgroundColor: Colors.green,
       icon: const Icon(
         Icons.check_circle,
         color: Colors.white,
       ),
     );
+    // Get.snackbar(
+    //   title.tr,
+    //   message.tr,
+    //   duration: duration ?? const Duration(seconds: 3),
+    //   margin: const EdgeInsets.only(top: 10, left: 10, right: 10),
+    //   colorText: Colors.white,
+    //   backgroundColor: Colors.green,
+    //   icon: const Icon(
+    //     Icons.check_circle,
+    //     color: Colors.white,
+    //   ),
+    // );
   }
 
   static showCustomErrorSnackBar(
@@ -23,12 +45,23 @@ class CustomSnackBar {
       required String message,
       Color? color,
       Duration? duration}) {
-    Get.snackbar(
-      title.tr,
-      message.tr,
+    Get.rawSnackbar(
+      snackPosition: SnackPosition.TOP,
+      titleText: PrimaryText(
+        title.tr,
+        color: Colors.white,
+        fontSize: 14.sp,
+      ),
+      snackStyle: SnackStyle.FLOATING,
+      borderRadius: 25,
+      messageText: PrimaryText(
+        message.tr,
+        color: ColorManager.white,
+        fontSize: 13.sp,
+        fontWeight: FontWeightManager.softLight,
+      ),
       duration: duration ?? const Duration(seconds: 3),
       margin: const EdgeInsets.only(top: 10, left: 10, right: 10),
-      colorText: Colors.white,
       backgroundColor: color ?? Colors.redAccent,
       icon: const Icon(
         Icons.error,
