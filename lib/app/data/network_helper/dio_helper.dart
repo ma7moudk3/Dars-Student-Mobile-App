@@ -7,7 +7,6 @@ import 'package:dio/adapter.dart';
 import 'package:dio/dio.dart';
 import 'package:get/get.dart' as getx;
 import 'package:hessa_student/app/data/network_helper/strings.dart';
-import 'package:logger/logger.dart';
 
 import '../../../../global_presentation/global_widgets/custom_snack_bar.dart';
 import '../../../generated/locales.g.dart';
@@ -473,33 +472,19 @@ final dioLoggerInterceptor =
   options.headers.forEach((key, value) {
     headers += "| $key: $value";
   });
-  var loggerNoStack = Logger(
-    printer: PrettyPrinter(methodCount: 0),
-  );
-  loggerNoStack.d(
-      "┌------------------------------------------------------------------------------");
-  loggerNoStack.i('''| [DIO] Request: ${options.method} ${options.uri}
+  log("┌------------------------------------------------------------------------------");
+  log('''| [DIO] Request: ${options.method} ${options.uri}
 | ${options.data.toString()}
 | Headers:\n$headers''');
-  loggerNoStack.d(
-      "├------------------------------------------------------------------------------");
+  log("├------------------------------------------------------------------------------");
   handler.next(options); //continue
 }, onResponse: (Response response, handler) async {
-  var loggerNoStack = Logger(
-    printer: PrettyPrinter(methodCount: 0),
-  );
-  loggerNoStack.i(response.data);
-  loggerNoStack.d(
-      "└------------------------------------------------------------------------------");
+  log(response.data.toString());
+  log("└------------------------------------------------------------------------------");
   handler.next(response);
   // return response; // continue
 }, onError: (DioError error, handler) async {
-  var loggerNoStack = Logger(
-    printer: PrettyPrinter(methodCount: 0),
-  );
-  loggerNoStack
-      .i("| [DIO] Error: ${error.error}: ${error.response.toString()}");
-  loggerNoStack.d(
-      "└------------------------------------------------------------------------------");
+  log("| [DIO] Error: ${error.error}: ${error.response.toString()}");
+  log("└------------------------------------------------------------------------------");
   handler.next(error); //continue
 });

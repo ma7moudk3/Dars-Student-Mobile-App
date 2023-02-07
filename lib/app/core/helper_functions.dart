@@ -1,3 +1,4 @@
+import 'dart:async';
 import 'dart:developer' as developer;
 import 'dart:io';
 import 'dart:math';
@@ -35,6 +36,13 @@ Future<bool> checkInternetConnection({required int timeout}) async {
   } on SocketException catch (_) {
     developer.log('not connected');
     print('not connected: $_');
+  } on TimeoutException catch (_) {
+    developer.log('timeout not connected');
+    print('timeout not connected: $_');
+    // CustomSnackBar.showCustomErrorSnackBar(
+    //   title: LocaleKeys.something_went_wrong.tr,
+    //   message: LocaleKeys.check_your_internet_connection.tr,
+    // );
   }
   return false;
 }

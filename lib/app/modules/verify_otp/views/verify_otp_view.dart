@@ -1,4 +1,3 @@
-import 'dart:developer';
 
 import 'package:pinput/pinput.dart';
 
@@ -110,16 +109,30 @@ class VerifyOtpView extends GetView<VerifyOtpController> {
                           Column(
                             children: [
                               PrimaryText(
-                                LocaleKeys
-                                    .the_verification_code_has_been_sent_to_the_phone_number
-                                    .tr,
+                                (controller.phoneNumber != null &&
+                                        controller.phoneNumber!.isNotEmpty)
+                                    ? LocaleKeys
+                                        .the_verification_code_has_been_sent_to_the_phone_number
+                                        .tr
+                                    : (controller.email != null &&
+                                            controller.email!.isNotEmpty)
+                                        ? LocaleKeys
+                                            .the_verification_code_has_been_sent_to_the_email
+                                            .tr
+                                        : "No Data",
                                 fontSize: 16.sp,
                                 fontWeight: FontWeightManager.softLight,
                                 textAlign: TextAlign.center,
                               ),
                               SizedBox(height: 5.h),
                               PrimaryText(
-                                "+970-592195200",
+                                (controller.phoneNumber != null &&
+                                        controller.phoneNumber!.isNotEmpty)
+                                    ? controller.phoneNumber!
+                                    : (controller.email != null &&
+                                            controller.email!.isNotEmpty)
+                                        ? controller.email!
+                                        : "No Data",
                                 fontSize: 17.sp,
                                 fontWeight: FontWeightManager.light,
                                 textAlign: TextAlign.center,
@@ -143,7 +156,7 @@ class VerifyOtpView extends GetView<VerifyOtpController> {
                                   focusNode: controller.pinFocusNode,
                                   defaultPinTheme: defaultPinTheme,
                                   pinAnimationType: PinAnimationType.slide,
-                                  length: 4,
+                                  length: 6,
                                   // showCursor: true,
                                   // cursor: cursor,
                                   // autofocus: true,
@@ -151,7 +164,7 @@ class VerifyOtpView extends GetView<VerifyOtpController> {
                                   onClipboardFound: (value) {
                                     String pattern = r'^[0-9]+$';
                                     RegExp regExp = RegExp(pattern);
-                                    if (value.length == 4 &&
+                                    if (value.length == 6 &&
                                         regExp.hasMatch(value)) {
                                       controller.pinController.text = value;
                                     }
@@ -232,7 +245,9 @@ class VerifyOtpView extends GetView<VerifyOtpController> {
                           else
                             GestureDetector(
                               onTap: () async {
-                                controller.resendOTP();
+                                await controller.resendOTP().then((value) {
+                                  controller.pinController.clear();
+                                });
                               },
                               child: PrimaryText(
                                 LocaleKeys.resend_code.tr,
@@ -246,7 +261,7 @@ class VerifyOtpView extends GetView<VerifyOtpController> {
                           PrimaryButton(
                             onPressed: () async {
                               if (controller.formKey.currentState!.validate()) {
-                                log('validate');
+                                await controller.verifyOTP();
                               }
                             },
                             borderRadius: BorderRadius.circular(15.h),

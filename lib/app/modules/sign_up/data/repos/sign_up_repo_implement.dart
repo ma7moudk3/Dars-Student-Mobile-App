@@ -56,6 +56,4 @@ class SignUpRepoImplement extends SignUpRepo {
     });
     return statusCode;
   }
-
-
 }

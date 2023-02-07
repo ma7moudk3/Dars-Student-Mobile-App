@@ -1,5 +1,3 @@
-import 'dart:developer';
-
 import 'package:hessa_student/app/modules/login/data/models/login_info/login_info.dart';
 
 import '../../../../constants/exports.dart';
@@ -7,6 +5,7 @@ import '../../../../constants/links.dart';
 import '../../../../data/cache_helper.dart';
 import '../../../../data/network_helper/dio_helper.dart';
 import '../models/current_user_info/current_user_info.dart';
+import '../models/current_user_profile_info/current_user_profile_info.dart';
 import 'login_repo.dart';
 
 class LoginRepoImplement extends LoginRepo {
@@ -27,7 +26,6 @@ class LoginRepoImplement extends LoginRepo {
           loginInfo.result!.accessToken != null &&
           loginInfo.result!.refreshToken != null) {
         await CacheHelper.instance.setAuthed(true);
-        log(loginInfo.result!.accessToken ?? 'null');
         await CacheHelper.instance
             .setAccessToken(loginInfo.result!.accessToken!);
         await CacheHelper.instance
@@ -64,5 +62,29 @@ class LoginRepoImplement extends LoginRepo {
       }
     });
     return currentUserInfo;
+  }
+
+  @override
+  Future<CurrentUserProfileInfo> getCurrentUserProfileInfo() async {
+    CurrentUserProfileInfo currentUserProfileInfo = CurrentUserProfileInfo();
+    String accessToken = CacheHelper.instance.getAccessToken();
+    Map<String, dynamic> headers = {
+      'Accept-Language': Get.locale != null ? Get.locale!.languageCode : 'ar',
+      'Content-Type': 'application/json',
+      'Accept': 'application/json',
+      'Authorization': 'Bearer $accessToken',
+    };
+    await DioHelper.get(headers: headers, Links.getCurrentUserProfileInfo,
+        onSuccess: (response) async {
+      currentUserProfileInfo = CurrentUserProfileInfo.fromJson(response.data);
+      if (Get.isDialogOpen!) {
+        Get.back();
+      }
+    }, onError: (response) {
+      if (Get.isDialogOpen!) {
+        Get.back();
+      }
+    });
+    return currentUserProfileInfo;
   }
 }

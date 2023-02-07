@@ -42,8 +42,8 @@ class ForgotPasswordView extends GetView<ForgotPasswordController> {
                     key: controller.formKey,
                     child: Container(
                       width: Get.width,
-                      padding:
-                          EdgeInsets.symmetric(vertical: 40.h, horizontal: 16.w),
+                      padding: EdgeInsets.symmetric(
+                          vertical: 40.h, horizontal: 16.w),
                       decoration: BoxDecoration(
                         color: ColorManager.white,
                         borderRadius: BorderRadius.circular(14.0),
@@ -84,7 +84,8 @@ class ForgotPasswordView extends GetView<ForgotPasswordController> {
                             ),
                             focusedBorder: OutlineInputBorder(
                               borderRadius: BorderRadius.circular(14),
-                              borderSide: BorderSide(color: ColorManager.primary),
+                              borderSide:
+                                  BorderSide(color: ColorManager.primary),
                             ),
                             errorBorder: OutlineInputBorder(
                               borderRadius: BorderRadius.circular(14),

@@ -14,8 +14,7 @@ class AddNewDependentView extends GetView<AddNewDependentController> {
 
   @override
   Widget build(BuildContext context) {
-    bool isFileFunctionalityNeeded = true;
-
+    bool isFileFunctionalityNeeded = false;
     Future handleAttachmentPressed() async {
       if (Platform.isIOS) {
         showCupertinoModalPopup(

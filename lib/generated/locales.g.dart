@@ -56,6 +56,8 @@ class LocaleKeys {
   static const or = 'or';
   static const payments = 'payments';
   static const restore = 'restore';
+  static const account_created_successfully = 'account_created_successfully';
+  static const you_can_login_now = 'you_can_login_now';
   static const shekel = 'shekel';
   static const remaining = 'remaining';
   static const view_all = 'view_all';
@@ -244,6 +246,7 @@ class LocaleKeys {
   static const you_do_not_have_notifications_at_the_present_time =
       'you_do_not_have_notifications_at_the_present_time';
   static const no_notifications = 'no_notifications';
+  static const verify_account = 'verify_account';
   static const enter_the_verification_code_here =
       'enter_the_verification_code_here';
   static const please_enter_the_verification_code =
@@ -251,7 +254,13 @@ class LocaleKeys {
   static const check_pin_code = 'check_pin_code';
   static const the_verification_code_has_been_sent_to_the_phone_number =
       'the_verification_code_has_been_sent_to_the_phone_number';
+  static const the_verification_code_has_been_sent_to_the_email =
+      'the_verification_code_has_been_sent_to_the_email';
   static const about_hessa = 'about_hessa';
+  static const success = 'success';
+  static const verify_email = 'verify_email';
+  static const verified_successfully = 'verified_successfully';
+  static const verify_phone_number = 'verify_phone_number';
   static const please_enter_old_password = 'please_enter_old_password';
   static const enter_new_password = 'enter_new_password';
   static const confirm_new_password = 'confirm_new_password';
@@ -369,6 +378,8 @@ class Locales {
     'or': 'أو',
     'payments': 'المدفوعات',
     'restore': 'استعادة',
+    'account_created_successfully': 'تم انشاء الحساب بنجاح !',
+    'you_can_login_now': 'يمكنك تسجيل الدخول الآن',
     'shekel': 'شيكل',
     'remaining': 'متبقي',
     'view_all': 'مشاهدة الكل',
@@ -559,12 +570,19 @@ class Locales {
     'you_do_not_have_notifications_at_the_present_time':
         'لا يوجد لديك إشعارات في الوقت الحالي',
     'no_notifications': 'لا يوجد إشعارات',
+    'verify_account': 'تحقق من الحساب',
     'enter_the_verification_code_here': 'ادخل رمز التحقق هنا',
     'please_enter_the_verification_code': 'الرجاء إدخال رمز التحقق',
     'check_pin_code': 'تحقق من رمز التحقق',
     'the_verification_code_has_been_sent_to_the_phone_number':
         'تم إرسال رمز التحقق إلى رقم الهاتف',
+    'the_verification_code_has_been_sent_to_the_email':
+        'تم إرسال رمز التحقق إلى البريد الإلكتروني',
     'about_hessa': 'عن حصة',
+    'success': 'نجاح',
+    'verify_email': 'تحقق من البريد الإلكتروني',
+    'verified_successfully': 'تم التحقق بنجاح',
+    'verify_phone_number': 'تحقق من رقم الهاتف',
     'please_enter_old_password': 'الرجاء إدخال كلمة المرور القديمة',
     'enter_new_password': 'أدخل كلمة المرور الجديدة',
     'confirm_new_password': 'تأكيد كلمة المرور الجديدة',

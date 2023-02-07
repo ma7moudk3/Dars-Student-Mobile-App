@@ -40,7 +40,8 @@ class AboutHessaView extends GetView<AboutHessaController> {
               Padding(
                 padding: EdgeInsets.symmetric(horizontal: 16.w),
                 child: Container(
-                  padding: EdgeInsets.symmetric(horizontal: 16.w, vertical: 20.h),
+                  padding:
+                      EdgeInsets.symmetric(horizontal: 16.w, vertical: 20.h),
                   width: Get.width,
                   decoration: BoxDecoration(
                     color: ColorManager.white,
@@ -101,7 +102,8 @@ class AboutHessaView extends GetView<AboutHessaController> {
                           GestureDetector(
                             behavior: HitTestBehavior.opaque,
                             onTap: () {},
-                            child: SvgPicture.asset(ImagesManager.instagramIcon),
+                            child:
+                                SvgPicture.asset(ImagesManager.instagramIcon),
                           ),
                           SizedBox(width: 12.w),
                           GestureDetector(

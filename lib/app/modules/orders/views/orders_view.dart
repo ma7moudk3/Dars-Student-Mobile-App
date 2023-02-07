@@ -1,4 +1,3 @@
-
 import '../../../../generated/locales.g.dart';
 import '../../../../global_presentation/global_widgets/custom_app_bar.dart';
 import '../../../constants/exports.dart';

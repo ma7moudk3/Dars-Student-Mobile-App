@@ -12,10 +12,12 @@ class IntlPhoneNumberTextField extends StatelessWidget {
   final TextEditingController? controller;
   final FocusNode? focusNode;
   final void Function(PhoneNumber)? onChanged;
+  final bool readOnly;
   const IntlPhoneNumberTextField({
     Key? key,
     this.controller,
     this.focusNode,
+    this.readOnly = false,
     this.onChanged,
   }) : super(key: key);
 
@@ -37,6 +39,10 @@ class IntlPhoneNumberTextField extends StatelessWidget {
         Directionality(
           textDirection: TextDirection.ltr,
           child: IntlPhoneField(
+            readOnly: readOnly,
+            enabled: !readOnly,
+            style: textStyle,
+
             initialValue: palestineValue,
             inputFormatters: [
               FilteringTextInputFormatter.allow(RegExp('[0-9]')),

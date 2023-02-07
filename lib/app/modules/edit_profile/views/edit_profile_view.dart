@@ -160,7 +160,8 @@ class EditProfileView extends GetView<EditProfileController> {
                               decoration: BoxDecoration(
                                 image: DecorationImage(
                                   image: controller.image != null
-                                      ? FileImage(controller.image!) as ImageProvider
+                                      ? FileImage(controller.image!)
+                                          as ImageProvider
                                       : AssetImage(ImagesManager.avatar),
                                   fit: BoxFit.cover,
                                   colorFilter: ColorFilter.mode(

@@ -14,8 +14,7 @@ class AddStudentOrderHessaWidget extends GetView<OrderHessaController> {
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () async {
-        if (controller.dependentsController
-            .dummyDependents.isNotEmpty) {
+        if (controller.dependentsController.dummyDependents.isNotEmpty) {
           await Get.bottomSheet(
             backgroundColor: ColorManager.white,
             isScrollControlled: true,
@@ -41,15 +40,11 @@ class AddStudentOrderHessaWidget extends GetView<OrderHessaController> {
             ..lineTo(size.width - cardRadius, 0)
             ..arcToPoint(Offset(size.width, cardRadius),
                 radius: Radius.circular(cardRadius))
-            ..lineTo(
-                size.width, size.height - cardRadius)
-            ..arcToPoint(
-                Offset(size.width - cardRadius,
-                    size.height),
+            ..lineTo(size.width, size.height - cardRadius)
+            ..arcToPoint(Offset(size.width - cardRadius, size.height),
                 radius: Radius.circular(cardRadius))
             ..lineTo(cardRadius, size.height)
-            ..arcToPoint(
-                Offset(0, size.height - cardRadius),
+            ..arcToPoint(Offset(0, size.height - cardRadius),
                 radius: Radius.circular(cardRadius))
             ..lineTo(0, cardRadius)
             ..arcToPoint(
@@ -65,16 +60,14 @@ class AddStudentOrderHessaWidget extends GetView<OrderHessaController> {
             width: Get.width,
             child: Center(
               child: Row(
-                mainAxisAlignment:
-                    MainAxisAlignment.center,
+                mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   Container(
                     width: 32.w,
                     height: 32.h,
                     decoration: BoxDecoration(
                       color: ColorManager.fontColor6,
-                      borderRadius:
-                          BorderRadius.circular(10),
+                      borderRadius: BorderRadius.circular(10),
                     ),
                     child: Center(
                       child: Icon(
@@ -88,8 +81,7 @@ class AddStudentOrderHessaWidget extends GetView<OrderHessaController> {
                   PrimaryText(
                     LocaleKeys.add_student,
                     fontSize: 14.sp,
-                    fontWeight:
-                        FontWeightManager.softLight,
+                    fontWeight: FontWeightManager.softLight,
                     color: ColorManager.fontColor,
                   ),
                 ],

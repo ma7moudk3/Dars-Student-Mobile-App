@@ -38,9 +38,9 @@ class LoginView extends GetView<LoginController> {
                     child: Visibility(
                       visible: isKeyboardVisible
                           ? (Get.arguments != null &&
-                                  Get.arguments['isFromLoginInOrSignUp'] !=
+                                  Get.arguments['isFromLoginOrSignUp'] !=
                                       null &&
-                                  Get.arguments['isFromLoginInOrSignUp'])
+                                  Get.arguments['isFromLoginOrSignUp'])
                               ? false
                               : true
                           : true,
@@ -71,8 +71,8 @@ class LoginView extends GetView<LoginController> {
                   top: 0,
                   child: Visibility(
                     visible: Get.arguments != null &&
-                        Get.arguments['isFromLoginInOrSignUp'] != null &&
-                        Get.arguments['isFromLoginInOrSignUp'],
+                        Get.arguments['isFromLoginOrSignUp'] != null &&
+                        Get.arguments['isFromLoginOrSignUp'],
                     child: Padding(
                       padding: EdgeInsets.symmetric(
                           horizontal: 16.w, vertical: 15.h),

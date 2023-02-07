@@ -46,7 +46,8 @@ class NotificationsView extends GetView<NotificationsController> {
                   ),
                   SizedBox(height: 10.h),
                   PrimaryText(
-                    LocaleKeys.you_do_not_have_notifications_at_the_present_time.tr,
+                    LocaleKeys
+                        .you_do_not_have_notifications_at_the_present_time.tr,
                     fontSize: 16.sp,
                     fontWeight: FontWeightManager.light,
                     color: ColorManager.fontColor7,

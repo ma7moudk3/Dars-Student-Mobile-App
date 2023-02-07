@@ -271,14 +271,17 @@ class WalletView extends GetView<WalletController> {
                   fontSize: 18.sp,
                 ),
                 Visibility(
-                  visible: true, // it depends >> this is for the teacher >> if the teacher didn't complete his profile information, but we don't know if it's for the student also or not
+                  visible:
+                      true, // it depends >> this is for the teacher >> if the teacher didn't complete his profile information, but we don't know if it's for the student also or not
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.center,
                     crossAxisAlignment: CrossAxisAlignment.center,
                     children: [
                       SizedBox(height: 8.h),
                       PrimaryText(
-                        LocaleKeys.please_complete_your_profile_information_to_benefit_from_hessa_services.tr,
+                        LocaleKeys
+                            .please_complete_your_profile_information_to_benefit_from_hessa_services
+                            .tr,
                         fontSize: 16.sp,
                         textAlign: TextAlign.center,
                         color: ColorManager.fontColor7,

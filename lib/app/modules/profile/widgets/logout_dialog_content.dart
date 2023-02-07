@@ -55,9 +55,15 @@ class LogoutDialogContent extends StatelessWidget {
                     if (await checkInternetConnection(timeout: 10)) {
                       showLoadingDialog();
                       await CacheHelper.instance.setAccessToken("");
+                      await CacheHelper.instance.setRefreshToken("");
                       await CacheHelper.instance.setFcmToken("");
+                      await CacheHelper.instance.cacheCurrentUserInfo({});
+                      await CacheHelper.instance
+                          .cacheCurrentUserProfileInfo({});
                       // await FirebaseMessaging.instance.deleteToken();
                       await CacheHelper.instance.setAuthed(false);
+                      await CacheHelper.instance.setIsEmailConfirmed(false);
+                      await CacheHelper.instance.setIsPhoneConfirmed(false);
                       // await CacheHelper.instance.cacheLoggedInUser({});
                       // await GoogleSignInHelper.googleLogout();
                       // await AppleSignInHelper.appleLogout();
@@ -66,7 +72,7 @@ class LogoutDialogContent extends StatelessWidget {
                       //     Get.back();
                       //   }
                       // });
-                      await Get.offAllNamed(Routes.LOGIN);
+                      await Get.offAllNamed(Routes.LOGIN_OR_SIGN_UP);
                     } else {
                       Get.toNamed(Routes.CONNECTION_FAILED);
                     }

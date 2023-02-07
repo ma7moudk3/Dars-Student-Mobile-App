@@ -117,7 +117,7 @@ class LoginOrSignUpView extends GetView<LoginOrSignUpController> {
                           PrimaryButton(
                             onPressed: () async {
                               await Get.toNamed(Routes.LOGIN, arguments: {
-                                "isFromLoginInOrSignUp": true,
+                                "isFromLoginOrSignUp": true,
                               });
                             },
                             borderRadius: BorderRadius.circular(15.h),
@@ -128,7 +128,7 @@ class LoginOrSignUpView extends GetView<LoginOrSignUpController> {
                             color: ColorManager.transparent,
                             onPressed: () async {
                               await Get.toNamed(Routes.SIGN_UP, arguments: {
-                                "isFromLoginInOrSignUp": true,
+                                "isFromLoginOrSignUp": true,
                               });
                             },
                             borderRadius: BorderRadius.circular(15.h),

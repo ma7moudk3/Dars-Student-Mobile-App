@@ -1,4 +1,9 @@
+import 'dart:convert';
+
+import 'package:hessa_student/app/modules/login/data/models/current_user_info/current_user_info.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+
+import '../modules/login/data/models/current_user_profile_info/current_user_profile_info.dart';
 
 class CacheHelper {
   CacheHelper._() {
@@ -19,16 +24,53 @@ class CacheHelper {
     await _sharedPreferences.setString('access_token', token);
   }
 
+  Future cacheCurrentUserInfo(Map<String, dynamic>? currentUserInfo) async {
+    await _sharedPreferences.setString(
+        "user_info", jsonEncode(currentUserInfo));
+  }
+
+  CurrentUserInfo? getCachedCurrentUserInfo() {
+    if (_sharedPreferences.getString("user_info") != null) {
+      return CurrentUserInfo.fromJson(
+          jsonDecode(_sharedPreferences.getString("user_info")!)
+              as Map<String, dynamic>);
+    }
+    return null;
+  }
+
+  Future cacheCurrentUserProfileInfo(
+      Map<String, dynamic>? currentUserProfileInfo) async {
+    await _sharedPreferences.setString(
+        "user_profile_info", jsonEncode(currentUserProfileInfo));
+  }
+
+  CurrentUserProfileInfo? getCachedCurrentUserProfileInfo() {
+    if (_sharedPreferences.getString("user_profile_info") != null) {
+      return CurrentUserProfileInfo.fromJson(
+          jsonDecode(_sharedPreferences.getString("user_profile_info")!)
+              as Map<String, dynamic>);
+    }
+    return null;
+  }
+
   String getAccessToken() {
     return _sharedPreferences.getString('access_token') ?? '';
   }
 
-  Future setIsEmailAndPhoneConfirmed(bool isConfirmed) async {
-    await _sharedPreferences.setBool('confirmed', isConfirmed);
+  Future setIsEmailConfirmed(bool isConfirmed) async {
+    await _sharedPreferences.setBool('email_confirmed', isConfirmed);
   }
 
-  bool getIsEmailAndPhoneConfirmed() {
-    return _sharedPreferences.getBool('confirmed') ?? false;
+  bool getIsEmailConfirmed() {
+    return _sharedPreferences.getBool('email_confirmed') ?? false;
+  }
+
+  Future setIsPhoneConfirmed(bool isConfirmed) async {
+    await _sharedPreferences.setBool('phone_confirmed', isConfirmed);
+  }
+
+  bool getIsPhoneConfirmed() {
+    return _sharedPreferences.getBool('phone_confirmed') ?? false;
   }
 
   Future setRefreshToken(String token) async {
@@ -134,14 +176,6 @@ class CacheHelper {
 
   bool authenticated() {
     return _sharedPreferences.getBool('authed') ?? false;
-  }
-
-  Future setIsFirstTime(bool authed) async {
-    await _sharedPreferences.setBool('isFirstTime', authed);
-  }
-
-  bool isFirstTime() {
-    return _sharedPreferences.getBool('isFirstTime') ?? true;
   }
 
   Future setIsAcceptAuthPermission(bool auth) async {

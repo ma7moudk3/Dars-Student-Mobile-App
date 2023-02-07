@@ -34,7 +34,7 @@ class MessagesView extends GetView<MessagesController> {
                     ),
                   ],
                 ),
-                child: controller.length == 0 // to be changed later
+                child: controller.length > 0 // to be changed later
                     ? ListView.builder(
                         itemCount: controller.length,
                         shrinkWrap: true,
