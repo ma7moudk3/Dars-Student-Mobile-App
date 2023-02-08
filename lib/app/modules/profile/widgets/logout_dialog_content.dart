@@ -60,11 +60,11 @@ class LogoutDialogContent extends StatelessWidget {
                       // await CacheHelper.instance.cacheLoggedInUser({});
                       await GoogleSignInHelper.googleLogout();
                       // await AppleSignInHelper.appleLogout();
-                      await FacebookSignInHelper.facebookLogout().then((value) {
-                        if (Get.isDialogOpen!) {
-                          Get.back();
-                        }
-                      });
+                      // await FacebookSignInHelper.facebookLogout().then((value) {
+                      //   if (Get.isDialogOpen!) {
+                      //     Get.back();
+                      //   }
+                      // });
                       await CacheHelper.instance.setAccessToken("");
                       await CacheHelper.instance.setRefreshToken("");
                       await CacheHelper.instance.setFcmToken("");

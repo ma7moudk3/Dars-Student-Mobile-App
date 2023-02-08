@@ -75,6 +75,7 @@ class SearchBar extends StatelessWidget {
             Expanded(
               child: TextField(
                 controller: controller.searchTextController,
+                focusNode: controller.searchFocusNode,
                 onSubmitted: (txt) {
                   onSearch?.call(txt);
                 },

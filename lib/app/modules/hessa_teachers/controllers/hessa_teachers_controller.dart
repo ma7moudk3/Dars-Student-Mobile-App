@@ -13,6 +13,7 @@ class HessaTeachersController extends GetxController {
   late TextEditingController searchTextController;
   int teacherGender = 0; // 0 male, 1 female, 2 both
   int teacherFilterFactor = 0; // 0 acacdemic learning, 1 skill
+  FocusNode searchFocusNode = FocusNode();
 
   void changeFilterFactor(int value) {
     teacherFilterFactor = value;
@@ -43,6 +44,9 @@ class HessaTeachersController extends GetxController {
   void onInit() {
     searchTextController = TextEditingController();
     searchTextController.addListener(_onSearchChanged);
+    if (Get.arguments != null && Get.arguments["searchFocus"] == true) {
+      searchFocusNode.requestFocus();
+    }
     super.onInit();
   }
 

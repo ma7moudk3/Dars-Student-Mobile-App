@@ -75,7 +75,16 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
                 fontWeight: FontWeightManager.light,
               ),
               const Spacer(),
-              action ?? SvgPicture.asset(ImagesManager.searchIcon),
+              action ??
+                  GestureDetector(
+                    onTap: () async =>
+                        await Get.toNamed(Routes.HESSA_TEACHERS, arguments: {
+                      'searchFocus': true,
+                    }),
+                    child: SvgPicture.asset(
+                      ImagesManager.searchIcon,
+                    ),
+                  ),
               SizedBox(width: 20.w),
             ],
           ),
