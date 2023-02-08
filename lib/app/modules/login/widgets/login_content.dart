@@ -232,9 +232,9 @@ class LoginContent extends GetView<LoginController> {
                         behavior: HitTestBehavior.opaque,
                         onTap: () async {
                           if (await checkInternetConnection(timeout: 10)) {
-                            // await controller.googleLogin();
+                            await controller.googleLogin();
                           } else {
-                            Get.toNamed(Routes.CONNECTION_FAILED);
+                            await Get.toNamed(Routes.CONNECTION_FAILED);
                           }
                         },
                         child: Container(

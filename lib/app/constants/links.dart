@@ -5,6 +5,8 @@ class Links {
   static const String logout = 'api/TokenAuth/LogOut';
   static const String getCurrentUserInfo =
       'api/services/app/Session/GetCurrentUserInfo';
+  static const String externalAuthenticate =
+      'api/TokenAuth/ExternalAuthenticate';
   static const String getCurrentUserProfileInfo =
       'api/services/app/Requesters/GetRequesterForEdit';
   static const String generateOTPCode =
@@ -16,5 +18,11 @@ class Links {
   static const String sendResetPasswordCode =
       "api/services/app/Account/SendPasswordResetCode";
   static const String profileImageById =
-      "File/GetUserProfileImageById";
+      "api/services/app/Profile/GetProfilePictureByUser";
+  static const String updateProfileData =
+      "api/services/app/Requesters/CreateOrEdit";
+  static const String updateProfilePicture =
+      "api/services/app/Profile/UpdateCurrentUserProfile";
+  static const String updateProfilePicture2 =
+      "api/services/app/Profile/UpdateProfilePicture";
 }

@@ -1,0 +1,306 @@
+{
+  "project_info": {
+    "project_number": "876339883767",
+    "project_id": "hessa-7e936",
+    "storage_bucket": "hessa-7e936.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:876339883767:android:e261e1c80cb48203552df2",
+        "android_client_info": {
+          "package_name": "com.example.chat_app_kit"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "876339883767-0r89fsjlrsend7dodi6i33a01bkqm5fd.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.chat_app_kit",
+            "certificate_hash": "bbd1fcad8f8bfc0665e88167daa912b54adf6e68"
+          }
+        },
+        {
+          "client_id": "876339883767-f8tjkqkvi0cv1h2ihlcgphbf2ob9543b.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.chat_app_kit",
+            "certificate_hash": "b66c16bdf154ef9f4a284984d9bd8252228718e5"
+          }
+        },
+        {
+          "client_id": "876339883767-adqpmmkvvjup8mk9d09vc8tvcuaev587.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyC7lT0BgY4jENV0X9ibL4h9T2sdviNQNIo"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "876339883767-adqpmmkvvjup8mk9d09vc8tvcuaev587.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "876339883767-blipsuh81i4lpv1a6knc6b8hjaichatp.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.shadisamara.hessaTeacher"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:876339883767:android:68fc1e83b39bf620552df2",
+        "android_client_info": {
+          "package_name": "com.example.shady_hessa"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "876339883767-jn46qgnnegqmfmibb9q81tfci30q8esn.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.shady_hessa",
+            "certificate_hash": "bbd1fcad8f8bfc0665e88167daa912b54adf6e68"
+          }
+        },
+        {
+          "client_id": "876339883767-adqpmmkvvjup8mk9d09vc8tvcuaev587.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyC7lT0BgY4jENV0X9ibL4h9T2sdviNQNIo"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "876339883767-adqpmmkvvjup8mk9d09vc8tvcuaev587.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "876339883767-blipsuh81i4lpv1a6knc6b8hjaichatp.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.shadisamara.hessaTeacher"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:876339883767:android:f4791b90f5f3a4ef552df2",
+        "android_client_info": {
+          "package_name": "com.hessa.student"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "876339883767-p27e03pk70q2v5uiaqsrnnkpgfgpcdde.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.hessa.student",
+            "certificate_hash": "a3327dfeba27a9f6acf66a56809e7102df91efb2"
+          }
+        },
+        {
+          "client_id": "876339883767-rfplkjvqgro14hndmed7u30hp7df0dcb.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.hessa.student",
+            "certificate_hash": "86b9cfa86559fe7173d887094defa91bbe5016eb"
+          }
+        },
+        {
+          "client_id": "876339883767-adqpmmkvvjup8mk9d09vc8tvcuaev587.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyC7lT0BgY4jENV0X9ibL4h9T2sdviNQNIo"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "876339883767-adqpmmkvvjup8mk9d09vc8tvcuaev587.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "876339883767-blipsuh81i4lpv1a6knc6b8hjaichatp.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.shadisamara.hessaTeacher"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:876339883767:android:937ca4f9957a1b3d552df2",
+        "android_client_info": {
+          "package_name": "com.provider.hessa"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "876339883767-1oartj2bgvigohskdaape38lc2iglcbr.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.provider.hessa",
+            "certificate_hash": "b66c16bdf154ef9f4a284984d9bd8252228718e5"
+          }
+        },
+        {
+          "client_id": "876339883767-kjnhjis7pnm7rks6ucpq3nfgbinn0n5p.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.provider.hessa",
+            "certificate_hash": "bbd1fcad8f8bfc0665e88167daa912b54adf6e68"
+          }
+        },
+        {
+          "client_id": "876339883767-adqpmmkvvjup8mk9d09vc8tvcuaev587.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyC7lT0BgY4jENV0X9ibL4h9T2sdviNQNIo"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "876339883767-adqpmmkvvjup8mk9d09vc8tvcuaev587.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "876339883767-blipsuh81i4lpv1a6knc6b8hjaichatp.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.shadisamara.hessaTeacher"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:876339883767:android:08abbd116d0513d7552df2",
+        "android_client_info": {
+          "package_name": "com.shadisamara.hessa_teacher"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "876339883767-5lt43is72isq6k89kagm4e8guk3b53br.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.shadisamara.hessa_teacher",
+            "certificate_hash": "b66c16bdf154ef9f4a284984d9bd8252228718e5"
+          }
+        },
+        {
+          "client_id": "876339883767-pr7853ah4jok6lopkmafe8h6vqd7v08r.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.shadisamara.hessa_teacher",
+            "certificate_hash": "bbd1fcad8f8bfc0665e88167daa912b54adf6e68"
+          }
+        },
+        {
+          "client_id": "876339883767-adqpmmkvvjup8mk9d09vc8tvcuaev587.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyC7lT0BgY4jENV0X9ibL4h9T2sdviNQNIo"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "876339883767-adqpmmkvvjup8mk9d09vc8tvcuaev587.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "876339883767-blipsuh81i4lpv1a6knc6b8hjaichatp.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.shadisamara.hessaTeacher"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:876339883767:android:6107a14330be0497552df2",
+        "android_client_info": {
+          "package_name": "com.student.hessa"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "876339883767-06j0m4inu8crf4eb6o4h8lvt4ceg5g07.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.student.hessa",
+            "certificate_hash": "86b9cfa86559fe7173d887094defa91bbe5016eb"
+          }
+        },
+        {
+          "client_id": "876339883767-adqpmmkvvjup8mk9d09vc8tvcuaev587.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyC7lT0BgY4jENV0X9ibL4h9T2sdviNQNIo"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "876339883767-adqpmmkvvjup8mk9d09vc8tvcuaev587.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "876339883767-blipsuh81i4lpv1a6knc6b8hjaichatp.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.shadisamara.hessaTeacher"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

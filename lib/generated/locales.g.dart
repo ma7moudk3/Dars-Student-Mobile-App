@@ -252,6 +252,7 @@ class LocaleKeys {
       'enter_the_verification_code_here';
   static const please_enter_the_verification_code =
       'please_enter_the_verification_code';
+  static const profile_edited_succesfully = 'profile_edited_succesfully';
   static const wanna_back = 'wanna_back';
   static const check_pin_code = 'check_pin_code';
   static const the_verification_code_has_been_sent_to_the_phone_number =
@@ -576,6 +577,7 @@ class Locales {
     'back_backward': 'الرجوع للخلف',
     'enter_the_verification_code_here': 'ادخل رمز التحقق هنا',
     'please_enter_the_verification_code': 'الرجاء إدخال رمز التحقق',
+    'profile_edited_succesfully': 'تم تعديل بيانات الملف الشخصي بنجاح',
     'wanna_back': 'هل أنت متأكد أنك تريد العودة؟',
     'check_pin_code': 'تحقق من رمز التحقق',
     'the_verification_code_has_been_sent_to_the_phone_number':

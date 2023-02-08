@@ -1,5 +1,7 @@
 import 'package:hessa_student/app/modules/login/data/models/login_info/login_info.dart';
 
+import '../../../../../generated/locales.g.dart';
+import '../../../../../global_presentation/global_widgets/custom_snack_bar.dart';
 import '../../../../constants/exports.dart';
 import '../../../../constants/links.dart';
 import '../../../../data/cache_helper.dart';
@@ -24,12 +26,14 @@ class LoginRepoImplement extends LoginRepo {
       LoginInfo loginInfo = LoginInfo.fromJson(response.data);
       if (loginInfo.result != null &&
           loginInfo.result!.accessToken != null &&
-          loginInfo.result!.refreshToken != null) {
+          loginInfo.result!.refreshToken != null &&
+          loginInfo.result!.userId != null) {
         await CacheHelper.instance.setAuthed(true);
         await CacheHelper.instance
             .setAccessToken(loginInfo.result!.accessToken!);
         await CacheHelper.instance
             .setRefreshToken(loginInfo.result!.refreshToken!);
+        await CacheHelper.instance.setUserId(loginInfo.result!.userId!);
       }
       if (Get.isDialogOpen!) {
         Get.back();
@@ -86,5 +90,54 @@ class LoginRepoImplement extends LoginRepo {
       }
     });
     return currentUserProfileInfo;
+  }
+
+  @override
+  Future<int> googleLogin({
+    required String accessToken,
+    required String providerKey,
+  }) async {
+    int statusCode = 200;
+    Map<String, dynamic> data = {
+      "authProvider": "Google",
+      "providerAccessCode": accessToken,
+      "providerKey": providerKey,
+      "returnUrl": "",
+      "singleSignIn": false,
+      "userType": 2 // student
+    };
+    await DioHelper.post(Links.externalAuthenticate, data: data,
+        onSuccess: (response) async {
+      statusCode = response.statusCode ?? 200;
+      LoginInfo loginInfo = LoginInfo.fromJson(response.data);
+      if (loginInfo.result != null &&
+          loginInfo.result!.accessToken != null &&
+          loginInfo.result!.refreshToken != null &&
+          loginInfo.result!.userId != null) {
+        await CacheHelper.instance.setAuthed(true);
+        await CacheHelper.instance
+            .setAccessToken(loginInfo.result!.accessToken!);
+        await CacheHelper.instance
+            .setRefreshToken(loginInfo.result!.refreshToken!);
+        await CacheHelper.instance.setUserId(loginInfo.result!.userId!);
+      }
+      if (Get.isDialogOpen!) {
+        Get.back();
+      }
+    }, onError: (response) {
+      statusCode = response.statusCode ?? 400;
+      if (response.response != null) {
+        if (Get.isDialogOpen!) {
+          Get.back();
+        }
+        CustomSnackBar.showCustomErrorSnackBar(
+          title: LocaleKeys.error.tr,
+          message: response.response!.data['error']['message'] ??
+              LocaleKeys.something_went_wrong.tr,
+        );
+      }
+    });
+
+    return statusCode;
   }
 }

@@ -74,7 +74,7 @@ class LogoutDialogContent extends StatelessWidget {
                       // });
                       await Get.offAllNamed(Routes.LOGIN_OR_SIGN_UP);
                     } else {
-                      Get.toNamed(Routes.CONNECTION_FAILED);
+                      await Get.toNamed(Routes.CONNECTION_FAILED);
                     }
                   },
                   title: LocaleKeys.ok.tr,

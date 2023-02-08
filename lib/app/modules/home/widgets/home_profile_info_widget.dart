@@ -25,16 +25,15 @@ class HomeProfileInfoWidget extends GetView<HomeController> {
               height: 65.h,
               decoration: BoxDecoration(
                 image: DecorationImage(
-                  image: controller.currentUserInfo.result != null &&
-                          controller.currentUserInfo.result!.id != null
-                      ? controller.userPicture != null
-                          ? CachedNetworkImageProvider(
-                              controller.userPicture!,
-                              errorListener: () {
-                                controller.changeUserPictureIfErrorHappens();
-                              },
-                            ) as ImageProvider
-                          : AssetImage(ImagesManager.guest)
+                  image: controller.userPicture != null &&
+                          controller.userPicture!.isNotEmpty
+                      ? CachedNetworkImageProvider(
+                          controller.userPicture ??
+                              "https://www.shareicon.net/data/2016/06/10/586098_guest_512x512.png",
+                          errorListener: () {
+                            controller.changeUserPictureIfErrorHappens();
+                          },
+                        ) as ImageProvider
                       : AssetImage(ImagesManager.guest),
                   fit: BoxFit.cover,
                 ),

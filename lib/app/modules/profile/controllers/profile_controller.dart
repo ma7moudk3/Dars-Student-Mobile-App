@@ -1,7 +1,12 @@
 import 'package:hessa_student/app/data/cache_helper.dart';
+import 'package:hessa_student/app/modules/login/data/repos/login_repo.dart';
+import 'package:hessa_student/app/modules/login/data/repos/login_repo_implement.dart';
 
 import '../../../../generated/locales.g.dart';
 import '../../../constants/exports.dart';
+import '../../../constants/links.dart';
+import '../../login/data/models/current_user_info/current_user_info.dart';
+import '../../login/data/models/current_user_profile_info/current_user_profile_info.dart';
 
 class ProfileController extends GetxController {
   bool isNotified =
@@ -10,7 +15,12 @@ class ProfileController extends GetxController {
   final GlobalKey<FormState> formKey = GlobalKey<FormState>();
   late TextEditingController areaController, currentAddressController;
   FocusNode areaFocusNode = FocusNode(), currentAddressFocusNode = FocusNode();
-
+  String? userPicture;
+  Rx<CurrentUserInfo?> currentUserInfo =
+      CacheHelper.instance.getCachedCurrentUserInfo().obs;
+  Rx<CurrentUserProfileInfo?> currentUserProfileInfo =
+      CacheHelper.instance.getCachedCurrentUserProfileInfo().obs;
+  final LoginRepo _loginRepo = LoginRepoImplement();
   Future<void> toggleNotifications(bool value) async {
     isNotified = value;
     if (isNotified) {
@@ -28,6 +38,33 @@ class ProfileController extends GetxController {
       //   });
       // });
     }
+    update();
+  }
+
+  Future getCurrentUserInfo() async {
+    await _loginRepo
+        .getCurrentUserInfo()
+        .then((CurrentUserInfo currentUserInfo) async {
+      this.currentUserInfo.value = currentUserInfo;
+      await CacheHelper.instance.cacheCurrentUserInfo(currentUserInfo.toJson());
+    });
+    update();
+  }
+
+  Future getCurrentUserProfileInfo() async {
+    await _loginRepo
+        .getCurrentUserProfileInfo()
+        .then((CurrentUserProfileInfo currentUserProfileInfo) async {
+      this.currentUserProfileInfo.value = currentUserProfileInfo;
+      await CacheHelper.instance
+          .cacheCurrentUserProfileInfo(currentUserProfileInfo.toJson());
+    });
+    update();
+  }
+
+  void changeUserPictureIfErrorHappens() {
+    userPicture =
+        "https://www.shareicon.net/data/2016/06/10/586098_guest_512x512.png";
     update();
   }
 
@@ -67,6 +104,13 @@ class ProfileController extends GetxController {
   void onInit() {
     areaController = TextEditingController();
     currentAddressController = TextEditingController();
+    if (currentUserProfileInfo.value != null &&
+        currentUserProfileInfo.value!.result != null &&
+        currentUserProfileInfo.value!.result!.requester != null &&
+        currentUserProfileInfo.value!.result!.requester!.userId != null) {
+      userPicture =
+          "${Links.baseLink}${Links.profileImageById}?userId=${currentUserProfileInfo.value!.result!.requester!.userId}";
+    }
     areaFocusNode.addListener(() => update());
     currentAddressFocusNode.addListener(() => update());
     super.onInit();

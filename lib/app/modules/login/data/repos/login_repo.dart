@@ -7,6 +7,11 @@ abstract class LoginRepo {
     required String password,
   });
 
+  Future<int> googleLogin({
+    required String accessToken,
+    required String providerKey,
+  });
+
   Future<CurrentUserInfo> getCurrentUserInfo();
   Future<CurrentUserProfileInfo> getCurrentUserProfileInfo();
 }

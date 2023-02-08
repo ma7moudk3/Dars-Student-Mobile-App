@@ -47,6 +47,32 @@ Future<bool> checkInternetConnection({required int timeout}) async {
   return false;
 }
 
+String? seperatePhoneAndDialCode({required String phoneWithDialCode}) {
+  List<Map<String, String>> allowedCountries = [
+    {"name": "Palestine", "dial_code": "+970", "code": "PS"},
+    {"name": "Israel", "dial_code": "+972", "code": "IL"},
+  ];
+  Map<String, String> foundCountry = {};
+  for (Map<String, String> country in allowedCountries) {
+    String dialCode = country["dial_code"].toString();
+    if (phoneWithDialCode.contains(dialCode)) {
+      foundCountry = country;
+      break;
+    }
+  }
+  if (foundCountry.isNotEmpty) {
+    String dialCode = phoneWithDialCode.substring(
+      0,
+      foundCountry["dial_code"]!.length,
+    );
+    String phoneNumber = phoneWithDialCode.substring(
+      foundCountry["dial_code"]!.length,
+    );
+    return phoneNumber;
+  }
+  return null;
+}
+
 Divider moreDivider({
   double thickness = 1.3,
   double? height,
@@ -151,5 +177,14 @@ extension DateTimeExtension on DateTime {
       return "${diff.inMinutes} ${diff.inMinutes == 1 ? LocaleKeys.minute.tr : LocaleKeys.minutes.tr} ${LocaleKeys.ago.tr}";
     }
     return "just_now".tr;
+  }
+}
+
+class MyHttpOverrides extends HttpOverrides {
+  @override
+  HttpClient createHttpClient(SecurityContext? context) {
+    return super.createHttpClient(context)
+      ..badCertificateCallback =
+          (X509Certificate cert, String host, int port) => true;
   }
 }

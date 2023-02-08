@@ -24,13 +24,18 @@ class HomeController extends GetxController {
   @override
   void onInit() async {
     await checkInternet();
-    userPicture =
-        "${Links.baseLink}${Links.profileImageById}?userId=${currentUserInfo.result!.id}";
+    if (currentUserProfileInfo.result != null &&
+        currentUserProfileInfo.result!.requester != null &&
+        currentUserProfileInfo.result!.requester!.id != null) {
+      userPicture =
+          "${Links.baseLink}${Links.profileImageById}?userId=${currentUserProfileInfo.result!.requester!.id}";
+    }
     super.onInit();
   }
 
   void changeUserPictureIfErrorHappens() {
-    userPicture = ImagesManager.guest;
+    userPicture =
+        "https://www.shareicon.net/data/2016/06/10/586098_guest_512x512.png";
     update();
   }
 

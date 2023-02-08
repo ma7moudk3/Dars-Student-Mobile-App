@@ -1,5 +1,6 @@
 import 'dart:developer';
 
+import 'package:google_sign_in/google_sign_in.dart';
 import 'package:hessa_student/app/modules/login/data/models/current_user_info/current_user_info.dart';
 import 'package:hessa_student/app/modules/login/data/repos/login_repo.dart';
 
@@ -7,6 +8,7 @@ import '../../../../generated/locales.g.dart';
 import '../../../../global_presentation/global_widgets/loading.dart';
 import '../../../constants/exports.dart';
 import '../../../data/cache_helper.dart';
+import '../../../data/network_helper/firebase_social_auth_helpers.dart';
 import '../../../routes/app_pages.dart';
 import '../data/models/current_user_profile_info/current_user_profile_info.dart';
 import '../data/repos/login_repo_implement.dart';
@@ -17,6 +19,7 @@ class LoginController extends GetxController {
   FocusNode passwordFocusNode = FocusNode();
   late TextEditingController emailController, passwordController;
   Color? emailErrorIconColor, passwordErrorIconColor;
+  GoogleSignInAccount? googleAccount;
   final GlobalKey<FormState> formKey = GlobalKey();
   final LoginRepo _loginRepo = LoginRepoImplement();
   @override
@@ -114,6 +117,84 @@ class LoginController extends GetxController {
         Get.back();
       }
     }
+  }
+
+  Future googleLogin() async {
+    try {
+      showLoadingDialog();
+      googleAccount = await GoogleSignInHelper.googleLogin();
+      if (googleAccount != null) {
+        GoogleSignInAuthentication authentication =
+            await googleAccount!.authentication;
+        if (authentication.accessToken != null) {
+          log(googleAccount!.id);
+          log(googleAccount!.email);
+          log(authentication.accessToken ?? "");
+          log(authentication.idToken ?? "");
+          await _loginRepo
+              .googleLogin(
+            accessToken: authentication.accessToken!,
+            providerKey: googleAccount!.id,
+          )
+              .then((int statusCode) async {
+            if (statusCode == 200) {
+              await Future.wait(
+                      [_getCurrentUserInfo(), _getCurrentUserProfileInfo()])
+                  .then((value) async {
+                CurrentUserInfo currentUserInfo =
+                    CacheHelper.instance.getCachedCurrentUserInfo() ??
+                        CurrentUserInfo();
+                bool isEmailConfirmed = currentUserInfo.result != null
+                    ? currentUserInfo.result!.isEmailConfirmed ?? false
+                    : false;
+                bool isPhoneConfirmed = currentUserInfo.result != null
+                    ? currentUserInfo.result!.isPhoneNumberConfirmed ?? false
+                    : false;
+                log("isEmailConfirmed? $isEmailConfirmed");
+                log("isPhoneConfirmed? $isPhoneConfirmed");
+                if (currentUserInfo.result != null &&
+                    ((!isEmailConfirmed) || (!isPhoneConfirmed))) {
+                  Future.wait([
+                    CacheHelper.instance.setIsEmailConfirmed(
+                        currentUserInfo.result!.isEmailConfirmed ?? false),
+                    CacheHelper.instance.setIsPhoneConfirmed(
+                        currentUserInfo.result!.isPhoneNumberConfirmed ?? false)
+                  ]).then((value) async {
+                    await Get.offAllNamed(Routes.VERIFY_ACCOUNT);
+                  });
+                } else {
+                  await CacheHelper.instance.setIsEmailConfirmed(true);
+                  await CacheHelper.instance.setIsPhoneConfirmed(true);
+                  await Get.offAllNamed(Routes.BOTTOM_NAV_BAR);
+                  Future.delayed(const Duration(microseconds: 1200), () async {
+                    await Get.dialog(
+                      Container(
+                        color: ColorManager.black.withOpacity(0.1),
+                        height: 140.h,
+                        width: 140.w,
+                        child: Center(
+                          child: Container(
+                            width: Get.width,
+                            margin: EdgeInsets.symmetric(horizontal: 18.w),
+                            child: const WelcomeBackDialogContent(),
+                          ),
+                        ),
+                      ),
+                    );
+                  });
+                }
+              });
+            }
+          });
+        }
+      }
+    } catch (e) {
+      log('googleLogin Exception error {{2}} $e');
+      if (Get.isDialogOpen!) {
+        Get.back();
+      }
+    }
+    update();
   }
 
   Future _getCurrentUserInfo() async {

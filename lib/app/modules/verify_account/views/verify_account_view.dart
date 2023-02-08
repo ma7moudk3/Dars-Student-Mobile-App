@@ -85,7 +85,8 @@ class VerifyAccountView extends GetView<VerifyAccountController> {
                 ),
               ),
               Visibility(
-                visible: !controller.isPhoneNumberConfirmed.value,
+                visible: !controller.isPhoneNumberConfirmed.value &&
+                    controller.phoneNumber.completeNumber.isPhoneNumber,
                 child: Form(
                   key: controller.phoneForm,
                   child: Column(

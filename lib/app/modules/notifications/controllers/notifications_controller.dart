@@ -26,7 +26,7 @@ class NotificationsController extends GetxController {
     // _initPageRequestListener();
     await checkInternet();
   }
-  
+
   // Future getNotifications({
   //   required int page,
   // }) async {
