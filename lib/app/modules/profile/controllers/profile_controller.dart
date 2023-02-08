@@ -1,6 +1,12 @@
+import 'dart:developer';
+
+import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:hessa_student/app/data/cache_helper.dart';
 import 'package:hessa_student/app/modules/login/data/repos/login_repo.dart';
 import 'package:hessa_student/app/modules/login/data/repos/login_repo_implement.dart';
+import 'package:hessa_student/app/modules/profile/data/repos/profile_repo.dart';
+import 'package:hessa_student/app/modules/profile/data/repos/profile_repo_implement.dart';
+import 'package:hessa_student/global_presentation/global_widgets/loading.dart';
 
 import '../../../../generated/locales.g.dart';
 import '../../../constants/exports.dart';
@@ -21,24 +27,48 @@ class ProfileController extends GetxController {
   Rx<CurrentUserProfileInfo?> currentUserProfileInfo =
       CacheHelper.instance.getCachedCurrentUserProfileInfo().obs;
   final LoginRepo _loginRepo = LoginRepoImplement();
+  final ProfileRepo _profileRepo = ProfileRepoImplement();
   Future<void> toggleNotifications(bool value) async {
     isNotified = value;
+    showLoadingDialog();
     if (isNotified) {
-      // await sendFcmToken().then((value) {
-      //   if (Get.isDialogOpen!) {
-      //     Get.back();
-      //   }
-      // });
+      await sendFcmToken().then((value) {
+        if (Get.isDialogOpen!) {
+          Get.back();
+        }
+      });
     } else {
-      // await FirebaseMessaging.instance.deleteToken().then((value) async {
-      //   await CacheController.instance.setFcmToken("").then((value) {
-      //     if (Get.isDialogOpen!) {
-      //       Get.back();
-      //     }
-      //   });
-      // });
+      await FirebaseMessaging.instance.deleteToken().then((value) async {
+        await CacheHelper.instance.setFcmToken("").then((value) {
+          if (Get.isDialogOpen!) {
+            Get.back();
+          }
+        });
+      });
     }
     update();
+  }
+
+  Future sendFcmToken() async {
+    try {
+      FirebaseMessaging messaging = FirebaseMessaging.instance;
+      String? token = await messaging.getToken();
+      if (token != null) {
+        log("token : $token");
+        await _profileRepo
+            .sendFcmToken(
+          fcmToken: token,
+        )
+            .then((value) async {
+          await CacheHelper.instance.setFcmToken(token);
+        });
+      }
+    } catch (e) {
+      log('sendFcmToken Exception error {{2}} $e');
+      if (Get.isDialogOpen!) {
+        Get.back();
+      }
+    }
   }
 
   Future getCurrentUserInfo() async {

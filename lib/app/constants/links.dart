@@ -25,4 +25,6 @@ class Links {
       "api/services/app/Profile/UpdateCurrentUserProfile";
   static const String updateProfilePicture2 =
       "api/services/app/Profile/UpdateProfilePicture";
+  static const String sendFCMToken =
+      "api/services/app/Account/UpdateFcmToken";
 }

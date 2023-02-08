@@ -53,7 +53,7 @@ class LoginController extends GetxController {
     update();
     return null;
   }
-
+  
   Future login() async {
     try {
       showLoadingDialog();
@@ -127,10 +127,11 @@ class LoginController extends GetxController {
         GoogleSignInAuthentication authentication =
             await googleAccount!.authentication;
         if (authentication.accessToken != null) {
-          log(googleAccount!.id);
-          log(googleAccount!.email);
-          log(authentication.accessToken ?? "");
-          log(authentication.idToken ?? "");
+          log("Google Account ID: ${googleAccount!.id}");
+          log("Google Account Email: ${googleAccount!.email}");
+          log("Google Account PHOTO URL: ${googleAccount!.photoUrl}");
+          log("Google Authentication Acess Token: ${authentication.accessToken ?? ""}");
+          log("Google Authentication ID Token: ${authentication.idToken ?? ""}");
           await _loginRepo
               .googleLogin(
             accessToken: authentication.accessToken!,
@@ -144,6 +145,9 @@ class LoginController extends GetxController {
                 CurrentUserInfo currentUserInfo =
                     CacheHelper.instance.getCachedCurrentUserInfo() ??
                         CurrentUserInfo();
+                CurrentUserProfileInfo currentUserProfileInfo =
+                    CacheHelper.instance.getCachedCurrentUserProfileInfo() ??
+                        CurrentUserProfileInfo();
                 bool isEmailConfirmed = currentUserInfo.result != null
                     ? currentUserInfo.result!.isEmailConfirmed ?? false
                     : false;
@@ -153,7 +157,11 @@ class LoginController extends GetxController {
                 log("isEmailConfirmed? $isEmailConfirmed");
                 log("isPhoneConfirmed? $isPhoneConfirmed");
                 if (currentUserInfo.result != null &&
-                    ((!isEmailConfirmed) || (!isPhoneConfirmed))) {
+                    ((!isEmailConfirmed &&
+                            currentUserInfo.result!.emailAddress != null) ||
+                        (!isPhoneConfirmed &&
+                            currentUserProfileInfo.result!.phoneNumber !=
+                                null))) {
                   Future.wait([
                     CacheHelper.instance.setIsEmailConfirmed(
                         currentUserInfo.result!.isEmailConfirmed ?? false),

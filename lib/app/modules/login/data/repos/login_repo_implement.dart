@@ -1,3 +1,4 @@
+import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:hessa_student/app/modules/login/data/models/login_info/login_info.dart';
 
 import '../../../../../generated/locales.g.dart';
@@ -17,10 +18,16 @@ class LoginRepoImplement extends LoginRepo {
     required String password,
   }) async {
     int statusCode = 200;
+    FirebaseMessaging messaging = FirebaseMessaging.instance;
+    String? token = await messaging.getToken();
     Map<String, dynamic> data = {
       "userNameOrEmailAddress": login,
       "password": password,
     };
+    if (token != null) {
+      data['fcmtoken'] = token;
+      await CacheHelper.instance.setFcmToken(token);
+    }
     await DioHelper.post(Links.login, data: data, onSuccess: (response) async {
       statusCode = response.statusCode ?? 200;
       LoginInfo loginInfo = LoginInfo.fromJson(response.data);
@@ -98,6 +105,8 @@ class LoginRepoImplement extends LoginRepo {
     required String providerKey,
   }) async {
     int statusCode = 200;
+    FirebaseMessaging messaging = FirebaseMessaging.instance;
+    String? token = await messaging.getToken();
     Map<String, dynamic> data = {
       "authProvider": "Google",
       "providerAccessCode": accessToken,
@@ -106,6 +115,10 @@ class LoginRepoImplement extends LoginRepo {
       "singleSignIn": false,
       "userType": 2 // student
     };
+    if (token != null) {
+      data['fcmtoken'] = token;
+      await CacheHelper.instance.setFcmToken(token);
+    }
     await DioHelper.post(Links.externalAuthenticate, data: data,
         onSuccess: (response) async {
       statusCode = response.statusCode ?? 200;

@@ -12,6 +12,7 @@ import 'package:syncfusion_localizations/syncfusion_localizations.dart';
 import 'app/core/helper_functions.dart';
 import 'app/data/cache_helper.dart';
 import 'app/data/network_helper/dio_helper.dart';
+import 'app/data/network_helper/firebase_cloud_messaging_helper.dart';
 import 'app/routes/app_pages.dart';
 
 void main() async {
@@ -19,10 +20,10 @@ void main() async {
   HttpOverrides.global = MyHttpOverrides();
   await Firebase.initializeApp();
   await CacheHelper.instance.init();
-  // await Firebase.initializeApp();
   SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(
     statusBarColor: ColorManager.transparent, // transparent status bar
   ));
+  await FcmHelper.initFcm();
   DioHelper.init();
   runApp(
     ScreenUtilInit(

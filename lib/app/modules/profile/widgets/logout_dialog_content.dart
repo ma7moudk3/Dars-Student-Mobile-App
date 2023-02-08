@@ -1,9 +1,12 @@
+import 'package:firebase_messaging/firebase_messaging.dart';
+
 import '../../../../generated/locales.g.dart';
 import '../../../../global_presentation/global_widgets/global_button.dart';
 import '../../../../global_presentation/global_widgets/loading.dart';
 import '../../../constants/exports.dart';
 import '../../../core/helper_functions.dart';
 import '../../../data/cache_helper.dart';
+import '../../../data/network_helper/firebase_social_auth_helpers.dart';
 import '../../../routes/app_pages.dart';
 
 class LogoutDialogContent extends StatelessWidget {
@@ -54,24 +57,24 @@ class LogoutDialogContent extends StatelessWidget {
                   onPressed: () async {
                     if (await checkInternetConnection(timeout: 10)) {
                       showLoadingDialog();
+                      // await CacheHelper.instance.cacheLoggedInUser({});
+                      await GoogleSignInHelper.googleLogout();
+                      // await AppleSignInHelper.appleLogout();
+                      await FacebookSignInHelper.facebookLogout().then((value) {
+                        if (Get.isDialogOpen!) {
+                          Get.back();
+                        }
+                      });
                       await CacheHelper.instance.setAccessToken("");
                       await CacheHelper.instance.setRefreshToken("");
                       await CacheHelper.instance.setFcmToken("");
+                      await FirebaseMessaging.instance.deleteToken();
                       await CacheHelper.instance.cacheCurrentUserInfo({});
                       await CacheHelper.instance
                           .cacheCurrentUserProfileInfo({});
-                      // await FirebaseMessaging.instance.deleteToken();
                       await CacheHelper.instance.setAuthed(false);
                       await CacheHelper.instance.setIsEmailConfirmed(false);
                       await CacheHelper.instance.setIsPhoneConfirmed(false);
-                      // await CacheHelper.instance.cacheLoggedInUser({});
-                      // await GoogleSignInHelper.googleLogout();
-                      // await AppleSignInHelper.appleLogout();
-                      // await FacebookSignInHelper.facebookLogout().then((value) {
-                      //   if (Get.isDialogOpen!) {
-                      //     Get.back();
-                      //   }
-                      // });
                       await Get.offAllNamed(Routes.LOGIN_OR_SIGN_UP);
                     } else {
                       await Get.toNamed(Routes.CONNECTION_FAILED);
