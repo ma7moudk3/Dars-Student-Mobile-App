@@ -16,11 +16,7 @@ class NotificationsController extends GetxController {
   Future checkInternet() async {
     await checkInternetConnection(timeout: 10)
         .then((bool internetStatus) async {
-      if (internetStatus) {
-        isInternetConnected.value = true;
-      } else {
-        isInternetConnected.value = false;
-      }
+      isInternetConnected.value = internetStatus;
     });
   }
 
@@ -30,7 +26,7 @@ class NotificationsController extends GetxController {
     // _initPageRequestListener();
     await checkInternet();
   }
-
+  
   // Future getNotifications({
   //   required int page,
   // }) async {

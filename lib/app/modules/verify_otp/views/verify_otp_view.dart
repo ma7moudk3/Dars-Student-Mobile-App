@@ -234,8 +234,8 @@ class VerifyOtpView extends GetView<VerifyOtpController> {
                                     //     ),
                                     //   ),
                                     // ),
-                                    onCompleted: (String value) {
-                                      // controller.verifyOtp();
+                                    onCompleted: (String value) async {
+                                      await controller.verifyOTP();
                                     },
                                     onTapOutside: (PointerDownEvent event) {
                                       controller.pinFocusNode.unfocus();

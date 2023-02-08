@@ -1,6 +1,7 @@
 import 'dart:io';
 
 import 'package:flutter/cupertino.dart';
+import 'package:hessa_student/app/core/helper_functions.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:intl_phone_field/phone_number.dart';
 
@@ -8,6 +9,7 @@ import '../../../../generated/locales.g.dart';
 import '../../../../global_presentation/global_widgets/custom_app_bar.dart';
 import '../../../../global_presentation/global_widgets/intl_phone_number_widget.dart';
 import '../../../constants/exports.dart';
+import '../../../routes/app_pages.dart';
 import '../controllers/edit_profile_controller.dart';
 
 class EditProfileView extends GetView<EditProfileController> {
@@ -356,7 +358,12 @@ class EditProfileView extends GetView<EditProfileController> {
                     child: PrimaryButton(
                       title: LocaleKeys.save,
                       onPressed: () async {
-                        if (controller.formKey.currentState!.validate()) {}
+                        if (controller.formKey.currentState!.validate()) {
+                          if (await checkInternetConnection(timeout: 5)) {
+                          } else {
+                            await Get.toNamed(Routes.CONNECTION_FAILED);
+                          }
+                        }
                       },
                     ),
                   ),

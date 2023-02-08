@@ -46,6 +46,7 @@ class HessaDateAndTimePickerWidget extends GetView<OrderHessaController> {
                 topRight: Radius.circular(20),
               ),
             ),
+            backgroundColor: ColorManager.white,
             Padding(
               padding: EdgeInsets.symmetric(
                 horizontal: 5.w,
@@ -158,7 +159,6 @@ class HessaDateAndTimePickerWidget extends GetView<OrderHessaController> {
                 ],
               ),
             ),
-            backgroundColor: ColorManager.white,
           );
         } else {
           await Get.bottomSheet(

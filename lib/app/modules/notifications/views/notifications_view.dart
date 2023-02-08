@@ -56,39 +56,40 @@ class NotificationsView extends GetView<NotificationsController> {
                 ],
               ),
             );
-          }
-          return RefreshIndicator(
-            color: ColorManager.white,
-            backgroundColor: ColorManager.primary,
-            onRefresh: () async {},
-            // onRefresh: () =>
-            //     Future.sync(() => controller.pagingController.refresh()),
-            child: SingleChildScrollView(
-              child: Padding(
-                padding: EdgeInsets.symmetric(vertical: 20.h),
-                child: ListView.builder(
-                  itemCount: 10,
-                  shrinkWrap: true,
-                  physics: const NeverScrollableScrollPhysics(),
-                  itemBuilder: (BuildContext context, int index) {
-                    return Column(
-                      children: [
-                        NotificationWidget(
-                          iconPath: ImagesManager.checkIcon,
-                          title: "تم ارسال طلبك بنجاح",
-                          time: "قبل 10 دقائق",
-                          onTap: () async {
-                            log('notification clicked');
-                          },
-                        ),
-                        SizedBox(height: 10.h),
-                      ],
-                    );
-                  },
+          } else {
+            return RefreshIndicator(
+              color: ColorManager.white,
+              backgroundColor: ColorManager.primary,
+              onRefresh: () async {},
+              // onRefresh: () =>
+              //     Future.sync(() => controller.pagingController.refresh()),
+              child: SingleChildScrollView(
+                child: Padding(
+                  padding: EdgeInsets.symmetric(vertical: 20.h),
+                  child: ListView.builder(
+                    itemCount: 10,
+                    shrinkWrap: true,
+                    physics: const NeverScrollableScrollPhysics(),
+                    itemBuilder: (BuildContext context, int index) {
+                      return Column(
+                        children: [
+                          NotificationWidget(
+                            iconPath: ImagesManager.checkIcon,
+                            title: "تم ارسال طلبك بنجاح",
+                            time: "قبل 10 دقائق",
+                            onTap: () async {
+                              log('notification clicked');
+                            },
+                          ),
+                          SizedBox(height: 10.h),
+                        ],
+                      );
+                    },
+                  ),
                 ),
               ),
-            ),
-          );
+            );
+          }
         } else {
           return Center(
             child: Column(

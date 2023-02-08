@@ -15,4 +15,6 @@ class Links {
       'api/services/app/Profile/ActivateMobile';
   static const String sendResetPasswordCode =
       "api/services/app/Account/SendPasswordResetCode";
+  static const String profileImageById =
+      "File/GetUserProfileImageById";
 }

@@ -1,4 +1,7 @@
+import 'package:lottie/lottie.dart';
+
 import '../../../../generated/locales.g.dart';
+import '../../../../global_presentation/global_features/lotties_manager.dart';
 import '../../../../global_presentation/global_widgets/custom_app_bar.dart';
 import '../../../constants/exports.dart';
 import '../../../routes/app_pages.dart';
@@ -39,25 +42,69 @@ class OrdersView extends GetView<OrdersController> {
           ),
         ),
       ),
-      body: SingleChildScrollView(
-        child: Padding(
-          padding: EdgeInsets.symmetric(horizontal: 16.w),
-          child: Column(
-            children: [
-              SizedBox(height: 20.h),
-              ListView.builder(
-                itemCount: 9 + 1,
-                shrinkWrap: true,
-                physics: const NeverScrollableScrollPhysics(),
-                itemBuilder: (BuildContext context, int index) {
-                  if (index == 9) {
-                    return SizedBox(height: 20.h);
-                  }
-                  return OrderWidget(isFirst: index == 0);
-                },
-              ),
-            ],
-          ),
+      body: SafeArea(
+        child: RefreshIndicator(
+          color: ColorManager.white,
+          backgroundColor: ColorManager.primary,
+          onRefresh: () async {
+            // Future.sync(() => controller.pagingController.refresh());
+            await controller.checkInternet();
+          },
+          child: GetX<OrdersController>(builder: (OrdersController controller) {
+            if (controller.isInternetConnected.value == true) {
+              return SingleChildScrollView(
+                child: Padding(
+                  padding: EdgeInsets.symmetric(horizontal: 16.w),
+                  child: Column(
+                    children: [
+                      SizedBox(height: 20.h),
+                      ListView.builder(
+                        itemCount: 9 + 1,
+                        shrinkWrap: true,
+                        physics: const NeverScrollableScrollPhysics(),
+                        itemBuilder: (BuildContext context, int index) {
+                          if (index == 9) {
+                            return SizedBox(height: 20.h);
+                          }
+                          return OrderWidget(isFirst: index == 0);
+                        },
+                      ),
+                    ],
+                  ),
+                ),
+              );
+            } else {
+              return Center(
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    PrimaryText(
+                      LocaleKeys.check_your_internet_connection.tr,
+                      fontSize: 18,
+                      fontWeight: FontWeightManager.bold,
+                      textAlign: TextAlign.center,
+                    ),
+                    SizedBox(height: 10.h),
+                    SizedBox(
+                      height: Get.height * 0.5,
+                      child: Lottie.asset(
+                        LottiesManager.noInernetConnection,
+                        animate: true,
+                      ),
+                    ),
+                    SizedBox(height: 10.h),
+                    PrimaryButton(
+                      onPressed: () async {
+                        await controller.checkInternet();
+                      },
+                      title: LocaleKeys.retry.tr,
+                      width: Get.width * 0.5,
+                    ),
+                  ],
+                ),
+              );
+            }
+          }),
         ),
       ),
     );

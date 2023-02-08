@@ -90,4 +90,5 @@ class ImagesManager {
   static String lockPassword = "assets/svg/lock_password.svg";
   static String otp = "assets/svg/otp.svg";
   static String noNotifications = "assets/svg/no_notifications.svg";
+  static String guest = "assets/images/guest.png";
 }

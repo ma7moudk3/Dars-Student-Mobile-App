@@ -34,7 +34,7 @@ class ProfileView extends GetView<ProfileController> {
           behavior: HitTestBehavior.opaque,
           onTap: () async {
             await Get.toNamed(Routes.EDIT_PROFILE);
-          },
+          },  
           child: SvgPicture.asset(
             ImagesManager.editProfileIcon,
           ),

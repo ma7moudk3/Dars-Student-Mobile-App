@@ -1,3 +1,6 @@
+import 'package:hessa_student/app/core/helper_functions.dart';
+import 'package:hessa_student/app/routes/app_pages.dart';
+
 import '../../../../generated/locales.g.dart';
 import '../../../../global_presentation/global_widgets/custom_app_bar.dart';
 import '../../../constants/exports.dart';
@@ -200,7 +203,11 @@ class TechnicalSupportView extends GetView<TechnicalSupportController> {
                 child: PrimaryButton(
                   onPressed: () async {
                     if (controller.formKey.currentState!.validate()) {
-                      // await controller.orderHessa();
+                      if (await checkInternetConnection(timeout: 5)) {
+                        // await controller.orderHessa();
+                      } else {
+                        await Get.toNamed(Routes.CONNECTION_FAILED);
+                      }
                     }
                   },
                   title: LocaleKeys.submit_form,

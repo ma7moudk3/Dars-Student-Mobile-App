@@ -113,7 +113,16 @@ class VerifyAccountController extends GetxController {
   }
 
   Future sendOTPEmail() async {
-    await sendOTP(email: emailController.text);
+    if (emailController.text.isNotEmpty) {
+      // log(emailController.text);
+      // log(currentUserProfileInfo.result!.emailAddress ?? "no email");
+      // log((currentUserProfileInfo.result!.emailAddress != null
+      //         ? emailController.text !=
+      //             currentUserProfileInfo.result!.emailAddress!
+      //         : false)
+      //     .toString());
+      await sendOTP(email: emailController.text);
+    }
   }
 
   Future sendOTPPhoneNumber() async {
@@ -148,7 +157,12 @@ class VerifyAccountController extends GetxController {
       });
     }
     if (email != null) {
-      generateOtpCode = await _verifyAccountRepo.sendOTP(emailAddress: email);
+      generateOtpCode = await _verifyAccountRepo.sendOTP(
+        emailAddress: email,
+        isEmailChanged: currentUserProfileInfo.result!.emailAddress != null
+            ? email != currentUserProfileInfo.result!.emailAddress!
+            : false,
+      );
       if (generateOtpCode.result != null &&
           generateOtpCode.result!.numberOfSeconds != null) {
         await Get.toNamed(Routes.VERIFY_OTP, arguments: {

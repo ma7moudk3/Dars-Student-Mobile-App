@@ -1,6 +1,7 @@
 import 'dart:async';
 
 import 'package:hessa_student/app/data/cache_helper.dart';
+import 'package:hessa_student/app/modules/login/data/models/current_user_profile_info/current_user_profile_info.dart';
 import 'package:hessa_student/app/modules/verify_account/data/models/generate_otp_code/generate_otp_code.dart';
 import 'package:hessa_student/app/modules/verify_account/data/repos/verify_account_repo.dart';
 import 'package:hessa_student/app/modules/verify_otp/data/models/verify_otp_response/verify_otp_response.dart';
@@ -10,6 +11,7 @@ import 'package:hessa_student/global_presentation/global_widgets/loading.dart';
 import '../../../../generated/locales.g.dart';
 import '../../../constants/exports.dart';
 import '../../../routes/app_pages.dart';
+import '../../login/data/models/current_user_info/current_user_info.dart';
 import '../../verify_account/data/repos/verify_account_repo_implement.dart';
 
 class VerifyOtpController extends GetxController {
@@ -23,6 +25,11 @@ class VerifyOtpController extends GetxController {
   final VerifyAccountRepo _verifyAccountRepo = VerifyAccountRepoImplement();
   GenerateOtpCode generateOtpCode = GenerateOtpCode();
   VerifyOtpResponse verifyOtpResponse = VerifyOtpResponse();
+  CurrentUserInfo currentUserInfo =
+      CacheHelper.instance.getCachedCurrentUserInfo() ?? CurrentUserInfo();
+  CurrentUserProfileInfo currentUserProfileInfo =
+      CacheHelper.instance.getCachedCurrentUserProfileInfo() ??
+          CurrentUserProfileInfo();
   @override
   void onInit() {
     if (Get.arguments != null) {
@@ -119,10 +126,19 @@ class VerifyOtpController extends GetxController {
     }
     showLoadingDialog();
     if (email != null && email!.isNotEmpty) {
-      generateOtpCode = await _verifyAccountRepo.sendOTP(emailAddress: email);
+      generateOtpCode = await _verifyAccountRepo.sendOTP(
+        emailAddress: email,
+        isEmailChanged: currentUserProfileInfo.result!.emailAddress != null
+            ? email != currentUserProfileInfo.result!.emailAddress!
+            : false,
+      );
     } else if (phoneNumber != null && phoneNumber!.isNotEmpty) {
-      generateOtpCode =
-          await _verifyAccountRepo.sendOTP(phoneNumber: phoneNumber);
+      generateOtpCode = await _verifyAccountRepo.sendOTP(
+        phoneNumber: phoneNumber,
+        isPhoneChanged: currentUserProfileInfo.result!.phoneNumber != null
+            ? phoneNumber != currentUserProfileInfo.result!.phoneNumber!
+            : false,
+      );
     }
     if (Get.isDialogOpen ?? false) {
       Get.back();

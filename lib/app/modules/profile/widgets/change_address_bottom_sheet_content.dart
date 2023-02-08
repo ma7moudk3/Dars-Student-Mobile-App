@@ -3,6 +3,8 @@ import 'package:hessa_student/app/modules/profile/controllers/profile_controller
 import '../../../../generated/locales.g.dart';
 import '../../../../global_presentation/global_widgets/global_dropdown.dart';
 import '../../../constants/exports.dart';
+import '../../../core/helper_functions.dart';
+import '../../../routes/app_pages.dart';
 
 class ChangeAddressBottomSheetContent extends GetView<ProfileController> {
   const ChangeAddressBottomSheetContent({
@@ -171,7 +173,11 @@ class ChangeAddressBottomSheetContent extends GetView<ProfileController> {
                           onPressed: () async {
                             if (controller.formKey.currentState!.validate()) {
                               Get.back(); // currently
-                              // await controller.changePassword();
+                              if (await checkInternetConnection(timeout: 5)) {
+                                // await controller.changePassword();
+                              } else {
+                                await Get.toNamed(Routes.CONNECTION_FAILED);
+                              }
                             }
                           },
                           title: LocaleKeys.save.tr,

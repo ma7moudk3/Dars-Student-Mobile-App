@@ -15,12 +15,13 @@ class VerifyAccountRepoImplement extends VerifyAccountRepo {
     String? phoneNumber,
     String? emailAddress,
     bool isPhoneChanged = false,
+    bool isEmailChanged = false,
   }) async {
     GenerateOtpCode generateOtpCode = GenerateOtpCode();
     Map<String, dynamic> data = emailAddress != null
         ? {
             "emailAddress": emailAddress,
-            "operationType": 5,
+            "operationType": isEmailChanged ? 6 : 5,
             "verificationMethod": 1,
           }
         : {

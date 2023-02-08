@@ -170,12 +170,12 @@ class OrderHessaOptions extends GetView<OrderHessaController> {
             children: [
               PrimaryText(
                 "${LocaleKeys.school_package.tr}*: ",
-                fontSize: 12.sp,
+                fontSize: 11.2.sp,
                 fontWeight: FontWeightManager.softLight,
                 color: ColorManager.red,
               ),
               SizedBox(
-                width: Get.width * 0.6,
+                width: Get.width * 0.60,
                 child: PrimaryText(
                   LocaleKeys.school_package_description,
                   fontSize: 11.sp,

@@ -43,7 +43,7 @@ class VerifyAccountView extends GetView<VerifyAccountController> {
                         cursorColor: ColorManager.primary,
                         focusNode: controller.emailFocusNode,
                         fontSize: 14.sp,
-                        readOnly: true,
+                        // readOnly: true,
                         prefixIcon: Icon(
                           Icons.email_outlined,
                           size: 25,

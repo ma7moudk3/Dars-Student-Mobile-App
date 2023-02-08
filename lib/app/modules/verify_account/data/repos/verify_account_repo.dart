@@ -6,6 +6,7 @@ abstract class VerifyAccountRepo {
     String? phoneNumber,
     String? emailAddress,
     bool isPhoneChanged = false,
+    bool isEmailChanged = false,
   });
 
   Future<int> logout();
