@@ -1,3 +1,4 @@
+import 'dart:convert';
 import 'dart:io';
 
 import 'package:flutter/cupertino.dart';
@@ -9,6 +10,7 @@ import '../../../../generated/locales.g.dart';
 import '../../../../global_presentation/global_widgets/custom_app_bar.dart';
 import '../../../../global_presentation/global_widgets/intl_phone_number_widget.dart';
 import '../../../constants/exports.dart';
+import '../../../data/cache_helper.dart';
 import '../../../routes/app_pages.dart';
 import '../controllers/edit_profile_controller.dart';
 
@@ -173,8 +175,14 @@ class EditProfileView extends GetView<EditProfileController> {
                                   image: DecorationImage(
                                     image: controller.image != null
                                         ? FileImage(controller.image!)
-                                            as ImageProvider
-                                        : AssetImage(ImagesManager.guest),
+                                        : (CacheHelper.instance
+                                                    .getUserProfilePicture() !=
+                                                null
+                                            ? MemoryImage(base64Decode(CacheHelper
+                                                    .instance
+                                                    .getUserProfilePicture()!))
+                                                as ImageProvider
+                                            : AssetImage(ImagesManager.guest)),
                                     fit: BoxFit.cover,
                                     colorFilter: ColorFilter.mode(
                                       ColorManager.black.withOpacity(0.1),

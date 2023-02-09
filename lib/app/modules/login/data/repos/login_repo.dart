@@ -13,5 +13,6 @@ abstract class LoginRepo {
   });
 
   Future<CurrentUserInfo> getCurrentUserInfo();
+  Future<String> getCurrentUserProfilePicture();
   Future<CurrentUserProfileInfo> getCurrentUserProfileInfo();
 }

@@ -74,14 +74,19 @@ class EditProfileController extends GetxController {
 
   Future updateProfile() async {
     showLoadingDialog();
-    await Future.wait([updateImage(), ]).then((value) async {
+    await Future.wait([updateImage(), updateProfileData()]).then((value) async {
       if (Get.isDialogOpen!) {
         Get.back();
       }
     }).then((value) async {
       await Future.wait([getCurrentUserInfo(), getCurrentUserProfileInfo()])
           .then((value) async {
-        await Future.delayed(const Duration(milliseconds: 2500))
+        CustomSnackBar.showCustomSnackBar(
+          title: LocaleKeys.success.tr,
+          message: LocaleKeys.profile_edited_succesfully.tr,
+          duration: const Duration(seconds: 2),
+        );
+        await Future.delayed(const Duration(milliseconds: 1000))
             .then((value) async {
           await Get.offAllNamed(Routes.BOTTOM_NAV_BAR);
         });
@@ -92,8 +97,7 @@ class EditProfileController extends GetxController {
   Future updateProfileData() async {
     if (currentUserProfileInfo.result != null &&
         currentUserProfileInfo.result!.requester != null) {
-      await _editProfileRepo
-          .updateProfile(
+      await _editProfileRepo.updateProfile(
         firstName: fullNameController.text.split(" ")[0],
         surname: fullNameController.text.split(" ").length > 1
             ? fullNameController.text.split(" ")[1]
@@ -102,14 +106,7 @@ class EditProfileController extends GetxController {
         email: emailController.text,
         phoneNumber: phoneNumber,
         gender: gender,
-      )
-          .then((int statusCode) async {
-        CustomSnackBar.showCustomSnackBar(
-          title: LocaleKeys.success.tr,
-          message: LocaleKeys.profile_edited_succesfully.tr,
-          duration: const Duration(seconds: 2),
-        );
-      });
+      );
     }
   }
 

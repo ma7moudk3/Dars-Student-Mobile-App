@@ -1,4 +1,7 @@
+import 'dart:convert';
+
 import 'package:cached_network_image/cached_network_image.dart';
+import 'package:hessa_student/app/data/cache_helper.dart';
 
 import '../../../constants/exports.dart';
 import '../../../constants/links.dart';
@@ -29,15 +32,19 @@ class HomeProfileInfoWidget extends GetView<HomeController> {
                 height: 65.h,
                 decoration: BoxDecoration(
                   image: DecorationImage(
-                    image: CachedNetworkImageProvider(
-                      userPicture,
-                      errorListener: () {
-                        setState(() {
-                          userPicture =
-                              "https://www.shareicon.net/data/2016/06/10/586098_guest_512x512.png";
-                        });
-                      },
-                    ),
+                    image: CacheHelper.instance.getUserProfilePicture() != null
+                        ? MemoryImage(base64Decode(
+                                CacheHelper.instance.getUserProfilePicture()!))
+                            as ImageProvider
+                        : CachedNetworkImageProvider(
+                            userPicture,
+                            errorListener: () {
+                              setState(() {
+                                userPicture =
+                                    "https://www.shareicon.net/data/2016/06/10/586098_guest_512x512.png";
+                              });
+                            },
+                          ),
                     fit: BoxFit.cover,
                   ),
                   border: Border.all(

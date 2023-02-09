@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:hessa_student/app/modules/login/data/models/login_info/login_info.dart';
 
@@ -50,7 +52,7 @@ class LoginRepoImplement extends LoginRepo {
     });
     return statusCode;
   }
-  
+
   @override
   Future<CurrentUserInfo> getCurrentUserInfo() async {
     CurrentUserInfo currentUserInfo = CurrentUserInfo();
@@ -152,5 +154,25 @@ class LoginRepoImplement extends LoginRepo {
     });
 
     return statusCode;
+  }
+
+  @override
+  Future<String> getCurrentUserProfilePicture() async {
+    String userPicture = "";
+    try {
+      Map<String, dynamic> headers = {
+        "Authorization": "Bearer ${CacheHelper.instance.getAccessToken()}",
+      };
+      await DioHelper.get(Links.userProfileImage, headers: headers,
+          onSuccess: (response) async {
+        userPicture = response.data['result']['profilePicture'];
+        await CacheHelper.instance.setUserProfilePicture(userPicture);
+      }, onError: (response) {
+        log("getCurrentUserProfilePicture error: ${response.response}");
+      });
+    } catch (e) {
+      log("getCurrentUserProfilePicture error: $e");
+    }
+    return userPicture;
   }
 }

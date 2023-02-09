@@ -1,4 +1,7 @@
+import 'dart:convert';
+
 import 'package:cached_network_image/cached_network_image.dart';
+import 'package:hessa_student/app/data/cache_helper.dart';
 
 import '../../../../generated/locales.g.dart';
 import '../../../constants/exports.dart';
@@ -29,13 +32,17 @@ class ProfileInfoWidget extends GetView<ProfileController> {
                 image: DecorationImage(
                   image: controller.userPicture != null &&
                           controller.userPicture!.isNotEmpty
-                      ? CachedNetworkImageProvider(
-                          controller.userPicture ??
-                              "https://www.shareicon.net/data/2016/06/10/586098_guest_512x512.png",
-                          errorListener: () {
-                            controller.changeUserPictureIfErrorHappens();
-                          },
-                        ) as ImageProvider
+                      ? CacheHelper.instance.getUserProfilePicture() != null
+                          ? MemoryImage(base64Decode(
+                                CacheHelper.instance.getUserProfilePicture()!))
+                            as ImageProvider
+                          : CachedNetworkImageProvider(
+                              controller.userPicture ??
+                                  "https://www.shareicon.net/data/2016/06/10/586098_guest_512x512.png",
+                              errorListener: () {
+                                controller.changeUserPictureIfErrorHappens();
+                              },
+                            )
                       : AssetImage(ImagesManager.guest),
                   fit: BoxFit.cover,
                 ),

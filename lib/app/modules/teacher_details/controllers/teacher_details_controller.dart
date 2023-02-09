@@ -9,6 +9,7 @@ import 'package:hessa_student/app/modules/teacher_details/data/repos/teacher_det
 
 import '../../../../generated/locales.g.dart';
 import '../../../../global_presentation/global_features/images_manager.dart';
+import '../data/models/hessa_teacher_details/provider_teaching_topic.dart';
 import '../data/repos/teacher_details_repo_implement.dart';
 
 class TeacherDetailsController extends GetxController {
@@ -61,6 +62,16 @@ class TeacherDetailsController extends GetxController {
         await getTeacherDetails().then((value) {
           if (hessaTeacherDetails.result != null &&
               hessaTeacherDetails.result!.providerSkill != null) {
+            teacherProperties[2]["content"] = hessaTeacherDetails
+                .result!.providerTeachingTopic!
+                .map((ProviderTeachingTopic providerTeachingTopic) =>
+                    providerTeachingTopic.topicName ?? "")
+                .join(", ");
+            teacherProperties[3]["content"] = hessaTeacherDetails
+                .result!.providerTeachingTopic!
+                .map((ProviderTeachingTopic providerTeachingTopic) =>
+                    providerTeachingTopic.levelName ?? "")
+                .join(", ");
             teacherProperties[4]["content"] = hessaTeacherDetails
                 .result!.providerSkill!
                 .map((ProviderSkill providerSkill) =>

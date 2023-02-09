@@ -68,6 +68,7 @@ class LogoutDialogContent extends StatelessWidget {
                       await CacheHelper.instance.setAccessToken("");
                       await CacheHelper.instance.setRefreshToken("");
                       await CacheHelper.instance.setFcmToken("");
+                      await CacheHelper.instance.setUserProfilePicture("");
                       await FirebaseMessaging.instance.deleteToken();
                       await CacheHelper.instance.cacheCurrentUserInfo({});
                       await CacheHelper.instance

@@ -19,6 +19,8 @@ class Links {
       "api/services/app/Account/SendPasswordResetCode";
   static const String profileImageById =
       "api/services/app/Profile/GetProfilePictureByUser";
+  static const String userProfileImage =
+      "api/services/app/Profile/GetProfilePicture";
   static const String updateProfileData =
       "api/services/app/Requesters/CreateOrEdit";
   static const String updateProfilePicture =

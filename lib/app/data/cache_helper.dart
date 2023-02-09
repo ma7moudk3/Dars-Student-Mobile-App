@@ -89,6 +89,14 @@ class CacheHelper {
     return _sharedPreferences.getString('fcm_token') ?? '';
   }
 
+  Future setUserProfilePicture(String userPicture) async {
+    await _sharedPreferences.setString('user_picture', userPicture);
+  }
+
+  String? getUserProfilePicture() {
+    return _sharedPreferences.getString('user_picture');
+  }
+
   Future setFirstTimeOpenedApp(bool firstTime) async {
     await _sharedPreferences.setBool('first_time', firstTime);
   }

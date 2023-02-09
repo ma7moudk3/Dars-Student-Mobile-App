@@ -12,7 +12,6 @@ import '../../../data/network_helper/firebase_social_auth_helpers.dart';
 import '../../../routes/app_pages.dart';
 import '../data/models/current_user_profile_info/current_user_profile_info.dart';
 import '../data/repos/login_repo_implement.dart';
-import '../widgets/welcome_back_dialog_content.dart';
 
 class LoginController extends GetxController {
   FocusNode emailFocusNode = FocusNode();
@@ -64,8 +63,11 @@ class LoginController extends GetxController {
       )
           .then((int statusCode) async {
         if (statusCode == 200) {
-          Future.wait([_getCurrentUserInfo(), _getCurrentUserProfileInfo()])
-              .then((value) async {
+          Future.wait([
+            _getCurrentUserInfo(),
+            _getCurrentUserProfileInfo(),
+            _loginRepo.getCurrentUserProfilePicture()
+          ]).then((value) async {
             CurrentUserInfo currentUserInfo =
                 CacheHelper.instance.getCachedCurrentUserInfo() ??
                     CurrentUserInfo();
@@ -91,22 +93,6 @@ class LoginController extends GetxController {
               await CacheHelper.instance.setIsEmailConfirmed(true);
               await CacheHelper.instance.setIsPhoneConfirmed(true);
               await Get.offAllNamed(Routes.BOTTOM_NAV_BAR);
-              Future.delayed(const Duration(microseconds: 1200), () async {
-                await Get.dialog(
-                  Container(
-                    color: ColorManager.black.withOpacity(0.1),
-                    height: 140.h,
-                    width: 140.w,
-                    child: Center(
-                      child: Container(
-                        width: Get.width,
-                        margin: EdgeInsets.symmetric(horizontal: 18.w),
-                        child: const WelcomeBackDialogContent(),
-                      ),
-                    ),
-                  ),
-                );
-              });
             }
           });
         }
@@ -139,9 +125,11 @@ class LoginController extends GetxController {
           )
               .then((int statusCode) async {
             if (statusCode == 200) {
-              await Future.wait(
-                      [_getCurrentUserInfo(), _getCurrentUserProfileInfo()])
-                  .then((value) async {
+              await Future.wait([
+                _getCurrentUserInfo(),
+                _getCurrentUserProfileInfo(),
+                _loginRepo.getCurrentUserProfilePicture()
+              ]).then((value) async {
                 CurrentUserInfo currentUserInfo =
                     CacheHelper.instance.getCachedCurrentUserInfo() ??
                         CurrentUserInfo();
@@ -174,22 +162,6 @@ class LoginController extends GetxController {
                   await CacheHelper.instance.setIsEmailConfirmed(true);
                   await CacheHelper.instance.setIsPhoneConfirmed(true);
                   await Get.offAllNamed(Routes.BOTTOM_NAV_BAR);
-                  Future.delayed(const Duration(microseconds: 1200), () async {
-                    await Get.dialog(
-                      Container(
-                        color: ColorManager.black.withOpacity(0.1),
-                        height: 140.h,
-                        width: 140.w,
-                        child: Center(
-                          child: Container(
-                            width: Get.width,
-                            margin: EdgeInsets.symmetric(horizontal: 18.w),
-                            child: const WelcomeBackDialogContent(),
-                          ),
-                        ),
-                      ),
-                    );
-                  });
                 }
               });
             }
