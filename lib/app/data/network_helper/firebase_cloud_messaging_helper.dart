@@ -157,7 +157,8 @@ class FcmHelper {
         .requestPermission();
 
     await flutterLocalNotificationsPlugin.initialize(initializationSettings,
-        onDidReceiveNotificationResponse: (NotificationResponse notificationResponse) async {
+        onDidReceiveNotificationResponse:
+            (NotificationResponse notificationResponse) async {
       final NotificationAppLaunchDetails? details =
           await flutterLocalNotificationsPlugin
               .getNotificationAppLaunchDetails();
@@ -178,7 +179,7 @@ class FcmHelper {
       // }
       // print('data $data');
       // switch (data['type']) {
-      
+
       // }
     });
   }

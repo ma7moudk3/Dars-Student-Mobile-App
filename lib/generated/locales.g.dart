@@ -186,6 +186,7 @@ class LocaleKeys {
   static const confirm = 'confirm';
   static const save = 'save';
   static const note = 'note';
+  static const no_results_found = 'no_results_found';
   static const dependents_list = 'dependents_list';
   static const no_teacher_found = 'no_teacher_found';
   static const camera = 'camera';
@@ -512,6 +513,7 @@ class Locales {
     'confirm': 'تأكيد',
     'save': 'حفظ',
     'note': 'مُلاحظة',
+    'no_results_found': 'نأسف! لم نجد نتائج بحث',
     'dependents_list': 'قائمة التابعين',
     'no_teacher_found': 'لم يتم العثور على مدرسين',
     'camera': 'الكاميرا',

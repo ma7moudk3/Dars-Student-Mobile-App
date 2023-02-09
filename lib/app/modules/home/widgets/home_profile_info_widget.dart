@@ -1,6 +1,7 @@
 import 'package:cached_network_image/cached_network_image.dart';
 
 import '../../../constants/exports.dart';
+import '../../../constants/links.dart';
 import '../../bottom_nav_bar/controllers/bottom_nav_bar_controller.dart';
 import '../controllers/home_controller.dart';
 
@@ -11,6 +12,8 @@ class HomeProfileInfoWidget extends GetView<HomeController> {
 
   @override
   Widget build(BuildContext context) {
+    String userPicture =
+        "${Links.baseLink}${Links.profileImageById}?userId=${controller.currentUserProfileInfo.result!.requester!.userId.toString()}";
     return GestureDetector(
       behavior: HitTestBehavior.deferToChild,
       onTap: () async {
@@ -20,30 +23,45 @@ class HomeProfileInfoWidget extends GetView<HomeController> {
       child: Row(
         children: [
           GetBuilder<HomeController>(builder: (HomeController controller) {
-            return Container(
-              width: 65.w,
-              height: 65.h,
-              decoration: BoxDecoration(
-                image: DecorationImage(
-                  image: controller.userPicture != null &&
-                          controller.userPicture!.isNotEmpty
-                      ? CachedNetworkImageProvider(
-                          controller.userPicture ??
-                              "https://www.shareicon.net/data/2016/06/10/586098_guest_512x512.png",
-                          errorListener: () {
-                            controller.changeUserPictureIfErrorHappens();
-                          },
-                        ) as ImageProvider
-                      : AssetImage(ImagesManager.guest),
-                  fit: BoxFit.cover,
+            return StatefulBuilder(builder: (BuildContext context, setState) {
+              return Container(
+                width: 65.w,
+                height: 65.h,
+                decoration: BoxDecoration(
+                  image: DecorationImage(
+                    image: CachedNetworkImageProvider(
+                      userPicture,
+                      errorListener: () {
+                        setState(() {
+                          userPicture =
+                              "https://www.shareicon.net/data/2016/06/10/586098_guest_512x512.png";
+                        });
+                      },
+                    ),
+                    fit: BoxFit.cover,
+                  ),
+                  border: Border.all(
+                    width: 1,
+                    color: ColorManager.primary,
+                  ),
+                  borderRadius: BorderRadius.circular(20),
                 ),
-                border: Border.all(
-                  width: 1,
-                  color: ColorManager.primary,
-                ),
-                borderRadius: BorderRadius.circular(20),
-              ),
-            );
+                // child: ClipRRect(
+                //   borderRadius: BorderRadius.circular(20),
+                //   child: CachedNetworkImage(
+                //     imageUrl:
+                //         "${Links.baseLink}${Links.profileImageById}?userId=${controller.currentUserProfileInfo.result!.requester!.userId.toString()}",
+                //     fit: BoxFit.cover,
+                //     errorWidget:
+                //         (BuildContext context, String url, dynamic error) =>
+                //             Image.asset(
+                //       ImagesManager.guest,
+                //       fit: BoxFit.cover,
+                //     ),
+                //   ),
+                // ),
+              );
+            });
           }),
           SizedBox(width: 13.w),
           Column(

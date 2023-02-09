@@ -1,4 +1,9 @@
+import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:hessa_student/app/constants/exports.dart';
+import 'package:hessa_student/app/modules/hessa_teachers/data/models/hessa_teacher.dart';
+import 'package:hessa_student/global_presentation/global_features/lotties_manager.dart';
+import 'package:infinite_scroll_pagination/infinite_scroll_pagination.dart';
+import 'package:lottie/lottie.dart';
 import '../../../../generated/locales.g.dart';
 import '../../../../global_presentation/global_widgets/custom_app_bar.dart';
 import '../../../../global_presentation/global_widgets/search_bar.dart';
@@ -6,6 +11,7 @@ import '../../../core/helper_functions.dart';
 import '../../../routes/app_pages.dart';
 import '../controllers/hessa_teachers_controller.dart';
 import '../widgets/hessa_teacher_filter_bottom_sheet_content.dart';
+import '../widgets/hessa_teacher_widget.dart';
 
 class HessaTeachersView extends GetView<HessaTeachersController> {
   const HessaTeachersView({super.key});
@@ -28,200 +34,204 @@ class HessaTeachersView extends GetView<HessaTeachersController> {
         ),
         action: const SizedBox.shrink(),
       ),
-      body: SingleChildScrollView(
-        child: Column(
-          children: [
-            SizedBox(height: 24.h),
-            Container(
-              width: (Get.width).w,
-              padding: EdgeInsets.symmetric(horizontal: 16, vertical: 0.h),
-              child: SearchBar(
-                searchHint: LocaleKeys.search_for_teacher.tr,
-                onFilterTap: () async {
-                  await Get.bottomSheet(
-                    isScrollControlled: true,
-                    shape: const RoundedRectangleBorder(
-                      borderRadius: BorderRadius.only(
-                        topLeft: Radius.circular(20),
-                        topRight: Radius.circular(20),
-                      ),
-                    ),
-                    backgroundColor: ColorManager.white,
-                    const HessaTeacherFilterBottomSheetContent(),
-                  );
-                },
-                onSearch: (String? text) async {
-                  if (controller.searchTextController.text.isNotEmpty &&
-                      (controller.searchTextController.text
-                          .trim()
-                          .isNotEmpty)) {
-                    if (await checkInternetConnection(timeout: 10)) {
-                      controller.toggleSearch = true;
-                    } else {
-                      Get.toNamed(Routes.CONNECTION_FAILED);
-                    }
-                  }
-                },
-              ),
-            ),
-            SizedBox(height: 25.h),
-            Padding(
-              padding: EdgeInsets.symmetric(horizontal: 16.w),
-              child: Column(
-                children: [
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      PrimaryText(
-                        LocaleKeys.search_results,
-                        fontSize: 16.sp,
-                      ),
-                      GestureDetector(
-                        onTap: () {},
-                        child: Row(
-                          children: [
-                            PrimaryText(
-                              LocaleKeys.most_requested,
-                              fontSize: 16.sp,
-                              color: ColorManager.fontColor7,
-                            ),
-                            SizedBox(width: 5.w),
-                            SvgPicture.asset(
-                              ImagesManager.descendingIcon,
-                            ),
-                          ],
+      body: GetX<HessaTeachersController>(
+          builder: (HessaTeachersController controller) {
+        if (controller.isInternetConnected.value == true) {
+          return Column(
+            children: [
+              SizedBox(height: 24.h),
+              Container(
+                width: (Get.width).w,
+                padding: EdgeInsets.symmetric(horizontal: 16, vertical: 0.h),
+                child: SearchBar(
+                  searchHint: LocaleKeys.search_for_teacher.tr,
+                  onFilterTap: () async {
+                    await Get.bottomSheet(
+                      isScrollControlled: true,
+                      shape: const RoundedRectangleBorder(
+                        borderRadius: BorderRadius.only(
+                          topLeft: Radius.circular(20),
+                          topRight: Radius.circular(20),
                         ),
                       ),
-                    ],
-                  ),
-                ],
+                      backgroundColor: ColorManager.white,
+                      const HessaTeacherFilterBottomSheetContent(),
+                    );
+                  },
+                  onSearch: (String? text) async {
+                    if (controller.searchTextController.text.isNotEmpty &&
+                        (controller.searchTextController.text
+                            .trim()
+                            .isNotEmpty)) {
+                      if (await checkInternetConnection(timeout: 10)) {
+                        controller.toggleSearch = true;
+                      } else {
+                        await Get.toNamed(Routes.CONNECTION_FAILED);
+                      }
+                    }
+                  },
+                ),
               ),
-            ),
-            SizedBox(height: 25.h),
-            Padding(
-              padding: EdgeInsets.symmetric(horizontal: 16.w),
-              child: ListView.builder(
-                itemCount: 3,
-                shrinkWrap: true,
-                physics: const NeverScrollableScrollPhysics(),
-                itemBuilder: (BuildContext context, int index) {
-                  return GestureDetector(
-                    behavior: HitTestBehavior.opaque,
-                    onTap: () async {
-                      await Get.toNamed(Routes.TEACHER_DETAILS);
-                    },
-                    child: Container(
-                      padding: EdgeInsets.symmetric(
-                          horizontal: 16.w, vertical: 16.h),
-                      margin: EdgeInsets.only(bottom: 16.h),
-                      width: Get.width,
-                      decoration: BoxDecoration(
-                        color: const Color(0xfeffffff),
-                        borderRadius: BorderRadius.circular(14.0),
-                        boxShadow: const [
-                          BoxShadow(
-                            color: Color(0x1a000000),
-                            offset: Offset(0, 1),
-                            blurRadius: 8,
-                          ),
-                        ],
-                      ),
-                      child: Column(
-                        children: [
-                          Row(
-                            crossAxisAlignment: CrossAxisAlignment.end,
+              SizedBox(height: 25.h),
+              Padding(
+                padding: EdgeInsets.symmetric(horizontal: 16.w),
+                child: Column(
+                  children: [
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        PrimaryText(
+                          LocaleKeys.search_results,
+                          fontSize: 16.sp,
+                        ),
+                        GestureDetector(
+                          onTap: () {},
+                          child: Row(
                             children: [
-                              Container(
-                                width: 50.w,
-                                height: 50.h,
-                                decoration: BoxDecoration(
-                                  image: DecorationImage(
-                                    image: AssetImage(ImagesManager.avatar),
-                                    fit: BoxFit.cover,
-                                  ),
-                                  borderRadius: BorderRadius.circular(15),
-                                ),
+                              PrimaryText(
+                                LocaleKeys.most_requested,
+                                fontSize: 16.sp,
+                                color: ColorManager.fontColor7,
                               ),
-                              SizedBox(width: 10.w),
-                              Expanded(
-                                child: Column(
-                                  children: [
-                                    Row(
-                                      mainAxisSize: MainAxisSize.min,
-                                      children: [
-                                        PrimaryText(
-                                          "وليد علي",
-                                          color: ColorManager.fontColor,
-                                        ),
-                                        const Spacer(),
-                                        Row(
-                                          mainAxisSize: MainAxisSize.min,
-                                          mainAxisAlignment:
-                                              MainAxisAlignment.end,
-                                          children: [
-                                            Icon(
-                                              Icons.star,
-                                              color: ColorManager.orange,
-                                              size: 14.sp,
-                                            ),
-                                            SizedBox(
-                                              width: 40.w,
-                                              child: PrimaryText(
-                                                "4.5",
-                                                color: ColorManager.fontColor,
-                                                fontSize: 12.sp,
-                                                maxLines: 1,
-                                                fontWeight:
-                                                    FontWeightManager.softLight,
-                                                overflow: TextOverflow.ellipsis,
-                                              ),
-                                            ),
-                                          ],
-                                        ),
-                                      ],
-                                    ),
-                                    SizedBox(height: 5.h),
-                                    Row(
-                                      mainAxisSize: MainAxisSize.min,
-                                      mainAxisAlignment: MainAxisAlignment.end,
-                                      children: [
-                                        PrimaryText(
-                                          ["رياضيات", "علوم", "فيزياء"]
-                                              .map((String subject) =>
-                                                  subject.toString())
-                                              .join(", "),
-                                          color: ColorManager.primary,
-                                          fontWeight:
-                                              FontWeightManager.softLight,
-                                          fontSize: 11.sp,
-                                        ),
-                                        const Spacer(),
-                                        PrimaryText(
-                                          "نابلس - الخليل",
-                                          color: ColorManager.fontColor7,
-                                          fontSize: 12.sp,
-                                          maxLines: 1,
-                                          fontWeight:
-                                              FontWeightManager.softLight,
-                                          overflow: TextOverflow.ellipsis,
-                                        ),
-                                      ],
-                                    ),
-                                  ],
-                                ),
+                              SizedBox(width: 5.w),
+                              SvgPicture.asset(
+                                ImagesManager.descendingIcon,
                               ),
                             ],
                           ),
-                        ],
+                        ),
+                      ],
+                    ),
+                  ],
+                ),
+              ),
+              SizedBox(height: 25.h),
+              GetBuilder<HessaTeachersController>(
+                  builder: (HessaTeachersController controller) {
+                return Expanded(
+                  child: Padding(
+                    padding: EdgeInsets.symmetric(horizontal: 16.w),
+                    child: RefreshIndicator(
+                      color: ColorManager.white,
+                      backgroundColor: ColorManager.primary,
+                      onRefresh: () async => await Future.sync(
+                          () => controller.pagingController.refresh()),
+                      child: PagedListView<int, HessaTeacher>(
+                        pagingController: controller.pagingController,
+                        builderDelegate:
+                            PagedChildBuilderDelegate<HessaTeacher>(
+                          animateTransitions: true,
+                          transitionDuration: const Duration(milliseconds: 350),
+                          firstPageErrorIndicatorBuilder:
+                              (BuildContext context) {
+                            return Center(
+                              child: SpinKitCircle(
+                                duration: const Duration(milliseconds: 1300),
+                                size: 50,
+                                color: ColorManager.primary,
+                              ),
+                            );
+                          },
+                          firstPageProgressIndicatorBuilder:
+                              (BuildContext context) {
+                            return Column(
+                              children: [
+                                SizedBox(height: 50.h),
+                                Lottie.asset(
+                                  LottiesManager.searchingLight,
+                                  animate: true,
+                                ),
+                              ],
+                            );
+                          },
+                          newPageErrorIndicatorBuilder: (BuildContext context) {
+                            return Center(
+                              child: SpinKitCircle(
+                                duration: const Duration(milliseconds: 1300),
+                                color: ColorManager.primary,
+                                size: 50,
+                              ),
+                            );
+                          },
+                          newPageProgressIndicatorBuilder:
+                              (BuildContext context) {
+                            return Column(
+                              children: [
+                                SizedBox(height: 20.h),
+                                Center(
+                                  child: SpinKitCircle(
+                                    duration:
+                                        const Duration(milliseconds: 1300),
+                                    color: ColorManager.primary,
+                                    size: 50,
+                                  ),
+                                ),
+                                SizedBox(height: 20.h),
+                              ],
+                            );
+                          },
+                          noItemsFoundIndicatorBuilder: (BuildContext context) {
+                            return Center(
+                              child: Column(
+                                children: [
+                                  const Spacer(),
+                                  Center(
+                                    child: Lottie.asset(
+                                      LottiesManager.noResultsSearching,
+                                      animate: true,
+                                    ),
+                                  ),
+                                  PrimaryText(
+                                    LocaleKeys.no_results_found.tr,
+                                    fontSize: 20,
+                                  ),
+                                  const Spacer(),
+                                ],
+                              ),
+                            );
+                          },
+                          itemBuilder: (BuildContext context,
+                              HessaTeacher teacher, int index) {
+                            return HessaTeacherWidget(
+                              teacher: teacher,
+                            );
+                          },
+                        ),
                       ),
                     ),
-                  );
-                },
+                  ),
+                );
+              }),
+            ],
+          );
+        } else {
+          return Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              PrimaryText(
+                LocaleKeys.check_your_internet_connection.tr,
+                fontSize: 18.sp,
+                fontWeight: FontWeightManager.bold,
+                textAlign: TextAlign.center,
               ),
-            ),
-          ],
-        ),
-      ),
+              SizedBox(
+                height: (Get.height * 0.5).h,
+                child: Lottie.asset(
+                  LottiesManager.noInernetConnection,
+                  animate: true,
+                ),
+              ),
+              PrimaryButton(
+                onPressed: () async {
+                  await controller.checkInternet();
+                },
+                title: LocaleKeys.retry.tr,
+                width: (Get.width * 0.5).w,
+              ),
+            ],
+          );
+        }
+      }),
     );
   }
 }

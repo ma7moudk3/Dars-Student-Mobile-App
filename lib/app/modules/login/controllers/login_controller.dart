@@ -53,7 +53,7 @@ class LoginController extends GetxController {
     update();
     return null;
   }
-  
+
   Future login() async {
     try {
       showLoadingDialog();

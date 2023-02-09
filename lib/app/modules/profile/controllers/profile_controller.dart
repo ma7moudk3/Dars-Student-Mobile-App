@@ -6,8 +6,7 @@ import 'package:hessa_student/app/modules/login/data/repos/login_repo.dart';
 import 'package:hessa_student/app/modules/login/data/repos/login_repo_implement.dart';
 import 'package:hessa_student/app/modules/profile/data/repos/profile_repo.dart';
 import 'package:hessa_student/app/modules/profile/data/repos/profile_repo_implement.dart';
-import 'package:hessa_student/global_presentation/global_widgets/loading.dart';
-
+import '../../../../global_presentation/global_widgets/loading.dart';
 import '../../../../generated/locales.g.dart';
 import '../../../constants/exports.dart';
 import '../../../constants/links.dart';
