@@ -19,7 +19,9 @@ class HessaTeacherWidget extends GetView<HessaTeachersController> {
     return GestureDetector(
       behavior: HitTestBehavior.opaque,
       onTap: () async {
-        await Get.toNamed(Routes.TEACHER_DETAILS);
+        await Get.toNamed(Routes.TEACHER_DETAILS, arguments: {
+          "teacher": teacher,
+        });
       },
       child: Container(
         padding: EdgeInsets.symmetric(horizontal: 16.w, vertical: 16.h),

@@ -41,7 +41,13 @@ class HessaTeacherBrief extends GetView<TeacherDetailsController> {
           moreDivider(),
           SizedBox(height: 10.h),
           PrimaryText(
-            "هذا النص هو مثال لنص يمكن أن يستبدل في نفس المساحة، لقد تم توليد هذا النص من مولد النص العربى، حيث يمكنك أن تولد مثل هذا النص أو العديد من النصوص الأخرى إضافة إلى زيادة عدد الحروف التى يولدها التط",
+            controller.hessaTeacherDetails.result != null
+                ? controller.hessaTeacherDetails.result!.providers != null
+                    ? controller
+                            .hessaTeacherDetails.result!.providers!.aboutMe ??
+                        ""
+                    : ""
+                : "",
             color: ColorManager.grey5,
             fontSize: 14.sp,
           ),

@@ -44,7 +44,6 @@ class ProfileView extends GetView<ProfileController> {
         color: ColorManager.white,
         backgroundColor: ColorManager.primary,
         onRefresh: () async {
-          // Future.sync(() => controller.pagingController.refresh());
           await Future.wait([
             controller.getCurrentUserInfo(),
             controller.getCurrentUserProfileInfo()

@@ -24,7 +24,7 @@ class HessaTeachersRepoImplement extends HessaTeachersRepo {
       "Authorization": "Bearer ${CacheHelper.instance.getAccessToken()}"
     };
     await DioHelper.get(
-      Links.getHessaTeachers,
+      Links.getAllHessaTeachers,
       queryParameters: queryParameters,
       headers: headers,
       onSuccess: (response) {

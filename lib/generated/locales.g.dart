@@ -190,6 +190,7 @@ class LocaleKeys {
   static const dependents_list = 'dependents_list';
   static const no_teacher_found = 'no_teacher_found';
   static const camera = 'camera';
+  static const teacher_details = 'teacher_details';
   static const gallery = 'gallery';
   static const file = 'file';
   static const privacy_policy_in_hessa = 'privacy_policy_in_hessa';
@@ -517,6 +518,7 @@ class Locales {
     'dependents_list': 'قائمة التابعين',
     'no_teacher_found': 'لم يتم العثور على مدرسين',
     'camera': 'الكاميرا',
+    'teacher_details': 'بيانات المعلّم',
     'gallery': 'المعرض',
     'file': 'ملف',
     'privacy_policy_in_hessa': 'سياسة الخصوصية في حصة',

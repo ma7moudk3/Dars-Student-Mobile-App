@@ -50,7 +50,7 @@ class LoginRepoImplement extends LoginRepo {
     });
     return statusCode;
   }
-
+  
   @override
   Future<CurrentUserInfo> getCurrentUserInfo() async {
     CurrentUserInfo currentUserInfo = CurrentUserInfo();

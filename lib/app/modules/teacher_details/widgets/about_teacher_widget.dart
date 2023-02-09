@@ -48,7 +48,7 @@ class AboutTeacher extends GetView<TeacherDetailsController> {
               return TeacherPropertyWidget(
                 iconPath: controller.teacherProperties[index]["icon"],
                 title: controller.teacherProperties[index]["title"],
-                content: "بكالوريوس",
+                content: controller.teacherProperties[index]["content"] ?? "",
               );
             }),
           ),

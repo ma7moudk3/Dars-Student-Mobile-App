@@ -84,8 +84,8 @@ class HessaTeachersController extends GetxController {
   Future getHessaTeachers({required int page}) async {
     try {
       if (await checkInternetConnection(timeout: 10)) {
-        hessaTeachers =
-            await _hessaTeacherRepo.getHessaTeachers(page: page, perPage: _pageSize);
+        hessaTeachers = await _hessaTeacherRepo.getHessaTeachers(
+            page: page, perPage: _pageSize);
         final isLastPage = hessaTeachers.length < _pageSize;
         if (isLastPage) {
           pagingController.appendLastPage(hessaTeachers);
@@ -93,7 +93,7 @@ class HessaTeachersController extends GetxController {
           final nextPageKey = page + 1;
           pagingController.appendPage(hessaTeachers, nextPageKey);
         }
-      }else{
+      } else {
         isInternetConnected.value = false;
       }
     } on DioError catch (e) {

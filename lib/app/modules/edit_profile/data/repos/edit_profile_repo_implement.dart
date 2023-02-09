@@ -56,7 +56,6 @@ class EditProfileRepoImplement extends EditProfileRepo {
 
   @override
   Future updateProfilePicture2({required String fileToken}) async {
-    try {
       Map<String, dynamic> data = {
         "fileToken": fileToken,
         "x": 0,
@@ -70,7 +69,7 @@ class EditProfileRepoImplement extends EditProfileRepo {
         'Accept': 'application/json',
         "Authorization": "Bearer ${CacheHelper.instance.getAccessToken()}"
       };
-      await DioHelper.post(
+      await DioHelper.put(
         data: data,
         headers: headers,
         Links.updateProfilePicture2,
@@ -82,6 +81,7 @@ class EditProfileRepoImplement extends EditProfileRepo {
           );
         },
       );
+    try {
     } catch (e) {
       log("updateProfilePicture2 $e");
     }

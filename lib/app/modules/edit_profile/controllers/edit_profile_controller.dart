@@ -1,3 +1,4 @@
+import 'dart:developer';
 import 'dart:io';
 
 import 'package:hessa_student/app/core/helper_functions.dart';
@@ -73,7 +74,7 @@ class EditProfileController extends GetxController {
 
   Future updateProfile() async {
     showLoadingDialog();
-    await Future.wait([updateImage(), updateProfileData()]).then((value) async {
+    await Future.wait([updateImage(), ]).then((value) async {
       if (Get.isDialogOpen!) {
         Get.back();
       }
@@ -180,6 +181,7 @@ class EditProfileController extends GetxController {
 
   Future updateImage() async {
     if (image != null) {
+      log("image is not null");
       await _editProfileRepo.updateProfilePicture(
         image: image!,
       );

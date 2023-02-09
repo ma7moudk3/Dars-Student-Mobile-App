@@ -22,12 +22,14 @@ class Links {
   static const String updateProfileData =
       "api/services/app/Requesters/CreateOrEdit";
   static const String updateProfilePicture =
-      "api/services/app/Profile/UpdateCurrentUserProfile";
+      "Profile/UploadProfilePicture";
   static const String updateProfilePicture2 =
       "api/services/app/Profile/UpdateProfilePicture";
   static const String sendFCMToken = "api/services/app/Account/UpdateFcmToken";
   static const String getMyOrders =
       "api/services/app/Orders/GetMyOrderForRequester";
-  static const String getHessaTeachers =
+  static const String getAllHessaTeachers =
       "api/services/app/Providers/GetSearchForProviders";
+  static const String getHessaTeacher =
+      "api/services/app/Providers/GetProviderDetailsForRequester";
 }

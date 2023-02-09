@@ -26,11 +26,16 @@ class TeacherPropertyWidget extends GetView<TeacherDetailsController> {
             fontWeight: FontWeightManager.softLight,
           ),
           const Spacer(),
-          PrimaryText(
-            content,
-            fontSize: 14.sp,
-            fontWeight: FontWeightManager.softLight,
-            color: ColorManager.grey5,
+          SizedBox(
+            width: (Get.width * 0.38).w,
+            child: PrimaryText(
+              content,
+              fontSize: 14.sp,
+              fontWeight: FontWeightManager.softLight,
+              color: ColorManager.grey5,
+              maxLines: 1,
+              overflow: TextOverflow.ellipsis,
+            ),
           ),
           SizedBox(width: (Get.width * 0.04).w),
         ],
