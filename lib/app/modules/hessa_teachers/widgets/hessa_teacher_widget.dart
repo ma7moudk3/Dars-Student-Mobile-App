@@ -12,10 +12,32 @@ class HessaTeacherWidget extends GetView<HessaTeachersController> {
     required this.teacher,
   }) : super(key: key);
 
-  final HessaTeacher teacher;
+  final dynamic teacher;
 
   @override
   Widget build(BuildContext context) {
+    String teacherId = teacher.runtimeType == HessaTeacher
+        ? teacher.userId.toString()
+        : (teacher.preferredProvider != null
+            ? teacher.preferredProvider!.id.toString()
+            : "");
+    String teacherName = teacher.runtimeType == HessaTeacher
+        ? teacher.name ?? ""
+        : teacher.providerName ?? "";
+    double teacherRate = teacher.runtimeType == HessaTeacher
+        ? teacher.rate ?? 0.0
+        : teacher.providerRate ?? 0.0;
+    String levelTopic = teacher.runtimeType == HessaTeacher
+        ? teacher.levelTopic ??
+            [""].map((String subject) => subject.toString()).join(", ")
+        : teacher.levelTopic ??
+            [""].map((String subject) => subject.toString()).join(", ");
+    String country = teacher.runtimeType == HessaTeacher
+            ? teacher.country ?? ""
+            : teacher.country ?? "",
+        governorate = teacher.runtimeType == HessaTeacher
+            ? teacher.governorate ?? ""
+            : teacher.governorate ?? "";
     return GestureDetector(
       behavior: HitTestBehavior.opaque,
       onTap: () async {
@@ -53,7 +75,7 @@ class HessaTeacherWidget extends GetView<HessaTeachersController> {
                     borderRadius: BorderRadius.circular(15),
                     child: CachedNetworkImage(
                       imageUrl:
-                          "${Links.baseLink}${Links.profileImageById}?userId=${teacher.userId.toString()}",
+                          "${Links.baseLink}${Links.profileImageById}?userId=$teacherId",
                       fit: BoxFit.cover,
                       errorWidget: (context, url, error) => Image.asset(
                         ImagesManager.guest,
@@ -70,7 +92,7 @@ class HessaTeacherWidget extends GetView<HessaTeachersController> {
                         mainAxisSize: MainAxisSize.min,
                         children: [
                           PrimaryText(
-                            teacher.name ?? "",
+                            teacherName,
                             color: ColorManager.fontColor,
                           ),
                           const Spacer(),
@@ -79,14 +101,11 @@ class HessaTeacherWidget extends GetView<HessaTeachersController> {
                             crossAxisAlignment: CrossAxisAlignment.center,
                             children: [
                               Icon(
-                                teacher.rate != null
-                                    ? (teacher.rate! <= 5 && teacher.rate! > 4)
-                                        ? Icons.star_rounded
-                                        : (teacher.rate! <= 3.5 &&
-                                                teacher.rate! >= 1)
-                                            ? Icons.star_half_rounded
-                                            : Icons.star_outline_rounded
-                                    : Icons.star_outline_rounded,
+                                (teacherRate <= 5 && teacherRate > 4)
+                                    ? Icons.star_rounded
+                                    : (teacherRate <= 3.5 && teacherRate >= 1)
+                                        ? Icons.star_half_rounded
+                                        : Icons.star_outline_rounded,
                                 color: ColorManager.orange,
                                 textDirection: TextDirection.ltr,
                                 size: 20.sp,
@@ -94,9 +113,7 @@ class HessaTeacherWidget extends GetView<HessaTeachersController> {
                               SizedBox(
                                 width: 25.w,
                                 child: PrimaryText(
-                                  teacher.rate != null
-                                      ? teacher.rate!.toStringAsFixed(1)
-                                      : "0.0",
+                                  teacherRate.toStringAsFixed(1),
                                   color: ColorManager.fontColor,
                                   fontSize: 12.sp,
                                   maxLines: 1,
@@ -116,11 +133,7 @@ class HessaTeacherWidget extends GetView<HessaTeachersController> {
                           SizedBox(
                             width: 150.w,
                             child: PrimaryText(
-                              teacher.levelTopic ??
-                                  [""]
-                                      .map((String subject) =>
-                                          subject.toString())
-                                      .join(", "),
+                              levelTopic,
                               color: ColorManager.primary,
                               fontWeight: FontWeightManager.softLight,
                               fontSize: 11.sp,
@@ -132,12 +145,9 @@ class HessaTeacherWidget extends GetView<HessaTeachersController> {
                           SizedBox(
                             width: 100.w,
                             child: PrimaryText(
-                              teacher.country != null &&
-                                      teacher.country!.isNotEmpty &&
-                                      teacher.governorate != null &&
-                                      teacher.governorate!.isNotEmpty
-                                  ? "${teacher.country ?? ""} - ${teacher.governorate ?? ""}"
-                                  : "${teacher.country ?? ""}${teacher.governorate ?? ""}",
+                              country.isNotEmpty && governorate.isNotEmpty
+                                  ? "$country - $governorate}"
+                                  : "$country$governorate",
                               color: ColorManager.fontColor7,
                               fontSize: 12.sp,
                               maxLines: 1,

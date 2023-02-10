@@ -41,11 +41,52 @@ class TeacherDetailsRepoImplement extends TeacherDetailsRepo {
   @override
   Future<int> addTeacherToFavorite({required int teacherId}) async {
     int statusCode = 200;
+    Map<String, dynamic> data = {
+      "providerId": teacherId,
+      "id": 0,
+    };
+    Map<String, dynamic> headers = {
+      'Accept-Language': Get.locale != null ? Get.locale!.languageCode : 'ar',
+      'Content-Type': 'application/json',
+      'Accept': 'application/json',
+      "Authorization": "Bearer ${CacheHelper.instance.getAccessToken()}"
+    };
     await DioHelper.post(
-      Links.addToFavorite,
-      onSuccess: (response) {},
-      onError: (error) {},
+      Links.addTeacherToFavorite,
+      data: data,
+      headers: headers,
+      onSuccess: (response) {
+        statusCode = response.statusCode ?? 200;
+      },
+      onError: (error) {
+        statusCode = error.response?.statusCode ?? 400;
+        log("addTeacherToFavorite error: $error");
+      },
     );
+    return statusCode;
+  }
+
+  @override
+  Future<int> removeTeacherFromFavorite({required int teacherId}) async {
+    int statusCode = 200;
+    Map<String, dynamic> queryParameters = {
+      "providerId": teacherId,
+    };
+    Map<String, dynamic> headers = {
+      'Accept-Language': Get.locale != null ? Get.locale!.languageCode : 'ar',
+      'Content-Type': 'application/json',
+      'Accept': 'application/json',
+      "Authorization": "Bearer ${CacheHelper.instance.getAccessToken()}"
+    };
+    await DioHelper.delete(
+        queryParameters: queryParameters,
+        headers: headers,
+        Links.removeTeacherFromFavorite, onSuccess: (response) {
+      statusCode = response.statusCode ?? 200;
+    }, onError: (error) {
+      statusCode = error.response?.statusCode ?? 400;
+      log("removeTeacherFromFavorite error: $error");
+    });
     return statusCode;
   }
 }

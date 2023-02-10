@@ -118,7 +118,7 @@ class HessaTeachersView extends GetView<HessaTeachersController> {
                           () => controller.pagingController.refresh()),
                       child: PagedListView<int, HessaTeacher>(
                         pagingController: controller.pagingController,
-                        builderDelegate:
+                          builderDelegate:
                             PagedChildBuilderDelegate<HessaTeacher>(
                           animateTransitions: true,
                           transitionDuration: const Duration(milliseconds: 350),

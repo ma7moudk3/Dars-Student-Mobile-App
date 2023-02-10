@@ -137,22 +137,22 @@ class ProfileView extends GetView<ProfileController> {
                     MoreItem(
                       textSettingsColor: ColorManager.fontColor2,
                       settingsColor: ColorManager.white,
-                      title: LocaleKeys.settings_and_help.tr,
-                      iconPath: ImagesManager.settingsIcon,
-                      color: ColorManager.primaryLight.withOpacity(0.15),
-                      iconColor: ColorManager.primaryLight,
-                      onTap: () async => await Get.toNamed(Routes.SETTINGS),
-                    ),
-                    moreDivider(),
-                    MoreItem(
-                      textSettingsColor: ColorManager.fontColor2,
-                      settingsColor: ColorManager.white,
                       title: LocaleKeys.preferred_teachers.tr,
                       iconPath: ImagesManager.heartIcon,
                       color: ColorManager.primaryLight.withOpacity(0.15),
                       iconColor: ColorManager.primaryLight,
                       onTap: () async =>
                           await Get.toNamed(Routes.PREFERRED_TEACHERS),
+                    ),
+                    moreDivider(),
+                    MoreItem(
+                      textSettingsColor: ColorManager.fontColor2,
+                      settingsColor: ColorManager.white,
+                      title: LocaleKeys.settings_and_help.tr,
+                      iconPath: ImagesManager.settingsIcon,
+                      color: ColorManager.primaryLight.withOpacity(0.15),
+                      iconColor: ColorManager.primaryLight,
+                      onTap: () async => await Get.toNamed(Routes.SETTINGS),
                     ),
                     moreDivider(),
                     MoreItem(

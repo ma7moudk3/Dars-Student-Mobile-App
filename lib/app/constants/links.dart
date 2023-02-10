@@ -35,6 +35,10 @@ class Links {
       "api/services/app/Providers/GetProviderDetailsForRequester";
   static const String changePassword =
       "api/services/app/Profile/ChangePassword";
-  static const String addToFavorite =
+  static const String addTeacherToFavorite =
       "api/services/app/PreferredProviders/CreateOrEdit";
+  static const String removeTeacherFromFavorite =
+      "api/services/app/PreferredProviders/DeletePreferredProvider";
+  static const String preferredTeachers = // favoriteTeachers
+      "api/services/app/PreferredProviders/GetAllForRequester";
 }

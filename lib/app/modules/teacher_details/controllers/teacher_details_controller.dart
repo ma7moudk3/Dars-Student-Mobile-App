@@ -2,6 +2,7 @@ import 'dart:developer';
 
 import 'package:get/get.dart';
 import 'package:hessa_student/app/core/helper_functions.dart';
+import 'package:hessa_student/app/data/cache_helper.dart';
 import 'package:hessa_student/app/modules/hessa_teachers/data/models/hessa_teacher.dart';
 import 'package:hessa_student/app/modules/teacher_details/data/models/hessa_teacher_details/hessa_teacher_details.dart';
 import 'package:hessa_student/app/modules/teacher_details/data/models/hessa_teacher_details/provider_skill.dart';
@@ -15,14 +16,19 @@ import '../data/repos/teacher_details_repo_implement.dart';
 class TeacherDetailsController extends GetxController {
   int currentStar = -1;
   RxBool isInternetConnected = true.obs, isLoading = true.obs;
-  HessaTeacher hessaTeacher = Get.arguments != null
+  bool? isFavorite;
+  dynamic hessaTeacher = Get.arguments != null
       ? Get.arguments["teacher"] ?? HessaTeacher()
       : HessaTeacher();
-  int teacherId = int.parse(Get.arguments != null
-      ? Get.arguments["teacher"] != null
-          ? Get.arguments["teacher"].id.toString()
-          : "-1"
-      : "-1");
+  int teacherId = int.parse(
+      Get.arguments != null && Get.arguments["teacher"] != null
+          ? Get.arguments["teacher"].runtimeType == HessaTeacher
+              ? Get.arguments["teacher"].id.toString()
+              : Get.arguments["teacher"].preferredProvider != null
+                  ? Get.arguments["teacher"].preferredProvider!.providerId
+                      .toString()
+                  : "-1"
+          : "-1");
   final TeacherDetailsRepo _teacherDetailsRepo = TeacherDetailsRepoImplement();
   HessaTeacherDetails hessaTeacherDetails = HessaTeacherDetails();
   List<Map<String, dynamic>> teacherProperties = [
@@ -85,11 +91,34 @@ class TeacherDetailsController extends GetxController {
     update();
   }
 
+  Future<void> toggleFavorite() async {
+    if (CacheHelper.instance.authenticated()) {
+      isFavorite = !isFavorite!;
+      update();
+      if (isFavorite == true) {
+        await _teacherDetailsRepo.addTeacherToFavorite(
+          teacherId: hessaTeacher.runtimeType == HessaTeacher
+              ? hessaTeacher.id ?? -1
+              : hessaTeacher.preferredProvider!.providerId ?? -1,
+        );
+      } else {
+        await _teacherDetailsRepo.removeTeacherFromFavorite(
+          teacherId: hessaTeacher.runtimeType == HessaTeacher
+              ? hessaTeacher.id ?? -1
+              : hessaTeacher.preferredProvider!.providerId ?? -1,
+        );
+      }
+    }
+  }
+
   Future getTeacherDetails() async {
     try {
       hessaTeacherDetails = await _teacherDetailsRepo.getTeacherDetails(
         teacherId: teacherId,
       );
+      if (hessaTeacherDetails.result != null) {
+        isFavorite = hessaTeacherDetails.result!.isPreferred ?? false;
+      }
     } catch (e) {
       log("getTeacherDetails error: $e");
     }

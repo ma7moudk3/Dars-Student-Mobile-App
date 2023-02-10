@@ -56,33 +56,32 @@ class EditProfileRepoImplement extends EditProfileRepo {
 
   @override
   Future updateProfilePicture2({required String fileToken}) async {
-      Map<String, dynamic> data = {
-        "fileToken": fileToken,
-        "x": 0,
-        "y": 0,
-        "width": 0,
-        "height": 0
-      };
-      Map<String, dynamic> headers = {
-        'Accept-Language': Get.locale != null ? Get.locale!.languageCode : 'ar',
-        'Content-Type': 'application/json',
-        'Accept': 'application/json',
-        "Authorization": "Bearer ${CacheHelper.instance.getAccessToken()}"
-      };
-      await DioHelper.put(
-        data: data,
-        headers: headers,
-        Links.updateProfilePicture2,
-        onSuccess: (response) {},
-        onError: (error) {
-          CustomSnackBar.showCustomErrorSnackBar(
-            title: LocaleKeys.error.tr,
-            message: error.message,
-          );
-        },
-      );
-    try {
-    } catch (e) {
+    Map<String, dynamic> data = {
+      "fileToken": fileToken,
+      "x": 0,
+      "y": 0,
+      "width": 0,
+      "height": 0
+    };
+    Map<String, dynamic> headers = {
+      'Accept-Language': Get.locale != null ? Get.locale!.languageCode : 'ar',
+      'Content-Type': 'application/json',
+      'Accept': 'application/json',
+      "Authorization": "Bearer ${CacheHelper.instance.getAccessToken()}"
+    };
+    await DioHelper.put(
+      data: data,
+      headers: headers,
+      Links.updateProfilePicture2,
+      onSuccess: (response) {},
+      onError: (error) {
+        CustomSnackBar.showCustomErrorSnackBar(
+          title: LocaleKeys.error.tr,
+          message: error.message,
+        );
+      },
+    );
+    try {} catch (e) {
       log("updateProfilePicture2 $e");
     }
   }
