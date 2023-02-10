@@ -33,7 +33,7 @@ class DioHelper {
     };
   }
 
-  static const int TIME_OUT_DURATION = 10000;
+  static const int TIME_OUT_DURATION = 12000;
 
   static post(
     String url, {
@@ -445,14 +445,20 @@ class DioHelper {
 
   static handleApiError(ApiException apiException) {
     log("apiException message: ${apiException.message}");
+    String msg = apiException.message.toLowerCase().contains("timeout")
+        ? LocaleKeys
+            .looks_like_the_server_is_taking_to_long_to_respond_please_try_again_in_sometime
+            .tr
+        : (apiException.response?.data?["error"]['message'] ??
+            LocaleKeys.something_went_wrong.tr);
+    log("msg1  $msg");
     if (getx.Get.isDialogOpen!) {
       getx.Get.back();
     }
-    String msg = (apiException.response?.data?["error"]['message']) ??
-        LocaleKeys.something_went_wrong.tr;
-    log("msg1  $msg");
     CustomSnackBar.showCustomErrorSnackBar(
-        message: msg, title: LocaleKeys.error.tr);
+      message: msg,
+      title: LocaleKeys.error.tr,
+    );
   }
 
   static _handleError(String msg) {

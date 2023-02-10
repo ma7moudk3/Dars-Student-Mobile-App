@@ -4,6 +4,8 @@ import 'dart:io';
 import 'dart:math';
 
 import 'package:firebase_messaging/firebase_messaging.dart';
+import 'package:hessa_student/app/modules/login/data/repos/login_repo.dart';
+import 'package:hessa_student/app/modules/login/data/repos/login_repo_implement.dart';
 import 'package:hessa_student/app/modules/verify_account/data/repos/verify_account_repo.dart';
 import 'package:intl/intl.dart';
 
@@ -13,16 +15,38 @@ import '../../global_presentation/global_widgets/loading.dart';
 import '../constants/exports.dart';
 import '../data/cache_helper.dart';
 import '../data/network_helper/firebase_social_auth_helpers.dart';
+import '../modules/login/data/models/current_user_info/current_user_info.dart';
+import '../modules/login/data/models/current_user_profile_info/current_user_profile_info.dart';
 import '../modules/login/widgets/welcome_back_dialog_content.dart';
 import '../modules/verify_account/data/repos/verify_account_repo_implement.dart';
 import '../routes/app_pages.dart';
 
 final VerifyAccountRepo _verifyAccountRepo = VerifyAccountRepoImplement();
+final LoginRepo _loginRepo = LoginRepoImplement();
 
 extension RandomListItem<T> on List<T> {
   T randomItem() {
     return this[Random().nextInt(length)];
   }
+}
+
+Future getCurrentUserInfo() async {
+  // information like: isProfileCompleted, isExternalUser (google or facecbook), isEmailConfirmed, isPhoneNumberConfirmed
+  await _loginRepo
+      .getCurrentUserInfo()
+      .then((CurrentUserInfo currentUserInfo) async {
+    await CacheHelper.instance.cacheCurrentUserInfo(currentUserInfo.toJson());
+  });
+}
+
+Future getCurrentUserProfileInfo() async {
+  // information like: userName, emailAddress, paymentMethodName, phoneNumber, addresses
+  await _loginRepo
+      .getCurrentUserProfileInfo()
+      .then((CurrentUserProfileInfo currentUserProfileInfo) async {
+    await CacheHelper.instance
+        .cacheCurrentUserProfileInfo(currentUserProfileInfo.toJson());
+  });
 }
 
 String formatTimeOfDay(DateTime? dateAndTime) {

@@ -1,13 +1,13 @@
 import 'dart:developer';
 import 'dart:io';
 
-import 'package:hessa_student/app/core/helper_functions.dart';
 import 'package:hessa_student/app/data/cache_helper.dart';
 import 'package:hessa_student/app/modules/login/data/models/current_user_info/current_user_info.dart';
 import 'package:hessa_student/app/modules/login/data/models/current_user_profile_info/current_user_profile_info.dart';
 import 'package:hessa_student/app/modules/login/data/repos/login_repo.dart';
 import 'package:hessa_student/global_presentation/global_widgets/loading.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:intl_phone_field/countries.dart';
 import 'package:intl_phone_field/phone_number.dart';
 
 import '../../../../generated/locales.g.dart';
@@ -15,6 +15,9 @@ import '../../../../global_presentation/global_widgets/custom_snack_bar.dart';
 import '../../../constants/exports.dart';
 import '../../../routes/app_pages.dart';
 import '../../login/data/repos/login_repo_implement.dart';
+import '../../verify_account/data/models/generate_otp_code/generate_otp_code.dart';
+import '../../verify_account/data/repos/verify_account_repo.dart';
+import '../../verify_account/data/repos/verify_account_repo_implement.dart';
 import '../data/repos/edit_profile_repo.dart';
 import '../data/repos/edit_profile_repo_implement.dart';
 
@@ -27,7 +30,9 @@ class EditProfileController extends GetxController {
       emailFocusNode = FocusNode(),
       phoneFocusNode = FocusNode();
   Color? fullNameErrorIconColor, emailErrorIconColor;
-  String? phoneNumber;
+  PhoneNumber phoneNumber =
+      PhoneNumber(countryISOCode: "", countryCode: "", number: "");
+  String? dialCode, countryCode;
   int gender = 1; // 1 male, 2 female
   File? image;
   final EditProfileRepo _editProfileRepo = EditProfileRepoImplement();
@@ -37,6 +42,11 @@ class EditProfileController extends GetxController {
       CacheHelper.instance.getCachedCurrentUserProfileInfo() ??
           CurrentUserProfileInfo();
   final LoginRepo _loginRepo = LoginRepoImplement();
+  bool isEmailChanged = false, isPhoneChanged = false;
+  bool isEmailConfirmed = false, isPhoneConfirmed = false;
+  GenerateOtpCode generateOtpCode = GenerateOtpCode();
+  final VerifyAccountRepo _verifyAccountRepo = VerifyAccountRepoImplement();
+
   @override
   void onInit() {
     initData();
@@ -44,6 +54,7 @@ class EditProfileController extends GetxController {
   }
 
   void initData() {
+    changeIsEmailAndPhoneConfirmed();
     fullNameController = TextEditingController(
         text: currentUserInfo.result != null
             ? ("${currentUserInfo.result!.name ?? ""} ${currentUserInfo.result!.surname ?? ""}")
@@ -54,21 +65,35 @@ class EditProfileController extends GetxController {
           ? currentUserInfo.result!.emailAddress ?? ""
           : "",
     );
+    emailController.addListener(_onEmailChanged);
     emailFocusNode.addListener(() => update());
-    phoneController = TextEditingController(
-      text: currentUserProfileInfo.result != null
-          ? seperatePhoneAndDialCode(
-                  phoneWithDialCode:
-                      currentUserProfileInfo.result!.phoneNumber ?? "") ??
-              ""
-          : "",
-    );
+    phoneController = TextEditingController();
+    if (currentUserProfileInfo.result != null &&
+        currentUserProfileInfo.result!.phoneNumber != null) {
+      _seperatePhoneAndDialCode(
+          phoneWithDialCode: currentUserProfileInfo.result!.phoneNumber!);
+    }
     gender = currentUserProfileInfo.result != null
         ? currentUserProfileInfo.result!.requester != null
             ? currentUserProfileInfo.result!.requester!.gender ?? 1
             : 1
         : 1;
     phoneFocusNode.addListener(() => update());
+    update();
+  }
+
+  void changeIsEmailAndPhoneConfirmed() {
+    isEmailConfirmed = CacheHelper.instance.getIsEmailConfirmed();
+    isPhoneConfirmed = CacheHelper.instance.getIsPhoneConfirmed();
+    update();
+  }
+
+  void _onEmailChanged() {
+    isEmailChanged = currentUserProfileInfo.result!.emailAddress != null &&
+            emailController.text.isNotEmpty &&
+            emailController.text.isEmail
+        ? emailController.text != currentUserProfileInfo.result!.emailAddress!
+        : false;
     update();
   }
 
@@ -89,7 +114,7 @@ class EditProfileController extends GetxController {
           message: LocaleKeys.profile_edited_succesfully.tr,
           duration: const Duration(seconds: 2),
         );
-        await Future.delayed(const Duration(milliseconds: 1000))
+        await Future.delayed(const Duration(milliseconds: 550))
             .then((value) async {
           await Get.offAllNamed(Routes.BOTTOM_NAV_BAR);
         });
@@ -107,9 +132,56 @@ class EditProfileController extends GetxController {
             : "",
         id: currentUserProfileInfo.result!.requester!.userId ?? -1,
         email: emailController.text,
-        phoneNumber: phoneNumber,
+        phoneNumber: phoneNumber.completeNumber,
         gender: gender,
       );
+    }
+  }
+
+  Future sendOTPEmail() async {
+    if (emailController.text.isNotEmpty) {
+      await _sendOTP(email: emailController.text);
+    }
+  }
+
+  Future sendOTPPhoneNumber() async {
+    if (phoneNumber.completeNumber.isNotEmpty) {
+      await _sendOTP(
+        phoneNumber: phoneNumber.completeNumber,
+      );
+    }
+  }
+
+  Future _sendOTP({String? phoneNumber, String? email}) async {
+    showLoadingDialog();
+    if (phoneNumber == null && email == null) {
+      return;
+    }
+    if (phoneNumber != null) {
+      generateOtpCode = await _verifyAccountRepo.sendOTP(
+        phoneNumber: phoneNumber,
+        isPhoneChanged: isPhoneChanged,
+      );
+      if (generateOtpCode.result != null &&
+          generateOtpCode.result!.numberOfSeconds != null) {
+        await Get.toNamed(Routes.VERIFY_OTP, arguments: {
+          "phoneNumber": phoneNumber,
+          "isEditProfile": true,
+        });
+      }
+    }
+    if (email != null) {
+      generateOtpCode = await _verifyAccountRepo.sendOTP(
+        emailAddress: email,
+        isEmailChanged: isEmailChanged,
+      );
+      if (generateOtpCode.result != null &&
+          generateOtpCode.result!.numberOfSeconds != null) {
+        await Get.toNamed(Routes.VERIFY_OTP, arguments: {
+          "email": email,
+          "isEditProfile": true,
+        });
+      }
     }
   }
 
@@ -174,8 +246,53 @@ class EditProfileController extends GetxController {
     return null;
   }
 
+  void changeCountry(Country country) {
+    phoneNumber.countryCode = "+${country.dialCode}";
+    isPhoneChanged = currentUserProfileInfo.result!.phoneNumber != null &&
+            phoneNumber.completeNumber.isPhoneNumber
+        ? phoneNumber.completeNumber !=
+            currentUserProfileInfo.result!.phoneNumber!
+        : false;
+    update();
+  }
+
   void changePhoneNumber(PhoneNumber number) {
-    phoneNumber = number.completeNumber.toString();
+    phoneNumber = number;
+    isPhoneChanged = currentUserProfileInfo.result!.phoneNumber != null &&
+            phoneNumber.completeNumber.isPhoneNumber
+        ? phoneNumber.completeNumber !=
+            currentUserProfileInfo.result!.phoneNumber!
+        : false;
+    update();
+  }
+
+  void _seperatePhoneAndDialCode({required String phoneWithDialCode}) {
+    List<Map<String, String>> allowedCountries = [
+      {"name": "Palestine", "dial_code": "+970", "code": "PS"},
+      {"name": "Israel", "dial_code": "+972", "code": "IL"},
+    ];
+    Map<String, String> foundCountry = {};
+    for (Map<String, String> country in allowedCountries) {
+      String dialCode = country["dial_code"].toString();
+      if (phoneWithDialCode.contains(dialCode)) {
+        foundCountry = country;
+        break;
+      }
+    }
+    if (foundCountry.isNotEmpty) {
+      String dialCode = phoneWithDialCode.substring(
+        0,
+        foundCountry["dial_code"]!.length,
+      );
+      this.dialCode = dialCode;
+      countryCode = foundCountry["code"];
+      String phoneNumber = phoneWithDialCode.substring(
+        foundCountry["dial_code"]!.length,
+      );
+      phoneController.text = phoneNumber;
+      this.phoneNumber = PhoneNumber(
+          countryISOCode: dialCode, countryCode: dialCode, number: phoneNumber);
+    }
     update();
   }
 

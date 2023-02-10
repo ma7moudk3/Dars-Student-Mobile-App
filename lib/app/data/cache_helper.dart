@@ -57,16 +57,16 @@ class CacheHelper {
     return _sharedPreferences.getString('access_token') ?? '';
   }
 
-  Future setIsEmailConfirmed(bool isConfirmed) async {
-    await _sharedPreferences.setBool('email_confirmed', isConfirmed);
-  }
-
   bool getIsWelcomeBack() {
     return _sharedPreferences.getBool('welcome_back') ?? false;
   }
 
   Future setIsWelcomeBack(bool isWelcomeBack) async {
     await _sharedPreferences.setBool('welcome_back', isWelcomeBack);
+  }
+
+  Future setIsEmailConfirmed(bool isConfirmed) async {
+    await _sharedPreferences.setBool('email_confirmed', isConfirmed);
   }
 
   bool getIsEmailConfirmed() {

@@ -63,6 +63,12 @@ class LoginRepoImplement extends LoginRepo {
     await DioHelper.get(headers: headers, Links.getCurrentUserInfo,
         onSuccess: (response) async {
       currentUserInfo = CurrentUserInfo.fromJson(response.data);
+      if (currentUserInfo.result != null) {
+        await CacheHelper.instance.setIsPhoneConfirmed(
+            currentUserInfo.result!.isPhoneNumberConfirmed ?? false);
+        await CacheHelper.instance.setIsEmailConfirmed(
+            currentUserInfo.result!.isEmailConfirmed ?? false);
+      }
       if (Get.isDialogOpen!) {
         Get.back();
       }

@@ -249,6 +249,7 @@ class LocaleKeys {
       'you_do_not_have_notifications_at_the_present_time';
   static const no_notifications = 'no_notifications';
   static const verify_account = 'verify_account';
+  static const preferred_teachers = 'preferred_teachers';
   static const back_backward = 'back_backward';
   static const enter_the_verification_code_here =
       'enter_the_verification_code_here';
@@ -313,12 +314,16 @@ class LocaleKeys {
   static const search_filter = 'search_filter';
   static const choose = 'choose';
   static const academic_learning = 'academic_learning';
+  static const looks_like_the_server_is_taking_to_long_to_respond_please_try_again_in_sometime =
+      'looks_like_the_server_is_taking_to_long_to_respond_please_try_again_in_sometime';
   static const skill = 'skill';
+  static const data_entry_error = 'data_entry_error';
   static const choose_skill = 'choose_skill';
   static const search_results = 'search_results';
   static const most_requested = 'most_requested';
   static const brief = 'brief';
   static const about_teacher = 'about_teacher';
+  static const password_changed_successfully = 'password_changed_successfully';
   static const education_level = 'education_level';
   static const major = 'major';
   static const subjects = 'subjects';
@@ -578,6 +583,7 @@ class Locales {
         'لا يوجد لديك إشعارات في الوقت الحالي',
     'no_notifications': 'لا يوجد إشعارات',
     'verify_account': 'تحقق من الحساب',
+    'preferred_teachers': 'المعلّمين المفضلين',
     'back_backward': 'الرجوع للخلف',
     'enter_the_verification_code_here': 'ادخل رمز التحقق هنا',
     'please_enter_the_verification_code': 'الرجاء إدخال رمز التحقق',
@@ -590,9 +596,9 @@ class Locales {
         'تم إرسال رمز التحقق إلى البريد الإلكتروني',
     'about_hessa': 'عن حصة',
     'success': 'نجاح',
-    'verify_email': 'تحقق من البريد الإلكتروني',
-    'verified_successfully': 'تم التحقق بنجاح',
-    'verify_phone_number': 'تحقق من رقم الهاتف',
+    'verify_email': 'تأكيد البريد الإلكتروني',
+    'verified_successfully': 'تم التأكيد بنجاح',
+    'verify_phone_number': 'تأكيد رقم الهاتف',
     'please_enter_old_password': 'الرجاء إدخال كلمة المرور القديمة',
     'enter_new_password': 'أدخل كلمة المرور الجديدة',
     'confirm_new_password': 'تأكيد كلمة المرور الجديدة',
@@ -640,12 +646,16 @@ class Locales {
     'search_filter': 'فلتر البحث',
     'choose': 'اختر',
     'academic_learning': 'تعليم الأكاديمي',
+    'looks_like_the_server_is_taking_to_long_to_respond_please_try_again_in_sometime':
+        'يبدو أن الخادم يستغرق وقتًا طويلاً للرد ، يرجى المحاولة مرة أخرى في وقت لاحق',
     'skill': 'مهارة',
+    'data_entry_error': 'خطأ في إدخال البيانات',
     'choose_skill': 'اختر المهارة',
     'search_results': 'نتائج البحث',
     'most_requested': 'الأكثر طلباً',
     'brief': 'نُبذة',
     'about_teacher': 'عن المدرس',
+    'password_changed_successfully': 'تم تغيير كلمة المرور بنجاح',
     'education_level': 'المستوى التعليمي',
     'major': 'التخصص',
     'subjects': 'المواد',

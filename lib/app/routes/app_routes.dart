@@ -34,6 +34,7 @@ abstract class Routes {
   static const EDIT_PROFILE = _Paths.EDIT_PROFILE;
   static const PROFILE_INFORMATION = _Paths.PROFILE_INFORMATION;
   static const VERIFY_ACCOUNT = _Paths.VERIFY_ACCOUNT;
+  static const PREFERRED_TEACHERS = _Paths.PREFERRED_TEACHERS;
 }
 
 abstract class _Paths {
@@ -69,4 +70,5 @@ abstract class _Paths {
   static const EDIT_PROFILE = '/edit-profile';
   static const PROFILE_INFORMATION = '/profile-information';
   static const VERIFY_ACCOUNT = '/verify-account';
+  static const PREFERRED_TEACHERS = '/preferred-teachers';
 }

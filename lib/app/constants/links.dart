@@ -23,8 +23,7 @@ class Links {
       "api/services/app/Profile/GetProfilePicture";
   static const String updateProfileData =
       "api/services/app/Requesters/CreateOrEdit";
-  static const String updateProfilePicture =
-      "Profile/UploadProfilePicture";
+  static const String updateProfilePicture = "Profile/UploadProfilePicture";
   static const String updateProfilePicture2 =
       "api/services/app/Profile/UpdateProfilePicture";
   static const String sendFCMToken = "api/services/app/Account/UpdateFcmToken";
@@ -34,4 +33,8 @@ class Links {
       "api/services/app/Providers/GetSearchForProviders";
   static const String getHessaTeacher =
       "api/services/app/Providers/GetProviderDetailsForRequester";
+  static const String changePassword =
+      "api/services/app/Profile/ChangePassword";
+  static const String addToFavorite =
+      "api/services/app/PreferredProviders/CreateOrEdit";
 }

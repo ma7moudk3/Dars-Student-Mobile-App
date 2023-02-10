@@ -37,4 +37,15 @@ class TeacherDetailsRepoImplement extends TeacherDetailsRepo {
     );
     return hessaTeacherDetails;
   }
+
+  @override
+  Future<int> addTeacherToFavorite({required int teacherId}) async {
+    int statusCode = 200;
+    await DioHelper.post(
+      Links.addToFavorite,
+      onSuccess: (response) {},
+      onError: (error) {},
+    );
+    return statusCode;
+  }
 }

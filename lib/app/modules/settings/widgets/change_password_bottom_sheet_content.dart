@@ -192,10 +192,7 @@ class ChangePasswordBottomSheetContent extends GetView<SettingsController> {
                           width: Get.width,
                           onPressed: () async {
                             if (controller.formKey.currentState!.validate()) {
-                              controller.clearData();
-
-                              Get.back(); // currently
-                              // await controller.changePassword();
+                              await controller.changePassword();
                             }
                           },
                           title: LocaleKeys.save.tr,

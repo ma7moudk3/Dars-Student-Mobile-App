@@ -10,7 +10,9 @@ import 'package:hessa_student/global_presentation/global_widgets/loading.dart';
 
 import '../../../../generated/locales.g.dart';
 import '../../../constants/exports.dart';
+import '../../../core/helper_functions.dart';
 import '../../../routes/app_pages.dart';
+import '../../edit_profile/controllers/edit_profile_controller.dart';
 import '../../login/data/models/current_user_info/current_user_info.dart';
 import '../../verify_account/data/repos/verify_account_repo_implement.dart';
 
@@ -22,6 +24,7 @@ class VerifyOtpController extends GetxController {
   int start = 60;
   String? email;
   String? phoneNumber;
+  bool? isEditProfile;
   final VerifyAccountRepo _verifyAccountRepo = VerifyAccountRepoImplement();
   GenerateOtpCode generateOtpCode = GenerateOtpCode();
   VerifyOtpResponse verifyOtpResponse = VerifyOtpResponse();
@@ -35,6 +38,7 @@ class VerifyOtpController extends GetxController {
     if (Get.arguments != null) {
       email = Get.arguments["email"] ?? "";
       phoneNumber = Get.arguments["phoneNumber"] ?? "";
+      isEditProfile = Get.arguments["isEditProfile"] ?? false;
     }
     pinController = TextEditingController();
     pinFocusNode.addListener(() => update);
@@ -96,21 +100,29 @@ class VerifyOtpController extends GetxController {
     }
     if (verifyOtpResponse.result != null &&
         verifyOtpResponse.result!.isValid == true) {
-      CustomSnackBar.showCustomSnackBar(
-        title: LocaleKeys.success.tr,
-        message: verifyOtpResponse.result!.message ??
-            LocaleKeys.verified_successfully.tr,
-      );
-      if (phoneNumber != null && phoneNumber!.isNotEmpty) {
-        await CacheHelper.instance.setIsPhoneConfirmed(true);
+      await getCurrentUserInfo();
+      if (isEditProfile != null && isEditProfile!) {
+        final EditProfileController editProfileController =
+            Get.find<EditProfileController>();
+        editProfileController.changeIsEmailAndPhoneConfirmed();
+        Get.back();
+        CustomSnackBar.showCustomSnackBar(
+          title: LocaleKeys.success.tr,
+          message: verifyOtpResponse.result!.message ??
+              LocaleKeys.verified_successfully.tr,
+        );
       } else {
-        await CacheHelper.instance.setIsEmailConfirmed(true);
-      }
-      if (CacheHelper.instance.getIsEmailConfirmed() &&
-          CacheHelper.instance.getIsPhoneConfirmed()) {
-        await Get.offAllNamed(Routes.BOTTOM_NAV_BAR);
-      } else {
-        await Get.offAllNamed(Routes.VERIFY_ACCOUNT);
+        CustomSnackBar.showCustomSnackBar(
+          title: LocaleKeys.success.tr,
+          message: verifyOtpResponse.result!.message ??
+              LocaleKeys.verified_successfully.tr,
+        );
+        if (CacheHelper.instance.getIsEmailConfirmed() &&
+            CacheHelper.instance.getIsPhoneConfirmed()) {
+          await Get.offAllNamed(Routes.BOTTOM_NAV_BAR);
+        } else {
+          await Get.offAllNamed(Routes.VERIFY_ACCOUNT);
+        }
       }
     } else if (verifyOtpResponse.result != null &&
         verifyOtpResponse.result!.isValid == false) {

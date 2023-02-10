@@ -4,6 +4,7 @@ import 'dart:io';
 import 'package:flutter/cupertino.dart';
 import 'package:hessa_student/app/core/helper_functions.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:intl_phone_field/countries.dart';
 import 'package:intl_phone_field/phone_number.dart';
 
 import '../../../../generated/locales.g.dart';
@@ -33,35 +34,35 @@ class EditProfileView extends GetView<EditProfileController> {
             size: 20,
           ),
         ),
-        action: GestureDetector(
-          behavior: HitTestBehavior.opaque,
-          onTap: () async {},
-          child: Container(
-            width: 20.w,
-            height: 20.h,
-            decoration: BoxDecoration(
-              border: Border.all(
-                width: 2,
-                color: ColorManager.primary,
-              ),
-              borderRadius: BorderRadius.circular(5),
-            ),
-            child: Center(
-              child: Icon(
-                Icons.check,
-                color: ColorManager.primary,
-                size: 16,
-              ),
-            ),
-          ),
-        ),
+        action: const SizedBox.shrink(),
+        // action: GestureDetector(
+        //   behavior: HitTestBehavior.opaque,
+        //   onTap: () async {},
+        //   child: Container(
+        //     width: 20.w,
+        //     height: 20.h,
+        //     decoration: BoxDecoration(
+        //       border: Border.all(
+        //         width: 2,
+        //         color: ColorManager.primary,
+        //       ),
+        //       borderRadius: BorderRadius.circular(5),
+        //     ),
+        //     child: Center(
+        //       child: Icon(
+        //         Icons.check,
+        //         color: ColorManager.primary,
+        //         size: 16,
+        //       ),
+        //     ),
+        //   ),
+        // ),
       ),
       body: Center(
         child: RefreshIndicator(
           color: ColorManager.white,
           backgroundColor: ColorManager.primary,
           onRefresh: () async {
-            // Future.sync(() => controller.pagingController.refresh());
             await Future.wait([
               controller.getCurrentUserInfo(),
               controller.getCurrentUserProfileInfo()
@@ -71,7 +72,11 @@ class EditProfileView extends GetView<EditProfileController> {
             child: GetBuilder<EditProfileController>(
                 builder: (EditProfileController controller) {
               return Padding(
-                padding: EdgeInsets.symmetric(horizontal: 16.w),
+                padding: EdgeInsets.only(
+                  left: 16.w,
+                  right: 16.w,
+                  bottom: 16.h,
+                ),
                 child: Column(
                   children: [
                     Form(
@@ -176,8 +181,11 @@ class EditProfileView extends GetView<EditProfileController> {
                                     image: controller.image != null
                                         ? FileImage(controller.image!)
                                         : (CacheHelper.instance
-                                                    .getUserProfilePicture() !=
-                                                null
+                                                        .getUserProfilePicture() !=
+                                                    null &&
+                                                CacheHelper.instance
+                                                    .getUserProfilePicture()!
+                                                    .isNotEmpty
                                             ? MemoryImage(base64Decode(CacheHelper
                                                     .instance
                                                     .getUserProfilePicture()!))
@@ -303,12 +311,47 @@ class EditProfileView extends GetView<EditProfileController> {
                                   validator: (String? email) =>
                                       controller.validateEmail(email),
                                 ),
+                                Visibility(
+                                  visible: !controller.isEmailConfirmed,
+                                  child: Column(
+                                    children: [
+                                      SizedBox(height: 20.h),
+                                      PrimaryButton(
+                                        onPressed: () async {
+                                          await controller.sendOTPEmail();
+                                        },
+                                        title: LocaleKeys.verify_email.tr,
+                                      ),
+                                    ],
+                                  ),
+                                ),
                                 SizedBox(height: 13.h),
                                 IntlPhoneNumberTextField(
                                   controller: controller.phoneController,
                                   focusNode: controller.phoneFocusNode,
+                                  onCountryChanged: (Country country) {
+                                    controller.changeCountry(country);
+                                  },
+                                  initialValue: controller.dialCode ?? "+970",
+                                  initialCountryCode:
+                                      controller.countryCode ?? "PS",
                                   onChanged: (PhoneNumber phoneNumber) =>
                                       controller.changePhoneNumber(phoneNumber),
+                                ),
+                                Visibility(
+                                  visible: !controller.isPhoneConfirmed,
+                                  child: Column(
+                                    children: [
+                                      SizedBox(height: 20.h),
+                                      PrimaryButton(
+                                        onPressed: () async {
+                                          await controller.sendOTPPhoneNumber();
+                                        },
+                                        title:
+                                            LocaleKeys.verify_phone_number.tr,
+                                      ),
+                                    ],
+                                  ),
                                 ),
                                 SizedBox(height: 20.h),
                                 Row(

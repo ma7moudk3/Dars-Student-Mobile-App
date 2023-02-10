@@ -1,5 +1,12 @@
+import 'dart:developer';
+
+import 'package:hessa_student/app/modules/settings/data/repos/settings_repo.dart';
+import 'package:hessa_student/global_presentation/global_widgets/loading.dart';
+
 import '../../../../generated/locales.g.dart';
+import '../../../../global_presentation/global_widgets/custom_snack_bar.dart';
 import '../../../constants/exports.dart';
+import '../data/repos/settings_repo_implement.dart';
 
 class SettingsController extends GetxController {
   final GlobalKey<FormState> formKey = GlobalKey<FormState>();
@@ -11,7 +18,7 @@ class SettingsController extends GetxController {
   FocusNode oldPasswordFocusNode = FocusNode(),
       newPasswordFocusNode = FocusNode(),
       confirmPasswordFocusNode = FocusNode();
-
+  final SettingsRepo _settingsRepo = SettingsRepoImplement();
   Color? oldPasswordErrorIconColor,
       newPasswordErrorIconColor,
       confirmPasswordErrorIconColor;
@@ -46,6 +53,31 @@ class SettingsController extends GetxController {
     }
     update();
     return null;
+  }
+
+  Future changePassword() async {
+    try {
+      showLoadingDialog();
+      await _settingsRepo
+          .changePassword(
+        oldPassword: oldPasswordController.text,
+        newPassword: newPasswordController.text,
+      )
+          .then((bool status) async {
+        if (status) {
+          clearData();
+          if (Get.isBottomSheetOpen!) {
+            Get.back();
+          }
+          CustomSnackBar.showCustomSnackBar(
+            title: LocaleKeys.success.tr,
+            message: LocaleKeys.password_changed_successfully.tr,
+          );
+        }
+      });
+    } catch (error) {
+      log("Error in changePassword: $error");
+    }
   }
 
   String? validateConfirmNewPassword(String? confirmPasswordFieldValue) {

@@ -21,8 +21,7 @@ class VerifyAccountController extends GetxController {
   CurrentUserProfileInfo currentUserProfileInfo =
       CacheHelper.instance.getCachedCurrentUserProfileInfo() ??
           CurrentUserProfileInfo();
-  RxBool isEmailConfirmed = false.obs;
-  RxBool isPhoneNumberConfirmed = false.obs;
+  RxBool isEmailConfirmed = false.obs, isPhoneNumberConfirmed = false.obs;
   FocusNode emailFocusNode = FocusNode(), phoneNumberFocusNode = FocusNode();
   final VerifyAccountRepo _verifyAccountRepo = VerifyAccountRepoImplement();
   GenerateOtpCode generateOtpCode = GenerateOtpCode();
@@ -119,7 +118,7 @@ class VerifyAccountController extends GetxController {
       //             currentUserProfileInfo.result!.emailAddress!
       //         : false)
       //     .toString());
-      await sendOTP(email: emailController.text);
+      await _sendOTP(email: emailController.text);
     }
   }
 
@@ -132,13 +131,13 @@ class VerifyAccountController extends GetxController {
       //             currentUserProfileInfo.result!.phoneNumber!
       //         : false)
       //     .toString());
-      await sendOTP(
+      await _sendOTP(
         phoneNumber: phoneNumber.completeNumber,
       );
     }
   }
 
-  Future sendOTP({String? phoneNumber, String? email}) async {
+  Future _sendOTP({String? phoneNumber, String? email}) async {
     showLoadingDialog();
     if (phoneNumber == null && email == null) {
       return;
