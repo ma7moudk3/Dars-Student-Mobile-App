@@ -32,10 +32,12 @@ class ProfileInfoWidget extends GetView<ProfileController> {
                 image: DecorationImage(
                   image: controller.userPicture != null &&
                           controller.userPicture!.isNotEmpty
-                      ? CacheHelper.instance.getUserProfilePicture() != null
-                          ? MemoryImage(base64Decode(
-                                CacheHelper.instance.getUserProfilePicture()!))
-                            as ImageProvider
+                      ? CacheHelper.instance.getUserProfilePicture() != null &&
+                              CacheHelper.instance
+                                  .getUserProfilePicture()!
+                                  .isNotEmpty
+                          ? MemoryImage(base64Decode(CacheHelper.instance
+                              .getUserProfilePicture()!)) as ImageProvider
                           : CachedNetworkImageProvider(
                               controller.userPicture ??
                                   "https://www.shareicon.net/data/2016/06/10/586098_guest_512x512.png",

@@ -3,10 +3,21 @@ import 'dart:developer' as developer;
 import 'dart:io';
 import 'dart:math';
 
+import 'package:firebase_messaging/firebase_messaging.dart';
+import 'package:hessa_student/app/modules/verify_account/data/repos/verify_account_repo.dart';
 import 'package:intl/intl.dart';
 
 import '../../generated/locales.g.dart';
+import '../../global_presentation/global_widgets/custom_snack_bar.dart';
+import '../../global_presentation/global_widgets/loading.dart';
 import '../constants/exports.dart';
+import '../data/cache_helper.dart';
+import '../data/network_helper/firebase_social_auth_helpers.dart';
+import '../modules/login/widgets/welcome_back_dialog_content.dart';
+import '../modules/verify_account/data/repos/verify_account_repo_implement.dart';
+import '../routes/app_pages.dart';
+
+final VerifyAccountRepo _verifyAccountRepo = VerifyAccountRepoImplement();
 
 extension RandomListItem<T> on List<T> {
   T randomItem() {
@@ -186,5 +197,70 @@ class MyHttpOverrides extends HttpOverrides {
     return super.createHttpClient(context)
       ..badCertificateCallback =
           (X509Certificate cert, String host, int port) => true;
+  }
+}
+
+Future welcomeBack() async {
+  await Future.delayed(const Duration(microseconds: 1200), () async {
+    await Get.dialog(
+      Container(
+        color: ColorManager.black.withOpacity(0.1),
+        height: 140.h,
+        width: 140.w,
+        child: Center(
+          child: Container(
+            width: Get.width,
+            margin: EdgeInsets.symmetric(horizontal: 18.w),
+            child: const WelcomeBackDialogContent(),
+          ),
+        ),
+      ),
+    );
+  });
+}
+
+Future _clearAllCaches() async {
+  await Future.wait([
+    CacheHelper.instance.setAccessToken(""),
+    CacheHelper.instance.setRefreshToken(""),
+    CacheHelper.instance.setFcmToken(""),
+    CacheHelper.instance.setUserProfilePicture(""),
+    FirebaseMessaging.instance.deleteToken(),
+    CacheHelper.instance.cacheCurrentUserInfo({}),
+    CacheHelper.instance.cacheCurrentUserProfileInfo({}),
+    CacheHelper.instance.setAuthed(false),
+    CacheHelper.instance.setIsEmailConfirmed(false),
+    CacheHelper.instance.setIsPhoneConfirmed(false),
+  ]);
+}
+
+Future logout() async {
+  showLoadingDialog();
+  if (await checkInternetConnection(timeout: 10)) {
+    await _verifyAccountRepo.logout().then((int statusCode) async {
+      if (statusCode == 200) {
+        await _clearAllCaches();
+        await GoogleSignInHelper.googleLogout();
+        // await AppleSignInHelper.appleLogout();
+        // await FacebookSignInHelper.facebookLogout().then((value) {
+        //   if (Get.isDialogOpen!) {
+        //     Get.back();
+        //   }
+        // });
+        if (Get.isDialogOpen!) {
+          Get.back();
+        }
+        await Get.offAllNamed(Routes.LOGIN_OR_SIGN_UP, arguments: {
+          "isFromOnboarding": false,
+        });
+      } else {
+        CustomSnackBar.showCustomErrorSnackBar(
+          title: LocaleKeys.error.tr,
+          message: LocaleKeys.something_went_wrong.tr,
+        );
+      }
+    });
+  } else {
+    await Get.toNamed(Routes.CONNECTION_FAILED);
   }
 }

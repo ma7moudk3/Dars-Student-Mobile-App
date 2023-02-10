@@ -32,7 +32,11 @@ class HomeProfileInfoWidget extends GetView<HomeController> {
                 height: 65.h,
                 decoration: BoxDecoration(
                   image: DecorationImage(
-                    image: CacheHelper.instance.getUserProfilePicture() != null
+                    image: CacheHelper.instance.getUserProfilePicture() !=
+                                null &&
+                            CacheHelper.instance
+                                .getUserProfilePicture()!
+                                .isNotEmpty
                         ? MemoryImage(base64Decode(
                                 CacheHelper.instance.getUserProfilePicture()!))
                             as ImageProvider

@@ -16,7 +16,6 @@ import '../../login/data/models/current_user_profile_info/current_user_profile_i
 class ProfileController extends GetxController {
   bool isNotified =
       CacheHelper.instance.getFcmToken().isNotEmpty ? true : false;
-
   final GlobalKey<FormState> formKey = GlobalKey<FormState>();
   late TextEditingController areaController, currentAddressController;
   FocusNode areaFocusNode = FocusNode(), currentAddressFocusNode = FocusNode();

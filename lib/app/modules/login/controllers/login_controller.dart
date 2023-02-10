@@ -1,8 +1,12 @@
-import 'dart:developer';
+import 'dart:developer' as developer;
+import 'dart:io';
+import 'dart:math';
+import 'package:http/http.dart' as http;
 
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:hessa_student/app/modules/login/data/models/current_user_info/current_user_info.dart';
 import 'package:hessa_student/app/modules/login/data/repos/login_repo.dart';
+import 'package:path_provider/path_provider.dart';
 
 import '../../../../generated/locales.g.dart';
 import '../../../../global_presentation/global_widgets/loading.dart';
@@ -10,6 +14,8 @@ import '../../../constants/exports.dart';
 import '../../../data/cache_helper.dart';
 import '../../../data/network_helper/firebase_social_auth_helpers.dart';
 import '../../../routes/app_pages.dart';
+import '../../edit_profile/data/repos/edit_profile_repo.dart';
+import '../../edit_profile/data/repos/edit_profile_repo_implement.dart';
 import '../data/models/current_user_profile_info/current_user_profile_info.dart';
 import '../data/repos/login_repo_implement.dart';
 
@@ -21,6 +27,8 @@ class LoginController extends GetxController {
   GoogleSignInAccount? googleAccount;
   final GlobalKey<FormState> formKey = GlobalKey();
   final LoginRepo _loginRepo = LoginRepoImplement();
+  final EditProfileRepo _editProfileRepo = EditProfileRepoImplement();
+
   @override
   void onInit() {
     emailController = TextEditingController();
@@ -66,7 +74,7 @@ class LoginController extends GetxController {
           Future.wait([
             _getCurrentUserInfo(),
             _getCurrentUserProfileInfo(),
-            _loginRepo.getCurrentUserProfilePicture()
+            _getCurrentUserProfilePicture()
           ]).then((value) async {
             CurrentUserInfo currentUserInfo =
                 CacheHelper.instance.getCachedCurrentUserInfo() ??
@@ -77,8 +85,8 @@ class LoginController extends GetxController {
             bool isPhoneConfirmed = currentUserInfo.result != null
                 ? currentUserInfo.result!.isPhoneNumberConfirmed ?? false
                 : false;
-            log("isEmailConfirmed? $isEmailConfirmed");
-            log("isPhoneConfirmed? $isPhoneConfirmed");
+            developer.log("isEmailConfirmed? $isEmailConfirmed");
+            developer.log("isPhoneConfirmed? $isPhoneConfirmed");
             if (currentUserInfo.result != null &&
                 ((!isEmailConfirmed) || (!isPhoneConfirmed))) {
               Future.wait([
@@ -92,13 +100,14 @@ class LoginController extends GetxController {
             } else {
               await CacheHelper.instance.setIsEmailConfirmed(true);
               await CacheHelper.instance.setIsPhoneConfirmed(true);
+              await CacheHelper.instance.setIsWelcomeBack(true);
               await Get.offAllNamed(Routes.BOTTOM_NAV_BAR);
             }
           });
         }
       });
     } catch (e) {
-      log('login Exception error {{2}} $e');
+      developer.log('login Exception error {{2}} $e');
       if (Get.isDialogOpen!) {
         Get.back();
       }
@@ -113,11 +122,13 @@ class LoginController extends GetxController {
         GoogleSignInAuthentication authentication =
             await googleAccount!.authentication;
         if (authentication.accessToken != null) {
-          log("Google Account ID: ${googleAccount!.id}");
-          log("Google Account Email: ${googleAccount!.email}");
-          log("Google Account PHOTO URL: ${googleAccount!.photoUrl}");
-          log("Google Authentication Acess Token: ${authentication.accessToken ?? ""}");
-          log("Google Authentication ID Token: ${authentication.idToken ?? ""}");
+          developer.log("Google Account ID: ${googleAccount!.id}");
+          developer.log("Google Account Email: ${googleAccount!.email}");
+          developer.log("Google Account PHOTO URL: ${googleAccount!.photoUrl}");
+          developer.log(
+              "Google Authentication Acess Token: ${authentication.accessToken ?? ""}");
+          developer.log(
+              "Google Authentication ID Token: ${authentication.idToken ?? ""}");
           await _loginRepo
               .googleLogin(
             accessToken: authentication.accessToken!,
@@ -128,7 +139,10 @@ class LoginController extends GetxController {
               await Future.wait([
                 _getCurrentUserInfo(),
                 _getCurrentUserProfileInfo(),
-                _loginRepo.getCurrentUserProfilePicture()
+                _getCurrentUserProfilePicture(
+                  isGoogleLogin: true,
+                  googlePhotoUrl: googleAccount!.photoUrl ?? "",
+                ),
               ]).then((value) async {
                 CurrentUserInfo currentUserInfo =
                     CacheHelper.instance.getCachedCurrentUserInfo() ??
@@ -142,15 +156,15 @@ class LoginController extends GetxController {
                 bool isPhoneConfirmed = currentUserInfo.result != null
                     ? currentUserInfo.result!.isPhoneNumberConfirmed ?? false
                     : false;
-                log("isEmailConfirmed? $isEmailConfirmed");
-                log("isPhoneConfirmed? $isPhoneConfirmed");
+                developer.log("isEmailConfirmed? $isEmailConfirmed");
+                developer.log("isPhoneConfirmed? $isPhoneConfirmed");
                 if (currentUserInfo.result != null &&
                     ((!isEmailConfirmed &&
                             currentUserInfo.result!.emailAddress != null) ||
                         (!isPhoneConfirmed &&
                             currentUserProfileInfo.result!.phoneNumber !=
                                 null))) {
-                  Future.wait([
+                  await Future.wait([
                     CacheHelper.instance.setIsEmailConfirmed(
                         currentUserInfo.result!.isEmailConfirmed ?? false),
                     CacheHelper.instance.setIsPhoneConfirmed(
@@ -161,6 +175,7 @@ class LoginController extends GetxController {
                 } else {
                   await CacheHelper.instance.setIsEmailConfirmed(true);
                   await CacheHelper.instance.setIsPhoneConfirmed(true);
+                  await CacheHelper.instance.setIsWelcomeBack(true);
                   await Get.offAllNamed(Routes.BOTTOM_NAV_BAR);
                 }
               });
@@ -169,7 +184,7 @@ class LoginController extends GetxController {
         }
       }
     } catch (e) {
-      log('googleLogin Exception error {{2}} $e');
+      developer.log('googleLogin Exception error {{2}} $e');
       if (Get.isDialogOpen!) {
         Get.back();
       }
@@ -185,6 +200,30 @@ class LoginController extends GetxController {
         .then((CurrentUserInfo currentUserInfo) async {
       await CacheHelper.instance.cacheCurrentUserInfo(currentUserInfo.toJson());
     });
+  }
+
+  Future _getCurrentUserProfilePicture(
+      {bool isGoogleLogin = false, String? googlePhotoUrl}) async {
+    developer.log("isGoogleLogin? $googlePhotoUrl");
+    String profilePicture = await _loginRepo.getCurrentUserProfilePicture();
+    if (isGoogleLogin && googlePhotoUrl != null && googlePhotoUrl.isNotEmpty) {
+      if (profilePicture.isEmpty) {
+        await _editProfileRepo.updateProfilePicture(
+          image: await _urlToFile(imageURL: googlePhotoUrl),
+        );
+      }
+    }
+  }
+
+  Future<File> _urlToFile({required String imageURL}) async {
+    var rng = Random();
+    Directory tempDir = await getTemporaryDirectory();
+    String tempPath = tempDir.path;
+    File file = File('$tempPath${rng.nextInt(10000)}.png');
+    Uri uri = Uri.parse(imageURL);
+    http.Response response = await http.get(uri);
+    await file.writeAsBytes(response.bodyBytes);
+    return file;
   }
 
   Future _getCurrentUserProfileInfo() async {

@@ -5,6 +5,7 @@ import 'package:intl_phone_field/phone_number.dart';
 import '../../../../generated/locales.g.dart';
 import '../../../../global_presentation/global_widgets/custom_app_bar.dart';
 import '../../../../global_presentation/global_widgets/intl_phone_number_widget.dart';
+import '../../../core/helper_functions.dart';
 import '../controllers/verify_account_controller.dart';
 
 class VerifyAccountView extends GetView<VerifyAccountController> {
@@ -122,7 +123,7 @@ class VerifyAccountView extends GetView<VerifyAccountController> {
               PrimaryButton(
                 width: 150.w,
                 onPressed: () async {
-                  await controller.logout();
+                  await logout();
                 },
                 title: LocaleKeys.logout.tr,
                 borderSide: BorderSide.none,

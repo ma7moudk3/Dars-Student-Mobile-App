@@ -79,8 +79,11 @@ class EditProfileController extends GetxController {
         Get.back();
       }
     }).then((value) async {
-      await Future.wait([getCurrentUserInfo(), getCurrentUserProfileInfo()])
-          .then((value) async {
+      await Future.wait([
+        getCurrentUserInfo(),
+        getCurrentUserProfileInfo(),
+        _loginRepo.getCurrentUserProfilePicture()
+      ]).then((value) async {
         CustomSnackBar.showCustomSnackBar(
           title: LocaleKeys.success.tr,
           message: LocaleKeys.profile_edited_succesfully.tr,

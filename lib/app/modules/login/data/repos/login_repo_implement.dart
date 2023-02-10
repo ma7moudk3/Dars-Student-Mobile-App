@@ -44,9 +44,6 @@ class LoginRepoImplement extends LoginRepo {
             .setRefreshToken(loginInfo.result!.refreshToken!);
         await CacheHelper.instance.setUserId(loginInfo.result!.userId!);
       }
-      if (Get.isDialogOpen!) {
-        Get.back();
-      }
     }, onError: (response) {
       statusCode = response.statusCode ?? 400;
     });
