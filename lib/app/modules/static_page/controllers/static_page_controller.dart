@@ -9,7 +9,7 @@ class StaticPageController extends GetxController {
   String pageTitle =
       Get.arguments != null ? Get.arguments['pageTitle'] ?? "" : "";
   int staticPageId =
-      Get.arguments != null ? Get.arguments['staticPageId'] ?? 0 : 0;
+      Get.arguments != null ? Get.arguments['staticPageId'] ?? -1 : -1;
   String pageSubTitle =
       Get.arguments != null ? Get.arguments['pageSubTitle'] ?? "" : "";
   final StaticPageRepo _staticPageRepo = StaticPageRepoImplement();

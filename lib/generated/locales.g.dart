@@ -252,6 +252,8 @@ class LocaleKeys {
   static const preferred_teachers = 'preferred_teachers';
   static const message_type = 'message_type';
   static const choose_message_type = 'choose_message_type';
+  static const choose_country = 'choose_country';
+  static const reset = 'reset';
   static const message_sent_successfully = 'message_sent_successfully';
   static const chech_that_you_choose_the_message_type =
       'chech_that_you_choose_the_message_type';
@@ -591,6 +593,8 @@ class Locales {
     'preferred_teachers': 'المعلّمين المفضلين',
     'message_type': 'نوع الرسالة',
     'choose_message_type': 'اختر نوع الرسالة',
+    'choose_country': 'اختر الدولة',
+    'reset': 'إعادة تعيين',
     'message_sent_successfully': 'تم إرسال الرسالة بنجاح',
     'chech_that_you_choose_the_message_type': 'تأكد من اختيار نوع الرسالة',
     'back_backward': 'الرجوع للخلف',

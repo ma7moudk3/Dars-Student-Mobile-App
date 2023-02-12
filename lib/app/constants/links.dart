@@ -44,5 +44,8 @@ class Links {
   static const String staticPage = // 3 -> policy, 4 -> terms
       "api/services/app/ContentManagements/GetContentManagementForView";
   static const String contactUs = "api/services/app/Tickets/CreateOrEdit";
-  static const String urgencyTypesForDropDown = "api/services/app/Tickets/GetAllUrgencyForTableDropdown";
+  static const String urgencyTypesForDropDown =
+      "api/services/app/Tickets/GetAllUrgencyForTableDropdown";
+  static const String countriesForDropDown =
+      "api/services/app/Governorates/GetAllCountryForTableDropdown";
 }

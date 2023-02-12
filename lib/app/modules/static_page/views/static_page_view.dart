@@ -80,7 +80,7 @@ class StaticPageView extends GetView<StaticPageController> {
                     SizedBox(height: 10.h),
                     HtmlWidget(
                       Get.locale!.languageCode != "ar"
-                          ? controller.contentManagement.bodyL ?? ""
+                          ? controller.contentManagement.bodyF ?? ""
                           : controller.contentManagement.bodyL ?? "",
                       textStyle: TextStyle(
                         color: ColorManager.fontColor,

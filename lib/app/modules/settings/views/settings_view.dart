@@ -102,7 +102,10 @@ class SettingsView extends GetView<SettingsController> {
               iconPath: ImagesManager.aboutHessaIcon,
               color: ColorManager.primaryLight.withOpacity(0.15),
               iconColor: ColorManager.primaryLight,
-              onTap: () async => await Get.toNamed(Routes.ABOUT_HESSA),
+              onTap: () async =>
+                  await Get.toNamed(Routes.ABOUT_HESSA, arguments: {
+                "staticPageId": 5,
+              }),
             ),
           ],
         ),

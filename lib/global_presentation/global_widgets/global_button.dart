@@ -14,6 +14,7 @@ class GlobalButton extends StatelessWidget {
     this.borderColor,
     this.width,
     this.fontSize = 15,
+    this.borderRadius,
     this.height,
     this.fontWeight = FontWeightManager.medium,
   }) : super(key: key);
@@ -22,6 +23,7 @@ class GlobalButton extends StatelessWidget {
   final double? width, height, fontSize;
   final Icon? icon;
   final String title;
+  final BorderRadiusGeometry? borderRadius;
   final bool? selected, isSkip;
   final Color? color, borderColor;
   final FontWeight fontWeight;
@@ -43,7 +45,7 @@ class GlobalButton extends StatelessWidget {
                           : ColorManager.grey
                       : borderColor ?? ColorManager.primary)
                   : borderColor ?? ColorManager.primary),
-          borderRadius: BorderRadius.circular(8),
+          borderRadius: borderRadius ?? BorderRadius.circular(8),
         ),
         child: Row(
           mainAxisAlignment: MainAxisAlignment.center,

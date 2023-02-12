@@ -59,9 +59,10 @@ class SearchBar extends StatelessWidget {
                 behavior: HitTestBehavior.opaque,
                 onTap: () async {
                   if (await checkInternetConnection(timeout: 10)) {
+                    controller.pagingController.refresh();
                     controller.toggleSearch = true;
                   } else {
-                    Get.toNamed(Routes.CONNECTION_FAILED);
+                    await Get.toNamed(Routes.CONNECTION_FAILED);
                   }
                 },
                 child: SvgPicture.asset(
@@ -82,7 +83,14 @@ class SearchBar extends StatelessWidget {
                 onEditingComplete: () {},
                 onChanged: (String value) async {
                   if (value.isEmpty &&
-                      (controller.toggleSearch || controller.toggleFilter)) {}
+                      (controller.toggleSearch || controller.toggleFilter)) {
+                    if (await checkInternetConnection(timeout: 10)) {
+                      await controller.resetTeachers();
+                      controller.toggleSearch = false;
+                    } else {
+                      await Get.toNamed(Routes.CONNECTION_FAILED);
+                    }
+                  }
                   controller.makeSearchIconVisible(value);
                 },
                 decoration: InputDecoration(
