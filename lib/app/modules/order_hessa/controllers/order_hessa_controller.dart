@@ -125,10 +125,10 @@ class OrderHessaController extends GetxController {
     ),
   ];
 
-  List<Teacher> foundedTeachers = [];
+  List<Teacher> foundTeachers = [];
 
   List<Teacher> searchTeacher({required String searchValue}) {
-    return foundedTeachers = teachers
+    return foundTeachers = teachers
         .where((Teacher teacher) =>
             teacher.name.toLowerCase().contains(searchValue) ||
             teacher.address.toLowerCase().contains(searchValue) ||

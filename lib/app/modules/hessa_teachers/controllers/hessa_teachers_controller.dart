@@ -4,6 +4,7 @@ import 'dart:developer';
 import 'package:dio/dio.dart';
 import 'package:hessa_student/app/data/models/countries/result.dart' as country;
 import 'package:hessa_student/app/data/models/topics/result.dart' as topic;
+import '../../../../global_presentation/global_widgets/typeahead/cupertino_flutter_typeahead.dart';
 import '../../../data/models/classes/item.dart' as level;
 import '../../../data/models/skills/item.dart' as skill;
 import 'package:hessa_student/app/modules/hessa_teachers/data/models/hessa_teacher.dart';
@@ -28,7 +29,10 @@ class HessaTeachersController extends GetxController {
   Timer? _debounce;
   static const _pageSize = 6; // 6 teachers per page
   final int _debounceTime = 800;
-  late TextEditingController searchTextController;
+  late TextEditingController searchTextController,
+      topicController; // subject = topic
+  final CupertinoSuggestionsBoxController suggestionsBoxController =
+      CupertinoSuggestionsBoxController();
   PagingController<int, HessaTeacher> pagingController =
       PagingController(firstPageKey: 1); // item = hessa teacher
   int teacherGender = 0; // 1 male, 2 female, starts from zero just for indexing
@@ -51,6 +55,7 @@ class HessaTeachersController extends GetxController {
   @override
   void onInit() async {
     searchTextController = TextEditingController();
+    topicController = TextEditingController();
     if (Get.arguments != null && Get.arguments["searchFocus"] == true) {
       searchFocusNode.requestFocus();
     }
@@ -193,15 +198,21 @@ class HessaTeachersController extends GetxController {
     update();
   }
 
-  void changeTopic(String result) {
-    if (topics.result != null) {
-      for (var topic in topics.result ?? <topic.Result>[]) {
-        if (topic.displayName != null &&
-            topic.displayName!.toLowerCase() == result.toLowerCase()) {
-          selectedTopic = topic;
-        }
-      }
-    }
+  // if using dropdown
+  // void changeTopic(String result) {
+  // if (topics.result != null) {
+  //   for (var topic in topics.result ?? <topic.Result>[]) {
+  //     if (topic.displayName != null &&
+  //         topic.displayName!.toLowerCase() == result.toLowerCase()) {
+  //       selectedTopic = topic;
+  //     }
+  //   }
+  // }
+  // update();
+  // }
+  void changeTopic(topic.Result topic) {
+    topicController.text = topic.displayName ?? "";
+    selectedTopic = topic;
     update();
   }
 
@@ -318,6 +329,7 @@ class HessaTeachersController extends GetxController {
   @override
   void dispose() {
     searchTextController.dispose();
+    topicController.dispose();
     searchTextController.removeListener(_onSearchChanged);
     super.dispose();
   }

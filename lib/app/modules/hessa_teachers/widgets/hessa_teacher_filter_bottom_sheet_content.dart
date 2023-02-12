@@ -3,6 +3,7 @@ import 'package:hessa_student/global_presentation/global_widgets/global_button.d
 
 import '../../../../generated/locales.g.dart';
 import '../../../../global_presentation/global_widgets/global_dropdown.dart';
+import '../../../../global_presentation/global_widgets/typeahead/cupertino_flutter_typeahead.dart';
 import '../../../constants/exports.dart';
 import '../../../core/helper_functions.dart';
 import 'package:hessa_student/app/data/models/countries/result.dart' as country;
@@ -283,8 +284,9 @@ class HessaTeacherFilterBottomSheetContent
                                 items: controller.topics.result != null &&
                                         controller.topics.result!.isNotEmpty
                                     ? (controller.topics.result!.map(
-                                        (topic.Result result) =>
-                                            result.displayName ?? "")).toList()
+                                            (topic.Result result) =>
+                                                result.displayName ?? ""))
+                                        .toList()
                                     : [""],
                                 hint: LocaleKeys.studying_subject,
                                 value: controller.topics.result != null &&
@@ -329,8 +331,112 @@ class HessaTeacherFilterBottomSheetContent
                                   ),
                                   borderRadius: BorderRadius.circular(12),
                                 ),
-                                onChanged: (String? value) =>
-                                    controller.changeTopic(value ?? ""),
+                                // onChanged: (String? value) =>
+                                //     controller.changeTopic(value ?? ""),
+                              ),
+                            ),
+                            Visibility(
+                              visible: false, //~ remove false if we want to use searcahable dropdown
+                              child: Padding(
+                                padding: EdgeInsets.only(
+                                  left: 16.w,
+                                  right: 16.w,
+                                  top: 10.h,
+                                ),
+                                child: Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    PrimaryText(
+                                      LocaleKeys.studying_subject,
+                                      fontSize: 14.sp,
+                                      fontWeight: FontWeightManager.softLight,
+                                      color: ColorManager.fontColor,
+                                    ),
+                                    SizedBox(height: 8.h),
+                                    SingleChildScrollView(
+                                      clipBehavior: Clip.none,
+                                      child: CupertinoTypeAheadFormField<
+                                          topic.Result>(
+                                        hideOnError: true,
+                                        getImmediateSuggestions: true,
+                                        suggestionsBoxController:
+                                            controller.suggestionsBoxController,
+                                        textFieldConfiguration:
+                                            CupertinoTextFieldConfiguration(
+                                          controller: controller.topicController,
+                                          decoration: BoxDecoration(
+                                            borderRadius:
+                                                BorderRadius.circular(15),
+                                            border: Border.all(
+                                              color: ColorManager.borderColor2,
+                                            ),
+                                          ),
+                                          cursorColor: ColorManager.primary,
+                                          enableSuggestions: true,
+                                          maxLines: 1,
+                                          enableInteractiveSelection: true,
+                                          padding: const EdgeInsets.fromLTRB(
+                                              10.0, 15.0, 20.0, 15.0),
+                                          style: TextStyle(
+                                            color: ColorManager.fontColor,
+                                            fontSize: 14.sp,
+                                            fontFamily: FontConstants.fontFamily,
+                                          ),
+                                          placeholder:
+                                              LocaleKeys.search_for_subject.tr,
+                                        ),
+                                        suggestionsCallback:
+                                            (String searchValue) {
+                                          if (controller.topics.result != null &&
+                                              controller
+                                                  .topics.result!.isNotEmpty) {
+                                            return controller.topics.result!
+                                                .where((topic.Result topic) =>
+                                                    topic.displayName != null &&
+                                                    topic.displayName!
+                                                        .toLowerCase()
+                                                        .contains(searchValue))
+                                                .toList();
+                                          } else {
+                                            return [];
+                                          }
+                                        },
+                                        hideOnEmpty: true,
+                                        transitionBuilder: (context,
+                                            suggestionsBox, controller) {
+                                          return suggestionsBox;
+                                        },
+                                        itemBuilder: (BuildContext context,
+                                            topic.Result result) {
+                                          return Padding(
+                                            padding: const EdgeInsets.all(5.0),
+                                            child: PrimaryText(
+                                              result.displayName ?? "",
+                                              color: ColorManager.fontColor,
+                                              fontSize: 12.sp,
+                                            ),
+                                          );
+                                        },
+                                        noItemsFoundBuilder:
+                                            (BuildContext context) {
+                                          return PrimaryText(
+                                            LocaleKeys.no_teacher_found,
+                                          );
+                                        },
+                                        onSuggestionSelected:
+                                            (topic.Result result) {
+                                          controller.changeTopic(result);
+                                        },
+                                        errorBuilder: (context, error) {
+                                          return PrimaryText(
+                                            error.toString(),
+                                            color: ColorManager.red,
+                                          );
+                                        },
+                                      ),
+                                    ),
+                                  ],
+                                ),
                               ),
                             ),
                             Padding(

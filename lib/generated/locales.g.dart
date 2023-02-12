@@ -126,6 +126,7 @@ class LocaleKeys {
   static const choose_studying_class = 'choose_studying_class';
   static const studying_subject = 'studying_subject';
   static const choose_studying_subject = 'choose_studying_subject';
+  static const search_for_subject = 'search_for_subject';
   static const session_way = 'session_way';
   static const face_to_face = 'face_to_face';
   static const electronic = 'electronic';
@@ -466,6 +467,7 @@ class Locales {
     'choose_studying_class': 'اختر الصف الدراسي',
     'studying_subject': 'المادة الدراسية',
     'choose_studying_subject': 'اختر المادة الدراسية',
+    'search_for_subject': 'ابحث عن مادة دراسية',
     'session_way': 'طريقة الجلسة',
     'face_to_face': 'وجاهي',
     'electronic': 'إلكتروني',
