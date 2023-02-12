@@ -199,22 +199,23 @@ class HessaTeachersController extends GetxController {
   }
 
   // if using dropdown
-  // void changeTopic(String result) {
-  // if (topics.result != null) {
-  //   for (var topic in topics.result ?? <topic.Result>[]) {
-  //     if (topic.displayName != null &&
-  //         topic.displayName!.toLowerCase() == result.toLowerCase()) {
-  //       selectedTopic = topic;
-  //     }
-  //   }
-  // }
-  // update();
-  // }
-  void changeTopic(topic.Result topic) {
-    topicController.text = topic.displayName ?? "";
-    selectedTopic = topic;
+  void changeTopic(String result) {
+    if (topics.result != null) {
+      for (var topic in topics.result ?? <topic.Result>[]) {
+        if (topic.displayName != null &&
+            topic.displayName!.toLowerCase() == result.toLowerCase()) {
+          selectedTopic = topic;
+        }
+      }
+    }
     update();
   }
+  // if using typeahead
+  // void changeTopic(topic.Result topic) {
+  //   topicController.text = topic.displayName ?? "";
+  //   selectedTopic = topic;
+  //   update();
+  // }
 
   void changeLevel(String result) {
     if (classes.result != null && classes.result!.items != null) {
