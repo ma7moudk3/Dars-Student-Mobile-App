@@ -18,6 +18,8 @@ class HessaTeachersRepoImplement extends HessaTeachersRepo {
   @override
   Future<List<HessaTeacher>> getHessaTeachers({
     String? searchValue,
+    String? sortingField,
+    String sortingOrder = "DESC",
     int? genderId,
     int? countryId,
     int? levelId,
@@ -27,12 +29,17 @@ class HessaTeachersRepoImplement extends HessaTeachersRepo {
     required int perPage,
   }) async {
     List<HessaTeacher> hessaTeachers = [];
+    String? sorting;
     Map<String, dynamic> queryParameters = {
       "Filter": searchValue,
       "OrderId": 0,
       "SkipCount": (page - 1) * perPage,
       "MaxResultCount": perPage,
     };
+    if (sortingField != null) {
+      sorting = "$sortingField $sortingOrder"; // example: "rate DESC"
+      queryParameters["Sorting"] = sorting;
+    }
     if (genderId != null) {
       queryParameters["GenderId"] = genderId;
     }

@@ -8,6 +8,8 @@ import '../models/hessa_teacher.dart';
 abstract class HessaTeachersRepo {
   Future<List<HessaTeacher>> getHessaTeachers({
     String? searchValue,
+    String? sortingField,
+    String sortingOrder = "DESC",
     int? genderId,
     int? levelId,
     int? countryId,
