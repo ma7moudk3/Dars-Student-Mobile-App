@@ -116,9 +116,6 @@ class HessaTeachersController extends GetxController {
       this.levelId = null;
       this.topicId = null;
     }
-    this.levelId = levelId != -1 ? levelId : null;
-    this.topicId = topicId != -1 ? topicId : null;
-    this.skillId = skillId != -1 ? skillId : null;
     toggleFilter = true;
     pagingController.refresh();
     update();

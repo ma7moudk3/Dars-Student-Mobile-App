@@ -79,12 +79,12 @@ class HessaTeacherFilterBottomSheetContent
                         controller.countries.result!.isNotEmpty
                     ? controller.countries.result!.firstWhereOrNull(
                                 (country.Result country) =>
-                                    (country.id ?? -1) ==
-                                    controller.countryId) !=
+                                    (country.id) ==
+                                    controller.selectedCountry.id) !=
                             null
                         ? controller.countries.result!
                                 .firstWhereOrNull((country.Result country) =>
-                                    (country.id ?? -1) == controller.countryId)!
+                                    (country.id ?? -1) == controller.selectedCountry.id)!
                                 .displayName ??
                             ""
                         : (controller.countries.result![0].displayName ?? "")
@@ -223,16 +223,16 @@ class HessaTeacherFilterBottomSheetContent
                                     controller.skills.result!.items != null &&
                                     controller.skills.result!.items!.isNotEmpty
                                 ? controller.skills.result!.items!
-                                            .firstWhereOrNull(
-                                                (skill.Item skill) =>
-                                                    (skill.id ?? -1) ==
-                                                    controller.skillId) !=
+                                            .firstWhereOrNull((skill.Item
+                                                    skill) =>
+                                                (skill.id ?? -1) ==
+                                                controller.selectedSkill.id) !=
                                         null
                                     ? controller.skills.result!.items!
-                                            .firstWhereOrNull(
-                                                (skill.Item skill) =>
-                                                    (skill.id ?? -1) ==
-                                                    controller.skillId)!
+                                            .firstWhereOrNull((skill.Item
+                                                    skill) =>
+                                                (skill.id ?? -1) ==
+                                                controller.selectedSkill.id)!
                                             .displayName ??
                                         ""
                                     : (controller.skills.result!.items![0]
@@ -293,13 +293,15 @@ class HessaTeacherFilterBottomSheetContent
                                                 .firstWhereOrNull(
                                                     (topic.Result topic) =>
                                                         (topic.id ?? -1) ==
-                                                        controller.topicId) !=
+                                                        controller.selectedTopic
+                                                            .id) !=
                                             null
                                         ? controller.topics.result!
                                                 .firstWhereOrNull(
                                                     (topic.Result topic) =>
                                                         (topic.id ?? -1) ==
-                                                        controller.topicId)!
+                                                        controller
+                                                            .selectedTopic.id)!
                                                 .displayName ??
                                             ""
                                         : (controller.topics.result![0]
@@ -462,13 +464,15 @@ class HessaTeacherFilterBottomSheetContent
                                                 .firstWhereOrNull(
                                                     (level.Item level) =>
                                                         (level.id ?? -1) ==
-                                                        controller.levelId) !=
+                                                        controller.selectedClass
+                                                            .id) !=
                                             null
                                         ? controller.classes.result!.items!
                                                 .firstWhereOrNull(
                                                     (level.Item level) =>
                                                         (level.id ?? -1) ==
-                                                        controller.levelId)!
+                                                        controller
+                                                            .selectedClass.id)!
                                                 .displayName ??
                                             ""
                                         : (controller.classes.result!.items![0]
