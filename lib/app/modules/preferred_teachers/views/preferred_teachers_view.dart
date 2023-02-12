@@ -101,23 +101,20 @@ class PreferredTeachersView extends GetView<PreferredTeachersController> {
                             );
                           },
                           noItemsFoundIndicatorBuilder: (BuildContext context) {
-                            return Center(
-                              child: Column(
-                                children: [
-                                  const Spacer(),
-                                  Center(
-                                    child: Lottie.asset(
-                                      LottiesManager.noResultsSearching,
-                                      animate: true,
-                                    ),
+                            return Column(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                Center(
+                                  child: Lottie.asset(
+                                    LottiesManager.noResultsSearching,
+                                    animate: true,
                                   ),
-                                  PrimaryText(
-                                    LocaleKeys.no_results_found.tr,
-                                    fontSize: 20,
-                                  ),
-                                  const Spacer(),
-                                ],
-                              ),
+                                ),
+                                PrimaryText(
+                                  LocaleKeys.no_results_found.tr,
+                                  fontSize: 20.sp,
+                                ),
+                              ],
                             );
                           },
                           itemBuilder: (BuildContext context,

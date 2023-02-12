@@ -21,13 +21,14 @@ class PreferredTeachersRepoImplement extends PreferredTeachersRepo {
       'Accept': 'application/json',
       "Authorization": "Bearer ${CacheHelper.instance.getAccessToken()}"
     };
-    Map<String, dynamic> data = {
+    Map<String, dynamic> queryParameters = {
       "MaxResultCount": perPage,
       "SkipCount": (page - 1) * perPage,
     };
     await DioHelper.get(
       headers: headers,
       Links.preferredTeachers,
+      queryParameters: queryParameters,
       onSuccess: (response) {
         var result = response.data;
         if (result != null &&

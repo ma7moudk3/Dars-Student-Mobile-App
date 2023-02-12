@@ -41,4 +41,8 @@ class Links {
       "api/services/app/PreferredProviders/DeletePreferredProvider";
   static const String preferredTeachers = // favoriteTeachers
       "api/services/app/PreferredProviders/GetAllForRequester";
+  static const String staticPage = // 3 -> policy, 4 -> terms
+      "api/services/app/ContentManagements/GetContentManagementForView";
+  static const String contactUs = "api/services/app/Tickets/CreateOrEdit";
+  static const String urgencyTypesForDropDown = "api/services/app/Tickets/GetAllUrgencyForTableDropdown";
 }

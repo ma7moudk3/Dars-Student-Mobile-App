@@ -100,22 +100,20 @@ class EditProfileController extends GetxController {
   Future updateProfile() async {
     showLoadingDialog();
     await Future.wait([updateImage(), updateProfileData()]).then((value) async {
-      if (Get.isDialogOpen!) {
-        Get.back();
-      }
-    }).then((value) async {
       await Future.wait([
         getCurrentUserInfo(),
         getCurrentUserProfileInfo(),
         _loginRepo.getCurrentUserProfilePicture()
       ]).then((value) async {
-        CustomSnackBar.showCustomSnackBar(
-          title: LocaleKeys.success.tr,
-          message: LocaleKeys.profile_edited_succesfully.tr,
-          duration: const Duration(seconds: 2),
-        );
+        if (Get.isDialogOpen!) {
+          Get.back();
+        }
         await Future.delayed(const Duration(milliseconds: 550))
             .then((value) async {
+          CustomSnackBar.showCustomSnackBar(
+            title: LocaleKeys.success.tr,
+            message: LocaleKeys.profile_edited_succesfully.tr,
+          );
           await Get.offAllNamed(Routes.BOTTOM_NAV_BAR);
         });
       });

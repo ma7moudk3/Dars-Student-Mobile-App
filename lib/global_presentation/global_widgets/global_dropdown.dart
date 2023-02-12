@@ -13,6 +13,7 @@ class PrimaryDropDown extends StatefulWidget {
     this.focusNode,
     this.width,
     this.height,
+    this.fontColor,
     this.onChanged,
   }) : super(key: key);
 
@@ -25,6 +26,7 @@ class PrimaryDropDown extends StatefulWidget {
   final InputBorder? focusedBorder;
   final InputBorder? errorBorder;
   final double? width, height;
+  final Color? fontColor;
   final Function(String value)? onChanged;
   @override
   State<PrimaryDropDown> createState() => _PrimaryDropDownState();
@@ -76,7 +78,7 @@ class _PrimaryDropDownState extends State<PrimaryDropDown> {
                 value: itemValue,
                 child: PrimaryText(
                   itemValue,
-                  color: ColorManager.fontColor7,
+                  color: widget.fontColor ?? ColorManager.fontColor7,
                 ),
               );
             }).toList(),

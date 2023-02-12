@@ -76,7 +76,7 @@ class SettingsView extends GetView<SettingsController> {
                   await Get.toNamed(Routes.STATIC_PAGE, arguments: {
                 "pageTitle": LocaleKeys.privacy_policy.tr,
                 "pageSubTitle": LocaleKeys.privacy_policy_in_hessa.tr,
-                "pageId": 659,
+                "staticPageId": 3,
               }),
             ),
             moreDivider(),
@@ -91,7 +91,7 @@ class SettingsView extends GetView<SettingsController> {
                   await Get.toNamed(Routes.STATIC_PAGE, arguments: {
                 "pageTitle": LocaleKeys.terms_and_conditions.tr,
                 "pageSubTitle": LocaleKeys.terms_and_conditions_in_hessa.tr,
-                "pageId": 659,
+                "staticPageId": 4,
               }),
             ),
             moreDivider(),

@@ -250,6 +250,11 @@ class LocaleKeys {
   static const no_notifications = 'no_notifications';
   static const verify_account = 'verify_account';
   static const preferred_teachers = 'preferred_teachers';
+  static const message_type = 'message_type';
+  static const choose_message_type = 'choose_message_type';
+  static const message_sent_successfully = 'message_sent_successfully';
+  static const chech_that_you_choose_the_message_type =
+      'chech_that_you_choose_the_message_type';
   static const back_backward = 'back_backward';
   static const enter_the_verification_code_here =
       'enter_the_verification_code_here';
@@ -584,6 +589,10 @@ class Locales {
     'no_notifications': 'لا يوجد إشعارات',
     'verify_account': 'تحقق من الحساب',
     'preferred_teachers': 'المعلّمين المفضلين',
+    'message_type': 'نوع الرسالة',
+    'choose_message_type': 'اختر نوع الرسالة',
+    'message_sent_successfully': 'تم إرسال الرسالة بنجاح',
+    'chech_that_you_choose_the_message_type': 'تأكد من اختيار نوع الرسالة',
     'back_backward': 'الرجوع للخلف',
     'enter_the_verification_code_here': 'ادخل رمز التحقق هنا',
     'please_enter_the_verification_code': 'الرجاء إدخال رمز التحقق',

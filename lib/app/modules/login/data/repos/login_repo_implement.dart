@@ -69,9 +69,6 @@ class LoginRepoImplement extends LoginRepo {
         await CacheHelper.instance.setIsEmailConfirmed(
             currentUserInfo.result!.isEmailConfirmed ?? false);
       }
-      if (Get.isDialogOpen!) {
-        Get.back();
-      }
     }, onError: (response) {
       if (Get.isDialogOpen!) {
         Get.back();
@@ -93,9 +90,6 @@ class LoginRepoImplement extends LoginRepo {
     await DioHelper.get(headers: headers, Links.getCurrentUserProfileInfo,
         onSuccess: (response) async {
       currentUserProfileInfo = CurrentUserProfileInfo.fromJson(response.data);
-      if (Get.isDialogOpen!) {
-        Get.back();
-      }
     }, onError: (response) {
       if (Get.isDialogOpen!) {
         Get.back();

@@ -81,11 +81,15 @@ class HessaTeachersController extends GetxController {
     });
   }
 
-  Future getHessaTeachers({required int page}) async {
+  Future getHessaTeachers({
+    required int page,
+  }) async {
     try {
       if (await checkInternetConnection(timeout: 10)) {
         hessaTeachers = await _hessaTeacherRepo.getHessaTeachers(
-            page: page, perPage: _pageSize);
+          page: page,
+          perPage: _pageSize,
+        );
         final isLastPage = hessaTeachers.length < _pageSize;
         if (isLastPage) {
           pagingController.appendLastPage(hessaTeachers);
