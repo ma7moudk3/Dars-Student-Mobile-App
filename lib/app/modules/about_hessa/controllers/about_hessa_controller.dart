@@ -9,7 +9,8 @@ class AboutHessaController extends GetxController {
   int staticPageId =
       Get.arguments != null ? Get.arguments['staticPageId'] ?? -1 : -1;
   final StaticPageRepo _staticPageRepo = StaticPageRepoImplement();
-  ContentManagement aboutHessa = ContentManagement(), socialMedia = ContentManagement();
+  ContentManagement aboutHessa = ContentManagement(),
+      socialMedia = ContentManagement();
   RxBool isLoading = true.obs, isInternetConnected = true.obs;
 
   @override

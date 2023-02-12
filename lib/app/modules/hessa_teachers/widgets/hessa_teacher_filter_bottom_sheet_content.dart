@@ -1,11 +1,14 @@
 import 'package:flutter_spinkit/flutter_spinkit.dart';
-import 'package:hessa_student/app/data/models/countries/result.dart';
 import 'package:hessa_student/global_presentation/global_widgets/global_button.dart';
 
 import '../../../../generated/locales.g.dart';
 import '../../../../global_presentation/global_widgets/global_dropdown.dart';
 import '../../../constants/exports.dart';
 import '../../../core/helper_functions.dart';
+import 'package:hessa_student/app/data/models/countries/result.dart' as country;
+import 'package:hessa_student/app/data/models/topics/result.dart' as topic;
+import '../../../data/models/classes/item.dart' as level;
+import '../../../data/models/skills/item.dart' as skill;
 import '../../../routes/app_pages.dart';
 import '../controllers/hessa_teachers_controller.dart';
 
@@ -45,8 +48,9 @@ class HessaTeacherFilterBottomSheetContent
                   width: 26.w,
                   height: 6.h,
                   decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(10),
-                      color: ColorManager.borderColor3),
+                    borderRadius: BorderRadius.circular(10),
+                    color: ColorManager.borderColor3,
+                  ),
                 ),
               ),
               PrimaryText(
@@ -66,14 +70,24 @@ class HessaTeacherFilterBottomSheetContent
                 fontColor: ColorManager.fontColor5,
                 items: controller.countries.result != null &&
                         controller.countries.result!.isNotEmpty
-                    ? (controller.countries.result!
-                            .map((Result result) => result.displayName ?? ""))
-                        .toList()
+                    ? (controller.countries.result!.map(
+                        (country.Result result) =>
+                            result.displayName ?? "")).toList()
                     : [""],
                 hint: LocaleKeys.city,
                 value: controller.countries.result != null &&
                         controller.countries.result!.isNotEmpty
-                    ? (controller.countries.result![0].displayName ?? "")
+                    ? controller.countries.result!.firstWhereOrNull(
+                                (country.Result country) =>
+                                    (country.id ?? -1) ==
+                                    controller.countryId) !=
+                            null
+                        ? controller.countries.result!
+                                .firstWhereOrNull((country.Result country) =>
+                                    (country.id ?? -1) == controller.countryId)!
+                                .displayName ??
+                            ""
+                        : (controller.countries.result![0].displayName ?? "")
                     : "",
                 disabledBorder: OutlineInputBorder(
                   borderSide: BorderSide(
@@ -196,9 +210,35 @@ class HessaTeacherFilterBottomSheetContent
                             top: 16.h,
                           ),
                           child: PrimaryDropDown(
-                            items: [LocaleKeys.choose_skill.tr],
-                            hint: LocaleKeys.skill,
-                            value: LocaleKeys.choose_skill.tr,
+                            fontColor: ColorManager.fontColor5,
+                            items: controller.skills.result != null &&
+                                    controller.skills.result!.items != null &&
+                                    controller.skills.result!.items!.isNotEmpty
+                                ? (controller.skills.result!.items!.map(
+                                    (skill.Item item) =>
+                                        item.displayName ?? "")).toList()
+                                : [""],
+                            hint: LocaleKeys.choose_skill,
+                            value: controller.skills.result != null &&
+                                    controller.skills.result!.items != null &&
+                                    controller.skills.result!.items!.isNotEmpty
+                                ? controller.skills.result!.items!
+                                            .firstWhereOrNull(
+                                                (skill.Item skill) =>
+                                                    (skill.id ?? -1) ==
+                                                    controller.skillId) !=
+                                        null
+                                    ? controller.skills.result!.items!
+                                            .firstWhereOrNull(
+                                                (skill.Item skill) =>
+                                                    (skill.id ?? -1) ==
+                                                    controller.skillId)!
+                                            .displayName ??
+                                        ""
+                                    : (controller.skills.result!.items![0]
+                                            .displayName ??
+                                        "")
+                                : "",
                             disabledBorder: OutlineInputBorder(
                               borderSide: BorderSide(
                                 color: ColorManager.borderColor2,
@@ -222,7 +262,8 @@ class HessaTeacherFilterBottomSheetContent
                               ),
                               borderRadius: BorderRadius.circular(12),
                             ),
-                            onChanged: (String? value) {},
+                            onChanged: (String? value) =>
+                                controller.changeSkill(value ?? ""),
                           ),
                         ),
                       ),
@@ -238,9 +279,33 @@ class HessaTeacherFilterBottomSheetContent
                                 top: 16.h,
                               ),
                               child: PrimaryDropDown(
-                                items: [LocaleKeys.choose_studying_subject.tr],
+                                fontColor: ColorManager.fontColor5,
+                                items: controller.topics.result != null &&
+                                        controller.topics.result!.isNotEmpty
+                                    ? (controller.topics.result!.map(
+                                        (topic.Result result) =>
+                                            result.displayName ?? "")).toList()
+                                    : [""],
                                 hint: LocaleKeys.studying_subject,
-                                value: LocaleKeys.choose_studying_subject.tr,
+                                value: controller.topics.result != null &&
+                                        controller.topics.result!.isNotEmpty
+                                    ? controller.topics.result!
+                                                .firstWhereOrNull(
+                                                    (topic.Result topic) =>
+                                                        (topic.id ?? -1) ==
+                                                        controller.topicId) !=
+                                            null
+                                        ? controller.topics.result!
+                                                .firstWhereOrNull(
+                                                    (topic.Result topic) =>
+                                                        (topic.id ?? -1) ==
+                                                        controller.topicId)!
+                                                .displayName ??
+                                            ""
+                                        : (controller.topics.result![0]
+                                                .displayName ??
+                                            "")
+                                    : "",
                                 disabledBorder: OutlineInputBorder(
                                   borderSide: BorderSide(
                                     color: ColorManager.borderColor2,
@@ -264,7 +329,8 @@ class HessaTeacherFilterBottomSheetContent
                                   ),
                                   borderRadius: BorderRadius.circular(12),
                                 ),
-                                onChanged: (String? value) {},
+                                onChanged: (String? value) =>
+                                    controller.changeTopic(value ?? ""),
                               ),
                             ),
                             Padding(
@@ -274,9 +340,39 @@ class HessaTeacherFilterBottomSheetContent
                                 top: 16.h,
                               ),
                               child: PrimaryDropDown(
-                                items: [LocaleKeys.choose_studying_class.tr],
+                                fontColor: ColorManager.fontColor5,
+                                items: controller.classes.result != null &&
+                                        controller.classes.result!.items !=
+                                            null &&
+                                        controller
+                                            .classes.result!.items!.isNotEmpty
+                                    ? (controller.classes.result!.items!.map(
+                                        (level.Item item) =>
+                                            item.displayName ?? "")).toList()
+                                    : [""],
                                 hint: LocaleKeys.studying_class,
-                                value: LocaleKeys.choose_studying_class.tr,
+                                value: controller.classes.result != null &&
+                                        controller.classes.result!.items !=
+                                            null &&
+                                        controller
+                                            .classes.result!.items!.isNotEmpty
+                                    ? controller.classes.result!.items!
+                                                .firstWhereOrNull(
+                                                    (level.Item level) =>
+                                                        (level.id ?? -1) ==
+                                                        controller.levelId) !=
+                                            null
+                                        ? controller.classes.result!.items!
+                                                .firstWhereOrNull(
+                                                    (level.Item level) =>
+                                                        (level.id ?? -1) ==
+                                                        controller.levelId)!
+                                                .displayName ??
+                                            ""
+                                        : (controller.classes.result!.items![0]
+                                                .displayName ??
+                                            "")
+                                    : "",
                                 disabledBorder: OutlineInputBorder(
                                   borderSide: BorderSide(
                                     color: ColorManager.borderColor2,
@@ -300,7 +396,8 @@ class HessaTeacherFilterBottomSheetContent
                                   ),
                                   borderRadius: BorderRadius.circular(12),
                                 ),
-                                onChanged: (String? value) {},
+                                onChanged: (String? value) =>
+                                    controller.changeLevel(value ?? ""),
                               ),
                             ),
                           ],
@@ -344,7 +441,6 @@ class HessaTeacherFilterBottomSheetContent
                                               width: 1,
                                             )
                                           : null,
-                                      boxShadow: const [],
                                     ),
                                     child: Center(
                                       child: PrimaryText(
@@ -374,27 +470,47 @@ class HessaTeacherFilterBottomSheetContent
                 children: [
                   PrimaryButton(
                     width: (Get.width * 0.42).w,
-                    onPressed: () => Get.back(),
-                    title: LocaleKeys.search.tr,
-                  ),
-                  GlobalButton(
-                    width: (Get.width * 0.42).w,
-                    borderRadius: BorderRadius.circular(15.h),
-                    height: 55.h,
-                    onTap: () async {
-                      if (controller.toggleSort == true) {
-                        if (await checkInternetConnection(timeout: 10)) {
-                          await controller.resetTeachers();
-                        } else {
-                          await Get.toNamed(Routes.CONNECTION_FAILED);
-                        }
+                    fontSize: 16.sp,
+                    onPressed: () async {
+                      if (await checkInternetConnection(timeout: 10)) {
+                        await controller.filterTeachers(
+                          levelId: controller.selectedClass.id,
+                          topicId: controller.selectedTopic.id,
+                          skillId: controller.selectedSkill.id,
+                          countryId: controller.selectedCountry.id,
+                          genderId: controller.teacherGender +
+                              1, // 1 or 2 , 1 female, 2 male
+                        );
+                      } else {
+                        await Get.toNamed(Routes.CONNECTION_FAILED);
                       }
                       if (Get.isBottomSheetOpen!) {
                         Get.back();
                       }
                     },
-                    title: LocaleKeys.reset.tr,
+                    title: LocaleKeys.search.tr,
                   ),
+                  GetBuilder<HessaTeachersController>(
+                      builder: (HessaTeachersController controller) {
+                    return GlobalButton(
+                      width: (Get.width * 0.42).w,
+                      borderRadius: BorderRadius.circular(15.h),
+                      height: 55.h,
+                      onTap: () async {
+                        if (controller.toggleFilter == true) {
+                          if (await checkInternetConnection(timeout: 10)) {
+                            await controller.resetTeachers();
+                          } else {
+                            await Get.toNamed(Routes.CONNECTION_FAILED);
+                          }
+                        }
+                        if (Get.isBottomSheetOpen!) {
+                          Get.back();
+                        }
+                      },
+                      title: LocaleKeys.reset.tr,
+                    );
+                  }),
                 ],
               ),
             ],

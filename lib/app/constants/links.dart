@@ -48,4 +48,10 @@ class Links {
       "api/services/app/Tickets/GetAllUrgencyForTableDropdown";
   static const String countriesForDropDown =
       "api/services/app/Governorates/GetAllCountryForTableDropdown";
+  static const String skillsForDropDown =
+      "api/services/app/OrderSkills/GetAllSkillForLookupTable";
+  static const String classesForDropDown =
+      "api/services/app/Topics/GetAllLevelForLookupTable";
+  static const String topicsForDropDown =
+      "api/services/app/Sessions/GetAllTopicForTableDropdown";
 }
