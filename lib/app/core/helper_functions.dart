@@ -247,6 +247,7 @@ Future _clearAllCaches() async {
   await Future.wait([
     CacheHelper.instance.setAccessToken(""),
     CacheHelper.instance.setRefreshToken(""),
+    CacheHelper.instance.setEncryptedToken(""),
     CacheHelper.instance.setFcmToken(""),
     CacheHelper.instance.setUserProfilePicture(""),
     FirebaseMessaging.instance.deleteToken(),

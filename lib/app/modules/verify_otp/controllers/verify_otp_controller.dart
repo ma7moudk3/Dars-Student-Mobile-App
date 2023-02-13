@@ -39,6 +39,7 @@ class VerifyOtpController extends GetxController {
       email = Get.arguments["email"] ?? "";
       phoneNumber = Get.arguments["phoneNumber"] ?? "";
       isEditProfile = Get.arguments["isEditProfile"] ?? false;
+      start = Get.arguments["numberOfSeconds"] ?? 60;
     }
     pinController = TextEditingController();
     pinFocusNode.addListener(() => update);

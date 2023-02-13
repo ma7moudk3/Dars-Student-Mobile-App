@@ -12,6 +12,11 @@ abstract class LoginRepo {
     required String providerKey,
   });
 
+  Future<int> facebookLogin({
+    required String accessToken,
+    required String providerKey,
+  });
+
   Future<CurrentUserInfo> getCurrentUserInfo();
   Future<String> getCurrentUserProfilePicture();
   Future<CurrentUserProfileInfo> getCurrentUserProfileInfo();

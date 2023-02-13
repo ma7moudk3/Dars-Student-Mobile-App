@@ -2,6 +2,7 @@ import 'package:cached_network_image/cached_network_image.dart';
 
 import '../../../constants/exports.dart';
 import '../../../constants/links.dart';
+import '../../../data/cache_helper.dart';
 import '../../../routes/app_pages.dart';
 import '../controllers/hessa_teachers_controller.dart';
 import '../data/models/hessa_teacher.dart';
@@ -75,7 +76,7 @@ class HessaTeacherWidget extends GetView<HessaTeachersController> {
                     borderRadius: BorderRadius.circular(15),
                     child: CachedNetworkImage(
                       imageUrl:
-                          "${Links.baseLink}${Links.profileImageById}?userId=$teacherId",
+                          "${Links.baseLink}${Links.profileImageById}?userId=$teacherId&enc_auth_token=${CacheHelper.instance.getEncryptedToken()}",
                       fit: BoxFit.cover,
                       errorWidget:
                           (BuildContext context, String url, dynamic error) =>

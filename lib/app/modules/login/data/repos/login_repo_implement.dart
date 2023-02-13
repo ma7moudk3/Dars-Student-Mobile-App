@@ -33,17 +33,14 @@ class LoginRepoImplement extends LoginRepo {
     await DioHelper.post(Links.login, data: data, onSuccess: (response) async {
       statusCode = response.statusCode ?? 200;
       LoginInfo loginInfo = LoginInfo.fromJson(response.data);
-      if (loginInfo.result != null &&
-          loginInfo.result!.accessToken != null &&
-          loginInfo.result!.refreshToken != null &&
-          loginInfo.result!.userId != null) {
-        await CacheHelper.instance.setAuthed(true);
-        await CacheHelper.instance
-            .setAccessToken(loginInfo.result!.accessToken!);
-        await CacheHelper.instance
-            .setRefreshToken(loginInfo.result!.refreshToken!);
-        await CacheHelper.instance.setUserId(loginInfo.result!.userId!);
-      }
+      await CacheHelper.instance.setAuthed(true);
+      await CacheHelper.instance
+          .setAccessToken(loginInfo.result!.accessToken ?? '');
+      await CacheHelper.instance
+          .setEncryptedToken(loginInfo.result!.encryptedAccessToken ?? "");
+      await CacheHelper.instance
+          .setRefreshToken(loginInfo.result!.refreshToken ?? "");
+      await CacheHelper.instance.setUserId(loginInfo.result!.userId ?? -1);
     }, onError: (response) {
       statusCode = response.statusCode ?? 400;
     });
@@ -122,17 +119,14 @@ class LoginRepoImplement extends LoginRepo {
         onSuccess: (response) async {
       statusCode = response.statusCode ?? 200;
       LoginInfo loginInfo = LoginInfo.fromJson(response.data);
-      if (loginInfo.result != null &&
-          loginInfo.result!.accessToken != null &&
-          loginInfo.result!.refreshToken != null &&
-          loginInfo.result!.userId != null) {
-        await CacheHelper.instance.setAuthed(true);
-        await CacheHelper.instance
-            .setAccessToken(loginInfo.result!.accessToken!);
-        await CacheHelper.instance
-            .setRefreshToken(loginInfo.result!.refreshToken!);
-        await CacheHelper.instance.setUserId(loginInfo.result!.userId!);
-      }
+      await CacheHelper.instance.setAuthed(true);
+      await CacheHelper.instance
+          .setAccessToken(loginInfo.result!.accessToken ?? "");
+      await CacheHelper.instance
+          .setEncryptedToken(loginInfo.result!.encryptedAccessToken ?? "");
+      await CacheHelper.instance
+          .setRefreshToken(loginInfo.result!.refreshToken ?? "");
+      await CacheHelper.instance.setUserId(loginInfo.result!.userId ?? -1);
       if (Get.isDialogOpen!) {
         Get.back();
       }
@@ -149,7 +143,6 @@ class LoginRepoImplement extends LoginRepo {
         );
       }
     });
-
     return statusCode;
   }
 
@@ -171,5 +164,56 @@ class LoginRepoImplement extends LoginRepo {
       log("getCurrentUserProfilePicture error: $e");
     }
     return userPicture;
+  }
+
+  @override
+  Future<int> facebookLogin({
+    required String accessToken,
+    required String providerKey,
+  }) async {
+    int statusCode = 200;
+    FirebaseMessaging messaging = FirebaseMessaging.instance;
+    String? token = await messaging.getToken();
+    Map<String, dynamic> data = {
+      "authProvider": "Facebook",
+      "providerAccessCode": accessToken,
+      "providerKey": providerKey,
+      "returnUrl": "",
+      "singleSignIn": false,
+      "userType": 2 // student
+    };
+    if (token != null) {
+      data['fcmtoken'] = token;
+      await CacheHelper.instance.setFcmToken(token);
+    }
+    await DioHelper.post(Links.externalAuthenticate, data: data,
+        onSuccess: (response) async {
+      statusCode = response.statusCode ?? 200;
+      LoginInfo loginInfo = LoginInfo.fromJson(response.data);
+      await CacheHelper.instance.setAuthed(true);
+      await CacheHelper.instance
+          .setAccessToken(loginInfo.result!.accessToken ?? "");
+      await CacheHelper.instance
+          .setEncryptedToken(loginInfo.result!.encryptedAccessToken ?? "");
+      await CacheHelper.instance
+          .setRefreshToken(loginInfo.result!.refreshToken ?? "");
+      await CacheHelper.instance.setUserId(loginInfo.result!.userId ?? -1);
+      if (Get.isDialogOpen!) {
+        Get.back();
+      }
+    }, onError: (response) {
+      statusCode = response.statusCode ?? 400;
+      if (response.response != null) {
+        if (Get.isDialogOpen!) {
+          Get.back();
+        }
+        CustomSnackBar.showCustomErrorSnackBar(
+          title: LocaleKeys.error.tr,
+          message: response.response!.data['error']['message'] ??
+              LocaleKeys.something_went_wrong.tr,
+        );
+      }
+    });
+    return statusCode;
   }
 }

@@ -24,6 +24,10 @@ class CacheHelper {
     await _sharedPreferences.setString('access_token', token);
   }
 
+  Future setEncryptedToken(String token) async {
+    await _sharedPreferences.setString('encrypted_token', token);
+  }
+
   Future cacheCurrentUserInfo(Map<String, dynamic>? currentUserInfo) async {
     await _sharedPreferences.setString(
         "user_info", jsonEncode(currentUserInfo));
@@ -55,6 +59,9 @@ class CacheHelper {
 
   String getAccessToken() {
     return _sharedPreferences.getString('access_token') ?? '';
+  }
+  String getEncryptedToken() {
+    return _sharedPreferences.getString('encrypted_token') ?? '';
   }
 
   bool getIsWelcomeBack() {

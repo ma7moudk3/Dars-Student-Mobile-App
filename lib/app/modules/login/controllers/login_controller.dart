@@ -25,6 +25,7 @@ class LoginController extends GetxController {
   late TextEditingController emailController, passwordController;
   Color? emailErrorIconColor, passwordErrorIconColor;
   GoogleSignInAccount? googleAccount;
+  Map<String, dynamic>? facebookUserData;
   final GlobalKey<FormState> formKey = GlobalKey();
   final LoginRepo _loginRepo = LoginRepoImplement();
   final EditProfileRepo _editProfileRepo = EditProfileRepoImplement();
@@ -112,6 +113,29 @@ class LoginController extends GetxController {
         Get.back();
       }
     }
+  }
+
+  Future facebookLogin() async {
+    showLoadingDialog();
+    try {
+      facebookUserData = await FacebookSignInHelper.facebookLogin();
+      if (facebookUserData != null && facebookUserData!.isNotEmpty) {
+        developer.log(facebookUserData.toString());
+        await _loginRepo
+            .facebookLogin(
+                accessToken: facebookUserData!["accessToken"],
+                providerKey: googleAccount!.id)
+            .then((value) async {
+              
+            });
+      }
+    } catch (e) {
+      developer.log('facebookLogin Exception error {{2}} $e');
+      if (Get.isDialogOpen!) {
+        Get.back();
+      }
+    }
+    update();
   }
 
   Future googleLogin() async {

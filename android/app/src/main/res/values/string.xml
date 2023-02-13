@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Hessa Student</string>
+    <string name="facebook_app_id">592957012682027</string>
+    <string name="fb_login_protocol_scheme">fb592957012682027</string>
+    <string name="facebook_client_token">e08a0e07017ce61e9ddc0a24e9537600</string>
+</resources>

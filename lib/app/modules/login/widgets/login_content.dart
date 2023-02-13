@@ -205,7 +205,7 @@ class LoginContent extends GetView<LoginController> {
                         behavior: HitTestBehavior.opaque,
                         onTap: () async {
                           if (await checkInternetConnection(timeout: 10)) {
-                            // await controller.facebookLogin();
+                            await controller.facebookLogin();
                           } else {
                             Get.toNamed(Routes.CONNECTION_FAILED);
                           }

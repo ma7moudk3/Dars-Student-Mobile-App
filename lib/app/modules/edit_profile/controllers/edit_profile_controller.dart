@@ -77,7 +77,9 @@ class EditProfileController extends GetxController {
     gender = currentUserProfileInfo.result != null
         ? currentUserProfileInfo.result!.requester != null
             ? currentUserProfileInfo.result!.requester!.gender != null
-                ? (currentUserProfileInfo.result!.requester!.gender! - 1)
+                ? ((currentUserProfileInfo.result!.requester!.gender! - 1) >= 0)
+                    ? (currentUserProfileInfo.result!.requester!.gender! - 1)
+                    : 0
                 : 0
             : 0
         : 0;
@@ -168,6 +170,7 @@ class EditProfileController extends GetxController {
         await Get.toNamed(Routes.VERIFY_OTP, arguments: {
           "phoneNumber": phoneNumber,
           "isEditProfile": true,
+          "numberOfSeconds": generateOtpCode.result!.numberOfSeconds,
         });
       }
     }
@@ -181,6 +184,7 @@ class EditProfileController extends GetxController {
         await Get.toNamed(Routes.VERIFY_OTP, arguments: {
           "email": email,
           "isEditProfile": true,
+          "numberOfSeconds": generateOtpCode.result!.numberOfSeconds,
         });
       }
     }
