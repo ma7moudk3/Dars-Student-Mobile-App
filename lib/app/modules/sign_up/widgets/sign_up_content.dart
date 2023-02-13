@@ -53,10 +53,7 @@ class SignUpContent extends GetView<SignUpController> {
                       ),
                       SizedBox(width: 10.w),
                       Row(
-                        children: List.generate(3, (int index) {
-                          if (index == 1) {
-                            return SizedBox(width: 10.w);
-                          }
+                        children: List.generate(2, (int index) {
                           return GestureDetector(
                             onTap: () {
                               controller.changeGender(index);
@@ -64,6 +61,9 @@ class SignUpContent extends GetView<SignUpController> {
                             child: Container(
                               width: 60.w,
                               height: 31.h,
+                              margin: EdgeInsets.only(
+                                right: index == 0 ? 0 : 10.w,
+                              ),
                               decoration: BoxDecoration(
                                 color: controller.gender == index
                                     ? ColorManager.primary
@@ -268,7 +268,11 @@ class SignUpContent extends GetView<SignUpController> {
                   Row(
                     children: [
                       GestureDetector(
-                        onTap: () => controller.toggleTermsOfUse(),
+                        onTap: () {
+                          CustomSnackBar.showCustomToast(
+                              message: LocaleKeys.agreenment_thorugh_reading.tr,
+                              color: ColorManager.primary);
+                        },
                         child: Container(
                           width: 20.w,
                           height: 20.h,
@@ -308,11 +312,12 @@ class SignUpContent extends GetView<SignUpController> {
                           ),
                           GestureDetector(
                             onTap: () async {
+                              controller.toggleTermsOfUse();
                               await Get.toNamed(Routes.STATIC_PAGE, arguments: {
                                 "pageTitle": LocaleKeys.terms_and_conditions.tr,
                                 "pageSubTitle":
                                     LocaleKeys.terms_and_conditions_in_hessa.tr,
-                                "pageId": 659,
+                                "staticPageId": 4,
                               });
                             },
                             child: PrimaryText(

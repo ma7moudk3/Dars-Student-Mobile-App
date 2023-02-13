@@ -93,6 +93,7 @@ class LocaleKeys {
   static const check_confirm_password = 'check_confirm_password';
   static const check_tos_agreement = 'check_tos_agreement';
   static const phone_number = 'phone_number';
+  static const agreenment_thorugh_reading = 'agreenment_thorugh_reading';
   static const enter_phone_number = 'enter_phone_number';
   static const invalid_phone_number = 'invalid_phone_number';
   static const something_went_wrong = 'something_went_wrong';
@@ -442,9 +443,10 @@ class Locales {
     'check_dependent_name': 'تحقق من اسم التابع',
     'please_enter_confirm_password': 'الرجاء إدخال كلمة مرور مطابقة',
     'check_confirm_password': 'تحقق من أنك أدخلت كلمة مرور مطابقة',
-    'check_tos_agreement':
-        'تحقق من أنك وافقت على سياسة الخصوصية وشروط الاستخدام',
+    'check_tos_agreement': 'تحقق من أنك قرأت سياسة الخصوصية وشروط الاستخدام',
     'phone_number': 'رقم الهاتف',
+    'agreenment_thorugh_reading':
+        'الموافقة على الشروط والأحكام تتم من خلال قرائتها',
     'enter_phone_number': 'أدخل رقم الهاتف',
     'invalid_phone_number': 'رقم الهاتف غير صحيح',
     'something_went_wrong': 'حدث خطأ ما',

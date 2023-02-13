@@ -13,10 +13,8 @@ import '../../../../generated/locales.g.dart';
 import '../../../../global_presentation/global_features/lotties_manager.dart';
 import '../../../../global_presentation/global_widgets/custom_app_bar.dart';
 import '../../../../global_presentation/global_widgets/global_dropdown.dart';
-import 'package:hessa_student/app/data/models/topics/result.dart' as topic;
 import '../../../data/models/classes/item.dart' as level;
 import '../controllers/add_new_dependent_controller.dart';
-import '../widgets/date_of_birth_bottom_sheet_content.dart';
 
 class AddNewDependentView extends GetView<AddNewDependentController> {
   const AddNewDependentView({super.key});
@@ -219,11 +217,7 @@ class AddNewDependentView extends GetView<AddNewDependentController> {
                                       width: 22.w,
                                       height: 22.h,
                                       color: controller.nameIconErrorColor ??
-                                          (controller.nameFocusNode.hasFocus
-                                              ? (controller
-                                                      .nameIconErrorColor ??
-                                                  ColorManager.primary)
-                                              : ColorManager.primaryLight),
+                                          ColorManager.primary,
                                     ),
                                   ),
                                   prefixIconConstraints: BoxConstraints(
@@ -312,78 +306,88 @@ class AddNewDependentView extends GetView<AddNewDependentController> {
                                   ),
                                   hintText: LocaleKeys.upload_picture_or_pdf,
                                 ),
-                                SizedBox(height: 12.h),
-                                PrimaryTextField(
-                                  fontSize: 14.sp,
-                                  readOnly: true,
-                                  ifReadOnlyTextColor: ColorManager.fontColor7,
-                                  controller: controller.dateOfBirthController,
-                                  title: LocaleKeys.date_of_birth,
-                                  borderRadius: BorderRadius.circular(14),
-                                  focusNode: controller.dateOfBirthFocusNode,
-                                  titleFontWeight: FontWeightManager.softLight,
-                                  onTap: () async {
-                                    DateTime maxdate = DateTime(
-                                      DateTime.now().year - 10,
-                                      DateTime.now().month,
-                                      DateTime.now().day,
-                                    );
-                                    await Get.bottomSheet(
-                                      isScrollControlled: true,
-                                      shape: const RoundedRectangleBorder(
-                                        borderRadius: BorderRadius.only(
-                                          topLeft: Radius.circular(20),
-                                          topRight: Radius.circular(20),
-                                        ),
-                                      ),
-                                      DateOfBirthBottomSheetContent(
-                                          maxdate: maxdate),
-                                      backgroundColor: ColorManager.white,
-                                    );
-                                  },
-                                  suffixIcon: Container(
-                                    margin:
-                                        EdgeInsets.symmetric(horizontal: 14.w),
-                                    child: SvgPicture.asset(
-                                      ImagesManager.calendarIcon,
-                                      width: 22.w,
-                                      height: 22.h,
-                                      color: controller
-                                              .dateOfBirthIconErrorColor ??
-                                          (controller
-                                                  .dateOfBirthFocusNode.hasFocus
-                                              ? (controller
-                                                      .dateOfBirthIconErrorColor ??
-                                                  ColorManager.primary)
-                                              : ColorManager.primaryLight),
-                                    ),
-                                  ),
-                                  suffixIconConstraints: BoxConstraints(
-                                    minHeight: 22.h,
-                                    minWidth: 22.w,
-                                  ),
-                                  enabledBorder: OutlineInputBorder(
-                                    borderRadius: BorderRadius.circular(14),
-                                    borderSide: BorderSide(
-                                        color: ColorManager.borderColor2),
-                                  ),
-                                  focusedBorder: OutlineInputBorder(
-                                    borderRadius: BorderRadius.circular(14),
-                                    borderSide:
-                                        BorderSide(color: ColorManager.primary),
-                                  ),
-                                  errorBorder: OutlineInputBorder(
-                                    borderRadius: BorderRadius.circular(14),
-                                    borderSide:
-                                        BorderSide(color: ColorManager.red),
-                                  ),
-                                  borderSide: BorderSide(
-                                    color: ColorManager.primary,
-                                  ),
-                                  hintText: LocaleKeys.choose_date_of_birth,
-                                  validator: (String? dateOfBirth) => controller
-                                      .validateDateOfBirth(dateOfBirth),
-                                ),
+                                // SizedBox(height: 12.h),
+                                // PrimaryTextField(
+                                //   fontSize: 14.sp,
+                                //   readOnly: true,
+                                //   ifReadOnlyTextColor:
+                                //       ColorManager.fontColor7,
+                                //   controller:
+                                //       controller.dateOfBirthController,
+                                //   title: LocaleKeys.date_of_birth,
+                                //   borderRadius: BorderRadius.circular(14),
+                                //   focusNode:
+                                //       controller.dateOfBirthFocusNode,
+                                //   titleFontWeight:
+                                //       FontWeightManager.softLight,
+                                //   onTap: () async {
+                                //     DateTime maxdate = DateTime(
+                                //       DateTime.now().year - 10,
+                                //       DateTime.now().month,
+                                //       DateTime.now().day,
+                                //     );
+                                //     await Get.bottomSheet(
+                                //       isScrollControlled: true,
+                                //       shape: const RoundedRectangleBorder(
+                                //         borderRadius: BorderRadius.only(
+                                //           topLeft: Radius.circular(20),
+                                //           topRight: Radius.circular(20),
+                                //         ),
+                                //       ),
+                                //       DateOfBirthBottomSheetContent(
+                                //           maxdate: maxdate),
+                                //       backgroundColor: ColorManager.white,
+                                //     );
+                                //   },
+                                //   suffixIcon: Container(
+                                //     margin: EdgeInsets.symmetric(
+                                //         horizontal: 14.w),
+                                //     child: SvgPicture.asset(
+                                //       ImagesManager.calendarIcon,
+                                //       width: 22.w,
+                                //       height: 22.h,
+                                //       color: controller
+                                //               .dateOfBirthIconErrorColor ??
+                                //           (controller.dateOfBirthFocusNode
+                                //                   .hasFocus
+                                //               ? (controller
+                                //                       .dateOfBirthIconErrorColor ??
+                                //                   ColorManager.primary)
+                                //               : ColorManager
+                                //                   .primaryLight),
+                                //     ),
+                                //   ),
+                                //   suffixIconConstraints: BoxConstraints(
+                                //     minHeight: 22.h,
+                                //     minWidth: 22.w,
+                                //   ),
+                                //   enabledBorder: OutlineInputBorder(
+                                //     borderRadius:
+                                //         BorderRadius.circular(14),
+                                //     borderSide: BorderSide(
+                                //         color: ColorManager.borderColor2),
+                                //   ),
+                                //   focusedBorder: OutlineInputBorder(
+                                //     borderRadius:
+                                //         BorderRadius.circular(14),
+                                //     borderSide: BorderSide(
+                                //         color: ColorManager.primary),
+                                //   ),
+                                //   errorBorder: OutlineInputBorder(
+                                //     borderRadius:
+                                //         BorderRadius.circular(14),
+                                //     borderSide: BorderSide(
+                                //         color: ColorManager.red),
+                                //   ),
+                                //   borderSide: BorderSide(
+                                //     color: ColorManager.primary,
+                                //   ),
+                                //   hintText:
+                                //       LocaleKeys.choose_date_of_birth,
+                                //   validator: (String? dateOfBirth) =>
+                                //       controller.validateDateOfBirth(
+                                //           dateOfBirth),
+                                // ),
                                 SizedBox(height: 12.h),
                                 PrimaryText(
                                   LocaleKeys.student_relation,
@@ -589,73 +593,73 @@ class AddNewDependentView extends GetView<AddNewDependentController> {
                                   onChanged: (String? level) =>
                                       controller.changeLevel(level),
                                 ),
-                                SizedBox(height: 12.h),
-                                PrimaryText(
-                                  LocaleKeys.studying_subject,
-                                  fontSize: 14.sp,
-                                  fontWeight: FontWeightManager.softLight,
-                                  color: ColorManager.fontColor,
-                                ),
-                                SizedBox(height: 12.h),
-                                PrimaryDropDown(
-                                  fontColor: ColorManager.fontColor5,
-                                  items: controller.topics.result != null &&
-                                          controller.topics.result!.isNotEmpty
-                                      ? (controller.topics.result!.map(
-                                              (topic.Result result) =>
-                                                  result.displayName ?? ""))
-                                          .toList()
-                                      : [""],
-                                  hint: LocaleKeys.studying_subject,
-                                  value: controller.topics.result != null &&
-                                          controller.topics.result!.isNotEmpty
-                                      ? controller.topics.result!
-                                                  .firstWhereOrNull(
-                                                      (topic.Result topic) =>
-                                                          (topic.id ?? -1) ==
-                                                          controller
-                                                              .selectedTopic
-                                                              .id) !=
-                                              null
-                                          ? controller.topics.result!
-                                                  .firstWhereOrNull(
-                                                      (topic.Result topic) =>
-                                                          (topic.id ?? -1) ==
-                                                          controller
-                                                              .selectedTopic
-                                                              .id)!
-                                                  .displayName ??
-                                              ""
-                                          : (controller.topics.result![0]
-                                                  .displayName ??
-                                              "")
-                                      : "",
-                                  disabledBorder: OutlineInputBorder(
-                                    borderSide: BorderSide(
-                                      color: ColorManager.borderColor2,
-                                      width: 1.2,
-                                    ),
-                                    borderRadius: BorderRadius.circular(12),
-                                  ),
-                                  width: Get.width,
-                                  height: 50.h,
-                                  enabledBorder: OutlineInputBorder(
-                                    borderSide: BorderSide(
-                                      color: ColorManager.borderColor2,
-                                      width: 1.2,
-                                    ),
-                                    borderRadius: BorderRadius.circular(12),
-                                  ),
-                                  focusedBorder: OutlineInputBorder(
-                                    borderSide: BorderSide(
-                                      color: ColorManager.borderColor2,
-                                      width: 1.2,
-                                    ),
-                                    borderRadius: BorderRadius.circular(12),
-                                  ),
-                                  onChanged: (String? topic) =>
-                                      controller.changeTopic(topic),
-                                ),
+                                // SizedBox(height: 12.h),
+                                // PrimaryText(
+                                //   LocaleKeys.studying_subject,
+                                //   fontSize: 14.sp,
+                                //   fontWeight: FontWeightManager.softLight,
+                                //   color: ColorManager.fontColor,
+                                // ),
+                                // SizedBox(height: 12.h),
+                                // PrimaryDropDown(
+                                //   fontColor: ColorManager.fontColor5,
+                                //   items: controller.topics.result != null &&
+                                //           controller.topics.result!.isNotEmpty
+                                //       ? (controller.topics.result!.map(
+                                //               (topic.Result result) =>
+                                //                   result.displayName ?? ""))
+                                //           .toList()
+                                //       : [""],
+                                //   hint: LocaleKeys.studying_subject,
+                                //   value: controller.topics.result != null &&
+                                //           controller.topics.result!.isNotEmpty
+                                //       ? controller.topics.result!
+                                //                   .firstWhereOrNull(
+                                //                       (topic.Result topic) =>
+                                //                           (topic.id ?? -1) ==
+                                //                           controller
+                                //                               .selectedTopic
+                                //                               .id) !=
+                                //               null
+                                //           ? controller.topics.result!
+                                //                   .firstWhereOrNull(
+                                //                       (topic.Result topic) =>
+                                //                           (topic.id ?? -1) ==
+                                //                           controller
+                                //                               .selectedTopic
+                                //                               .id)!
+                                //                   .displayName ??
+                                //               ""
+                                //           : (controller.topics.result![0]
+                                //                   .displayName ??
+                                //               "")
+                                //       : "",
+                                //   disabledBorder: OutlineInputBorder(
+                                //     borderSide: BorderSide(
+                                //       color: ColorManager.borderColor2,
+                                //       width: 1.2,
+                                //     ),
+                                //     borderRadius: BorderRadius.circular(12),
+                                //   ),
+                                //   width: Get.width,
+                                //   height: 50.h,
+                                //   enabledBorder: OutlineInputBorder(
+                                //     borderSide: BorderSide(
+                                //       color: ColorManager.borderColor2,
+                                //       width: 1.2,
+                                //     ),
+                                //     borderRadius: BorderRadius.circular(12),
+                                //   ),
+                                //   focusedBorder: OutlineInputBorder(
+                                //     borderSide: BorderSide(
+                                //       color: ColorManager.borderColor2,
+                                //       width: 1.2,
+                                //     ),
+                                //     borderRadius: BorderRadius.circular(12),
+                                //   ),
+                                //   onChanged: (String? topic) =>
+                                //       controller.changeTopic(topic),
+                                // ),
                                 SizedBox(height: 24.h),
                                 Row(
                                   children: [
@@ -760,12 +764,12 @@ class AddNewDependentView extends GetView<AddNewDependentController> {
                                 title: LocaleKeys.data_entry_error.tr,
                                 message: LocaleKeys.please_select_class.tr,
                               );
-                            } else if (controller.selectedTopic.id == null ||
-                                controller.selectedTopic.id == -1) {
-                              CustomSnackBar.showCustomErrorSnackBar(
-                                title: LocaleKeys.data_entry_error.tr,
-                                message: LocaleKeys.please_select_subject.tr,
-                              );
+                              // } else if (controller.selectedTopic.id == null ||
+                              //     controller.selectedTopic.id == -1) {
+                              //   CustomSnackBar.showCustomErrorSnackBar(
+                              //     title: LocaleKeys.data_entry_error.tr,
+                              //     message: LocaleKeys.please_select_subject.tr,
+                              //   );
                             } else {
                               await controller.addNewStudent();
                             }

@@ -33,7 +33,8 @@ class EditProfileController extends GetxController {
   PhoneNumber phoneNumber =
       PhoneNumber(countryISOCode: "", countryCode: "", number: "");
   String? dialCode, countryCode;
-  int gender = 1; // 1 male, 2 female
+  int gender =
+      0; // 0 male 1 female (starts from zero just for indexing) in the view, but 1 male, 2 female in the api
   File? image;
   final EditProfileRepo _editProfileRepo = EditProfileRepoImplement();
   CurrentUserInfo currentUserInfo =
@@ -75,9 +76,11 @@ class EditProfileController extends GetxController {
     }
     gender = currentUserProfileInfo.result != null
         ? currentUserProfileInfo.result!.requester != null
-            ? currentUserProfileInfo.result!.requester!.gender ?? 1
-            : 1
-        : 1;
+            ? currentUserProfileInfo.result!.requester!.gender != null
+                ? (currentUserProfileInfo.result!.requester!.gender! - 1)
+                : 0
+            : 0
+        : 0;
     phoneFocusNode.addListener(() => update());
     update();
   }
@@ -131,7 +134,7 @@ class EditProfileController extends GetxController {
         id: currentUserProfileInfo.result!.requester!.userId ?? -1,
         email: emailController.text,
         phoneNumber: phoneNumber.completeNumber,
-        gender: gender,
+        gender: gender + 1,
       );
     }
   }

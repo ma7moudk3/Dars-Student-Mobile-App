@@ -11,7 +11,7 @@ import 'sign_up_repo.dart';
 class SignUpRepoImplement extends SignUpRepo {
   @override
   Future<int?> register({
-    required String gender,
+    required int gender,
     required String fullName,
     required String phoneNumber,
     required String emailAddress,

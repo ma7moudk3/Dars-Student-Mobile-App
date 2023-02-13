@@ -241,45 +241,58 @@ class OrderHessaView extends GetView<OrderHessaController> {
                                   ),
                                   SizedBox(height: 12.h),
                                   const OrderHessaOptions(),
-                                  SizedBox(height: 12.h),
-                                  PrimaryText(
-                                    LocaleKeys.hessa_duration,
-                                    fontSize: 14.sp,
-                                    fontWeight: FontWeightManager.softLight,
-                                    color: ColorManager.fontColor,
-                                  ),
-                                  SizedBox(height: 12.h),
-                                  PrimaryDropDown(
-                                    fontColor: ColorManager.fontColor5,
-                                    items: [
-                                      LocaleKeys.choose_hessa_duration.tr
-                                    ],
-                                    hint: LocaleKeys.hessa_duration,
-                                    value: LocaleKeys.choose_hessa_duration.tr,
-                                    disabledBorder: OutlineInputBorder(
-                                      borderSide: BorderSide(
-                                        color: ColorManager.borderColor2,
-                                        width: 1.2,
-                                      ),
-                                      borderRadius: BorderRadius.circular(12),
+                                  Visibility(
+                                    visible:
+                                        false, // there's no duration for hessa for right now so we hide it, it will be in the hessa details
+                                    child: Column(
+                                      children: [
+                                        SizedBox(height: 12.h),
+                                        PrimaryText(
+                                          LocaleKeys.hessa_duration,
+                                          fontSize: 14.sp,
+                                          fontWeight:
+                                              FontWeightManager.softLight,
+                                          color: ColorManager.fontColor,
+                                        ),
+                                        SizedBox(height: 12.h),
+                                        PrimaryDropDown(
+                                          fontColor: ColorManager.fontColor5,
+                                          items: [
+                                            LocaleKeys.choose_hessa_duration.tr
+                                          ],
+                                          hint: LocaleKeys.hessa_duration,
+                                          value: LocaleKeys
+                                              .choose_hessa_duration.tr,
+                                          disabledBorder: OutlineInputBorder(
+                                            borderSide: BorderSide(
+                                              color: ColorManager.borderColor2,
+                                              width: 1.2,
+                                            ),
+                                            borderRadius:
+                                                BorderRadius.circular(12),
+                                          ),
+                                          width: Get.width,
+                                          height: 50.h,
+                                          enabledBorder: OutlineInputBorder(
+                                            borderSide: BorderSide(
+                                              color: ColorManager.borderColor2,
+                                              width: 1.2,
+                                            ),
+                                            borderRadius:
+                                                BorderRadius.circular(12),
+                                          ),
+                                          focusedBorder: OutlineInputBorder(
+                                            borderSide: BorderSide(
+                                              color: ColorManager.borderColor2,
+                                              width: 1.2,
+                                            ),
+                                            borderRadius:
+                                                BorderRadius.circular(12),
+                                          ),
+                                          onChanged: (String? value) {},
+                                        ),
+                                      ],
                                     ),
-                                    width: Get.width,
-                                    height: 50.h,
-                                    enabledBorder: OutlineInputBorder(
-                                      borderSide: BorderSide(
-                                        color: ColorManager.borderColor2,
-                                        width: 1.2,
-                                      ),
-                                      borderRadius: BorderRadius.circular(12),
-                                    ),
-                                    focusedBorder: OutlineInputBorder(
-                                      borderSide: BorderSide(
-                                        color: ColorManager.borderColor2,
-                                        width: 1.2,
-                                      ),
-                                      borderRadius: BorderRadius.circular(12),
-                                    ),
-                                    onChanged: (String? value) {},
                                   ),
                                   SizedBox(height: 12.h),
                                   PrimaryText(

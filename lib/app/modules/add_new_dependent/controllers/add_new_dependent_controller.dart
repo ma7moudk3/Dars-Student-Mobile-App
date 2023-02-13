@@ -1,4 +1,3 @@
-import 'dart:developer';
 import 'dart:io';
 import 'package:file_picker/file_picker.dart';
 import 'package:hessa_student/app/data/models/school_types/school_types.dart';
@@ -9,7 +8,6 @@ import 'package:image_picker/image_picker.dart';
 import 'package:intl/intl.dart';
 import 'package:syncfusion_flutter_datepicker/datepicker.dart';
 import '../../../../generated/locales.g.dart';
-import 'package:hessa_student/app/data/models/topics/result.dart' as topic;
 import 'package:hessa_student/app/data/models/school_types/result.dart'
     as school_type;
 import '../../../../global_presentation/global_widgets/custom_snack_bar.dart';
@@ -20,7 +18,6 @@ import '../../../data/models/student_relation/result.dart' as student_relation;
 import '../../../constants/exports.dart';
 import '../../../data/models/classes/classes.dart';
 import '../../../data/models/student_relation/student_relation.dart';
-import '../../../data/models/topics/topics.dart';
 
 extension IsAtLeastYearsOld on DateTime {
   bool isAtLeastYearsOld(int years) {
@@ -34,8 +31,7 @@ extension IsAtLeastYearsOld on DateTime {
 class AddNewDependentController extends GetxController {
   final GlobalKey<FormState> formKey = GlobalKey<FormState>();
   late TextEditingController nameController,
-      uplpoadPictureFileController,
-      dateOfBirthController;
+      uplpoadPictureFileController; // ,dateOfBirthController;
   late DateRangePickerController dateOfBirthRangeController;
   File? image;
   FocusNode nameFocusNode = FocusNode(),
@@ -47,11 +43,11 @@ class AddNewDependentController extends GetxController {
       dateOfBirthIconErrorColor;
   int dependentGender = 0; // 0 male, 1 female
   Classes classes = Classes();
-  Topics topics = Topics();
+  // Topics topics = Topics();
   StudentRelation studentRelations = StudentRelation();
   SchoolTypes schoolTypes = SchoolTypes();
   level.Item selectedClass = level.Item();
-  topic.Result selectedTopic = topic.Result();
+  // topic.Result selectedTopic = topic.Result();
   school_type.Result selectedSchoolType = school_type.Result();
   student_relation.Result selectedStudentRelation = student_relation.Result();
   RxBool isInternetConnected = true.obs, isLoading = true.obs;
@@ -62,7 +58,7 @@ class AddNewDependentController extends GetxController {
   void onInit() async {
     nameController = TextEditingController();
     uplpoadPictureFileController = TextEditingController();
-    dateOfBirthController = TextEditingController();
+    // dateOfBirthController = TextEditingController();
     dateOfBirthRangeController = DateRangePickerController();
     nameFocusNode.addListener(() => update());
     uplpoadPictureFileFocusNode.addListener(() => update());
@@ -78,7 +74,7 @@ class AddNewDependentController extends GetxController {
         if (isInternetConnected.value) {
           await Future.wait([
             _getClasses(),
-            _getTopics(),
+            // _getTopics(),
             _getStudentRelations(),
             _getSchoolTypes(),
           ]).then((value) => isLoading.value = false);
@@ -95,11 +91,11 @@ class AddNewDependentController extends GetxController {
         .addNewDependent(
       genderId: dependentGender + 1,
       name: nameController.text,
-      dateOfBirth: DateFormat('yyyy-MM-dd').format(dateOfBirth),
       levelId: selectedClass.id ?? 1,
       schoolTypeId: selectedSchoolType.id ?? 1,
       relationId: selectedStudentRelation.id ?? 1,
       schoolName: selectedSchoolType.displayName ?? '',
+      image: image,
     )
         .then((value) async {
       if (Get.isDialogOpen!) {
@@ -119,17 +115,17 @@ class AddNewDependentController extends GetxController {
     });
   }
 
-  void changeTopic(String? result) {
-    if (topics.result != null && result != null) {
-      for (var topic in topics.result ?? <topic.Result>[]) {
-        if (topic.displayName != null &&
-            topic.displayName!.toLowerCase() == result.toLowerCase()) {
-          selectedTopic = topic;
-        }
-      }
-    }
-    update();
-  }
+  // void changeTopic(String? result) {
+  //   if (topics.result != null && result != null) {
+  //     for (var topic in topics.result ?? <topic.Result>[]) {
+  //       if (topic.displayName != null &&
+  //           topic.displayName!.toLowerCase() == result.toLowerCase()) {
+  //         selectedTopic = topic;
+  //       }
+  //     }
+  //   }
+  //   update();
+  // }
 
   void changeSchoolType(String? result) {
     if (schoolTypes.result != null && result != null) {
@@ -210,18 +206,18 @@ class AddNewDependentController extends GetxController {
     }
   }
 
-  Future _getTopics() async {
-    topics = await _addNewDependentRepo.getTopics();
-    if (topics.result != null) {
-      topics.result!.add(
-        topic.Result(
-          id: -1,
-          displayName: LocaleKeys.choose_studying_subject.tr,
-        ),
-      );
-      topics.result!.sort((a, b) => a.id!.compareTo(b.id!));
-    }
-  }
+  // Future _getTopics() async {
+  //   topics = await _addNewDependentRepo.getTopics();
+  //   if (topics.result != null) {
+  //     topics.result!.add(
+  //       topic.Result(
+  //         id: -1,
+  //         displayName: LocaleKeys.choose_studying_subject.tr,
+  //       ),
+  //     );
+  //     topics.result!.sort((a, b) => a.id!.compareTo(b.id!));
+  //   }
+  // }
 
   Future handleImageSelection({required ImageSource imageSource}) async {
     XFile? result = await ImagePicker().pickImage(
@@ -262,38 +258,38 @@ class AddNewDependentController extends GetxController {
     update();
   }
 
-  String? validateDateOfBirth(String? dateOfBirth) {
-    if (dateOfBirth != null && dateOfBirth.isNotEmpty) {
-      DateTime tempDateTime =
-          DateFormat("dd MMMM yyyy", "ar_SA").parse(dateOfBirth);
-      if (dateOfBirth.isEmpty) {
-        dateOfBirthIconErrorColor = Colors.red;
-        update();
-        return LocaleKeys.please_enter_dob.tr;
-      } else if (!tempDateTime.isAtLeastYearsOld(10)) {
-        // at least 10 years dependent can be registered ..
-        dateOfBirthIconErrorColor = Colors.red;
-        update();
-        return LocaleKeys.check_dependent_dob.tr;
-      } else {
-        dateOfBirthIconErrorColor = null;
-      }
-    } else {
-      dateOfBirthIconErrorColor = Colors.red;
-      update();
-      return LocaleKeys.please_enter_dob.tr;
-    }
-    update();
-    return null;
-  }
+  // String? validateDateOfBirth(String? dateOfBirth) {
+  //   if (dateOfBirth != null && dateOfBirth.isNotEmpty) {
+  //     DateTime tempDateTime =
+  //         DateFormat("dd MMMM yyyy", "ar_SA").parse(dateOfBirth);
+  //     if (dateOfBirth.isEmpty) {
+  //       dateOfBirthIconErrorColor = Colors.red;
+  //       update();
+  //       return LocaleKeys.please_enter_dob.tr;
+  //     } else if (!tempDateTime.isAtLeastYearsOld(10)) {
+  //       // at least 10 years dependent can be registered ..
+  //       dateOfBirthIconErrorColor = Colors.red;
+  //       update();
+  //       return LocaleKeys.check_dependent_dob.tr;
+  //     } else {
+  //       dateOfBirthIconErrorColor = null;
+  //       update();
+  //       return null;
+  //     }
+  //   } else {
+  //     dateOfBirthIconErrorColor = Colors.red;
+  //     update();
+  //     return LocaleKeys.please_enter_dob.tr;
+  //   }
+  // }
 
-  void changeDate(DateRangePickerSelectionChangedArgs dateAndTime) {
-    log(dateAndTime.value.toString());
-    dateOfBirth = dateAndTime.value;
-    dateOfBirthController.text =
-        DateFormat("dd MMMM yyyy", "ar_SA").format(dateOfBirth);
-    update();
-  }
+  // void changeDate(DateRangePickerSelectionChangedArgs dateAndTime) {
+  //   log(dateAndTime.value.toString());
+  //   dateOfBirth = dateAndTime.value;
+  //   dateOfBirthController.text =
+  //       DateFormat("dd MMMM yyyy", "ar_SA").format(dateOfBirth);
+  //   update();
+  // }
 
   void changeDependentGender(int value) {
     dependentGender = value;
@@ -311,6 +307,8 @@ class AddNewDependentController extends GetxController {
       if (!dependentName.contains(" ")) {
         return LocaleKeys.should_have_space.tr;
       } else {
+        nameIconErrorColor = null;
+        update();
         return null;
       }
     } else if (regExp.hasMatch(dependentName)) {
@@ -319,16 +317,16 @@ class AddNewDependentController extends GetxController {
       return LocaleKeys.check_dependent_name.tr;
     } else {
       nameIconErrorColor = null;
+      update();
+      return null;
     }
-    update();
-    return null;
   }
 
   @override
   void dispose() {
     nameController.dispose();
     uplpoadPictureFileController.dispose();
-    dateOfBirthController.dispose();
+    // dateOfBirthController.dispose();
     nameFocusNode.dispose();
     uplpoadPictureFileFocusNode.dispose();
     dateOfBirthFocusNode.dispose();

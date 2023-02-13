@@ -77,7 +77,9 @@ class HessaTeacherWidget extends GetView<HessaTeachersController> {
                       imageUrl:
                           "${Links.baseLink}${Links.profileImageById}?userId=$teacherId",
                       fit: BoxFit.cover,
-                      errorWidget: (context, url, error) => Image.asset(
+                      errorWidget:
+                          (BuildContext context, String url, dynamic error) =>
+                              Image.asset(
                         ImagesManager.guest,
                         fit: BoxFit.cover,
                       ),

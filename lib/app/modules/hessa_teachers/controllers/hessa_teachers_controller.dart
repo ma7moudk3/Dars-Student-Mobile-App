@@ -81,6 +81,7 @@ class HessaTeachersController extends GetxController {
     selectedTopic = topic.Result();
     selectedCountry = country.Result();
     selectedSkill = skill.Item();
+    teacherGender = 0;
     // sortType = null;
     toggleSort = false;
     toggleFilter = false;

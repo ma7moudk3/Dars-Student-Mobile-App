@@ -34,7 +34,8 @@ class SignUpController extends GetxController {
   bool tosIsAgreed = false;
   final GlobalKey<FormState> formKey = GlobalKey();
   final LoginRepo _loginRepo = LoginRepoImplement();
-  int gender = 0; // 0 male , 1 female
+  int gender =
+      0; // 0 male 1 female (starts from zero just for indexing) in the view, but 1 male, 2 female in the api
   String? phoneNumber;
   void changeGender(int genderValue) {
     gender = genderValue;
@@ -69,7 +70,7 @@ class SignUpController extends GetxController {
       captchaResponse: "",
       fullName: fullNameController.text,
       password: passwordController.text,
-      gender: gender.toString(),
+      gender: gender + 1,
       phoneNumber: phoneNumber ?? "",
     )
         .then((int? statusCode) async {

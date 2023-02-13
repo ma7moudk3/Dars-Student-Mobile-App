@@ -40,7 +40,7 @@ class DateOfBirthBottomSheetContent extends GetView<AddNewDependentController> {
             child: SfDateRangePicker(
               onSelectionChanged: (DateRangePickerSelectionChangedArgs
                   dateRangePickerSelectionChangedArgs) {
-                controller.changeDate(dateRangePickerSelectionChangedArgs);
+                // controller.changeDate(dateRangePickerSelectionChangedArgs);
               },
               monthViewSettings: const DateRangePickerMonthViewSettings(
                   showTrailingAndLeadingDates: true),

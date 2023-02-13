@@ -1,4 +1,5 @@
 import 'dart:developer';
+import 'dart:io';
 
 import 'package:hessa_student/app/data/models/school_types/school_types.dart';
 import 'package:hessa_student/app/data/models/student_relation/student_relation.dart';
@@ -6,6 +7,8 @@ import 'package:hessa_student/app/data/models/topics/topics.dart';
 
 import 'package:hessa_student/app/data/models/classes/classes.dart';
 import 'package:hessa_student/app/modules/add_new_dependent/data/models/dependent/dependent.dart';
+import 'package:dio/dio.dart' as dio;
+import 'package:uuid/uuid.dart';
 
 import '../../../../../generated/locales.g.dart';
 import '../../../../../global_presentation/global_widgets/custom_snack_bar.dart';
@@ -137,16 +140,16 @@ class AddNewDependentRepoImplement extends AddNewDependentRepo {
     required String name,
     required int genderId,
     required String schoolName,
-    required String dateOfBirth,
     String? details,
     required int relationId,
     required int levelId,
     required int schoolTypeId,
     int? id,
+    File? image,
   }) async {
     Dependent dependent = Dependent();
     try {
-      Map<String, dynamic> data = {
+      dynamic data = {
         "name": name,
         "genderId": genderId,
         "schoolName": schoolName,
@@ -166,6 +169,14 @@ class AddNewDependentRepoImplement extends AddNewDependentRepo {
         "schoolTypeId": schoolTypeId,
         "id": id ?? 0,
       };
+      if (image != null) {
+        Uuid uuid = const Uuid();
+        String fileName = image.path.split("/").last;
+        data["FileName"] = 'ProfilePicture: $fileName';
+        data["FileToken"] = uuid.v1();
+        data["file"] =
+            await dio.MultipartFile.fromFile(image.path, filename: fileName);
+      }
       Map<String, dynamic> headers = {
         'Accept-Language': Get.locale != null ? Get.locale!.languageCode : 'ar',
         'Content-Type': 'application/json',

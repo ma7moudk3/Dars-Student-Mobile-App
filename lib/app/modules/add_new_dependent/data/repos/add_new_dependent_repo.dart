@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:hessa_student/app/data/models/classes/classes.dart';
 import 'package:hessa_student/app/data/models/student_relation/student_relation.dart';
 import 'package:hessa_student/app/data/models/topics/topics.dart';
@@ -10,12 +12,12 @@ abstract class AddNewDependentRepo {
     required String name,
     required int genderId,
     required String schoolName,
-    required String dateOfBirth,
     String? details,
     required int relationId,
     required int levelId,
     required int schoolTypeId,
     int? id,
+    File? image,
   });
 
   Future<Classes> getClasses();
