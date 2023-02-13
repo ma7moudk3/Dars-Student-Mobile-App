@@ -84,7 +84,8 @@ class HessaTeacherFilterBottomSheetContent
                             null
                         ? controller.countries.result!
                                 .firstWhereOrNull((country.Result country) =>
-                                    (country.id ?? -1) == controller.selectedCountry.id)!
+                                    (country.id ?? -1) ==
+                                    controller.selectedCountry.id)!
                                 .displayName ??
                             ""
                         : (controller.countries.result![0].displayName ?? "")
@@ -112,8 +113,7 @@ class HessaTeacherFilterBottomSheetContent
                   ),
                   borderRadius: BorderRadius.circular(12),
                 ),
-                onChanged: (String? value) =>
-                    controller.changeCountry(value ?? ""),
+                onChanged: (String? value) => controller.changeCountry(value),
               ),
               SizedBox(height: 12.h),
               PrimaryText(
@@ -263,7 +263,7 @@ class HessaTeacherFilterBottomSheetContent
                               borderRadius: BorderRadius.circular(12),
                             ),
                             onChanged: (String? value) =>
-                                controller.changeSkill(value ?? ""),
+                                controller.changeSkill(value),
                           ),
                         ),
                       ),
@@ -332,7 +332,7 @@ class HessaTeacherFilterBottomSheetContent
                                   borderRadius: BorderRadius.circular(12),
                                 ),
                                 onChanged: (String? value) =>
-                                    controller.changeTopic(value ?? ""),
+                                    controller.changeTopic(value),
                               ),
                             ),
                             //~ uncomment if we want to use searcahable dropdown
@@ -503,7 +503,7 @@ class HessaTeacherFilterBottomSheetContent
                                   borderRadius: BorderRadius.circular(12),
                                 ),
                                 onChanged: (String? value) =>
-                                    controller.changeLevel(value ?? ""),
+                                    controller.changeLevel(value),
                               ),
                             ),
                           ],

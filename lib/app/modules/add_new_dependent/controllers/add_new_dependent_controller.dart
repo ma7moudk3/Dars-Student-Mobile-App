@@ -1,13 +1,26 @@
 import 'dart:developer';
 import 'dart:io';
-
 import 'package:file_picker/file_picker.dart';
+import 'package:hessa_student/app/data/models/school_types/school_types.dart';
+import 'package:hessa_student/app/modules/add_new_dependent/data/repos/add_new_dependent_repo.dart';
+import 'package:hessa_student/app/modules/add_new_dependent/data/repos/add_new_dependent_repo_implement.dart';
+import 'package:hessa_student/app/modules/dependents/controllers/dependents_controller.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:intl/intl.dart';
 import 'package:syncfusion_flutter_datepicker/datepicker.dart';
-
 import '../../../../generated/locales.g.dart';
+import 'package:hessa_student/app/data/models/topics/result.dart' as topic;
+import 'package:hessa_student/app/data/models/school_types/result.dart'
+    as school_type;
+import '../../../../global_presentation/global_widgets/custom_snack_bar.dart';
+import '../../../../global_presentation/global_widgets/loading.dart';
+import '../../../core/helper_functions.dart';
+import '../../../data/models/classes/item.dart' as level;
+import '../../../data/models/student_relation/result.dart' as student_relation;
 import '../../../constants/exports.dart';
+import '../../../data/models/classes/classes.dart';
+import '../../../data/models/student_relation/student_relation.dart';
+import '../../../data/models/topics/topics.dart';
 
 extension IsAtLeastYearsOld on DateTime {
   bool isAtLeastYearsOld(int years) {
@@ -33,6 +46,180 @@ class AddNewDependentController extends GetxController {
       uplpoadPictureFileIconErrorColor,
       dateOfBirthIconErrorColor;
   int dependentGender = 0; // 0 male, 1 female
+  Classes classes = Classes();
+  Topics topics = Topics();
+  StudentRelation studentRelations = StudentRelation();
+  SchoolTypes schoolTypes = SchoolTypes();
+  level.Item selectedClass = level.Item();
+  topic.Result selectedTopic = topic.Result();
+  school_type.Result selectedSchoolType = school_type.Result();
+  student_relation.Result selectedStudentRelation = student_relation.Result();
+  RxBool isInternetConnected = true.obs, isLoading = true.obs;
+  final AddNewDependentRepo _addNewDependentRepo =
+      AddNewDependentRepoImplement();
+
+  @override
+  void onInit() async {
+    nameController = TextEditingController();
+    uplpoadPictureFileController = TextEditingController();
+    dateOfBirthController = TextEditingController();
+    dateOfBirthRangeController = DateRangePickerController();
+    nameFocusNode.addListener(() => update());
+    uplpoadPictureFileFocusNode.addListener(() => update());
+    dateOfBirthFocusNode.addListener(() => update());
+    await checkInternet();
+    super.onInit();
+  }
+
+  Future checkInternet() async {
+    await checkInternetConnection(timeout: 10).then(
+      (bool internetStatus) async {
+        isInternetConnected.value = internetStatus;
+        if (isInternetConnected.value) {
+          await Future.wait([
+            _getClasses(),
+            _getTopics(),
+            _getStudentRelations(),
+            _getSchoolTypes(),
+          ]).then((value) => isLoading.value = false);
+        }
+      },
+    );
+    update();
+  }
+
+  Future addNewStudent() async {
+    showLoadingDialog();
+    await _addNewDependentRepo
+        .addNewDependent(
+      genderId: dependentGender + 1,
+      name: nameController.text,
+      levelId: selectedClass.id ?? 1,
+      schoolTypeId: selectedSchoolType.id ?? 1,
+      relationId: selectedStudentRelation.id ?? 1,
+      schoolName: selectedSchoolType.displayName ?? '',
+    )
+        .then((value) async {
+      if (Get.isDialogOpen!) {
+        Get.back();
+      }
+      await Future.delayed(const Duration(milliseconds: 550))
+          .then((value) async {
+        CustomSnackBar.showCustomSnackBar(
+          title: LocaleKeys.success.tr,
+          message: LocaleKeys.dependent_added_successfully.tr,
+        );
+        final DependentsController dependentsController =
+            Get.find<DependentsController>();
+        dependentsController.refreshPagingController();
+        Get.back();
+      });
+    });
+  }
+
+  void changeTopic(String? result) {
+    if (topics.result != null && result != null) {
+      for (var topic in topics.result ?? <topic.Result>[]) {
+        if (topic.displayName != null &&
+            topic.displayName!.toLowerCase() == result.toLowerCase()) {
+          selectedTopic = topic;
+        }
+      }
+    }
+    update();
+  }
+
+  void changeSchoolType(String? result) {
+    if (schoolTypes.result != null && result != null) {
+      for (var schoolType in schoolTypes.result ?? <school_type.Result>[]) {
+        if (schoolType.displayName != null &&
+            schoolType.displayName!.toLowerCase() == result.toLowerCase()) {
+          selectedSchoolType = schoolType;
+        }
+      }
+    }
+    update();
+  }
+
+  void changeLevel(String? result) {
+    if (classes.result != null &&
+        classes.result!.items != null &&
+        result != null) {
+      for (var level in classes.result!.items ?? <level.Item>[]) {
+        if (level.displayName != null &&
+            level.displayName!.toLowerCase() == result.toLowerCase()) {
+          selectedClass = level;
+        }
+      }
+    }
+    update();
+  }
+
+  void changeStudentRelation(String? result) {
+    if (studentRelations.result != null && result != null) {
+      for (var studentRelation
+          in studentRelations.result ?? <student_relation.Result>[]) {
+        if (studentRelation.displayName != null &&
+            studentRelation.displayName!.toLowerCase() ==
+                result.toLowerCase()) {
+          selectedStudentRelation = studentRelation;
+        }
+      }
+    }
+    update();
+  }
+
+  Future _getClasses() async {
+    classes = await _addNewDependentRepo.getClasses();
+    if (classes.result != null && classes.result!.items != null) {
+      classes.result!.items!.add(
+        level.Item(
+          id: -1,
+          displayName: LocaleKeys.choose_studying_class.tr,
+        ),
+      );
+      classes.result!.items!.sort((a, b) => a.id!.compareTo(b.id!));
+    }
+  }
+
+  Future _getStudentRelations() async {
+    studentRelations = await _addNewDependentRepo.getStudentRelations();
+    if (studentRelations.result != null) {
+      studentRelations.result!.add(
+        student_relation.Result(
+          id: -1,
+          displayName: LocaleKeys.choose_student_relation.tr,
+        ),
+      );
+      studentRelations.result!.sort((a, b) => a.id!.compareTo(b.id!));
+    }
+  }
+
+  Future _getSchoolTypes() async {
+    schoolTypes = await _addNewDependentRepo.getSchoolTypes();
+    if (schoolTypes.result != null) {
+      schoolTypes.result!.add(
+        school_type.Result(
+          id: -1,
+          displayName: LocaleKeys.choose_school_type.tr,
+        ),
+      );
+      schoolTypes.result!.sort((a, b) => a.id!.compareTo(b.id!));
+    }
+  }
+
+  Future _getTopics() async {
+    topics = await _addNewDependentRepo.getTopics();
+    if (topics.result != null) {
+      topics.result!.add(
+        topic.Result(
+          id: -1,
+          displayName: LocaleKeys.choose_studying_subject.tr,
+        ),
+      );
+      topics.result!.sort((a, b) => a.id!.compareTo(b.id!));
+    }
+  }
 
   Future handleImageSelection({required ImageSource imageSource}) async {
     XFile? result = await ImagePicker().pickImage(
@@ -71,18 +258,6 @@ class AddNewDependentController extends GetxController {
       // log(lookupMimeType(filePath).toString());
     }
     update();
-  }
-
-  @override
-  void onInit() {
-    nameController = TextEditingController();
-    uplpoadPictureFileController = TextEditingController();
-    dateOfBirthController = TextEditingController();
-    dateOfBirthRangeController = DateRangePickerController();
-    nameFocusNode.addListener(() => update());
-    uplpoadPictureFileFocusNode.addListener(() => update());
-    dateOfBirthFocusNode.addListener(() => update());
-    super.onInit();
   }
 
   String? validateDateOfBirth(String? dateOfBirth) {

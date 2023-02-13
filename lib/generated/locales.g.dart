@@ -23,6 +23,7 @@ class LocaleKeys {
       'welcome_in_hessa_we_missed_you';
   static const email = 'email';
   static const enter_email = 'enter_email';
+  static const dependent_added_successfully = 'dependent_added_successfully';
   static const enter_password = 'enter_password';
   static const enter_old_password = 'enter_old_password';
   static const enjoy_the_app = 'enjoy_the_app';
@@ -124,15 +125,25 @@ class LocaleKeys {
   static const add_student = 'add_student';
   static const studying_class = 'studying_class';
   static const choose_studying_class = 'choose_studying_class';
+  static const school_type = 'school_type';
+  static const choose_school_type = 'choose_school_type';
+  static const please_select_school_type = 'please_select_school_type';
   static const studying_subject = 'studying_subject';
   static const choose_studying_subject = 'choose_studying_subject';
   static const search_for_subject = 'search_for_subject';
   static const session_way = 'session_way';
+  static const please_select_student_relation =
+      'please_select_student_relation';
+  static const student_relation = 'student_relation';
+  static const choose_student_relation = 'choose_student_relation';
   static const face_to_face = 'face_to_face';
   static const electronic = 'electronic';
   static const both = 'both';
   static const teacher_gender = 'teacher_gender';
   static const order_type = 'order_type';
+  static const please_select_image = 'please_select_image';
+  static const please_select_class = 'please_select_class';
+  static const please_select_subject = 'please_select_subject';
   static const one_hessa = 'one_hessa';
   static const school_package = 'school_package';
   static const school_package_description = 'school_package_description';
@@ -363,6 +374,7 @@ class Locales {
     'welcome_in_hessa_we_missed_you': 'مرحباً بعودتك في حصة، لقد افتقدناك',
     'email': 'البريد الإلكتروني',
     'enter_email': 'عنوان البريد الإلكتروني',
+    'dependent_added_successfully': 'تمت إضافة التابع بنجاح',
     'enter_password': 'أدخل كلمة المرور',
     'enter_old_password': 'أدخل كلمة المرور القديمة',
     'enjoy_the_app': 'استمتع مع حصة',
@@ -465,15 +477,24 @@ class Locales {
     'add_student': 'إضافة طالب',
     'studying_class': 'الصف الدراسي',
     'choose_studying_class': 'اختر الصف الدراسي',
+    'school_type': 'نوع المدرسة',
+    'choose_school_type': 'اختر نوع المدرسة',
+    'please_select_school_type': 'الرجاء اختيار نوع المدرسة',
     'studying_subject': 'المادة الدراسية',
     'choose_studying_subject': 'اختر المادة الدراسية',
     'search_for_subject': 'ابحث عن مادة دراسية',
     'session_way': 'طريقة الجلسة',
+    'please_select_student_relation': 'الرجاء اختيار صلة القرابة',
+    'student_relation': 'صلة القرابة',
+    'choose_student_relation': 'اختر صلة القرابة',
     'face_to_face': 'وجاهي',
     'electronic': 'إلكتروني',
     'both': 'أيهما',
     'teacher_gender': 'جنس المدرّس المطلوب',
     'order_type': 'نوع الطلب المراد',
+    'please_select_image': 'الرجاء اختيار صورة',
+    'please_select_class': 'الرجاء اختيار الصف الدراسي',
+    'please_select_subject': 'الرجاء اختيار المادة الدراسية',
     'one_hessa': 'حصة واحدة',
     'school_package': 'حقيبة مدرسية',
     'school_package_description': 'حصص مستمرة تصل لمدة 20 ساعة تدريسية',

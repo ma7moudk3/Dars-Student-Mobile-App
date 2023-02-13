@@ -2,9 +2,9 @@ import 'dart:async';
 import 'dart:developer';
 
 import 'package:dio/dio.dart';
+import '../../../../global_presentation/global_widgets/typeahead/cupertino_flutter_typeahead.dart';
 import 'package:hessa_student/app/data/models/countries/result.dart' as country;
 import 'package:hessa_student/app/data/models/topics/result.dart' as topic;
-import '../../../../global_presentation/global_widgets/typeahead/cupertino_flutter_typeahead.dart';
 import '../../../data/models/classes/item.dart' as level;
 import '../../../data/models/skills/item.dart' as skill;
 import 'package:hessa_student/app/modules/hessa_teachers/data/models/hessa_teacher.dart';
@@ -45,10 +45,10 @@ class HessaTeachersController extends GetxController {
   Skills skills = Skills();
   Classes classes = Classes();
   Topics topics = Topics();
-  country.Result selectedCountry = country.Result();
-  skill.Item selectedSkill = skill.Item();
   level.Item selectedClass = level.Item();
   topic.Result selectedTopic = topic.Result();
+  country.Result selectedCountry = country.Result();
+  skill.Item selectedSkill = skill.Item();
   // String? sortType;
   int? levelId, topicId, skillId, genderId, countryId;
 
@@ -77,6 +77,11 @@ class HessaTeachersController extends GetxController {
     skillId = null;
     genderId = null;
     countryId = null;
+    selectedClass = level.Item();
+    selectedTopic = topic.Result();
+    selectedCountry = country.Result();
+    selectedSkill = skill.Item();
+    // sortType = null;
     toggleSort = false;
     toggleFilter = false;
     toggleSearch = false;
@@ -171,8 +176,8 @@ class HessaTeachersController extends GetxController {
     update();
   }
 
-  void changeCountry(String result) {
-    if (countries.result != null) {
+  void changeCountry(String? result) {
+    if (countries.result != null && result != null) {
       for (var country in countries.result ?? <country.Result>[]) {
         if (country.displayName != null &&
             country.displayName!.toLowerCase() == result.toLowerCase()) {
@@ -183,8 +188,10 @@ class HessaTeachersController extends GetxController {
     update();
   }
 
-  void changeSkill(String result) {
-    if (skills.result != null && skills.result!.items != null) {
+  void changeSkill(String? result) {
+    if (skills.result != null &&
+        skills.result!.items != null &&
+        result != null) {
       for (var skill in skills.result!.items ?? <skill.Item>[]) {
         if (skill.displayName != null &&
             skill.displayName!.toLowerCase() == result.toLowerCase()) {
@@ -196,8 +203,8 @@ class HessaTeachersController extends GetxController {
   }
 
   // if using dropdown
-  void changeTopic(String result) {
-    if (topics.result != null) {
+  void changeTopic(String? result) {
+    if (topics.result != null && result != null) {
       for (var topic in topics.result ?? <topic.Result>[]) {
         if (topic.displayName != null &&
             topic.displayName!.toLowerCase() == result.toLowerCase()) {
@@ -214,8 +221,10 @@ class HessaTeachersController extends GetxController {
   //   update();
   // }
 
-  void changeLevel(String result) {
-    if (classes.result != null && classes.result!.items != null) {
+  void changeLevel(String? result) {
+    if (classes.result != null &&
+        classes.result!.items != null &&
+        result != null) {
       for (var level in classes.result!.items ?? <level.Item>[]) {
         if (level.displayName != null &&
             level.displayName!.toLowerCase() == result.toLowerCase()) {

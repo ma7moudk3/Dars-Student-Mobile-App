@@ -1,14 +1,21 @@
 import 'dart:developer';
 
+import 'package:hessa_student/app/core/helper_functions.dart';
 import 'package:hessa_student/app/modules/dependents/controllers/dependents_controller.dart';
+import 'package:hessa_student/app/modules/order_hessa/data/repos/order_hessa_repo.dart';
 import 'package:intl/date_symbol_data_local.dart';
+import '../../../data/models/classes/classes.dart';
+import 'package:hessa_student/app/data/models/topics/result.dart' as topic;
+import '../../../data/models/classes/item.dart' as level;
 import 'package:intl/intl.dart';
 import 'package:syncfusion_flutter_datepicker/datepicker.dart';
 import 'package:time_range/time_range.dart';
 import '../../../../generated/locales.g.dart';
 import '../../../../global_presentation/global_widgets/typeahead/cupertino_flutter_typeahead.dart';
 import '../../../constants/exports.dart';
+import '../../../data/models/topics/topics.dart';
 import '../data/models/teacher.dart';
+import '../data/repos/order_hessa_repo_implement.dart';
 
 extension IsAtMaximumYears on DateTime {
   bool isAtMaximumYears(int years) {
@@ -34,13 +41,18 @@ class OrderHessaController extends GetxController {
       hessaDateErrorIconColor,
       hessaTimeErrorIconColor;
   TimeRangeResult? hessaTimeRange;
+  RxBool isInternetConnected = true.obs, isLoading = true.obs;
   late DateRangePickerController hessaDateRangeController;
+  final OrderHessaRepo _orderHessaRepo = OrderHessaRepoImplement();
   FocusNode hessaDateFocusNode = FocusNode(), hessaTimeFocusNode = FocusNode();
   DependentsController dependentsController =
       Get.put<DependentsController>(DependentsController());
   final CupertinoSuggestionsBoxController suggestionsBoxController =
       CupertinoSuggestionsBoxController();
-
+  Classes classes = Classes();
+  Topics topics = Topics();
+  level.Item selectedClass = level.Item();
+  topic.Result selectedTopic = topic.Result();
   Teacher? chosenTeacher;
   void changeHessaDate(DateRangePickerSelectionChangedArgs hessaDate) {
     log(hessaDate.value.toString());
@@ -146,6 +158,32 @@ class OrderHessaController extends GetxController {
     update();
   }
 
+  void changeTopic(String? result) {
+    if (topics.result != null && result != null) {
+      for (var topic in topics.result ?? <topic.Result>[]) {
+        if (topic.displayName != null &&
+            topic.displayName!.toLowerCase() == result.toLowerCase()) {
+          selectedTopic = topic;
+        }
+      }
+    }
+    update();
+  }
+
+  void changeLevel(String? result) {
+    if (classes.result != null &&
+        classes.result!.items != null &&
+        result != null) {
+      for (var level in classes.result!.items ?? <level.Item>[]) {
+        if (level.displayName != null &&
+            level.displayName!.toLowerCase() == result.toLowerCase()) {
+          selectedClass = level;
+        }
+      }
+    }
+    update();
+  }
+
   void changeLocation(String location) {
     locationController.text = location;
     update();
@@ -234,6 +272,7 @@ class OrderHessaController extends GetxController {
     await initializeDateFormatting("ar_SA", null);
     hessaDateFocusNode.addListener(() => update());
     hessaTimeFocusNode.addListener(() => update());
+    await checkInternet();
     super.onInit();
   }
 
@@ -248,6 +287,45 @@ class OrderHessaController extends GetxController {
     hessaDateFocusNode.dispose();
     hessaTimeFocusNode.dispose();
     super.dispose();
+  }
+
+  Future checkInternet() async {
+    await checkInternetConnection(timeout: 10)
+        .then((bool internetStatus) async {
+      isInternetConnected.value = internetStatus;
+      if (isInternetConnected.value) {
+        await Future.wait([
+          _getClasses(),
+          _getTopics(),
+        ]).then((value) => isLoading.value = false);
+      }
+    });
+  }
+
+  Future _getClasses() async {
+    classes = await _orderHessaRepo.getClasses();
+    if (classes.result != null && classes.result!.items != null) {
+      classes.result!.items!.add(
+        level.Item(
+          id: -1,
+          displayName: LocaleKeys.choose_studying_class.tr,
+        ),
+      );
+      classes.result!.items!.sort((a, b) => a.id!.compareTo(b.id!));
+    }
+  }
+
+  Future _getTopics() async {
+    topics = await _orderHessaRepo.getTopics();
+    if (topics.result != null) {
+      topics.result!.add(
+        topic.Result(
+          id: -1,
+          displayName: LocaleKeys.choose_studying_subject.tr,
+        ),
+      );
+      topics.result!.sort((a, b) => a.id!.compareTo(b.id!));
+    }
   }
 
   void changeSessionWay(int value) {

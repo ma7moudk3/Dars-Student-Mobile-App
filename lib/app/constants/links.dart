@@ -52,6 +52,20 @@ class Links {
       "api/services/app/OrderSkills/GetAllSkillForLookupTable";
   static const String classesForDropDown =
       "api/services/app/Topics/GetAllLevelForLookupTable";
+  static const String studentRelationsForDropDown =
+      "api/services/app/RequesterStudents/GetAllRequesterStudentRelationForTableDropdown";
+  static const String schoolTypesForDropDown =
+      "api/services/app/RequesterStudents/GetAllSchoolTypeForTableDropdown";
+  static const String
+      addNewStudent = // dependent >> student relation >> son, daughter, ...
+      "api/services/app/RequesterStudents/CreateOrEdit";
+  static const String getAllMyStudents =
+      "api/services/app/RequesterStudents/GetStudentsByRequester";
   static const String topicsForDropDown =
       "api/services/app/Sessions/GetAllTopicForTableDropdown";
+  static const String addNewAddress =
+      "api/services/app/Requesters/RequesterAddressCreateOrEdit";
+  static const String allMyAddresses =
+      "api/services/app/Requesters/GetRequesterAddressForEdit";
+  static const String deleteAddress = "api/services/app/Addresses/Delete";
 }
