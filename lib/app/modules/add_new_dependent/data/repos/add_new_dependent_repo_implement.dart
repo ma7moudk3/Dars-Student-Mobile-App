@@ -137,6 +137,7 @@ class AddNewDependentRepoImplement extends AddNewDependentRepo {
     required String name,
     required int genderId,
     required String schoolName,
+    required String dateOfBirth,
     String? details,
     required int relationId,
     required int levelId,

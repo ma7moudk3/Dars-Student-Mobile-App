@@ -89,11 +89,13 @@ class AddNewDependentController extends GetxController {
   }
 
   Future addNewStudent() async {
+    // Student == Dependent
     showLoadingDialog();
     await _addNewDependentRepo
         .addNewDependent(
       genderId: dependentGender + 1,
       name: nameController.text,
+      dateOfBirth: DateFormat('yyyy-MM-dd').format(dateOfBirth),
       levelId: selectedClass.id ?? 1,
       schoolTypeId: selectedSchoolType.id ?? 1,
       relationId: selectedStudentRelation.id ?? 1,
@@ -105,14 +107,14 @@ class AddNewDependentController extends GetxController {
       }
       await Future.delayed(const Duration(milliseconds: 550))
           .then((value) async {
-        CustomSnackBar.showCustomSnackBar(
-          title: LocaleKeys.success.tr,
-          message: LocaleKeys.dependent_added_successfully.tr,
-        );
         final DependentsController dependentsController =
             Get.find<DependentsController>();
         dependentsController.refreshPagingController();
         Get.back();
+        CustomSnackBar.showCustomSnackBar(
+          title: LocaleKeys.success.tr,
+          message: LocaleKeys.dependent_added_successfully.tr,
+        );
       });
     });
   }
@@ -305,12 +307,12 @@ class AddNewDependentController extends GetxController {
       nameIconErrorColor = Colors.red;
       update();
       return LocaleKeys.please_enter_dependent_name.tr;
-      // } else if (!regExp.hasMatch(fullName)) {
-      // if (!fullName.contains(" ")) {
-      //   return LocaleKeys.should_have_space.tr;
-      // } else {
-      //   return null;
-      // }
+    } else if (!regExp.hasMatch(dependentName)) {
+      if (!dependentName.contains(" ")) {
+        return LocaleKeys.should_have_space.tr;
+      } else {
+        return null;
+      }
     } else if (regExp.hasMatch(dependentName)) {
       nameIconErrorColor = Colors.red;
       update();
