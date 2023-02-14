@@ -74,7 +74,7 @@ class ProfileView extends GetView<ProfileController> {
                             if (await checkInternetConnection(timeout: 10)) {
                               await controller.toggleNotifications(value);
                             } else {
-                              Get.toNamed(Routes.CONNECTION_FAILED);
+                              await Get.toNamed(Routes.CONNECTION_FAILED);
                             }
                           }),
                       onTap: () => log("notifications"),
@@ -94,22 +94,12 @@ class ProfileView extends GetView<ProfileController> {
                       textSettingsColor: ColorManager.fontColor2,
                       settingsColor: ColorManager.white,
                       title: LocaleKeys.addresses.tr,
-                      subTitle: "رام الله ، الضفة الغربية",
+                      subTitle:
+                          "${LocaleKeys.current_address.tr}: رام الله ، الضفة الغربية",
                       iconPath: ImagesManager.locationIcon,
                       color: ColorManager.primaryLight.withOpacity(0.15),
                       iconColor: ColorManager.primaryLight,
                       onTap: () async {
-                        // await Get.bottomSheet(
-                        //   backgroundColor: ColorManager.white,
-                        //   isScrollControlled: true,
-                        //   shape: const RoundedRectangleBorder(
-                        //     borderRadius: BorderRadius.only(
-                        //       topLeft: Radius.circular(20),
-                        //       topRight: Radius.circular(20),
-                        //     ),
-                        //   ),
-                        //   const ChangeAddressBottomSheetContent(),
-                        // ).whenComplete(() => controller.clearData());
                         await Get.toNamed(Routes.ADDRESSES);
                       },
                     ),

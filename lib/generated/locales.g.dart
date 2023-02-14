@@ -73,6 +73,7 @@ class LocaleKeys {
   static const welcome_in_hessa = 'welcome_in_hessa';
   static const gender = 'gender';
   static const full_name = 'full_name';
+  static const my_orders = 'my_orders';
   static const enter_full_name = 'enter_full_name';
   static const confirm_password = 'confirm_password';
   static const write_full_name = 'write_full_name';
@@ -81,6 +82,7 @@ class LocaleKeys {
   static const for_hessa = 'for_hessa';
   static const please_enter_fullname = 'please_enter_fullname';
   static const please_enter_area = 'please_enter_area';
+  static const current_address = 'current_address';
   static const country = 'country';
   static const please_enter_address_description =
       'please_enter_address_description';
@@ -441,6 +443,7 @@ class Locales {
     'welcome_in_hessa': 'مرحبا بقدومك إلى حِصّة',
     'gender': 'الجنس',
     'full_name': 'الاسم الكامل',
+    'my_orders': 'طلباتي',
     'enter_full_name': 'أدخل الاسم الكامل',
     'confirm_password': 'تأكيد كلمة المرور',
     'write_full_name': 'اكتب الاسم الكامل',
@@ -449,6 +452,7 @@ class Locales {
     'for_hessa': 'لحِصّة',
     'please_enter_fullname': 'الرجاء ادخال الاسم الكامل',
     'please_enter_area': 'الرجاء ادخال المنطقة',
+    'current_address': 'العنوان الحالي',
     'country': 'الدولة',
     'please_enter_address_description': 'الرجاء ادخال وصف العنوان',
     'please_enter_address': 'الرجاء ادخال العنوان',

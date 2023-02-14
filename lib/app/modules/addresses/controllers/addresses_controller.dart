@@ -2,18 +2,18 @@ import 'dart:developer';
 
 import 'package:dio/dio.dart';
 import 'package:hessa_student/app/core/helper_functions.dart';
-import 'package:hessa_student/app/modules/addresses/data/models/address/address.dart';
 import 'package:hessa_student/app/modules/addresses/data/repos/addresses.repo.dart';
 import 'package:hessa_student/app/modules/addresses/data/repos/addresses_repo_implement.dart';
 import 'package:infinite_scroll_pagination/infinite_scroll_pagination.dart';
 
 import '../../../constants/exports.dart';
+import '../data/models/address_result/address_result.dart';
 
 class AddressesController extends GetxController {
   static const _pageSize = 6; // 6 addresses per page
-  PagingController<int, Address> pagingController = // item = address
+  PagingController<int, AddressResult> pagingController = // item = address
       PagingController(firstPageKey: 1);
-  List<Address> addresses = [];
+  List<AddressResult> addresses = [];
   RxBool isInternetConnected = true.obs;
   final AddressesRepo _addressesRepo = AddressesRepoImplement();
   @override

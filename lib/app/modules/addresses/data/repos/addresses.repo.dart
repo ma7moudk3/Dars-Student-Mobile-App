@@ -1,7 +1,8 @@
-import 'package:hessa_student/app/modules/addresses/data/models/address/address.dart';
+
+import '../models/address_result/address_result.dart';
 
 abstract class AddressesRepo {
-  Future<List<Address>> getAllMyAddresses({
+  Future<List<AddressResult>> getAllMyAddresses({
     required int page,
     required int perPage,
   });

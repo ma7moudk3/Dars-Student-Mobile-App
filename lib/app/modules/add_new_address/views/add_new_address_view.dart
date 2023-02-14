@@ -376,8 +376,8 @@ class AddNewAddressView extends GetView<AddNewAddressController> {
                                       : ColorManager.borderColor2,
                                 ),
                                 validator: (String? addressDescription) =>
-                                    controller
-                                        .validateAddressDescription(addressDescription),
+                                    controller.validateAddressDescription(
+                                        addressDescription),
                               ),
                               SizedBox(height: 20.h),
                             ],

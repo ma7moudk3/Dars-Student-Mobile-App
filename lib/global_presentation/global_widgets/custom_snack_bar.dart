@@ -61,7 +61,7 @@ class CustomSnackBar {
       margin: const EdgeInsets.only(top: 10, left: 10, right: 10),
       backgroundColor: ColorManager.primary,
       shouldIconPulse: false,
-      icon:  const Icon(
+      icon: const Icon(
         Icons.info_rounded,
         color: Colors.white,
         size: 25,

@@ -1,6 +1,6 @@
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:hessa_student/app/constants/exports.dart';
-import 'package:hessa_student/app/modules/addresses/data/models/address/address.dart';
+import 'package:hessa_student/app/modules/addresses/data/models/address_result/address_result.dart';
 import 'package:infinite_scroll_pagination/infinite_scroll_pagination.dart';
 import 'package:lottie/lottie.dart';
 
@@ -65,9 +65,10 @@ class AddressesView extends GetView<AddressesController> {
                       backgroundColor: ColorManager.primary,
                       onRefresh: () async => await Future.sync(
                           () => controller.pagingController.refresh()),
-                      child: PagedListView<int, Address>(
+                      child: PagedListView<int, AddressResult>(
                         pagingController: controller.pagingController,
-                        builderDelegate: PagedChildBuilderDelegate<Address>(
+                        builderDelegate:
+                            PagedChildBuilderDelegate<AddressResult>(
                           animateTransitions: true,
                           transitionDuration: const Duration(milliseconds: 350),
                           firstPageErrorIndicatorBuilder:
@@ -147,9 +148,10 @@ class AddressesView extends GetView<AddressesController> {
                               ],
                             );
                           },
-                          itemBuilder: (BuildContext context, Address address,
-                              int index) {
-                            return PrimaryText("asd4");
+                          itemBuilder: (BuildContext context,
+                              AddressResult addressResult, int index) {
+                            return PrimaryText(
+                                addressResult.address?.address1 ?? "");
                           },
                         ),
                       ),
