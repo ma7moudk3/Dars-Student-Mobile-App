@@ -23,6 +23,11 @@ class AddressesController extends GetxController {
     super.onInit();
   }
 
+  void refreshPagingController() {
+    pagingController.refresh();
+    update();
+  }
+
   void _initPageRequestListener() {
     pagingController.addPageRequestListener((int pageKey) async {
       await getMyAddresses(page: pageKey);

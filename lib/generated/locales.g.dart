@@ -84,11 +84,13 @@ class LocaleKeys {
   static const country = 'country';
   static const please_enter_address_description =
       'please_enter_address_description';
+  static const please_enter_address = 'please_enter_address';
   static const please_enter_teacher_name = 'please_enter_teacher_name';
   static const please_enter_dependent_name = 'please_enter_dependent_name';
   static const check_your_full_name = 'check_your_full_name';
   static const check_area = 'check_area';
   static const check_address_description = 'check_address_description';
+  static const check_address = 'check_address';
   static const check_teacher_name = 'check_teacher_name';
   static const check_dependent_name = 'check_dependent_name';
   static const please_enter_confirm_password = 'please_enter_confirm_password';
@@ -128,9 +130,11 @@ class LocaleKeys {
   static const locality = 'locality';
   static const add_student = 'add_student';
   static const studying_class = 'studying_class';
+  static const address_added_successfully = 'address_added_successfully';
   static const choose_studying_class = 'choose_studying_class';
   static const school_type = 'school_type';
   static const add_address = 'add_address';
+  static const enter_address = 'enter_address';
   static const choose_locality = 'choose_locality';
   static const please_choose_locality = 'please_choose_locality';
   static const choose_school_type = 'choose_school_type';
@@ -447,11 +451,13 @@ class Locales {
     'please_enter_area': 'الرجاء ادخال المنطقة',
     'country': 'الدولة',
     'please_enter_address_description': 'الرجاء ادخال وصف العنوان',
+    'please_enter_address': 'الرجاء ادخال العنوان',
     'please_enter_teacher_name': 'الرجاء ادخال اسم المدرّس',
     'please_enter_dependent_name': 'الرجاء ادخال اسم التابع',
     'check_your_full_name': 'تحقق من اسمك الكامل',
     'check_area': 'تحقق من المنطقة المُدخلة',
     'check_address_description': 'تحقق من وصف العنوان المُدخل',
+    'check_address': 'تحقق من العنوان المُدخل',
     'check_teacher_name': 'تحقق من اسم المدرّس',
     'check_dependent_name': 'تحقق من اسم التابع',
     'please_enter_confirm_password': 'الرجاء إدخال كلمة مرور مطابقة',
@@ -492,9 +498,11 @@ class Locales {
     'locality': 'المنطقة',
     'add_student': 'إضافة طالب',
     'studying_class': 'الصف الدراسي',
+    'address_added_successfully': 'تم إضافة العنوان بنجاح',
     'choose_studying_class': 'اختر الصف الدراسي',
     'school_type': 'نوع المدرسة',
     'add_address': 'إضافة عنوان',
+    'enter_address': 'أدخل العنوان',
     'choose_locality': 'اختر المنطقة',
     'please_choose_locality': 'الرجاء اختيار المنطقة',
     'choose_school_type': 'اختر نوع المدرسة',

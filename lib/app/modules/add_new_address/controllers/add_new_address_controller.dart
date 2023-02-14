@@ -2,8 +2,11 @@ import 'package:hessa_student/app/core/helper_functions.dart';
 import 'package:hessa_student/app/data/models/governorates/governorates.dart';
 import 'package:hessa_student/app/modules/add_new_address/data/repos/add_new_address_repo.dart';
 import 'package:hessa_student/app/modules/add_new_address/data/repos/add_new_address_repo_implement.dart';
+import 'package:hessa_student/app/modules/addresses/controllers/addresses_controller.dart';
 
 import '../../../../generated/locales.g.dart';
+import '../../../../global_presentation/global_widgets/custom_snack_bar.dart';
+import '../../../../global_presentation/global_widgets/loading.dart';
 import '../../../constants/exports.dart';
 import '../../../data/models/countries/countries.dart';
 import '../../../data/models/countries/result.dart' as country;
@@ -13,9 +16,9 @@ import '../../../data/models/localities/localities.dart';
 
 class AddNewAddressController extends GetxController {
   final GlobalKey<FormState> formKey = GlobalKey<FormState>();
-  late TextEditingController areaController, addressDescriptionController;
-  FocusNode areaFocusNode = FocusNode(),
-      addressDescriptionFocusNode = FocusNode();
+  late TextEditingController addressDescriptionController, addressController;
+  FocusNode addressDescriptionFocusNode = FocusNode(),
+      addressFocusNode = FocusNode();
   Countries countries = Countries();
   Governorates governorates = Governorates();
   Localities localities = Localities();
@@ -28,9 +31,9 @@ class AddNewAddressController extends GetxController {
 
   @override
   void onInit() async {
-    areaController = TextEditingController();
     addressDescriptionController = TextEditingController();
-    areaFocusNode.addListener(() => update());
+    addressController = TextEditingController();
+    addressFocusNode.addListener(() => update());
     addressDescriptionFocusNode.addListener(() => update());
     await checkInternet();
     super.onInit();
@@ -125,9 +128,9 @@ class AddNewAddressController extends GetxController {
 
   @override
   void dispose() {
-    areaController.dispose();
     addressDescriptionController.dispose();
-    areaFocusNode.dispose();
+    addressController.dispose();
+    addressFocusNode.dispose();
     addressDescriptionFocusNode.dispose();
     super.dispose();
   }
@@ -189,6 +192,43 @@ class AddNewAddressController extends GetxController {
     update();
   }
 
+  Future addNewAddress() async {
+    showLoadingDialog();
+    if (selectedCountry.id != null &&
+        selectedCountry.id != -1 &&
+        selectedGovernorate.id != null &&
+        selectedGovernorate.id != -1 &&
+        selectedLocality.id != null &&
+        selectedLocality.id != -1) {
+      await _addNewAddressRepo
+          .addNewAddress(
+        address: addressController.text,
+        addressDescription: addressDescriptionController.text,
+        countryId: selectedCountry.id!,
+        governorateId: selectedGovernorate.id!,
+        localityId: selectedLocality.id!,
+      )
+          .then((int statusCode) async {
+        if (statusCode == 200) {
+          if (Get.isDialogOpen!) {
+            Get.back();
+          }
+          await Future.delayed(const Duration(milliseconds: 550))
+              .then((value) async {
+            final AddressesController addressesController =
+                Get.find<AddressesController>();
+            addressesController.refreshPagingController();
+            Get.back();
+            CustomSnackBar.showCustomSnackBar(
+              title: LocaleKeys.success.tr,
+              message: LocaleKeys.address_added_successfully.tr,
+            );
+          });
+        }
+      });
+    }
+  }
+
   String? validateAddressDescription(String? addressDescription) {
     String pattern = r'^[0-9]+$';
     RegExp regExp = RegExp(pattern);
@@ -201,10 +241,22 @@ class AddNewAddressController extends GetxController {
     return null;
   }
 
+  String? validateAddress(String? address) {
+    String pattern = r'^[0-9]+$';
+    RegExp regExp = RegExp(pattern);
+    if (address == null || address.isEmpty) {
+      return LocaleKeys.please_enter_address.tr;
+    } else if (regExp.hasMatch(address)) {
+      return LocaleKeys.check_address.tr;
+    }
+    update();
+    return null;
+  }
+
   void clearData() {
-    areaController.clear();
     addressDescriptionController.clear();
-    areaFocusNode.unfocus();
+    addressController.clear();
+    addressFocusNode.unfocus();
     addressDescriptionFocusNode.unfocus();
     update();
   }

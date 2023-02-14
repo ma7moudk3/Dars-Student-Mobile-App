@@ -121,4 +121,60 @@ class AddNewAddressRepoImplement extends AddNewAddressRepo {
     }
     return localities;
   }
+
+  @override
+  Future<int> addNewAddress({
+    required String address,
+    required String addressDescription,
+    required int countryId,
+    required int governorateId,
+    required int localityId,
+  }) async {
+    int statusCode = 200;
+    try {
+      Map<String, dynamic> data = {
+        "address1": addressDescription,
+        "countryId": countryId,
+        "governorateId": governorateId,
+        "localityId": localityId,
+        "nameL": address,
+        "nameF": address,
+        "name": address,
+        "isDefault": true,
+      };
+      Map<String, dynamic> headers = {
+        'Accept-Language': Get.locale != null ? Get.locale!.languageCode : 'ar',
+        'Content-Type': 'application/json',
+        'Accept': 'application/json',
+        "Authorization": "Bearer ${CacheHelper.instance.getAccessToken()}"
+      };
+      await DioHelper.post(
+        Links.addNewAddress,
+        data: data,
+        headers: headers,
+        onSuccess: (response) {
+          statusCode = response.statusCode ?? 200;
+          if (Get.isDialogOpen!) {
+            Get.back();
+          }
+        },
+        onError: (error) {
+          statusCode = error.response?.statusCode ?? 500;
+          if (Get.isDialogOpen!) {
+            Get.back();
+          }
+          CustomSnackBar.showCustomErrorSnackBar(
+            title: LocaleKeys.error.tr,
+            message: error.message,
+          );
+        },
+      );
+    } catch (error) {
+      log("Error in addNewAddress: $error");
+      if (Get.isDialogOpen!) {
+        Get.back();
+      }
+    }
+    return statusCode;
+  }
 }

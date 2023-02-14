@@ -122,24 +122,7 @@ class AddNewAddressView extends GetView<AddNewAddressController> {
                                   (AddNewAddressController controller) {
                                 if (controller.isGovernorateDropDownLoading ==
                                     true) {
-                                  return Shimmer.fromColors(
-                                    baseColor:
-                                        ColorManager.grey5.withOpacity(0.2),
-                                    highlightColor:
-                                        ColorManager.grey5.withOpacity(0.4),
-                                    child: Container(
-                                      width: Get.width,
-                                      height: 55.h,
-                                      decoration: BoxDecoration(
-                                        color: ColorManager.white,
-                                        borderRadius: BorderRadius.circular(12),
-                                        border: Border.all(
-                                          color: ColorManager.borderColor2,
-                                          width: 1.2,
-                                        ),
-                                      ),
-                                    ),
-                                  );
+                                  return const ShimmerLoading();
                                 } else {
                                   return Column(
                                     crossAxisAlignment:
@@ -238,24 +221,7 @@ class AddNewAddressView extends GetView<AddNewAddressController> {
                                   (AddNewAddressController controller) {
                                 if (controller.isLocalityDropDownLoading ==
                                     true) {
-                                  return Shimmer.fromColors(
-                                    baseColor:
-                                        ColorManager.grey5.withOpacity(0.2),
-                                    highlightColor:
-                                        ColorManager.grey5.withOpacity(0.4),
-                                    child: Container(
-                                      width: Get.width,
-                                      height: 55.h,
-                                      decoration: BoxDecoration(
-                                        color: ColorManager.white,
-                                        borderRadius: BorderRadius.circular(12),
-                                        border: Border.all(
-                                          color: ColorManager.borderColor2,
-                                          width: 1.2,
-                                        ),
-                                      ),
-                                    ),
-                                  );
+                                  return const ShimmerLoading();
                                 } else {
                                   return Column(
                                     crossAxisAlignment:
@@ -345,6 +311,39 @@ class AddNewAddressView extends GetView<AddNewAddressController> {
                               SizedBox(height: 12.h),
                               PrimaryTextField(
                                 cursorColor: ColorManager.primary,
+                                focusNode: controller.addressFocusNode,
+                                titleFontSize: 14.sp,
+                                titleFontWeight: FontWeightManager.softLight,
+                                borderRadius: BorderRadius.circular(14),
+                                controller: controller.addressController,
+                                title: LocaleKeys.address.tr,
+                                hintText: LocaleKeys.enter_address.tr,
+                                enabledBorder: OutlineInputBorder(
+                                  borderRadius: BorderRadius.circular(14),
+                                  borderSide: BorderSide(
+                                      color: ColorManager.borderColor2),
+                                ),
+                                focusedBorder: OutlineInputBorder(
+                                  borderRadius: BorderRadius.circular(14),
+                                  borderSide:
+                                      BorderSide(color: ColorManager.primary),
+                                ),
+                                errorBorder: OutlineInputBorder(
+                                  borderRadius: BorderRadius.circular(14),
+                                  borderSide:
+                                      BorderSide(color: ColorManager.red),
+                                ),
+                                borderSide: BorderSide(
+                                  color: controller.addressFocusNode.hasFocus
+                                      ? ColorManager.primary
+                                      : ColorManager.borderColor2,
+                                ),
+                                validator: (String? address) =>
+                                    controller.validateAddress(address),
+                              ),
+                              SizedBox(height: 12.h),
+                              PrimaryTextField(
+                                cursorColor: ColorManager.primary,
                                 focusNode:
                                     controller.addressDescriptionFocusNode,
                                 titleFontSize: 14.sp,
@@ -377,8 +376,8 @@ class AddNewAddressView extends GetView<AddNewAddressController> {
                                       : ColorManager.borderColor2,
                                 ),
                                 validator: (String? addressDescription) =>
-                                    controller.validateAddressDescription(
-                                        addressDescription),
+                                    controller
+                                        .validateAddressDescription(addressDescription),
                               ),
                               SizedBox(height: 20.h),
                             ],
@@ -413,7 +412,7 @@ class AddNewAddressView extends GetView<AddNewAddressController> {
                         } else if (controller.formKey.currentState!
                             .validate()) {
                           if (await checkInternetConnection(timeout: 5)) {
-                            // await controller.addNewAddress();
+                            await controller.addNewAddress();
                           } else {
                             await Get.toNamed(Routes.CONNECTION_FAILED);
                           }
@@ -463,6 +462,33 @@ class AddNewAddressView extends GetView<AddNewAddressController> {
           );
         }
       }),
+    );
+  }
+}
+
+class ShimmerLoading extends StatelessWidget {
+  const ShimmerLoading({
+    super.key,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return Shimmer.fromColors(
+      loop: 3,
+      baseColor: ColorManager.grey.withOpacity(0.4),
+      highlightColor: ColorManager.grey.withOpacity(0.6),
+      child: Container(
+        width: Get.width,
+        height: 55.h,
+        decoration: BoxDecoration(
+          color: ColorManager.white,
+          borderRadius: BorderRadius.circular(12),
+          border: Border.all(
+            color: ColorManager.borderColor2,
+            width: 1.2,
+          ),
+        ),
+      ),
     );
   }
 }
