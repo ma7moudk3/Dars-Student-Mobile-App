@@ -170,52 +170,52 @@ class AddNewDependentController extends GetxController {
   Future _getClasses() async {
     classes = await _addNewDependentRepo.getClasses();
     if (classes.result != null && classes.result!.items != null) {
-      classes.result!.items!.add(
+      classes.result!.items!.insert(
+        0,
         level.Item(
           id: -1,
           displayName: LocaleKeys.choose_studying_class.tr,
         ),
       );
-      classes.result!.items!.sort((a, b) => a.id!.compareTo(b.id!));
     }
   }
 
   Future _getStudentRelations() async {
     studentRelations = await _addNewDependentRepo.getStudentRelations();
     if (studentRelations.result != null) {
-      studentRelations.result!.add(
+      studentRelations.result!.insert(
+        0,
         student_relation.Result(
           id: -1,
           displayName: LocaleKeys.choose_student_relation.tr,
         ),
       );
-      studentRelations.result!.sort((a, b) => a.id!.compareTo(b.id!));
     }
   }
 
   Future _getSchoolTypes() async {
     schoolTypes = await _addNewDependentRepo.getSchoolTypes();
     if (schoolTypes.result != null) {
-      schoolTypes.result!.add(
+      schoolTypes.result!.insert(
+        0,
         school_type.Result(
           id: -1,
           displayName: LocaleKeys.choose_school_type.tr,
         ),
       );
-      schoolTypes.result!.sort((a, b) => a.id!.compareTo(b.id!));
     }
   }
 
   // Future _getTopics() async {
   //   topics = await _addNewDependentRepo.getTopics();
   //   if (topics.result != null) {
-  //     topics.result!.add(
+  //     topics.result!.insert(
+  //       0,
   //       topic.Result(
   //         id: -1,
   //         displayName: LocaleKeys.choose_studying_subject.tr,
   //       ),
   //     );
-  //     topics.result!.sort((a, b) => a.id!.compareTo(b.id!));
   //   }
   // }
 

@@ -14,11 +14,13 @@ class PrimaryDropDown extends StatefulWidget {
     this.width,
     this.height,
     this.fontColor,
+    this.isDisabled = false,
     this.onChanged,
   }) : super(key: key);
 
   final List<String> items;
   final String hint;
+  final bool isDisabled;
   final String value;
   final InputBorder? disabledBorder;
   final FocusNode? focusNode;
@@ -33,7 +35,7 @@ class PrimaryDropDown extends StatefulWidget {
 }
 
 class _PrimaryDropDownState extends State<PrimaryDropDown> {
-  late String dropDownValue;
+  String? dropDownValue;
 
   @override
   void initState() {
@@ -83,16 +85,18 @@ class _PrimaryDropDownState extends State<PrimaryDropDown> {
               );
             }).toList(),
             focusNode: widget.focusNode,
-            onChanged: (String? value) {
-              setState(
-                () {
-                  if (widget.onChanged != null) {
-                    widget.onChanged!(value!);
-                  }
-                  dropDownValue = value!;
-                },
-              );
-            }),
+            onChanged: widget.isDisabled
+                ? null
+                : (String? value) {
+                    setState(
+                      () {
+                        if (widget.onChanged != null) {
+                          widget.onChanged!(value!);
+                        }
+                        dropDownValue = value!;
+                      },
+                    );
+                  }),
       ),
     );
   }

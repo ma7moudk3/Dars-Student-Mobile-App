@@ -1,4 +1,5 @@
 import 'package:hessa_student/app/core/helper_functions.dart';
+import 'package:hessa_student/app/data/cache_helper.dart';
 import 'package:hessa_student/app/modules/technical_support/data/models/urgency_type/result.dart';
 import 'package:hessa_student/app/modules/technical_support/data/models/urgency_type/urgency_type.dart';
 import 'package:hessa_student/app/modules/technical_support/data/repos/technical_support_repo.dart';
@@ -24,9 +25,16 @@ class TechnicalSupportController extends GetxController {
   Result selectedUrgency = Result();
   @override
   void onInit() async {
-    fullNameController = TextEditingController();
+    fullNameController = TextEditingController(
+        text:
+            "${CacheHelper.instance.getCachedCurrentUserInfo()?.result?.name ?? ''} ${CacheHelper.instance.getCachedCurrentUserInfo()?.result?.surname ?? ''}");
     messageController = TextEditingController();
-    emailController = TextEditingController();
+    emailController = TextEditingController(
+        text: CacheHelper.instance
+                .getCachedCurrentUserInfo()
+                ?.result
+                ?.emailAddress ??
+            '');
     fullNameFocusNode.addListener(() => update());
     emailFocusNode.addListener(() => update());
     await checkInternet();
@@ -100,13 +108,13 @@ class TechnicalSupportController extends GetxController {
   Future _getUrgencyTypes() async {
     urgencyType = await _technicalSupportRepo.getUrgencyTypes();
     if (urgencyType.result != null) {
-      urgencyType.result!.add(
+      urgencyType.result!.insert(
+        0,
         Result(
           id: -1,
           displayName: LocaleKeys.choose_message_type.tr,
         ),
       );
-      urgencyType.result!.sort((a, b) => a.id!.compareTo(b.id!));
     }
   }
 

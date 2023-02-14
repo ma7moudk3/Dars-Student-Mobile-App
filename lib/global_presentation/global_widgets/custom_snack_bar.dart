@@ -40,6 +40,35 @@ class CustomSnackBar {
     // );
   }
 
+  static showCustomInfoSnackBar(
+      {required String title, required String message, Duration? duration}) {
+    Get.rawSnackbar(
+      snackPosition: SnackPosition.TOP,
+      titleText: PrimaryText(
+        title.tr,
+        color: Colors.white,
+        fontSize: 14.sp,
+      ),
+      snackStyle: SnackStyle.FLOATING,
+      borderRadius: 25,
+      messageText: PrimaryText(
+        message.tr,
+        color: ColorManager.white,
+        fontSize: 13.sp,
+        fontWeight: FontWeightManager.softLight,
+      ),
+      duration: duration ?? const Duration(seconds: 3),
+      margin: const EdgeInsets.only(top: 10, left: 10, right: 10),
+      backgroundColor: ColorManager.primary,
+      shouldIconPulse: false,
+      icon:  const Icon(
+        Icons.info_rounded,
+        color: Colors.white,
+        size: 25,
+      ),
+    );
+  }
+
   static showCustomErrorSnackBar(
       {required String title,
       required String message,

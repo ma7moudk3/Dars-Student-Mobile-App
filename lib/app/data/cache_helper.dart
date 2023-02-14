@@ -60,6 +60,7 @@ class CacheHelper {
   String getAccessToken() {
     return _sharedPreferences.getString('access_token') ?? '';
   }
+
   String getEncryptedToken() {
     return _sharedPreferences.getString('encrypted_token') ?? '';
   }

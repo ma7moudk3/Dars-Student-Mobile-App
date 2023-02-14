@@ -31,11 +31,13 @@ class HessaTeachersRepoImplement extends HessaTeachersRepo {
     List<HessaTeacher> hessaTeachers = [];
     String? sorting;
     Map<String, dynamic> queryParameters = {
-      "Filter": searchValue,
       "OrderId": 0,
       "SkipCount": (page - 1) * perPage,
       "MaxResultCount": perPage,
     };
+    if (searchValue != null && searchValue.isNotEmpty) {
+      queryParameters["Filter"] = searchValue;
+    }
     if (sortingField != null) {
       sorting = "$sortingField $sortingOrder"; // example: "rate DESC"
       queryParameters["Sorting"] = sorting;

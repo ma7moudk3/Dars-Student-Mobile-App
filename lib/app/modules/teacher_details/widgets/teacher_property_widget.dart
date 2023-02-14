@@ -1,3 +1,4 @@
+import 'package:hessa_student/app/core/helper_functions.dart';
 import 'package:hessa_student/app/modules/teacher_details/controllers/teacher_details_controller.dart';
 
 import '../../../constants/exports.dart';
@@ -28,13 +29,33 @@ class TeacherPropertyWidget extends GetView<TeacherDetailsController> {
           const Spacer(),
           SizedBox(
             width: (Get.width * 0.38).w,
-            child: PrimaryText(
-              content,
-              fontSize: 14.sp,
-              fontWeight: FontWeightManager.softLight,
-              color: ColorManager.grey5,
-              maxLines: 1,
-              overflow: TextOverflow.ellipsis,
+            child: Tooltip(
+              padding: const EdgeInsets.all(10),
+              margin: const EdgeInsets.all(16),
+              showDuration: const Duration(milliseconds: 5500),
+              preferBelow: true,
+              textAlign:
+                  detectLang(text: content) ? TextAlign.left : TextAlign.right,
+              decoration: BoxDecoration(
+                color: ColorManager.grey5,
+                borderRadius: BorderRadius.circular(10),
+              ),
+              triggerMode: TooltipTriggerMode.tap,
+              message: content,
+              textStyle: TextStyle(
+                color: ColorManager.white,
+                fontSize: 14.sp,
+                fontWeight: FontWeightManager.softLight,
+                fontFamily: FontConstants.fontFamily,
+              ),
+              child: PrimaryText(
+                content,
+                fontSize: 14.sp,
+                fontWeight: FontWeightManager.softLight,
+                color: ColorManager.grey5,
+                maxLines: 2,
+                overflow: TextOverflow.ellipsis,
+              ),
             ),
           ),
           SizedBox(width: (Get.width * 0.04).w),

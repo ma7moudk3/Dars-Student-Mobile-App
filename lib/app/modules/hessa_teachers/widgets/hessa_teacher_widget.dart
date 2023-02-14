@@ -2,7 +2,6 @@ import 'package:cached_network_image/cached_network_image.dart';
 
 import '../../../constants/exports.dart';
 import '../../../constants/links.dart';
-import '../../../data/cache_helper.dart';
 import '../../../routes/app_pages.dart';
 import '../controllers/hessa_teachers_controller.dart';
 import '../data/models/hessa_teacher.dart';
@@ -20,7 +19,7 @@ class HessaTeacherWidget extends GetView<HessaTeachersController> {
     String teacherId = teacher.runtimeType == HessaTeacher
         ? teacher.userId.toString()
         : (teacher.preferredProvider != null
-            ? teacher.preferredProvider!.id.toString()
+            ? teacher.preferredProvider!.providerId.toString()
             : "");
     String teacherName = teacher.runtimeType == HessaTeacher
         ? teacher.name ?? ""
@@ -30,9 +29,17 @@ class HessaTeacherWidget extends GetView<HessaTeachersController> {
         : teacher.providerRate ?? 0.0;
     String levelTopic = teacher.runtimeType == HessaTeacher
         ? teacher.levelTopic ??
-            [""].map((String subject) => subject.toString()).join(", ")
+            [""]
+                .map((String subject) => subject.toString())
+                .toSet()
+                .toList()
+                .join(", ")
         : teacher.levelTopic ??
-            [""].map((String subject) => subject.toString()).join(", ");
+            [""]
+                .map((String subject) => subject.toString())
+                .toSet()
+                .toList()
+                .join(", ");
     String country = teacher.runtimeType == HessaTeacher
             ? teacher.country ?? ""
             : teacher.country ?? "",
@@ -76,7 +83,7 @@ class HessaTeacherWidget extends GetView<HessaTeachersController> {
                     borderRadius: BorderRadius.circular(15),
                     child: CachedNetworkImage(
                       imageUrl:
-                          "${Links.baseLink}${Links.profileImageById}?userId=$teacherId&enc_auth_token=${CacheHelper.instance.getEncryptedToken()}",
+                          "${Links.baseLink}${Links.profileImageById}?userId=$teacherId",
                       fit: BoxFit.cover,
                       errorWidget:
                           (BuildContext context, String url, dynamic error) =>

@@ -32,17 +32,17 @@ class TeacherDetailsController extends GetxController {
   final TeacherDetailsRepo _teacherDetailsRepo = TeacherDetailsRepoImplement();
   HessaTeacherDetails hessaTeacherDetails = HessaTeacherDetails();
   List<Map<String, dynamic>> teacherProperties = [
-    {
-      "icon": ImagesManager.flagIcon,
-      "title": LocaleKeys.education_level.tr,
-    },
-    {
-      "icon": ImagesManager.bagIcon,
-      "title": LocaleKeys.major.tr,
-    },
+    // {
+    //   "icon": ImagesManager.flagIcon,
+    //   "title": LocaleKeys.education_level.tr,
+    // },
+    // {
+    //   "icon": ImagesManager.bagIcon,
+    //   "title": LocaleKeys.major.tr,
+    // },
     {
       "icon": ImagesManager.bookIcon,
-      "title": LocaleKeys.subjects.tr,
+      "title": LocaleKeys.subjects.tr, // subject= topic
     },
     {
       "icon": ImagesManager.classIcon,
@@ -68,20 +68,26 @@ class TeacherDetailsController extends GetxController {
         await getTeacherDetails().then((value) {
           if (hessaTeacherDetails.result != null &&
               hessaTeacherDetails.result!.providerSkill != null) {
-            teacherProperties[2]["content"] = hessaTeacherDetails
+            teacherProperties[0]["content"] = hessaTeacherDetails
                 .result!.providerTeachingTopic!
                 .map((ProviderTeachingTopic providerTeachingTopic) =>
                     providerTeachingTopic.topicName ?? "")
+                .toSet()
+                .toList()
                 .join(", ");
-            teacherProperties[3]["content"] = hessaTeacherDetails
+            teacherProperties[1]["content"] = hessaTeacherDetails
                 .result!.providerTeachingTopic!
                 .map((ProviderTeachingTopic providerTeachingTopic) =>
                     providerTeachingTopic.levelName ?? "")
+                .toSet()
+                .toList()
                 .join(", ");
-            teacherProperties[4]["content"] = hessaTeacherDetails
+            teacherProperties[2]["content"] = hessaTeacherDetails
                 .result!.providerSkill!
                 .map((ProviderSkill providerSkill) =>
                     providerSkill.skillName ?? "")
+                .toSet()
+                .toList()
                 .join(", ");
           }
           isLoading.value = false;

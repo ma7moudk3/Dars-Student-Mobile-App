@@ -306,26 +306,26 @@ class OrderHessaController extends GetxController {
   Future _getClasses() async {
     classes = await _orderHessaRepo.getClasses();
     if (classes.result != null && classes.result!.items != null) {
-      classes.result!.items!.add(
+      classes.result!.items!.insert(
+        0,
         level.Item(
           id: -1,
           displayName: LocaleKeys.choose_studying_class.tr,
         ),
       );
-      classes.result!.items!.sort((a, b) => a.id!.compareTo(b.id!));
     }
   }
 
   Future _getTopics() async {
     topics = await _orderHessaRepo.getTopics();
     if (topics.result != null) {
-      topics.result!.add(
+      topics.result!.insert(
+        0,
         topic.Result(
           id: -1,
           displayName: LocaleKeys.choose_studying_subject.tr,
         ),
       );
-      topics.result!.sort((a, b) => a.id!.compareTo(b.id!));
     }
   }
 

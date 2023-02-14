@@ -7,8 +7,7 @@ import 'package:hessa_student/app/data/models/topics/topics.dart';
 
 import 'package:hessa_student/app/data/models/classes/classes.dart';
 import 'package:hessa_student/app/modules/add_new_dependent/data/models/dependent/dependent.dart';
-import 'package:dio/dio.dart' as dio;
-import 'package:uuid/uuid.dart';
+import 'package:hessa_student/app/modules/edit_profile/data/repos/edit_profile_repo.dart';
 
 import '../../../../../generated/locales.g.dart';
 import '../../../../../global_presentation/global_widgets/custom_snack_bar.dart';
@@ -16,9 +15,11 @@ import '../../../../constants/exports.dart';
 import '../../../../constants/links.dart';
 import '../../../../data/cache_helper.dart';
 import '../../../../data/network_helper/dio_helper.dart';
+import '../../../edit_profile/data/repos/edit_profile_repo_implement.dart';
 import 'add_new_dependent_repo.dart';
 
 class AddNewDependentRepoImplement extends AddNewDependentRepo {
+  final EditProfileRepo _editProfileRepo = EditProfileRepoImplement();
   @override
   Future<Topics> getTopics() async {
     Topics topics = Topics();
@@ -170,12 +171,13 @@ class AddNewDependentRepoImplement extends AddNewDependentRepo {
         "id": id ?? 0,
       };
       if (image != null) {
-        Uuid uuid = const Uuid();
+        String? fileToken = await _editProfileRepo.updateProfilePicture(
+            image: image, isForStudent: true);
         String fileName = image.path.split("/").last;
-        data["FileName"] = 'ProfilePicture: $fileName';
-        data["FileToken"] = uuid.v1();
-        data["file"] =
-            await dio.MultipartFile.fromFile(image.path, filename: fileName);
+        if (fileToken != null) {
+          data["requesterStudentPhotoToken"] = fileToken;
+          data["requesterStudentPhotoFileName"] = fileName;
+        }
       }
       Map<String, dynamic> headers = {
         'Accept-Language': Get.locale != null ? Get.locale!.languageCode : 'ar',

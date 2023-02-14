@@ -42,7 +42,7 @@ class PreferredTeachersRepoImplement extends PreferredTeachersRepo {
       onError: (error) {
         CustomSnackBar.showCustomErrorSnackBar(
           title: LocaleKeys.error.tr,
-          message: error.response?.data["error"]["message"] ?? error.message,
+          message: error.response?.data["error"]?["message"] ?? error.message,
         );
       },
     );

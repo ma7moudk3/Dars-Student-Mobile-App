@@ -1,6 +1,6 @@
 # hessa_student
 
-Hessa Student App
+Hessa Student
 
 ## Getting Started
 

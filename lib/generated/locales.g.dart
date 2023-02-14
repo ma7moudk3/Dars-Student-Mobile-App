@@ -81,12 +81,14 @@ class LocaleKeys {
   static const for_hessa = 'for_hessa';
   static const please_enter_fullname = 'please_enter_fullname';
   static const please_enter_area = 'please_enter_area';
-  static const please_enter_current_address = 'please_enter_current_address';
+  static const country = 'country';
+  static const please_enter_address_description =
+      'please_enter_address_description';
   static const please_enter_teacher_name = 'please_enter_teacher_name';
   static const please_enter_dependent_name = 'please_enter_dependent_name';
   static const check_your_full_name = 'check_your_full_name';
   static const check_area = 'check_area';
-  static const check_current_address = 'check_current_address';
+  static const check_address_description = 'check_address_description';
   static const check_teacher_name = 'check_teacher_name';
   static const check_dependent_name = 'check_dependent_name';
   static const please_enter_confirm_password = 'please_enter_confirm_password';
@@ -123,14 +125,20 @@ class LocaleKeys {
   static const order_hessa = 'order_hessa';
   static const fill_the_student_form = 'fill_the_student_form';
   static const student_name = 'student_name';
+  static const locality = 'locality';
   static const add_student = 'add_student';
   static const studying_class = 'studying_class';
   static const choose_studying_class = 'choose_studying_class';
   static const school_type = 'school_type';
+  static const add_address = 'add_address';
+  static const choose_locality = 'choose_locality';
   static const choose_school_type = 'choose_school_type';
+  static const please_choose_country_first = 'please_choose_country_first';
   static const please_select_school_type = 'please_select_school_type';
   static const studying_subject = 'studying_subject';
   static const choose_studying_subject = 'choose_studying_subject';
+  static const please_choose_governorate_first =
+      'please_choose_governorate_first';
   static const search_for_subject = 'search_for_subject';
   static const session_way = 'session_way';
   static const please_select_student_relation =
@@ -200,6 +208,8 @@ class LocaleKeys {
   static const save = 'save';
   static const note = 'note';
   static const no_results_found = 'no_results_found';
+  static const no_addresses_found = 'no_addresses_found';
+  static const add_new_address = 'add_new_address';
   static const dependents_list = 'dependents_list';
   static const no_teacher_found = 'no_teacher_found';
   static const camera = 'camera';
@@ -235,6 +245,7 @@ class LocaleKeys {
   static const last_seen = 'last_seen';
   static const personal_information = 'personal_information';
   static const address = 'address';
+  static const addresses = 'addresses';
   static const wallet = 'wallet';
   static const dependents = 'dependents';
   static const settings_and_help = 'settings_and_help';
@@ -296,8 +307,8 @@ class LocaleKeys {
   static const choose_city = 'choose_city';
   static const area = 'area';
   static const enter_area = 'enter_area';
-  static const current_address = 'current_address';
-  static const enter_current_address = 'enter_current_address';
+  static const address_description = 'address_description';
+  static const enter_address_description = 'enter_address_description';
   static const please_enter_message_content = 'please_enter_message_content';
   static const check_message_content = 'check_message_content';
   static const hessa_details = 'hessa_details';
@@ -433,12 +444,13 @@ class Locales {
     'for_hessa': 'لحِصّة',
     'please_enter_fullname': 'الرجاء ادخال الاسم الكامل',
     'please_enter_area': 'الرجاء ادخال المنطقة',
-    'please_enter_current_address': 'الرجاء ادخال العنوان الحالي',
+    'country': 'الدولة',
+    'please_enter_address_description': 'الرجاء ادخال وصف العنوان',
     'please_enter_teacher_name': 'الرجاء ادخال اسم المدرّس',
     'please_enter_dependent_name': 'الرجاء ادخال اسم التابع',
     'check_your_full_name': 'تحقق من اسمك الكامل',
     'check_area': 'تحقق من المنطقة المُدخلة',
-    'check_current_address': 'تحقق من العنوان الحالي المُدخل',
+    'check_address_description': 'تحقق من وصف العنوان المُدخل',
     'check_teacher_name': 'تحقق من اسم المدرّس',
     'check_dependent_name': 'تحقق من اسم التابع',
     'please_enter_confirm_password': 'الرجاء إدخال كلمة مرور مطابقة',
@@ -476,14 +488,19 @@ class Locales {
     'fill_the_student_form':
         'قم بتعبئة المعلومات الخاصة بطالب المدرسة لاستكمال الطلب الخاص بك',
     'student_name': 'اسم الطالب',
+    'locality': 'المنطقة',
     'add_student': 'إضافة طالب',
     'studying_class': 'الصف الدراسي',
     'choose_studying_class': 'اختر الصف الدراسي',
     'school_type': 'نوع المدرسة',
+    'add_address': 'إضافة عنوان',
+    'choose_locality': 'اختر المنطقة',
     'choose_school_type': 'اختر نوع المدرسة',
+    'please_choose_country_first': 'الرجاء اختيار الدولة أولاً',
     'please_select_school_type': 'الرجاء اختيار نوع المدرسة',
     'studying_subject': 'المادة الدراسية',
     'choose_studying_subject': 'اختر المادة الدراسية',
+    'please_choose_governorate_first': 'الرجاء اختيار المدينة أولاً',
     'search_for_subject': 'ابحث عن مادة دراسية',
     'session_way': 'طريقة الجلسة',
     'please_select_student_relation': 'الرجاء اختيار صلة القرابة',
@@ -552,6 +569,8 @@ class Locales {
     'save': 'حفظ',
     'note': 'مُلاحظة',
     'no_results_found': 'نأسف! لم نجد نتائج بحث',
+    'no_addresses_found': 'نأسف! لم يتم العثور على عناوين خاصة بك',
+    'add_new_address': 'إضافة عنوان جديد',
     'dependents_list': 'قائمة التابعين',
     'no_teacher_found': 'لم يتم العثور على مدرسين',
     'camera': 'الكاميرا',
@@ -587,6 +606,7 @@ class Locales {
     'last_seen': 'آخر ظهور',
     'personal_information': 'البيانات الشخصية',
     'address': 'العنوان',
+    'addresses': 'العناوين',
     'wallet': 'المحفظة',
     'dependents': 'التابعين',
     'settings_and_help': 'الإعدادات والمساعدة',
@@ -646,8 +666,8 @@ class Locales {
     'choose_city': 'اختر المدينة',
     'area': 'المنطقة',
     'enter_area': 'اكتب المنطقة',
-    'current_address': 'العنوان الحالي',
-    'enter_current_address': 'اكتب العنوان الحالي',
+    'address_description': 'وصف العنوان',
+    'enter_address_description': 'اكتب وصف العنوان',
     'please_enter_message_content': 'الرجاء إدخال نص الرسالة ...',
     'check_message_content': 'تحقق من نص الرسالة المُدخل',
     'hessa_details': 'تفاصيل الحصة',

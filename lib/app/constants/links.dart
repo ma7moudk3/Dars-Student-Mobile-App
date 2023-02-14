@@ -17,8 +17,7 @@ class Links {
       'api/services/app/Profile/ActivateMobile';
   static const String sendResetPasswordCode =
       "api/services/app/Account/SendPasswordResetCode";
-  static const String profileImageById =
-      "Profile/GetProfilePictureByUser";
+  static const String profileImageById = "Profile/GetUserProfilePictureByUser";
   static const String userProfileImage =
       "api/services/app/Profile/GetProfilePicture";
   static const String updateProfileData =
@@ -48,6 +47,10 @@ class Links {
       "api/services/app/Tickets/GetAllUrgencyForTableDropdown";
   static const String countriesForDropDown =
       "api/services/app/Governorates/GetAllCountryForTableDropdown";
+  static const String governoratesForDropDown =
+      "api/services/app/Providers/GetGovernorateByCountryId";
+  static const String localitiesForDropDown =
+      "api/services/app/Providers/GetAllLocalityByGovernorateId";
   static const String skillsForDropDown =
       "api/services/app/OrderSkills/GetAllSkillForLookupTable";
   static const String classesForDropDown =

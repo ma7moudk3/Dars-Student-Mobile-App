@@ -1,7 +1,7 @@
 name: hessa_student
 version: 1.0.0+1
 publish_to: none
-description: Hessa Student App
+description: Hessa Student
 environment: 
   sdk: '>=2.18.6 <3.0.0'
 

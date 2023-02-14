@@ -15,7 +15,9 @@ import 'edit_profile_repo.dart';
 
 class EditProfileRepoImplement extends EditProfileRepo {
   @override
-  Future updateProfilePicture({required File image}) async {
+  Future<String?> updateProfilePicture(
+      {required File image, bool isForStudent = false}) async {
+    String? fileToken;
     try {
       Uuid uuid = const Uuid();
       String fileName = image.path.split("/").last;
@@ -38,8 +40,12 @@ class EditProfileRepoImplement extends EditProfileRepo {
         Links.updateProfilePicture,
         onSuccess: (response) async {
           if (response.statusCode == 200 && response.data['success'] == true) {
-            await updateProfilePicture2(
-                fileToken: response.data['result']['fileToken']);
+            fileToken = response.data['result']['fileToken'];
+            if (isForStudent == false) {
+              // it means for me
+              await updateProfilePicture2(
+                  fileToken: response.data['result']['fileToken']);
+            }
           }
         },
         onError: (error) {
@@ -52,6 +58,7 @@ class EditProfileRepoImplement extends EditProfileRepo {
     } catch (e) {
       log("updateProfilePicture $e");
     }
+    return fileToken;
   }
 
   @override

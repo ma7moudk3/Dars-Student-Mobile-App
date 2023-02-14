@@ -11,8 +11,9 @@ abstract class EditProfileRepo {
     required int id,
   });
 
-  Future updateProfilePicture({
+  Future<String?> updateProfilePicture({
     required File image,
+    bool isForStudent = false,
   });
 
   Future updateProfilePicture2({

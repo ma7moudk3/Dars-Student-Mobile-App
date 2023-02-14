@@ -239,52 +239,52 @@ class HessaTeachersController extends GetxController {
   Future _getCountries() async {
     countries = await _hessaTeacherRepo.getCountries();
     if (countries.result != null) {
-      countries.result!.add(
+      countries.result!.insert(
+        0,
         country.Result(
           id: -1,
           displayName: LocaleKeys.choose_country.tr,
         ),
       );
-      countries.result!.sort((a, b) => a.id!.compareTo(b.id!));
     }
   }
 
   Future _getClasses() async {
     classes = await _hessaTeacherRepo.getClasses();
     if (classes.result != null && classes.result!.items != null) {
-      classes.result!.items!.add(
+      classes.result!.items!.insert(
+        0,
         level.Item(
           id: -1,
           displayName: LocaleKeys.choose_studying_class.tr,
         ),
       );
-      classes.result!.items!.sort((a, b) => a.id!.compareTo(b.id!));
     }
   }
 
   Future _getTopics() async {
     topics = await _hessaTeacherRepo.getTopics();
     if (topics.result != null) {
-      topics.result!.add(
+      topics.result!.insert(
+        0,
         topic.Result(
           id: -1,
           displayName: LocaleKeys.choose_studying_subject.tr,
         ),
       );
-      topics.result!.sort((a, b) => a.id!.compareTo(b.id!));
     }
   }
 
   Future _getSkills() async {
     skills = await _hessaTeacherRepo.getSkills();
     if (skills.result != null && skills.result!.items != null) {
-      skills.result!.items!.add(
+      skills.result!.items!.insert(
+        0,
         skill.Item(
           id: -1,
           displayName: LocaleKeys.choose_skill.tr,
         ),
       );
-      skills.result!.items!.sort((a, b) => a.id!.compareTo(b.id!));
     }
   }
 

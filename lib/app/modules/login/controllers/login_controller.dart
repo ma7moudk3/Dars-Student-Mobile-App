@@ -125,9 +125,7 @@ class LoginController extends GetxController {
             .facebookLogin(
                 accessToken: facebookUserData!["accessToken"],
                 providerKey: googleAccount!.id)
-            .then((value) async {
-              
-            });
+            .then((value) async {});
       }
     } catch (e) {
       developer.log('facebookLogin Exception error {{2}} $e');

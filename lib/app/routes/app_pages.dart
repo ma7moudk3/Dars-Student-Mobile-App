@@ -2,10 +2,14 @@ import 'package:get/get.dart';
 
 import '../modules/about_hessa/bindings/about_hessa_binding.dart';
 import '../modules/about_hessa/views/about_hessa_view.dart';
+import '../modules/add_new_address/bindings/add_new_address_binding.dart';
+import '../modules/add_new_address/views/add_new_address_view.dart';
 import '../modules/add_new_dependent/bindings/add_new_dependent_binding.dart';
 import '../modules/add_new_dependent/views/add_new_dependent_view.dart';
 import '../modules/add_payment_way/bindings/add_payment_way_binding.dart';
 import '../modules/add_payment_way/views/add_payment_way_view.dart';
+import '../modules/addresses/bindings/addresses_binding.dart';
+import '../modules/addresses/views/addresses_view.dart';
 import '../modules/bottom_nav_bar/bindings/bottom_nav_bar_binding.dart';
 import '../modules/bottom_nav_bar/views/bottom_nav_bar_view.dart';
 import '../modules/chat/bindings/chat_binding.dart';
@@ -292,6 +296,16 @@ class AppPages {
       name: _Paths.PREFERRED_TEACHERS,
       page: () => const PreferredTeachersView(),
       binding: PreferredTeachersBinding(),
+    ),
+    GetPage(
+      name: _Paths.ADDRESSES,
+      page: () => const AddressesView(),
+      binding: AddressesBinding(),
+    ),
+    GetPage(
+      name: _Paths.ADD_NEW_ADDRESS,
+      page: () => const AddNewAddressView(),
+      binding: AddNewAddressBinding(),
     ),
   ];
 }
