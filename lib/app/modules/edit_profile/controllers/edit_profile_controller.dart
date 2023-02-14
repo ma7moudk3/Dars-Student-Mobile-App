@@ -104,31 +104,36 @@ class EditProfileController extends GetxController {
 
   Future updateProfile() async {
     showLoadingDialog();
-    await Future.wait([updateImage(), updateProfileData()]).then((value) async {
-      await Future.wait([
-        getCurrentUserInfo(),
-        getCurrentUserProfileInfo(),
-        _loginRepo.getCurrentUserProfilePicture()
-      ]).then((value) async {
-        if (Get.isDialogOpen!) {
-          Get.back();
+    await Future.wait([updateImage()]).then((List<dynamic> values) async {
+      await updateProfileData().then((int statusCode) async {
+        if (statusCode == 200) {
+          await Future.wait([
+            getCurrentUserInfo(),
+            getCurrentUserProfileInfo(),
+            _loginRepo.getCurrentUserProfilePicture()
+          ]).then((value) async {
+            if (Get.isDialogOpen!) {
+              Get.back();
+            }
+            await Future.delayed(const Duration(milliseconds: 550))
+                .then((value) async {
+              CustomSnackBar.showCustomSnackBar(
+                title: LocaleKeys.success.tr,
+                message: LocaleKeys.profile_edited_succesfully.tr,
+              );
+              await Get.offAllNamed(Routes.BOTTOM_NAV_BAR);
+            });
+          });
         }
-        await Future.delayed(const Duration(milliseconds: 550))
-            .then((value) async {
-          CustomSnackBar.showCustomSnackBar(
-            title: LocaleKeys.success.tr,
-            message: LocaleKeys.profile_edited_succesfully.tr,
-          );
-          await Get.offAllNamed(Routes.BOTTOM_NAV_BAR);
-        });
       });
     });
   }
 
-  Future updateProfileData() async {
+  Future<int> updateProfileData() async {
+    int statusCode = 500;
     if (currentUserProfileInfo.result != null &&
         currentUserProfileInfo.result!.requester != null) {
-      await _editProfileRepo.updateProfile(
+      statusCode = await _editProfileRepo.updateProfile(
         firstName: fullNameController.text.split(" ")[0],
         surname: fullNameController.text.split(" ").length > 1
             ? fullNameController.text.split(" ")[1]
@@ -139,6 +144,7 @@ class EditProfileController extends GetxController {
         gender: gender + 1,
       );
     }
+    return statusCode;
   }
 
   Future sendOTPEmail() async {

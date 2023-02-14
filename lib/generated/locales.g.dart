@@ -132,6 +132,7 @@ class LocaleKeys {
   static const school_type = 'school_type';
   static const add_address = 'add_address';
   static const choose_locality = 'choose_locality';
+  static const please_choose_locality = 'please_choose_locality';
   static const choose_school_type = 'choose_school_type';
   static const please_choose_country_first = 'please_choose_country_first';
   static const please_select_school_type = 'please_select_school_type';
@@ -495,6 +496,7 @@ class Locales {
     'school_type': 'نوع المدرسة',
     'add_address': 'إضافة عنوان',
     'choose_locality': 'اختر المنطقة',
+    'please_choose_locality': 'الرجاء اختيار المنطقة',
     'choose_school_type': 'اختر نوع المدرسة',
     'please_choose_country_first': 'الرجاء اختيار الدولة أولاً',
     'please_select_school_type': 'الرجاء اختيار نوع المدرسة',

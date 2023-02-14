@@ -43,6 +43,7 @@ dependencies:
   path_provider: ^2.0.12
   flutter_widget_from_html: ^0.9.1
   url_launcher: ^6.1.9
+  shimmer: ^2.0.0
   
 dev_dependencies: 
   flutter_lints: ^2.0.0

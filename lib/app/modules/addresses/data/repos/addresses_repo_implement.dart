@@ -1,4 +1,3 @@
-import 'dart:developer';
 
 import 'package:hessa_student/app/constants/links.dart';
 import 'package:hessa_student/app/data/network_helper/dio_helper.dart';
@@ -17,8 +16,8 @@ class AddressesRepoImplement extends AddressesRepo {
     required int perPage,
   }) async {
     List<Address> addresses = [];
-    try {
-      Map<String, dynamic> data = {
+    // try {
+      Map<String, dynamic> queryParameters = {
         "MaxResultCount": perPage,
         "SkipCount": (page - 1) * perPage,
       };
@@ -28,9 +27,9 @@ class AddressesRepoImplement extends AddressesRepo {
         'Accept': 'application/json',
         "Authorization": "Bearer ${CacheHelper.instance.getAccessToken()}"
       };
-      await DioHelper.post(
+      await DioHelper.get(
         headers: headers,
-        data: data,
+        queryParameters: queryParameters,
         Links.allMyAddresses,
         onSuccess: (response) {
           var result = response.data;
@@ -47,9 +46,9 @@ class AddressesRepoImplement extends AddressesRepo {
           );
         },
       );
-    } catch (e) {
-      log("getAllMyAddresses DioError $e");
-    }
+    // } catch (e) {
+    //   log("getAllMyAddresses DioError $e");
+    // }
     return addresses;
   }
 }

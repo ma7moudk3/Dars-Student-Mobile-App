@@ -2,7 +2,6 @@ import 'package:hessa_student/app/core/helper_functions.dart';
 import 'package:hessa_student/app/data/models/governorates/governorates.dart';
 import 'package:hessa_student/app/modules/add_new_address/data/repos/add_new_address_repo.dart';
 import 'package:hessa_student/app/modules/add_new_address/data/repos/add_new_address_repo_implement.dart';
-import 'package:hessa_student/global_presentation/global_widgets/loading.dart';
 
 import '../../../../generated/locales.g.dart';
 import '../../../constants/exports.dart';
@@ -24,6 +23,7 @@ class AddNewAddressController extends GetxController {
   governorate.Result selectedGovernorate = governorate.Result();
   locality.Result selectedLocality = locality.Result();
   RxBool isInternetConnected = true.obs, isLoading = true.obs;
+  bool isGovernorateDropDownLoading = false, isLocalityDropDownLoading = false;
   final AddNewAddressRepo _addNewAddressRepo = AddNewAddressRepoImplement();
 
   @override
@@ -37,6 +37,9 @@ class AddNewAddressController extends GetxController {
   }
 
   Future changeCountry(String? result) async {
+    isGovernorateDropDownLoading = true;
+    isLocalityDropDownLoading = true;
+    update();
     if (countries.result != null && result != null) {
       for (var country in countries.result ?? <country.Result>[]) {
         if (country.displayName != null &&
@@ -47,25 +50,29 @@ class AddNewAddressController extends GetxController {
     }
     if (selectedCountry.id != null && selectedCountry.id != -1) {
       await _getGovernorate(countryId: selectedCountry.id!).then((value) {
+        selectedGovernorate = governorate.Result();
         selectedLocality = locality.Result();
         update();
       });
     } else {
-      governorates = Governorates();
-      localities = Localities();
-      selectedGovernorate = governorate.Result(
-        id: -1,
-        displayName: LocaleKeys.choose_city.tr,
-      );
-      selectedLocality = locality.Result(
-        id: -1,
-        displayName: LocaleKeys.choose_locality.tr,
-      );
+      isGovernorateDropDownLoading = true;
+      isLocalityDropDownLoading = true;
       update();
+      Future.delayed(const Duration(milliseconds: 500), () {
+        governorates = Governorates();
+        localities = Localities();
+        selectedGovernorate = governorate.Result();
+        selectedLocality = locality.Result();
+        isGovernorateDropDownLoading = false;
+        isLocalityDropDownLoading = false;
+        update();
+      });
     }
   }
 
   Future changeGovernorate(String? result) async {
+    isLocalityDropDownLoading = true;
+    update();
     if (governorates.result != null && result != null) {
       for (var governorate in governorates.result ?? <governorate.Result>[]) {
         if (governorate.displayName != null &&
@@ -76,14 +83,19 @@ class AddNewAddressController extends GetxController {
     }
     if (selectedGovernorate.id != null && selectedGovernorate.id != -1) {
       await _getLocalities(governorateId: selectedGovernorate.id!)
-          .then((value) => update());
+          .then((value) {
+        selectedLocality = locality.Result();
+        update();
+      });
     } else {
-      localities = Localities();
-      selectedLocality = locality.Result(
-        id: -1,
-        displayName: LocaleKeys.choose_locality.tr,
-      );
+      isLocalityDropDownLoading = true;
       update();
+      Future.delayed(const Duration(milliseconds: 500), () {
+        localities = Localities();
+        selectedLocality = locality.Result();
+        isLocalityDropDownLoading = false;
+        update();
+      });
     }
   }
 
@@ -135,10 +147,14 @@ class AddNewAddressController extends GetxController {
   }
 
   Future _getLocalities({required int governorateId}) async {
-    showLoadingDialog();
-    localities = await _addNewAddressRepo.getLocalities(
-      governorateId: governorateId,
-    );
+    await _addNewAddressRepo
+        .getLocalities(
+          governorateId: governorateId,
+        )
+        .then((Localities localities) => {
+              this.localities = localities,
+              isLocalityDropDownLoading = false,
+            });
     if (localities.result != null) {
       localities.result!.insert(
         0,
@@ -152,10 +168,15 @@ class AddNewAddressController extends GetxController {
   }
 
   Future _getGovernorate({required int countryId}) async {
-    showLoadingDialog();
-    governorates = await _addNewAddressRepo.getGovernorates(
-      countryId: countryId,
-    );
+    await _addNewAddressRepo
+        .getGovernorates(
+          countryId: countryId,
+        )
+        .then((Governorates governorates) => {
+              this.governorates = governorates,
+              isGovernorateDropDownLoading = false,
+              isLocalityDropDownLoading = false,
+            });
     if (governorates.result != null) {
       governorates.result!.insert(
         0,

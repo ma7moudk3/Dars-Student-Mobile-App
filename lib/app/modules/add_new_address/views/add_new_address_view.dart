@@ -1,6 +1,7 @@
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:hessa_student/global_presentation/global_widgets/custom_snack_bar.dart';
 import 'package:lottie/lottie.dart';
+import 'package:shimmer/shimmer.dart';
 
 import '../../../../generated/locales.g.dart';
 import '../../../../global_presentation/global_features/lotties_manager.dart';
@@ -117,147 +118,230 @@ class AddNewAddressView extends GetView<AddNewAddressController> {
                                     await controller.changeCountry(country),
                               ),
                               SizedBox(height: 12.h),
-                              PrimaryText(
-                                LocaleKeys.city,
-                                fontSize: 14.sp,
-                                fontWeight: FontWeightManager.softLight,
-                                color: ColorManager.fontColor,
-                              ),
+                              GetBuilder<AddNewAddressController>(builder:
+                                  (AddNewAddressController controller) {
+                                if (controller.isGovernorateDropDownLoading ==
+                                    true) {
+                                  return Shimmer.fromColors(
+                                    baseColor:
+                                        ColorManager.grey5.withOpacity(0.2),
+                                    highlightColor:
+                                        ColorManager.grey5.withOpacity(0.4),
+                                    child: Container(
+                                      width: Get.width,
+                                      height: 55.h,
+                                      decoration: BoxDecoration(
+                                        color: ColorManager.white,
+                                        borderRadius: BorderRadius.circular(12),
+                                        border: Border.all(
+                                          color: ColorManager.borderColor2,
+                                          width: 1.2,
+                                        ),
+                                      ),
+                                    ),
+                                  );
+                                } else {
+                                  return Column(
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
+                                    children: [
+                                      PrimaryText(
+                                        LocaleKeys.city,
+                                        fontSize: 14.sp,
+                                        fontWeight: FontWeightManager.softLight,
+                                        color: ColorManager.fontColor,
+                                      ),
+                                      SizedBox(height: 12.h),
+                                      GestureDetector(
+                                        behavior: HitTestBehavior.opaque,
+                                        onTap: () async {
+                                          if (isGovernorateDropDownDisabled &&
+                                              (controller.selectedCountry.id ==
+                                                      null ||
+                                                  controller
+                                                          .selectedCountry.id ==
+                                                      -1)) {
+                                            CustomSnackBar
+                                                .showCustomInfoSnackBar(
+                                              title: LocaleKeys.note.tr,
+                                              message: LocaleKeys
+                                                  .please_choose_country_first
+                                                  .tr,
+                                            );
+                                          }
+                                        },
+                                        child: PrimaryDropDown(
+                                          fontColor:
+                                              isGovernorateDropDownDisabled
+                                                  ? null
+                                                  : ColorManager.fontColor5,
+                                          items: controller
+                                                      .governorates.result !=
+                                                  null
+                                              ? (controller.governorates.result!
+                                                  .map((governorate.Result
+                                                          result) =>
+                                                      result.displayName ??
+                                                      "")).toList()
+                                              : [LocaleKeys.choose_city.tr],
+                                          hint: LocaleKeys.city,
+                                          value:
+                                              controller.governorates.result !=
+                                                          null &&
+                                                      controller.governorates
+                                                          .result!.isNotEmpty
+                                                  ? controller
+                                                          .governorates
+                                                          .result![0]
+                                                          .displayName ??
+                                                      LocaleKeys.choose_city.tr
+                                                  : LocaleKeys.choose_city.tr,
+                                          isDisabled:
+                                              isGovernorateDropDownDisabled,
+                                          disabledBorder: OutlineInputBorder(
+                                            borderSide: BorderSide(
+                                              color: ColorManager.borderColor2,
+                                              width: 1.2,
+                                            ),
+                                            borderRadius:
+                                                BorderRadius.circular(12),
+                                          ),
+                                          width: Get.width,
+                                          height: 50.h,
+                                          enabledBorder: OutlineInputBorder(
+                                            borderSide: BorderSide(
+                                              color: ColorManager.borderColor2,
+                                              width: 1.2,
+                                            ),
+                                            borderRadius:
+                                                BorderRadius.circular(12),
+                                          ),
+                                          focusedBorder: OutlineInputBorder(
+                                            borderSide: BorderSide(
+                                              color: ColorManager.borderColor2,
+                                              width: 1.2,
+                                            ),
+                                            borderRadius:
+                                                BorderRadius.circular(12),
+                                          ),
+                                          onChanged: (String? governorate) =>
+                                              controller.changeGovernorate(
+                                                  governorate),
+                                        ),
+                                      ),
+                                    ],
+                                  );
+                                }
+                              }),
                               SizedBox(height: 12.h),
                               GetBuilder<AddNewAddressController>(builder:
                                   (AddNewAddressController controller) {
-                                return GestureDetector(
-                                  behavior: HitTestBehavior.opaque,
-                                  onTap: () async {
-                                    if (isGovernorateDropDownDisabled &&
-                                        (controller.selectedCountry.id ==
-                                                null ||
-                                            controller.selectedCountry.id ==
-                                                -1)) {
-                                      CustomSnackBar.showCustomInfoSnackBar(
-                                        title: LocaleKeys.note.tr,
-                                        message: LocaleKeys
-                                            .please_choose_country_first.tr,
-                                      );
-                                    }
-                                  },
-                                  child: PrimaryDropDown(
-                                    fontColor: isGovernorateDropDownDisabled
-                                        ? null
-                                        : ColorManager.fontColor5,
-                                    items: controller.governorates.result !=
-                                          null
-                                        ? (controller.governorates.result!.map(
-                                                (governorate.Result result) =>
-                                                    result.displayName ?? ""))
-                                            .toList()
-                                        : [LocaleKeys.choose_city.tr],
-                                    hint: LocaleKeys.city,
-                                    value: controller.governorates.result !=
-                                                null &&
-                                            controller
-                                                .governorates.result!.isNotEmpty
-                                        ? controller.governorates.result![0]
-                                                .displayName ??
-                                            LocaleKeys.choose_city.tr
-                                        : LocaleKeys.choose_city.tr,
-                                    isDisabled: isGovernorateDropDownDisabled,
-                                    disabledBorder: OutlineInputBorder(
-                                      borderSide: BorderSide(
-                                        color: ColorManager.borderColor2,
-                                        width: 1.2,
+                                if (controller.isLocalityDropDownLoading ==
+                                    true) {
+                                  return Shimmer.fromColors(
+                                    baseColor:
+                                        ColorManager.grey5.withOpacity(0.2),
+                                    highlightColor:
+                                        ColorManager.grey5.withOpacity(0.4),
+                                    child: Container(
+                                      width: Get.width,
+                                      height: 55.h,
+                                      decoration: BoxDecoration(
+                                        color: ColorManager.white,
+                                        borderRadius: BorderRadius.circular(12),
+                                        border: Border.all(
+                                          color: ColorManager.borderColor2,
+                                          width: 1.2,
+                                        ),
                                       ),
-                                      borderRadius: BorderRadius.circular(12),
                                     ),
-                                    width: Get.width,
-                                    height: 50.h,
-                                    enabledBorder: OutlineInputBorder(
-                                      borderSide: BorderSide(
-                                        color: ColorManager.borderColor2,
-                                        width: 1.2,
+                                  );
+                                } else {
+                                  return Column(
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
+                                    children: [
+                                      PrimaryText(
+                                        LocaleKeys.locality,
+                                        fontSize: 14.sp,
+                                        fontWeight: FontWeightManager.softLight,
+                                        color: ColorManager.fontColor,
                                       ),
-                                      borderRadius: BorderRadius.circular(12),
-                                    ),
-                                    focusedBorder: OutlineInputBorder(
-                                      borderSide: BorderSide(
-                                        color: ColorManager.borderColor2,
-                                        width: 1.2,
+                                      SizedBox(height: 12.h),
+                                      GestureDetector(
+                                        behavior: HitTestBehavior.opaque,
+                                        onTap: () async {
+                                          if (isLocalityDropDownDisabled &&
+                                              (controller.selectedGovernorate
+                                                          .id ==
+                                                      null ||
+                                                  controller.selectedGovernorate
+                                                          .id ==
+                                                      -1)) {
+                                            CustomSnackBar
+                                                .showCustomInfoSnackBar(
+                                              title: LocaleKeys.note.tr,
+                                              message: LocaleKeys
+                                                  .please_choose_governorate_first
+                                                  .tr,
+                                            );
+                                          }
+                                        },
+                                        child: PrimaryDropDown(
+                                          fontColor: isLocalityDropDownDisabled
+                                              ? null
+                                              : ColorManager.fontColor5,
+                                          items: controller.localities.result !=
+                                                      null &&
+                                                  controller.localities.result!
+                                                      .isNotEmpty
+                                              ? (controller.localities.result!
+                                                  .map((locality.Result
+                                                          result) =>
+                                                      result.displayName ??
+                                                      "")).toList()
+                                              : [LocaleKeys.choose_locality.tr],
+                                          isDisabled:
+                                              isLocalityDropDownDisabled,
+                                          hint: LocaleKeys.locality,
+                                          value: controller.selectedLocality
+                                                  .displayName ??
+                                              LocaleKeys.choose_locality.tr,
+                                          disabledBorder: OutlineInputBorder(
+                                            borderSide: BorderSide(
+                                              color: ColorManager.borderColor2,
+                                              width: 1.2,
+                                            ),
+                                            borderRadius:
+                                                BorderRadius.circular(12),
+                                          ),
+                                          width: Get.width,
+                                          height: 50.h,
+                                          enabledBorder: OutlineInputBorder(
+                                            borderSide: BorderSide(
+                                              color: ColorManager.borderColor2,
+                                              width: 1.2,
+                                            ),
+                                            borderRadius:
+                                                BorderRadius.circular(12),
+                                          ),
+                                          focusedBorder: OutlineInputBorder(
+                                            borderSide: BorderSide(
+                                              color: ColorManager.borderColor2,
+                                              width: 1.2,
+                                            ),
+                                            borderRadius:
+                                                BorderRadius.circular(12),
+                                          ),
+                                          onChanged: (String? locality) =>
+                                              controller
+                                                  .changeLocality(locality),
+                                        ),
                                       ),
-                                      borderRadius: BorderRadius.circular(12),
-                                    ),
-                                    onChanged: (String? governorate) =>
-                                        controller
-                                            .changeGovernorate(governorate),
-                                  ),
-                                );
+                                    ],
+                                  );
+                                }
                               }),
-                              SizedBox(height: 12.h),
-                              PrimaryText(
-                                LocaleKeys.locality,
-                                fontSize: 14.sp,
-                                fontWeight: FontWeightManager.softLight,
-                                color: ColorManager.fontColor,
-                              ),
-                              SizedBox(height: 12.h),
-                              GestureDetector(
-                                behavior: HitTestBehavior.opaque,
-                                onTap: () async {
-                                  if (isLocalityDropDownDisabled &&
-                                      (controller.selectedGovernorate.id ==
-                                              null ||
-                                          controller.selectedGovernorate.id ==
-                                              -1)) {
-                                    CustomSnackBar.showCustomInfoSnackBar(
-                                      title: LocaleKeys.note.tr,
-                                      message: LocaleKeys
-                                          .please_choose_governorate_first.tr,
-                                    );
-                                  }
-                                },
-                                child: PrimaryDropDown(
-                                  fontColor: isLocalityDropDownDisabled
-                                      ? null
-                                      : ColorManager.fontColor5,
-                                  items: controller.localities.result != null &&
-                                          controller
-                                              .localities.result!.isNotEmpty
-                                      ? (controller.localities.result!.map(
-                                              (locality.Result result) =>
-                                                  result.displayName ?? ""))
-                                          .toList()
-                                      : [LocaleKeys.choose_locality.tr],
-                                  isDisabled: isLocalityDropDownDisabled,
-                                  hint: LocaleKeys.locality,
-                                  value:
-                                      controller.selectedLocality.displayName ??
-                                          LocaleKeys.choose_locality.tr,
-                                  disabledBorder: OutlineInputBorder(
-                                    borderSide: BorderSide(
-                                      color: ColorManager.borderColor2,
-                                      width: 1.2,
-                                    ),
-                                    borderRadius: BorderRadius.circular(12),
-                                  ),
-                                  width: Get.width,
-                                  height: 50.h,
-                                  enabledBorder: OutlineInputBorder(
-                                    borderSide: BorderSide(
-                                      color: ColorManager.borderColor2,
-                                      width: 1.2,
-                                    ),
-                                    borderRadius: BorderRadius.circular(12),
-                                  ),
-                                  focusedBorder: OutlineInputBorder(
-                                    borderSide: BorderSide(
-                                      color: ColorManager.borderColor2,
-                                      width: 1.2,
-                                    ),
-                                    borderRadius: BorderRadius.circular(12),
-                                  ),
-                                  onChanged: (String? locality) =>
-                                      controller.changeLocality(locality),
-                                ),
-                              ),
                               SizedBox(height: 12.h),
                               PrimaryTextField(
                                 cursorColor: ColorManager.primary,
@@ -307,8 +391,27 @@ class AddNewAddressView extends GetView<AddNewAddressController> {
                     padding: const EdgeInsets.all(16),
                     child: PrimaryButton(
                       onPressed: () async {
-                        if (controller.formKey.currentState!.validate()) {
-                          Get.back(); // currently
+                        if (controller.selectedCountry.id == null ||
+                            controller.selectedCountry.id == -1) {
+                          CustomSnackBar.showCustomInfoSnackBar(
+                            title: LocaleKeys.note.tr,
+                            message: LocaleKeys.please_choose_country_first.tr,
+                          );
+                        } else if (controller.selectedGovernorate.id == null ||
+                            controller.selectedGovernorate.id == -1) {
+                          CustomSnackBar.showCustomInfoSnackBar(
+                            title: LocaleKeys.note.tr,
+                            message:
+                                LocaleKeys.please_choose_governorate_first.tr,
+                          );
+                        } else if (controller.selectedLocality.id == null ||
+                            controller.selectedLocality.id == -1) {
+                          CustomSnackBar.showCustomInfoSnackBar(
+                            title: LocaleKeys.note.tr,
+                            message: LocaleKeys.please_choose_locality.tr,
+                          );
+                        } else if (controller.formKey.currentState!
+                            .validate()) {
                           if (await checkInternetConnection(timeout: 5)) {
                             // await controller.addNewAddress();
                           } else {

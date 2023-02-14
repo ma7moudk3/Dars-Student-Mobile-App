@@ -107,6 +107,7 @@ class EditProfileRepoImplement extends EditProfileRepo {
     try {
       Map<String, dynamic> data = {
         "id": id,
+        // "userId" : CacheHelper.instance.getUserId(),
       };
       if (firstName != null) {
         data["name"] = firstName;
@@ -141,6 +142,9 @@ class EditProfileRepoImplement extends EditProfileRepo {
         },
         onError: (error) {
           statusCode = error.statusCode ?? 400;
+          if (Get.isDialogOpen!) {
+            Get.back();
+          }
           CustomSnackBar.showCustomErrorSnackBar(
             title: LocaleKeys.error.tr,
             message: error.message,
