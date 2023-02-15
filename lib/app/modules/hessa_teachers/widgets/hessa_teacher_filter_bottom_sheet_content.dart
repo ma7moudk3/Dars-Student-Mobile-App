@@ -163,9 +163,23 @@ class HessaTeacherFilterBottomSheetContent
                             hint: LocaleKeys.city,
                             value: controller.governorates.result != null &&
                                     controller.governorates.result!.isNotEmpty
-                                ? controller
-                                        .governorates.result![0].displayName ??
-                                    LocaleKeys.choose_city.tr
+                                ? controller.governorates.result!.firstWhereOrNull(
+                                            (governorate.Result governorate) =>
+                                                (governorate.id) ==
+                                                controller
+                                                    .selectedGovernorate.id) !=
+                                        null
+                                    ? controller.governorates.result!
+                                            .firstWhereOrNull((governorate.Result
+                                                    governorat) =>
+                                                (governorat.id ?? -1) ==
+                                                controller
+                                                    .selectedGovernorate.id)!
+                                            .displayName ??
+                                        LocaleKeys.choose_city.tr
+                                    : (controller.governorates.result![0]
+                                            .displayName ??
+                                        LocaleKeys.choose_city.tr)
                                 : LocaleKeys.choose_city.tr,
                             isDisabled: isGovernorateDropDownDisabled,
                             disabledBorder: OutlineInputBorder(

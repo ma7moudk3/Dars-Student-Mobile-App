@@ -72,7 +72,59 @@ class HessaTeachersView extends GetView<HessaTeachersController> {
                   },
                 ),
               ),
-              SizedBox(height: 25.h),
+              GetBuilder<HessaTeachersController>(
+                  builder: (HessaTeachersController controller) {
+                return Visibility(
+                  visible: controller.toggleFilter,
+                  child: Column(
+                    children: [
+                      SizedBox(height: 14.h),
+                      Padding(
+                        padding: EdgeInsets.symmetric(horizontal: 16.w),
+                        child: Row(
+                          children: [
+                            Container(
+                              padding: EdgeInsets.symmetric(
+                                  horizontal: 10.w, vertical: 7.h),
+                              decoration: BoxDecoration(
+                                color: const Color(0x1a5b83f9),
+                                borderRadius: BorderRadius.circular(10.0),
+                                boxShadow: const [
+                                  BoxShadow(
+                                    color: Color(0x01000000),
+                                    offset: Offset(0, 5),
+                                    blurRadius: 3,
+                                  ),
+                                ],
+                              ),
+                              child: Center(
+                                child: Row(
+                                  children: [
+                                    PrimaryText(
+                                      "نابلس",
+                                      color: ColorManager.primary,
+                                    ),
+                                    SizedBox(width: 5.w),
+                                    GestureDetector(
+                                      behavior: HitTestBehavior.opaque,
+                                      onTap: () {},
+                                      child: Icon(
+                                        Icons.close_rounded,
+                                        color: ColorManager.primary,
+                                        size: 20,
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                              ),
+                            )
+                          ],
+                        ),
+                      ),
+                    ],
+                  ),
+                );
+              }),
               SizedBox(height: 25.h),
               Padding(
                 padding: EdgeInsets.symmetric(horizontal: 16.w),

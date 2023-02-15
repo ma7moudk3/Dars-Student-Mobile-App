@@ -79,19 +79,27 @@ class HessaTeachersController extends GetxController {
   }
 
   Future resetTeachers() async {
-    searchTextController.text = "";
+    searchTextController.clear();
     levelId = null;
     topicId = null;
     skillId = null;
-    genderId = null;
+    selectedSkill = skills.result!.items![0];
+    selectedClass = classes.result!.items![0];
+    selectedTopic = topics.result![0];
+    selectedCountry = countries.result![0];
+    genderId = -1;
     countryId = null;
-    selectedClass = level.Item();
-    selectedTopic = topic.Result();
-    selectedCountry = country.Result();
-    governorates = Governorates();
-    selectedGovernorate = governorate.Result();
-    selectedSkill = skill.Item();
+    governorateId = null;
+    isGovernorateDropDownLoading = true;
+    update();
+    Future.delayed(const Duration(milliseconds: 500), () {
+      governorates = Governorates();
+      selectedGovernorate = governorate.Result();
+      isGovernorateDropDownLoading = false;
+      update();
+    });
     teacherGender = 0;
+    teacherFilterFactor = 0;
     // sortType = null;
     toggleSort = false;
     toggleFilter = false;
@@ -118,22 +126,25 @@ class HessaTeachersController extends GetxController {
     this.genderId = genderId != -1 ? genderId : null;
     this.countryId = countryId != -1 ? countryId : null;
     this.governorateId = governorateId != -1 ? governorateId : null;
-    if (teacherFilterFactor == 0 && levelId == null && topicId == null) {
-      return;
-    }
     if (teacherFilterFactor == 0) {
       this.levelId = levelId != -1 ? levelId : null;
       this.topicId = topicId != -1 ? topicId : null;
       this.skillId = null;
-    }
-    if (teacherFilterFactor == 1 && skillId == null) {
-      return;
+      update();
     }
     if (teacherFilterFactor == 1) {
       this.skillId = skillId != -1 ? skillId : null;
       this.levelId = null;
       this.topicId = null;
+      update();
     }
+    log("levelId: ${this.levelId}");
+    log("topicId: ${this.topicId}");
+    log("skillId: ${this.skillId}");
+    log("genderId: ${this.genderId}");
+    log("countryId: ${this.countryId}");
+    log("governorateId: ${this.governorateId}");
+    log("teacherFilterFactor: $teacherFilterFactor");
     toggleFilter = true;
     pagingController.refresh();
     update();
@@ -181,10 +192,10 @@ class HessaTeachersController extends GetxController {
   }
 
   void _initDataWhichSentThroughApi() {
-    selectedSkill = skills.result!.items![0];
-    selectedClass = classes.result!.items![0];
-    selectedTopic = topics.result![0];
-    selectedCountry = countries.result![0];
+    selectedSkill = skills.result?.items?[0] ?? skill.Item();
+    selectedClass = classes.result?.items?[0] ?? level.Item();
+    selectedTopic = topics.result?[0] ?? topic.Result();
+    selectedCountry = countries.result?[0] ?? country.Result();
     genderId = -1;
     update();
   }
@@ -247,6 +258,7 @@ class HessaTeachersController extends GetxController {
         ),
       );
     }
+    selectedGovernorate = governorates.result![0];
     update();
   }
 
