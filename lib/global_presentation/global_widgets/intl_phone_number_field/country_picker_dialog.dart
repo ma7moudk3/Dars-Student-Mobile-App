@@ -122,7 +122,6 @@ class _CountryPickerDialogState extends State<CountryPickerDialog> {
                     ListTile(
                       leading: Image.asset(
                         'assets/flags/${_filteredCountries[index].code.toLowerCase()}.png',
-                        package: 'intl_phone_field',
                         width: 32,
                       ),
                       contentPadding: widget.style?.listTilePadding,

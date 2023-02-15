@@ -1,4 +1,3 @@
-library intl_phone_field;
 
 import 'dart:async';
 
