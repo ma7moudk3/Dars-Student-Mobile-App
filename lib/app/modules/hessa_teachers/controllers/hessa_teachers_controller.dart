@@ -103,6 +103,7 @@ class HessaTeachersController extends GetxController {
     // sortType = null;
     toggleSort = false;
     toggleFilter = false;
+    filterList.clear();
     toggleSearch = false;
     pagingController.refresh();
     update();
@@ -130,12 +131,53 @@ class HessaTeachersController extends GetxController {
       this.levelId = levelId != -1 ? levelId : null;
       this.topicId = topicId != -1 ? topicId : null;
       this.skillId = null;
+      // delete the selectedSkill and add the selectedClass and selectedTopic
+      filterList.removeWhere((element) => element["selectedSkill"] != null);
+      if (this.levelId != null &&
+          this.levelId != -1 &&
+          selectedClass.id != null &&
+          selectedClass.id != -1) {
+        filterList.removeWhere((element) => element["selectedClass"] != null);
+        filterList.add({
+          "selectedClass": selectedClass,
+          "displayName": selectedClass.displayName ?? "",
+        });
+      } else {
+        filterList.removeWhere((element) => element["selectedClass"] != null);
+      }
+      if (this.topicId != null &&
+          this.topicId != -1 &&
+          selectedTopic.id != null &&
+          selectedTopic.id != -1) {
+        // here's the opposite of the above
+        filterList.removeWhere((element) => element["selectedTopic"] != null);
+        filterList.add({
+          "selectedTopic": selectedTopic,
+          "displayName": selectedTopic.displayName ?? "",
+        });
+      } else {
+        filterList.removeWhere((element) => element["selectedTopic"] != null);
+      }
       update();
     }
     if (teacherFilterFactor == 1) {
       this.skillId = skillId != -1 ? skillId : null;
       this.levelId = null;
       this.topicId = null;
+      if (this.skillId != null &&
+          this.skillId != -1 &&
+          selectedSkill.id != null &&
+          selectedSkill.id != -1) {
+        filterList.removeWhere((element) => element["selectedSkill"] != null);
+        filterList.add({
+          "selectedSkill": selectedSkill,
+          "displayName": selectedSkill.displayName ?? "",
+        });
+      } else {
+        filterList.removeWhere((element) => element["selectedSkill"] != null);
+      }
+      filterList.removeWhere((element) => element["selectedClass"] != null);
+      filterList.removeWhere((element) => element["selectedTopic"] != null);
       update();
     }
     log("levelId: ${this.levelId}");
@@ -145,7 +187,95 @@ class HessaTeachersController extends GetxController {
     log("countryId: ${this.countryId}");
     log("governorateId: ${this.governorateId}");
     log("teacherFilterFactor: $teacherFilterFactor");
+    if (this.countryId != null &&
+        this.countryId != -1 &&
+        selectedCountry.id != null &&
+        selectedCountry.id != -1) {
+      filterList.removeWhere((element) => element["selectedCountry"] != null);
+      filterList.add({
+        "selectedCountry": selectedCountry,
+        "displayName": selectedCountry.displayName ?? "",
+      });
+    } else {
+      filterList.removeWhere((element) => element["selectedCountry"] != null);
+    }
+    if (this.governorateId != null &&
+        this.governorateId != -1 &&
+        selectedGovernorate.id != null &&
+        selectedGovernorate.id != -1) {
+      filterList
+          .removeWhere((element) => element["selectedGovernorate"] != null);
+      filterList.add({
+        "selectedGovernorate": selectedGovernorate,
+        "displayName": selectedGovernorate.displayName ?? "",
+      });
+    } else {
+      filterList
+          .removeWhere((element) => element["selectedGovernorate"] != null);
+    }
+    if (this.genderId != null && this.genderId != -1 && teacherGender != -1) {
+      filterList.removeWhere((element) => element["teacherGender"] != null);
+      filterList.add({
+        "teacherGender": teacherGender,
+        "displayName":
+            this.genderId == 1 ? LocaleKeys.male.tr : LocaleKeys.female.tr,
+      });
+    } else {
+      filterList.removeWhere((element) => element["teacherGender"] != null);
+    }
     toggleFilter = true;
+    pagingController.refresh();
+    update();
+  }
+
+  void removeFilterTag({required Map<String, dynamic> filterTag}) {
+    filterList
+        .removeWhere((element) => element.keys.first == filterTag.keys.first);
+    switch (filterTag.keys.first) {
+      case "selectedClass":
+        selectedClass = classes.result!.items![0];
+        levelId = null;
+        break;
+      case "selectedTopic":
+        selectedTopic = topics.result![0];
+        topicId = null;
+        break;
+      case "selectedSkill":
+        selectedSkill = skills.result!.items![0];
+        skillId = null;
+        break;
+      case "teacherGender":
+        teacherGender = 0;
+        genderId = -1;
+        break;
+      case "selectedCountry":
+        filterList.removeWhere((element) =>
+            element["selectedGovernorate"] !=
+            null); // delete also the selectedGovernorate
+        selectedCountry = countries.result![0];
+        countryId = null;
+        governorateId = null;
+        isGovernorateDropDownLoading = true;
+        update();
+        Future.delayed(const Duration(milliseconds: 500), () {
+          governorates = Governorates();
+          selectedGovernorate = governorate.Result();
+          isGovernorateDropDownLoading = false;
+          update();
+        });
+        break;
+      case "selectedGovernorate":
+        governorateId = null;
+        isGovernorateDropDownLoading = true;
+        update();
+        Future.delayed(const Duration(milliseconds: 500), () {
+          governorates = Governorates();
+          selectedGovernorate = governorate.Result();
+          isGovernorateDropDownLoading = false;
+          update();
+        });
+        break;
+    }
     pagingController.refresh();
     update();
   }

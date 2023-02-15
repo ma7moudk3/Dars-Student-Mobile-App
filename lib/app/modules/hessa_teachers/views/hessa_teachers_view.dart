@@ -94,6 +94,7 @@ class HessaTeachersView extends GetView<HessaTeachersController> {
                               itemCount: controller.filterList.length,
                               itemBuilder: (BuildContext context, int index) {
                                 return Container(
+                                  height: 30.h,
                                   margin: EdgeInsets.only(right: 10.w),
                                   padding: EdgeInsets.symmetric(
                                     horizontal: 10.w,
@@ -115,13 +116,16 @@ class HessaTeachersView extends GetView<HessaTeachersController> {
                                       mainAxisSize: MainAxisSize.min,
                                       children: [
                                         PrimaryText(
-                                          "نابلس",
+                                          controller.filterList[index]
+                                              ["displayName"],
                                           color: ColorManager.primary,
                                         ),
                                         SizedBox(width: 5.w),
                                         GestureDetector(
                                           behavior: HitTestBehavior.opaque,
-                                          onTap: () {},
+                                          onTap: () {
+                                            controller.removeFilterTag(filterTag: controller.filterList[index]);
+                                          },
                                           child: Icon(
                                             Icons.close_rounded,
                                             color: ColorManager.primary,
