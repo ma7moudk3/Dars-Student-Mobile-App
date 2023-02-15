@@ -59,7 +59,7 @@ class HessaTeachersController extends GetxController {
   // String? sortType;
   int? levelId, topicId, skillId, genderId, countryId, governorateId;
   final AddNewAddressRepo _addNewAddressRepo = AddNewAddressRepoImplement();
-
+  List<Map<String, dynamic>> filterList = [];
   @override
   void onInit() async {
     searchTextController = TextEditingController();

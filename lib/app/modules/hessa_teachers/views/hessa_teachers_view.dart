@@ -38,6 +38,7 @@ class HessaTeachersView extends GetView<HessaTeachersController> {
           builder: (HessaTeachersController controller) {
         if (controller.isInternetConnected.value == true) {
           return Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               SizedBox(height: 24.h),
               Container(
@@ -75,53 +76,68 @@ class HessaTeachersView extends GetView<HessaTeachersController> {
               GetBuilder<HessaTeachersController>(
                   builder: (HessaTeachersController controller) {
                 return Visibility(
-                  visible: controller.toggleFilter,
-                  child: Column(
-                    children: [
-                      SizedBox(height: 14.h),
-                      Padding(
-                        padding: EdgeInsets.symmetric(horizontal: 16.w),
-                        child: Row(
-                          children: [
-                            Container(
-                              padding: EdgeInsets.symmetric(
-                                  horizontal: 10.w, vertical: 7.h),
-                              decoration: BoxDecoration(
-                                color: const Color(0x1a5b83f9),
-                                borderRadius: BorderRadius.circular(10.0),
-                                boxShadow: const [
-                                  BoxShadow(
-                                    color: Color(0x01000000),
-                                    offset: Offset(0, 5),
-                                    blurRadius: 3,
+                  visible: controller.toggleFilter &&
+                      controller.filterList.isNotEmpty,
+                  child: Expanded(
+                    flex: 1,
+                    child: Column(
+                      mainAxisSize: MainAxisSize.min,
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        SizedBox(height: 14.h),
+                        Expanded(
+                          child: Padding(
+                            padding: EdgeInsets.symmetric(horizontal: 16.w),
+                            child: ListView.builder(
+                              shrinkWrap: true,
+                              scrollDirection: Axis.horizontal,
+                              itemCount: controller.filterList.length,
+                              itemBuilder: (BuildContext context, int index) {
+                                return Container(
+                                  margin: EdgeInsets.only(right: 10.w),
+                                  padding: EdgeInsets.symmetric(
+                                    horizontal: 10.w,
+                                    vertical: 7.h,
                                   ),
-                                ],
-                              ),
-                              child: Center(
-                                child: Row(
-                                  children: [
-                                    PrimaryText(
-                                      "نابلس",
-                                      color: ColorManager.primary,
-                                    ),
-                                    SizedBox(width: 5.w),
-                                    GestureDetector(
-                                      behavior: HitTestBehavior.opaque,
-                                      onTap: () {},
-                                      child: Icon(
-                                        Icons.close_rounded,
-                                        color: ColorManager.primary,
-                                        size: 20,
+                                  decoration: BoxDecoration(
+                                    color: const Color(0x1a5b83f9),
+                                    borderRadius: BorderRadius.circular(10.0),
+                                    boxShadow: const [
+                                      BoxShadow(
+                                        color: Color(0x01000000),
+                                        offset: Offset(0, 5),
+                                        blurRadius: 3,
                                       ),
+                                    ],
+                                  ),
+                                  child: Center(
+                                    child: Row(
+                                      mainAxisSize: MainAxisSize.min,
+                                      children: [
+                                        PrimaryText(
+                                          "نابلس",
+                                          color: ColorManager.primary,
+                                        ),
+                                        SizedBox(width: 5.w),
+                                        GestureDetector(
+                                          behavior: HitTestBehavior.opaque,
+                                          onTap: () {},
+                                          child: Icon(
+                                            Icons.close_rounded,
+                                            color: ColorManager.primary,
+                                            size: 20,
+                                          ),
+                                        ),
+                                      ],
                                     ),
-                                  ],
-                                ),
-                              ),
-                            )
-                          ],
+                                  ),
+                                );
+                              },
+                            ),
+                          ),
                         ),
-                      ),
-                    ],
+                      ],
+                    ),
                   ),
                 );
               }),
@@ -162,6 +178,7 @@ class HessaTeachersView extends GetView<HessaTeachersController> {
               GetBuilder<HessaTeachersController>(
                   builder: (HessaTeachersController controller) {
                 return Expanded(
+                  flex: 10,
                   child: Padding(
                     padding: EdgeInsets.symmetric(horizontal: 16.w),
                     child: RefreshIndicator(
