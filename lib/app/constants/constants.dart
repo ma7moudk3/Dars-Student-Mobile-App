@@ -1,4 +1,4 @@
-const applicationName = "Hessa Student App";
+const applicationName = "حصة - الطالب";
 
 enum HessaType { oneHessa, studyingPackage }
 
