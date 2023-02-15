@@ -1,4 +1,5 @@
 import '../../../../constants/exports.dart';
+import '../../../../core/helper_functions.dart';
 import '../../controllers/addresses_controller.dart';
 import '../../data/models/address_result/address_result.dart';
 
@@ -33,8 +34,7 @@ class AddressWidget extends GetView<AddressesController> {
             width: 40.w,
             height: 40.h,
             decoration: BoxDecoration(
-              color: ColorManager.primary
-                  .withOpacity(0.10),
+              color: ColorManager.primary.withOpacity(0.10),
               borderRadius: BorderRadius.circular(10),
             ),
             child: Center(
@@ -46,40 +46,81 @@ class AddressWidget extends GetView<AddressesController> {
           ),
           SizedBox(width: 16.w),
           Column(
-            crossAxisAlignment:
-                CrossAxisAlignment.start,
+            crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               SizedBox(
                 width: 200.w,
-                child: PrimaryText(
-                  addressResult.countryName != null &&
-                          addressResult
-                                  .governorateName !=
-                              null
-                      ? "${addressResult.countryName ?? ""} - ${addressResult.governorateName ?? ""}"
+                child: Tooltip(
+                  message: addressResult.countryName != null &&
+                          addressResult.governorateName != null &&
+                          addressResult.localityName != null
+                      ? "${addressResult.countryName ?? ""} - ${addressResult.governorateName ?? ""} - ${addressResult.localityName ?? ""}"
                       : "${addressResult.countryName ?? ""}${addressResult.governorateName ?? ""}",
-                  fontSize: 16,
-                  maxLines: 1,
-                  overflow: TextOverflow.ellipsis,
-                  fontWeight: FontWeightManager.light,
+                  padding: const EdgeInsets.all(10),
+                  margin: const EdgeInsets.all(16),
+                  showDuration: const Duration(milliseconds: 5500),
+                  preferBelow: true,
+                  textAlign: detectLang(
+                          text: addressResult.countryName != null &&
+                                  addressResult.governorateName != null
+                              ? "${addressResult.countryName ?? ""} - ${addressResult.governorateName ?? ""}"
+                              : "${addressResult.countryName ?? ""}${addressResult.governorateName ?? ""}")
+                      ? TextAlign.left
+                      : TextAlign.right,
+                  decoration: BoxDecoration(
+                    color: ColorManager.grey5,
+                    borderRadius: BorderRadius.circular(10),
+                  ),
+                  triggerMode: TooltipTriggerMode.tap,
+                  child: PrimaryText(
+                    addressResult.countryName != null &&
+                            addressResult.governorateName != null
+                        ? "${addressResult.countryName ?? ""} - ${addressResult.governorateName ?? ""}"
+                        : "${addressResult.countryName ?? ""}${addressResult.governorateName ?? ""}",
+                    fontSize: 16,
+                    maxLines: 1,
+                    overflow: TextOverflow.ellipsis,
+                    fontWeight: FontWeightManager.light,
+                  ),
                 ),
               ),
               SizedBox(height: 4.h),
               SizedBox(
                 width: 200.w,
-                child: PrimaryText(
-                  addressResult.address != null &&
-                          addressResult.address?.name !=
-                              null &&
-                          addressResult
-                                  .address?.address1 !=
-                              null
+                child: Tooltip(
+                  message: addressResult.address != null &&
+                          addressResult.address?.name != null &&
+                          addressResult.address?.address1 != null
                       ? "${addressResult.address?.name ?? ""}: ${addressResult.address?.address1 ?? ""}"
                       : "${addressResult.address?.name ?? ""}${addressResult.address?.name ?? ""}",
-                  fontSize: 13.sp,
-                  maxLines: 1,
-                  color: ColorManager.fontColor7,
-                  overflow: TextOverflow.ellipsis,
+                  padding: const EdgeInsets.all(10),
+                  margin: const EdgeInsets.all(16),
+                  showDuration: const Duration(milliseconds: 5500),
+                  preferBelow: true,
+                  textAlign: detectLang(
+                          text: addressResult.address != null &&
+                                  addressResult.address?.name != null &&
+                                  addressResult.address?.address1 != null
+                              ? "${addressResult.address?.name ?? ""}: ${addressResult.address?.address1 ?? ""}"
+                              : "${addressResult.address?.name ?? ""}${addressResult.address?.name ?? ""}")
+                      ? TextAlign.left
+                      : TextAlign.right,
+                  decoration: BoxDecoration(
+                    color: ColorManager.grey5,
+                    borderRadius: BorderRadius.circular(10),
+                  ),
+                  triggerMode: TooltipTriggerMode.tap,
+                  child: PrimaryText(
+                    addressResult.address != null &&
+                            addressResult.address?.name != null &&
+                            addressResult.address?.address1 != null
+                        ? "${addressResult.address?.name ?? ""}: ${addressResult.address?.address1 ?? ""}"
+                        : "${addressResult.address?.name ?? ""}${addressResult.address?.name ?? ""}",
+                    fontSize: 13.sp,
+                    maxLines: 1,
+                    color: ColorManager.fontColor7,
+                    overflow: TextOverflow.ellipsis,
+                  ),
                 ),
               ),
             ],
@@ -88,16 +129,14 @@ class AddressWidget extends GetView<AddressesController> {
           GestureDetector(
             onTap: () async {
               await controller.deleteAddress(
-                addressId:
-                    addressResult.address?.id ?? -1,
+                addressId: addressResult.address?.id ?? -1,
               );
             },
             child: Container(
               width: 40.w,
               height: 40.h,
               decoration: BoxDecoration(
-                color:
-                    ColorManager.red.withOpacity(0.10),
+                color: ColorManager.red.withOpacity(0.10),
                 borderRadius: BorderRadius.circular(10),
               ),
               child: Center(

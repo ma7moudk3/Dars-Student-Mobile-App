@@ -29,7 +29,6 @@ void main() async {
     ScreenUtilInit(
       designSize: const Size(375, 812),
       builder: (BuildContext context, Widget? child) {
-        const languageCode = "ar";
         return GetMaterialApp(
           localizationsDelegates: const <LocalizationsDelegate<dynamic>>[
             GlobalMaterialLocalizations.delegate,
@@ -37,12 +36,12 @@ void main() async {
             GlobalCupertinoLocalizations.delegate,
             SfGlobalLocalizations.delegate
           ],
-          supportedLocales: const <Locale>[Locale('en'), Locale(languageCode)],
+          supportedLocales: const <Locale>[Locale("ar"), Locale("ar")],
           title: applicationName,
           debugShowCheckedModeBanner: false,
           initialRoute: AppPages.INITIAL,
           getPages: AppPages.routes,
-          locale: const Locale(languageCode),
+          locale: const Locale("ar"),
           theme: getApplicationTheme(),
           translationsKeys: AppTranslation.translations,
         );
