@@ -22,6 +22,7 @@ class HessaTeachersRepoImplement extends HessaTeachersRepo {
     String sortingOrder = "DESC",
     int? genderId,
     int? countryId,
+    int? governorateId,
     int? levelId,
     int? topicId,
     int? skillId,
@@ -56,6 +57,9 @@ class HessaTeachersRepoImplement extends HessaTeachersRepo {
     }
     if (countryId != null) {
       queryParameters["CountryId"] = countryId;
+    }
+    if (governorateId != null) {
+      queryParameters["GovernorateId"] = governorateId;
     }
     Map<String, dynamic> headers = {
       "Accpet": "application/json",

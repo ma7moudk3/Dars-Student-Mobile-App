@@ -25,7 +25,7 @@ class LogoutDialogContent extends StatelessWidget {
               LocaleKeys.logout.tr,
               color: ColorManager.primary,
               fontSize: 20,
-              fontWeight: FontWeightManager.medium,
+              fontWeight: FontWeightManager.light,
             ),
             SizedBox(height: 10.h),
             PrimaryText(

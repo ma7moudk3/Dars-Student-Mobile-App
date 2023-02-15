@@ -13,6 +13,7 @@ abstract class HessaTeachersRepo {
     int? genderId,
     int? levelId,
     int? countryId,
+    int? governorateId,
     int? topicId,
     int? skillId,
     required int page,

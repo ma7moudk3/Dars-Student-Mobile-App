@@ -1,12 +1,12 @@
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:hessa_student/global_presentation/global_widgets/custom_snack_bar.dart';
 import 'package:lottie/lottie.dart';
-import 'package:shimmer/shimmer.dart';
 
 import '../../../../generated/locales.g.dart';
 import '../../../../global_presentation/global_features/lotties_manager.dart';
 import '../../../../global_presentation/global_widgets/custom_app_bar.dart';
 import 'package:hessa_student/app/data/models/countries/result.dart' as country;
+import '../../../../global_presentation/global_widgets/shimmer_loading.dart';
 import '../../../data/models/governorates/result.dart' as governorate;
 import '../../../data/models/localities/result.dart' as locality;
 
@@ -501,33 +501,6 @@ class AddNewAddressView extends GetView<AddNewAddressController> {
           );
         }
       }),
-    );
-  }
-}
-
-class ShimmerLoading extends StatelessWidget {
-  const ShimmerLoading({
-    super.key,
-  });
-
-  @override
-  Widget build(BuildContext context) {
-    return Shimmer.fromColors(
-      loop: 3,
-      baseColor: ColorManager.grey.withOpacity(0.4),
-      highlightColor: ColorManager.grey.withOpacity(0.6),
-      child: Container(
-        width: Get.width,
-        height: 55.h,
-        decoration: BoxDecoration(
-          color: ColorManager.white,
-          borderRadius: BorderRadius.circular(12),
-          border: Border.all(
-            color: ColorManager.borderColor2,
-            width: 1.2,
-          ),
-        ),
-      ),
     );
   }
 }

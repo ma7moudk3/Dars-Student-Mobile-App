@@ -5,7 +5,9 @@ import 'package:dio/dio.dart';
 import '../../../../global_presentation/global_widgets/typeahead/cupertino_flutter_typeahead.dart';
 import 'package:hessa_student/app/data/models/countries/result.dart' as country;
 import 'package:hessa_student/app/data/models/topics/result.dart' as topic;
+import '../../../data/models/governorates/result.dart' as governorate;
 import '../../../data/models/classes/item.dart' as level;
+import '../../../data/models/governorates/governorates.dart';
 import '../../../data/models/skills/item.dart' as skill;
 import 'package:hessa_student/app/modules/hessa_teachers/data/models/hessa_teacher.dart';
 import 'package:hessa_student/app/modules/hessa_teachers/data/repos/hessa_teachers_repo.dart';
@@ -19,13 +21,16 @@ import '../../../data/models/countries/countries.dart';
 import '../../../data/models/skills/skills.dart';
 import '../../../data/models/topics/topics.dart';
 import '../../../routes/app_pages.dart';
+import '../../add_new_address/data/repos/add_new_address_repo.dart';
+import '../../add_new_address/data/repos/add_new_address_repo_implement.dart';
 import '../data/repos/hessa_teachers_repo_implement.dart';
 
 class HessaTeachersController extends GetxController {
   bool isSearchIconVisible = false,
       toggleSearch = false,
       toggleFilter = false,
-      toggleSort = false;
+      toggleSort = false,
+      isGovernorateDropDownLoading = false;
   Timer? _debounce;
   static const _pageSize = 6; // 6 teachers per page
   final int _debounceTime = 800;
@@ -42,15 +47,18 @@ class HessaTeachersController extends GetxController {
   RxBool isInternetConnected = true.obs, isLoading = true.obs;
   final HessaTeachersRepo _hessaTeacherRepo = HessaTeachersRepoImplement();
   Countries countries = Countries();
+  Governorates governorates = Governorates();
   Skills skills = Skills();
   Classes classes = Classes();
   Topics topics = Topics();
   level.Item selectedClass = level.Item();
   topic.Result selectedTopic = topic.Result();
   country.Result selectedCountry = country.Result();
+  governorate.Result selectedGovernorate = governorate.Result();
   skill.Item selectedSkill = skill.Item();
   // String? sortType;
-  int? levelId, topicId, skillId, genderId, countryId;
+  int? levelId, topicId, skillId, genderId, countryId, governorateId;
+  final AddNewAddressRepo _addNewAddressRepo = AddNewAddressRepoImplement();
 
   @override
   void onInit() async {
@@ -80,6 +88,8 @@ class HessaTeachersController extends GetxController {
     selectedClass = level.Item();
     selectedTopic = topic.Result();
     selectedCountry = country.Result();
+    governorates = Governorates();
+    selectedGovernorate = governorate.Result();
     selectedSkill = skill.Item();
     teacherGender = 0;
     // sortType = null;
@@ -103,9 +113,11 @@ class HessaTeachersController extends GetxController {
     int? skillId,
     int? genderId,
     int? countryId,
+    int? governorateId,
   }) async {
     this.genderId = genderId != -1 ? genderId : null;
     this.countryId = countryId != -1 ? countryId : null;
+    this.governorateId = governorateId != -1 ? governorateId : null;
     if (teacherFilterFactor == 0 && levelId == null && topicId == null) {
       return;
     }
@@ -177,7 +189,9 @@ class HessaTeachersController extends GetxController {
     update();
   }
 
-  void changeCountry(String? result) {
+  Future changeCountry(String? result) async {
+    isGovernorateDropDownLoading = true;
+    update();
     if (countries.result != null && result != null) {
       for (var country in countries.result ?? <country.Result>[]) {
         if (country.displayName != null &&
@@ -185,6 +199,53 @@ class HessaTeachersController extends GetxController {
           selectedCountry = country;
         }
       }
+    }
+    if (selectedCountry.id != null && selectedCountry.id != -1) {
+      await _getGovernorate(countryId: selectedCountry.id!).then((value) {
+        selectedGovernorate = governorate.Result();
+        update();
+      });
+    } else {
+      isGovernorateDropDownLoading = true;
+      update();
+      Future.delayed(const Duration(milliseconds: 500), () {
+        governorates = Governorates();
+        selectedGovernorate = governorate.Result();
+        isGovernorateDropDownLoading = false;
+        update();
+      });
+    }
+  }
+
+  Future changeGovernorate(String? result) async {
+    if (governorates.result != null && result != null) {
+      for (var governorate in governorates.result ?? <governorate.Result>[]) {
+        if (governorate.displayName != null &&
+            governorate.displayName!.toLowerCase() == result.toLowerCase()) {
+          selectedGovernorate = governorate;
+        }
+      }
+    }
+    update();
+  }
+
+  Future _getGovernorate({required int countryId}) async {
+    await _addNewAddressRepo
+        .getGovernorates(
+          countryId: countryId,
+        )
+        .then((Governorates governorates) => {
+              this.governorates = governorates,
+              isGovernorateDropDownLoading = false,
+            });
+    if (governorates.result != null) {
+      governorates.result!.insert(
+        0,
+        governorate.Result(
+          id: -1,
+          displayName: LocaleKeys.choose_city.tr,
+        ),
+      );
     }
     update();
   }
@@ -308,6 +369,7 @@ class HessaTeachersController extends GetxController {
               ? searchTextController.text
               : null,
           countryId: countryId,
+          governorateId: governorateId,
           genderId: genderId != -1 ? genderId : null,
           skillId: skillId,
           topicId: topicId,

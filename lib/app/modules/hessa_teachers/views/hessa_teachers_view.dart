@@ -73,6 +73,7 @@ class HessaTeachersView extends GetView<HessaTeachersController> {
                 ),
               ),
               SizedBox(height: 25.h),
+              SizedBox(height: 25.h),
               Padding(
                 padding: EdgeInsets.symmetric(horizontal: 16.w),
                 child: Column(
