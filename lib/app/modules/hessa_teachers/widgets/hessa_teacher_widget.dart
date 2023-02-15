@@ -156,7 +156,7 @@ class HessaTeacherWidget extends GetView<HessaTeachersController> {
                             width: 100.w,
                             child: PrimaryText(
                               country.isNotEmpty && governorate.isNotEmpty
-                                  ? "$country - $governorate}"
+                                  ? "$country - $governorate"
                                   : "$country$governorate",
                               color: ColorManager.fontColor7,
                               fontSize: 12.sp,
