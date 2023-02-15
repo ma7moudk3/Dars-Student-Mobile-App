@@ -1,16 +1,18 @@
 import 'dart:convert';
 import 'dart:io';
 
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:hessa_student/app/core/helper_functions.dart';
 import 'package:image_picker/image_picker.dart';
-import 'package:intl_phone_field/countries.dart';
-import 'package:intl_phone_field/phone_number.dart';
 
 import '../../../../generated/locales.g.dart';
 import '../../../../global_presentation/global_widgets/custom_app_bar.dart';
+import '../../../../global_presentation/global_widgets/intl_phone_number_field/countries.dart';
+import '../../../../global_presentation/global_widgets/intl_phone_number_field/phone_number.dart';
 import '../../../../global_presentation/global_widgets/intl_phone_number_widget.dart';
 import '../../../constants/exports.dart';
+import '../../../constants/links.dart';
 import '../../../data/cache_helper.dart';
 import '../../../routes/app_pages.dart';
 import '../controllers/edit_profile_controller.dart';
@@ -20,6 +22,8 @@ class EditProfileView extends GetView<EditProfileController> {
 
   @override
   Widget build(BuildContext context) {
+    String userPicture =
+        "${Links.baseLink}${Links.profileImageById}?userId=${controller.currentUserProfileInfo.result?.requester?.userId ?? -1}";
     return Scaffold(
       appBar: CustomAppBar(
         title: LocaleKeys.edit_profile,
@@ -173,51 +177,61 @@ class EditProfileView extends GetView<EditProfileController> {
                                   );
                                 }
                               },
-                              child: Container(
-                                width: 100.w,
-                                height: 100.h,
-                                decoration: BoxDecoration(
-                                  image: DecorationImage(
-                                    image: controller.image != null
-                                        ? FileImage(controller.image!)
-                                        : (CacheHelper.instance
-                                                        .getUserProfilePicture() !=
-                                                    null &&
-                                                CacheHelper.instance
-                                                    .getUserProfilePicture()!
-                                                    .isNotEmpty
-                                            ? MemoryImage(base64Decode(CacheHelper
-                                                    .instance
-                                                    .getUserProfilePicture()!))
-                                                as ImageProvider
-                                            : AssetImage(ImagesManager.guest)),
-                                    fit: BoxFit.cover,
-                                    colorFilter: ColorFilter.mode(
-                                      ColorManager.black.withOpacity(0.1),
-                                      BlendMode.srcOver,
+                              child: StatefulBuilder(
+                                  builder: (BuildContext context, setState) {
+                                return Container(
+                                  width: 100.w,
+                                  height: 100.h,
+                                  decoration: BoxDecoration(
+                                    image: DecorationImage(
+                                      image: controller.image != null
+                                          ? FileImage(controller.image!)
+                                          : (CacheHelper.instance
+                                                          .getUserProfilePicture() !=
+                                                      null &&
+                                                  CacheHelper.instance
+                                                      .getUserProfilePicture()!
+                                                      .isNotEmpty
+                                              ? MemoryImage(base64Decode(
+                                                  CacheHelper.instance
+                                                      .getUserProfilePicture()!))
+                                              : CachedNetworkImageProvider(
+                                                  userPicture,
+                                                  errorListener: () {
+                                                    setState(() {
+                                                      userPicture =
+                                                          "https://www.shareicon.net/data/2016/06/10/586098_guest_512x512.png";
+                                                    });
+                                                  },
+                                                )) as ImageProvider,
+                                      fit: BoxFit.cover,
+                                      colorFilter: ColorFilter.mode(
+                                        ColorManager.black.withOpacity(0.1),
+                                        BlendMode.srcOver,
+                                      ),
+                                    ),
+                                    boxShadow: const [
+                                      BoxShadow(
+                                        color: Color(0x1a000000),
+                                        offset: Offset(0, 1),
+                                        blurRadius: 8,
+                                      ),
+                                    ],
+                                    border: Border.all(
+                                      width: 1,
+                                      color: ColorManager.primary,
+                                    ),
+                                    shape: BoxShape.circle,
+                                  ),
+                                  child: Center(
+                                    child: SvgPicture.asset(
+                                      ImagesManager.cameraIcon,
+                                      width: 27.w,
+                                      height: 27.h,
                                     ),
                                   ),
-                                  boxShadow: const [
-                                    BoxShadow(
-                                      color: Color(0x1a000000),
-                                      offset: Offset(0, 1),
-                                      blurRadius: 8,
-                                    ),
-                                  ],
-                                  border: Border.all(
-                                    width: 1,
-                                    color: ColorManager.primary,
-                                  ),
-                                  shape: BoxShape.circle,
-                                ),
-                                child: Center(
-                                  child: SvgPicture.asset(
-                                    ImagesManager.cameraIcon,
-                                    width: 27.w,
-                                    height: 27.h,
-                                  ),
-                                ),
-                              ),
+                                );
+                              }),
                             ),
                             const SizedBox(height: 20),
                             Column(

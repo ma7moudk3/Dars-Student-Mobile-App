@@ -16,7 +16,7 @@ class HomeProfileInfoWidget extends GetView<HomeController> {
   @override
   Widget build(BuildContext context) {
     String userPicture =
-        "${Links.baseLink}${Links.profileImageById}?userId=${controller.currentUserProfileInfo.result!.requester!.userId.toString()}";
+        "${Links.baseLink}${Links.profileImageById}?userId=${controller.currentUserProfileInfo.result?.requester?.userId ?? -1}";
     return GestureDetector(
       behavior: HitTestBehavior.deferToChild,
       onTap: () async {

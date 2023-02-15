@@ -118,12 +118,7 @@ class VerifyOtpController extends GetxController {
           message: verifyOtpResponse.result!.message ??
               LocaleKeys.verified_successfully.tr,
         );
-        if (CacheHelper.instance.getIsEmailConfirmed() &&
-            CacheHelper.instance.getIsPhoneConfirmed()) {
-          await Get.offAllNamed(Routes.BOTTOM_NAV_BAR);
-        } else {
-          await Get.offAllNamed(Routes.VERIFY_ACCOUNT);
-        }
+        await Get.offAllNamed(Routes.VERIFY_ACCOUNT);
       }
     } else if (verifyOtpResponse.result != null &&
         verifyOtpResponse.result!.isValid == false) {

@@ -1,9 +1,9 @@
 import 'package:flutter_keyboard_visibility/flutter_keyboard_visibility.dart';
 import 'package:hessa_student/app/modules/sign_up/controllers/sign_up_controller.dart';
-import 'package:intl_phone_field/phone_number.dart';
 
 import '../../../../generated/locales.g.dart';
 import '../../../../global_presentation/global_widgets/custom_snack_bar.dart';
+import '../../../../global_presentation/global_widgets/intl_phone_number_field/phone_number.dart';
 import '../../../../global_presentation/global_widgets/intl_phone_number_widget.dart';
 import '../../../constants/exports.dart';
 import '../../../core/helper_functions.dart';

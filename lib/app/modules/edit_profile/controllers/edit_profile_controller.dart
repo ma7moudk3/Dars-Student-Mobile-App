@@ -7,11 +7,11 @@ import 'package:hessa_student/app/modules/login/data/models/current_user_profile
 import 'package:hessa_student/app/modules/login/data/repos/login_repo.dart';
 import 'package:hessa_student/global_presentation/global_widgets/loading.dart';
 import 'package:image_picker/image_picker.dart';
-import 'package:intl_phone_field/countries.dart';
-import 'package:intl_phone_field/phone_number.dart';
 
 import '../../../../generated/locales.g.dart';
 import '../../../../global_presentation/global_widgets/custom_snack_bar.dart';
+import '../../../../global_presentation/global_widgets/intl_phone_number_field/countries.dart';
+import '../../../../global_presentation/global_widgets/intl_phone_number_field/phone_number.dart';
 import '../../../constants/exports.dart';
 import '../../../routes/app_pages.dart';
 import '../../login/data/repos/login_repo_implement.dart';

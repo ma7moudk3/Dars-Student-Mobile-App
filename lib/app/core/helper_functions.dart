@@ -264,7 +264,6 @@ Future logout() async {
   if (await checkInternetConnection(timeout: 10)) {
     await _verifyAccountRepo.logout().then((int statusCode) async {
       if (statusCode == 200) {
-        await _clearAllCaches();
         await GoogleSignInHelper.googleLogout();
         // await AppleSignInHelper.appleLogout();
         // await FacebookSignInHelper.facebookLogout().then((value) {
@@ -275,6 +274,7 @@ Future logout() async {
         if (Get.isDialogOpen!) {
           Get.back();
         }
+        await _clearAllCaches();
         await Get.offAllNamed(Routes.LOGIN_OR_SIGN_UP, arguments: {
           "isFromOnboarding": false,
         });

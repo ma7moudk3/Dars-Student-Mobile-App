@@ -8,6 +8,7 @@ class ImagesManager {
   static String loginOrSignUpBackground3 =
       "assets/images/login_or_sign_up/login_background3.png";
   static String loginBackground = "assets/images/login_background.png";
+  static String verificationBackground = "assets/images/verification_background.png";
   static String signUpBackground = "assets/images/sign_up_background.png";
   static String noInernetConnection = "assets/images/connection_failed.png";
   static String googleLogo = "assets/svg/login/google_logo.svg";
@@ -83,6 +84,8 @@ class ImagesManager {
   static String emailVerificationSentIcon =
       "assets/svg/icons/email_verification_sent.svg";
   static String descendingIcon = "assets/svg/icons/descending.svg";
+  static String envelopeIcon = "assets/svg/icons/envelope.svg";
+  static String mobileIcon = "assets/svg/icons/mobile.svg";
   static String cameraIcon = "assets/svg/icons/camera.svg";
   static String dependents = "assets/svg/dependents.svg";
   static String forgotPassword = "assets/svg/forgot_password.svg";

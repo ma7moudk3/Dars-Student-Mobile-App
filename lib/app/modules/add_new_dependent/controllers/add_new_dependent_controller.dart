@@ -31,7 +31,9 @@ extension IsAtLeastYearsOld on DateTime {
 class AddNewDependentController extends GetxController {
   final GlobalKey<FormState> formKey = GlobalKey<FormState>();
   late TextEditingController nameController,
-      uplpoadPictureFileController; // ,dateOfBirthController;
+      notesController,
+      uplpoadPictureFileController,
+      schoolNameController; // ,dateOfBirthController;
   late DateRangePickerController dateOfBirthRangeController;
   File? image;
   FocusNode nameFocusNode = FocusNode(),
@@ -39,6 +41,7 @@ class AddNewDependentController extends GetxController {
       dateOfBirthFocusNode = FocusNode();
   DateTime dateOfBirth = DateTime.now();
   Color? nameIconErrorColor,
+      schoolNameIconErrorColor,
       uplpoadPictureFileIconErrorColor,
       dateOfBirthIconErrorColor;
   int dependentGender = 0; // 0 male, 1 female
@@ -59,6 +62,8 @@ class AddNewDependentController extends GetxController {
     nameController = TextEditingController();
     uplpoadPictureFileController = TextEditingController();
     // dateOfBirthController = TextEditingController();
+    schoolNameController = TextEditingController();
+    notesController = TextEditingController();
     dateOfBirthRangeController = DateRangePickerController();
     nameFocusNode.addListener(() => update());
     uplpoadPictureFileFocusNode.addListener(() => update());
@@ -94,7 +99,8 @@ class AddNewDependentController extends GetxController {
       levelId: selectedClass.id ?? 1,
       schoolTypeId: selectedSchoolType.id ?? 1,
       relationId: selectedStudentRelation.id ?? 1,
-      schoolName: selectedSchoolType.displayName ?? '',
+      schoolName: schoolNameController.text,
+      details: notesController.text,
       image: image,
     )
         .then((value) async {
@@ -322,12 +328,32 @@ class AddNewDependentController extends GetxController {
     }
   }
 
+  String? validateSchoolName(String? schoolName) {
+    String pattern = r'^[0-9]+$';
+    RegExp regExp = RegExp(pattern);
+    if (schoolName == null || schoolName.isEmpty) {
+      schoolNameIconErrorColor = Colors.red;
+      update();
+      return LocaleKeys.please_enter_dependent_name.tr;
+    } else if (regExp.hasMatch(schoolName)) {
+      schoolNameIconErrorColor = Colors.red;
+      update();
+      return LocaleKeys.check_dependent_name.tr;
+    } else {
+      schoolNameIconErrorColor = null;
+      update();
+      return null;
+    }
+  }
+
   @override
   void dispose() {
     nameController.dispose();
     uplpoadPictureFileController.dispose();
     // dateOfBirthController.dispose();
     nameFocusNode.dispose();
+    notesController.dispose();
+    schoolNameController.dispose();
     uplpoadPictureFileFocusNode.dispose();
     dateOfBirthFocusNode.dispose();
     dateOfBirthRangeController.dispose();

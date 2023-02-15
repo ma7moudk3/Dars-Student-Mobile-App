@@ -78,10 +78,26 @@ class LocaleKeys {
   static const confirm_password = 'confirm_password';
   static const write_full_name = 'write_full_name';
   static const agree_with = 'agree_with';
+  static const please_confirm_email_first_before_keep_going =
+      'please_confirm_email_first_before_keep_going';
+  static const please_confirm_phone_number_first_before_keep_going =
+      'please_confirm_phone_number_first_before_keep_going';
+  static const verification_of_the_account = 'verification_of_the_account';
+  static const confirm_your_mail_and_your_phone_number =
+      'confirm_your_mail_and_your_phone_number';
   static const terms_and_conditions = 'terms_and_conditions';
+  static const phone_number_already_verified = 'phone_number_already_verified';
+  static const please_enter_a_valid_phone_number =
+      'please_enter_a_valid_phone_number';
+  static const please_enter_a_valid_email = 'please_enter_a_valid_email';
+  static const email_already_verified = 'email_already_verified';
   static const for_hessa = 'for_hessa';
+  static const school_name = 'school_name';
+  static const write_school_name = 'write_school_name';
+  static const notes_about_dependent = 'notes_about_dependent';
   static const please_enter_fullname = 'please_enter_fullname';
   static const please_enter_area = 'please_enter_area';
+  static const keep_going = 'keep_going';
   static const current_address = 'current_address';
   static const country = 'country';
   static const please_enter_address_description =
@@ -448,10 +464,25 @@ class Locales {
     'confirm_password': 'تأكيد كلمة المرور',
     'write_full_name': 'اكتب الاسم الكامل',
     'agree_with': 'الموافقة على جميع ',
+    'please_confirm_email_first_before_keep_going':
+        'الرجاء تأكيد البريد الإلكتروني أولاً قبل المتابعة',
+    'please_confirm_phone_number_first_before_keep_going':
+        'الرجاء تأكيد رقم الهاتف أولاً قبل المتابعة',
+    'verification_of_the_account': 'التحقق وتأكيد الحساب',
+    'confirm_your_mail_and_your_phone_number':
+        'قم بتأكيد بريدك ورقم هاتفك المدخل',
     'terms_and_conditions': 'الشروط والأحكام',
+    'phone_number_already_verified': 'رقم الهاتف مؤكد بالفعل',
+    'please_enter_a_valid_phone_number': 'الرجاء إدخال رقم هاتف صحيح',
+    'please_enter_a_valid_email': 'الرجاء إدخال بريد إلكتروني صحيح',
+    'email_already_verified': 'البريد الإلكتروني مؤكد بالفعل',
     'for_hessa': 'لحِصّة',
+    'school_name': 'اسم المدرسة',
+    'write_school_name': 'اكتب اسم المدرسة',
+    'notes_about_dependent': 'ملاحظات عن التابع',
     'please_enter_fullname': 'الرجاء ادخال الاسم الكامل',
     'please_enter_area': 'الرجاء ادخال المنطقة',
+    'keep_going': 'متابعة',
     'current_address': 'العنوان الحالي',
     'country': 'الدولة',
     'please_enter_address_description': 'الرجاء ادخال وصف العنوان',

@@ -2,13 +2,13 @@ import 'dart:async';
 import 'dart:developer';
 
 import 'package:flutter/services.dart';
-import 'package:intl_phone_field/countries.dart';
-import 'package:intl_phone_field/country_picker_dialog.dart';
-import 'package:intl_phone_field/intl_phone_field.dart';
-import 'package:intl_phone_field/phone_number.dart';
 
 import '../../app/constants/exports.dart';
 import '../../generated/locales.g.dart';
+import 'intl_phone_number_field/countries.dart';
+import 'intl_phone_number_field/country_picker_dialog.dart';
+import 'intl_phone_number_field/intl_phone_field.dart';
+import 'intl_phone_number_field/phone_number.dart';
 
 class IntlPhoneNumberTextField extends StatelessWidget {
   final TextEditingController? controller;
@@ -16,17 +16,25 @@ class IntlPhoneNumberTextField extends StatelessWidget {
   final void Function(PhoneNumber)? onChanged;
   final void Function(Country)? onCountryChanged;
   final FutureOr<String?> Function(PhoneNumber?)? validator;
-  final bool readOnly, enabled;
+  final bool readOnly, enabled, changeCountryEnabled;
+  final Widget? prefix, suffix;
+  final BorderRadius? borderRadius;
   final String initialValue, initialCountryCode;
+  final EdgeInsetsGeometry? contentPadding;
   const IntlPhoneNumberTextField({
     Key? key,
     this.controller,
     this.initialValue = "+970",
     this.initialCountryCode = "PS",
     this.focusNode,
+    this.prefix,
+    this.suffix,
+    this.borderRadius,
     this.validator,
+    this.contentPadding,
     this.readOnly = false,
     this.enabled = true,
+    this.changeCountryEnabled = true,
     this.onChanged,
     this.onCountryChanged,
   }) : super(key: key);
@@ -50,7 +58,10 @@ class IntlPhoneNumberTextField extends StatelessWidget {
           child: IntlPhoneField(
             validator: validator,
             readOnly: readOnly,
+            suffix: suffix,
+            prefix: prefix,
             enabled: enabled,
+            changeCountryEnabled: changeCountryEnabled,
             style: textStyle,
             initialValue: initialValue,
             inputFormatters: [
@@ -99,7 +110,9 @@ class IntlPhoneNumberTextField extends StatelessWidget {
             ),
             controller: controller,
             decoration: InputDecoration(
-              contentPadding: const EdgeInsets.fromLTRB(20.0, 10.0, 20.0, 10.0),
+              enabled: !enabled,
+              contentPadding: contentPadding ??
+                  const EdgeInsets.fromLTRB(20.0, 10.0, 20.0, 10.0),
               hintMaxLines: null,
               counterText: "",
               // hintText:  "(59 | 56) XXXXXXX",
@@ -117,11 +130,15 @@ class IntlPhoneNumberTextField extends StatelessWidget {
                 fontFamily: FontConstants.fontFamily,
               ),
               enabledBorder: OutlineInputBorder(
-                borderRadius: BorderRadius.circular(14),
+                borderRadius: borderRadius ?? BorderRadius.circular(14),
+                borderSide: BorderSide(color: ColorManager.borderColor2),
+              ),
+              disabledBorder: OutlineInputBorder(
+                borderRadius: borderRadius ?? BorderRadius.circular(14),
                 borderSide: BorderSide(color: ColorManager.borderColor2),
               ),
               errorBorder: OutlineInputBorder(
-                borderRadius: BorderRadius.circular(14),
+                borderRadius: borderRadius ?? BorderRadius.circular(14),
                 borderSide: BorderSide(color: ColorManager.red),
               ),
               labelStyle: TextStyle(
@@ -131,11 +148,11 @@ class IntlPhoneNumberTextField extends StatelessWidget {
                 fontFamily: FontConstants.fontFamily,
               ),
               focusedBorder: OutlineInputBorder(
-                borderRadius: BorderRadius.circular(14),
+                borderRadius: borderRadius ?? BorderRadius.circular(14),
                 borderSide: BorderSide(color: ColorManager.primary),
               ),
               border: OutlineInputBorder(
-                borderRadius: BorderRadius.circular(14),
+                borderRadius: borderRadius ?? BorderRadius.circular(14),
                 borderSide: BorderSide(color: ColorManager.primary),
               ),
             ),

@@ -2,9 +2,9 @@ import 'dart:developer';
 
 import 'package:hessa_student/app/modules/login/data/repos/login_repo.dart';
 import 'package:hessa_student/global_presentation/global_widgets/custom_snack_bar.dart';
-import 'package:intl_phone_field/phone_number.dart';
 
 import '../../../../generated/locales.g.dart';
+import '../../../../global_presentation/global_widgets/intl_phone_number_field/phone_number.dart';
 import '../../../../global_presentation/global_widgets/loading.dart';
 import '../../../constants/exports.dart';
 import '../../../data/cache_helper.dart';

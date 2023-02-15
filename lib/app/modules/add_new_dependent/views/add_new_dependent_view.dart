@@ -204,6 +204,7 @@ class AddNewDependentView extends GetView<AddNewDependentController> {
                                 ),
                                 PrimaryTextField(
                                   fontSize: 14.sp,
+                                  isRequired: true,
                                   controller: controller.nameController,
                                   title: LocaleKeys.name,
                                   focusNode: controller.nameFocusNode,
@@ -251,6 +252,7 @@ class AddNewDependentView extends GetView<AddNewDependentController> {
                                 SizedBox(height: 12.h),
                                 PrimaryTextField(
                                   fontSize: 14.sp,
+                                  isRequired: true,
                                   readOnly: true,
                                   ifReadOnlyTextColor: ColorManager.fontColor7,
                                   controller:
@@ -389,11 +391,22 @@ class AddNewDependentView extends GetView<AddNewDependentController> {
                                 //           dateOfBirth),
                                 // ),
                                 SizedBox(height: 12.h),
-                                PrimaryText(
-                                  LocaleKeys.student_relation,
-                                  fontSize: 14.sp,
-                                  fontWeight: FontWeightManager.softLight,
-                                  color: ColorManager.fontColor,
+                                Row(
+                                  children: [
+                                    PrimaryText(
+                                      LocaleKeys.student_relation,
+                                      fontSize: 14.sp,
+                                      fontWeight: FontWeightManager.softLight,
+                                      color: ColorManager.fontColor,
+                                    ),
+                                    SizedBox(width: 2.w),
+                                    PrimaryText(
+                                      "*",
+                                      fontSize: 16.sp,
+                                      fontWeight: FontWeightManager.softLight,
+                                      color: ColorManager.accent,
+                                    ),
+                                  ],
                                 ),
                                 SizedBox(height: 12.h),
                                 PrimaryDropDown(
@@ -456,11 +469,22 @@ class AddNewDependentView extends GetView<AddNewDependentController> {
                                           studentRelation),
                                 ),
                                 SizedBox(height: 12.h),
-                                PrimaryText(
-                                  LocaleKeys.school_type,
-                                  fontSize: 14.sp,
-                                  fontWeight: FontWeightManager.softLight,
-                                  color: ColorManager.fontColor,
+                                Row(
+                                  children: [
+                                    PrimaryText(
+                                      LocaleKeys.school_type,
+                                      fontSize: 14.sp,
+                                      fontWeight: FontWeightManager.softLight,
+                                      color: ColorManager.fontColor,
+                                    ),
+                                    SizedBox(width: 2.w),
+                                    PrimaryText(
+                                      "*",
+                                      fontSize: 16.sp,
+                                      fontWeight: FontWeightManager.softLight,
+                                      color: ColorManager.accent,
+                                    ),
+                                  ],
                                 ),
                                 SizedBox(height: 12.h),
                                 PrimaryDropDown(
@@ -524,11 +548,69 @@ class AddNewDependentView extends GetView<AddNewDependentController> {
                                       controller.changeSchoolType(schoolType),
                                 ),
                                 SizedBox(height: 12.h),
-                                PrimaryText(
-                                  LocaleKeys.studying_class,
+                                PrimaryTextField(
                                   fontSize: 14.sp,
-                                  fontWeight: FontWeightManager.softLight,
-                                  color: ColorManager.fontColor,
+                                  isRequired: true,
+                                  controller: controller.schoolNameController,
+                                  title: LocaleKeys.school_name,
+                                  titleFontWeight: FontWeightManager.softLight,
+                                  onTap: () async {},
+                                  prefixIcon: Container(
+                                    margin: EdgeInsets.symmetric(
+                                      horizontal: 14.w,
+                                    ),
+                                    child: Icon(
+                                      Icons.school_rounded,
+                                      color:
+                                          controller.schoolNameIconErrorColor ??
+                                              ColorManager.primary,
+                                      size: 22.sp,
+                                    ),
+                                  ),
+                                  prefixIconConstraints: BoxConstraints(
+                                    minHeight: 22.h,
+                                    minWidth: 22.w,
+                                  ),
+                                  enabledBorder: OutlineInputBorder(
+                                    borderRadius: BorderRadius.circular(14),
+                                    borderSide: BorderSide(
+                                        color: ColorManager.borderColor2),
+                                  ),
+                                  focusedBorder: OutlineInputBorder(
+                                    borderRadius: BorderRadius.circular(14),
+                                    borderSide:
+                                        BorderSide(color: ColorManager.primary),
+                                  ),
+                                  borderRadius: BorderRadius.circular(14),
+                                  errorBorder: OutlineInputBorder(
+                                    borderRadius: BorderRadius.circular(14),
+                                    borderSide:
+                                        BorderSide(color: ColorManager.red),
+                                  ),
+                                  borderSide: BorderSide(
+                                    color: ColorManager.primary,
+                                  ),
+                                  hintText: LocaleKeys.write_school_name,
+                                  validator: (String? schoolName) =>
+                                      controller.validateSchoolName(schoolName),
+                                ),
+                                SizedBox(height: 12.h),
+                                Row(
+                                  children: [
+                                    PrimaryText(
+                                      LocaleKeys.studying_class,
+                                      fontSize: 14.sp,
+                                      fontWeight: FontWeightManager.softLight,
+                                      color: ColorManager.fontColor,
+                                    ),
+                                    SizedBox(width: 2.w),
+                                    PrimaryText(
+                                      "*",
+                                      fontSize: 16.sp,
+                                      fontWeight: FontWeightManager.softLight,
+                                      color: ColorManager.accent,
+                                    ),
+                                  ],
                                 ),
                                 SizedBox(height: 12.h),
                                 PrimaryDropDown(
@@ -593,7 +675,38 @@ class AddNewDependentView extends GetView<AddNewDependentController> {
                                   onChanged: (String? level) =>
                                       controller.changeLevel(level),
                                 ),
-                                // SizedBox(height: 12.h),
+                                SizedBox(height: 12.h),
+                                PrimaryTextField(
+                                  fontSize: 14.sp,
+                                  multiLines: true,
+                                  maxLines: 8,
+                                  contentPadding: const EdgeInsets.fromLTRB(
+                                      20.0, 20.0, 20.0, 10.0),
+                                  controller: controller.notesController,
+                                  title: LocaleKeys.notes,
+                                  borderRadius: BorderRadius.circular(14),
+                                  titleFontWeight: FontWeightManager.softLight,
+                                  onTap: () async {},
+                                  enabledBorder: OutlineInputBorder(
+                                    borderRadius: BorderRadius.circular(14),
+                                    borderSide: BorderSide(
+                                        color: ColorManager.borderColor2),
+                                  ),
+                                  focusedBorder: OutlineInputBorder(
+                                    borderRadius: BorderRadius.circular(14),
+                                    borderSide:
+                                        BorderSide(color: ColorManager.primary),
+                                  ),
+                                  errorBorder: OutlineInputBorder(
+                                    borderRadius: BorderRadius.circular(14),
+                                    borderSide:
+                                        BorderSide(color: ColorManager.red),
+                                  ),
+                                  borderSide: BorderSide(
+                                    color: ColorManager.primary,
+                                  ),
+                                  hintText: LocaleKeys.notes_about_dependent,
+                                ),
                                 // PrimaryText(
                                 //   LocaleKeys.studying_subject,
                                 //   fontSize: 14.sp,
@@ -668,6 +781,13 @@ class AddNewDependentView extends GetView<AddNewDependentController> {
                                       fontSize: 14.sp,
                                       fontWeight: FontWeightManager.softLight,
                                       color: ColorManager.fontColor,
+                                    ),
+                                    SizedBox(width: 2.w),
+                                    PrimaryText(
+                                      "*",
+                                      fontSize: 16.sp,
+                                      fontWeight: FontWeightManager.softLight,
+                                      color: ColorManager.accent,
                                     ),
                                     SizedBox(width: 5.w),
                                     Row(

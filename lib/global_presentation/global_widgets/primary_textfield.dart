@@ -28,7 +28,7 @@ class PrimaryTextField extends StatelessWidget {
   final BoxConstraints? suffixIconConstraints, prefixIconConstraints;
   final double titleFontSize;
   final Function(String)? onFieldSubmitted;
-  final bool readOnly;
+  final bool readOnly, isRequired;
   final bool? multiLines;
   final String title;
   final Color? titleColor;
@@ -69,6 +69,7 @@ class PrimaryTextField extends StatelessWidget {
     this.focusNode,
     this.onFieldSubmitted,
     this.readOnly = false,
+    this.isRequired = false,
     this.multiLines = false,
     required this.title,
     this.titleColor,
@@ -95,12 +96,30 @@ class PrimaryTextField extends StatelessWidget {
         title.isNotEmpty
             ? Column(
                 children: [
-                  PrimaryText(
-                    title,
-                    fontSize: titleFontSize.sp,
-                    fontWeight: titleFontWeight,
-                    color: titleColor,
-                  ),
+                  isRequired
+                      ? Row(
+                          children: [
+                            PrimaryText(
+                              title,
+                              fontSize: titleFontSize.sp,
+                              fontWeight: titleFontWeight,
+                              color: titleColor,
+                            ),
+                            SizedBox(width: 2.w),
+                            PrimaryText(
+                              "*",
+                              fontSize: 16.sp,
+                              fontWeight: titleFontWeight,
+                              color: ColorManager.accent,
+                            ),
+                          ],
+                        )
+                      : PrimaryText(
+                          title,
+                          fontSize: titleFontSize.sp,
+                          fontWeight: titleFontWeight,
+                          color: titleColor,
+                        ),
                   SizedBox(height: 10.h),
                 ],
               )

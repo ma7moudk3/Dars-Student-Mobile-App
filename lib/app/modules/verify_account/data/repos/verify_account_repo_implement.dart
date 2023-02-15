@@ -39,18 +39,21 @@ class VerifyAccountRepoImplement extends VerifyAccountRepo {
       data: data,
       headers: headers,
       onSuccess: (response) {
+        if (Get.isDialogOpen!) {
+          Get.back();
+        }
         generateOtpCode = GenerateOtpCode.fromJson(response.data);
       },
       onError: (error) {
+        if (Get.isDialogOpen!) {
+          Get.back();
+        }
         CustomSnackBar.showCustomErrorSnackBar(
           title: LocaleKeys.something_went_wrong.tr,
           message: error.response?.data["error"]["message"] ?? "Error",
         );
       },
     );
-    if (Get.isDialogOpen!) {
-      Get.back();
-    }
     return generateOtpCode;
   }
 
