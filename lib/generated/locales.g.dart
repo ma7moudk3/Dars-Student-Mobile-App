@@ -136,6 +136,8 @@ class LocaleKeys {
   static const toggle_notifications = 'toggle_notifications';
   static const settings = 'settings';
   static const logout = 'logout';
+  static const address_deletion = 'address_deletion';
+  static const wanna_delete_address = 'wanna_delete_address';
   static const edit_profile = 'edit_profile';
   static const change_password = 'change_password';
   static const change_language = 'change_language';
@@ -523,6 +525,8 @@ class Locales {
     'toggle_notifications': 'تفعيل الإشعارات',
     'settings': 'الإعدادات',
     'logout': 'تسجيل الخروج',
+    'address_deletion': 'حذف العنوان',
+    'wanna_delete_address': 'هل تريد حذف هذا العنوان؟',
     'edit_profile': 'تعديل الملف الشخصي',
     'change_password': 'تغيير كلمة المرور',
     'change_language': 'تغيير اللغة',

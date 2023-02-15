@@ -2,6 +2,7 @@ import '../../../../constants/exports.dart';
 import '../../../../core/helper_functions.dart';
 import '../../controllers/addresses_controller.dart';
 import '../../data/models/address_result/address_result.dart';
+import 'delete_address_dialog_content.dart';
 
 class AddressWidget extends GetView<AddressesController> {
   const AddressWidget({
@@ -128,9 +129,25 @@ class AddressWidget extends GetView<AddressesController> {
           const Spacer(),
           GestureDetector(
             onTap: () async {
-              await controller.deleteAddress(
-                addressId: addressResult.address?.id ?? -1,
-              );
+              await Get.dialog(
+                  Container(
+                    color: ColorManager.black.withOpacity(0.1),
+                    height: 140.h,
+                    width: 140.w,
+                    child: Center(
+                      child: Container(
+                        width: Get.width,
+                        margin: EdgeInsets.symmetric(
+                          horizontal: 18.w,
+                        ),
+                        child: const DeleteAddressDialogContent(),
+                      ),
+                    ),
+                  ),
+                  arguments: {
+                    "addressId": addressResult.address?.id ?? -1,
+                  });
+
             },
             child: Container(
               width: 40.w,
