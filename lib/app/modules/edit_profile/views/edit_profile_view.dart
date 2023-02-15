@@ -446,19 +446,21 @@ class EditProfileView extends GetView<EditProfileController> {
                       ),
                     ),
                     SizedBox(height: 36.h),
-                    Padding(
-                      padding: EdgeInsets.symmetric(horizontal: 16.w),
-                      child: PrimaryButton(
-                        title: LocaleKeys.save,
-                        onPressed: () async {
-                          if (controller.formKey.currentState!.validate()) {
-                            if (await checkInternetConnection(timeout: 5)) {
-                              await controller.updateProfile();
-                            } else {
-                              await Get.toNamed(Routes.CONNECTION_FAILED);
+                    SafeArea(
+                      child: Padding(
+                        padding: EdgeInsets.symmetric(horizontal: 16.w),
+                        child: PrimaryButton(
+                          title: LocaleKeys.save,
+                          onPressed: () async {
+                            if (controller.formKey.currentState!.validate()) {
+                              if (await checkInternetConnection(timeout: 5)) {
+                                await controller.updateProfile();
+                              } else {
+                                await Get.toNamed(Routes.CONNECTION_FAILED);
+                              }
                             }
-                          }
-                        },
+                          },
+                        ),
                       ),
                     ),
                   ],

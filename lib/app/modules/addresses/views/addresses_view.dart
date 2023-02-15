@@ -177,23 +177,25 @@ class AddressesView extends GetView<AddressesController> {
                     ),
                   );
                 }),
-                GetBuilder<AddressesController>(
-                    builder: (AddressesController controller) {
-                  return Visibility(
-                    visible: controller.addresses.isNotEmpty,
-                    child: Padding(
-                      padding: EdgeInsets.symmetric(
-                        horizontal: 16.w,
-                        vertical: 20.h,
+                SafeArea(
+                  child: GetBuilder<AddressesController>(
+                      builder: (AddressesController controller) {
+                    return Visibility(
+                      visible: controller.addresses.isNotEmpty,
+                      child: Padding(
+                        padding: EdgeInsets.symmetric(
+                          horizontal: 16.w,
+                          vertical: 20.h,
+                        ),
+                        child: PrimaryButton(
+                          onPressed: () async =>
+                              await Get.toNamed(Routes.ADD_NEW_ADDRESS),
+                          title: LocaleKeys.add_new_address.tr,
+                        ),
                       ),
-                      child: PrimaryButton(
-                        onPressed: () async =>
-                            await Get.toNamed(Routes.ADD_NEW_ADDRESS),
-                        title: LocaleKeys.add_new_address.tr,
-                      ),
-                    ),
-                  );
-                }),
+                    );
+                  }),
+                ),
               ],
             ),
           );

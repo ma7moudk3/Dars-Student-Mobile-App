@@ -36,12 +36,12 @@ void main() async {
             GlobalCupertinoLocalizations.delegate,
             SfGlobalLocalizations.delegate
           ],
-          supportedLocales: const <Locale>[Locale("ar"), Locale("ar")],
+          supportedLocales: const <Locale>[Locale("en"), Locale("ar")],
           title: applicationName,
           debugShowCheckedModeBanner: false,
           initialRoute: AppPages.INITIAL,
           getPages: AppPages.routes,
-          locale: const Locale("ar"),
+          locale: const Locale("ar"), // it's arabic for right now
           theme: getApplicationTheme(),
           translationsKeys: AppTranslation.translations,
         );

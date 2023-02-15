@@ -282,28 +282,30 @@ class TechnicalSupportView extends GetView<TechnicalSupportController> {
                       ),
                     ),
                     SizedBox(height: 25.h),
-                    Padding(
-                      padding: EdgeInsets.only(
-                          left: 16.w, right: 16.w, bottom: 16.h),
-                      child: PrimaryButton(
-                        onPressed: () async {
-                          if (controller.formKey.currentState!.validate()) {
-                            if (controller.urgencyType.result != null &&
-                                controller.selectedUrgency.id != null) {
-                              if (await checkInternetConnection(timeout: 5)) {
-                                await controller.sendMessage();
+                    SafeArea(
+                      child: Padding(
+                        padding: EdgeInsets.only(
+                            left: 16.w, right: 16.w, bottom: 16.h),
+                        child: PrimaryButton(
+                          onPressed: () async {
+                            if (controller.formKey.currentState!.validate()) {
+                              if (controller.urgencyType.result != null &&
+                                  controller.selectedUrgency.id != null) {
+                                if (await checkInternetConnection(timeout: 5)) {
+                                  await controller.sendMessage();
+                                } else {
+                                  await Get.toNamed(Routes.CONNECTION_FAILED);
+                                }
                               } else {
-                                await Get.toNamed(Routes.CONNECTION_FAILED);
+                                CustomSnackBar.showCustomErrorToast(
+                                  message: LocaleKeys
+                                      .chech_that_you_choose_the_message_type.tr,
+                                );
                               }
-                            } else {
-                              CustomSnackBar.showCustomErrorToast(
-                                message: LocaleKeys
-                                    .chech_that_you_choose_the_message_type.tr,
-                              );
                             }
-                          }
-                        },
-                        title: LocaleKeys.submit_form,
+                          },
+                          title: LocaleKeys.submit_form,
+                        ),
                       ),
                     )
                   ],

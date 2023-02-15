@@ -27,16 +27,18 @@ class HessaDetailsView extends GetView<HessaDetailsController> {
         ),
         action: const SizedBox.shrink(),
       ),
-      body: SingleChildScrollView(
-        child: GetBuilder<HessaDetailsController>(
-            builder: (HessaDetailsController controller) {
-          if (controller.hessaType == HessaType.oneHessa) {
-            return const OneHessaWidget();
-          } else {
-            // HessaType.studyingPackage
-            return const StudyingPackageWidget();
-          }
-        }),
+      body: SafeArea(
+        child: SingleChildScrollView(
+          child: GetBuilder<HessaDetailsController>(
+              builder: (HessaDetailsController controller) {
+            if (controller.hessaType == HessaType.oneHessa) {
+              return const OneHessaWidget();
+            } else {
+              // HessaType.studyingPackage
+              return const StudyingPackageWidget();
+            }
+          }),
+        ),
       ),
     );
   }
