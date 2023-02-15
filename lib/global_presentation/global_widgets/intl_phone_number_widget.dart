@@ -19,6 +19,7 @@ class IntlPhoneNumberTextField extends StatelessWidget {
   final bool readOnly, enabled, changeCountryEnabled;
   final Widget? prefix, suffix;
   final BorderRadius? borderRadius;
+  final bool isRequired;
   final String initialValue, initialCountryCode;
   final EdgeInsetsGeometry? contentPadding;
   const IntlPhoneNumberTextField({
@@ -34,6 +35,7 @@ class IntlPhoneNumberTextField extends StatelessWidget {
     this.contentPadding,
     this.readOnly = false,
     this.enabled = true,
+    this.isRequired = false,
     this.changeCountryEnabled = true,
     this.onChanged,
     this.onCountryChanged,
@@ -51,7 +53,20 @@ class IntlPhoneNumberTextField extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         SizedBox(height: 10.h),
-        PrimaryText(LocaleKeys.phone_number),
+        isRequired
+            ? Row(
+                children: [
+                  PrimaryText(LocaleKeys.phone_number),
+                  SizedBox(width: 2.w),
+                  PrimaryText(
+                    "*",
+                    fontSize: 16.sp,
+                    fontWeight: FontWeightManager.softLight,
+                    color: ColorManager.accent,
+                  ),
+                ],
+              )
+            : PrimaryText(LocaleKeys.phone_number),
         SizedBox(height: 5.h),
         Directionality(
           textDirection: TextDirection.ltr,

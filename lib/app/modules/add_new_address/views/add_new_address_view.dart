@@ -73,11 +73,22 @@ class AddNewAddressView extends GetView<AddNewAddressController> {
                             crossAxisAlignment: CrossAxisAlignment.start,
                             mainAxisSize: MainAxisSize.min,
                             children: [
-                              PrimaryText(
-                                LocaleKeys.country,
-                                fontSize: 14.sp,
-                                fontWeight: FontWeightManager.softLight,
-                                color: ColorManager.fontColor,
+                              Row(
+                                children: [
+                                  PrimaryText(
+                                    LocaleKeys.country,
+                                    fontSize: 14.sp,
+                                    fontWeight: FontWeightManager.softLight,
+                                    color: ColorManager.fontColor,
+                                  ),
+                                  SizedBox(width: 2.w),
+                                  PrimaryText(
+                                    "*",
+                                    fontSize: 16.sp,
+                                    fontWeight: FontWeightManager.softLight,
+                                    color: ColorManager.accent,
+                                  ),
+                                ],
                               ),
                               SizedBox(height: 12.h),
                               PrimaryDropDown(
@@ -128,11 +139,24 @@ class AddNewAddressView extends GetView<AddNewAddressController> {
                                     crossAxisAlignment:
                                         CrossAxisAlignment.start,
                                     children: [
-                                      PrimaryText(
-                                        LocaleKeys.city,
-                                        fontSize: 14.sp,
-                                        fontWeight: FontWeightManager.softLight,
-                                        color: ColorManager.fontColor,
+                                      Row(
+                                        children: [
+                                          PrimaryText(
+                                            LocaleKeys.city,
+                                            fontSize: 14.sp,
+                                            fontWeight:
+                                                FontWeightManager.softLight,
+                                            color: ColorManager.fontColor,
+                                          ),
+                                          SizedBox(width: 2.w),
+                                          PrimaryText(
+                                            "*",
+                                            fontSize: 16.sp,
+                                            fontWeight:
+                                                FontWeightManager.softLight,
+                                            color: ColorManager.accent,
+                                          ),
+                                        ],
                                       ),
                                       SizedBox(height: 12.h),
                                       GestureDetector(
@@ -227,11 +251,24 @@ class AddNewAddressView extends GetView<AddNewAddressController> {
                                     crossAxisAlignment:
                                         CrossAxisAlignment.start,
                                     children: [
-                                      PrimaryText(
-                                        LocaleKeys.locality,
-                                        fontSize: 14.sp,
-                                        fontWeight: FontWeightManager.softLight,
-                                        color: ColorManager.fontColor,
+                                      Row(
+                                        children: [
+                                          PrimaryText(
+                                            LocaleKeys.locality,
+                                            fontSize: 14.sp,
+                                            fontWeight:
+                                                FontWeightManager.softLight,
+                                            color: ColorManager.fontColor,
+                                          ),
+                                          SizedBox(width: 2.w),
+                                          PrimaryText(
+                                            "*",
+                                            fontSize: 16.sp,
+                                            fontWeight:
+                                                FontWeightManager.softLight,
+                                            color: ColorManager.accent,
+                                          ),
+                                        ],
                                       ),
                                       SizedBox(height: 12.h),
                                       GestureDetector(
@@ -313,6 +350,7 @@ class AddNewAddressView extends GetView<AddNewAddressController> {
                                 cursorColor: ColorManager.primary,
                                 focusNode: controller.addressFocusNode,
                                 titleFontSize: 14.sp,
+                                isRequired: true,
                                 titleFontWeight: FontWeightManager.softLight,
                                 borderRadius: BorderRadius.circular(14),
                                 controller: controller.addressController,
@@ -344,6 +382,7 @@ class AddNewAddressView extends GetView<AddNewAddressController> {
                               SizedBox(height: 12.h),
                               PrimaryTextField(
                                 cursorColor: ColorManager.primary,
+                                isRequired: true,
                                 focusNode:
                                     controller.addressDescriptionFocusNode,
                                 titleFontSize: 14.sp,

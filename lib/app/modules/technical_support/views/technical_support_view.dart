@@ -81,6 +81,7 @@ class TechnicalSupportView extends GetView<TechnicalSupportController> {
                               SizedBox(height: 20.h),
                               PrimaryTextField(
                                 fontSize: 14.sp,
+                                isRequired: true,
                                 controller: controller.fullNameController,
                                 title: LocaleKeys.full_name,
                                 focusNode: controller.fullNameFocusNode,
@@ -131,6 +132,7 @@ class TechnicalSupportView extends GetView<TechnicalSupportController> {
                               SizedBox(height: 20.h),
                               PrimaryTextField(
                                 fontSize: 14.sp,
+                                isRequired: true,
                                 controller: controller.emailController,
                                 title: LocaleKeys.email,
                                 focusNode: controller.emailFocusNode,
@@ -178,11 +180,22 @@ class TechnicalSupportView extends GetView<TechnicalSupportController> {
                                     controller.validateEmail(email),
                               ),
                               SizedBox(height: 20.h),
-                              PrimaryText(
-                                LocaleKeys.message_type,
-                                fontSize: 14.sp,
-                                fontWeight: FontWeightManager.softLight,
-                                color: ColorManager.fontColor,
+                              Row(
+                                children: [
+                                  PrimaryText(
+                                    LocaleKeys.message_type,
+                                    fontSize: 14.sp,
+                                    fontWeight: FontWeightManager.softLight,
+                                    color: ColorManager.fontColor,
+                                  ),
+                                  SizedBox(width: 2.w),
+                                  PrimaryText(
+                                    "*",
+                                    fontSize: 16.sp,
+                                    fontWeight: FontWeightManager.softLight,
+                                    color: ColorManager.accent,
+                                  ),
+                                ],
                               ),
                               SizedBox(height: 10.h),
                               PrimaryDropDown(
@@ -232,6 +245,7 @@ class TechnicalSupportView extends GetView<TechnicalSupportController> {
                               PrimaryTextField(
                                 fontSize: 14.sp,
                                 multiLines: true,
+                                isRequired: true,
                                 maxLines: 8,
                                 contentPadding: const EdgeInsets.fromLTRB(
                                     20.0, 20.0, 20.0, 10.0),

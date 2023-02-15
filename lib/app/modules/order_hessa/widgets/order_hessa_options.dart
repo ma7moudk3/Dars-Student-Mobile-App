@@ -14,11 +14,22 @@ class OrderHessaOptions extends GetView<OrderHessaController> {
       return Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          PrimaryText(
-            LocaleKeys.session_way,
-            fontSize: 14.sp,
-            fontWeight: FontWeightManager.softLight,
-            color: ColorManager.fontColor,
+          Row(
+            children: [
+              PrimaryText(
+                LocaleKeys.session_way,
+                fontSize: 14.sp,
+                fontWeight: FontWeightManager.softLight,
+                color: ColorManager.fontColor,
+              ),
+              SizedBox(width: 2.w),
+              PrimaryText(
+                "*",
+                fontSize: 16.sp,
+                fontWeight: FontWeightManager.softLight,
+                color: ColorManager.accent,
+              ),
+            ],
           ),
           SizedBox(height: 12.h),
           Row(
@@ -65,11 +76,22 @@ class OrderHessaOptions extends GetView<OrderHessaController> {
             }),
           ),
           SizedBox(height: 12.h),
-          PrimaryText(
-            LocaleKeys.teacher_gender,
-            fontSize: 14.sp,
-            fontWeight: FontWeightManager.softLight,
-            color: ColorManager.fontColor,
+          Row(
+            children: [
+              PrimaryText(
+                LocaleKeys.teacher_gender,
+                fontSize: 14.sp,
+                fontWeight: FontWeightManager.softLight,
+                color: ColorManager.fontColor,
+              ),
+              SizedBox(width: 2.w),
+              PrimaryText(
+                "*",
+                fontSize: 16.sp,
+                fontWeight: FontWeightManager.softLight,
+                color: ColorManager.accent,
+              ),
+            ],
           ),
           SizedBox(height: 12.h),
           Row(
@@ -116,11 +138,22 @@ class OrderHessaOptions extends GetView<OrderHessaController> {
             }),
           ),
           SizedBox(height: 12.h),
-          PrimaryText(
-            LocaleKeys.order_type,
-            fontSize: 14.sp,
-            fontWeight: FontWeightManager.softLight,
-            color: ColorManager.fontColor,
+          Row(
+            children: [
+              PrimaryText(
+                LocaleKeys.order_type,
+                fontSize: 14.sp,
+                fontWeight: FontWeightManager.softLight,
+                color: ColorManager.fontColor,
+              ),
+              SizedBox(width: 2.w),
+              PrimaryText(
+                "*",
+                fontSize: 16.sp,
+                fontWeight: FontWeightManager.softLight,
+                color: ColorManager.accent,
+              ),
+            ],
           ),
           SizedBox(height: 12.h),
           Row(

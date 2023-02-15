@@ -60,6 +60,7 @@ class ChangePasswordBottomSheetContent extends GetView<SettingsController> {
                         Column(
                           children: [
                             PasswordTextField(
+                              isRequired: true,
                               titleFontSize: 14.sp,
                               titleSpacing: 15,
                               titleFontWeight: FontWeightManager.softLight,
@@ -102,6 +103,7 @@ class ChangePasswordBottomSheetContent extends GetView<SettingsController> {
                             SizedBox(height: 20.h),
                             PasswordTextField(
                               titleFontSize: 14.sp,
+                              isRequired: true,
                               titleSpacing: 15,
                               titleFontWeight: FontWeightManager.softLight,
                               focusNode: controller.newPasswordFocusNode,
@@ -142,6 +144,7 @@ class ChangePasswordBottomSheetContent extends GetView<SettingsController> {
                             ),
                             SizedBox(height: 20.h),
                             PasswordTextField(
+                              isRequired: true,
                               titleFontSize: 14.sp,
                               titleSpacing: 15,
                               titleFontWeight: FontWeightManager.softLight,

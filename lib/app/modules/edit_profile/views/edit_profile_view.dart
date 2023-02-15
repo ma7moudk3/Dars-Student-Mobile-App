@@ -239,6 +239,7 @@ class EditProfileView extends GetView<EditProfileController> {
                               children: [
                                 PrimaryTextField(
                                   fontSize: 14.sp,
+                                  isRequired: true,
                                   controller: controller.fullNameController,
                                   title: LocaleKeys.full_name,
                                   focusNode: controller.fullNameFocusNode,
@@ -289,6 +290,7 @@ class EditProfileView extends GetView<EditProfileController> {
                                 PrimaryTextField(
                                   cursorColor: ColorManager.primary,
                                   focusNode: controller.emailFocusNode,
+                                  isRequired: true,
                                   prefixIcon: Icon(
                                     Icons.email_outlined,
                                     size: 25,
@@ -341,6 +343,7 @@ class EditProfileView extends GetView<EditProfileController> {
                                 ),
                                 SizedBox(height: 13.h),
                                 IntlPhoneNumberTextField(
+                                  isRequired: true,
                                   controller: controller.phoneController,
                                   focusNode: controller.phoneFocusNode,
                                   onCountryChanged: (Country country) {
@@ -371,11 +374,23 @@ class EditProfileView extends GetView<EditProfileController> {
                                 Row(
                                   mainAxisAlignment: MainAxisAlignment.start,
                                   children: [
-                                    PrimaryText(
-                                      LocaleKeys.gender,
-                                      color: ColorManager.fontColor,
-                                      fontWeight: FontWeightManager.light,
-                                      fontSize: 14.sp,
+                                    Row(
+                                      children: [
+                                        PrimaryText(
+                                          LocaleKeys.gender,
+                                          color: ColorManager.fontColor,
+                                          fontWeight: FontWeightManager.light,
+                                          fontSize: 14.sp,
+                                        ),
+                                        SizedBox(width: 2.w),
+                                        PrimaryText(
+                                          "*",
+                                          fontSize: 16.sp,
+                                          fontWeight:
+                                              FontWeightManager.softLight,
+                                          color: ColorManager.accent,
+                                        ),
+                                      ],
                                     ),
                                     SizedBox(width: 38.w),
                                     Row(

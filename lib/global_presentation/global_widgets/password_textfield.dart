@@ -17,6 +17,7 @@ class PasswordTextField extends StatefulWidget {
   final InputBorder? focusedBorder;
   final InputBorder? errorBorder;
   final BorderSide borderSide;
+  final bool isRequired;
   final int? maxLength;
   final Widget? prefixIcon;
   final FocusNode? focusNode;
@@ -33,6 +34,7 @@ class PasswordTextField extends StatefulWidget {
       this.title,
       this.titleSpacing,
       this.borderRadius,
+      this.isRequired = false,
       this.prefixIcon,
       this.titleFontSize,
       this.titleFontWeight,
@@ -68,11 +70,29 @@ class _PasswordTextFieldState extends State<PasswordTextField> {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        PrimaryText(
-          widget.title ?? LocaleKeys.password.tr,
-          fontWeight: widget.titleFontWeight ?? FontWeightManager.light,
-          fontSize: widget.titleFontSize ?? 13,
-        ),
+        widget.isRequired
+            ? Row(
+                children: [
+                  PrimaryText(
+                    widget.title ?? LocaleKeys.password.tr,
+                    fontWeight:
+                        widget.titleFontWeight ?? FontWeightManager.light,
+                    fontSize: widget.titleFontSize ?? 13,
+                  ),
+                  SizedBox(width: 2.w),
+                  PrimaryText(
+                    "*",
+                    fontSize: 16.sp,
+                    fontWeight: FontWeightManager.softLight,
+                    color: ColorManager.accent,
+                  ),
+                ],
+              )
+            : PrimaryText(
+                widget.title ?? LocaleKeys.password.tr,
+                fontWeight: widget.titleFontWeight ?? FontWeightManager.light,
+                fontSize: widget.titleFontSize ?? 13,
+              ),
         SizedBox(height: (widget.titleSpacing ?? 10).h),
         /*
                     decoration: BoxDecoration(

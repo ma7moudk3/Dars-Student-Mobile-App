@@ -96,20 +96,42 @@ class OrderHessaView extends GetView<OrderHessaController> {
                               child: Column(
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
-                                  PrimaryText(
-                                    LocaleKeys.student_name,
-                                    fontSize: 14.sp,
-                                    fontWeight: FontWeightManager.softLight,
-                                    color: ColorManager.fontColor,
+                                  Row(
+                                    children: [
+                                      PrimaryText(
+                                        LocaleKeys.student_name,
+                                        fontSize: 14.sp,
+                                        fontWeight: FontWeightManager.softLight,
+                                        color: ColorManager.fontColor,
+                                      ),
+                                      SizedBox(width: 2.w),
+                                      PrimaryText(
+                                        "*",
+                                        fontSize: 16.sp,
+                                        fontWeight: FontWeightManager.softLight,
+                                        color: ColorManager.accent,
+                                      ),
+                                    ],
                                   ),
                                   SizedBox(height: 12.h),
                                   const AddStudentOrderHessaWidget(),
                                   SizedBox(height: 12.h),
-                                  PrimaryText(
-                                    LocaleKeys.studying_class,
-                                    fontSize: 14.sp,
-                                    fontWeight: FontWeightManager.softLight,
-                                    color: ColorManager.fontColor,
+                                  Row(
+                                    children: [
+                                      PrimaryText(
+                                        LocaleKeys.studying_class,
+                                        fontSize: 14.sp,
+                                        fontWeight: FontWeightManager.softLight,
+                                        color: ColorManager.fontColor,
+                                      ),
+                                      SizedBox(width: 2.w),
+                                      PrimaryText(
+                                        "*",
+                                        fontSize: 16.sp,
+                                        fontWeight: FontWeightManager.softLight,
+                                        color: ColorManager.accent,
+                                      ),
+                                    ],
                                   ),
                                   SizedBox(height: 12.h),
                                   PrimaryDropDown(
@@ -173,11 +195,22 @@ class OrderHessaView extends GetView<OrderHessaController> {
                                         controller.changeLevel(value),
                                   ),
                                   SizedBox(height: 12.h),
-                                  PrimaryText(
-                                    LocaleKeys.studying_subject,
-                                    fontSize: 14.sp,
-                                    fontWeight: FontWeightManager.softLight,
-                                    color: ColorManager.fontColor,
+                                  Row(
+                                    children: [
+                                      PrimaryText(
+                                        LocaleKeys.studying_subject,
+                                        fontSize: 14.sp,
+                                        fontWeight: FontWeightManager.softLight,
+                                        color: ColorManager.fontColor,
+                                      ),
+                                      SizedBox(width: 2.w),
+                                      PrimaryText(
+                                        "*",
+                                        fontSize: 16.sp,
+                                        fontWeight: FontWeightManager.softLight,
+                                        color: ColorManager.accent,
+                                      ),
+                                    ],
                                   ),
                                   SizedBox(height: 12.h),
                                   PrimaryDropDown(
@@ -295,11 +328,22 @@ class OrderHessaView extends GetView<OrderHessaController> {
                                     ),
                                   ),
                                   SizedBox(height: 12.h),
-                                  PrimaryText(
-                                    LocaleKeys.hessa_time_and_date,
-                                    fontSize: 14.sp,
-                                    fontWeight: FontWeightManager.softLight,
-                                    color: ColorManager.fontColor,
+                                  Row(
+                                    children: [
+                                      PrimaryText(
+                                        LocaleKeys.hessa_time_and_date,
+                                        fontSize: 14.sp,
+                                        fontWeight: FontWeightManager.softLight,
+                                        color: ColorManager.fontColor,
+                                      ),
+                                      SizedBox(width: 2.w),
+                                      PrimaryText(
+                                        "*",
+                                        fontSize: 16.sp,
+                                        fontWeight: FontWeightManager.softLight,
+                                        color: ColorManager.accent,
+                                      ),
+                                    ],
                                   ),
                                   SizedBox(height: 12.h),
                                   Row(
@@ -318,6 +362,7 @@ class OrderHessaView extends GetView<OrderHessaController> {
                                   PrimaryTextField(
                                     readOnly: true,
                                     fontSize: 14.sp,
+                                    isRequired: true,
                                     controller: controller.locationController,
                                     title: LocaleKeys.location,
                                     titleFontWeight:
@@ -351,11 +396,22 @@ class OrderHessaView extends GetView<OrderHessaController> {
                                     hintText: LocaleKeys.choose_location,
                                   ),
                                   SizedBox(height: 12.h),
-                                  PrimaryText(
-                                    LocaleKeys.teacher_name,
-                                    fontSize: 14.sp,
-                                    fontWeight: FontWeightManager.softLight,
-                                    color: ColorManager.fontColor,
+                                  Row(
+                                    children: [
+                                      PrimaryText(
+                                        LocaleKeys.teacher_name,
+                                        fontSize: 14.sp,
+                                        fontWeight: FontWeightManager.softLight,
+                                        color: ColorManager.fontColor,
+                                      ),
+                                      SizedBox(width: 2.w),
+                                      PrimaryText(
+                                        "*",
+                                        fontSize: 16.sp,
+                                        fontWeight: FontWeightManager.softLight,
+                                        color: ColorManager.accent,
+                                      ),
+                                    ],
                                   ),
                                   SizedBox(height: 12.h),
                                   CupertinoTypeAheadFormField(
