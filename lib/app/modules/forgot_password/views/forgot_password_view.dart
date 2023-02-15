@@ -63,6 +63,7 @@ class ForgotPasswordView extends GetView<ForgotPasswordController> {
                           ),
                           SizedBox(height: 55.h),
                           PrimaryTextField(
+                            isRequired: true,
                             cursorColor: ColorManager.primary,
                             focusNode: controller.emailFocusNode,
                             textDirection: TextDirection.rtl,

@@ -38,6 +38,7 @@ class LoginContent extends GetView<LoginController> {
                 PrimaryTextField(
                   cursorColor: ColorManager.primary,
                   focusNode: controller.emailFocusNode,
+                  isRequired: true,
                   fontSize: 14.sp,
                   prefixIcon: Icon(
                     Icons.email_outlined,
@@ -71,6 +72,7 @@ class LoginContent extends GetView<LoginController> {
                 ),
                 SizedBox(height: 28.h),
                 PasswordTextField(
+                  isRequired: true,
                   onFieldSubmitted: (String? value) async {
                     if (controller.formKey.currentState!.validate()) {
                       await checkInternetConnection(timeout: 5)

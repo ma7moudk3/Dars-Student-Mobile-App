@@ -45,11 +45,22 @@ class SignUpContent extends GetView<SignUpController> {
                   Row(
                     mainAxisAlignment: MainAxisAlignment.start,
                     children: [
-                      PrimaryText(
-                        LocaleKeys.gender,
-                        color: ColorManager.fontColor,
-                        fontWeight: FontWeightManager.light,
-                        fontSize: 14.sp,
+                      Row(
+                        children: [
+                          PrimaryText(
+                            LocaleKeys.gender,
+                            color: ColorManager.fontColor,
+                            fontWeight: FontWeightManager.light,
+                            fontSize: 14.sp,
+                          ),
+                          SizedBox(width: 2.w),
+                          PrimaryText(
+                            "*",
+                            fontSize: 16.sp,
+                            fontWeight: FontWeightManager.softLight,
+                            color: ColorManager.accent,
+                          ),
+                        ],
                       ),
                       SizedBox(width: 10.w),
                       Row(
@@ -96,6 +107,7 @@ class SignUpContent extends GetView<SignUpController> {
                   ),
                   SizedBox(height: 18.h),
                   PrimaryTextField(
+                    isRequired: true,
                     cursorColor: ColorManager.primary,
                     focusNode: controller.fullNameFocusNode,
                     prefixIcon: Icon(
@@ -131,6 +143,7 @@ class SignUpContent extends GetView<SignUpController> {
                         controller.validateFullName(fullName),
                   ),
                   IntlPhoneNumberTextField(
+                    isRequired: true,
                     controller: controller.phoneController,
                     focusNode: controller.phoneFocusNode,
                     onChanged: (PhoneNumber phoneNumber) =>
@@ -138,6 +151,7 @@ class SignUpContent extends GetView<SignUpController> {
                   ),
                   SizedBox(height: 10.h),
                   PrimaryTextField(
+                    isRequired: true,
                     cursorColor: ColorManager.primary,
                     focusNode: controller.emailFocusNode,
                     prefixIcon: Icon(
@@ -175,6 +189,7 @@ class SignUpContent extends GetView<SignUpController> {
                   ),
                   SizedBox(height: 10.h),
                   PasswordTextField(
+                    isRequired: true,
                     errorBorder: OutlineInputBorder(
                       borderRadius: BorderRadius.circular(14),
                       borderSide: BorderSide(color: ColorManager.red),
@@ -211,6 +226,7 @@ class SignUpContent extends GetView<SignUpController> {
                   ),
                   SizedBox(height: 10.h),
                   PasswordTextField(
+                    isRequired: true,
                     onFieldSubmitted: (String? value) async {
                       if (controller.formKey.currentState!.validate() &&
                           controller.phoneNumber != null) {
