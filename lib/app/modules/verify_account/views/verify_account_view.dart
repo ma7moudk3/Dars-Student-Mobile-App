@@ -1,6 +1,7 @@
 import 'dart:developer';
 
 import 'package:hessa_student/app/constants/exports.dart';
+import 'package:hessa_student/app/data/cache_helper.dart';
 import 'package:hessa_student/global_presentation/global_widgets/custom_snack_bar.dart';
 
 import '../../../../generated/locales.g.dart';
@@ -282,12 +283,14 @@ class VerifyAccountView extends GetView<VerifyAccountController> {
                                   controller.countryCode ?? "PS",
                             ),
                           ),
-                          SizedBox(height: 50.h),
+                          SizedBox(height: 40.h),
                           PrimaryButton(
                             width: Get.width.w,
                             onPressed: () async {
                               if (controller.isEmailConfirmed.value &&
                                   controller.isPhoneNumberConfirmed.value) {
+                                await CacheHelper.instance
+                                    .setIsWelcomeBack(true);
                                 await Get.offAllNamed(Routes.BOTTOM_NAV_BAR);
                               } else if (!controller.isEmailConfirmed.value) {
                                 CustomSnackBar.showCustomInfoSnackBar(
@@ -308,9 +311,10 @@ class VerifyAccountView extends GetView<VerifyAccountController> {
                             },
                             title: LocaleKeys.keep_going.tr,
                             borderSide: BorderSide.none,
+                            fontSize: 15,
                             color: ColorManager.primary,
                           ),
-                          SizedBox(height: 50.h),
+                          SizedBox(height: 25.h),
                           GestureDetector(
                             behavior: HitTestBehavior.opaque,
                             onTap: () async => await logout(),

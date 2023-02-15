@@ -102,6 +102,7 @@ class VerifyOtpController extends GetxController {
     if (verifyOtpResponse.result != null &&
         verifyOtpResponse.result!.isValid == true) {
       await getCurrentUserInfo();
+      await getCurrentUserProfileInfo();
       if (isEditProfile != null && isEditProfile!) {
         final EditProfileController editProfileController =
             Get.find<EditProfileController>();

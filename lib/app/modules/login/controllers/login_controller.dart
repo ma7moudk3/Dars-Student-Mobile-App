@@ -96,6 +96,7 @@ class LoginController extends GetxController {
                 CacheHelper.instance.setIsPhoneConfirmed(
                     currentUserInfo.result!.isPhoneNumberConfirmed ?? false)
               ]).then((value) async {
+                await CacheHelper.instance.setIsWelcomeBack(true);
                 await Get.offAllNamed(Routes.VERIFY_ACCOUNT);
               });
             } else {
