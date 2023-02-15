@@ -73,119 +73,119 @@ class EditProfileView extends GetView<EditProfileController> {
             ]);
           },
           child: SingleChildScrollView(
-            child: GetBuilder<EditProfileController>(
-                builder: (EditProfileController controller) {
-              return Padding(
-                padding: EdgeInsets.only(
-                  left: 16.w,
-                  right: 16.w,
-                  bottom: 16.h,
-                ),
-                child: Column(
-                  children: [
-                    Form(
-                      key: controller.formKey,
-                      child: Container(
-                        width: Get.width,
-                        padding: EdgeInsets.symmetric(
-                            vertical: 30.h, horizontal: 16.w),
-                        decoration: BoxDecoration(
-                          color: ColorManager.white,
-                          borderRadius: BorderRadius.circular(14.0),
-                          boxShadow: const [
-                            BoxShadow(
-                              color: Color(0x1a000000),
-                              offset: Offset(0, 1),
-                              blurRadius: 8,
-                            ),
-                          ],
-                        ),
-                        child: Column(
-                          children: [
-                            GestureDetector(
-                              behavior: HitTestBehavior.opaque,
-                              onTap: () async {
-                                if (Platform.isIOS) {
-                                  showCupertinoModalPopup(
-                                      context: context,
-                                      builder: (BuildContext context) {
-                                        return CupertinoActionSheet(
-                                          actions: [
-                                            CupertinoActionSheetAction(
-                                              child: PrimaryText(
-                                                  LocaleKeys.camera.tr),
-                                              onPressed: () async {
-                                                Get.back();
-                                                await controller.pickImage(
-                                                    ImageSource.camera);
-                                              },
-                                            ),
-                                            CupertinoActionSheetAction(
-                                              child: PrimaryText(
-                                                  LocaleKeys.gallery.tr),
-                                              onPressed: () async {
-                                                Get.back();
-                                                await controller.pickImage(
-                                                    ImageSource.gallery);
-                                              },
-                                            ),
-                                          ],
-                                        );
-                                      });
-                                } else {
-                                  Get.bottomSheet(
-                                    shape: const RoundedRectangleBorder(
-                                      borderRadius: BorderRadius.only(
-                                        topLeft: Radius.circular(20),
-                                        topRight: Radius.circular(20),
+            child: Padding(
+              padding: EdgeInsets.only(
+                left: 16.w,
+                right: 16.w,
+                bottom: 16.h,
+              ),
+              child: Column(
+                children: [
+                  Form(
+                    key: controller.formKey,
+                    child: Container(
+                      width: Get.width,
+                      padding: EdgeInsets.symmetric(
+                          vertical: 30.h, horizontal: 16.w),
+                      decoration: BoxDecoration(
+                        color: ColorManager.white,
+                        borderRadius: BorderRadius.circular(14.0),
+                        boxShadow: const [
+                          BoxShadow(
+                            color: Color(0x1a000000),
+                            offset: Offset(0, 1),
+                            blurRadius: 8,
+                          ),
+                        ],
+                      ),
+                      child: Column(
+                        children: [
+                          GestureDetector(
+                            behavior: HitTestBehavior.opaque,
+                            onTap: () async {
+                              if (Platform.isIOS) {
+                                showCupertinoModalPopup(
+                                    context: context,
+                                    builder: (BuildContext context) {
+                                      return CupertinoActionSheet(
+                                        actions: [
+                                          CupertinoActionSheetAction(
+                                            child: PrimaryText(
+                                                LocaleKeys.camera.tr),
+                                            onPressed: () async {
+                                              Get.back();
+                                              await controller.pickImage(
+                                                  ImageSource.camera);
+                                            },
+                                          ),
+                                          CupertinoActionSheetAction(
+                                            child: PrimaryText(
+                                                LocaleKeys.gallery.tr),
+                                            onPressed: () async {
+                                              Get.back();
+                                              await controller.pickImage(
+                                                  ImageSource.gallery);
+                                            },
+                                          ),
+                                        ],
+                                      );
+                                    });
+                              } else {
+                                Get.bottomSheet(
+                                  shape: const RoundedRectangleBorder(
+                                    borderRadius: BorderRadius.only(
+                                      topLeft: Radius.circular(20),
+                                      topRight: Radius.circular(20),
+                                    ),
+                                  ),
+                                  Padding(
+                                    padding: EdgeInsets.symmetric(
+                                        horizontal: 16.w, vertical: 20.h),
+                                    child: SizedBox(
+                                      height: Get.height * 0.13,
+                                      child: ListView(
+                                        children: [
+                                          ListTile(
+                                            leading: const Icon(
+                                                Icons.camera_alt_rounded),
+                                            title: PrimaryText(
+                                                LocaleKeys.camera.tr),
+                                            onTap: () async {
+                                              Get.back();
+                                              await controller.pickImage(
+                                                  ImageSource.camera);
+                                            },
+                                          ),
+                                          ListTile(
+                                            leading:
+                                                const Icon(Icons.photo_rounded),
+                                            title: PrimaryText(
+                                                LocaleKeys.gallery.tr),
+                                            onTap: () async {
+                                              Get.back();
+                                              await controller.pickImage(
+                                                  ImageSource.gallery);
+                                            },
+                                          ),
+                                        ],
                                       ),
                                     ),
-                                    Padding(
-                                      padding: EdgeInsets.symmetric(
-                                          horizontal: 16.w, vertical: 20.h),
-                                      child: SizedBox(
-                                        height: Get.height * 0.13,
-                                        child: ListView(
-                                          children: [
-                                            ListTile(
-                                              leading: const Icon(
-                                                  Icons.camera_alt_rounded),
-                                              title: PrimaryText(
-                                                  LocaleKeys.camera.tr),
-                                              onTap: () async {
-                                                Get.back();
-                                                await controller.pickImage(
-                                                    ImageSource.camera);
-                                              },
-                                            ),
-                                            ListTile(
-                                              leading: const Icon(
-                                                  Icons.photo_rounded),
-                                              title: PrimaryText(
-                                                  LocaleKeys.gallery.tr),
-                                              onTap: () async {
-                                                Get.back();
-                                                await controller.pickImage(
-                                                    ImageSource.gallery);
-                                              },
-                                            ),
-                                          ],
-                                        ),
-                                      ),
-                                    ),
-                                    backgroundColor: ColorManager.white,
-                                  );
-                                }
-                              },
-                              child: StatefulBuilder(
-                                  builder: (BuildContext context, setState) {
+                                  ),
+                                  backgroundColor: ColorManager.white,
+                                );
+                              }
+                            },
+                            child: StatefulBuilder(
+                                builder: (BuildContext context, setState) {
+                              return GetX<EditProfileController>(
+                                  builder: (EditProfileController controller) {
                                 return Container(
                                   width: 100.w,
                                   height: 100.h,
                                   decoration: BoxDecoration(
                                     image: DecorationImage(
-                                      image: controller.image != null
-                                          ? FileImage(controller.image!)
+                                      image: controller.image.value != null
+                                          ? FileImage(controller.image.value!)
                                           : (CacheHelper.instance
                                                           .getUserProfilePicture() !=
                                                       null &&
@@ -231,10 +231,13 @@ class EditProfileView extends GetView<EditProfileController> {
                                     ),
                                   ),
                                 );
-                              }),
-                            ),
-                            const SizedBox(height: 20),
-                            Column(
+                              });
+                            }),
+                          ),
+                          const SizedBox(height: 20),
+                          GetBuilder<EditProfileController>(
+                              builder: (EditProfileController controller) {
+                            return Column(
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
                                 PrimaryTextField(
@@ -440,33 +443,33 @@ class EditProfileView extends GetView<EditProfileController> {
                                   ],
                                 ),
                               ],
-                            ),
-                          ],
-                        ),
+                            );
+                          }),
+                        ],
                       ),
                     ),
-                    SizedBox(height: 36.h),
-                    SafeArea(
-                      child: Padding(
-                        padding: EdgeInsets.symmetric(horizontal: 16.w),
-                        child: PrimaryButton(
-                          title: LocaleKeys.save,
-                          onPressed: () async {
-                            if (controller.formKey.currentState!.validate()) {
-                              if (await checkInternetConnection(timeout: 5)) {
-                                await controller.updateProfile();
-                              } else {
-                                await Get.toNamed(Routes.CONNECTION_FAILED);
-                              }
+                  ),
+                  SizedBox(height: 36.h),
+                  SafeArea(
+                    child: Padding(
+                      padding: EdgeInsets.symmetric(horizontal: 16.w),
+                      child: PrimaryButton(
+                        title: LocaleKeys.save,
+                        onPressed: () async {
+                          if (controller.formKey.currentState!.validate()) {
+                            if (await checkInternetConnection(timeout: 5)) {
+                              await controller.updateProfile();
+                            } else {
+                              await Get.toNamed(Routes.CONNECTION_FAILED);
                             }
-                          },
-                        ),
+                          }
+                        },
                       ),
                     ),
-                  ],
-                ),
-              );
-            }),
+                  ),
+                ],
+              ),
+            ),
           ),
         ),
       ),

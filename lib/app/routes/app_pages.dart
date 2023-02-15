@@ -286,26 +286,36 @@ class AppPages {
       name: _Paths.PROFILE_INFORMATION,
       page: () => ProfileInformationView(),
       binding: ProfileInformationBinding(),
+      transition: Transition.cupertino,
+      transitionDuration: const Duration(milliseconds: 400),
     ),
     GetPage(
       name: _Paths.VERIFY_ACCOUNT,
-      page: () => VerifyAccountView(),
+      page: () => const VerifyAccountView(),
       binding: VerifyAccountBinding(),
+      transition: Transition.cupertino,
+      transitionDuration: const Duration(milliseconds: 400),
     ),
     GetPage(
       name: _Paths.PREFERRED_TEACHERS,
       page: () => const PreferredTeachersView(),
       binding: PreferredTeachersBinding(),
+      transition: Transition.cupertino,
+      transitionDuration: const Duration(milliseconds: 400),
     ),
     GetPage(
       name: _Paths.ADDRESSES,
       page: () => const AddressesView(),
       binding: AddressesBinding(),
+      transition: Transition.cupertino,
+      transitionDuration: const Duration(milliseconds: 400),
     ),
     GetPage(
       name: _Paths.ADD_NEW_ADDRESS,
       page: () => const AddNewAddressView(),
       binding: AddNewAddressBinding(),
+      transition: Transition.cupertino,
+      transitionDuration: const Duration(milliseconds: 400),
     ),
   ];
 }

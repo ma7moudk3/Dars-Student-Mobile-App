@@ -35,7 +35,7 @@ class EditProfileController extends GetxController {
   String? dialCode, countryCode;
   int gender =
       0; // 0 male 1 female (starts from zero just for indexing) in the view, but 1 male, 2 female in the api
-  File? image;
+  Rx<File?> image = Rx<File?>(null);
   final EditProfileRepo _editProfileRepo = EditProfileRepoImplement();
   CurrentUserInfo currentUserInfo =
       CacheHelper.instance.getCachedCurrentUserInfo() ?? CurrentUserInfo();
@@ -224,7 +224,7 @@ class EditProfileController extends GetxController {
     ImagePicker imagePicker = ImagePicker();
     XFile? pickedImage = await imagePicker.pickImage(source: imageSource);
     if (pickedImage != null) {
-      image = File(pickedImage.path);
+      image.value = File(pickedImage.path);
     }
     update();
   }
@@ -308,10 +308,10 @@ class EditProfileController extends GetxController {
   }
 
   Future updateImage() async {
-    if (image != null) {
+    if (image.value != null) {
       log("image is not null");
       await _editProfileRepo.updateProfilePicture(
-        image: image!,
+        image: image.value!,
       );
     }
   }
