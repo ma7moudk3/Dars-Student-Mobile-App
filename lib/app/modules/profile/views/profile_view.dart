@@ -94,8 +94,8 @@ class ProfileView extends GetView<ProfileController> {
                       textSettingsColor: ColorManager.fontColor2,
                       settingsColor: ColorManager.white,
                       title: LocaleKeys.addresses.tr,
-                      subTitle:
-                          "${LocaleKeys.current_address.tr}: رام الله ، الضفة الغربية",
+                      // subTitle:
+                      //     "${LocaleKeys.current_address.tr}: رام الله ، الضفة الغربية",
                       iconPath: ImagesManager.locationIcon,
                       color: ColorManager.primaryLight.withOpacity(0.15),
                       iconColor: ColorManager.primaryLight,

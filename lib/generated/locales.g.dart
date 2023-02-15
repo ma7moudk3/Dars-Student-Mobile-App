@@ -86,12 +86,16 @@ class LocaleKeys {
   static const confirm_your_mail_and_your_phone_number =
       'confirm_your_mail_and_your_phone_number';
   static const terms_and_conditions = 'terms_and_conditions';
+  static const added_addresses = 'added_addresses';
   static const phone_number_already_verified = 'phone_number_already_verified';
   static const please_enter_a_valid_phone_number =
       'please_enter_a_valid_phone_number';
   static const please_enter_a_valid_email = 'please_enter_a_valid_email';
+  static const please_choose_a_valid_address_to_delete =
+      'please_choose_a_valid_address_to_delete';
   static const email_already_verified = 'email_already_verified';
   static const for_hessa = 'for_hessa';
+  static const address_deleted_successfully = 'address_deleted_successfully';
   static const school_name = 'school_name';
   static const write_school_name = 'write_school_name';
   static const notes_about_dependent = 'notes_about_dependent';
@@ -472,11 +476,14 @@ class Locales {
     'confirm_your_mail_and_your_phone_number':
         'قم بتأكيد بريدك ورقم هاتفك المدخل',
     'terms_and_conditions': 'الشروط والأحكام',
+    'added_addresses': 'العناوين المضافة',
     'phone_number_already_verified': 'رقم الهاتف مؤكد بالفعل',
     'please_enter_a_valid_phone_number': 'الرجاء إدخال رقم هاتف صحيح',
     'please_enter_a_valid_email': 'الرجاء إدخال بريد إلكتروني صحيح',
+    'please_choose_a_valid_address_to_delete': 'الرجاء اختيار عنوان صحيح للحذف',
     'email_already_verified': 'البريد الإلكتروني مؤكد بالفعل',
     'for_hessa': 'لحِصّة',
+    'address_deleted_successfully': 'تم حذف العنوان بنجاح',
     'school_name': 'اسم المدرسة',
     'write_school_name': 'اكتب اسم المدرسة',
     'notes_about_dependent': 'ملاحظات عن التابع',

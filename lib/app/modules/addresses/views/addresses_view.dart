@@ -9,6 +9,7 @@ import '../../../../global_presentation/global_features/lotties_manager.dart';
 import '../../../../global_presentation/global_widgets/custom_app_bar.dart';
 import '../../../routes/app_pages.dart';
 import '../controllers/addresses_controller.dart';
+import 'widgets/address_widget.dart';
 
 class AddressesView extends GetView<AddressesController> {
   const AddressesView({Key? key}) : super(key: key);
@@ -52,14 +53,31 @@ class AddressesView extends GetView<AddressesController> {
       body:
           GetX<AddressesController>(builder: (AddressesController controller) {
         if (controller.isInternetConnected.value) {
-          return Column(
-            children: [
-              SizedBox(height: 24.h),
-              GetBuilder<AddressesController>(
-                  builder: (AddressesController controller) {
-                return Expanded(
-                  child: Padding(
-                    padding: EdgeInsets.symmetric(horizontal: 16.w),
+          return Padding(
+            padding: EdgeInsets.symmetric(horizontal: 16.w),
+            child: Column(
+              children: [
+                SizedBox(height: 24.h),
+                Container(
+                  width: Get.width,
+                  height: 50.h,
+                  decoration: BoxDecoration(
+                    color: ColorManager.green.withOpacity(0.10),
+                    borderRadius: BorderRadius.circular(10),
+                  ),
+                  child: Center(
+                    child: PrimaryText(
+                      LocaleKeys.added_addresses,
+                      fontSize: 16,
+                      color: ColorManager.green,
+                      fontWeight: FontWeightManager.light,
+                    ),
+                  ),
+                ),
+                SizedBox(height: 24.h),
+                GetBuilder<AddressesController>(
+                    builder: (AddressesController controller) {
+                  return Expanded(
                     child: RefreshIndicator(
                       color: ColorManager.white,
                       backgroundColor: ColorManager.primary,
@@ -150,16 +168,34 @@ class AddressesView extends GetView<AddressesController> {
                           },
                           itemBuilder: (BuildContext context,
                               AddressResult addressResult, int index) {
-                            return PrimaryText(
-                                addressResult.address?.address1 ?? "");
+                            return AddressWidget(
+                              addressResult: addressResult,
+                            );
                           },
                         ),
                       ),
                     ),
-                  ),
-                );
-              }),
-            ],
+                  );
+                }),
+                GetBuilder<AddressesController>(
+                    builder: (AddressesController controller) {
+                  return Visibility(
+                    visible: controller.addresses.isNotEmpty,
+                    child: Padding(
+                      padding: EdgeInsets.symmetric(
+                        horizontal: 16.w,
+                        vertical: 20.h,
+                      ),
+                      child: PrimaryButton(
+                        onPressed: () async =>
+                            await Get.toNamed(Routes.ADD_NEW_ADDRESS),
+                        title: LocaleKeys.add_new_address.tr,
+                      ),
+                    ),
+                  );
+                }),
+              ],
+            ),
           );
         } else {
           return Column(
