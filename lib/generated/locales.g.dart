@@ -317,6 +317,8 @@ class LocaleKeys {
       'please_enter_the_verification_code';
   static const profile_edited_succesfully = 'profile_edited_succesfully';
   static const wanna_back = 'wanna_back';
+  static const wanna_back_and_lose_data = 'wanna_back_and_lose_data';
+  static const wanna_back_and_lose_filters = 'wanna_back_and_lose_filters';
   static const check_pin_code = 'check_pin_code';
   static const the_verification_code_has_been_sent_to_the_phone_number =
       'the_verification_code_has_been_sent_to_the_phone_number';
@@ -703,6 +705,9 @@ class Locales {
     'please_enter_the_verification_code': 'الرجاء إدخال رمز التحقق',
     'profile_edited_succesfully': 'تم تعديل بيانات الملف الشخصي بنجاح',
     'wanna_back': 'هل أنت متأكد أنك تريد العودة؟',
+    'wanna_back_and_lose_data': 'هل أنت متأكد أنك تريد العودة وفقدان البيانات؟',
+    'wanna_back_and_lose_filters':
+        'هل أنت متأكد أنك تريد العودة وفقدان اختيارات الفلاتر؟',
     'check_pin_code': 'تحقق من رمز التحقق',
     'the_verification_code_has_been_sent_to_the_phone_number':
         'تم إرسال رمز التحقق إلى رقم الهاتف',

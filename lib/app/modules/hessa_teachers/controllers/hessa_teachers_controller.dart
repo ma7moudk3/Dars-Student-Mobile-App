@@ -103,8 +103,8 @@ class HessaTeachersController extends GetxController {
     // sortType = null;
     toggleSort = false;
     toggleFilter = false;
-    filterList.clear();
     toggleSearch = false;
+    filterList.clear();
     pagingController.refresh();
     update();
   }
@@ -228,7 +228,7 @@ class HessaTeachersController extends GetxController {
     update();
   }
 
-  void removeFilterTag({required Map<String, dynamic> filterTag}) {
+  Future removeFilterTag({required Map<String, dynamic> filterTag}) async {
     filterList
         .removeWhere((element) => element.keys.first == filterTag.keys.first);
     switch (filterTag.keys.first) {
@@ -257,7 +257,7 @@ class HessaTeachersController extends GetxController {
         governorateId = null;
         isGovernorateDropDownLoading = true;
         update();
-        Future.delayed(const Duration(milliseconds: 500), () {
+        await Future.delayed(const Duration(milliseconds: 500), () {
           governorates = Governorates();
           selectedGovernorate = governorate.Result();
           isGovernorateDropDownLoading = false;
@@ -275,6 +275,9 @@ class HessaTeachersController extends GetxController {
           update();
         });
         break;
+    }
+    if (filterList.isEmpty) {
+      toggleFilter = false;
     }
     pagingController.refresh();
     update();

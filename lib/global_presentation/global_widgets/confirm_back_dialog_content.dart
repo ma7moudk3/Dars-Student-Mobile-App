@@ -1,3 +1,4 @@
+
 import '../../app/constants/exports.dart';
 import '../../generated/locales.g.dart';
 import 'global_button.dart';
@@ -5,7 +6,11 @@ import 'global_button.dart';
 class ConfirmBackDialogContent extends StatelessWidget {
   const ConfirmBackDialogContent({
     Key? key,
+    this.title,
+    this.subTitle,
   }) : super(key: key);
+
+  final String? title, subTitle;
 
   @override
   Widget build(BuildContext context) {
@@ -19,17 +24,20 @@ class ConfirmBackDialogContent extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             PrimaryText(
-              LocaleKeys.back_backward.tr,
+              title ?? LocaleKeys.back_backward.tr,
               color: ColorManager.primary,
               fontSize: 20,
               fontWeight: FontWeightManager.medium,
             ),
             SizedBox(height: 10.h),
-            PrimaryText(
-              LocaleKeys.wanna_back.tr,
-              color: ColorManager.grey2,
-              fontSize: 16,
-              textAlign: TextAlign.center,
+            Padding(
+              padding: EdgeInsets.symmetric(horizontal: 16.w),
+              child: PrimaryText(
+                subTitle ?? LocaleKeys.wanna_back_and_lose_data.tr,
+                color: ColorManager.grey2,
+                fontSize: 16,
+                textAlign: TextAlign.center,
+              ),
             ),
             SizedBox(height: 20.h),
             Row(

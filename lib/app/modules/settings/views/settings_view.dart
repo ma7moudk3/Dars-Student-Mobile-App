@@ -44,6 +44,7 @@ class SettingsView extends GetView<SettingsController> {
                 await Get.bottomSheet(
                   backgroundColor: ColorManager.white,
                   isScrollControlled: true,
+                  isDismissible: false,
                   shape: const RoundedRectangleBorder(
                     borderRadius: BorderRadius.only(
                       topLeft: Radius.circular(20),
