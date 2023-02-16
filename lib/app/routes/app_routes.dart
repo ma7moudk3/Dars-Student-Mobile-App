@@ -37,6 +37,7 @@ abstract class Routes {
   static const PREFERRED_TEACHERS = _Paths.PREFERRED_TEACHERS;
   static const ADDRESSES = _Paths.ADDRESSES;
   static const ADD_NEW_ADDRESS = _Paths.ADD_NEW_ADDRESS;
+  static const EDIT_ADDRESS = _Paths.EDIT_ADDRESS;
 }
 
 abstract class _Paths {
@@ -75,4 +76,5 @@ abstract class _Paths {
   static const PREFERRED_TEACHERS = '/preferred-teachers';
   static const ADDRESSES = '/addresses';
   static const ADD_NEW_ADDRESS = '/add-new-address';
+  static const EDIT_ADDRESS = '/edit-address';
 }

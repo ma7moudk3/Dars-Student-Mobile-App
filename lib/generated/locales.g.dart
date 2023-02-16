@@ -24,6 +24,7 @@ class LocaleKeys {
   static const email = 'email';
   static const enter_email = 'enter_email';
   static const dependent_added_successfully = 'dependent_added_successfully';
+  static const address_edited_successfully = 'address_edited_successfully';
   static const enter_password = 'enter_password';
   static const enter_old_password = 'enter_old_password';
   static const enjoy_the_app = 'enjoy_the_app';
@@ -172,6 +173,7 @@ class LocaleKeys {
   static const order_hessa_category = 'order_hessa_category';
   static const choose_studying_subjects = 'choose_studying_subjects';
   static const choose_skills = 'choose_skills';
+  static const edit_address = 'edit_address';
   static const no_rating = 'no_rating';
   static const choose_one_studying_subject_at_least =
       'choose_one_studying_subject_at_least';
@@ -429,6 +431,7 @@ class Locales {
     'email': 'البريد الإلكتروني',
     'enter_email': 'عنوان البريد الإلكتروني',
     'dependent_added_successfully': 'تمت إضافة التابع بنجاح',
+    'address_edited_successfully': 'تم تعديل العنوان بنجاح',
     'enter_password': 'أدخل كلمة المرور',
     'enter_old_password': 'أدخل كلمة المرور القديمة',
     'enjoy_the_app': 'استمتع مع حصة',
@@ -575,6 +578,7 @@ class Locales {
     'order_hessa_category': 'تصنيف الطلب',
     'choose_studying_subjects': 'اختر المواد الدراسية',
     'choose_skills': 'اختر المهارات',
+    'edit_address': 'تعديل العنوان',
     'no_rating': 'لا يوجد تقييم',
     'choose_one_studying_subject_at_least': 'اختر مادة واحدة على الأقل',
     'choose_one_skill_at_least': 'اختر مهارة واحدة على الأقل',

@@ -66,7 +66,7 @@ class Links {
       "api/services/app/RequesterStudents/GetStudentsByRequester";
   static const String topicsForDropDown =
       "api/services/app/Sessions/GetAllTopicForTableDropdown";
-  static const String addNewAddress =
+  static const String addOrEditAddress =
       "api/services/app/Requesters/RequesterAddressCreateOrEdit";
   static const String allMyAddresses =
       "api/services/app/Requesters/GetRequesterAddressForEdit";

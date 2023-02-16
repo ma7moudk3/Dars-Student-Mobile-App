@@ -123,12 +123,13 @@ class AddNewAddressRepoImplement extends AddNewAddressRepo {
   }
 
   @override
-  Future<int> addNewAddress({
+  Future<int> addOrEditAddress({
     required String address,
     required String addressDescription,
     required int countryId,
     required int governorateId,
     required int localityId,
+    int? addressIdToEdit,
   }) async {
     int statusCode = 200;
     try {
@@ -142,6 +143,9 @@ class AddNewAddressRepoImplement extends AddNewAddressRepo {
         "name": address,
         "isDefault": true,
       };
+      if (addressIdToEdit != null && addressIdToEdit != -1) {
+        data["id"] = addressIdToEdit;
+      }
       Map<String, dynamic> headers = {
         'Accept-Language': Get.locale != null ? Get.locale!.languageCode : 'ar',
         'Content-Type': 'application/json',
@@ -149,7 +153,7 @@ class AddNewAddressRepoImplement extends AddNewAddressRepo {
         "Authorization": "Bearer ${CacheHelper.instance.getAccessToken()}"
       };
       await DioHelper.post(
-        Links.addNewAddress,
+        Links.addOrEditAddress,
         data: data,
         headers: headers,
         onSuccess: (response) {

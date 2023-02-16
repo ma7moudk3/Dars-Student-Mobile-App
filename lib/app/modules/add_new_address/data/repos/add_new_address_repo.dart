@@ -7,11 +7,12 @@ abstract class AddNewAddressRepo {
   Future<Countries> getCountries();
   Future<Governorates> getGovernorates({required int countryId});
   Future<Localities> getLocalities({required int governorateId});
-  Future<int> addNewAddress({
+  Future<int> addOrEditAddress({
     required String address,
     required String addressDescription,
     required int countryId,
     required int governorateId,
     required int localityId,
+    int? addressIdToEdit,
   });
 }

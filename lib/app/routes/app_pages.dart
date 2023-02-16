@@ -18,6 +18,8 @@ import '../modules/connection_failed/bindings/connection_failed_binding.dart';
 import '../modules/connection_failed/views/connection_failed_view.dart';
 import '../modules/dependents/bindings/dependents_binding.dart';
 import '../modules/dependents/views/dependents_view.dart';
+import '../modules/edit_address/bindings/edit_address_binding.dart';
+import '../modules/edit_address/views/edit_address_view.dart';
 import '../modules/edit_profile/bindings/edit_profile_binding.dart';
 import '../modules/edit_profile/views/edit_profile_view.dart';
 import '../modules/forgot_password/bindings/forgot_password_binding.dart';
@@ -316,6 +318,11 @@ class AppPages {
       binding: AddNewAddressBinding(),
       transition: Transition.cupertino,
       transitionDuration: const Duration(milliseconds: 400),
+    ),
+    GetPage(
+      name: _Paths.EDIT_ADDRESS,
+      page: () => const EditAddressView(),
+      binding: EditAddressBinding(),
     ),
   ];
 }
