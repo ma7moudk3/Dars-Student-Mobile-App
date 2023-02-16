@@ -1,6 +1,8 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:hessa_student/app/constants/exports.dart';
 import 'package:hessa_student/app/modules/addresses/data/models/address_result/address_result.dart';
+import 'package:hessa_student/app/modules/hessa_teachers/data/models/hessa_teacher.dart';
 import 'package:hessa_student/generated/locales.g.dart';
 import 'package:hessa_student/global_presentation/global_widgets/global_dropdown.dart';
 import 'package:lottie/lottie.dart';
@@ -13,7 +15,6 @@ import '../../../../global_presentation/global_widgets/shimmer_loading.dart';
 import '../../../../global_presentation/global_widgets/typeahead/cupertino_flutter_typeahead.dart';
 import '../../../routes/app_pages.dart';
 import '../controllers/order_hessa_controller.dart';
-import '../data/models/teacher.dart';
 import '../widgets/add_student_widget.dart';
 import '../widgets/hessa_date_time_picker_widget.dart';
 import '../widgets/order_hessa_options.dart';
@@ -749,14 +750,15 @@ class OrderHessaView extends GetView<OrderHessaController> {
                                                 FontWeightManager.softLight,
                                             color: ColorManager.fontColor,
                                           ),
-                                          SizedBox(width: 2.w),
-                                          PrimaryText(
-                                            "*",
-                                            fontSize: 16.sp,
-                                            fontWeight:
-                                                FontWeightManager.softLight,
-                                            color: ColorManager.accent,
-                                          ),
+                                          // uncomment this if you want to make teacher name required
+                                          // SizedBox(width: 2.w),
+                                          // PrimaryText(
+                                          //   "*",
+                                          //   fontSize: 16.sp,
+                                          //   fontWeight:
+                                          //       FontWeightManager.softLight,
+                                          //   color: ColorManager.accent,
+                                          // ),
                                         ],
                                       ),
                                       SizedBox(height: 12.h),
@@ -788,23 +790,35 @@ class OrderHessaView extends GetView<OrderHessaController> {
                                             fontFamily:
                                                 FontConstants.fontFamily,
                                           ),
-                                          suffix: Container(
-                                            margin: EdgeInsets.only(left: 10.w),
-                                            child: SvgPicture.asset(
-                                              ImagesManager.addTeacherIcon,
-                                              color: controller
-                                                  .teacherNameErrorIconColor,
+                                          suffix: GestureDetector(
+                                            behavior: HitTestBehavior.opaque,
+                                            onTap: () async {
+                                              // go to assign teacher screen
+                                            },
+                                            child: Container(
+                                              margin:
+                                                  EdgeInsets.only(left: 10.w),
+                                              child: SvgPicture.asset(
+                                                ImagesManager.addTeacherIcon,
+                                                color: controller
+                                                    .teacherNameErrorIconColor,
+                                              ),
                                             ),
                                           ),
                                           placeholder:
                                               LocaleKeys.write_teacher_name.tr,
                                         ),
                                         suggestionsCallback:
-                                            (String searchValue) {
-                                          return controller
-                                              .searchTeacher(
-                                                  searchValue: searchValue)
-                                              .toList();
+                                            (String searchValue) async {
+                                          if (searchValue.isNotEmpty &&
+                                              searchValue.length >= 3 &&
+                                              searchValue.trim().isNotEmpty) {
+                                            return await controller
+                                                .searchTeacher(
+                                                    searchValue: searchValue);
+                                          } else {
+                                            return <HessaTeacher>[];
+                                          }
                                         },
                                         hideOnEmpty: true,
                                         transitionBuilder: (context,
@@ -812,19 +826,41 @@ class OrderHessaView extends GetView<OrderHessaController> {
                                           return suggestionsBox;
                                         },
                                         itemBuilder: (BuildContext context,
-                                            Teacher teacher) {
+                                            HessaTeacher teacher) {
                                           return TypeAheadTeacherWidget(
                                             teacher: teacher,
                                           );
                                         },
                                         noItemsFoundBuilder:
                                             (BuildContext context) {
-                                          return PrimaryText(
-                                            LocaleKeys.no_teacher_found,
+                                          return Container(
+                                            padding: EdgeInsets.symmetric(
+                                                horizontal: 16.w,
+                                                vertical: 8.h),
+                                            decoration: BoxDecoration(
+                                              color: CupertinoColors.white,
+                                              border: Border.all(
+                                                color: CupertinoColors
+                                                    .extraLightBackgroundGray,
+                                                width: 1.0,
+                                              ),
+                                              borderRadius:
+                                                  BorderRadius.circular(15),
+                                              boxShadow: const [
+                                                BoxShadow(
+                                                  color: Color(0x29000000),
+                                                  offset: Offset(0, 1),
+                                                  blurRadius: 8,
+                                                ),
+                                              ],
+                                            ),
+                                            child: PrimaryText(
+                                              LocaleKeys.no_teacher_found,
+                                            ),
                                           );
                                         },
                                         onSuggestionSelected:
-                                            (Teacher teacher) {
+                                            (HessaTeacher teacher) {
                                           controller.selectTeacher(teacher);
                                         },
                                         errorBuilder: (context, error) {

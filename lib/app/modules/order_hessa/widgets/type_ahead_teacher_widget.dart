@@ -1,14 +1,19 @@
-import 'package:hessa_student/app/modules/order_hessa/data/models/teacher.dart';
+import 'package:cached_network_image/cached_network_image.dart';
+import 'package:hessa_student/app/modules/hessa_teachers/data/models/hessa_teacher.dart';
 
 import '../../../constants/exports.dart';
+import '../../../constants/links.dart';
 import '../controllers/order_hessa_controller.dart';
 
 class TypeAheadTeacherWidget extends GetView<OrderHessaController> {
   const TypeAheadTeacherWidget({Key? key, required this.teacher})
       : super(key: key);
-  final Teacher teacher;
+  final HessaTeacher teacher;
   @override
   Widget build(BuildContext context) {
+    String teacherPicture =
+        "${Links.baseLink}${Links.profileImageById}?userId=${teacher.userId ?? -1}";
+    double teacherRate = teacher.rate ?? 0.0;
     return Padding(
       padding: const EdgeInsets.all(5.0),
       child: Column(
@@ -16,22 +21,32 @@ class TypeAheadTeacherWidget extends GetView<OrderHessaController> {
           Row(
             crossAxisAlignment: CrossAxisAlignment.end,
             children: [
-              Container(
-                width: 50.w,
-                height: 50.h,
-                decoration: BoxDecoration(
-                  image: DecorationImage(
-                    image: AssetImage(teacher.picture),
-                    fit: BoxFit.cover,
+              StatefulBuilder(builder: (BuildContext context, setState) {
+                return Container(
+                  width: 50.w,
+                  height: 50.h,
+                  decoration: BoxDecoration(
+                    image: DecorationImage(
+                      image: CachedNetworkImageProvider(
+                        teacherPicture,
+                        errorListener: () {
+                          setState(() {
+                            teacherPicture =
+                                "https://www.shareicon.net/data/2016/06/10/586098_guest_512x512.png";
+                          });
+                        },
+                      ),
+                      fit: BoxFit.cover,
+                    ),
+                    border: Border.all(
+                      width: 1,
+                      color: ColorManager.primary,
+                    ),
+                    borderRadius: BorderRadius.circular(20),
                   ),
-                  border: Border.all(
-                    width: 1,
-                    color: ColorManager.primary,
-                  ),
-                  borderRadius: BorderRadius.circular(20),
-                ),
-              ),
-              SizedBox(width: 10.w),
+                );
+              }),
+              SizedBox(width: 5.w),
               Expanded(
                 child: Column(
                   children: [
@@ -39,24 +54,36 @@ class TypeAheadTeacherWidget extends GetView<OrderHessaController> {
                       mainAxisSize: MainAxisSize.min,
                       mainAxisAlignment: MainAxisAlignment.end,
                       children: [
-                        PrimaryText(
-                          teacher.name,
-                          color: ColorManager.fontColor,
+                        SizedBox(
+                          width: 150.w,
+                          child: PrimaryText(
+                            teacher.name ?? "",
+                            color: ColorManager.fontColor,
+                            fontSize: 12.sp,
+                            maxLines: 1,
+                            overflow: TextOverflow.ellipsis,
+                          ),
                         ),
-                        const Spacer(),
                         Row(
                           mainAxisSize: MainAxisSize.min,
                           mainAxisAlignment: MainAxisAlignment.end,
                           children: [
                             Icon(
-                              Icons.star,
+                              (teacherRate <= 5 && teacherRate > 4)
+                                  ? Icons.star_rounded
+                                  : (teacherRate <= 3.5 && teacherRate >= 1)
+                                      ? Icons.star_half_rounded
+                                      : Icons.star_outline_rounded,
                               color: ColorManager.orange,
-                              size: 14.sp,
+                              textDirection: TextDirection.ltr,
+                              size: 20.sp,
                             ),
                             SizedBox(
                               width: 40.w,
                               child: PrimaryText(
-                                "4.5",
+                                teacher.rate != null
+                                    ? teacherRate.toString()
+                                    : "0.0",
                                 color: ColorManager.fontColor,
                                 fontSize: 12.sp,
                                 maxLines: 1,
@@ -72,21 +99,29 @@ class TypeAheadTeacherWidget extends GetView<OrderHessaController> {
                       mainAxisSize: MainAxisSize.min,
                       mainAxisAlignment: MainAxisAlignment.end,
                       children: [
-                        PrimaryText(
-                          teacher.subjects
-                              .map((String subject) => subject.toString())
-                              .join(", "),
-                          color: ColorManager.primary,
-                          fontWeight: FontWeightManager.softLight,
-                          fontSize: 11.sp,
+                        SizedBox(
+                          width: 150.w,
+                          child: PrimaryText(
+                            teacher.levelTopic ?? "",
+                            color: ColorManager.primary,
+                            fontWeight: FontWeightManager.softLight,
+                            fontSize: 11.sp,
+                            maxLines: 1,
+                            overflow: TextOverflow.ellipsis,
+                          ),
                         ),
-                        const Spacer(),
-                        PrimaryText(
-                          teacher.address,
-                          color: ColorManager.fontColor7,
-                          fontSize: 12.sp,
-                          maxLines: 1,
-                          overflow: TextOverflow.ellipsis,
+                        SizedBox(
+                          width: 50.w,
+                          child: PrimaryText(
+                            teacher.country != null &&
+                                    teacher.governorate != null
+                                ? "${teacher.country} - ${teacher.governorate}"
+                                : "${teacher.country}${teacher.governorate}",
+                            color: ColorManager.fontColor7,
+                            fontSize: 12.sp,
+                            maxLines: 1,
+                            overflow: TextOverflow.ellipsis,
+                          ),
                         ),
                       ],
                     ),

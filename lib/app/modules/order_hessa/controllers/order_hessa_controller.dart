@@ -1,6 +1,7 @@
 import 'dart:async';
 import 'dart:developer';
 
+import 'package:dio/dio.dart';
 import 'package:hessa_student/app/core/helper_functions.dart';
 import 'package:hessa_student/app/data/models/skills/item.dart' as skill;
 import 'package:hessa_student/app/modules/dependents/controllers/dependents_controller.dart';
@@ -20,7 +21,9 @@ import '../../../data/models/topics/topics.dart';
 import '../../addresses/data/models/address_result/address_result.dart';
 import '../../addresses/data/repos/addresses.repo.dart';
 import '../../addresses/data/repos/addresses_repo_implement.dart';
-import '../data/models/teacher.dart';
+import '../../hessa_teachers/data/models/hessa_teacher.dart';
+import '../../hessa_teachers/data/repos/hessa_teachers_repo.dart';
+import '../../hessa_teachers/data/repos/hessa_teachers_repo_implement.dart';
 import '../data/repos/order_hessa_repo_implement.dart';
 
 extension IsAtMaximumYears on DateTime {
@@ -38,12 +41,14 @@ class OrderHessaController extends GetxController {
   int hessaCategory = 0; // 0 academic learning, 1 skills
   int teacherGender = 0; // 0 male, 1 female, 2 both
   int orderType = 0; // 0 one hessa, 1 school package
+  final HessaTeachersRepo _hessaTeacherRepo = HessaTeachersRepoImplement();
   late TextEditingController hessaDateController,
       hessaTimeController,
       locationController,
       teacherNameController,
       notesController;
   DateTime hessaDate = DateTime.now();
+
   Color? teacherNameErrorIconColor,
       hessaDateErrorIconColor,
       hessaTimeErrorIconColor;
@@ -66,7 +71,7 @@ class OrderHessaController extends GetxController {
   List<AddressResult> addresses = [];
   AddressResult? selectedAddress;
   bool isAddressDropDownLoading = false;
-  Teacher? chosenTeacher;
+  HessaTeacher? chosenTeacher;
   void changeHessaDate(DateRangePickerSelectionChangedArgs hessaDate) {
     log(hessaDate.value.toString());
     this.hessaDate = hessaDate.value;
@@ -75,95 +80,36 @@ class OrderHessaController extends GetxController {
     update();
   }
 
-  List<Teacher> teachers = [
-    Teacher(
-      name: "وليد علي",
-      subjects: ["فيزياء", "رياضيات", "علوم"],
-      address: "رام الله، الضفة",
-      picture: ImagesManager.avatar,
-    ),
-    Teacher(
-      name: "ولاء يوسف",
-      subjects: ["فيزياء", "رياضيات", "علوم"],
-      address: "رام الله، الضفة",
-      picture: ImagesManager.avatar,
-    ),
-    Teacher(
-      name: "Ahmed Alashi",
-      subjects: ["فيزياء", "رياضيات", "علوم"],
-      address: "رام الله، الضفة",
-      picture: ImagesManager.avatar,
-    ),
-    Teacher(
-      name: "Abdullah Alashi2",
-      subjects: ["فيزياء", "رياضيات", "علوم"],
-      address: "رام الله، الضفة",
-      picture: ImagesManager.avatar,
-    ),
-    Teacher(
-      name: "Abdullah Alashi3",
-      subjects: ["فيزياء", "رياضيات", "علوم"],
-      address: "رام الله، الضفة",
-      picture: ImagesManager.avatar,
-    ),
-    Teacher(
-      name: "Abdullah Alashi4",
-      subjects: ["فيزياء", "رياضيات", "علوم"],
-      address: "رام الله، الضفة",
-      picture: ImagesManager.avatar,
-    ),
-    Teacher(
-      name: "Abdullah Alashi5",
-      subjects: ["فيزياء", "رياضيات", "علوم"],
-      address: "رام الله، الضفة",
-      picture: ImagesManager.avatar,
-    ),
-    Teacher(
-      name: "Abdullah Alashi6",
-      subjects: ["فيزياء", "رياضيات", "علوم"],
-      address: "رام الله، الضفة",
-      picture: ImagesManager.avatar,
-    ),
-    Teacher(
-      name: "Abdullah Alashi7",
-      subjects: ["فيزياء", "رياضيات", "علوم"],
-      address: "رام الله، الضفة",
-      picture: ImagesManager.avatar,
-    ),
-    Teacher(
-      name: "Abdullah Alashi8",
-      subjects: ["فيزياء", "رياضيات", "علوم"],
-      address: "رام الله، الضفة",
-      picture: ImagesManager.avatar,
-    ),
-    Teacher(
-      name: "Abdullah Alashi9",
-      subjects: ["فيزياء", "رياضيات", "علوم"],
-      address: "رام الله، الضفة",
-      picture: ImagesManager.avatar,
-    ),
-    Teacher(
-      name: "Abdullah Alashi10",
-      subjects: ["فيزياء", "رياضيات", "علوم"],
-      address: "رام الله، الضفة",
-      picture: ImagesManager.avatar,
-    ),
-  ];
+  List<HessaTeacher> teachers = [];
 
-  List<Teacher> foundTeachers = [];
-
-  List<Teacher> searchTeacher({required String searchValue}) {
-    return foundTeachers = teachers
-        .where((Teacher teacher) =>
-            teacher.name.toLowerCase().contains(searchValue) ||
-            teacher.address.toLowerCase().contains(searchValue) ||
-            teacher.subjects.any((String subject) =>
-                subject.toLowerCase().contains(searchValue)))
-        .toList();
+  Future<List<HessaTeacher>> searchTeacher(
+      {required String searchValue}) async {
+    return teachers = await getHessaTeachers(page: 1, searchValue: searchValue);
   }
 
-  void selectTeacher(Teacher teacher) {
-    teacherNameController.text = teacher.name;
+  Future<List<HessaTeacher>> getHessaTeachers({
+    required int page,
+    required String searchValue,
+  }) async {
+    List<HessaTeacher> hessaTeachers = [];
+    try {
+      if (await checkInternetConnection(timeout: 10)) {
+        hessaTeachers = await _hessaTeacherRepo.getHessaTeachers(
+          page: 1,
+          perPage: 1000,
+          searchValue: searchValue,
+        );
+      } else {
+        isInternetConnected.value = false;
+      }
+    } on DioError catch (e) {
+      log("getHessaTeachers DioError ${e.message}");
+    }
+    return hessaTeachers;
+  }
+
+  void selectTeacher(HessaTeacher teacher) {
+    teacherNameController.text = teacher.name ?? "";
     chosenTeacher = teacher;
     update();
   }
