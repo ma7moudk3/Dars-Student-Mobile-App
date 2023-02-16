@@ -80,7 +80,8 @@ class AboutHessaView extends GetView<AboutHessaController> {
                               textStyle: TextStyle(
                                 color: ColorManager.fontColor,
                                 fontSize: 15.sp,
-                                wordSpacing: 1,
+                                letterSpacing: 0.5,
+                                wordSpacing: 1.2,
                                 fontWeight: FontWeightManager.softLight,
                                 fontFamily: FontConstants.fontFamily,
                               ),

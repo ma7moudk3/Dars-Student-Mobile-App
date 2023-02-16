@@ -1,3 +1,4 @@
+import 'package:flutter_keyboard_visibility/flutter_keyboard_visibility.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:hessa_student/app/constants/exports.dart';
 import 'package:hessa_student/app/modules/hessa_teachers/data/models/hessa_teacher.dart';
@@ -73,77 +74,82 @@ class HessaTeachersView extends GetView<HessaTeachersController> {
                   },
                 ),
               ),
-              GetBuilder<HessaTeachersController>(
-                  builder: (HessaTeachersController controller) {
-                return Visibility(
-                  visible: controller.toggleFilter &&
-                      controller.filterList.isNotEmpty,
-                  child: Expanded(
-                    flex: 1,
-                    child: Column(
-                      mainAxisSize: MainAxisSize.min,
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        SizedBox(height: 14.h),
-                        Expanded(
-                          child: Padding(
-                            padding: EdgeInsets.symmetric(horizontal: 16.w),
-                            child: ListView.builder(
-                              shrinkWrap: true,
-                              scrollDirection: Axis.horizontal,
-                              itemCount: controller.filterList.length,
-                              itemBuilder: (BuildContext context, int index) {
-                                return Container(
-                                  height: 30.h,
-                                  margin: EdgeInsets.only(right: 10.w),
-                                  padding: EdgeInsets.symmetric(
-                                    horizontal: 10.w,
-                                    vertical: 7.h,
-                                  ),
-                                  decoration: BoxDecoration(
-                                    color: const Color(0x1a5b83f9),
-                                    borderRadius: BorderRadius.circular(10.0),
-                                    boxShadow: const [
-                                      BoxShadow(
-                                        color: Color(0x01000000),
-                                        offset: Offset(0, 5),
-                                        blurRadius: 3,
-                                      ),
-                                    ],
-                                  ),
-                                  child: Center(
-                                    child: Row(
-                                      mainAxisSize: MainAxisSize.min,
-                                      children: [
-                                        PrimaryText(
-                                          controller.filterList[index]
-                                              ["displayName"],
-                                          color: ColorManager.primary,
-                                        ),
-                                        SizedBox(width: 5.w),
-                                        GestureDetector(
-                                          behavior: HitTestBehavior.opaque,
-                                          onTap: () {
-                                            controller.removeFilterTag(filterTag: controller.filterList[index]);
-                                          },
-                                          child: Icon(
-                                            Icons.close_rounded,
-                                            color: ColorManager.primary,
-                                            size: 20,
-                                          ),
+              KeyboardVisibilityBuilder(
+                  builder: (context, bool isKeyboardVisible) {
+                return GetBuilder<HessaTeachersController>(
+                    builder: (HessaTeachersController controller) {
+                  return Visibility(
+                    visible: controller.toggleFilter &&
+                        controller.filterList.isNotEmpty,
+                    child: Expanded(
+                      flex: isKeyboardVisible ? 2 : 1,
+                      child: Column(
+                        mainAxisSize: MainAxisSize.min,
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          SizedBox(height: 14.h),
+                          Expanded(
+                            child: Padding(
+                              padding: EdgeInsets.symmetric(horizontal: 16.w),
+                              child: ListView.builder(
+                                shrinkWrap: true,
+                                scrollDirection: Axis.horizontal,
+                                itemCount: controller.filterList.length,
+                                itemBuilder: (BuildContext context, int index) {
+                                  return Container(
+                                    height: 30.h,
+                                    margin: EdgeInsets.only(right: 10.w),
+                                    padding: EdgeInsets.symmetric(
+                                      horizontal: 10.w,
+                                      vertical: 7.h,
+                                    ),
+                                    decoration: BoxDecoration(
+                                      color: const Color(0x1a5b83f9),
+                                      borderRadius: BorderRadius.circular(10.0),
+                                      boxShadow: const [
+                                        BoxShadow(
+                                          color: Color(0x01000000),
+                                          offset: Offset(0, 5),
+                                          blurRadius: 3,
                                         ),
                                       ],
                                     ),
-                                  ),
-                                );
-                              },
+                                    child: Center(
+                                      child: Row(
+                                        mainAxisSize: MainAxisSize.min,
+                                        children: [
+                                          PrimaryText(
+                                            controller.filterList[index]
+                                                ["displayName"],
+                                            color: ColorManager.primary,
+                                          ),
+                                          SizedBox(width: 5.w),
+                                          GestureDetector(
+                                            behavior: HitTestBehavior.opaque,
+                                            onTap: () {
+                                              controller.removeFilterTag(
+                                                  filterTag: controller
+                                                      .filterList[index]);
+                                            },
+                                            child: Icon(
+                                              Icons.close_rounded,
+                                              color: ColorManager.primary,
+                                              size: 20,
+                                            ),
+                                          ),
+                                        ],
+                                      ),
+                                    ),
+                                  );
+                                },
+                              ),
                             ),
                           ),
-                        ),
-                      ],
+                        ],
+                      ),
                     ),
-                  ),
-                );
+                  );
+                });
               }),
               SizedBox(height: 25.h),
               Padding(
