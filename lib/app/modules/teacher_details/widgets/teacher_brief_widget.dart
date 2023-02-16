@@ -1,17 +1,23 @@
+import 'package:flutter_chat_types/flutter_chat_types.dart';
+import 'package:flutter_link_previewer/flutter_link_previewer.dart';
+import 'package:flutter_linkify/flutter_linkify.dart';
+import 'package:url_launcher/url_launcher.dart';
+
 import '../../../../generated/locales.g.dart';
 import '../../../constants/exports.dart';
 import '../../../core/helper_functions.dart';
 import '../controllers/teacher_details_controller.dart';
 
 class HessaTeacherBrief extends GetView<TeacherDetailsController> {
-  const HessaTeacherBrief({
+  HessaTeacherBrief({
     super.key,
   });
+  Map<String, PreviewData> datas = {};
 
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: const EdgeInsets.fromLTRB(13.0, 14.0, 14.0, 12.0),
+      padding: const EdgeInsets.fromLTRB(13.0, 14.0, 14.0, 0.0),
       decoration: BoxDecoration(
         color: ColorManager.white,
         borderRadius: BorderRadius.circular(14),
@@ -24,6 +30,7 @@ class HessaTeacherBrief extends GetView<TeacherDetailsController> {
         ],
       ),
       child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Row(
             children: [
@@ -40,17 +47,148 @@ class HessaTeacherBrief extends GetView<TeacherDetailsController> {
           SizedBox(height: 10.h),
           moreDivider(),
           SizedBox(height: 10.h),
-          PrimaryText(
-            controller.hessaTeacherDetails.result != null
-                ? controller.hessaTeacherDetails.result!.providers != null
-                    ? controller
-                            .hessaTeacherDetails.result!.providers!.aboutMe ??
-                        ""
-                    : ""
-                : "",
-            color: ColorManager.grey5,
-            fontSize: 14.sp,
-          ),
+          StatefulBuilder(builder: (BuildContext context, setState) {
+            return LinkPreview(
+              enableAnimation: true,
+              hideImage: true,
+              padding: EdgeInsets.zero,
+              openOnPreviewTitleTap: true,
+              openOnPreviewImageTap: true,
+              onPreviewDataFetched: (PreviewData data) {
+                setState(() {
+                  if (extractLink(controller.hessaTeacherDetails.result != null
+                          ? controller.hessaTeacherDetails.result!.providers !=
+                                  null
+                              ? controller.hessaTeacherDetails.result!
+                                      .providers!.aboutMe ??
+                                  ""
+                              : ""
+                          : "") !=
+                      null) {
+                    datas = {
+                      ...datas,
+                      extractLink(controller.hessaTeacherDetails.result != null
+                          ? controller.hessaTeacherDetails.result!.providers !=
+                                  null
+                              ? controller.hessaTeacherDetails.result!
+                                      .providers!.aboutMe ??
+                                  ""
+                              : ""
+                          : "")!: data
+                    };
+                  }
+                });
+              },
+              textWidget: Linkify(
+                onOpen: (LinkableElement link) async {
+                  if (extractLink(controller.hessaTeacherDetails.result != null
+                          ? controller.hessaTeacherDetails.result!.providers !=
+                                  null
+                              ? controller.hessaTeacherDetails.result!
+                                      .providers!.aboutMe ??
+                                  ""
+                              : ""
+                          : "") !=
+                      null) {
+                    final url = Uri.parse(extractLink(
+                        controller.hessaTeacherDetails.result != null
+                            ? controller.hessaTeacherDetails.result!
+                                        .providers !=
+                                    null
+                                ? controller.hessaTeacherDetails.result!
+                                        .providers!.aboutMe ??
+                                    ""
+                                : ""
+                            : "")!);
+                    if (url.isAbsolute) {
+                      if (await canLaunchUrl(url)) {
+                        await launchUrl(
+                          url,
+                          mode: LaunchMode.externalApplication,
+                        );
+                      } else {
+                        throw 'Could not launch $link';
+                      }
+                    }
+                  }
+                },
+                textDirection: detectLang(
+                        text: controller.hessaTeacherDetails.result != null
+                            ? controller.hessaTeacherDetails.result!
+                                        .providers !=
+                                    null
+                                ? controller.hessaTeacherDetails.result!
+                                        .providers!.aboutMe ??
+                                    ""
+                                : ""
+                            : "")
+                    ? TextDirection.ltr
+                    : TextDirection.rtl,
+                text: controller.hessaTeacherDetails.result != null
+                    ? controller.hessaTeacherDetails.result!.providers != null
+                        ? controller.hessaTeacherDetails.result!.providers!
+                                .aboutMe ??
+                            ""
+                        : ""
+                    : "",
+                textAlign: TextAlign.start,
+                style: TextStyle(
+                  color: ColorManager.grey5,
+                  fontSize: 14.sp,
+                  fontWeight: FontWeightManager.light,
+                  fontFamily: FontConstants.fontFamily,
+                ),
+              ),
+              textStyle: TextStyle(
+                color: ColorManager.grey5,
+                fontSize: 14.sp,
+                fontWeight: FontWeightManager.light,
+                fontFamily: FontConstants.fontFamily,
+              ),
+              previewData: datas[extractLink(
+                      controller.hessaTeacherDetails.result != null
+                          ? controller.hessaTeacherDetails.result!.providers !=
+                                  null
+                              ? controller.hessaTeacherDetails.result!
+                                      .providers!.aboutMe ??
+                                  ""
+                              : ""
+                          : "") ??
+                  ""],
+              text: extractLink(controller.hessaTeacherDetails.result != null
+                      ? controller.hessaTeacherDetails.result!.providers != null
+                          ? controller.hessaTeacherDetails.result!.providers!
+                                  .aboutMe ??
+                              ""
+                          : ""
+                      : "") ??
+                  "",
+              width: Get.width,
+            );
+          }),
+          // PrimaryText(
+          //   controller.hessaTeacherDetails.result != null
+          //       ? controller.hessaTeacherDetails.result!.providers != null
+          //           ? controller
+          //                   .hessaTeacherDetails.result!.providers!.aboutMe ??
+          //               ""
+          //           : ""
+          //       : "",
+          //   textDirection: detectLang(
+          //           text: controller.hessaTeacherDetails.result != null
+          //               ? controller.hessaTeacherDetails.result!.providers !=
+          //                       null
+          //                   ? controller.hessaTeacherDetails.result!.providers!
+          //                           .aboutMe ??
+          //                       ""
+          //                   : ""
+          //               : "")
+          //       ? TextDirection.ltr
+          //       : TextDirection.rtl,
+          //   textAlign: TextAlign.start,
+          //   color: ColorManager.grey5,
+          //   fontSize: 14.sp,
+          // ),
         ],
       ),
     );

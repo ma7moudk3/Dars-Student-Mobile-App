@@ -8,6 +8,7 @@ import 'package:hessa_student/app/modules/login/data/repos/login_repo.dart';
 import 'package:hessa_student/app/modules/login/data/repos/login_repo_implement.dart';
 import 'package:hessa_student/app/modules/verify_account/data/repos/verify_account_repo.dart';
 import 'package:intl/intl.dart';
+import 'package:linkify/linkify.dart';
 
 import '../../generated/locales.g.dart';
 import '../../global_presentation/global_widgets/custom_snack_bar.dart';
@@ -257,6 +258,19 @@ Future _clearAllCaches() async {
     CacheHelper.instance.setIsEmailConfirmed(false),
     CacheHelper.instance.setIsPhoneConfirmed(false),
   ]);
+}
+
+String? extractLink(String input) {
+  var elements = linkify(input,
+      options: const LinkifyOptions(
+        humanize: false,
+      ));
+  for (var e in elements) {
+    if (e is LinkableElement) {
+      return e.url;
+    }
+  }
+  return null;
 }
 
 Future logout() async {

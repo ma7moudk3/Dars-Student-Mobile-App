@@ -285,9 +285,12 @@ class SignUpContent extends GetView<SignUpController> {
                     children: [
                       GestureDetector(
                         onTap: () {
-                          CustomSnackBar.showCustomToast(
-                              message: LocaleKeys.agreenment_thorugh_reading.tr,
-                              color: ColorManager.primary);
+                          if (!controller.tosIsAgreed) {
+                            CustomSnackBar.showCustomToast(
+                                message:
+                                    LocaleKeys.agreenment_thorugh_reading.tr,
+                                color: ColorManager.primary);
+                          }
                         },
                         child: Container(
                           width: 20.w,
@@ -328,7 +331,9 @@ class SignUpContent extends GetView<SignUpController> {
                           ),
                           GestureDetector(
                             onTap: () async {
-                              controller.toggleTermsOfUse();
+                              if (!controller.tosIsAgreed) {
+                                controller.toggleTermsOfUse();
+                              }
                               await Get.toNamed(Routes.STATIC_PAGE, arguments: {
                                 "pageTitle": LocaleKeys.terms_and_conditions.tr,
                                 "pageSubTitle":

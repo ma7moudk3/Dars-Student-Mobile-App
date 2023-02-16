@@ -39,7 +39,6 @@ class PrimaryText extends StatelessWidget {
   Widget build(BuildContext context) {
     textAlign ??=
         Get.locale == const Locale("ar") ? TextAlign.right : TextAlign.left;
-
     TextStyle style = TextStyle(
       color: color,
       fontSize: (fontSize).sp,
