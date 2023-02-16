@@ -1,4 +1,3 @@
-
 import 'dart:async';
 
 import 'package:flutter/services.dart';
@@ -354,24 +353,50 @@ class _IntlPhoneFieldState extends State<IntlPhoneField> {
 
   Future<void> _changeCountry() async {
     filteredCountries = _countryList;
-    await showDialog(
-      context: context,
-      useRootNavigator: false,
-      builder: (context) => StatefulBuilder(
-        builder: (ctx, setState) => CountryPickerDialog(
-          style: widget.pickerDialogStyle,
-          filteredCountries: filteredCountries,
-          searchText: widget.searchText,
-          countryList: _countryList,
-          selectedCountry: _selectedCountry,
-          onCountryChanged: (Country country) {
-            _selectedCountry = country;
-            widget.onCountryChanged?.call(country);
-            setState(() {});
-          },
-        ),
-      ),
-    );
+    await Get.bottomSheet(
+        backgroundColor: ColorManager.white,
+        useRootNavigator: false,
+        SafeArea(
+          child: Padding(
+            padding: EdgeInsets.symmetric(
+              horizontal: 5.w,
+              vertical: 16.h,
+            ),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                Center(
+                  child: Container(
+                    width: 26.w,
+                    height: 6.h,
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(15),
+                      color: ColorManager.borderColor3,
+                    ),
+                  ),
+                ),
+                SizedBox(height: 10.h),
+                Expanded(
+                  child: StatefulBuilder(
+                    builder: (ctx, setState) => CountryPickerDialog(
+                      style: widget.pickerDialogStyle,
+                      filteredCountries: filteredCountries,
+                      searchText: widget.searchText,
+                      countryList: _countryList,
+                      selectedCountry: _selectedCountry,
+                      onCountryChanged: (Country country) {
+                        _selectedCountry = country;
+                        widget.onCountryChanged?.call(country);
+                        setState(() {});
+                      },
+                    ),
+                  ),
+                ),
+              ],
+            ),
+          ),
+        ));
     if (mounted) setState(() {});
   }
 

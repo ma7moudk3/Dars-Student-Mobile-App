@@ -96,7 +96,8 @@ class OrderHessaController extends GetxController {
       if (await checkInternetConnection(timeout: 10)) {
         hessaTeachers = await _hessaTeacherRepo.getHessaTeachers(
           page: 1,
-          perPage: 1000,
+          perPage:
+              1000, // there's a restriction on the searchValue length to be at least 3 characters so we can get all the teachers for that searchValue
           searchValue: searchValue,
         );
       } else {

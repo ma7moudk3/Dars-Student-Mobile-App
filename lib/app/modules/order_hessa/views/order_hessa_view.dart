@@ -808,6 +808,7 @@ class OrderHessaView extends GetView<OrderHessaController> {
                                           placeholder:
                                               LocaleKeys.write_teacher_name.tr,
                                         ),
+                                        keepSuggestionsOnLoading: true,
                                         suggestionsCallback:
                                             (String searchValue) async {
                                           if (searchValue.isNotEmpty &&
@@ -815,7 +816,7 @@ class OrderHessaView extends GetView<OrderHessaController> {
                                               searchValue.trim().isNotEmpty) {
                                             return await controller
                                                 .searchTeacher(
-                                                    searchValue: searchValue);
+                                                    searchValue: searchValue.toLowerCase());
                                           } else {
                                             return <HessaTeacher>[];
                                           }
