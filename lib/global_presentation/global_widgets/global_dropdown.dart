@@ -13,6 +13,8 @@ class PrimaryDropDown extends StatefulWidget {
     this.focusNode,
     this.width,
     this.height,
+    this.prefixIcon,
+    this.suffixIcon,
     this.fontColor,
     this.isDisabled = false,
     this.onChanged,
@@ -29,6 +31,7 @@ class PrimaryDropDown extends StatefulWidget {
   final InputBorder? errorBorder;
   final double? width, height;
   final Color? fontColor;
+  final Widget? prefixIcon, suffixIcon;
   final Function(String value)? onChanged;
   @override
   State<PrimaryDropDown> createState() => _PrimaryDropDownState();
@@ -60,8 +63,20 @@ class _PrimaryDropDownState extends State<PrimaryDropDown> {
       child: SizedBox(
         width: widget.width,
         height: widget.height,
-        child: DropdownButton(
-            underline: const SizedBox.shrink(),
+        child: DropdownButtonFormField(
+            decoration: InputDecoration(
+              border: InputBorder.none,
+              prefixIcon: widget.prefixIcon,
+              prefixIconConstraints: BoxConstraints(
+                minWidth: 30.w,
+                minHeight: 30.h,
+              ),
+              suffixIcon: widget.suffixIcon,
+              suffixIconConstraints: BoxConstraints(
+                minWidth: 30.w,
+                minHeight: 30.h,
+              ),
+            ),
             isExpanded: true,
             style: TextStyle(color: ColorManager.primary),
             hint: PrimaryText(

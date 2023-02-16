@@ -165,7 +165,17 @@ class LocaleKeys {
   static const please_choose_country_first = 'please_choose_country_first';
   static const please_select_school_type = 'please_select_school_type';
   static const studying_subject = 'studying_subject';
+  static const delete = 'delete';
+  static const studying_subjects = 'studying_subjects';
+  static const cancel = 'cancel';
   static const choose_studying_subject = 'choose_studying_subject';
+  static const order_hessa_category = 'order_hessa_category';
+  static const choose_studying_subjects = 'choose_studying_subjects';
+  static const choose_skills = 'choose_skills';
+  static const no_rating = 'no_rating';
+  static const choose_one_studying_subject_at_least =
+      'choose_one_studying_subject_at_least';
+  static const choose_one_skill_at_least = 'choose_one_skill_at_least';
   static const please_choose_governorate_first =
       'please_choose_governorate_first';
   static const search_for_subject = 'search_for_subject';
@@ -317,6 +327,7 @@ class LocaleKeys {
       'please_enter_the_verification_code';
   static const profile_edited_succesfully = 'profile_edited_succesfully';
   static const wanna_back = 'wanna_back';
+  static const wanna_out = 'wanna_out';
   static const wanna_back_and_lose_data = 'wanna_back_and_lose_data';
   static const wanna_back_and_lose_filters = 'wanna_back_and_lose_filters';
   static const check_pin_code = 'check_pin_code';
@@ -557,7 +568,16 @@ class Locales {
     'please_choose_country_first': 'الرجاء اختيار الدولة أولاً',
     'please_select_school_type': 'الرجاء اختيار نوع المدرسة',
     'studying_subject': 'المادة الدراسية',
+    'delete': 'حذف',
+    'studying_subjects': 'المواد الدراسية',
+    'cancel': 'إلغاء',
     'choose_studying_subject': 'اختر المادة الدراسية',
+    'order_hessa_category': 'تصنيف الطلب',
+    'choose_studying_subjects': 'اختر المواد الدراسية',
+    'choose_skills': 'اختر المهارات',
+    'no_rating': 'لا يوجد تقييم',
+    'choose_one_studying_subject_at_least': 'اختر مادة واحدة على الأقل',
+    'choose_one_skill_at_least': 'اختر مهارة واحدة على الأقل',
     'please_choose_governorate_first': 'الرجاء اختيار المدينة أولاً',
     'search_for_subject': 'ابحث عن مادة دراسية',
     'session_way': 'طريقة الجلسة',
@@ -705,6 +725,7 @@ class Locales {
     'please_enter_the_verification_code': 'الرجاء إدخال رمز التحقق',
     'profile_edited_succesfully': 'تم تعديل بيانات الملف الشخصي بنجاح',
     'wanna_back': 'هل أنت متأكد أنك تريد العودة؟',
+    'wanna_out': 'هل أنت متأكد أنك تريد الخروج؟',
     'wanna_back_and_lose_data': 'هل أنت متأكد أنك تريد العودة وفقدان البيانات؟',
     'wanna_back_and_lose_filters':
         'هل أنت متأكد أنك تريد العودة وفقدان اختيارات الفلاتر؟',
@@ -714,7 +735,7 @@ class Locales {
     'the_verification_code_has_been_sent_to_the_email':
         'تم إرسال رمز التحقق إلى البريد الإلكتروني',
     'about_hessa': 'عن حصة',
-    'success': 'نجاح',
+    'success': 'عملية ناجحة',
     'verify_email': 'تأكيد البريد الإلكتروني',
     'verified_successfully': 'تم التأكيد بنجاح',
     'verify_phone_number': 'تأكيد رقم الهاتف',

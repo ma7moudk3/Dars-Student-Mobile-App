@@ -17,39 +17,39 @@ class AddressesRepoImplement extends AddressesRepo {
     required int perPage,
   }) async {
     List<AddressResult> addresses = [];
-    // try {
-    Map<String, dynamic> queryParameters = {
-      // "MaxResultCount": perPage,
-      // "SkipCount": (page - 1) * perPage,
-    };
-    Map<String, dynamic> headers = {
-      'Accept-Language': Get.locale != null ? Get.locale!.languageCode : 'ar',
-      'Content-Type': 'application/json',
-      'Accept': 'application/json',
-      "Authorization": "Bearer ${CacheHelper.instance.getAccessToken()}"
-    };
-    await DioHelper.get(
-      headers: headers,
-      queryParameters: queryParameters,
-      Links.allMyAddresses,
-      onSuccess: (response) {
-        var result = response.data;
-        if (result != null && result["result"] != null) {
-          for (var address in result["result"]) {
-            addresses.add(AddressResult.fromJson(address));
+    try {
+      Map<String, dynamic> queryParameters = {
+        // "MaxResultCount": perPage,
+        // "SkipCount": (page - 1) * perPage,
+      };
+      Map<String, dynamic> headers = {
+        'Accept-Language': Get.locale != null ? Get.locale!.languageCode : 'ar',
+        'Content-Type': 'application/json',
+        'Accept': 'application/json',
+        "Authorization": "Bearer ${CacheHelper.instance.getAccessToken()}"
+      };
+      await DioHelper.get(
+        headers: headers,
+        queryParameters: queryParameters,
+        Links.allMyAddresses,
+        onSuccess: (response) {
+          var result = response.data;
+          if (result != null && result["result"] != null) {
+            for (var address in result["result"]) {
+              addresses.add(AddressResult.fromJson(address));
+            }
           }
-        }
-      },
-      onError: (error) {
-        CustomSnackBar.showCustomErrorSnackBar(
-          title: LocaleKeys.error.tr,
-          message: error.response?.data["error"]?["message"] ?? error.message,
-        );
-      },
-    );
-    // } catch (e) {
-    //   log("getAllMyAddresses DioError $e");
-    // }
+        },
+        onError: (error) {
+          CustomSnackBar.showCustomErrorSnackBar(
+            title: LocaleKeys.error.tr,
+            message: error.response?.data["error"]?["message"] ?? error.message,
+          );
+        },
+      );
+    } catch (e) {
+      log("getAllMyAddresses DioError $e");
+    }
     return addresses;
   }
 

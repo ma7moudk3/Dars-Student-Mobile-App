@@ -26,7 +26,7 @@ class DeleteAddressDialogContent extends GetView<AddressesController> {
               LocaleKeys.address_deletion.tr,
               color: ColorManager.primary,
               fontSize: 20,
-              fontWeight: FontWeightManager.medium,
+              fontWeight: FontWeightManager.light,
             ),
             SizedBox(height: 10.h),
             PrimaryText(

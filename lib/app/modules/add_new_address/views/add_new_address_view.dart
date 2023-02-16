@@ -64,10 +64,13 @@ class AddNewAddressView extends GetView<AddNewAddressController> {
               );
             },
             behavior: HitTestBehavior.opaque,
-            child: Icon(
-              Icons.arrow_back_ios,
-              color: ColorManager.fontColor,
-              size: 20,
+            child: Padding(
+              padding: const EdgeInsets.all(5),
+              child: Icon(
+                Icons.arrow_back_ios,
+                color: ColorManager.fontColor,
+                size: 20,
+              ),
             ),
           ),
           action: const SizedBox.shrink(),

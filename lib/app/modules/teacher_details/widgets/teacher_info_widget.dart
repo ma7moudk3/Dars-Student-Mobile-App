@@ -71,40 +71,43 @@ class TeacherInfo extends GetView<TeacherDetailsController> {
                 color: ColorManager.fontColor7,
                 fontWeight: FontWeightManager.softLight,
               ),
-              Row(
-                children: [
-                  Icon(
-                    controller.hessaTeacherDetails.result != null &&
-                            controller.hessaTeacherDetails.result!.providers !=
-                                null &&
-                            controller.hessaTeacherDetails.result!.providers!
-                                    .rate !=
-                                null
-                        ? (controller.hessaTeacherDetails.result!.providers!
-                                        .rate <=
-                                    5 &&
-                                controller.hessaTeacherDetails.result!
-                                        .providers!.rate >
-                                    4)
-                            ? Icons.star_rounded
-                            : (teacherRate <= 3.5 && teacherRate >= 1)
-                                ? Icons.star_half_rounded
-                                : Icons.star_outline_rounded
-                        : Icons.star_outline_rounded,
-                    color: ColorManager.orange,
-                    textDirection: TextDirection.ltr,
-                    size: 16.sp,
-                  ),
-                  SizedBox(
-                    width: 25.w,
-                    child: PrimaryText(
-                      teacherRate.toStringAsFixed(1),
-                      fontSize: 13.sp,
-                      fontWeight: FontWeightManager.softLight,
-                    ),
-                  ),
-                ],
-              ),
+              teacherRate > 0.0
+                  ? Row(
+                      children: [
+                        Icon(
+                          controller.hessaTeacherDetails.result != null &&
+                                  controller.hessaTeacherDetails.result!
+                                          .providers !=
+                                      null &&
+                                  controller.hessaTeacherDetails.result!
+                                          .providers!.rate !=
+                                      null
+                              ? (controller.hessaTeacherDetails.result!
+                                              .providers!.rate <=
+                                          5 &&
+                                      controller.hessaTeacherDetails.result!
+                                              .providers!.rate >
+                                          4)
+                                  ? Icons.star_rounded
+                                  : (teacherRate <= 3.5 && teacherRate >= 1)
+                                      ? Icons.star_half_rounded
+                                      : Icons.star_outline_rounded
+                              : Icons.star_outline_rounded,
+                          color: ColorManager.orange,
+                          textDirection: TextDirection.ltr,
+                          size: 16.sp,
+                        ),
+                        SizedBox(
+                          width: 25.w,
+                          child: PrimaryText(
+                            teacherRate.toStringAsFixed(1),
+                            fontSize: 13.sp,
+                            fontWeight: FontWeightManager.softLight,
+                          ),
+                        ),
+                      ],
+                    )
+                  : const SizedBox.shrink(),
             ],
           ),
           const Spacer(),

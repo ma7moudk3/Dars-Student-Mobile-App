@@ -53,13 +53,13 @@ class OrderWidget extends GetView<HomeController> {
                   children: [
                     PrimaryText(
                       '20',
-                      fontSize: 18.sp,
+                      fontSize: 18,
                       color: ColorManager.primary,
                       fontWeight: FontWeightManager.light,
                     ),
                     PrimaryText(
                       'ديسمبر',
-                      fontSize: 12.5.sp,
+                      fontSize: 12,
                       color: ColorManager.primary,
                       fontWeight: FontWeightManager.softLight,
                     ),

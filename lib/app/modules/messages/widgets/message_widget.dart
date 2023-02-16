@@ -106,13 +106,12 @@ class Message extends GetView<MessagesController> {
                         SizedBox(width: 12.w),
                         Column(
                           mainAxisSize: MainAxisSize.min,
-                          mainAxisAlignment: MainAxisAlignment.start,
                           children: [
                             SizedBox(
                               width: 130.w,
                               child: PrimaryText(
                                 "رامي النابلسي",
-                                fontSize: 16.sp,
+                                fontSize: 15.sp,
                                 fontWeight: FontWeightManager.softLight,
                                 maxLines: 1,
                                 overflow: TextOverflow.ellipsis,

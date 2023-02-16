@@ -71,4 +71,33 @@ class OrderHessaRepoImplement extends OrderHessaRepo {
     }
     return topics;
   }
+  
+ @override
+  Future<Skills> getSkills() async {
+    Skills skills = Skills();
+    try {
+      Map<String, dynamic> headers = {
+        "Accpet": "application/json",
+        "Content-Type": "application/json",
+        "Authorization": "Bearer ${CacheHelper.instance.getAccessToken()}"
+      };
+      await DioHelper.get(
+        Links.skillsForDropDown,
+        headers: headers,
+        onSuccess: (response) {
+          var result = response.data;
+          skills = Skills.fromJson(result);
+        },
+        onError: (error) {
+          CustomSnackBar.showCustomErrorSnackBar(
+            title: LocaleKeys.error.tr,
+            message: error.message,
+          );
+        },
+      );
+    } catch (e) {
+      log("Error in getSkills: $e");
+    }
+    return skills;
+  }
 }

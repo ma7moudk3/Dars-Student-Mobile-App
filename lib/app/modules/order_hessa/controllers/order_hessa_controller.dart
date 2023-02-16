@@ -2,10 +2,11 @@ import 'dart:async';
 import 'dart:developer';
 
 import 'package:hessa_student/app/core/helper_functions.dart';
+import 'package:hessa_student/app/data/models/skills/item.dart' as skill;
 import 'package:hessa_student/app/modules/dependents/controllers/dependents_controller.dart';
 import 'package:hessa_student/app/modules/order_hessa/data/repos/order_hessa_repo.dart';
 import 'package:intl/date_symbol_data_local.dart';
-import '../../../data/models/classes/classes.dart';
+import '../../../../global_presentation/global_widgets/multiselect_dropdown.dart';
 import 'package:hessa_student/app/data/models/topics/result.dart' as topic;
 import '../../../data/models/classes/item.dart' as level;
 import 'package:intl/intl.dart';
@@ -14,7 +15,11 @@ import 'package:time_range/time_range.dart';
 import '../../../../generated/locales.g.dart';
 import '../../../../global_presentation/global_widgets/typeahead/cupertino_flutter_typeahead.dart';
 import '../../../constants/exports.dart';
+import '../../../data/models/skills/skills.dart';
 import '../../../data/models/topics/topics.dart';
+import '../../addresses/data/models/address_result/address_result.dart';
+import '../../addresses/data/repos/addresses.repo.dart';
+import '../../addresses/data/repos/addresses_repo_implement.dart';
 import '../data/models/teacher.dart';
 import '../data/repos/order_hessa_repo_implement.dart';
 
@@ -30,6 +35,7 @@ extension IsAtMaximumYears on DateTime {
 class OrderHessaController extends GetxController {
   final GlobalKey<FormState> formKey = GlobalKey<FormState>();
   int sessionWay = 0; // 0 face-to-face, 1 electronic, 2 both
+  int hessaCategory = 0; // 0 academic learning, 1 skills
   int teacherGender = 0; // 0 male, 1 female, 2 both
   int orderType = 0; // 0 one hessa, 1 school package
   late TextEditingController hessaDateController,
@@ -46,14 +52,20 @@ class OrderHessaController extends GetxController {
   late DateRangePickerController hessaDateRangeController;
   final OrderHessaRepo _orderHessaRepo = OrderHessaRepoImplement();
   FocusNode hessaDateFocusNode = FocusNode(), hessaTimeFocusNode = FocusNode();
+  final AddressesRepo _addressesRepo = AddressesRepoImplement();
   DependentsController dependentsController =
       Get.put<DependentsController>(DependentsController());
   final CupertinoSuggestionsBoxController suggestionsBoxController =
       CupertinoSuggestionsBoxController();
-  Classes classes = Classes();
+  // Classes classes = Classes();
   Topics topics = Topics();
+  Skills skills = Skills();
   level.Item selectedClass = level.Item();
-  topic.Result selectedTopic = topic.Result();
+  List<String> selectedTopics = [];
+  List<String> selectedSkills = [];
+  List<AddressResult> addresses = [];
+  AddressResult? selectedAddress;
+  bool isAddressDropDownLoading = false;
   Teacher? chosenTeacher;
   void changeHessaDate(DateRangePickerSelectionChangedArgs hessaDate) {
     log(hessaDate.value.toString());
@@ -148,9 +160,6 @@ class OrderHessaController extends GetxController {
             teacher.subjects.any((String subject) =>
                 subject.toLowerCase().contains(searchValue)))
         .toList();
-    // for (Teacher teacher in foundedTeachers) {
-    //   log("Teacher name: ${teacher.name}");
-    // }
   }
 
   void selectTeacher(Teacher teacher) {
@@ -159,36 +168,94 @@ class OrderHessaController extends GetxController {
     update();
   }
 
-  void changeTopic(String? result) {
-    if (topics.result != null && result != null) {
-      for (var topic in topics.result ?? <topic.Result>[]) {
-        if (topic.displayName != null &&
-            topic.displayName!.toLowerCase() == result.toLowerCase()) {
-          selectedTopic = topic;
-        }
+  Future getMyAddresses() async {
+    isAddressDropDownLoading = true;
+    update();
+    await Future.delayed(const Duration(milliseconds: 500), () async {
+      addresses = await _addressesRepo.getAllMyAddresses(
+        page: 1,
+        perPage: 100,
+      );
+      if (addresses.isNotEmpty) {
+        selectedAddress = addresses.first;
       }
+      isAddressDropDownLoading = false;
+      update();
+    });
+  }
+
+  Future showMultiSelectTopics() async {
+    final List<String> items = topics.result != null &&
+            topics.result!.isNotEmpty
+        ? (topics.result!
+            .map((topic.Result result) => result.displayName ?? "")).toList()
+        : [""];
+
+    final List<String>? results = await Get.dialog(
+        barrierDismissible: false,
+        transitionDuration: const Duration(milliseconds: 250),
+        transitionCurve: Curves.easeInOutBack,
+        MultiSelect(
+          items: items,
+          cancelButtonText: LocaleKeys.cancel.tr,
+          submitButtonText: LocaleKeys.save.tr,
+          title: LocaleKeys.choose_studying_subjects.tr,
+          selectedItems: selectedTopics,
+        ));
+    if (results != null) {
+      selectedTopics = results;
     }
     update();
   }
 
-  void changeLevel(String? result) {
-    if (classes.result != null &&
-        classes.result!.items != null &&
-        result != null) {
-      for (var level in classes.result!.items ?? <level.Item>[]) {
-        if (level.displayName != null &&
-            level.displayName!.toLowerCase() == result.toLowerCase()) {
-          selectedClass = level;
-        }
-      }
+  void removeTopic(String item) {
+    selectedTopics.remove(item);
+    update();
+  }
+
+  void removeSkill(String item) {
+    selectedSkills.remove(item);
+    update();
+  }
+
+  Future showMultiSelectSkills() async {
+    final List<String> items = skills.result != null &&
+            skills.result!.items != null &&
+            skills.result!.items!.isNotEmpty
+        ? (skills.result!.items!
+            .map((skill.Item result) => result.displayName ?? "")).toList()
+        : [""];
+
+    final List<String>? results = await Get.dialog(
+        barrierDismissible: false,
+        transitionDuration: const Duration(milliseconds: 250),
+        transitionCurve: Curves.easeInOutBack,
+        MultiSelect(
+          items: items,
+          cancelButtonText: LocaleKeys.cancel.tr,
+          submitButtonText: LocaleKeys.save.tr,
+          title: LocaleKeys.choose_skills.tr,
+          selectedItems: selectedSkills,
+        ));
+    if (results != null) {
+      selectedSkills = results;
     }
     update();
   }
 
-  void changeLocation(String location) {
-    locationController.text = location;
-    update();
-  }
+  // void changeLevel(String? result) {
+  //   if (classes.result != null &&
+  //       classes.result!.items != null &&
+  //       result != null) {
+  //     for (var level in classes.result!.items ?? <level.Item>[]) {
+  //       if (level.displayName != null &&
+  //           level.displayName!.toLowerCase() == result.toLowerCase()) {
+  //         selectedClass = level;
+  //       }
+  //     }
+  //   }
+  //   update();
+  // }
 
   String? validateHessaDate(String? hessaDate) {
     if (hessaDate != null && hessaDate.isNotEmpty) {
@@ -290,47 +357,68 @@ class OrderHessaController extends GetxController {
     super.dispose();
   }
 
+  Future changeAddress(String? result) async {
+    if (addresses.isNotEmpty && result != null) {
+      for (var address in addresses) {
+        if (address.countryName != null &&
+                address.governorateName != null &&
+                address.localityName != null
+            ? "${address.countryName ?? ""} - ${address.governorateName ?? ""} - ${address.localityName ?? ""}"
+                    .toLowerCase() ==
+                result.toLowerCase()
+            : "${address.countryName ?? ""}${address.governorateName ?? ""}${address.localityName ?? ""}"
+                    .toLowerCase() ==
+                result.toLowerCase()) {
+          selectedAddress = address;
+        }
+      }
+    }
+    update();
+  }
+
   Future checkInternet() async {
     await checkInternetConnection(timeout: 10)
         .then((bool internetStatus) async {
       isInternetConnected.value = internetStatus;
       if (isInternetConnected.value) {
         await Future.wait([
-          _getClasses(),
+          // _getClasses(),
           _getTopics(),
+          _getSkills(),
+          getMyAddresses(),
         ]).then((value) => isLoading.value = false);
       }
     });
   }
 
-  Future _getClasses() async {
-    classes = await _orderHessaRepo.getClasses();
-    if (classes.result != null && classes.result!.items != null) {
-      classes.result!.items!.insert(
-        0,
-        level.Item(
-          id: -1,
-          displayName: LocaleKeys.choose_studying_class.tr,
-        ),
-      );
-    }
-  }
+  // Future _getClasses() async {
+  //   classes = await _orderHessaRepo.getClasses();
+  //   if (classes.result != null && classes.result!.items != null) {
+  //     classes.result!.items!.insert(
+  //       0,
+  //       level.Item(
+  //         id: -1,
+  //         displayName: LocaleKeys.choose_studying_class.tr,
+  //       ),
+  //     );
+  //   }
+  // }
 
   Future _getTopics() async {
     topics = await _orderHessaRepo.getTopics();
-    if (topics.result != null) {
-      topics.result!.insert(
-        0,
-        topic.Result(
-          id: -1,
-          displayName: LocaleKeys.choose_studying_subject.tr,
-        ),
-      );
-    }
+  }
+
+  Future _getSkills() async {
+    skills = await _orderHessaRepo.getSkills();
   }
 
   void changeSessionWay(int value) {
     sessionWay = value;
+    update();
+  }
+
+  void changeHessaCategory(int value) {
+    hessaCategory = value;
     update();
   }
 

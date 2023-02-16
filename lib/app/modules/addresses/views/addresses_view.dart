@@ -150,7 +150,7 @@ class AddressesView extends GetView<AddressesController> {
                                 PrimaryText(
                                   LocaleKeys.no_addresses_found.tr,
                                   textAlign: TextAlign.center,
-                                  fontSize: 21.sp,
+                                  fontSize: 19,
                                 ),
                                 Padding(
                                   padding: EdgeInsets.symmetric(

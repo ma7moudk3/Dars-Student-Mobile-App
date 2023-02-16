@@ -3,6 +3,7 @@ import 'package:hessa_student/app/data/models/governorates/governorates.dart';
 import 'package:hessa_student/app/modules/add_new_address/data/repos/add_new_address_repo.dart';
 import 'package:hessa_student/app/modules/add_new_address/data/repos/add_new_address_repo_implement.dart';
 import 'package:hessa_student/app/modules/addresses/controllers/addresses_controller.dart';
+import 'package:hessa_student/app/modules/order_hessa/controllers/order_hessa_controller.dart';
 
 import '../../../../generated/locales.g.dart';
 import '../../../../global_presentation/global_widgets/custom_snack_bar.dart';
@@ -28,7 +29,7 @@ class AddNewAddressController extends GetxController {
   RxBool isInternetConnected = true.obs, isLoading = true.obs;
   bool isGovernorateDropDownLoading = false, isLocalityDropDownLoading = false;
   final AddNewAddressRepo _addNewAddressRepo = AddNewAddressRepoImplement();
-
+  bool isFromOrderHessa = false;
   @override
   void onInit() async {
     addressDescriptionController = TextEditingController();
@@ -36,6 +37,9 @@ class AddNewAddressController extends GetxController {
     addressFocusNode.addListener(() => update());
     addressDescriptionFocusNode.addListener(() => update());
     await checkInternet();
+    isFromOrderHessa = Get.arguments != null
+        ? Get.arguments["isFromOrderHessa"] ?? false
+        : false;
     super.onInit();
   }
 
@@ -213,17 +217,39 @@ class AddNewAddressController extends GetxController {
           if (Get.isDialogOpen!) {
             Get.back();
           }
-          await Future.delayed(const Duration(milliseconds: 550))
-              .then((value) async {
-            final AddressesController addressesController =
-                Get.find<AddressesController>();
-            addressesController.refreshPagingController();
-            Get.back();
-            CustomSnackBar.showCustomSnackBar(
-              title: LocaleKeys.success.tr,
-              message: LocaleKeys.address_added_successfully.tr,
-            );
-          });
+          if (isFromOrderHessa == false) {
+            await Future.delayed(const Duration(milliseconds: 550))
+                .then((value) async {
+              final AddressesController addressesController =
+                  Get.find<AddressesController>();
+              addressesController.refreshPagingController();
+              Get.back();
+              CustomSnackBar.showCustomSnackBar(
+                title: LocaleKeys.success.tr,
+                message: LocaleKeys.address_added_successfully.tr,
+              );
+            });
+          } else {
+            await Future.delayed(const Duration(milliseconds: 550))
+                .then((value) async {
+              final OrderHessaController orderHessaController =
+                  Get.find<OrderHessaController>();
+              showLoadingDialog();
+              await orderHessaController.getMyAddresses().then((value) async {
+                await Future.delayed(const Duration(milliseconds: 850))
+                    .then((value) {
+                  if (Get.isDialogOpen!) {
+                    Get.back();
+                  }
+                  Get.back();
+                  CustomSnackBar.showCustomSnackBar(
+                    title: LocaleKeys.success.tr,
+                    message: LocaleKeys.address_added_successfully.tr,
+                  );
+                });
+              });
+            });
+          }
         }
       });
     }
