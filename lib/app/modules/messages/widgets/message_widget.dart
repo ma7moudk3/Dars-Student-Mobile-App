@@ -111,7 +111,7 @@ class Message extends GetView<MessagesController> {
                               width: 130.w,
                               child: PrimaryText(
                                 "رامي النابلسي",
-                                fontSize: 15.sp,
+                                fontSize: 16,
                                 fontWeight: FontWeightManager.softLight,
                                 maxLines: 1,
                                 overflow: TextOverflow.ellipsis,
@@ -122,7 +122,7 @@ class Message extends GetView<MessagesController> {
                               width: 130.w,
                               child: PrimaryText(
                                 "أهلاً, مرحباً بك في تطبيقنا الجديد للتواصل معنا ومع العملاء والمستخدمين",
-                                fontSize: 14.sp,
+                                fontSize: 13.5,
                                 fontWeight: FontWeightManager.light,
                                 color: ColorManager.fontColor7,
                                 maxLines: 1,

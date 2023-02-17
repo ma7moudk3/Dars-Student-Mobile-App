@@ -1,5 +1,3 @@
-import 'dart:developer';
-
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:hessa_student/app/modules/order_hessa/controllers/order_hessa_controller.dart';
@@ -14,7 +12,6 @@ import '../../../constants/links.dart';
 import '../../../data/models/classes/item.dart';
 import '../../../routes/app_pages.dart';
 import '../../dependents/data/models/student/student.dart';
-import '../../dependents/views/widgets/no_dependents_widget.dart';
 
 class DependentsListBottomSheetContent extends GetView<OrderHessaController> {
   const DependentsListBottomSheetContent({
@@ -131,7 +128,29 @@ class DependentsListBottomSheetContent extends GetView<OrderHessaController> {
                             },
                             noItemsFoundIndicatorBuilder:
                                 (BuildContext context) {
-                              return const NoDependentsWidget();
+                              return Column(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                crossAxisAlignment: CrossAxisAlignment.center,
+                                children: [
+                                  SvgPicture.asset(
+                                    ImagesManager.dependents,
+                                    width: Get.width,
+                                    height: 160.h,
+                                  ),
+                                  PrimaryText(
+                                    LocaleKeys.there_are_no_dependents,
+                                    fontSize: 18.sp,
+                                    fontWeight: FontWeightManager.softLight,
+                                  ),
+                                  SizedBox(height: 8.h),
+                                  PrimaryText(
+                                    LocaleKeys.you_can_add_new_dependent,
+                                    fontSize: 16.sp,
+                                    color: ColorManager.fontColor7,
+                                    fontWeight: FontWeightManager.softLight,
+                                  ),
+                                ],
+                              );
                             },
                             itemBuilder: (BuildContext context, Student student,
                                 int index) {
