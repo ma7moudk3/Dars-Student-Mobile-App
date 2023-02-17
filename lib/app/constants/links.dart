@@ -62,6 +62,8 @@ class Links {
   static const String
       addNewStudent = // dependent >> student relation >> son, daughter, ...
       "api/services/app/RequesterStudents/CreateOrEdit";
+  static const String deleteMyStudent =
+      "api/services/app/RequesterStudents/Delete";
   static const String getAllMyStudents =
       "api/services/app/RequesterStudents/GetStudentsByRequester";
   static const String topicsForDropDown =

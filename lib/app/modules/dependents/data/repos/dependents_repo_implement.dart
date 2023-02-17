@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:hessa_student/app/modules/dependents/data/models/student/student.dart';
 import 'package:hessa_student/app/modules/dependents/data/repos/dependents_repo.dart';
 
@@ -47,5 +49,49 @@ class DependentsRepoImplement extends DependentsRepo {
       },
     );
     return myStudents;
+  }
+
+  @override
+  Future<int> deleteStudent({required int studentId}) async {
+    int statusCode = 200;
+    try {
+      Map<String, dynamic> queryParameters = {
+        "Id": studentId,
+      };
+      Map<String, dynamic> headers = {
+        'Accept-Language': Get.locale != null ? Get.locale!.languageCode : 'ar',
+        'Content-Type': 'application/json',
+        'Accept': 'application/json',
+        "Authorization": "Bearer ${CacheHelper.instance.getAccessToken()}"
+      };
+      await DioHelper.delete(
+        Links.deleteMyStudent,
+        headers: headers,
+        queryParameters: queryParameters,
+        onSuccess: (response) {
+          statusCode = response.statusCode ?? 200;
+          if (Get.isDialogOpen!) {
+            Get.back();
+          }
+        },
+        onError: (error) {
+          statusCode = error.response?.statusCode ?? 500;
+          if (Get.isDialogOpen!) {
+            Get.back();
+          }
+          CustomSnackBar.showCustomErrorSnackBar(
+            title: LocaleKeys.error.tr,
+            message: error.response?.data["error"]?["message"] ?? error.message,
+          );
+        },
+      );
+    } catch (e) {
+      statusCode = 500;
+      if (Get.isDialogOpen!) {
+        Get.back();
+      }
+      log("deleteStudent DioError $e");
+    }
+    return statusCode;
   }
 }

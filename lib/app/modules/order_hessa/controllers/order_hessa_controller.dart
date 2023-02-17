@@ -4,11 +4,14 @@ import 'dart:developer';
 import 'package:dio/dio.dart';
 import 'package:hessa_student/app/core/helper_functions.dart';
 import 'package:hessa_student/app/data/models/skills/item.dart' as skill;
-import 'package:hessa_student/app/modules/dependents/controllers/dependents_controller.dart';
 import 'package:hessa_student/app/modules/order_hessa/data/repos/order_hessa_repo.dart';
+import 'package:infinite_scroll_pagination/infinite_scroll_pagination.dart';
 import 'package:intl/date_symbol_data_local.dart';
+import '../../../../global_presentation/global_widgets/custom_snack_bar.dart';
+import '../../../../global_presentation/global_widgets/loading.dart';
 import '../../../../global_presentation/global_widgets/multiselect_dropdown.dart';
 import 'package:hessa_student/app/data/models/topics/result.dart' as topic;
+import '../../../data/models/classes/classes.dart';
 import '../../../data/models/classes/item.dart' as level;
 import 'package:intl/intl.dart';
 import 'package:syncfusion_flutter_datepicker/datepicker.dart';
@@ -18,9 +21,13 @@ import '../../../../global_presentation/global_widgets/typeahead/cupertino_flutt
 import '../../../constants/exports.dart';
 import '../../../data/models/skills/skills.dart';
 import '../../../data/models/topics/topics.dart';
+import '../../../routes/app_pages.dart';
 import '../../addresses/data/models/address_result/address_result.dart';
 import '../../addresses/data/repos/addresses.repo.dart';
 import '../../addresses/data/repos/addresses_repo_implement.dart';
+import '../../dependents/data/models/student/student.dart';
+import '../../dependents/data/repos/dependents_repo.dart';
+import '../../dependents/data/repos/dependents_repo_implement.dart';
 import '../../hessa_teachers/data/models/hessa_teacher.dart';
 import '../../hessa_teachers/data/repos/hessa_teachers_repo.dart';
 import '../../hessa_teachers/data/repos/hessa_teachers_repo_implement.dart';
@@ -41,6 +48,11 @@ class OrderHessaController extends GetxController {
   int hessaCategory = 0; // 0 academic learning, 1 skills
   int teacherGender = 0; // 0 male, 1 female, 2 both
   int orderType = 0; // 0 one hessa, 1 school package
+  static const _pageSize = 3; // 3 students per page >> student = dependent
+  final DependentsRepo _dependentsRepo = DependentsRepoImplement();
+  List<Student> students = [];
+  PagingController<int, Student> pagingController = PagingController(
+      firstPageKey: 1); // Student = RequesterDependent or RequesterStudent :)
   final HessaTeachersRepo _hessaTeacherRepo = HessaTeachersRepoImplement();
   late TextEditingController hessaDateController,
       hessaTimeController,
@@ -48,7 +60,6 @@ class OrderHessaController extends GetxController {
       teacherNameController,
       notesController;
   DateTime hessaDate = DateTime.now();
-
   Color? teacherNameErrorIconColor,
       hessaDateErrorIconColor,
       hessaTimeErrorIconColor;
@@ -58,16 +69,15 @@ class OrderHessaController extends GetxController {
   final OrderHessaRepo _orderHessaRepo = OrderHessaRepoImplement();
   FocusNode hessaDateFocusNode = FocusNode(), hessaTimeFocusNode = FocusNode();
   final AddressesRepo _addressesRepo = AddressesRepoImplement();
-  DependentsController dependentsController =
-      Get.put<DependentsController>(DependentsController());
   final CupertinoSuggestionsBoxController suggestionsBoxController =
       CupertinoSuggestionsBoxController();
-  // Classes classes = Classes();
+  Classes classes = Classes();
   Topics topics = Topics();
   Skills skills = Skills();
   level.Item selectedClass = level.Item();
   List<String> selectedTopics = [];
   List<String> selectedSkills = [];
+  List<Student> selectedStudents = [];
   List<AddressResult> addresses = [];
   AddressResult? selectedAddress;
   bool isAddressDropDownLoading = false;
@@ -77,6 +87,53 @@ class OrderHessaController extends GetxController {
     this.hessaDate = hessaDate.value;
     hessaDateController.text =
         DateFormat("dd MMMM yyyy", "ar_SA").format(hessaDate.value);
+    update();
+  }
+
+  void selectStudent(Student studentItem, bool isChecked) {
+    if (isChecked &&
+        selectedStudents.firstWhereOrNull((Student student) =>
+                (student.requesterStudent?.id ?? -1) ==
+                (studentItem.requesterStudent?.id ?? -1)) ==
+            null) {
+      selectedStudents.add(studentItem);
+    } else {
+      selectedStudents.removeWhere((Student student) =>
+          (student.requesterStudent?.id ?? -1) ==
+          (studentItem.requesterStudent?.id ?? -1));
+    }
+    update();
+  }
+
+  void refreshStudentsPagingController() {
+    pagingController.refresh();
+    update();
+  }
+
+  void _initPageRequestListener() {
+    pagingController.addPageRequestListener((int pageKey) async {
+      await getMyStudents(page: pageKey);
+    });
+  }
+
+  Future getMyStudents({required int page}) async {
+    try {
+      if (await checkInternetConnection(timeout: 10)) {
+        students =
+            await _dependentsRepo.getMyStudents(page: page, perPage: _pageSize);
+        final isLastPage = students.length < _pageSize;
+        if (isLastPage) {
+          pagingController.appendLastPage(students);
+        } else {
+          final nextPageKey = page + 1;
+          pagingController.appendPage(students, nextPageKey);
+        }
+      } else {
+        isInternetConnected.value = false;
+      }
+    } on DioError catch (e) {
+      log("getMyStudents DioError ${e.message}");
+    }
     update();
   }
 
@@ -157,6 +214,51 @@ class OrderHessaController extends GetxController {
 
   void removeTopic(String item) {
     selectedTopics.remove(item);
+    update();
+  }
+
+  void refreshPagingController() {
+    pagingController.refresh();
+    update();
+  }
+
+  Future deleteStudent({required int studentId}) async {
+    if (studentId != -1) {
+      if (await checkInternetConnection(timeout: 10)) {
+        showLoadingDialog();
+        await _dependentsRepo
+            .deleteStudent(studentId: studentId)
+            .then((int statusCode) {
+          removeStudent(studentId: studentId);
+          CustomSnackBar.showCustomSnackBar(
+            title: LocaleKeys.success.tr,
+            message: LocaleKeys.student_deleted_successfully.tr,
+          );
+          refreshPagingController();
+        });
+      } else {
+        await Get.toNamed(Routes.CONNECTION_FAILED);
+      }
+    } else {
+      CustomSnackBar.showCustomErrorSnackBar(
+        title: LocaleKeys.error.tr,
+        message: LocaleKeys.please_choose_a_valid_student_to_delete.tr,
+      );
+    }
+  }
+
+  void removeStudent({Student? studentItem, int? studentId}) {
+    if (studentItem == null && studentId == null) {
+      return;
+    }
+    if (studentId != null && studentId != -1) {
+      selectedStudents.removeWhere((Student student) =>
+          (student.requesterStudent?.id ?? -1) == studentId);
+    } else if (studentItem != null) {
+      selectedStudents.removeWhere((Student student) =>
+          (student.requesterStudent?.id ?? -1) ==
+          (studentItem.requesterStudent?.id ?? -1));
+    }
     update();
   }
 
@@ -287,6 +389,7 @@ class OrderHessaController extends GetxController {
     await initializeDateFormatting("ar_SA", null);
     hessaDateFocusNode.addListener(() => update());
     hessaTimeFocusNode.addListener(() => update());
+    _initPageRequestListener();
     await checkInternet();
     super.onInit();
   }
@@ -329,7 +432,7 @@ class OrderHessaController extends GetxController {
       isInternetConnected.value = internetStatus;
       if (isInternetConnected.value) {
         await Future.wait([
-          // _getClasses(),
+          _getClasses(),
           _getTopics(),
           _getSkills(),
           getMyAddresses(),
@@ -338,18 +441,18 @@ class OrderHessaController extends GetxController {
     });
   }
 
-  // Future _getClasses() async {
-  //   classes = await _orderHessaRepo.getClasses();
-  //   if (classes.result != null && classes.result!.items != null) {
-  //     classes.result!.items!.insert(
-  //       0,
-  //       level.Item(
-  //         id: -1,
-  //         displayName: LocaleKeys.choose_studying_class.tr,
-  //       ),
-  //     );
-  //   }
-  // }
+  Future _getClasses() async {
+    classes = await _orderHessaRepo.getClasses();
+    // if (classes.result != null && classes.result!.items != null) {
+    //   classes.result!.items!.insert(
+    //     0,
+    //     level.Item(
+    //       id: -1,
+    //       displayName: LocaleKeys.choose_studying_class.tr,
+    //     ),
+    //   );
+    // }
+  }
 
   Future _getTopics() async {
     topics = await _orderHessaRepo.getTopics();

@@ -5,4 +5,6 @@ abstract class DependentsRepo {
     required int perPage,
     required int page,
   });
+
+  Future<int> deleteStudent({required int studentId});
 }

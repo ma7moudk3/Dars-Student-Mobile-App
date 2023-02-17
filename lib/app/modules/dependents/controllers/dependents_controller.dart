@@ -11,45 +11,8 @@ import '../data/repos/dependents_repo_implement.dart';
 
 class DependentsController extends GetxController {
   RxBool isInternetConnected = true.obs;
-  List<Map<String, dynamic>> dummyDependents = [
-    {
-      "dependent_name": "وليد علي",
-      "dependent_image": ImagesManager.avatar,
-      "class": "الصف الثاني"
-    },
-    {
-      "dependent_name": "شام محمد",
-      "dependent_image": ImagesManager.avatar,
-      "class": "الصف الأول"
-    },
-    {
-      "dependent_name": "وائل محمد",
-      "dependent_image": ImagesManager.avatar,
-      "class": "الصف الرابع"
-    },
-    {
-      "dependent_name": "وائل محمد",
-      "dependent_image": ImagesManager.avatar,
-      "class": "الصف الرابع"
-    },
-    {
-      "dependent_name": "وائل محمد",
-      "dependent_image": ImagesManager.avatar,
-      "class": "الصف الرابع"
-    },
-    {
-      "dependent_name": "وائل محمد",
-      "dependent_image": ImagesManager.avatar,
-      "class": "الصف الرابع"
-    },
-    {
-      "dependent_name": "وائل محمد",
-      "dependent_image": ImagesManager.avatar,
-      "class": "الصف الرابع"
-    },
-  ]; // dummyDependents
   final DependentsRepo _dependentsRepo = DependentsRepoImplement();
-  static const _pageSize = 6; // 6 teachers per page
+  static const _pageSize = 6; // 6 students per page
   PagingController<int, Student> pagingController = PagingController(
       firstPageKey: 1); // Student = RequesterDependent or RequesterStudent :)
   List<Student> myStudents = [];

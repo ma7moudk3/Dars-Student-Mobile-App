@@ -429,26 +429,27 @@ class OrderHessaView extends GetView<OrderHessaController> {
                                                   .selectedTopics
                                                   .map((String item) {
                                                 return Chip(
-                                                  backgroundColor:
-                                                      ColorManager.primary,
+                                                  backgroundColor: ColorManager
+                                                      .primary
+                                                      .withOpacity(0.10),
                                                   onDeleted: () {
                                                     controller
                                                         .removeTopic(item);
                                                   },
                                                   deleteIconColor:
-                                                      ColorManager.white,
+                                                      ColorManager.primary,
                                                   deleteButtonTooltipMessage:
                                                       LocaleKeys.delete.tr,
                                                   labelPadding: EdgeInsets.only(
                                                       right: 5.w),
                                                   deleteIcon: Icon(
                                                     Icons.close,
-                                                    color: ColorManager.white,
+                                                    color: ColorManager.primary,
                                                     size: 14.sp,
                                                   ),
                                                   label: PrimaryText(
                                                     item,
-                                                    color: ColorManager.white,
+                                                    color: ColorManager.primary,
                                                     fontSize: 12.sp,
                                                   ),
                                                 );
@@ -544,26 +545,27 @@ class OrderHessaView extends GetView<OrderHessaController> {
                                                   .selectedSkills
                                                   .map((String item) {
                                                 return Chip(
-                                                  backgroundColor:
-                                                      ColorManager.primary,
+                                                  backgroundColor: ColorManager
+                                                      .primary
+                                                      .withOpacity(0.10),
                                                   onDeleted: () {
                                                     controller
                                                         .removeSkill(item);
                                                   },
                                                   deleteIconColor:
-                                                      ColorManager.white,
+                                                      ColorManager.primary,
                                                   deleteButtonTooltipMessage:
                                                       LocaleKeys.delete.tr,
                                                   labelPadding: EdgeInsets.only(
                                                       right: 5.w),
                                                   deleteIcon: Icon(
                                                     Icons.close,
-                                                    color: ColorManager.white,
+                                                    color: ColorManager.primary,
                                                     size: 14.sp,
                                                   ),
                                                   label: PrimaryText(
                                                     item,
-                                                    color: ColorManager.white,
+                                                    color: ColorManager.primary,
                                                     fontSize: 12.sp,
                                                   ),
                                                 );
@@ -799,7 +801,7 @@ class OrderHessaView extends GetView<OrderHessaController> {
                                               margin:
                                                   EdgeInsets.only(left: 10.w),
                                               child: SvgPicture.asset(
-                                                ImagesManager.addTeacherIcon,
+                                                ImagesManager.addPersonIcon,
                                                 color: controller
                                                     .teacherNameErrorIconColor,
                                               ),
@@ -816,7 +818,8 @@ class OrderHessaView extends GetView<OrderHessaController> {
                                               searchValue.trim().isNotEmpty) {
                                             return await controller
                                                 .searchTeacher(
-                                                    searchValue: searchValue.toLowerCase());
+                                                    searchValue: searchValue
+                                                        .toLowerCase());
                                           } else {
                                             return <HessaTeacher>[];
                                           }

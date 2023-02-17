@@ -3,7 +3,6 @@ import 'dart:developer';
 import 'package:get/get_utils/src/extensions/export.dart';
 import 'package:hessa_student/app/data/models/topics/topics.dart';
 import 'package:hessa_student/app/data/models/skills/skills.dart';
-import 'package:hessa_student/app/data/models/countries/countries.dart';
 import 'package:hessa_student/app/data/models/classes/classes.dart';
 import 'package:hessa_student/app/modules/order_hessa/data/repos/order_hessa_repo.dart';
 
@@ -71,8 +70,8 @@ class OrderHessaRepoImplement extends OrderHessaRepo {
     }
     return topics;
   }
-  
- @override
+
+  @override
   Future<Skills> getSkills() async {
     Skills skills = Skills();
     try {
@@ -99,5 +98,10 @@ class OrderHessaRepoImplement extends OrderHessaRepo {
       log("Error in getSkills: $e");
     }
     return skills;
+  }
+
+  @override
+  Future<bool> addNewOrderHessa() async {
+    throw UnimplementedError();
   }
 }

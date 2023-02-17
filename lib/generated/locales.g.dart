@@ -94,9 +94,12 @@ class LocaleKeys {
   static const please_enter_a_valid_email = 'please_enter_a_valid_email';
   static const please_choose_a_valid_address_to_delete =
       'please_choose_a_valid_address_to_delete';
+  static const please_choose_a_valid_student_to_delete =
+      'please_choose_a_valid_student_to_delete';
   static const email_already_verified = 'email_already_verified';
   static const for_hessa = 'for_hessa';
   static const address_deleted_successfully = 'address_deleted_successfully';
+  static const student_deleted_successfully = 'student_deleted_successfully';
   static const school_name = 'school_name';
   static const write_school_name = 'write_school_name';
   static const notes_about_dependent = 'notes_about_dependent';
@@ -138,7 +141,9 @@ class LocaleKeys {
   static const settings = 'settings';
   static const logout = 'logout';
   static const address_deletion = 'address_deletion';
+  static const student_deletion = 'student_deletion';
   static const wanna_delete_address = 'wanna_delete_address';
+  static const wanna_delete_student = 'wanna_delete_student';
   static const edit_profile = 'edit_profile';
   static const change_password = 'change_password';
   static const change_language = 'change_language';
@@ -499,9 +504,11 @@ class Locales {
     'please_enter_a_valid_phone_number': 'الرجاء إدخال رقم هاتف صحيح',
     'please_enter_a_valid_email': 'الرجاء إدخال بريد إلكتروني صحيح',
     'please_choose_a_valid_address_to_delete': 'الرجاء اختيار عنوان صحيح للحذف',
+    'please_choose_a_valid_student_to_delete': 'الرجاء اختيار طالب صحيح للحذف',
     'email_already_verified': 'البريد الإلكتروني مؤكد بالفعل',
     'for_hessa': 'لحِصّة',
     'address_deleted_successfully': 'تم حذف العنوان بنجاح',
+    'student_deleted_successfully': 'تم حذف الطالب بنجاح',
     'school_name': 'اسم المدرسة',
     'write_school_name': 'اكتب اسم المدرسة',
     'notes_about_dependent': 'ملاحظات عن التابع',
@@ -542,7 +549,9 @@ class Locales {
     'settings': 'الإعدادات',
     'logout': 'تسجيل الخروج',
     'address_deletion': 'حذف العنوان',
+    'student_deletion': 'حذف الطالب',
     'wanna_delete_address': 'هل تريد حذف هذا العنوان؟',
+    'wanna_delete_student': 'هل تريد حذف هذا الطالب؟',
     'edit_profile': 'تعديل الملف الشخصي',
     'change_password': 'تغيير كلمة المرور',
     'change_language': 'تغيير اللغة',

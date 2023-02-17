@@ -4,6 +4,7 @@ import 'package:hessa_student/app/data/models/school_types/school_types.dart';
 import 'package:hessa_student/app/modules/add_new_dependent/data/repos/add_new_dependent_repo.dart';
 import 'package:hessa_student/app/modules/add_new_dependent/data/repos/add_new_dependent_repo_implement.dart';
 import 'package:hessa_student/app/modules/dependents/controllers/dependents_controller.dart';
+import 'package:hessa_student/app/modules/order_hessa/controllers/order_hessa_controller.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:intl/intl.dart';
 import 'package:syncfusion_flutter_datepicker/datepicker.dart';
@@ -38,12 +39,15 @@ class AddNewDependentController extends GetxController {
   File? image;
   FocusNode nameFocusNode = FocusNode(),
       uplpoadPictureFileFocusNode = FocusNode(),
-      dateOfBirthFocusNode = FocusNode();
+      dateOfBirthFocusNode = FocusNode(),
+      schoolNameFocusNode = FocusNode();
   DateTime dateOfBirth = DateTime.now();
+  bool isFromOrderHessa = false;
   Color? nameIconErrorColor,
       schoolNameIconErrorColor,
       uplpoadPictureFileIconErrorColor,
       dateOfBirthIconErrorColor;
+
   int dependentGender = 0; // 0 male, 1 female
   Classes classes = Classes();
   // Topics topics = Topics();
@@ -68,6 +72,9 @@ class AddNewDependentController extends GetxController {
     nameFocusNode.addListener(() => update());
     uplpoadPictureFileFocusNode.addListener(() => update());
     dateOfBirthFocusNode.addListener(() => update());
+    isFromOrderHessa = Get.arguments != null
+        ? Get.arguments["isFromOrderHessa"] ?? false
+        : false;
     await checkInternet();
     super.onInit();
   }
@@ -109,9 +116,15 @@ class AddNewDependentController extends GetxController {
       }
       await Future.delayed(const Duration(milliseconds: 550))
           .then((value) async {
-        final DependentsController dependentsController =
-            Get.find<DependentsController>();
-        dependentsController.refreshPagingController();
+        if (isFromOrderHessa == false) {
+          final DependentsController dependentsController =
+              Get.find<DependentsController>();
+          dependentsController.refreshPagingController();
+        } else {
+          final OrderHessaController orderHessaController =
+              Get.find<OrderHessaController>();
+          orderHessaController.refreshStudentsPagingController();
+        }
         Get.back();
         CustomSnackBar.showCustomSnackBar(
           title: LocaleKeys.success.tr,
@@ -307,22 +320,29 @@ class AddNewDependentController extends GetxController {
     RegExp regExp = RegExp(pattern);
     if (dependentName == null || dependentName.isEmpty) {
       nameIconErrorColor = Colors.red;
+      nameFocusNode.requestFocus();
       update();
       return LocaleKeys.please_enter_dependent_name.tr;
     } else if (!regExp.hasMatch(dependentName)) {
       if (!dependentName.contains(" ")) {
+        nameIconErrorColor = Colors.red;
+        nameFocusNode.requestFocus();
+        update();
         return LocaleKeys.should_have_space.tr;
       } else {
         nameIconErrorColor = null;
+        nameFocusNode.unfocus();
         update();
         return null;
       }
     } else if (regExp.hasMatch(dependentName)) {
       nameIconErrorColor = Colors.red;
+      nameFocusNode.requestFocus();
       update();
       return LocaleKeys.check_dependent_name.tr;
     } else {
       nameIconErrorColor = null;
+      nameFocusNode.unfocus();
       update();
       return null;
     }
@@ -333,14 +353,17 @@ class AddNewDependentController extends GetxController {
     RegExp regExp = RegExp(pattern);
     if (schoolName == null || schoolName.isEmpty) {
       schoolNameIconErrorColor = Colors.red;
+      schoolNameFocusNode.requestFocus();
       update();
       return LocaleKeys.please_enter_dependent_name.tr;
     } else if (regExp.hasMatch(schoolName)) {
       schoolNameIconErrorColor = Colors.red;
+      schoolNameFocusNode.requestFocus();
       update();
       return LocaleKeys.check_dependent_name.tr;
     } else {
       schoolNameIconErrorColor = null;
+      schoolNameFocusNode.unfocus();
       update();
       return null;
     }
@@ -355,6 +378,7 @@ class AddNewDependentController extends GetxController {
     notesController.dispose();
     schoolNameController.dispose();
     uplpoadPictureFileFocusNode.dispose();
+    schoolNameFocusNode.dispose();
     dateOfBirthFocusNode.dispose();
     dateOfBirthRangeController.dispose();
     super.dispose();

@@ -1,8 +1,20 @@
+import 'dart:developer';
+
+import 'package:cached_network_image/cached_network_image.dart';
+import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:hessa_student/app/modules/order_hessa/controllers/order_hessa_controller.dart';
+import 'package:hessa_student/app/modules/order_hessa/widgets/delete_student_dialog_content.dart';
+import 'package:infinite_scroll_pagination/infinite_scroll_pagination.dart';
+import 'package:lottie/lottie.dart';
 
 import '../../../../generated/locales.g.dart';
+import '../../../../global_presentation/global_features/lotties_manager.dart';
 import '../../../constants/exports.dart';
+import '../../../constants/links.dart';
+import '../../../data/models/classes/item.dart';
 import '../../../routes/app_pages.dart';
+import '../../dependents/data/models/student/student.dart';
+import '../../dependents/views/widgets/no_dependents_widget.dart';
 
 class DependentsListBottomSheetContent extends GetView<OrderHessaController> {
   const DependentsListBottomSheetContent({
@@ -53,114 +65,372 @@ class DependentsListBottomSheetContent extends GetView<OrderHessaController> {
                   SizedBox(height: 30.h),
                   Expanded(
                     child: SingleChildScrollView(
-                      child: ListView.builder(
-                          itemCount: controller
-                              .dependentsController.dummyDependents.length,
+                      child: RefreshIndicator(
+                        color: ColorManager.white,
+                        backgroundColor: ColorManager.primary,
+                        onRefresh: () async => await Future.sync(
+                            () => controller.pagingController.refresh()),
+                        child: PagedListView<int, Student>(
                           shrinkWrap: true,
                           physics: const NeverScrollableScrollPhysics(),
-                          itemBuilder: (BuildContext context, int index) {
-                            return Padding(
-                              padding: EdgeInsets.symmetric(vertical: 5.h),
-                              child: Column(
+                          pagingController: controller.pagingController,
+                          builderDelegate: PagedChildBuilderDelegate<Student>(
+                            animateTransitions: true,
+                            transitionDuration:
+                                const Duration(milliseconds: 350),
+                            firstPageErrorIndicatorBuilder:
+                                (BuildContext context) {
+                              return Center(
+                                child: SpinKitCircle(
+                                  duration: const Duration(milliseconds: 1300),
+                                  size: 40,
+                                  color: ColorManager.primary,
+                                ),
+                              );
+                            },
+                            firstPageProgressIndicatorBuilder:
+                                (BuildContext context) {
+                              return Column(
+                                mainAxisAlignment: MainAxisAlignment.center,
                                 children: [
-                                  Row(
+                                  Lottie.asset(
+                                    LottiesManager.searchingLight,
+                                    animate: true,
+                                    height: 250.h,
+                                    width: 250.w,
+                                  ),
+                                ],
+                              );
+                            },
+                            newPageErrorIndicatorBuilder:
+                                (BuildContext context) {
+                              return Center(
+                                child: SpinKitCircle(
+                                  duration: const Duration(milliseconds: 1300),
+                                  color: ColorManager.primary,
+                                  size: 40,
+                                ),
+                              );
+                            },
+                            newPageProgressIndicatorBuilder:
+                                (BuildContext context) {
+                              return Column(
+                                children: [
+                                  SizedBox(height: 20.h),
+                                  Center(
+                                    child: SpinKitCircle(
+                                      duration:
+                                          const Duration(milliseconds: 1300),
+                                      color: ColorManager.primary,
+                                      size: 40,
+                                    ),
+                                  ),
+                                  SizedBox(height: 20.h),
+                                ],
+                              );
+                            },
+                            noItemsFoundIndicatorBuilder:
+                                (BuildContext context) {
+                              return const NoDependentsWidget();
+                            },
+                            itemBuilder: (BuildContext context, Student student,
+                                int index) {
+                              return GetBuilder<OrderHessaController>(
+                                  builder: (OrderHessaController controller) {
+                                String studentPicture =
+                                    "${Links.baseLink}${Links.profileImageById}?userId=${student.requesterStudent?.id ?? -1}";
+                                return CheckboxListTile(
+                                  side: BorderSide(
+                                    color: ColorManager.borderColor2,
+                                    width: 2,
+                                  ),
+                                  value: controller.selectedStudents
+                                          .firstWhereOrNull(
+                                              (Student tempStudent) =>
+                                                  (tempStudent.requesterStudent
+                                                          ?.id ??
+                                                      -1) ==
+                                                  (student.requesterStudent
+                                                          ?.id ??
+                                                      0)) !=
+                                      null, // like contains
+                                  title: Column(
+                                    mainAxisSize: MainAxisSize.min,
                                     children: [
-                                      GestureDetector(
-                                        onTap: () async {},
-                                        child: Container(
-                                          height: 22.h,
-                                          width: 20.w,
-                                          decoration: BoxDecoration(
-                                            borderRadius:
-                                                BorderRadius.circular(8),
-                                            border: Border.all(
-                                              color: ColorManager.primary,
-                                              width: 2.w,
-                                            ),
-                                          ),
-                                          child: Center(
-                                            child: Icon(
-                                              Icons.check_rounded,
-                                              color: ColorManager.primary,
-                                              size: 13.sp,
-                                            ),
-                                          ),
-                                        ),
-                                      ),
-                                      SizedBox(width: 10.w),
-                                      Container(
-                                        width: 58.w,
-                                        height: 65.h,
-                                        decoration: BoxDecoration(
-                                          image: DecorationImage(
-                                            image: AssetImage(controller
-                                                    .dependentsController
-                                                    .dummyDependents[index]
-                                                ["dependent_image"]),
-                                            fit: BoxFit.cover,
-                                          ),
-                                          border: Border.all(
-                                            width: 1,
-                                            color: ColorManager.primary,
-                                          ),
-                                          borderRadius: BorderRadius.circular(20),
-                                        ),
-                                      ),
-                                      SizedBox(width: 10.w),
-                                      Column(
-                                        crossAxisAlignment:
-                                            CrossAxisAlignment.start,
+                                      Row(
                                         children: [
-                                          PrimaryText(
-                                            controller.dependentsController
-                                                    .dummyDependents[index]
-                                                ["dependent_name"],
-                                          ),
-                                          SizedBox(
-                                            height: 15.h,
-                                          ),
-                                          Row(
+                                          StatefulBuilder(builder:
+                                              (BuildContext context, setState) {
+                                            return Container(
+                                              width: 58.w,
+                                              height: 65.h,
+                                              decoration: BoxDecoration(
+                                                image: DecorationImage(
+                                                  image:
+                                                      CachedNetworkImageProvider(
+                                                    studentPicture,
+                                                    errorListener: () {
+                                                      setState(() {
+                                                        studentPicture =
+                                                            "https://www.shareicon.net/data/2016/06/10/586098_guest_512x512.png";
+                                                      });
+                                                    },
+                                                  ),
+                                                  fit: BoxFit.cover,
+                                                ),
+                                                border: Border.all(
+                                                  width: 1,
+                                                  color: ColorManager.primary,
+                                                ),
+                                                borderRadius:
+                                                    BorderRadius.circular(20),
+                                              ),
+                                            );
+                                          }),
+                                          SizedBox(width: 10.w),
+                                          Column(
+                                            crossAxisAlignment:
+                                                CrossAxisAlignment.start,
                                             children: [
-                                              SvgPicture.asset(
-                                                  ImagesManager.classIcon),
-                                              SizedBox(width: 5.w),
                                               PrimaryText(
-                                                controller.dependentsController
-                                                        .dummyDependents[index]
-                                                    ["class"],
-                                                fontSize: 14.sp,
-                                                color: ColorManager.fontColor7,
-                                                fontWeight:
-                                                    FontWeightManager.softLight,
+                                                student.requesterStudent
+                                                        ?.name ??
+                                                    "",
+                                              ),
+                                              SizedBox(
+                                                height: 15.h,
+                                              ),
+                                              Row(
+                                                children: [
+                                                  SvgPicture.asset(
+                                                      ImagesManager.classIcon),
+                                                  SizedBox(width: 5.w),
+                                                  PrimaryText(
+                                                    controller.classes.result
+                                                            ?.items
+                                                            ?.where((Item
+                                                                    level) =>
+                                                                (level.id ??
+                                                                    -1) ==
+                                                                (student.requesterStudent
+                                                                        ?.levelId ??
+                                                                    0))
+                                                            .first
+                                                            .displayName ??
+                                                        "",
+                                                    fontSize: 14.sp,
+                                                    color:
+                                                        ColorManager.fontColor7,
+                                                    fontWeight:
+                                                        FontWeightManager
+                                                            .softLight,
+                                                  ),
+                                                ],
                                               ),
                                             ],
                                           ),
+                                          const Spacer(),
+                                          GestureDetector(
+                                            behavior: HitTestBehavior.opaque,
+                                            onTap: () async {
+                                              await Get.dialog(
+                                                  Container(
+                                                    color: ColorManager.black
+                                                        .withOpacity(0.1),
+                                                    height: 140.h,
+                                                    width: 140.w,
+                                                    child: Center(
+                                                      child: Container(
+                                                        width: Get.width,
+                                                        margin: EdgeInsets
+                                                            .symmetric(
+                                                          horizontal: 18.w,
+                                                        ),
+                                                        child:
+                                                            const DeleteStudentDialogContent(),
+                                                      ),
+                                                    ),
+                                                  ),
+                                                  arguments: {
+                                                    "studentId": student
+                                                            .requesterStudent
+                                                            ?.id ??
+                                                        -1,
+                                                  });
+                                            },
+                                            child: Container(
+                                              width: 36.w,
+                                              height: 36.h,
+                                              decoration: BoxDecoration(
+                                                color: ColorManager.red
+                                                    .withOpacity(0.10),
+                                                borderRadius:
+                                                    BorderRadius.circular(14),
+                                              ),
+                                              child: Center(
+                                                child: SvgPicture.asset(
+                                                  ImagesManager.deleteIcon,
+                                                  height: 20.h,
+                                                  width: 20.w,
+                                                ),
+                                              ),
+                                            ),
+                                          ),
                                         ],
                                       ),
-                                      const Spacer(),
-                                      GestureDetector(
-                                        onTap: () {},
-                                        child: SvgPicture.asset(
-                                          ImagesManager.deleteIcon,
-                                        ),
+                                      SizedBox(height: 15.h),
+                                      Divider(
+                                        color: ColorManager.borderColor3,
+                                        thickness: 1,
                                       ),
                                     ],
                                   ),
-                                  SizedBox(height: 15.h),
-                                  Visibility(
-                                    visible: index !=
-                                        (controller.dependentsController
-                                                .dummyDependents.length -
-                                            1),
-                                    child: Divider(
-                                      color: ColorManager.borderColor3,
-                                      thickness: 1,
-                                    ),
+                                  controlAffinity:
+                                      ListTileControlAffinity.leading,
+                                  activeColor: ColorManager.primary,
+                                  selectedTileColor: ColorManager.primary,
+                                  shape: RoundedRectangleBorder(
+                                    borderRadius: BorderRadius.circular(5),
                                   ),
-                                ],
-                              ),
-                            );
-                          }),
+                                  dense: true,
+                                  contentPadding: const EdgeInsets.all(0),
+                                  checkboxShape: RoundedRectangleBorder(
+                                    side: BorderSide(
+                                      color: ColorManager.primary,
+                                      width: 1,
+                                    ),
+                                    borderRadius: BorderRadius.circular(5),
+                                  ),
+                                  onChanged: (bool? isChecked) =>
+                                      controller.selectStudent(
+                                          student, isChecked ?? false),
+                                );
+                              });
+                              // return Padding(
+                              //   padding: EdgeInsets.symmetric(vertical: 5.h),
+                              //   child: Column(
+                              //     children: [
+                              //       Row(
+                              //         children: [
+                              //           GestureDetector(
+                              //             onTap: () async {},
+                              //             child: Container(
+                              //               height: 22.h,
+                              //               width: 20.w,
+                              //               decoration: BoxDecoration(
+                              //                 borderRadius:
+                              //                     BorderRadius.circular(8),
+                              //                 border: Border.all(
+                              //                   color: ColorManager.primary,
+                              //                   width: 2.w,
+                              //                 ),
+                              //               ),
+                              //               child: Center(
+                              //                 child: Icon(
+                              //                   Icons.check_rounded,
+                              //                   color: ColorManager.primary,
+                              //                   size: 13.sp,
+                              //                 ),
+                              //               ),
+                              //             ),
+                              //           ),
+                              //           SizedBox(width: 10.w),
+                              //           Container(
+                              //             width: 58.w,
+                              //             height: 65.h,
+                              //             decoration: BoxDecoration(
+                              //               image: DecorationImage(
+                              //                 image: AssetImage(controller
+                              //                         .dependentsController
+                              //                         .dummyDependents[index]
+                              //                     ["dependent_image"]),
+                              //                 fit: BoxFit.cover,
+                              //               ),
+                              //               border: Border.all(
+                              //                 width: 1,
+                              //                 color: ColorManager.primary,
+                              //               ),
+                              //               borderRadius:
+                              //                   BorderRadius.circular(20),
+                              //             ),
+                              //           ),
+                              //           SizedBox(width: 10.w),
+                              //           Column(
+                              //             crossAxisAlignment:
+                              //                 CrossAxisAlignment.start,
+                              //             children: [
+                              //               PrimaryText(
+                              //                 controller.dependentsController
+                              //                         .dummyDependents[index]
+                              //                     ["dependent_name"],
+                              //               ),
+                              //               SizedBox(
+                              //                 height: 15.h,
+                              //               ),
+                              //               Row(
+                              //                 children: [
+                              //                   SvgPicture.asset(
+                              //                       ImagesManager.classIcon),
+                              //                   SizedBox(width: 5.w),
+                              //                   PrimaryText(
+                              //                     controller
+                              //                             .dependentsController
+                              //                             .dummyDependents[
+                              //                         index]["class"],
+                              //                     fontSize: 14.sp,
+                              //                     color:
+                              //                         ColorManager.fontColor7,
+                              //                     fontWeight: FontWeightManager
+                              //                         .softLight,
+                              //                   ),
+                              //                 ],
+                              //               ),
+                              //             ],
+                              //           ),
+                              //           const Spacer(),
+                              //           GestureDetector(
+                              //             behavior: HitTestBehavior.opaque,
+                              //             onTap: () async {
+                              //               log('delete');
+                              //             },
+                              //             child: Container(
+                              //               width: 36.w,
+                              //               height: 36.h,
+                              //               decoration: BoxDecoration(
+                              //                 color: ColorManager.red
+                              //                     .withOpacity(0.10),
+                              //                 borderRadius:
+                              //                     BorderRadius.circular(14),
+                              //               ),
+                              //               child: Center(
+                              //                 child: SvgPicture.asset(
+                              //                   ImagesManager.deleteIcon,
+                              //                   height: 20.h,
+                              //                   width: 20.w,
+                              //                 ),
+                              //               ),
+                              //             ),
+                              //           ),
+                              //         ],
+                              //       ),
+                              //       SizedBox(height: 15.h),
+                              //       Visibility(
+                              //         visible: index !=
+                              //             (controller.dependentsController
+                              //                     .dummyDependents.length -
+                              //                 1),
+                              //         child: Divider(
+                              //           color: ColorManager.borderColor3,
+                              //           thickness: 1,
+                              //         ),
+                              //       ),
+                              //     ],
+                              //   ),
+                              // );
+                            },
+                          ),
+                        ),
+                      ),
                     ),
                   ),
                   SizedBox(height: 10.h),
@@ -174,9 +444,13 @@ class DependentsListBottomSheetContent extends GetView<OrderHessaController> {
                       ),
                       GestureDetector(
                         onTap: () async {
-                          await Get.toNamed(
-                            Routes.ADD_NEW_DEPENDENT,
-                          );
+                          if (Get.isBottomSheetOpen!) {
+                            Get.back();
+                          }
+                          await Get.toNamed(Routes.ADD_NEW_DEPENDENT,
+                              arguments: {
+                                "isFromOrderHessa": true,
+                              });
                         },
                         child: Container(
                           width: 48.w,
