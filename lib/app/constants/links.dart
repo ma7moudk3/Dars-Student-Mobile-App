@@ -60,8 +60,10 @@ class Links {
   static const String schoolTypesForDropDown =
       "api/services/app/RequesterStudents/GetAllSchoolTypeForTableDropdown";
   static const String
-      addNewStudent = // dependent >> student relation >> son, daughter, ...
+      addOrEditStudent = // dependent >> student relation >> son, daughter, ...
       "api/services/app/RequesterStudents/CreateOrEdit";
+  static const String addOrEditOrderHessa =
+      "api/services/app/Orders/CreateOrEdit";
   static const String deleteMyStudent =
       "api/services/app/RequesterStudents/Delete";
   static const String getAllMyStudents =

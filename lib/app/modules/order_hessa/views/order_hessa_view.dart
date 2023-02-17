@@ -923,7 +923,13 @@ class OrderHessaView extends GetView<OrderHessaController> {
                               SizedBox(height: 25.h),
                               PrimaryButton(
                                 onPressed: () async {
-                                  if (controller.hessaCategory ==
+                                  if (controller.selectedStudents.isEmpty) {
+                                    CustomSnackBar.showCustomErrorSnackBar(
+                                      title: LocaleKeys.data_entry_error.tr,
+                                      message: LocaleKeys
+                                          .choose_one_student_at_least.tr,
+                                    );
+                                  } else if (controller.hessaCategory ==
                                           0 && // academic learning category
                                       controller.selectedTopics.isEmpty) {
                                     CustomSnackBar.showCustomErrorSnackBar(

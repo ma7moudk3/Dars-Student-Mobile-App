@@ -186,7 +186,7 @@ class AddNewDependentRepoImplement extends AddNewDependentRepo {
         "Authorization": "Bearer ${CacheHelper.instance.getAccessToken()}"
       };
       await DioHelper.post(
-        Links.addNewStudent,
+        Links.addOrEditStudent,
         data: data,
         headers: headers,
         onSuccess: (response) {

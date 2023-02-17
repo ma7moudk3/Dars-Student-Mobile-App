@@ -87,6 +87,7 @@ class LocaleKeys {
   static const confirm_your_mail_and_your_phone_number =
       'confirm_your_mail_and_your_phone_number';
   static const terms_and_conditions = 'terms_and_conditions';
+  static const choose_one_student_at_least = 'choose_one_student_at_least';
   static const added_addresses = 'added_addresses';
   static const phone_number_already_verified = 'phone_number_already_verified';
   static const please_enter_a_valid_phone_number =
@@ -499,6 +500,7 @@ class Locales {
     'confirm_your_mail_and_your_phone_number':
         'قم بتأكيد بريدك ورقم هاتفك المدخل',
     'terms_and_conditions': 'الشروط والأحكام',
+    'choose_one_student_at_least': 'اختر طالباً واحداً على الأقل',
     'added_addresses': 'العناوين المضافة',
     'phone_number_already_verified': 'رقم الهاتف مؤكد بالفعل',
     'please_enter_a_valid_phone_number': 'الرجاء إدخال رقم هاتف صحيح',

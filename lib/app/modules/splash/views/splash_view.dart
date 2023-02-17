@@ -24,11 +24,11 @@ class SplashView extends GetView<SplashController> {
           ),
           Positioned(
             bottom: 15.h,
-            left: 90.w,
-            right: 90.w,
+            left: 100.w,
+            right: 100.w,
             child: PrimaryText(
               "${LocaleKeys.contentRight.tr}${DateTime.now().year.toString()}",
-              fontSize: 14.sp,
+              fontSize: 13,
               fontWeight: FontWeightManager.light,
               color: Colors.white,
             ),

@@ -76,6 +76,7 @@ class OrderHessaController extends GetxController {
   Skills skills = Skills();
   level.Item selectedClass = level.Item();
   List<String> selectedTopics = [];
+  List<HessaTeacher> teachers = [];
   List<String> selectedSkills = [];
   List<Student> selectedStudents = [];
   List<AddressResult> addresses = [];
@@ -136,8 +137,6 @@ class OrderHessaController extends GetxController {
     }
     update();
   }
-
-  List<HessaTeacher> teachers = [];
 
   Future<List<HessaTeacher>> searchTeacher(
       {required String searchValue}) async {
