@@ -228,12 +228,14 @@ class OrderHessaController extends GetxController {
         await _dependentsRepo
             .deleteStudent(studentId: studentId)
             .then((int statusCode) {
-          removeStudent(studentId: studentId);
-          CustomSnackBar.showCustomSnackBar(
-            title: LocaleKeys.success.tr,
-            message: LocaleKeys.student_deleted_successfully.tr,
-          );
-          refreshPagingController();
+          if (statusCode == 200) {
+            removeStudent(studentId: studentId);
+            CustomSnackBar.showCustomSnackBar(
+              title: LocaleKeys.success.tr,
+              message: LocaleKeys.student_deleted_successfully.tr,
+            );
+            refreshPagingController();
+          }
         });
       } else {
         await Get.toNamed(Routes.CONNECTION_FAILED);

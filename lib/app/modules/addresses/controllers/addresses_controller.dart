@@ -72,11 +72,13 @@ class AddressesController extends GetxController {
         await _addressesRepo
             .deleteAddress(addressId: addressId)
             .then((int statusCode) {
-          CustomSnackBar.showCustomSnackBar(
-            title: LocaleKeys.success.tr,
-            message: LocaleKeys.address_deleted_successfully.tr,
-          );
-          refreshPagingController();
+          if (statusCode == 200) {
+            CustomSnackBar.showCustomSnackBar(
+              title: LocaleKeys.success.tr,
+              message: LocaleKeys.address_deleted_successfully.tr,
+            );
+            refreshPagingController();
+          }
         });
       } else {
         await Get.toNamed(Routes.CONNECTION_FAILED);
