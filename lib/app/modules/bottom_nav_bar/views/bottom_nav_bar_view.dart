@@ -45,10 +45,32 @@ class BottomNavBarView extends GetView<BottomNavBarController> {
                   SizedBox(
                     width: 22.w,
                     height: 40.h,
-                    child: SvgPicture.asset(
-                      controller.icons[index]["icon_path"],
-                      color: color,
-                    ),
+                    child: index != 2
+                        ? SvgPicture.asset(
+                            controller.icons[index]["icon_path"],
+                            color: color,
+                          )
+                        : Stack(
+                            fit: StackFit.passthrough,
+                            children: [
+                              SvgPicture.asset(
+                                controller.icons[index]["icon_path"],
+                                color: color,
+                              ),
+                              Positioned(
+                                top: 5.5.h,
+                                right: 0,
+                                child: Container(
+                                  width: 10.w,
+                                  height: 10.h,
+                                  decoration: BoxDecoration(
+                                    color: ColorManager.red,
+                                    shape: BoxShape.circle,
+                                  ),
+                                ),
+                              ),
+                            ],
+                          ),
                   ),
                   PrimaryText(
                     controller.icons[index]["label"],
