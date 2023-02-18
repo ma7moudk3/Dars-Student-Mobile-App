@@ -1,4 +1,3 @@
-
 import '../../app/constants/exports.dart';
 import '../../generated/locales.g.dart';
 import 'global_button.dart';

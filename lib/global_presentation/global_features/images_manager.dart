@@ -8,7 +8,8 @@ class ImagesManager {
   static String loginOrSignUpBackground3 =
       "assets/images/login_or_sign_up/login_background3.png";
   static String loginBackground = "assets/images/login_background.png";
-  static String verificationBackground = "assets/images/verification_background.png";
+  static String verificationBackground =
+      "assets/images/verification_background.png";
   static String signUpBackground = "assets/images/sign_up_background.png";
   static String noInernetConnection = "assets/images/connection_failed.png";
   static String googleLogo = "assets/svg/login/google_logo.svg";

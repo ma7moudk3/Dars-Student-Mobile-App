@@ -373,18 +373,18 @@ class ExpansionTileCardState extends State<ExpansionTileCard>
       child: closed
           ? null
           : Padding(
-              padding: EdgeInsets.only(left: 16.w, right: 16.w, bottom: 16.h),
+              padding: EdgeInsets.only(left: 10.w, right: 16.w, bottom: 16.h),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Divider(
                     thickness: 0.9,
                     indent: 16,
-                    endIndent: 16,
+                    endIndent: 10,
                     color: ColorManager.borderColor2,
                   ),
                   Padding(
-                    padding: EdgeInsets.only(left: 16.w, right: 16.w),
+                    padding: EdgeInsets.only(right: 16.w),
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: widget.children,

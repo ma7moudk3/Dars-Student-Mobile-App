@@ -28,6 +28,8 @@ class Links {
   static const String sendFCMToken = "api/services/app/Account/UpdateFcmToken";
   static const String getMyOrders =
       "api/services/app/Orders/GetMyOrderForRequester";
+  static const String refreshToken =
+      "api/TokenAuth/RefreshToken";
   static const String getAllHessaTeachers =
       "api/services/app/Providers/GetSearchForProviders";
   static const String getHessaTeacher =

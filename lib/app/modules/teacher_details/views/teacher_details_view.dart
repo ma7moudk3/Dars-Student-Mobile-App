@@ -49,7 +49,7 @@ class TeacherDetailsView extends GetView<TeacherDetailsController> {
                   children: [
                     const TeacherInfo(),
                     SizedBox(height: 27.h),
-                    HessaTeacherBrief(),
+                    const HessaTeacherBrief(),
                     SizedBox(height: 28.h),
                     const AboutTeacher(),
                     SizedBox(height: 25.h),

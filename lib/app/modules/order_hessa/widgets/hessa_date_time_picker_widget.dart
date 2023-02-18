@@ -77,8 +77,9 @@ class HessaDateAndTimePickerWidget extends GetView<OrderHessaController> {
                           controller.changeHessaDate(
                               dateRangePickerSelectionChangedArgs);
                         },
-                        monthViewSettings: const DateRangePickerMonthViewSettings(
-                            showTrailingAndLeadingDates: true),
+                        monthViewSettings:
+                            const DateRangePickerMonthViewSettings(
+                                showTrailingAndLeadingDates: true),
                         minDate: mindate,
                         enableMultiView: false,
                         selectionMode: DateRangePickerSelectionMode.single,
@@ -278,8 +279,8 @@ class HessaDateAndTimePickerWidget extends GetView<OrderHessaController> {
                                         ],
                                       ),
                                       Visibility(
-                                        visible: controller
-                                            .hessaTimeController.text.isNotEmpty,
+                                        visible: controller.hessaTimeController
+                                            .text.isNotEmpty,
                                         child: Row(
                                           children: [
                                             SizedBox(width: 5.w),
@@ -294,7 +295,8 @@ class HessaDateAndTimePickerWidget extends GetView<OrderHessaController> {
                                               ),
                                             ),
                                             PrimaryText(
-                                              controller.hessaTimeController.text,
+                                              controller
+                                                  .hessaTimeController.text,
                                               color: ColorManager.grey,
                                               fontSize: 14.sp,
                                             ),
@@ -312,8 +314,8 @@ class HessaDateAndTimePickerWidget extends GetView<OrderHessaController> {
                       );
                     }),
                     Padding(
-                      padding:
-                          EdgeInsets.only(left: 16.w, right: 16.w, bottom: 16.h),
+                      padding: EdgeInsets.only(
+                          left: 16.w, right: 16.w, bottom: 16.h),
                       child: PrimaryButton(
                         onPressed: () => Get.back(),
                         title: LocaleKeys.save.tr,

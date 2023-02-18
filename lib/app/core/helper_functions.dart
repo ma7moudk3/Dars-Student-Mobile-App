@@ -212,7 +212,7 @@ extension DateTimeExtension on DateTime {
     if (diff.inMinutes > 0) {
       return "${diff.inMinutes} ${diff.inMinutes == 1 ? LocaleKeys.minute.tr : LocaleKeys.minutes.tr} ${LocaleKeys.ago.tr}";
     }
-    return "just_now".tr;
+    return LocaleKeys.just_now.tr;
   }
 }
 
@@ -244,12 +244,28 @@ Future welcomeBack() async {
   });
 }
 
+bool isAccessTokenExpired() {
+  if (CacheHelper.instance.getLoginTime().isNotEmpty &&
+      CacheHelper.instance.getTokenExpirationSeconds() > 0) {
+    DateTime loginDateTime =
+        DateTime.parse(CacheHelper.instance.getLoginTime());
+    DateTime expiryDateTime = loginDateTime.add(
+        Duration(seconds: CacheHelper.instance.getTokenExpirationSeconds()));
+    DateTime currentDateTime = DateTime.now();
+    return currentDateTime.isAfter(expiryDateTime);
+  } else {
+    return true;
+  }
+}
+
 Future _clearAllCaches() async {
   await Future.wait([
     CacheHelper.instance.setAccessToken(""),
     CacheHelper.instance.setRefreshToken(""),
     CacheHelper.instance.setEncryptedToken(""),
     CacheHelper.instance.setFcmToken(""),
+    CacheHelper.instance.setTokenExpirationSeconds(0),
+    CacheHelper.instance.setLoginTime(""),
     CacheHelper.instance.setUserProfilePicture(""),
     FirebaseMessaging.instance.deleteToken(),
     CacheHelper.instance.cacheCurrentUserInfo({}),

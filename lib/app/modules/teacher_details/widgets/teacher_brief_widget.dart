@@ -1,5 +1,3 @@
-import 'package:flutter_chat_types/flutter_chat_types.dart';
-import 'package:flutter_link_previewer/flutter_link_previewer.dart';
 import 'package:flutter_linkify/flutter_linkify.dart';
 import 'package:url_launcher/url_launcher.dart';
 
@@ -9,10 +7,9 @@ import '../../../core/helper_functions.dart';
 import '../controllers/teacher_details_controller.dart';
 
 class HessaTeacherBrief extends GetView<TeacherDetailsController> {
-  HessaTeacherBrief({
+  const HessaTeacherBrief({
     super.key,
   });
-  Map<String, PreviewData> datas = {};
 
   @override
   Widget build(BuildContext context) {
@@ -48,104 +45,18 @@ class HessaTeacherBrief extends GetView<TeacherDetailsController> {
           moreDivider(),
           SizedBox(height: 10.h),
           StatefulBuilder(builder: (BuildContext context, setState) {
-            return LinkPreview(
-              enableAnimation: true,
-              hideImage: true,
-              padding: EdgeInsets.zero,
-              openOnPreviewTitleTap: true,
-              openOnPreviewImageTap: true,
-              onPreviewDataFetched: (PreviewData data) {
-                setState(() {
-                  if (extractLink(controller.hessaTeacherDetails.result != null
-                          ? controller.hessaTeacherDetails.result!.providers !=
-                                  null
-                              ? controller.hessaTeacherDetails.result!
-                                      .providers!.aboutMe ??
-                                  ""
-                              : ""
-                          : "") !=
-                      null) {
-                    datas = {
-                      ...datas,
-                      extractLink(controller.hessaTeacherDetails.result != null
-                          ? controller.hessaTeacherDetails.result!.providers !=
-                                  null
-                              ? controller.hessaTeacherDetails.result!
-                                      .providers!.aboutMe ??
-                                  ""
-                              : ""
-                          : "")!: data
-                    };
-                  }
-                });
-              },
-              textWidget: Linkify(
-                onOpen: (LinkableElement link) async {
-                  if (extractLink(controller.hessaTeacherDetails.result != null
-                          ? controller.hessaTeacherDetails.result!.providers !=
-                                  null
-                              ? controller.hessaTeacherDetails.result!
-                                      .providers!.aboutMe ??
-                                  ""
-                              : ""
-                          : "") !=
-                      null) {
-                    final url = Uri.parse(extractLink(
-                        controller.hessaTeacherDetails.result != null
-                            ? controller.hessaTeacherDetails.result!
-                                        .providers !=
-                                    null
-                                ? controller.hessaTeacherDetails.result!
-                                        .providers!.aboutMe ??
-                                    ""
-                                : ""
-                            : "")!);
-                    if (url.isAbsolute) {
-                      if (await canLaunchUrl(url)) {
-                        await launchUrl(
-                          url,
-                          mode: LaunchMode.externalApplication,
-                        );
-                      } else {
-                        throw 'Could not launch $link';
-                      }
-                    }
-                  }
-                },
-                textDirection: detectLang(
-                        text: controller.hessaTeacherDetails.result != null
-                            ? controller.hessaTeacherDetails.result!
-                                        .providers !=
-                                    null
-                                ? controller.hessaTeacherDetails.result!
-                                        .providers!.aboutMe ??
-                                    ""
-                                : ""
-                            : "")
-                    ? TextDirection.ltr
-                    : TextDirection.rtl,
-                text: controller.hessaTeacherDetails.result != null
-                    ? controller.hessaTeacherDetails.result!.providers != null
-                        ? controller.hessaTeacherDetails.result!.providers!
-                                .aboutMe ??
-                            ""
-                        : ""
-                    : "",
-                textAlign: TextAlign.start,
-                style: TextStyle(
-                  color: ColorManager.grey5,
-                  fontSize: 14.sp,
-                  fontWeight: FontWeightManager.light,
-                  fontFamily: FontConstants.fontFamily,
-                ),
-              ),
-              textStyle: TextStyle(
-                color: ColorManager.grey5,
-                fontSize: 14.sp,
-                fontWeight: FontWeightManager.light,
-                fontFamily: FontConstants.fontFamily,
-              ),
-              previewData: datas[extractLink(
+            return Linkify(
+              onOpen: (LinkableElement link) async {
+                if (extractLink(controller.hessaTeacherDetails.result != null
+                        ? controller.hessaTeacherDetails.result!.providers !=
+                                null
+                            ? controller.hessaTeacherDetails.result!.providers!
+                                    .aboutMe ??
+                                ""
+                            : ""
+                        : "") !=
+                    null) {
+                  final url = Uri.parse(extractLink(
                       controller.hessaTeacherDetails.result != null
                           ? controller.hessaTeacherDetails.result!.providers !=
                                   null
@@ -153,17 +64,44 @@ class HessaTeacherBrief extends GetView<TeacherDetailsController> {
                                       .providers!.aboutMe ??
                                   ""
                               : ""
-                          : "") ??
-                  ""],
-              text: extractLink(controller.hessaTeacherDetails.result != null
-                      ? controller.hessaTeacherDetails.result!.providers != null
-                          ? controller.hessaTeacherDetails.result!.providers!
-                                  .aboutMe ??
-                              ""
-                          : ""
-                      : "") ??
-                  "",
-              width: Get.width,
+                          : "")!);
+                  if (url.isAbsolute) {
+                    if (await canLaunchUrl(url)) {
+                      await launchUrl(
+                        url,
+                        mode: LaunchMode.externalApplication,
+                      );
+                    } else {
+                      throw 'Could not launch $link';
+                    }
+                  }
+                }
+              },
+              textDirection: detectLang(
+                      text: controller.hessaTeacherDetails.result != null
+                          ? controller.hessaTeacherDetails.result!.providers !=
+                                  null
+                              ? controller.hessaTeacherDetails.result!
+                                      .providers!.aboutMe ??
+                                  ""
+                              : ""
+                          : "")
+                  ? TextDirection.ltr
+                  : TextDirection.rtl,
+              text: controller.hessaTeacherDetails.result != null
+                  ? controller.hessaTeacherDetails.result!.providers != null
+                      ? controller
+                              .hessaTeacherDetails.result!.providers!.aboutMe ??
+                          ""
+                      : ""
+                  : "",
+              textAlign: TextAlign.start,
+              style: TextStyle(
+                color: ColorManager.grey5,
+                fontSize: 14.sp,
+                fontWeight: FontWeightManager.light,
+                fontFamily: FontConstants.fontFamily,
+              ),
             );
           }),
           // PrimaryText(

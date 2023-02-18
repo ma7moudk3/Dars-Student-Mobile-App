@@ -75,8 +75,8 @@ class CancelHessaBottomSheetContent extends GetView<HessaDetailsController> {
                             fontSize: 14.sp,
                             multiLines: true,
                             maxLines: 6,
-                            contentPadding:
-                                const EdgeInsets.fromLTRB(20.0, 20.0, 20.0, 10.0),
+                            contentPadding: const EdgeInsets.fromLTRB(
+                                20.0, 20.0, 20.0, 10.0),
                             controller: controller.cancelReasonController,
                             title: "",
                             borderRadius: BorderRadius.circular(14),
@@ -89,7 +89,8 @@ class CancelHessaBottomSheetContent extends GetView<HessaDetailsController> {
                             ),
                             focusedBorder: OutlineInputBorder(
                               borderRadius: BorderRadius.circular(14),
-                              borderSide: BorderSide(color: ColorManager.primary),
+                              borderSide:
+                                  BorderSide(color: ColorManager.primary),
                             ),
                             errorBorder: OutlineInputBorder(
                               borderRadius: BorderRadius.circular(14),

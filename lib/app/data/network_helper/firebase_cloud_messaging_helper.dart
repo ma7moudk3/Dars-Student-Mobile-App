@@ -99,7 +99,7 @@ class FcmHelper {
     //   title: message.notification?.title ?? 'Title',
     //   body: message.notification?.body ?? 'Body',
     //   // icon: '@drawable/ic_launcher',
-    //   // largeIcon: DrawableResourceAndroidBitmap('@mipmap/athr_icon'),
+    //   // largeIcon: DrawableResourceAndroidBitmap('@mipmap/hessa_icon'),
     // );
     showNotification(message, "${message.data}");
   }
@@ -130,14 +130,14 @@ class FcmHelper {
     log('message.data ${message.data}');
     log('my payload $payload');
     await flutterLocalNotificationsPlugin
-        .show(200, 'Athr Online', body, notificationDetails, payload: payload);
+        .show(200, 'Hessa Online', body, notificationDetails, payload: payload);
   }
 
   ///init notifications channels
   static _initNotification() async {
     const AndroidInitializationSettings initializationSettingsAndroid =
         AndroidInitializationSettings(
-      '@drawable/athr_icon',
+      '@drawable/hessa_icon',
     );
 
     const DarwinInitializationSettings initializationSettingsIOS =

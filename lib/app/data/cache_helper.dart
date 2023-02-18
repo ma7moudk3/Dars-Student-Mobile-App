@@ -24,6 +24,22 @@ class CacheHelper {
     await _sharedPreferences.setString('access_token', token);
   }
 
+  Future setTokenExpirationSeconds(int token) async {
+    await _sharedPreferences.setInt('token_expiration', token);
+  }
+
+  int getTokenExpirationSeconds() {
+    return _sharedPreferences.getInt('token_expiration') ?? 0;
+  }
+
+  Future setLoginTime(String loginTime) async {
+    await _sharedPreferences.setString('login_time', loginTime);
+  }
+
+  String getLoginTime() {
+    return _sharedPreferences.getString('login_time') ?? "";
+  }
+
   Future setEncryptedToken(String token) async {
     await _sharedPreferences.setString('encrypted_token', token);
   }

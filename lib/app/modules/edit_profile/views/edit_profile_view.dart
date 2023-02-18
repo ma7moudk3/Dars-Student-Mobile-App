@@ -187,8 +187,8 @@ class EditProfileView extends GetView<EditProfileController> {
                                             },
                                           ),
                                           ListTile(
-                                            leading: const Icon(
-                                                Icons.photo_rounded),
+                                            leading:
+                                                const Icon(Icons.photo_rounded),
                                             title: PrimaryText(
                                                 LocaleKeys.gallery.tr),
                                             onTap: () async {
@@ -207,8 +207,8 @@ class EditProfileView extends GetView<EditProfileController> {
                             },
                             child: StatefulBuilder(
                                 builder: (BuildContext context, setState) {
-                              return GetX<EditProfileController>(builder:
-                                  (EditProfileController controller) {
+                              return GetX<EditProfileController>(
+                                  builder: (EditProfileController controller) {
                                 return Container(
                                   width: 100.w,
                                   height: 100.h,
@@ -276,20 +276,18 @@ class EditProfileView extends GetView<EditProfileController> {
                                   controller: controller.fullNameController,
                                   title: LocaleKeys.full_name,
                                   focusNode: controller.fullNameFocusNode,
-                                  titleFontWeight:
-                                      FontWeightManager.softLight,
+                                  titleFontWeight: FontWeightManager.softLight,
                                   onTap: () async {},
                                   prefixIcon: Container(
-                                    margin: EdgeInsets.symmetric(
-                                        horizontal: 14.w),
+                                    margin:
+                                        EdgeInsets.symmetric(horizontal: 14.w),
                                     child: SvgPicture.asset(
                                       ImagesManager.personIcon,
                                       width: 22.w,
                                       height: 22.h,
                                       color: controller
                                               .fullNameErrorIconColor ??
-                                          (controller
-                                                  .fullNameFocusNode.hasFocus
+                                          (controller.fullNameFocusNode.hasFocus
                                               ? ColorManager.primary
                                               : ColorManager.borderColor2),
                                     ),
@@ -305,8 +303,8 @@ class EditProfileView extends GetView<EditProfileController> {
                                   ),
                                   focusedBorder: OutlineInputBorder(
                                     borderRadius: BorderRadius.circular(14),
-                                    borderSide: BorderSide(
-                                        color: ColorManager.primary),
+                                    borderSide:
+                                        BorderSide(color: ColorManager.primary),
                                   ),
                                   borderRadius: BorderRadius.circular(14),
                                   errorBorder: OutlineInputBorder(
@@ -345,8 +343,8 @@ class EditProfileView extends GetView<EditProfileController> {
                                   ),
                                   focusedBorder: OutlineInputBorder(
                                     borderRadius: BorderRadius.circular(14),
-                                    borderSide: BorderSide(
-                                        color: ColorManager.primary),
+                                    borderSide:
+                                        BorderSide(color: ColorManager.primary),
                                   ),
                                   errorBorder: OutlineInputBorder(
                                     borderRadius: BorderRadius.circular(14),
@@ -388,8 +386,7 @@ class EditProfileView extends GetView<EditProfileController> {
                                   initialCountryCode:
                                       controller.countryCode ?? "PS",
                                   onChanged: (PhoneNumber phoneNumber) =>
-                                      controller
-                                          .changePhoneNumber(phoneNumber),
+                                      controller.changePhoneNumber(phoneNumber),
                                 ),
                                 Visibility(
                                   visible: !controller.isPhoneConfirmed,
@@ -398,8 +395,7 @@ class EditProfileView extends GetView<EditProfileController> {
                                       SizedBox(height: 20.h),
                                       PrimaryButton(
                                         onPressed: () async {
-                                          await controller
-                                              .sendOTPPhoneNumber();
+                                          await controller.sendOTPPhoneNumber();
                                         },
                                         title:
                                             LocaleKeys.verify_phone_number.tr,
@@ -443,20 +439,18 @@ class EditProfileView extends GetView<EditProfileController> {
                                               right: index == 0 ? 0 : 10.w,
                                             ),
                                             decoration: BoxDecoration(
-                                              color: controller.gender ==
-                                                      index
+                                              color: controller.gender == index
                                                   ? ColorManager.primary
                                                   : ColorManager.transparent,
                                               borderRadius:
                                                   BorderRadius.circular(8),
-                                              border:
-                                                  controller.gender != index
-                                                      ? Border.all(
-                                                          color: ColorManager
-                                                              .primary,
-                                                          width: 1,
-                                                        )
-                                                      : null,
+                                              border: controller.gender != index
+                                                  ? Border.all(
+                                                      color:
+                                                          ColorManager.primary,
+                                                      width: 1,
+                                                    )
+                                                  : null,
                                               boxShadow: const [],
                                             ),
                                             child: Center(
@@ -464,11 +458,10 @@ class EditProfileView extends GetView<EditProfileController> {
                                                 index == 0
                                                     ? LocaleKeys.male
                                                     : LocaleKeys.female,
-                                                color:
-                                                    controller.gender == index
-                                                        ? ColorManager.white
-                                                        : ColorManager
-                                                            .borderColor,
+                                                color: controller.gender ==
+                                                        index
+                                                    ? ColorManager.white
+                                                    : ColorManager.borderColor,
                                                 fontWeight:
                                                     FontWeightManager.light,
                                               ),

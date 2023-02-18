@@ -105,7 +105,7 @@ class IntlPhoneNumberTextField extends StatelessWidget {
                   borderRadius: BorderRadius.circular(14),
                   borderSide: BorderSide(color: ColorManager.borderColor2),
                 ),
-                labelText : LocaleKeys.search.tr,
+                labelText: LocaleKeys.search.tr,
                 counterStyle: textStyle,
                 labelStyle: textStyle,
                 border: OutlineInputBorder(
