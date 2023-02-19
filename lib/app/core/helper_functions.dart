@@ -172,13 +172,13 @@ extension DateTimeExtension on DateTime {
   String timeAgoCustom() {
     Duration diff = DateTime.now().difference(this);
     if (diff.inDays > 365) {
-      return "${(diff.inDays / 365).floor()} ${(diff.inDays / 365).floor() == 1 ? LocaleKeys.year.tr : LocaleKeys.years.tr} ${LocaleKeys.ago.tr}";
+      return "${LocaleKeys.ago.tr} ${(diff.inDays / 365).floor()} ${(diff.inDays / 365).floor() == 1 ? LocaleKeys.year.tr : LocaleKeys.years.tr}";
     }
     if (diff.inDays > 30) {
-      return "${(diff.inDays / 30).floor()} ${(diff.inDays / 30).floor() == 1 ? LocaleKeys.month.tr : LocaleKeys.months.tr} ${LocaleKeys.ago.tr}";
+      return "${LocaleKeys.ago.tr} ${(diff.inDays / 30).floor()} ${(diff.inDays / 30).floor() == 1 ? LocaleKeys.month.tr : LocaleKeys.months.tr}";
     }
     if (diff.inDays > 7) {
-      return "${(diff.inDays / 7).floor()} ${(diff.inDays / 7).floor() == 1 ? LocaleKeys.week.tr : LocaleKeys.weeks.tr} ${LocaleKeys.ago.tr}";
+      return "${LocaleKeys.ago.tr} ${(diff.inDays / 7).floor()} ${(diff.inDays / 7).floor() == 1 ? LocaleKeys.week.tr : LocaleKeys.weeks.tr}";
     }
     if (diff.inDays > 0) {
       return DateFormat.E(Get.locale!.languageCode == "ar" ? "ar_SA" : null)
@@ -189,7 +189,7 @@ extension DateTimeExtension on DateTime {
       return "${LocaleKeys.today.tr} ${DateFormat('jm', Get.locale!.languageCode == "ar" ? "ar_SA" : null).format(this)}";
     }
     if (diff.inMinutes > 0) {
-      return "${diff.inMinutes} ${diff.inMinutes == 1 ? LocaleKeys.minute.tr : LocaleKeys.minutes.tr} ${LocaleKeys.ago.tr}";
+      return "${LocaleKeys.ago.tr} ${diff.inMinutes} ${diff.inMinutes == 1 ? LocaleKeys.minute.tr : LocaleKeys.minutes.tr}";
     }
     return LocaleKeys.just_now.tr;
   }

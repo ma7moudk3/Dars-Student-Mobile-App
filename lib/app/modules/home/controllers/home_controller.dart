@@ -1,5 +1,6 @@
 import 'package:hessa_student/app/constants/exports.dart';
 import 'package:hessa_student/app/core/helper_functions.dart';
+import 'package:hessa_student/app/modules/bottom_nav_bar/controllers/bottom_nav_bar_controller.dart';
 import 'package:hessa_student/app/modules/login/data/models/current_user_info/current_user_info.dart';
 import 'package:hessa_student/app/modules/login/data/models/current_user_profile_info/current_user_profile_info.dart';
 import 'package:hessa_student/app/modules/login/data/repos/login_repo_implement.dart';
@@ -34,8 +35,12 @@ class HomeController extends GetxController {
     await checkInternetConnection(timeout: 5).then((bool internetStatus) async {
       isInternetConnected.value = internetStatus;
       if (isInternetConnected.value) {
+        final BottomNavBarController bottomNavBarController =
+            Get.find<BottomNavBarController>();
         await Future.wait([
           _loginRepo.getCurrentUserProfilePicture(),
+          bottomNavBarController.getUnReadNotificationsCount(),
+          // bottomNavBarController.getUnreadMessages(), // to be done later if needed
         ]).then(
           (value) => isLoading.value = false,
         );

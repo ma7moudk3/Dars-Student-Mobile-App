@@ -1,3 +1,4 @@
+
 import 'package:hessa_student/app/modules/bottom_nav_bar/controllers/bottom_nav_bar_controller.dart';
 import 'package:hessa_student/app/routes/app_pages.dart';
 
@@ -48,15 +49,17 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
                   SizedBox(width: 20.w),
                   leading ??
                       GestureDetector(
-                        onTap: () async =>
-                            await Get.toNamed(Routes.NOTIFICATIONS),
+                        onTap: () async {
+                          await Get.toNamed(Routes.NOTIFICATIONS);
+                        },
                         child: Stack(
                           children: [
                             SvgPicture.asset(
                               ImagesManager.notificationIcon,
                             ),
                             Visibility(
-                              visible: controller.unReadNotificationsCount.value > 0,
+                              visible:
+                                  controller.unReadNotificationsCount.value > 0,
                               child: Positioned(
                                 top: 0,
                                 right: 0,

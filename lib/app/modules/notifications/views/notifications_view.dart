@@ -1,5 +1,6 @@
 import 'dart:developer';
 
+import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:hessa_student/app/constants/exports.dart';
 import 'package:hessa_student/app/core/helper_functions.dart';
@@ -8,6 +9,7 @@ import 'package:hessa_student/global_presentation/global_features/lotties_manage
 import 'package:infinite_scroll_pagination/infinite_scroll_pagination.dart';
 import 'package:lottie/lottie.dart';
 import '../../../../global_presentation/global_widgets/custom_app_bar.dart';
+import '../../../data/network_helper/firebase_cloud_messaging_helper.dart';
 import '../controllers/notifications_controller.dart';
 import '../data/models/notification_data/item.dart';
 import '../widgets/notification_widget.dart';
@@ -136,6 +138,8 @@ class NotificationsView extends GetView<NotificationsController> {
                             },
                             itemBuilder: (BuildContext context,
                                 Item notification, int index) {
+                              // log(notification.notification!.creationTime
+                              //     .toString());
                               return NotificationWidget(
                                 iconPath: ImagesManager.checkIcon,
                                 title:
@@ -144,6 +148,13 @@ class NotificationsView extends GetView<NotificationsController> {
                                 time: notification.notification!.creationTime!
                                     .timeAgoCustom(),
                                 onTap: () async {
+                                  FcmHelper.showNotification(
+                                      const RemoteMessage(data: {
+                                        "title": "تمت العملية بنجاح",
+                                        "body": "تم تسجيل الخروج بنجاح",
+                                        "type": "logout",
+                                      }),
+                                      '{"hh":"aa"}');
                                   log('notification clicked');
                                 },
                               );

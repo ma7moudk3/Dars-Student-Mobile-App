@@ -3,6 +3,7 @@ import 'dart:developer';
 import 'dart:typed_data';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
+import 'package:hessa_student/app/constants/constants.dart';
 import '../../constants/exports.dart';
 
 class FcmHelper {
@@ -123,21 +124,22 @@ class FcmHelper {
     var notificationDetails = NotificationDetails(
         android: androidPlatformChannelSpecifics,
         iOS: iOSPlatformChannelSpecifics);
-    log('message.    ${message.messageId}');
+    log('messageId: ${message.messageId}');
     Map<String, dynamic> data = message.data;
     String body = data['body'] ?? "Body";
     // log('message ${message.notification!.title}');
     log('message.data ${message.data}');
-    log('my payload $payload');
-    await flutterLocalNotificationsPlugin
-        .show(200, 'Hessa Online', body, notificationDetails, payload: payload);
+    log('Payload: $payload');
+    await flutterLocalNotificationsPlugin.show(
+        200, applicationName, body, notificationDetails,
+        payload: payload);
   }
 
   ///init notifications channels
   static _initNotification() async {
     const AndroidInitializationSettings initializationSettingsAndroid =
         AndroidInitializationSettings(
-      '@drawable/hessa_icon',
+      'hessa_icon',
     );
 
     const DarwinInitializationSettings initializationSettingsIOS =
@@ -162,8 +164,8 @@ class FcmHelper {
       final NotificationAppLaunchDetails? details =
           await flutterLocalNotificationsPlugin
               .getNotificationAppLaunchDetails();
-      log("test me !-> ${details!.notificationResponse!.payload}");
-      log("test me !-> $details");
+      log("Payload: ${details!.notificationResponse!.payload}");
+      log("Details: $details");
 
       // log('payload $payload');
       // List<String> str =

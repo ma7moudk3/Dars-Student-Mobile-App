@@ -27,7 +27,6 @@ class HomeView extends GetView<HomeController> {
           color: ColorManager.white,
           backgroundColor: ColorManager.primary,
           onRefresh: () async {
-            // Future.sync(() => controller.pagingController.refresh());
             await controller.checkInternet();
           },
           child: GetX<HomeController>(builder: (HomeController controller) {
