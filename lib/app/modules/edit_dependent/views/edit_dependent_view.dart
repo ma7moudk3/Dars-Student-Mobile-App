@@ -1,24 +1,28 @@
 import 'dart:io';
 
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
-import 'package:hessa_student/app/constants/exports.dart';
-import 'package:hessa_student/global_presentation/global_widgets/custom_snack_bar.dart';
+
+import 'package:image_picker/image_picker.dart';
+import 'package:lottie/lottie.dart';
+
+import '../../../../generated/locales.g.dart';
+import '../../../../global_presentation/global_features/lotties_manager.dart';
 import '../../../../global_presentation/global_widgets/confirm_back_dialog_content.dart';
+import '../../../../global_presentation/global_widgets/custom_app_bar.dart';
+import '../../../../global_presentation/global_widgets/custom_snack_bar.dart';
+import '../../../../global_presentation/global_widgets/global_dropdown.dart';
+import '../../../constants/links.dart';
 import '../../../data/models/student_relation/result.dart' as student_relation;
 import 'package:hessa_student/app/data/models/school_types/result.dart'
     as school_type;
-import 'package:image_picker/image_picker.dart';
-import 'package:lottie/lottie.dart';
-import '../../../../generated/locales.g.dart';
-import '../../../../global_presentation/global_features/lotties_manager.dart';
-import '../../../../global_presentation/global_widgets/custom_app_bar.dart';
-import '../../../../global_presentation/global_widgets/global_dropdown.dart';
 import '../../../data/models/classes/item.dart' as level;
-import '../controllers/add_new_dependent_controller.dart';
+import '../../../constants/exports.dart';
+import '../controllers/edit_dependent_controller.dart';
 
-class AddNewDependentView extends GetView<AddNewDependentController> {
-  const AddNewDependentView({super.key});
+class EditDependentView extends GetView<EditDependentController> {
+  const EditDependentView({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -129,6 +133,8 @@ class AddNewDependentView extends GetView<AddNewDependentController> {
       }
     }
 
+    String studentPicture =
+        "${Links.baseLink}${Links.profileImageById}?userId=${controller.studentToEdit.requesterStudent?.id ?? -1}";
     return WillPopScope(
       onWillPop: () async {
         await Get.dialog(
@@ -151,7 +157,7 @@ class AddNewDependentView extends GetView<AddNewDependentController> {
       },
       child: Scaffold(
         appBar: CustomAppBar(
-          title: LocaleKeys.add_dependent,
+          title: LocaleKeys.edit_dependent,
           leading: GestureDetector(
             onTap: () async {
               await Get.dialog(
@@ -183,12 +189,12 @@ class AddNewDependentView extends GetView<AddNewDependentController> {
           ),
           action: const SizedBox.shrink(),
         ),
-        body: GetX<AddNewDependentController>(
-            builder: (AddNewDependentController controller) {
+        body: GetX<EditDependentController>(
+            builder: (EditDependentController controller) {
           if (controller.isInternetConnected.value) {
             if (controller.isLoading.value == false) {
-              return GetBuilder<AddNewDependentController>(
-                  builder: (AddNewDependentController controller) {
+              return GetBuilder<EditDependentController>(
+                  builder: (EditDependentController controller) {
                 return SingleChildScrollView(
                   child: Column(
                     children: [
@@ -210,35 +216,51 @@ class AddNewDependentView extends GetView<AddNewDependentController> {
                               ),
                             ],
                           ),
-                          child: GetBuilder<AddNewDependentController>(
-                              builder: (AddNewDependentController controller) {
+                          child: GetBuilder<EditDependentController>(
+                              builder: (EditDependentController controller) {
                             return Form(
                               key: controller.formKey,
                               child: Column(
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
                                   Visibility(
-                                    visible: controller.image != null,
+                                    visible: controller.image != null ||
+                                        (controller.studentToEdit
+                                                    .requesterStudent !=
+                                                null &&
+                                            controller.studentToEdit
+                                                    .requesterStudent!.id !=
+                                                null),
                                     child: Center(
-                                      child: Container(
-                                        width: 85.w,
-                                        height: 85.h,
-                                        decoration: BoxDecoration(
-                                          image: DecorationImage(
-                                            image: controller.image != null
-                                                ? FileImage(controller.image!)
-                                                    as ImageProvider
-                                                : AssetImage(
-                                                    ImagesManager.avatar),
-                                            fit: BoxFit.cover,
+                                      child: StatefulBuilder(builder:
+                                          (BuildContext context, setState) {
+                                        return Container(
+                                          width: 85.w,
+                                          height: 85.h,
+                                          decoration: BoxDecoration(
+                                            image: DecorationImage(
+                                              image: controller.image != null
+                                                  ? FileImage(controller.image!)
+                                                      as ImageProvider
+                                                  : CachedNetworkImageProvider(
+                                                      studentPicture,
+                                                      errorListener: () {
+                                                        setState(() {
+                                                          studentPicture =
+                                                              "https://www.shareicon.net/data/2016/06/10/586098_guest_512x512.png";
+                                                        });
+                                                      },
+                                                    ),
+                                              fit: BoxFit.cover,
+                                            ),
+                                            border: Border.all(
+                                              width: 1,
+                                              color: ColorManager.primary,
+                                            ),
+                                            shape: BoxShape.circle,
                                           ),
-                                          border: Border.all(
-                                            width: 1,
-                                            color: ColorManager.primary,
-                                          ),
-                                          shape: BoxShape.circle,
-                                        ),
-                                      ),
+                                        );
+                                      }),
                                     ),
                                   ),
                                   PrimaryTextField(
@@ -292,7 +314,6 @@ class AddNewDependentView extends GetView<AddNewDependentController> {
                                   SizedBox(height: 12.h),
                                   PrimaryTextField(
                                     fontSize: 14.sp,
-                                    isRequired: true,
                                     readOnly: true,
                                     ifReadOnlyTextColor:
                                         ColorManager.fontColor7,
@@ -348,90 +369,8 @@ class AddNewDependentView extends GetView<AddNewDependentController> {
                                     borderSide: BorderSide(
                                       color: ColorManager.primary,
                                     ),
-                                    hintText: LocaleKeys.upload_picture,
+                                    hintText: LocaleKeys.upload_new_picture,
                                   ),
-                                  // SizedBox(height: 12.h),
-                                  // PrimaryTextField(
-                                  //   fontSize: 14.sp,
-                                  //   readOnly: true,
-                                  //   ifReadOnlyTextColor:
-                                  //       ColorManager.fontColor7,
-                                  //   controller:
-                                  //       controller.dateOfBirthController,
-                                  //   title: LocaleKeys.date_of_birth,
-                                  //   borderRadius: BorderRadius.circular(14),
-                                  //   focusNode:
-                                  //       controller.dateOfBirthFocusNode,
-                                  //   titleFontWeight:
-                                  //       FontWeightManager.softLight,
-                                  //   onTap: () async {
-                                  //     DateTime maxdate = DateTime(
-                                  //       DateTime.now().year - 10,
-                                  //       DateTime.now().month,
-                                  //       DateTime.now().day,
-                                  //     );
-                                  //     await Get.bottomSheet(
-                                  //       isScrollControlled: true,
-                                  //       shape: const RoundedRectangleBorder(
-                                  //         borderRadius: BorderRadius.only(
-                                  //           topLeft: Radius.circular(20),
-                                  //           topRight: Radius.circular(20),
-                                  //         ),
-                                  //       ),
-                                  //       DateOfBirthBottomSheetContent(
-                                  //           maxdate: maxdate),
-                                  //       backgroundColor: ColorManager.white,
-                                  //     );
-                                  //   },
-                                  //   suffixIcon: Container(
-                                  //     margin: EdgeInsets.symmetric(
-                                  //         horizontal: 14.w),
-                                  //     child: SvgPicture.asset(
-                                  //       ImagesManager.calendarIcon,
-                                  //       width: 22.w,
-                                  //       height: 22.h,
-                                  //       color: controller
-                                  //               .dateOfBirthIconErrorColor ??
-                                  //           (controller.dateOfBirthFocusNode
-                                  //                   .hasFocus
-                                  //               ? (controller
-                                  //                       .dateOfBirthIconErrorColor ??
-                                  //                   ColorManager.primary)
-                                  //               : ColorManager
-                                  //                   .primaryLight),
-                                  //     ),
-                                  //   ),
-                                  //   suffixIconConstraints: BoxConstraints(
-                                  //     minHeight: 22.h,
-                                  //     minWidth: 22.w,
-                                  //   ),
-                                  //   enabledBorder: OutlineInputBorder(
-                                  //     borderRadius:
-                                  //         BorderRadius.circular(14),
-                                  //     borderSide: BorderSide(
-                                  //         color: ColorManager.borderColor2),
-                                  //   ),
-                                  //   focusedBorder: OutlineInputBorder(
-                                  //     borderRadius:
-                                  //         BorderRadius.circular(14),
-                                  //     borderSide: BorderSide(
-                                  //         color: ColorManager.primary),
-                                  //   ),
-                                  //   errorBorder: OutlineInputBorder(
-                                  //     borderRadius:
-                                  //         BorderRadius.circular(14),
-                                  //     borderSide: BorderSide(
-                                  //         color: ColorManager.red),
-                                  //   ),
-                                  //   borderSide: BorderSide(
-                                  //     color: ColorManager.primary,
-                                  //   ),
-                                  //   hintText:
-                                  //       LocaleKeys.choose_date_of_birth,
-                                  //   validator: (String? dateOfBirth) =>
-                                  //       controller.validateDateOfBirth(
-                                  //           dateOfBirth),
-                                  // ),
                                   SizedBox(height: 12.h),
                                   Row(
                                     children: [
@@ -902,13 +841,7 @@ class AddNewDependentView extends GetView<AddNewDependentController> {
                         child: PrimaryButton(
                           onPressed: () async {
                             if (controller.formKey.currentState!.validate()) {
-                              if (controller.image == null) {
-                                CustomSnackBar.showCustomErrorSnackBar(
-                                  title: LocaleKeys.data_entry_error.tr,
-                                  message: LocaleKeys.please_select_image.tr,
-                                );
-                              } else if (controller
-                                          .selectedStudentRelation.id ==
+                              if (controller.selectedStudentRelation.id ==
                                       null ||
                                   controller.selectedStudentRelation.id == -1) {
                                 CustomSnackBar.showCustomErrorSnackBar(
@@ -930,19 +863,13 @@ class AddNewDependentView extends GetView<AddNewDependentController> {
                                   title: LocaleKeys.data_entry_error.tr,
                                   message: LocaleKeys.please_select_class.tr,
                                 );
-                                // } else if (controller.selectedTopic.id == null ||
-                                //     controller.selectedTopic.id == -1) {
-                                //   CustomSnackBar.showCustomErrorSnackBar(
-                                //     title: LocaleKeys.data_entry_error.tr,
-                                //     message: LocaleKeys.please_select_subject.tr,
-                                //   );
                               } else {
-                                await controller.addNewStudent();
+                                await controller.editStudent();
                               }
                             }
                           },
                           fontSize: 15.sp,
-                          title: LocaleKeys.confirm,
+                          title: LocaleKeys.edit_dependent.tr,
                         ),
                       )
                     ],

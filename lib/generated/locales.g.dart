@@ -30,6 +30,7 @@ class LocaleKeys {
   static const enjoy_the_app = 'enjoy_the_app';
   static const no_messages_yet = 'no_messages_yet';
   static const welcoming = 'welcoming';
+  static const add_new_dependent = 'add_new_dependent';
   static const welcome_back = 'welcome_back';
   static const no_messages_to_see_here = 'no_messages_to_see_here';
   static const start_a_conversation_with_any_of_the_teachers =
@@ -89,6 +90,8 @@ class LocaleKeys {
   static const terms_and_conditions = 'terms_and_conditions';
   static const choose_one_student_at_least = 'choose_one_student_at_least';
   static const added_addresses = 'added_addresses';
+  static const added_dependents = 'added_dependents';
+  static const edit_dependent = 'edit_dependent';
   static const phone_number_already_verified = 'phone_number_already_verified';
   static const please_enter_a_valid_phone_number =
       'please_enter_a_valid_phone_number';
@@ -168,6 +171,7 @@ class LocaleKeys {
   static const enter_address = 'enter_address';
   static const choose_locality = 'choose_locality';
   static const please_choose_locality = 'please_choose_locality';
+  static const student_requester = 'student_requester';
   static const choose_school_type = 'choose_school_type';
   static const please_choose_country_first = 'please_choose_country_first';
   static const please_select_school_type = 'please_select_school_type';
@@ -244,7 +248,8 @@ class LocaleKeys {
   static const add_dependent = 'add_dependent';
   static const name = 'name';
   static const person_picture = 'person_picture';
-  static const upload_picture_or_pdf = 'upload_picture_or_pdf';
+  static const upload_picture = 'upload_picture';
+  static const upload_new_picture = 'upload_new_picture';
   static const date_of_birth = 'date_of_birth';
   static const choose_date_of_birth = 'choose_date_of_birth';
   static const please_enter_dob = 'please_enter_dob';
@@ -334,6 +339,7 @@ class LocaleKeys {
   static const please_enter_the_verification_code =
       'please_enter_the_verification_code';
   static const profile_edited_succesfully = 'profile_edited_succesfully';
+  static const dependent_edited_successfully = 'dependent_edited_successfully';
   static const wanna_back = 'wanna_back';
   static const wanna_out = 'wanna_out';
   static const wanna_back_and_lose_data = 'wanna_back_and_lose_data';
@@ -443,6 +449,7 @@ class Locales {
     'enjoy_the_app': 'استمتع مع حصة',
     'no_messages_yet': 'لا توجد رسائل بعد',
     'welcoming': 'يسعدنا رؤيتك مرة أخرى',
+    'add_new_dependent': 'اضافة تابع جديد',
     'welcome_back': 'نأمل أن تكون قد قضيت وقتًا رائعًا\nونحن سعداء بالعودة',
     'no_messages_to_see_here': 'لا يوجد رسائل لعرضها هنا',
     'start_a_conversation_with_any_of_the_teachers':
@@ -501,7 +508,9 @@ class Locales {
         'قم بتأكيد بريدك ورقم هاتفك المدخل',
     'terms_and_conditions': 'الشروط والأحكام',
     'choose_one_student_at_least': 'اختر طالباً واحداً على الأقل',
-    'added_addresses': 'العناوين المضافة',
+    'added_addresses': 'العناوين المُضافة',
+    'added_dependents': 'التابعين المُضافين',
+    'edit_dependent': 'تعديل التابع',
     'phone_number_already_verified': 'رقم الهاتف مؤكد بالفعل',
     'please_enter_a_valid_phone_number': 'الرجاء إدخال رقم هاتف صحيح',
     'please_enter_a_valid_email': 'الرجاء إدخال بريد إلكتروني صحيح',
@@ -578,6 +587,7 @@ class Locales {
     'enter_address': 'أدخل العنوان',
     'choose_locality': 'اختر المنطقة',
     'please_choose_locality': 'الرجاء اختيار المنطقة',
+    'student_requester': 'ولي الأمر',
     'choose_school_type': 'اختر نوع المدرسة',
     'please_choose_country_first': 'الرجاء اختيار الدولة أولاً',
     'please_select_school_type': 'الرجاء اختيار نوع المدرسة',
@@ -651,7 +661,8 @@ class Locales {
     'add_dependent': 'إضافة تابع',
     'name': 'الاسم',
     'person_picture': 'صورة شخصية',
-    'upload_picture_or_pdf': 'رفع صورة',
+    'upload_picture': 'رفع صورة',
+    'upload_new_picture': 'رفع صورة جديدة',
     'date_of_birth': 'تاريخ الميلاد',
     'choose_date_of_birth': 'اختر تاريخ ميلاد التابع',
     'please_enter_dob': 'الرجاء إدخال تاريخ الميلاد',
@@ -739,6 +750,7 @@ class Locales {
     'enter_the_verification_code_here': 'ادخل رمز التحقق هنا',
     'please_enter_the_verification_code': 'الرجاء إدخال رمز التحقق',
     'profile_edited_succesfully': 'تم تعديل بيانات الملف الشخصي بنجاح',
+    'dependent_edited_successfully': 'تم تعديل التابع بنجاح',
     'wanna_back': 'هل أنت متأكد أنك تريد العودة؟',
     'wanna_out': 'هل أنت متأكد أنك تريد الخروج؟',
     'wanna_back_and_lose_data': 'هل أنت متأكد أنك تريد العودة وفقدان البيانات؟',

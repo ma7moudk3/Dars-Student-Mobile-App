@@ -1,7 +1,7 @@
-import '../../../../../generated/locales.g.dart';
-import '../../../../constants/exports.dart';
-import '../../../../routes/app_pages.dart';
-import '../../controllers/dependents_controller.dart';
+import '../../../../generated/locales.g.dart';
+import '../../../constants/exports.dart';
+import '../../../routes/app_pages.dart';
+import '../controllers/dependents_controller.dart';
 
 class NoDependentsWidget extends GetView<DependentsController> {
   const NoDependentsWidget({

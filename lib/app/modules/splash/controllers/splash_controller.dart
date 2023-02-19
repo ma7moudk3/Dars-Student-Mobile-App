@@ -19,12 +19,7 @@ class SplashController extends GetxController {
       scale.value = 1;
     });
     bool isTokenExpired = isAccessTokenExpired();
-    await Future.delayed(
-        Duration(
-            milliseconds: isTokenExpired
-                ? 1800
-                : 2000), // 200ms for the refreshToken request below :) just to be unnoticeable
-        () async {
+    await Future.delayed(const Duration(milliseconds: 2000), () async {
       if (CacheHelper.instance.getFirstTimeOpenedApp()) {
         await Get.offNamed(Routes.ONBOARDING);
       } else {

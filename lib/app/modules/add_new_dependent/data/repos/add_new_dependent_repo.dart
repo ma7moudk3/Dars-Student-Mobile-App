@@ -8,13 +8,14 @@ import '../../../../data/models/school_types/school_types.dart';
 import '../models/dependent/dependent.dart';
 
 abstract class AddNewDependentRepo {
-  Future<Dependent> addNewDependent({
+  Future<Dependent> addOrEditDependent({
     required String name,
     required int genderId,
     required String schoolName,
     String? details,
     required int relationId,
     required int levelId,
+    int? requesterId,
     required int schoolTypeId,
     int? id,
     File? image,

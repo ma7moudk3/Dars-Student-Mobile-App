@@ -137,41 +137,67 @@ class AddressWidget extends GetView<AddressesController> {
               ],
             ),
             const Spacer(),
-            GestureDetector(
-              onTap: () async {
-                await Get.dialog(
-                    Container(
-                      color: ColorManager.black.withOpacity(0.1),
-                      height: 140.h,
-                      width: 140.w,
-                      child: Center(
-                        child: Container(
-                          width: Get.width,
-                          margin: EdgeInsets.symmetric(
-                            horizontal: 18.w,
+            Row(
+              children: [
+                GestureDetector(
+                  onTap: () async {
+                    await Get.dialog(
+                        Container(
+                          color: ColorManager.black.withOpacity(0.1),
+                          height: 140.h,
+                          width: 140.w,
+                          child: Center(
+                            child: Container(
+                              width: Get.width,
+                              margin: EdgeInsets.symmetric(
+                                horizontal: 18.w,
+                              ),
+                              child: const DeleteAddressDialogContent(),
+                            ),
                           ),
-                          child: const DeleteAddressDialogContent(),
                         ),
+                        arguments: {
+                          "addressId": addressResult.address?.id ?? -1,
+                        });
+                  },
+                  child: Container(
+                    width: 40.w,
+                    height: 40.h,
+                    decoration: BoxDecoration(
+                      color: ColorManager.red.withOpacity(0.10),
+                      borderRadius: BorderRadius.circular(10),
+                    ),
+                    child: Center(
+                      child: SvgPicture.asset(
+                        ImagesManager.deleteIcon,
+                        color: ColorManager.red,
                       ),
                     ),
-                    arguments: {
-                      "addressId": addressResult.address?.id ?? -1,
-                    });
-              },
-              child: Container(
-                width: 40.w,
-                height: 40.h,
-                decoration: BoxDecoration(
-                  color: ColorManager.red.withOpacity(0.10),
-                  borderRadius: BorderRadius.circular(10),
-                ),
-                child: Center(
-                  child: SvgPicture.asset(
-                    ImagesManager.deleteIcon,
-                    color: ColorManager.red,
                   ),
                 ),
-              ),
+                SizedBox(width: 10.w),
+                GestureDetector(
+                  behavior: HitTestBehavior.opaque,
+                  onTap: () async => await Get.toNamed(
+                    Routes.EDIT_ADDRESS,
+                    arguments: addressResult,
+                  ),
+                  child: Container(
+                    width: 40.w,
+                    height: 40.h,
+                    decoration: BoxDecoration(
+                      color: ColorManager.primary.withOpacity(0.10),
+                      borderRadius: BorderRadius.circular(10),
+                    ),
+                    child: Center(
+                      child: Icon(
+                        Icons.edit_rounded,
+                        color: ColorManager.primary,
+                      ),
+                    ),
+                  ),
+                ),
+              ],
             ),
           ],
         ),

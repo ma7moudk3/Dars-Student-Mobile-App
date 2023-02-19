@@ -14,7 +14,7 @@ class HessaTeacherBrief extends GetView<TeacherDetailsController> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: const EdgeInsets.fromLTRB(13.0, 14.0, 14.0, 0.0),
+      padding: const EdgeInsets.fromLTRB(13.0, 14.0, 14.0, 14.0),
       decoration: BoxDecoration(
         color: ColorManager.white,
         borderRadius: BorderRadius.circular(14),

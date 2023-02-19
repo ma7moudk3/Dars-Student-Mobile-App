@@ -137,11 +137,12 @@ class AddNewDependentRepoImplement extends AddNewDependentRepo {
   }
 
   @override
-  Future<Dependent> addNewDependent({
+  Future<Dependent> addOrEditDependent({
     required String name,
     required int genderId,
     required String schoolName,
     String? details,
+    int? requesterId,
     required int relationId,
     required int levelId,
     required int schoolTypeId,
@@ -149,27 +150,37 @@ class AddNewDependentRepoImplement extends AddNewDependentRepo {
     File? image,
   }) async {
     Dependent dependent = Dependent();
+    if (requesterId == -1) {
+      requesterId = null;
+    }
     try {
       dynamic data = {
         "name": name,
         "genderId": genderId,
         "schoolName": schoolName,
         "details": details ?? "",
-        "requesterId": CacheHelper.instance.getCachedCurrentUserInfo() != null
-            ? CacheHelper.instance.getCachedCurrentUserInfo()!.result != null &&
-                    CacheHelper.instance
-                            .getCachedCurrentUserInfo()!
-                            .result!
-                            .id !=
-                        null
-                ? CacheHelper.instance.getCachedCurrentUserInfo()!.result!.id
-                : 0
-            : 0,
+        "requesterId": requesterId ??
+            (CacheHelper.instance.getCachedCurrentUserInfo() != null
+                ? CacheHelper.instance.getCachedCurrentUserInfo()!.result !=
+                            null &&
+                        CacheHelper.instance
+                                .getCachedCurrentUserInfo()!
+                                .result!
+                                .id !=
+                            null
+                    ? CacheHelper.instance
+                        .getCachedCurrentUserInfo()!
+                        .result!
+                        .id
+                    : 0
+                : 0),
         "relationId": relationId,
         "levelId": levelId,
         "schoolTypeId": schoolTypeId,
-        "id": id ?? 0,
       };
+      if (id != null) {
+        data["id"] = id;
+      }
       if (image != null) {
         String? fileToken = await _editProfileRepo.updateProfilePicture(
             image: image, isForStudent: true);

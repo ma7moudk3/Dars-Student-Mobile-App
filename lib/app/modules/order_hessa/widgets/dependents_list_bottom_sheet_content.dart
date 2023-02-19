@@ -260,29 +260,35 @@ class DependentsListBottomSheetContent extends GetView<OrderHessaController> {
                                               behavior: HitTestBehavior.opaque,
                                               onTap: () async {
                                                 await Get.dialog(
-                                                    Container(
-                                                      color: ColorManager.black
-                                                          .withOpacity(0.1),
-                                                      height: 140.h,
-                                                      width: 140.w,
-                                                      child: Center(
-                                                        child: Container(
-                                                          width: Get.width,
-                                                          margin: EdgeInsets
-                                                              .symmetric(
-                                                            horizontal: 18.w,
-                                                          ),
-                                                          child:
-                                                              const DeleteStudentDialogContent(),
+                                                  Container(
+                                                    color: ColorManager.black
+                                                        .withOpacity(0.1),
+                                                    height: 140.h,
+                                                    width: 140.w,
+                                                    child: Center(
+                                                      child: Container(
+                                                        width: Get.width,
+                                                        margin: EdgeInsets
+                                                            .symmetric(
+                                                          horizontal: 18.w,
+                                                        ),
+                                                        child:
+                                                            DeleteStudentDialogContent(
+                                                          deleteStudentFunction:
+                                                              () async {
+                                                            await controller
+                                                                .deleteStudent(
+                                                              studentId: student
+                                                                      .requesterStudent
+                                                                      ?.id ??
+                                                                  -1,
+                                                            );
+                                                          },
                                                         ),
                                                       ),
                                                     ),
-                                                    arguments: {
-                                                      "studentId": student
-                                                              .requesterStudent
-                                                              ?.id ??
-                                                          -1,
-                                                    });
+                                                  ),
+                                                );
                                               },
                                               child: Container(
                                                 width: 36.w,

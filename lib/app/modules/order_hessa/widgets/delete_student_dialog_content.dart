@@ -1,14 +1,14 @@
-import 'package:hessa_student/app/modules/order_hessa/controllers/order_hessa_controller.dart';
-
 import '../../../../../generated/locales.g.dart';
 import '../../../../../global_presentation/global_widgets/global_button.dart';
 import '../../../constants/exports.dart';
 
-class DeleteStudentDialogContent extends GetView<OrderHessaController> {
+class DeleteStudentDialogContent extends StatelessWidget {
   const DeleteStudentDialogContent({
     Key? key,
+    required this.deleteStudentFunction,
   }) : super(key: key);
 
+  final void Function() deleteStudentFunction;
   @override
   Widget build(BuildContext context) {
     return Material(
@@ -50,14 +50,10 @@ class DeleteStudentDialogContent extends GetView<OrderHessaController> {
                 PrimaryButton(
                   width: 142.w,
                   onPressed: () async {
-                    int studentId =
-                        Get.arguments != null ? Get.arguments["studentId"] : -1;
                     if (Get.isDialogOpen!) {
                       Get.back();
                     }
-                    await controller.deleteStudent(
-                      studentId: studentId,
-                    );
+                    deleteStudentFunction();
                   },
                   title: LocaleKeys.ok.tr,
                 ),

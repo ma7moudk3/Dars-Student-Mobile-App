@@ -20,6 +20,8 @@ import '../modules/dependents/bindings/dependents_binding.dart';
 import '../modules/dependents/views/dependents_view.dart';
 import '../modules/edit_address/bindings/edit_address_binding.dart';
 import '../modules/edit_address/views/edit_address_view.dart';
+import '../modules/edit_dependent/bindings/edit_dependent_binding.dart';
+import '../modules/edit_dependent/views/edit_dependent_view.dart';
 import '../modules/edit_profile/bindings/edit_profile_binding.dart';
 import '../modules/edit_profile/views/edit_profile_view.dart';
 import '../modules/forgot_password/bindings/forgot_password_binding.dart';
@@ -323,6 +325,11 @@ class AppPages {
       name: _Paths.EDIT_ADDRESS,
       page: () => const EditAddressView(),
       binding: EditAddressBinding(),
+    ),
+    GetPage(
+      name: _Paths.EDIT_DEPENDENT,
+      page: () => const EditDependentView(),
+      binding: EditDependentBinding(),
     ),
   ];
 }
