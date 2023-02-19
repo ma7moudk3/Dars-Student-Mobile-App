@@ -7,12 +7,7 @@ import '../../../data/cache_helper.dart';
 import '../../login/data/repos/login_repo.dart';
 
 class HomeController extends GetxController {
-  List<String> orders = [
-    "",
-    "",
-    "",
-    "",
-  ];
+  List<String> orders = [];
   CurrentUserInfo currentUserInfo =
       CacheHelper.instance.getCachedCurrentUserInfo() ?? CurrentUserInfo();
   CurrentUserProfileInfo currentUserProfileInfo =
@@ -39,7 +34,9 @@ class HomeController extends GetxController {
     await checkInternetConnection(timeout: 5).then((bool internetStatus) async {
       isInternetConnected.value = internetStatus;
       if (isInternetConnected.value) {
-        await Future.wait([_loginRepo.getCurrentUserProfilePicture()]).then(
+        await Future.wait([
+          _loginRepo.getCurrentUserProfilePicture(),
+        ]).then(
           (value) => isLoading.value = false,
         );
       }

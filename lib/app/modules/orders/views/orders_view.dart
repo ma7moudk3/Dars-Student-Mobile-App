@@ -16,6 +16,7 @@ class OrdersView extends GetView<OrdersController> {
     Get.put(() => OrdersController());
     return Scaffold(
       appBar: CustomAppBar(
+        readNotification: true,
         title: LocaleKeys.my_orders,
         action: GestureDetector(
           behavior: HitTestBehavior.opaque,

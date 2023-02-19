@@ -19,7 +19,9 @@ class HomeView extends GetView<HomeController> {
     Get.put(() => HomeController());
     return Scaffold(
       resizeToAvoidBottomInset: false,
-      appBar: const CustomAppBar(),
+      appBar: const CustomAppBar(
+        readNotification: true,
+      ),
       body: SafeArea(
         child: RefreshIndicator(
           color: ColorManager.white,

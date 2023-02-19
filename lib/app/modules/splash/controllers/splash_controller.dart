@@ -3,6 +3,7 @@ import 'package:hessa_student/app/core/helper_functions.dart';
 import 'package:hessa_student/app/data/cache_helper.dart';
 import 'package:hessa_student/app/modules/splash/data/repos/splash_repo.dart';
 import 'package:hessa_student/app/modules/splash/data/repos/splash_repo_implement.dart';
+import 'package:intl/intl.dart';
 
 import '../../../routes/app_pages.dart';
 import '../data/models/user_token/user_token.dart';
@@ -29,6 +30,10 @@ class SplashController extends GetxController {
               if (userToken.result != null &&
                   userToken.result!.accessToken != null &&
                   CacheHelper.instance.getRefreshToken().isNotEmpty) {
+                await CacheHelper.instance.setLoginTime(
+                    DateFormat('yyyy-MM-dd HH:mm:ss').format(DateTime.now()));
+                await CacheHelper.instance.setTokenExpirationSeconds(
+                    userToken.result?.expireInSeconds ?? 0);
                 if (CacheHelper.instance.getIsEmailConfirmed() &&
                     CacheHelper.instance.getIsPhoneConfirmed()) {
                   await Get.offNamed(Routes.BOTTOM_NAV_BAR);

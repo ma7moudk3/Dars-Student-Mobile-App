@@ -15,6 +15,10 @@ class Links {
       'api/services/app/Profile/ActivateEmail';
   static const String verifyOTPCodeMobile =
       'api/services/app/Profile/ActivateMobile';
+  static const String getAllNotifications =
+      'api/services/app/Notification/GetUserNotifications';
+  static const String setAllNotificationsAsRead =
+      'api/services/app/Notification/SetAllNotificationsAsRead';
   static const String sendResetPasswordCode =
       "api/services/app/Account/SendPasswordResetCode";
   static const String profileImageById = "Profile/GetUserProfilePictureByUser";
@@ -28,8 +32,7 @@ class Links {
   static const String sendFCMToken = "api/services/app/Account/UpdateFcmToken";
   static const String getMyOrders =
       "api/services/app/Orders/GetMyOrderForRequester";
-  static const String refreshToken =
-      "api/TokenAuth/RefreshToken";
+  static const String refreshToken = "api/TokenAuth/RefreshToken";
   static const String getAllHessaTeachers =
       "api/services/app/Providers/GetSearchForProviders";
   static const String getHessaTeacher =

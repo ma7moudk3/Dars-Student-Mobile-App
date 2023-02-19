@@ -16,7 +16,7 @@ import '../data/repos/dependents_repo.dart';
 import '../data/repos/dependents_repo_implement.dart';
 
 class DependentsController extends GetxController {
-  RxBool isInternetConnected = true.obs, isLoading = true.obs;
+  RxBool isInternetConnected = true.obs;
   final OrderHessaRepo _orderHessaRepo = OrderHessaRepoImplement();
   final DependentsRepo _dependentsRepo = DependentsRepoImplement();
   static const _pageSize = 6; // 6 students per page

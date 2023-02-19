@@ -1,4 +1,5 @@
 import '../../../constants/exports.dart';
+import '../../../core/helper_functions.dart';
 
 class NotificationWidget extends StatelessWidget {
   NotificationWidget({
@@ -52,12 +53,15 @@ class NotificationWidget extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 SizedBox(
-                  width: 240.w,
+                  width: 220.w,
                   child: PrimaryText(
                     title,
                     fontWeight: FontWeightManager.softLight,
                     fontSize: 14.sp,
                     maxLines: 2,
+                    textDirection: detectLang(text: title)
+                        ? TextDirection.ltr
+                        : TextDirection.rtl,
                     overflow: TextOverflow.ellipsis,
                   ),
                 ),

@@ -16,6 +16,7 @@ class MessagesView extends GetView<MessagesController> {
     return Scaffold(
       appBar: const CustomAppBar(
         title: LocaleKeys.messages,
+        readNotification: true,
       ),
       body: SafeArea(
         child:

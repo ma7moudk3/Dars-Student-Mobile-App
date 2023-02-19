@@ -46,7 +46,8 @@ class OrderHessaController extends GetxController {
   final GlobalKey<FormState> formKey = GlobalKey<FormState>();
   int sessionWay = 0; // 0 face-to-face, 1 electronic, 2 both
   int hessaCategory = 0; // 0 academic learning, 1 skills
-  int teacherGender = 0; // 0 male, 1 female, 2 both
+  int teacherGender =
+      0; // 1 male, 2 female, 3 both , starts from zero just for the sake of the UI
   int orderType = 0; // 0 one hessa, 1 school package
   static const _pageSize = 3; // 3 students per page >> student = dependent
   final DependentsRepo _dependentsRepo = DependentsRepoImplement();
@@ -89,6 +90,61 @@ class OrderHessaController extends GetxController {
     hessaDateController.text =
         DateFormat("dd MMMM yyyy", "ar_SA").format(hessaDate.value);
     update();
+  }
+
+  Future addNewOrderHessa() async {
+    showLoadingDialog();
+    List<int> selectedTopicsOrSkills = [];
+    if (hessaCategory == 0) {
+      // academic learning
+      if (topics.result != null) {
+        selectedTopicsOrSkills = topics.result!
+            .where((topic.Result element) =>
+                selectedTopics.contains(element.displayName))
+            .map((topic.Result topic) => topic.id ?? -1)
+            .toList();
+      }
+      selectedTopicsOrSkills.removeWhere((int element) => element == -1);
+    } else {
+      if (skills.result != null && skills.result!.items != null) {
+        selectedTopicsOrSkills = skills.result!.items!
+            .where((skill.Item skill) =>
+                selectedSkills.contains(skill.displayName))
+            .map((skill.Item skill) => skill.id ?? -1)
+            .toList();
+      }
+      selectedTopicsOrSkills.removeWhere((int element) => element == -1);
+    }
+    await _orderHessaRepo
+        .addOrEditOrderHessa(
+      addressId: selectedAddress?.address?.id ?? -1,
+      orderStudentsIDs: selectedStudents
+          .map((Student student) => student.requesterStudent?.id ?? -1)
+          .toList(),
+      orderTopicsOrSkillsIDs: selectedTopicsOrSkills,
+      sessionTypeId: sessionWay,
+      productId:
+          orderType == 0 ? 41 : 19, // 41 for one hessa, 19 for school package
+      targetGenderId: teacherGender + 1,
+      preferredStartDate: hessaDateRangeController.selectedDate.toString(),
+      preferredProviderId: chosenTeacher?.userId ?? -1,
+      notes: notesController.text,
+    )
+        .then((int statusCode) async {
+      if (statusCode == 200) {
+        if (Get.isDialogOpen!) {
+          Get.back();
+        }
+        await Future.delayed(const Duration(milliseconds: 550))
+            .then((value) async {
+          Get.back();
+          CustomSnackBar.showCustomSnackBar(
+            title: LocaleKeys.success.tr,
+            message: LocaleKeys.address_added_successfully.tr,
+          );
+        });
+      }
+    });
   }
 
   void selectStudent(Student studentItem, bool isChecked) {

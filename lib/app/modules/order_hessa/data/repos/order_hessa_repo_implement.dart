@@ -1,6 +1,5 @@
 import 'dart:developer';
 
-import 'package:get/get_utils/src/extensions/export.dart';
 import 'package:hessa_student/app/data/models/topics/topics.dart';
 import 'package:hessa_student/app/data/models/skills/skills.dart';
 import 'package:hessa_student/app/data/models/classes/classes.dart';
@@ -8,6 +7,7 @@ import 'package:hessa_student/app/modules/order_hessa/data/repos/order_hessa_rep
 
 import '../../../../../generated/locales.g.dart';
 import '../../../../../global_presentation/global_widgets/custom_snack_bar.dart';
+import '../../../../constants/exports.dart';
 import '../../../../constants/links.dart';
 import '../../../../data/cache_helper.dart';
 import '../../../../data/network_helper/dio_helper.dart';
@@ -105,7 +105,7 @@ class OrderHessaRepoImplement extends OrderHessaRepo {
     required int targetGenderId,
     String? notes,
     required String preferredStartDate,
-    required String preferredEndDate,
+    String? preferredEndDate,
     required int sessionTypeId,
     required int productId,
     int? providerId,
@@ -128,15 +128,29 @@ class OrderHessaRepoImplement extends OrderHessaRepo {
         "actualCost": 0,
         "totalPayments": 0,
         "preferredStartDate": preferredStartDate,
-        "preferredEndDate": preferredEndDate,
         "sessionTypeId": sessionTypeId,
         "productId": productId,
         "providerId": 0, // all
-        "requesterId": 0,
+        "requesterId": (CacheHelper.instance.getCachedCurrentUserInfo() != null
+            ? CacheHelper.instance.getCachedCurrentUserInfo()!.result != null &&
+                    CacheHelper.instance
+                            .getCachedCurrentUserInfo()!
+                            .result!
+                            .id !=
+                        null
+                ? CacheHelper.instance.getCachedCurrentUserInfo()!.result!.id
+                : 0
+            : 0),
         "addressId": addressId,
         "orderStudentId": orderStudentsIDs,
         "orderTopicOrSkillId": orderTopicsOrSkillsIDs,
       };
+      if (preferredEndDate != null) {
+        data["preferredEndDate"] = preferredEndDate;
+      }
+      if (preferredProviderId != null) {
+        data["preferredProviderId"] = preferredProviderId;
+      }
       if (paymentMethodId != null) {
         data["paymentMethodId"] = paymentMethodId;
       }
@@ -165,12 +179,19 @@ class OrderHessaRepoImplement extends OrderHessaRepo {
       };
       await DioHelper.post(
         headers: headers,
+        data: data,
         Links.addOrEditOrderHessa,
         onSuccess: (response) {
           statusCode = response.statusCode ?? 200;
+          if (Get.isDialogOpen!) {
+            Get.back();
+          }
         },
         onError: (error) {
           statusCode = error.response?.statusCode ?? 200;
+          if (Get.isDialogOpen!) {
+            Get.back();
+          }
           CustomSnackBar.showCustomErrorSnackBar(
             title: LocaleKeys.error.tr,
             message: error.message,
@@ -179,6 +200,9 @@ class OrderHessaRepoImplement extends OrderHessaRepo {
       );
     } catch (e) {
       log("addOrEditOrderHessa error $e");
+      if (Get.isDialogOpen!) {
+        Get.back();
+      }
     }
     return statusCode;
   }

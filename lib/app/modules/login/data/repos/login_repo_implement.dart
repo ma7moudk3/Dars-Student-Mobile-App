@@ -2,6 +2,7 @@ import 'dart:developer';
 
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:hessa_student/app/modules/login/data/models/login_info/login_info.dart';
+import 'package:intl/intl.dart';
 
 import '../../../../../generated/locales.g.dart';
 import '../../../../../global_presentation/global_widgets/custom_snack_bar.dart';
@@ -25,6 +26,7 @@ class LoginRepoImplement extends LoginRepo {
     Map<String, dynamic> data = {
       "userNameOrEmailAddress": login,
       "password": password,
+      "userType": 2 // student
     };
     if (token != null) {
       data['fcmtoken'] = token;
@@ -34,6 +36,10 @@ class LoginRepoImplement extends LoginRepo {
       statusCode = response.statusCode ?? 200;
       LoginInfo loginInfo = LoginInfo.fromJson(response.data);
       await CacheHelper.instance.setAuthed(true);
+      await CacheHelper.instance.setLoginTime(
+          DateFormat('yyyy-MM-dd HH:mm:ss').format(DateTime.now()));
+      await CacheHelper.instance
+          .setTokenExpirationSeconds(loginInfo.result?.expireInSeconds ?? 0);
       await CacheHelper.instance
           .setAccessToken(loginInfo.result?.accessToken ?? '');
       await CacheHelper.instance
