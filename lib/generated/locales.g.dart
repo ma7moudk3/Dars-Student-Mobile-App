@@ -814,7 +814,7 @@ class Locales {
     'choose': 'اختر',
     'academic_learning': 'تعليم الأكاديمي',
     'looks_like_the_server_is_taking_to_long_to_respond_please_try_again_in_sometime':
-        'يبدو أن الخادم يستغرق وقتًا طويلاً للرد ، يرجى المحاولة مرة أخرى في وقت لاحق',
+        'السيرفر يستغرق وقتًا طويلاً للرد ، يرجى المحاولة في وقت لاحق',
     'skill': 'مهارة',
     'data_entry_error': 'خطأ في إدخال البيانات',
     'choose_skill': 'اختر المهارة',
