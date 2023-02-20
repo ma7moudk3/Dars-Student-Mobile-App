@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_chat_types/flutter_chat_types.dart' as types;
+import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:hessa_student/global_presentation/global_features/color_manager.dart';
 
 import '../../models/input_clear_mode.dart';
 import '../../models/send_button_visibility_mode.dart';
@@ -135,7 +137,7 @@ class _InputState extends State<Input> {
     final buttonPadding = InheritedChatTheme.of(context)
         .theme
         .inputPadding
-        .copyWith(left: 16, right: 16);
+        .copyWith(left: 5, right: 5, top: 5, bottom: 5);
     final safeAreaInsets = isMobile
         ? EdgeInsets.fromLTRB(
             query.padding.left,
@@ -149,11 +151,11 @@ class _InputState extends State<Input> {
         .inputPadding
         .copyWith(left: 0, right: 0)
         .add(
-          EdgeInsets.fromLTRB(
-            widget.onAttachmentPressed != null ? 0 : 24,
+          const EdgeInsets.fromLTRB(
             0,
-            _sendButtonVisible ? 0 : 24,
-            0,
+            16,
+            16,
+            16,
           ),
         );
 
@@ -163,76 +165,88 @@ class _InputState extends State<Input> {
         padding: InheritedChatTheme.of(context).theme.inputMargin,
         child: Material(
           borderRadius: InheritedChatTheme.of(context).theme.inputBorderRadius,
-          color: InheritedChatTheme.of(context).theme.inputBackgroundColor,
-          child: Container(
-            decoration:
-                InheritedChatTheme.of(context).theme.inputContainerDecoration,
-            padding: safeAreaInsets,
-            child: Row(
-              textDirection: TextDirection.ltr,
-              children: [
-                if (widget.onAttachmentPressed != null)
-                  AttachmentButton(
-                    isLoading: widget.isAttachmentUploading ?? false,
-                    onPressed: widget.onAttachmentPressed,
-                    padding: buttonPadding,
-                  ),
-                Expanded(
-                  child: Padding(
-                    padding: textPadding,
-                    child: TextField(
-                      controller: _textController,
-                      cursorColor: InheritedChatTheme.of(context)
-                          .theme
-                          .inputTextCursorColor,
-                      decoration: InheritedChatTheme.of(context)
-                          .theme
-                          .inputTextDecoration
-                          .copyWith(
-                            hintStyle: InheritedChatTheme.of(context)
-                                .theme
-                                .inputTextStyle
-                                .copyWith(
-                                  color: InheritedChatTheme.of(context)
-                                      .theme
-                                      .inputTextColor
-                                      .withOpacity(0.5),
-                                ),
-                            hintText:
-                                InheritedL10n.of(context).l10n.inputPlaceholder,
-                          ),
-                      focusNode: _inputFocusNode,
-                      keyboardType: TextInputType.multiline,
-                      maxLines: 5,
-                      minLines: 1,
-                      onChanged: widget.options.onTextChanged,
-                      onTap: widget.options.onTextFieldTap,
-                      style: InheritedChatTheme.of(context)
-                          .theme
-                          .inputTextStyle
-                          .copyWith(
-                            color: InheritedChatTheme.of(context)
-                                .theme
-                                .inputTextColor,
-                          ),
-                      textCapitalization: TextCapitalization.sentences,
+          color: ColorManager.transparent,
+          child: Row(
+            textDirection: TextDirection.ltr,
+            children: [
+              if (widget.onAttachmentPressed != null)
+                AttachmentButton(
+                  isLoading: widget.isAttachmentUploading ?? false,
+                  onPressed: widget.onAttachmentPressed,
+                  padding: buttonPadding,
+                ),
+              Expanded(
+                child: Container(
+                  decoration: BoxDecoration(
+                    borderRadius:
+                        InheritedChatTheme.of(context).theme.inputBorderRadius,
+                    border: Border.all(
+                      color: ColorManager.primary,
+                      width: 2,
                     ),
                   ),
-                ),
-                ConstrainedBox(
-                  constraints: BoxConstraints(
-                    minHeight: buttonPadding.bottom + buttonPadding.top + 24,
+                  padding: EdgeInsets.only(
+                      top: _sendButtonVisible ? 8.5.h : 16.h,
+                      bottom: _sendButtonVisible ? 8.5.h : 16.h,
+                      right: 16.w,
+                      left: 16.w),
+                  child: TextField(
+                    controller: _textController,
+                    cursorColor: InheritedChatTheme.of(context)
+                        .theme
+                        .inputTextCursorColor,
+                    decoration: InheritedChatTheme.of(context)
+                        .theme
+                        .inputTextDecoration
+                        .copyWith(
+                          hintStyle: InheritedChatTheme.of(context)
+                              .theme
+                              .inputTextStyle
+                              .copyWith(
+                                color: InheritedChatTheme.of(context)
+                                    .theme
+                                    .inputTextColor
+                                    .withOpacity(0.5),
+                              ),
+                          hintText:
+                              InheritedL10n.of(context).l10n.inputPlaceholder,
+                          suffixIcon: _sendButtonVisible
+                              ? Container(
+                                  padding: EdgeInsets.only(
+                                      right: 5.w, top: 5.h, bottom: 5.h),
+                                  child: GestureDetector(
+                                    behavior: HitTestBehavior.opaque,
+                                    onTap: _handleSendPressed,
+                                    child: InheritedChatTheme.of(context)
+                                        .theme
+                                        .sendButtonIcon,
+                                  ),
+                                )
+                              : null,
+                          suffixIconConstraints: const BoxConstraints(
+                            minHeight: 35,
+                            minWidth: 35,
+                          ),
+                        ),
+                    focusNode: _inputFocusNode,
+                    keyboardType: TextInputType.multiline,
+                    maxLines: 5,
+                    minLines: 1,
+                    onChanged: widget.options.onTextChanged,
+                    onTap: widget.options.onTextFieldTap,
+                    style: InheritedChatTheme.of(context)
+                        .theme
+                        .inputTextStyle
+                        .copyWith(
+                          color: InheritedChatTheme.of(context)
+                              .theme
+                              .inputTextColor,
+                        ),
+                    textCapitalization: TextCapitalization.sentences,
                   ),
-                  child: Visibility(
-                    visible: _sendButtonVisible,
-                    child: SendButton(
-                      onPressed: _handleSendPressed,
-                      padding: buttonPadding,
-                    ),
-                  ),
                 ),
-              ],
-            ),
+              ),
+            ],
           ),
         ),
       ),

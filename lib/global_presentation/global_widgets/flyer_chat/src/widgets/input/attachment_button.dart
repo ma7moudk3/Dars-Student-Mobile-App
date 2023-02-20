@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:hessa_student/global_presentation/global_features/color_manager.dart';
 
 import '../state/inherited_chat_theme.dart';
 import '../state/inherited_l10n.dart';
@@ -33,25 +34,25 @@ class AttachmentButton extends StatelessWidget {
             ),
         child: IconButton(
           constraints: const BoxConstraints(
-            minHeight: 24,
-            minWidth: 24,
+            minHeight: 40,
+            minWidth: 40,
           ),
           icon: isLoading
               ? SizedBox(
-                  height: 20,
-                  width: 20,
+                  height: 40,
+                  width: 40,
                   child: CircularProgressIndicator(
                     backgroundColor: Colors.transparent,
                     strokeWidth: 1.5,
                     valueColor: AlwaysStoppedAnimation<Color>(
-                      InheritedChatTheme.of(context).theme.inputTextColor,
+                      ColorManager.primary,
                     ),
                   ),
                 )
               : InheritedChatTheme.of(context).theme.attachmentButtonIcon ??
                   Image.asset(
                     'assets/images/flyer_chat/icon-attachment.png',
-                    color: InheritedChatTheme.of(context).theme.inputTextColor,
+                    color: ColorManager.borderColor2,
                   ),
           onPressed: isLoading ? null : onPressed,
           padding: padding,

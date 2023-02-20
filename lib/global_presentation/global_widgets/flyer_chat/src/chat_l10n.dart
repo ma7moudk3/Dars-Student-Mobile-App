@@ -43,7 +43,7 @@ class ChatL10nAr extends ChatL10n {
     super.attachmentButtonAccessibilityLabel = 'إرسال الوسائط',
     super.emptyChatPlaceholder = 'لا يوجد رسائل هنا بعد',
     super.fileButtonAccessibilityLabel = 'ملف',
-    super.inputPlaceholder = 'الرسالة',
+    super.inputPlaceholder = 'نص الرسالة',
     super.sendButtonAccessibilityLabel = 'إرسال',
     super.unreadMessagesLabel = 'الرسائل غير المقروءة',
   });

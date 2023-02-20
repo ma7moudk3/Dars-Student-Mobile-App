@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import '../state/inherited_chat_theme.dart';
 import '../state/inherited_l10n.dart';
@@ -23,9 +24,9 @@ class SendButton extends StatelessWidget {
         margin: InheritedChatTheme.of(context).theme.sendButtonMargin ??
             const EdgeInsetsDirectional.fromSTEB(0, 0, 8, 0),
         child: IconButton(
-          constraints: const BoxConstraints(
-            minHeight: 24,
-            minWidth: 24,
+          constraints: BoxConstraints(
+            minHeight: 35.h,
+            minWidth: 35.w,
           ),
           icon: InheritedChatTheme.of(context).theme.sendButtonIcon ??
               Image.asset(
