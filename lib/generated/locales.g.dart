@@ -202,6 +202,9 @@ class LocaleKeys {
   static const teacher_gender = 'teacher_gender';
   static const order_type = 'order_type';
   static const please_select_image = 'please_select_image';
+  static const image_saved = 'image_saved';
+  static const copy_message = 'copy_message';
+  static const message_copied_succesfully = 'message_copied_succesfully';
   static const please_select_class = 'please_select_class';
   static const please_select_subject = 'please_select_subject';
   static const one_hessa = 'one_hessa';
@@ -407,9 +410,13 @@ class LocaleKeys {
   static const data_entry_error = 'data_entry_error';
   static const choose_skill = 'choose_skill';
   static const search_results = 'search_results';
+  static const delete_message = 'delete_message';
   static const most_requested = 'most_requested';
+  static const download_image = 'download_image';
   static const brief = 'brief';
   static const about_teacher = 'about_teacher';
+  static const read_more = 'read_more';
+  static const read_less = 'read_less';
   static const password_changed_successfully = 'password_changed_successfully';
   static const education_level = 'education_level';
   static const major = 'major';
@@ -615,6 +622,9 @@ class Locales {
     'teacher_gender': 'جنس المدرّس المطلوب',
     'order_type': 'نوع الطلب المراد',
     'please_select_image': 'الرجاء اختيار صورة',
+    'image_saved': 'تم حفظ الصورة بنجاح',
+    'copy_message': 'نسخ الرسالة',
+    'message_copied_succesfully': 'تم نسخ الرسالة بنجاح',
     'please_select_class': 'الرجاء اختيار الصف الدراسي',
     'please_select_subject': 'الرجاء اختيار المادة الدراسية',
     'one_hessa': 'حصة واحدة',
@@ -819,9 +829,13 @@ class Locales {
     'data_entry_error': 'خطأ في إدخال البيانات',
     'choose_skill': 'اختر المهارة',
     'search_results': 'نتائج البحث',
+    'delete_message': 'حذف الرسالة',
     'most_requested': 'الأكثر طلباً',
+    'download_image': 'تحميل الصورة',
     'brief': 'نُبذة',
     'about_teacher': 'عن المدرس',
+    'read_more': 'رؤية المزيد',
+    'read_less': 'رؤية أقل',
     'password_changed_successfully': 'تم تغيير كلمة المرور بنجاح',
     'education_level': 'المستوى التعليمي',
     'major': 'التخصص',
