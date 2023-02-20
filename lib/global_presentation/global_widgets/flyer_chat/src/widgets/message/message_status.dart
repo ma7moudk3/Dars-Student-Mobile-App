@@ -22,25 +22,22 @@ class MessageStatus extends StatelessWidget {
         return InheritedChatTheme.of(context).theme.deliveredIcon != null
             ? InheritedChatTheme.of(context).theme.deliveredIcon!
             : Image.asset(
-                'assets/icon-delivered.png',
+                'assets/images/flyer_chat/icon-delivered.png',
                 color: InheritedChatTheme.of(context).theme.primaryColor,
-                package: 'flutter_chat_ui',
               );
       case types.Status.error:
         return InheritedChatTheme.of(context).theme.errorIcon != null
             ? InheritedChatTheme.of(context).theme.errorIcon!
             : Image.asset(
-                'assets/icon-error.png',
+                'assets/images/flyer_chat/icon-error.png',
                 color: InheritedChatTheme.of(context).theme.errorColor,
-                package: 'flutter_chat_ui',
               );
       case types.Status.seen:
         return InheritedChatTheme.of(context).theme.seenIcon != null
             ? InheritedChatTheme.of(context).theme.seenIcon!
             : Image.asset(
-                'assets/icon-seen.png',
+                'assets/images/flyer_chat/icon-seen.png',
                 color: InheritedChatTheme.of(context).theme.primaryColor,
-                package: 'flutter_chat_ui',
               );
       case types.Status.sending:
         return InheritedChatTheme.of(context).theme.sendingIcon != null
