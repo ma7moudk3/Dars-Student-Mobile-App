@@ -128,6 +128,10 @@ class LoginRepoImplement extends LoginRepo {
       await CacheHelper.instance.setAuthed(true);
       await CacheHelper.instance
           .setAccessToken(loginInfo.result!.accessToken ?? "");
+                await CacheHelper.instance.setLoginTime(
+          DateFormat('yyyy-MM-dd HH:mm:ss').format(DateTime.now()));
+      await CacheHelper.instance
+          .setTokenExpirationSeconds(loginInfo.result?.expireInSeconds ?? 0);
       await CacheHelper.instance
           .setEncryptedToken(loginInfo.result!.encryptedAccessToken ?? "");
       await CacheHelper.instance
@@ -201,6 +205,10 @@ class LoginRepoImplement extends LoginRepo {
           .setAccessToken(loginInfo.result!.accessToken ?? "");
       await CacheHelper.instance
           .setEncryptedToken(loginInfo.result!.encryptedAccessToken ?? "");
+                await CacheHelper.instance.setLoginTime(
+          DateFormat('yyyy-MM-dd HH:mm:ss').format(DateTime.now()));
+      await CacheHelper.instance
+          .setTokenExpirationSeconds(loginInfo.result?.expireInSeconds ?? 0);
       await CacheHelper.instance
           .setRefreshToken(loginInfo.result!.refreshToken ?? "");
       await CacheHelper.instance.setUserId(loginInfo.result!.userId ?? -1);
