@@ -1,5 +1,7 @@
 class RequesterStudent {
   String? name;
+  String? requesterStudentPhoto;
+  String? requesterStudentPhotoFileName;
   int? genderId;
   String? schoolName;
   String? details;
@@ -12,6 +14,8 @@ class RequesterStudent {
 
   RequesterStudent({
     this.name,
+    this.requesterStudentPhoto,
+    this.requesterStudentPhotoFileName,
     this.genderId,
     this.schoolName,
     this.details,
@@ -26,6 +30,8 @@ class RequesterStudent {
   factory RequesterStudent.fromJson(Map<String, dynamic> json) {
     return RequesterStudent(
       name: json['name'] as String?,
+      requesterStudentPhoto: json['requesterStudentPhoto'] as String?,
+      requesterStudentPhotoFileName: json['requesterStudentPhotoFileName'] as String?,
       genderId: json['genderId'] as int?,
       schoolName: json['schoolName'] as String?,
       details: json['details'] as String?,
@@ -40,6 +46,8 @@ class RequesterStudent {
 
   Map<String, dynamic> toJson() => {
         'name': name,
+        'requesterStudentPhoto': requesterStudentPhoto,
+        'requesterStudentPhotoFileName': requesterStudentPhotoFileName,
         'genderId': genderId,
         'schoolName': schoolName,
         'details': details,

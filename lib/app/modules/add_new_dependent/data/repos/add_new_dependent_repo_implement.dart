@@ -182,9 +182,12 @@ class AddNewDependentRepoImplement extends AddNewDependentRepo {
         data["id"] = id;
       }
       if (image != null) {
-        String? fileToken = await _editProfileRepo.updateProfilePicture(
-            image: image, isForStudent: true);
         String fileName = image.path.split("/").last;
+        String? fileToken = await _editProfileRepo.updateProfilePicture(
+          image: image,
+          isForStudent: true,
+          fileName: fileName,
+        );
         if (fileToken != null) {
           data["requesterStudentPhotoToken"] = fileToken;
           data["requesterStudentPhotoFileName"] = fileName;

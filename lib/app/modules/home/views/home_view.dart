@@ -177,22 +177,20 @@ class HomeView extends GetView<HomeController> {
                                         SizedBox(height: 20.h),
                                         ListView.builder(
                                           itemCount: controller
-                                                  .recentHessaOrders.length +
-                                              1,
+                                              .recentHessaOrders.length,
                                           shrinkWrap: true,
                                           physics:
                                               const NeverScrollableScrollPhysics(),
                                           itemBuilder: (BuildContext context,
                                               int index) {
-                                            if (index ==
-                                                controller
-                                                    .recentHessaOrders.length) {
-                                              return SizedBox(height: 20.h);
-                                            }
                                             return OrderWidget(
-                                                isFirst: index == 0);
+                                              isFirst: index == 0,
+                                              hessaOrder: controller
+                                                  .recentHessaOrders[index],
+                                            );
                                           },
                                         ),
+                                        SizedBox(height: 20.h)
                                       ],
                                     );
                                   }

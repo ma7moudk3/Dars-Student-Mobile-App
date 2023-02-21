@@ -21,7 +21,7 @@ class HessaTeacherWidget extends GetView<HessaTeachersController> {
     String teacherId = teacher.runtimeType == HessaTeacher
         ? teacher.userId.toString()
         : (teacher.preferredProvider != null
-            ? teacher.preferredProvider!.providerId.toString()
+            ? teacher.preferredProvider!.providerUserId.toString()
             : "");
     String teacherName = teacher.runtimeType == HessaTeacher
         ? teacher.name ?? ""

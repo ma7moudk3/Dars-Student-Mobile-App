@@ -388,6 +388,19 @@ class LocaleKeys {
   static const explore_hessa_teachers = 'explore_hessa_teachers';
   static const participant_students = 'participant_students';
   static const teacher = 'teacher';
+  static const january = 'january';
+  static const february = 'february';
+  static const march = 'march';
+  static const april = 'april';
+  static const may = 'may';
+  static const june = 'june';
+  static const july = 'july';
+  static const august = 'august';
+  static const september = 'september';
+  static const october = 'october';
+  static const november = 'november';
+  static const december = 'december';
+  static const participants = 'participants';
   static const cancel_hessa = 'cancel_hessa';
   static const please_enter_cvv = 'please_enter_cvv';
   static const cvv_is_invalid = 'cvv_is_invalid';
@@ -809,6 +822,19 @@ class Locales {
     'explore_hessa_teachers': 'استكشف معلمين حصة',
     'participant_students': 'الطلاب المشاركين',
     'teacher': 'المدرس',
+    'january': 'يناير',
+    'february': 'فبراير',
+    'march': 'مارس',
+    'april': 'أبريل',
+    'may': 'مايو',
+    'june': 'يونيو',
+    'july': 'يوليو',
+    'august': 'أغسطس',
+    'september': 'سبتمبر',
+    'october': 'أكتوبر',
+    'november': 'نوفمبر',
+    'december': 'ديسمبر',
+    'participants': 'مشاركين',
     'cancel_hessa': 'إلغاء الحصة',
     'please_enter_cvv': 'أدخل CVV',
     'cvv_is_invalid': 'CVV غير صالح',

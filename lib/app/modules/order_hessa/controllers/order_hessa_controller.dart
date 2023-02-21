@@ -430,6 +430,7 @@ class OrderHessaController extends GetxController {
       } else {
         hessaDateErrorIconColor = null;
       }
+      // 2023-02-21T08:40:00 is in the format: yyyy-MM-ddTHH:mm:ss
     } else {
       hessaDateErrorIconColor = Colors.red;
       update();

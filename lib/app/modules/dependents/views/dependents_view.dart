@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:hessa_student/app/modules/dependents/data/models/student/student.dart';
@@ -160,7 +162,8 @@ class DependentsView extends GetView<DependentsController> {
                             itemBuilder: (BuildContext context, Student student,
                                 int index) {
                               String studentPicture =
-                                  "${Links.baseLink}${Links.profileImageById}?userId=${student.requesterStudent?.id ?? -1}";
+                                  "${Links.baseLink}${Links.nonUsersProfileImageByToken}?id=${student.requesterStudent?.requesterStudentPhoto}";
+                              log(studentPicture);
                               return GestureDetector(
                                 behavior: HitTestBehavior.opaque,
                                 onTap: () async {

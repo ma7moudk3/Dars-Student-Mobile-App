@@ -1,5 +1,6 @@
 class Links {
-  static const String baseLink = 'https://api.hessaedu.com/';
+  // static const String baseLink = 'https://api.hessaedu.com/';
+  static const String baseLink = 'http://192.168.10.167:8055/';
   static const String register = 'api/services/app/Account/Register';
   static const String login = 'api/TokenAuth/Authenticate';
   static const String logout = 'api/TokenAuth/LogOut';
@@ -22,6 +23,7 @@ class Links {
   static const String sendResetPasswordCode =
       "api/services/app/Account/SendPasswordResetCode";
   static const String profileImageById = "Profile/GetUserProfilePictureByUser";
+  static const String nonUsersProfileImageByToken = "File/DownloadBinaryFile";
   static const String userProfileImage =
       "api/services/app/Profile/GetProfilePicture";
   static const String updateProfileData =

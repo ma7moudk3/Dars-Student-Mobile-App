@@ -64,6 +64,8 @@ class OrdersView extends GetView<OrdersController> {
                       child: GetBuilder<OrdersController>(
                           builder: (OrdersController controller) {
                         return PagedListView<int, HessaOrder>(
+                          padding: EdgeInsets.symmetric(
+                              horizontal: 5.w, vertical: 4.h),
                           pagingController: controller.pagingController,
                           builderDelegate:
                               PagedChildBuilderDelegate<HessaOrder>(
@@ -154,24 +156,16 @@ class OrdersView extends GetView<OrdersController> {
                             },
                             itemBuilder: (BuildContext context,
                                 HessaOrder order, int index) {
-                              return OrderWidget(isFirst: index == 0);
+                              return OrderWidget(
+                                isFirst: index == 0,
+                                hessaOrder: order,
+                              );
                             },
                           ),
                         );
                       }),
                     ),
                     SizedBox(height: 20.h),
-                    // ListView.builder(
-                    //   itemCount: 9 + 1,
-                    //   shrinkWrap: true,
-                    //   physics: const NeverScrollableScrollPhysics(),
-                    //   itemBuilder: (BuildContext context, int index) {
-                    //     if (index == 9) {
-                    //       return SizedBox(height: 20.h);
-                    //     }
-                    //     return OrderWidget(isFirst: index == 0);
-                    //   },
-                    // ),
                   ],
                 ),
               );

@@ -1,9 +1,12 @@
 import 'package:hessa_student/app/core/helper_functions.dart';
 import 'package:hessa_student/app/routes/app_pages.dart';
+import 'package:hessa_student/generated/locales.g.dart';
+import 'package:intl/intl.dart';
 
 import '../../../constants/constants.dart';
 import '../../../constants/exports.dart';
 import '../controllers/home_controller.dart';
+import '../data/models/hessa_order.dart';
 
 class OrderWidget extends GetView<HomeController> {
   final bool isFirst;
@@ -11,8 +14,9 @@ class OrderWidget extends GetView<HomeController> {
   const OrderWidget({
     Key? key,
     this.isFirst = false,
+    required this.hessaOrder,
   }) : super(key: key);
-
+  final HessaOrder hessaOrder;
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
@@ -52,13 +56,20 @@ class OrderWidget extends GetView<HomeController> {
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     PrimaryText(
-                      '20',
+                      DateTime.parse(hessaOrder.preferredStartDate ?? '')
+                          .day
+                          .toString()
+                          .padLeft(2, '0'),
                       fontSize: 18,
                       color: ColorManager.primary,
                       fontWeight: FontWeightManager.light,
                     ),
                     PrimaryText(
-                      'ديسمبر',
+                      months[DateFormat('yyyy-MM-ddTHH:mm:ss')
+                                  .parse(hessaOrder.preferredStartDate ?? '')
+                                  .month -
+                              1]
+                          .toString(),
                       fontSize: 12,
                       color: ColorManager.primary,
                       fontWeight: FontWeightManager.softLight,
@@ -139,7 +150,14 @@ class OrderWidget extends GetView<HomeController> {
                               ),
                               SizedBox(width: 5.w),
                               PrimaryText(
-                                '01:00 م - 02:00 م',
+                                hessaOrder.preferredStartDate != null
+                                    ? hessaOrder.preferredEndDate != null
+                                        ? '${DateFormat('h:mm a', 'ar_SA').format(DateTime.parse(hessaOrder.preferredStartDate ?? ''))} - ${DateFormat('h:mm a', 'ar_SA').format(DateTime.parse(hessaOrder.preferredEndDate ?? ''))}'
+                                        : DateFormat('h:mm a', 'ar_SA').format(
+                                            DateTime.parse(
+                                                hessaOrder.preferredStartDate ??
+                                                    ''))
+                                    : '',
                                 fontSize: 13.sp,
                                 color: ColorManager.fontColor7,
                                 fontWeight: FontWeightManager.softLight,
@@ -157,13 +175,16 @@ class OrderWidget extends GetView<HomeController> {
                                 color: ColorManager.yellow,
                               ),
                               SizedBox(width: 5.w),
-                              PrimaryText(
-                                '5 مشاركين',
-                                fontSize: 13.sp,
-                                color: ColorManager.fontColor7,
-                                fontWeight: FontWeightManager.softLight,
-                                maxLines: 1,
-                                overflow: TextOverflow.ellipsis,
+                              SizedBox(
+                                width: 75.w,
+                                child: PrimaryText(
+                                  "${hessaOrder.studentCount ?? 0} ${LocaleKeys.participants.tr}",
+                                  fontSize: 14,
+                                  color: ColorManager.fontColor7,
+                                  fontWeight: FontWeightManager.softLight,
+                                  maxLines: 1,
+                                  overflow: TextOverflow.ellipsis,
+                                ),
                               ),
                             ],
                           ),

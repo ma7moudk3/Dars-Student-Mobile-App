@@ -15,16 +15,17 @@ import 'edit_profile_repo.dart';
 
 class EditProfileRepoImplement extends EditProfileRepo {
   @override
-  Future<String?> updateProfilePicture(
-      {required File image, bool isForStudent = false}) async {
+  Future<String?> updateProfilePicture({
+    required File image,
+    bool isForStudent = false,
+    String? fileName,
+  }) async {
     String? fileToken;
     try {
       Uuid uuid = const Uuid();
-      String fileName = image.path.split("/").last;
       dynamic data = dio.FormData.fromMap({
         "FileType": lookupMimeType(image.path),
-        // "FileName": 'ProfilePicture: $fileName',
-        "FileName": 'ProfilePicture',
+        "FileName": fileName ?? 'ProfilePicture',
         "FileToken": uuid.v1(),
         "file": await dio.MultipartFile.fromFile(image.path, filename: fileName)
       });
