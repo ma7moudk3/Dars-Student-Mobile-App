@@ -466,56 +466,62 @@ class DependentsListBottomSheetContent extends GetView<OrderHessaController> {
                       ),
                     ),
                     SizedBox(height: 10.h),
-                    controller.students.isNotEmpty
-                        ? Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            children: [
-                              PrimaryButton(
-                                width: 265.w,
-                                onPressed: () => Get.back(),
-                                title: LocaleKeys.save.tr,
-                              ),
-                              GestureDetector(
-                                onTap: () async {
-                                  if (Get.isBottomSheetOpen!) {
-                                    Get.back();
-                                  }
-                                  await Get.toNamed(Routes.ADD_NEW_DEPENDENT,
-                                      arguments: {
-                                        "isFromOrderHessa": true,
-                                      });
-                                },
-                                child: Container(
-                                  width: 48.w,
-                                  height: 50.h,
-                                  decoration: BoxDecoration(
-                                    color: ColorManager.green,
-                                    borderRadius: BorderRadius.circular(15),
-                                  ),
-                                  child: Center(
-                                    child: Icon(
-                                      Icons.add_rounded,
-                                      color: ColorManager.white,
-                                      size: 25.sp,
-                                    ),
+                    GetBuilder<OrderHessaController>(
+                        builder: (OrderHessaController controller) {
+                      if (controller.pagingController.itemList != null &&
+                          controller.pagingController.itemList!.isNotEmpty) {
+                        return Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            PrimaryButton(
+                              width: 265.w,
+                              onPressed: () => Get.back(),
+                              title: LocaleKeys.save.tr,
+                            ),
+                            GestureDetector(
+                              onTap: () async {
+                                if (Get.isBottomSheetOpen!) {
+                                  Get.back();
+                                }
+                                await Get.toNamed(Routes.ADD_NEW_DEPENDENT,
+                                    arguments: {
+                                      "isFromOrderHessa": true,
+                                    });
+                              },
+                              child: Container(
+                                width: 48.w,
+                                height: 50.h,
+                                decoration: BoxDecoration(
+                                  color: ColorManager.green,
+                                  borderRadius: BorderRadius.circular(15),
+                                ),
+                                child: Center(
+                                  child: Icon(
+                                    Icons.add_rounded,
+                                    color: ColorManager.white,
+                                    size: 25.sp,
                                   ),
                                 ),
                               ),
-                            ],
-                          )
-                        : PrimaryButton(
-                            width: Get.width.w,
-                            onPressed: () async {
-                              if (Get.isBottomSheetOpen!) {
-                                Get.back();
-                              }
-                              await Get.toNamed(Routes.ADD_NEW_DEPENDENT,
-                                  arguments: {
-                                    "isFromOrderHessa": true,
-                                  });
-                            },
-                            title: LocaleKeys.add_dependent.tr,
-                          ),
+                            ),
+                          ],
+                        );
+                      } else {
+                        return PrimaryButton(
+                          width: Get.width.w,
+                          onPressed: () async {
+                            if (Get.isBottomSheetOpen!) {
+                              Get.back();
+                            }
+                            await Get.toNamed(Routes.ADD_NEW_DEPENDENT,
+                                arguments: {
+                                  "isFromOrderHessa": true,
+                                });
+                          },
+                          title: LocaleKeys.add_dependent.tr,
+                        );
+                      }
+                    })
                   ],
                 );
               }),

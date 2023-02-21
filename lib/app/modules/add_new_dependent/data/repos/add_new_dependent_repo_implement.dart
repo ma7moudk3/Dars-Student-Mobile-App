@@ -1,5 +1,6 @@
-import 'dart:developer';
 import 'dart:io';
+import 'dart:math';
+import 'dart:developer' as developer;
 
 import 'package:hessa_student/app/data/models/school_types/school_types.dart';
 import 'package:hessa_student/app/data/models/student_relation/student_relation.dart';
@@ -44,7 +45,7 @@ class AddNewDependentRepoImplement extends AddNewDependentRepo {
         },
       );
     } catch (e) {
-      log("Error in getTopics: $e");
+      developer.log("Error in getTopics: $e");
     }
     return topics;
   }
@@ -73,7 +74,7 @@ class AddNewDependentRepoImplement extends AddNewDependentRepo {
         },
       );
     } catch (e) {
-      log("Error in getClasses: $e");
+      developer.log("Error in getClasses: $e");
     }
     return classes;
   }
@@ -102,7 +103,7 @@ class AddNewDependentRepoImplement extends AddNewDependentRepo {
         },
       );
     } catch (e) {
-      log("Error in getStudentRelations: $e");
+      developer.log("Error in getStudentRelations: $e");
     }
     return studentRelations;
   }
@@ -131,7 +132,7 @@ class AddNewDependentRepoImplement extends AddNewDependentRepo {
         },
       );
     } catch (e) {
-      log("Error in getSchoolTypes: $e");
+      developer.log("Error in getSchoolTypes: $e");
     }
     return schoolTypes;
   }
@@ -182,7 +183,9 @@ class AddNewDependentRepoImplement extends AddNewDependentRepo {
         data["id"] = id;
       }
       if (image != null) {
-        String fileName = image.path.split("/").last;
+        Random random = Random();
+        int randomNumber = random.nextInt(100000);
+        String fileName = "${name}_$randomNumber";
         String? fileToken = await _editProfileRepo.updateProfilePicture(
           image: image,
           isForStudent: true,
@@ -214,7 +217,7 @@ class AddNewDependentRepoImplement extends AddNewDependentRepo {
         },
       );
     } catch (error) {
-      log("Error in addNewDependent: $error");
+      developer.log("Error in addNewDependent: $error");
     }
     return dependent;
   }

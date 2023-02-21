@@ -4,10 +4,9 @@ import '../../generated/locales.g.dart';
 
 const applicationName = "حصة - الطالب";
 
-enum HessaType {
-  oneHessa,
-  studyingPackage
-} // 19 is for studying package, 41 is for one hessa
+
+List<int> hessaProductTypes = [19, 41];
+// 19 is for studying package, 41 is for one hessa, if another product id is added, add it to hessaProductTypes list ..
 
 enum HessaStatus { confirmed, started, canceled, finished }
 

@@ -5,6 +5,7 @@ import 'package:lottie/lottie.dart';
 import '../../../../generated/locales.g.dart';
 import '../../../../global_presentation/global_features/lotties_manager.dart';
 import '../../../../global_presentation/global_widgets/custom_app_bar.dart';
+import '../../../constants/constants.dart';
 import '../controllers/hessa_details_controller.dart';
 import '../widgets/studying_package_widget.dart';
 
@@ -39,7 +40,7 @@ class HessaDetailsView extends GetView<HessaDetailsController> {
             if (controller.isLoading.value == false) {
               if (controller.hessaOrderDetails.result?.order?.productId ==
                       null ||
-                  ![19, 41].contains(
+                  !hessaProductTypes.contains(
                       controller.hessaOrderDetails.result?.order?.productId)) {
                 return Center(
                   child: SpinKitCircle(
@@ -49,19 +50,24 @@ class HessaDetailsView extends GetView<HessaDetailsController> {
                   ),
                 );
               } else {
-                return SingleChildScrollView(
-                  child: GetBuilder<HessaDetailsController>(
-                      builder: (HessaDetailsController controller) {
-                    int productId =
-                        controller.hessaOrderDetails.result?.order?.productId ??
-                            -1;
-                    if (productId == 41) {
-                      // 19 is for studying package, 41 is for one hessa
-                      return const OneHessaWidget();
-                    } else {
-                      return const StudyingPackageWidget();
-                    }
-                  }),
+                return RefreshIndicator(
+                  color: ColorManager.white,
+                  backgroundColor: ColorManager.primary,
+                  onRefresh: () async => await controller.checkInternet(),
+                  child: SingleChildScrollView(
+                    child: GetBuilder<HessaDetailsController>(
+                        builder: (HessaDetailsController controller) {
+                      int productId = controller
+                              .hessaOrderDetails.result?.order?.productId ??
+                          -1;
+                      if (productId == 41) {
+                        // 19 is for studying package, 41 is for one hessa
+                        return const OneHessaWidget();
+                      } else {
+                        return const StudyingPackageWidget();
+                      }
+                    }),
+                  ),
                 );
               }
             } else {
