@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:cached_network_image/cached_network_image.dart';
 
 import '../../../constants/exports.dart';
@@ -46,6 +48,7 @@ class HessaTeacherWidget extends GetView<HessaTeachersController> {
         governorate = teacher.runtimeType == HessaTeacher
             ? teacher.governorate ?? ""
             : teacher.governorate ?? "";
+    log("${Links.baseLink}${Links.profileImageById}?userId=$teacherId");
     return GestureDetector(
       behavior: HitTestBehavior.opaque,
       onTap: () async {

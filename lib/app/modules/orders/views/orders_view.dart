@@ -1,3 +1,5 @@
+import 'package:flutter_spinkit/flutter_spinkit.dart';
+import 'package:infinite_scroll_pagination/infinite_scroll_pagination.dart';
 import 'package:lottie/lottie.dart';
 
 import '../../../../generated/locales.g.dart';
@@ -5,6 +7,7 @@ import '../../../../global_presentation/global_features/lotties_manager.dart';
 import '../../../../global_presentation/global_widgets/custom_app_bar.dart';
 import '../../../constants/exports.dart';
 import '../../../routes/app_pages.dart';
+import '../../home/data/models/hessa_order.dart';
 import '../../home/widgets/order_widget.dart';
 import '../controllers/orders_controller.dart';
 
@@ -48,30 +51,128 @@ class OrdersView extends GetView<OrdersController> {
           color: ColorManager.white,
           backgroundColor: ColorManager.primary,
           onRefresh: () async {
-            // Future.sync(() => controller.pagingController.refresh());
-            await controller.checkInternet();
+            await Future.sync(() => controller.pagingController.refresh());
           },
           child: GetX<OrdersController>(builder: (OrdersController controller) {
             if (controller.isInternetConnected.value == true) {
-              return SingleChildScrollView(
-                child: Padding(
-                  padding: EdgeInsets.symmetric(horizontal: 16.w),
-                  child: Column(
-                    children: [
-                      SizedBox(height: 20.h),
-                      ListView.builder(
-                        itemCount: 9 + 1,
-                        shrinkWrap: true,
-                        physics: const NeverScrollableScrollPhysics(),
-                        itemBuilder: (BuildContext context, int index) {
-                          if (index == 9) {
-                            return SizedBox(height: 20.h);
-                          }
-                          return OrderWidget(isFirst: index == 0);
-                        },
-                      ),
-                    ],
-                  ),
+              return Padding(
+                padding: EdgeInsets.symmetric(horizontal: 16.w),
+                child: Column(
+                  children: [
+                    SizedBox(height: 20.h),
+                    Expanded(
+                      child: GetBuilder<OrdersController>(
+                          builder: (OrdersController controller) {
+                        return PagedListView<int, HessaOrder>(
+                          pagingController: controller.pagingController,
+                          builderDelegate:
+                              PagedChildBuilderDelegate<HessaOrder>(
+                            animateTransitions: true,
+                            transitionDuration:
+                                const Duration(milliseconds: 350),
+                            firstPageErrorIndicatorBuilder:
+                                (BuildContext context) {
+                              return Center(
+                                child: SpinKitCircle(
+                                  duration: const Duration(milliseconds: 1300),
+                                  size: 50,
+                                  color: ColorManager.primary,
+                                ),
+                              );
+                            },
+                            firstPageProgressIndicatorBuilder:
+                                (BuildContext context) {
+                              return Column(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                children: [
+                                  Lottie.asset(
+                                    LottiesManager.searchingLight,
+                                    animate: true,
+                                  ),
+                                ],
+                              );
+                            },
+                            newPageErrorIndicatorBuilder:
+                                (BuildContext context) {
+                              return Center(
+                                child: SpinKitCircle(
+                                  duration: const Duration(milliseconds: 1300),
+                                  color: ColorManager.primary,
+                                  size: 50,
+                                ),
+                              );
+                            },
+                            newPageProgressIndicatorBuilder:
+                                (BuildContext context) {
+                              return Column(
+                                children: [
+                                  SizedBox(height: 20.h),
+                                  Center(
+                                    child: SpinKitCircle(
+                                      duration:
+                                          const Duration(milliseconds: 1300),
+                                      color: ColorManager.primary,
+                                      size: 50,
+                                    ),
+                                  ),
+                                  SizedBox(height: 20.h),
+                                ],
+                              );
+                            },
+                            noItemsFoundIndicatorBuilder:
+                                (BuildContext context) {
+                              return Column(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                children: [
+                                  SvgPicture.asset(
+                                    ImagesManager.noOrders,
+                                    width: 120.w,
+                                    height: 125.h,
+                                  ),
+                                  PrimaryText(
+                                    LocaleKeys.no_orders_currently.tr,
+                                    fontSize: 16.sp,
+                                    fontWeight: FontWeightManager.light,
+                                    color: ColorManager.fontColor,
+                                  ),
+                                  PrimaryText(
+                                    LocaleKeys.you_can_add_new_hessa_order.tr,
+                                    fontSize: 16.sp,
+                                    fontWeight: FontWeightManager.light,
+                                    color: ColorManager.grey5,
+                                  ),
+                                  SizedBox(height: 25.h),
+                                  PrimaryButton(
+                                    onPressed: () async {
+                                      await Get.toNamed(Routes.ORDER_HESSA);
+                                    },
+                                    title: LocaleKeys.add_new_order.tr,
+                                    width: (Get.width * 0.55).w,
+                                  ),
+                                ],
+                              );
+                            },
+                            itemBuilder: (BuildContext context,
+                                HessaOrder order, int index) {
+                              return OrderWidget(isFirst: index == 0);
+                            },
+                          ),
+                        );
+                      }),
+                    ),
+                    SizedBox(height: 20.h),
+                    // ListView.builder(
+                    //   itemCount: 9 + 1,
+                    //   shrinkWrap: true,
+                    //   physics: const NeverScrollableScrollPhysics(),
+                    //   itemBuilder: (BuildContext context, int index) {
+                    //     if (index == 9) {
+                    //       return SizedBox(height: 20.h);
+                    //     }
+                    //     return OrderWidget(isFirst: index == 0);
+                    //   },
+                    // ),
+                  ],
                 ),
               );
             } else {

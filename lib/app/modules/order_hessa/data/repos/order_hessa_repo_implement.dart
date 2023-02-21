@@ -105,7 +105,7 @@ class OrderHessaRepoImplement extends OrderHessaRepo {
     required int targetGenderId,
     String? notes,
     required String preferredStartDate,
-    String? preferredEndDate,
+    required String preferredEndDate,
     required int sessionTypeId,
     required int productId,
     int? providerId,
@@ -124,10 +124,11 @@ class OrderHessaRepoImplement extends OrderHessaRepo {
       Map<String, dynamic> data = {
         "targetGenderId": targetGenderId,
         "currentStatusId": 0,
-        "predictionCost": 0,
-        "actualCost": 0,
-        "totalPayments": 0,
+        // "predictionCost": 0,
+        // "actualCost": 0,
+        // "totalPayments": 0,
         "preferredStartDate": preferredStartDate,
+        "preferredEndDate": preferredEndDate,
         "sessionTypeId": sessionTypeId,
         "productId": productId,
         "providerId": 0, // all
@@ -141,14 +142,13 @@ class OrderHessaRepoImplement extends OrderHessaRepo {
                 ? CacheHelper.instance.getCachedCurrentUserInfo()!.result!.id
                 : 0
             : 0),
+        "paymentMethodId":
+            1, // 1 cash, 2 payment gateways, when a payment method is selected, the payment gateway id will be sent
         "addressId": addressId,
         "orderStudentId": orderStudentsIDs,
         "orderTopicOrSkillId": orderTopicsOrSkillsIDs,
       };
-      if (preferredEndDate != null) {
-        data["preferredEndDate"] = preferredEndDate;
-      }
-      if (preferredProviderId != null) {
+      if (preferredProviderId != null && preferredProviderId != -1) {
         data["preferredProviderId"] = preferredProviderId;
       }
       if (paymentMethodId != null) {

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:hessa_student/app/modules/chat/widgets/image_message_widget.dart';
+import 'package:hessa_student/generated/locales.g.dart';
 import 'package:hessa_student/global_presentation/global_widgets/flyer_chat/flutter_chat_ui.dart';
 import 'package:intl/intl.dart' as intl;
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -118,45 +119,50 @@ class ChatView extends GetView<ChatController> {
                               ],
                             ),
                             const Spacer(),
-                            Container(
-                              width: 140.w,
-                              height: 30.h,
-                              decoration: BoxDecoration(
-                                color: ColorManager.yellow.withOpacity(0.15),
-                                borderRadius: BorderRadius.circular(10),
-                              ),
-                              child: Center(
-                                child: Row(
-                                  mainAxisSize: MainAxisSize.min,
-                                  mainAxisAlignment: MainAxisAlignment.center,
-                                  children: [
-                                    SizedBox(width: 8.w),
-                                    Container(
-                                      width: 16.w,
-                                      height: 16.h,
-                                      decoration: BoxDecoration(
-                                        borderRadius: BorderRadius.circular(5),
-                                        border: Border.all(
-                                          color: ColorManager.yellow,
-                                          width: 2,
+                            GestureDetector(
+                              behavior: HitTestBehavior.opaque,
+                              onTap: () async {},
+                              child: Container(
+                                width: 140.w,
+                                height: 30.h,
+                                decoration: BoxDecoration(
+                                  color: ColorManager.yellow.withOpacity(0.15),
+                                  borderRadius: BorderRadius.circular(10),
+                                ),
+                                child: Center(
+                                  child: Row(
+                                    mainAxisSize: MainAxisSize.min,
+                                    mainAxisAlignment: MainAxisAlignment.center,
+                                    children: [
+                                      SizedBox(width: 8.w),
+                                      Container(
+                                        width: 16.w,
+                                        height: 16.h,
+                                        decoration: BoxDecoration(
+                                          borderRadius:
+                                              BorderRadius.circular(5),
+                                          border: Border.all(
+                                            color: ColorManager.yellow,
+                                            width: 2,
+                                          ),
+                                        ),
+                                        child: Center(
+                                          child: Icon(
+                                            Icons.add_rounded,
+                                            color: ColorManager.yellow,
+                                            size: 10.sp,
+                                          ),
                                         ),
                                       ),
-                                      child: Center(
-                                        child: Icon(
-                                          Icons.add_rounded,
-                                          color: ColorManager.yellow,
-                                          size: 10.sp,
-                                        ),
+                                      SizedBox(width: 8.w),
+                                      PrimaryText(
+                                        LocaleKeys.approve_teacher.tr,
+                                        fontSize: 14,
+                                        color: ColorManager.yellow,
+                                        fontWeight: FontWeightManager.light,
                                       ),
-                                    ),
-                                    SizedBox(width: 8.w),
-                                    PrimaryText(
-                                      "اعتماد المدرس",
-                                      fontSize: 14,
-                                      color: ColorManager.yellow,
-                                      fontWeight: FontWeightManager.light,
-                                    ),
-                                  ],
+                                    ],
+                                  ),
                                 ),
                               ),
                             ),
@@ -210,7 +216,7 @@ class ChatView extends GetView<ChatController> {
                       onSendPressed: (types.PartialText message) {},
                       theme: DefaultChatTheme(
                         inputMargin: EdgeInsets.only(
-                            bottom: 10.h, right: 16.w, left: 16.w, top:  10.h),
+                            bottom: 10.h, right: 16.w, left: 16.w, top: 10.h),
                         primaryColor: ColorManager.primary,
                         inputTextColor: ColorManager.fontColor,
                         inputTextCursorColor: ColorManager.primary,

@@ -113,7 +113,7 @@ class DioHelper {
       }
 
       var exception = ApiException(
-        message: error.response!.data["message"] ?? error.message,
+        message: error.response?.data["message"] ?? error.message,
         url: Links.baseLink + url,
         response: error.response,
         statusCode: error.response?.statusCode ?? 404,

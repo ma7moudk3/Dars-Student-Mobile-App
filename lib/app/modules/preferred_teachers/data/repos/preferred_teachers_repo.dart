@@ -4,5 +4,6 @@ abstract class PreferredTeachersRepo {
   Future<List<PreferredTeacher>> getPreferredTeachers({
     required int page,
     required int perPage,
+    String? searchValue,
   });
 }

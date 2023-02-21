@@ -25,7 +25,7 @@ class OrderWidget extends GetView<HomeController> {
       },
       child: Container(
         height: 186.h,
-        margin: isFirst ? null : EdgeInsets.only(top: 10.h),
+        margin: EdgeInsets.only(bottom: 10.h),
         padding: EdgeInsets.symmetric(horizontal: 16.w, vertical: 16.h),
         decoration: BoxDecoration(
           color: const Color(0xfeffffff),

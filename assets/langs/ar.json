@@ -357,6 +357,8 @@
     "check_card_type": "تحقق من نوع البطاقة",
     "hessa_started": "بدأت الحصة",
     "intersted_teachers": "مدرسين مهتمين بتقديم الحصة",
+    "order_added_successfully" : "تم إضافة الطلب بنجاح",
+    "add_new_order" : "إضافة طلب حصة جديد",
     "approve_teacher": "اعتماد المدرّس",
     "confirm_canceling_hessa": "تأكيد الغاء الحصة",
     "canceling_hessa_reason": "سبب الغاء الحصة",

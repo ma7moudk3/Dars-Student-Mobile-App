@@ -1,19 +1,19 @@
 import 'package:cached_network_image/cached_network_image.dart';
-import 'package:hessa_student/app/modules/hessa_teachers/data/models/hessa_teacher.dart';
 
 import '../../../constants/exports.dart';
 import '../../../constants/links.dart';
+import '../../preferred_teachers/data/models/preferred_teacher/preferred_teacher.dart';
 import '../controllers/order_hessa_controller.dart';
 
-class TypeAheadTeacherWidget extends GetView<OrderHessaController> {
-  const TypeAheadTeacherWidget({Key? key, required this.teacher})
+class TypeAheadPreferredTeacherWidget extends GetView<OrderHessaController> {
+  const TypeAheadPreferredTeacherWidget({Key? key, required this.teacher})
       : super(key: key);
-  final HessaTeacher teacher;
+  final PreferredTeacher teacher;
   @override
   Widget build(BuildContext context) {
     String teacherPicture =
-        "${Links.baseLink}${Links.profileImageById}?userId=${teacher.userId ?? -1}";
-    double teacherRate = teacher.rate ?? 0.0;
+        "${Links.baseLink}${Links.profileImageById}?userId=${teacher.preferredProvider?.providerId ?? -1}";
+    double teacherRate = teacher.providerRate ?? 0.0;
     return Padding(
       padding: const EdgeInsets.all(5.0),
       child: Column(
@@ -57,7 +57,7 @@ class TypeAheadTeacherWidget extends GetView<OrderHessaController> {
                         SizedBox(
                           width: 150.w,
                           child: PrimaryText(
-                            teacher.name ?? "",
+                            teacher.providerName ?? "",
                             color: ColorManager.fontColor,
                             fontSize: 12.sp,
                             maxLines: 1,
@@ -81,7 +81,7 @@ class TypeAheadTeacherWidget extends GetView<OrderHessaController> {
                             SizedBox(
                               width: 40.w,
                               child: PrimaryText(
-                                teacher.rate != null
+                                teacher.providerRate != null
                                     ? teacherRate.toString()
                                     : "0.0",
                                 color: ColorManager.fontColor,

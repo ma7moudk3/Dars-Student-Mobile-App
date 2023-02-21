@@ -2,7 +2,6 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:hessa_student/app/constants/exports.dart';
 import 'package:hessa_student/app/modules/addresses/data/models/address_result/address_result.dart';
-import 'package:hessa_student/app/modules/hessa_teachers/data/models/hessa_teacher.dart';
 import 'package:hessa_student/generated/locales.g.dart';
 import 'package:hessa_student/global_presentation/global_widgets/global_dropdown.dart';
 import 'package:lottie/lottie.dart';
@@ -14,6 +13,7 @@ import '../../../../global_presentation/global_widgets/custom_snack_bar.dart';
 import '../../../../global_presentation/global_widgets/shimmer_loading.dart';
 import '../../../../global_presentation/global_widgets/typeahead/cupertino_flutter_typeahead.dart';
 import '../../../routes/app_pages.dart';
+import '../../preferred_teachers/data/models/preferred_teacher/preferred_teacher.dart';
 import '../controllers/order_hessa_controller.dart';
 import '../widgets/add_student_widget.dart';
 import '../widgets/hessa_date_time_picker_widget.dart';
@@ -821,7 +821,7 @@ class OrderHessaView extends GetView<OrderHessaController> {
                                                     searchValue: searchValue
                                                         .toLowerCase());
                                           } else {
-                                            return <HessaTeacher>[];
+                                            return <PreferredTeacher>[];
                                           }
                                         },
                                         hideOnEmpty: true,
@@ -830,8 +830,8 @@ class OrderHessaView extends GetView<OrderHessaController> {
                                           return suggestionsBox;
                                         },
                                         itemBuilder: (BuildContext context,
-                                            HessaTeacher teacher) {
-                                          return TypeAheadTeacherWidget(
+                                            PreferredTeacher teacher) {
+                                          return TypeAheadPreferredTeacherWidget(
                                             teacher: teacher,
                                           );
                                         },
@@ -864,7 +864,7 @@ class OrderHessaView extends GetView<OrderHessaController> {
                                           );
                                         },
                                         onSuggestionSelected:
-                                            (HessaTeacher teacher) {
+                                            (PreferredTeacher teacher) {
                                           controller.selectTeacher(teacher);
                                         },
                                         errorBuilder: (context, error) {
@@ -873,9 +873,6 @@ class OrderHessaView extends GetView<OrderHessaController> {
                                             color: ColorManager.red,
                                           );
                                         },
-                                        validator: (String? teacherName) =>
-                                            controller.validateTeacherName(
-                                                teacherName),
                                       ),
                                       SizedBox(height: 12.h),
                                       PrimaryTextField(
@@ -946,18 +943,16 @@ class OrderHessaView extends GetView<OrderHessaController> {
                                       message: LocaleKeys
                                           .choose_one_skill_at_least.tr,
                                     );
-                                  } else if (controller.formKey.currentState!
-                                      .validate()) {
-                                    if (controller.selectedAddress == null) {
-                                      CustomSnackBar.showCustomErrorSnackBar(
-                                        title: LocaleKeys.data_entry_error.tr,
-                                        message: LocaleKeys.choose_location.tr,
-                                      );
-                                    } else {
-                                      if (controller.formKey.currentState!
-                                          .validate()) {
-                                        await controller.addNewOrderHessa();
-                                      }
+                                  } else if (controller.selectedAddress ==
+                                      null) {
+                                    CustomSnackBar.showCustomErrorSnackBar(
+                                      title: LocaleKeys.data_entry_error.tr,
+                                      message: LocaleKeys.choose_location.tr,
+                                    );
+                                  } else {
+                                    if (controller.formKey.currentState!
+                                        .validate()) {
+                                      await controller.addNewOrderHessa();
                                     }
                                   }
                                 },

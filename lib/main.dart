@@ -40,7 +40,7 @@ void main() async {
           title: applicationName,
           debugShowCheckedModeBanner: false,
           initialRoute: AppPages.INITIAL,
-        getPages: AppPages.routes,
+          getPages: AppPages.routes,
           locale: const Locale("ar"), // it's arabic for right now
           theme: getApplicationTheme(),
           translationsKeys: AppTranslation.translations,

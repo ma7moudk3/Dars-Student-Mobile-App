@@ -1,19 +1,21 @@
-
 import 'dart:developer';
 
-import 'package:hessa_student/app/modules/home/data/models/hessa_order.dart';
-import 'package:hessa_student/app/modules/home/data/repos/home_repo.dart';
+import 'package:hessa_student/app/constants/exports.dart';
+import 'package:hessa_student/app/modules/orders/data/repos/orders_repo.dart';
 
 import '../../../../../generated/locales.g.dart';
 import '../../../../../global_presentation/global_widgets/custom_snack_bar.dart';
-import '../../../../constants/exports.dart';
 import '../../../../constants/links.dart';
 import '../../../../data/cache_helper.dart';
 import '../../../../data/network_helper/dio_helper.dart';
+import '../../../home/data/models/hessa_order.dart';
 
-class HomeRepoImplement extends HomeRepo {
+class OrdersRepoImplement extends OrdersRepo {
   @override
-  Future<List<HessaOrder>> getRecentHessaOrders() async {
+  Future<List<HessaOrder>> getHessaOrders({
+    required int page,
+    required int perPage,
+  }) async {
     List<HessaOrder> recentHessaOrders = [];
     try {
       Map<String, dynamic> headers = {
@@ -24,7 +26,8 @@ class HomeRepoImplement extends HomeRepo {
       };
       Map<String, dynamic> queryParameters = {
         "Sorting": "id DESC",
-        "MaxResultCount": 4,
+        "SkipCount": (page - 1) * perPage,
+        "MaxResultCount": perPage,
       };
       await DioHelper.get(
         headers: headers,
@@ -43,12 +46,12 @@ class HomeRepoImplement extends HomeRepo {
         onError: (error) {
           CustomSnackBar.showCustomErrorSnackBar(
             title: LocaleKeys.error.tr,
-            message: error.response?.data["error"]["message"] ?? error.message,
+            message: error.response?.data["error"]?["message"] ?? error.message,
           );
         },
       );
     } catch (e) {
-      log("Error in HomeRepoImplement.getRecentHessaOrders: $e");
+      log("Error in OrdersRepoImplement.getHessaOrders: $e");
     }
     return recentHessaOrders;
   }

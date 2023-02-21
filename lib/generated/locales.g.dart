@@ -395,6 +395,8 @@ class LocaleKeys {
   static const check_card_type = 'check_card_type';
   static const hessa_started = 'hessa_started';
   static const intersted_teachers = 'intersted_teachers';
+  static const order_added_successfully = 'order_added_successfully';
+  static const add_new_order = 'add_new_order';
   static const approve_teacher = 'approve_teacher';
   static const confirm_canceling_hessa = 'confirm_canceling_hessa';
   static const canceling_hessa_reason = 'canceling_hessa_reason';
@@ -814,6 +816,8 @@ class Locales {
     'check_card_type': 'تحقق من نوع البطاقة',
     'hessa_started': 'بدأت الحصة',
     'intersted_teachers': 'مدرسين مهتمين بتقديم الحصة',
+    'order_added_successfully': 'تم إضافة الطلب بنجاح',
+    'add_new_order': 'إضافة طلب حصة جديد',
     'approve_teacher': 'اعتماد المدرّس',
     'confirm_canceling_hessa': 'تأكيد الغاء الحصة',
     'canceling_hessa_reason': 'سبب الغاء الحصة',

@@ -102,7 +102,8 @@ class ChatController extends GetxController with WidgetsBindingObserver {
                     child: PrimaryText(LocaleKeys.camera.tr),
                     onPressed: () async {
                       Get.back();
-                      await handleImageSelection(imageSource: ImageSource.camera);
+                      await handleImageSelection(
+                          imageSource: ImageSource.camera);
                     },
                   ),
                   CupertinoActionSheetAction(
@@ -153,7 +154,8 @@ class ChatController extends GetxController with WidgetsBindingObserver {
                     title: PrimaryText("camera".tr),
                     onTap: () async {
                       Get.back();
-                      await handleImageSelection(imageSource: ImageSource.camera);
+                      await handleImageSelection(
+                          imageSource: ImageSource.camera);
                     },
                   ),
                   ListTile(
@@ -372,7 +374,8 @@ class ChatController extends GetxController with WidgetsBindingObserver {
                     onPressed: () async {
                       Get.back();
                       await Clipboard.setData(
-                        ClipboardData(text: (message as types.TextMessage).text),
+                        ClipboardData(
+                            text: (message as types.TextMessage).text),
                       ).then((value) {
                         CustomSnackBar.showCustomInfoSnackBar(
                             title: LocaleKeys.note.tr,
@@ -504,7 +507,8 @@ class ChatController extends GetxController with WidgetsBindingObserver {
                         ).then((value) {
                           CustomSnackBar.showCustomInfoSnackBar(
                               title: LocaleKeys.note.tr,
-                              message: LocaleKeys.message_copied_succesfully.tr);
+                              message:
+                                  LocaleKeys.message_copied_succesfully.tr);
                         });
                       },
                     ),

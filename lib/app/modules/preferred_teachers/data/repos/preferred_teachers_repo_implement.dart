@@ -10,10 +10,8 @@ import 'preferred_teachers_repo.dart';
 
 class PreferredTeachersRepoImplement extends PreferredTeachersRepo {
   @override
-  Future<List<PreferredTeacher>> getPreferredTeachers({
-    required int page,
-    required int perPage,
-  }) async {
+  Future<List<PreferredTeacher>> getPreferredTeachers(
+      {required int page, required int perPage, String? searchValue}) async {
     List<PreferredTeacher> preferredTeachers = [];
     Map<String, dynamic> headers = {
       'Accept-Language': Get.locale != null ? Get.locale!.languageCode : 'ar',
@@ -25,6 +23,9 @@ class PreferredTeachersRepoImplement extends PreferredTeachersRepo {
       "MaxResultCount": perPage,
       "SkipCount": (page - 1) * perPage,
     };
+    if (searchValue != null) {
+      queryParameters["Filter"] = searchValue;
+    }
     await DioHelper.get(
       headers: headers,
       Links.preferredTeachers,

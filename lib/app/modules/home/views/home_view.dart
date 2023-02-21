@@ -145,7 +145,7 @@ class HomeView extends GetView<HomeController> {
                             GetBuilder<HomeController>(
                                 init: HomeController(),
                                 builder: (HomeController controller) {
-                                  if (controller.orders.isEmpty) {
+                                  if (controller.recentHessaOrders.isEmpty) {
                                     return Center(
                                       child: Column(
                                         children: [
@@ -176,15 +176,17 @@ class HomeView extends GetView<HomeController> {
                                       children: [
                                         SizedBox(height: 20.h),
                                         ListView.builder(
-                                          itemCount:
-                                              controller.orders.length + 1,
+                                          itemCount: controller
+                                                  .recentHessaOrders.length +
+                                              1,
                                           shrinkWrap: true,
                                           physics:
                                               const NeverScrollableScrollPhysics(),
                                           itemBuilder: (BuildContext context,
                                               int index) {
                                             if (index ==
-                                                controller.orders.length) {
+                                                controller
+                                                    .recentHessaOrders.length) {
                                               return SizedBox(height: 20.h);
                                             }
                                             return OrderWidget(

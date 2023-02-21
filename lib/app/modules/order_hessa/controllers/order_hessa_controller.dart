@@ -5,6 +5,8 @@ import 'package:dio/dio.dart';
 import 'package:hessa_student/app/core/helper_functions.dart';
 import 'package:hessa_student/app/data/models/skills/item.dart' as skill;
 import 'package:hessa_student/app/modules/order_hessa/data/repos/order_hessa_repo.dart';
+import 'package:hessa_student/app/modules/orders/controllers/orders_controller.dart';
+import 'package:hessa_student/app/modules/preferred_teachers/data/repos/preferred_teachers_repo.dart';
 import 'package:infinite_scroll_pagination/infinite_scroll_pagination.dart';
 import 'package:intl/date_symbol_data_local.dart';
 import '../../../../global_presentation/global_widgets/custom_snack_bar.dart';
@@ -28,9 +30,8 @@ import '../../addresses/data/repos/addresses_repo_implement.dart';
 import '../../dependents/data/models/student/student.dart';
 import '../../dependents/data/repos/dependents_repo.dart';
 import '../../dependents/data/repos/dependents_repo_implement.dart';
-import '../../hessa_teachers/data/models/hessa_teacher.dart';
-import '../../hessa_teachers/data/repos/hessa_teachers_repo.dart';
-import '../../hessa_teachers/data/repos/hessa_teachers_repo_implement.dart';
+import '../../preferred_teachers/data/models/preferred_teacher/preferred_teacher.dart';
+import '../../preferred_teachers/data/repos/preferred_teachers_repo_implement.dart';
 import '../data/repos/order_hessa_repo_implement.dart';
 
 extension IsAtMaximumYears on DateTime {
@@ -54,17 +55,18 @@ class OrderHessaController extends GetxController {
   List<Student> students = [];
   PagingController<int, Student> pagingController = PagingController(
       firstPageKey: 1); // Student = RequesterDependent or RequesterStudent :)
-  final HessaTeachersRepo _hessaTeacherRepo = HessaTeachersRepoImplement();
+  final PreferredTeachersRepo _hessaTeacherRepo =
+      PreferredTeachersRepoImplement();
   late TextEditingController hessaDateController,
       hessaTimeController,
       locationController,
       teacherNameController,
       notesController;
   DateTime hessaDate = DateTime.now();
+  TimeRangeResult? hessaTimeRange;
   Color? teacherNameErrorIconColor,
       hessaDateErrorIconColor,
       hessaTimeErrorIconColor;
-  TimeRangeResult? hessaTimeRange;
   RxBool isInternetConnected = true.obs, isLoading = true.obs;
   late DateRangePickerController hessaDateRangeController;
   final OrderHessaRepo _orderHessaRepo = OrderHessaRepoImplement();
@@ -77,18 +79,59 @@ class OrderHessaController extends GetxController {
   Skills skills = Skills();
   level.Item selectedClass = level.Item();
   List<String> selectedTopics = [];
-  List<HessaTeacher> teachers = [];
+  List<PreferredTeacher> teachers = [];
   List<String> selectedSkills = [];
   List<Student> selectedStudents = [];
   List<AddressResult> addresses = [];
   AddressResult? selectedAddress;
   bool isAddressDropDownLoading = false;
-  HessaTeacher? chosenTeacher;
+  PreferredTeacher? chosenTeacher;
+
+  @override
+  void onInit() async {
+    hessaDateController = TextEditingController();
+    hessaDateRangeController = DateRangePickerController();
+    hessaTimeController = TextEditingController();
+    locationController = TextEditingController();
+    teacherNameController = TextEditingController();
+    notesController = TextEditingController();
+    await initializeDateFormatting("ar_SA", null);
+    hessaDateFocusNode.addListener(() => update());
+    hessaTimeFocusNode.addListener(() => update());
+    _initPageRequestListener();
+    await checkInternet();
+    super.onInit();
+  }
+
+  @override
+  void dispose() {
+    hessaDateController.dispose();
+    hessaDateRangeController.dispose();
+    hessaTimeController.dispose();
+    locationController.dispose();
+    teacherNameController.dispose();
+    notesController.dispose();
+    hessaDateFocusNode.dispose();
+    hessaTimeFocusNode.dispose();
+    super.dispose();
+  }
+
   void changeHessaDate(DateRangePickerSelectionChangedArgs hessaDate) {
-    log(hessaDate.value.toString());
     this.hessaDate = hessaDate.value;
     hessaDateController.text =
         DateFormat("dd MMMM yyyy", "ar_SA").format(hessaDate.value);
+    update();
+  }
+
+  void changeHessaTime(TimeRangeResult? rangeResult) {
+    if (rangeResult == null) return;
+    hessaTimeRange = rangeResult;
+    DateTime now = DateTime.now();
+    String formattedFromTime = DateFormat.jm('ar_SA').format(DateTime(now.year,
+        now.month, now.day, rangeResult.start.hour, rangeResult.start.minute));
+    String formattedToTime = DateFormat.jm('ar_SA').format(DateTime(now.year,
+        now.month, now.day, rangeResult.end.hour, rangeResult.end.minute));
+    hessaTimeController.text = "$formattedFromTime - $formattedToTime";
     update();
   }
 
@@ -115,6 +158,12 @@ class OrderHessaController extends GetxController {
       }
       selectedTopicsOrSkills.removeWhere((int element) => element == -1);
     }
+    DateFormat yearDateFormat = DateFormat("yyyy-MM-dd");
+    DateFormat timeDateFormat = DateFormat("HH:mm:ss.SSS");
+    String preferredStartDate =
+        "${yearDateFormat.format(hessaDate)}T${timeDateFormat.format(DateTime(hessaDate.year, hessaDate.month, hessaDate.day, hessaTimeRange!.start.hour, hessaTimeRange!.start.minute))}Z";
+    String preferredEndDate =
+        "${yearDateFormat.format(hessaDate)}T${timeDateFormat.format(DateTime(hessaDate.year, hessaDate.month, hessaDate.day, hessaTimeRange!.end.hour, hessaTimeRange!.end.minute))}Z";
     await _orderHessaRepo
         .addOrEditOrderHessa(
       addressId: selectedAddress?.address?.id ?? -1,
@@ -124,10 +173,11 @@ class OrderHessaController extends GetxController {
       orderTopicsOrSkillsIDs: selectedTopicsOrSkills,
       sessionTypeId: sessionWay,
       productId:
-          orderType == 0 ? 41 : 19, // 41 for one hessa, 19 for school package
+          orderType == 0 ? 41 : 19, // 41 for one hessa, 19 for studying package
       targetGenderId: teacherGender + 1,
-      preferredStartDate: hessaDateRangeController.selectedDate.toString(),
-      preferredProviderId: chosenTeacher?.userId ?? -1,
+      preferredStartDate: preferredStartDate,
+      preferredEndDate: preferredEndDate,
+      preferredProviderId: chosenTeacher?.preferredProvider?.providerId ?? -1,
       notes: notesController.text,
     )
         .then((int statusCode) async {
@@ -135,12 +185,14 @@ class OrderHessaController extends GetxController {
         if (Get.isDialogOpen!) {
           Get.back();
         }
+        final OrdersController ordersController = Get.find<OrdersController>();
+        ordersController.refreshOrdersPagingController();
         await Future.delayed(const Duration(milliseconds: 550))
             .then((value) async {
           Get.back();
           CustomSnackBar.showCustomSnackBar(
             title: LocaleKeys.success.tr,
-            message: LocaleKeys.address_added_successfully.tr,
+            message: LocaleKeys.order_added_successfully.tr,
           );
         });
       }
@@ -194,19 +246,19 @@ class OrderHessaController extends GetxController {
     update();
   }
 
-  Future<List<HessaTeacher>> searchTeacher(
+  Future<List<PreferredTeacher>> searchTeacher(
       {required String searchValue}) async {
     return teachers = await getHessaTeachers(page: 1, searchValue: searchValue);
   }
 
-  Future<List<HessaTeacher>> getHessaTeachers({
+  Future<List<PreferredTeacher>> getHessaTeachers({
     required int page,
     required String searchValue,
   }) async {
-    List<HessaTeacher> hessaTeachers = [];
+    List<PreferredTeacher> preferredHessaTeachers = [];
     try {
       if (await checkInternetConnection(timeout: 10)) {
-        hessaTeachers = await _hessaTeacherRepo.getHessaTeachers(
+        preferredHessaTeachers = await _hessaTeacherRepo.getPreferredTeachers(
           page: 1,
           perPage:
               1000, // there's a restriction on the searchValue length to be at least 3 characters so we can get all the teachers for that searchValue
@@ -218,11 +270,11 @@ class OrderHessaController extends GetxController {
     } on DioError catch (e) {
       log("getHessaTeachers DioError ${e.message}");
     }
-    return hessaTeachers;
+    return preferredHessaTeachers;
   }
 
-  void selectTeacher(HessaTeacher teacher) {
-    teacherNameController.text = teacher.name ?? "";
+  void selectTeacher(PreferredTeacher teacher) {
+    teacherNameController.text = teacher.providerName ?? "";
     chosenTeacher = teacher;
     update();
   }
@@ -421,47 +473,6 @@ class OrderHessaController extends GetxController {
     }
     update();
     return null;
-  }
-
-  void changeHessaTime(TimeRangeResult? rangeResult) {
-    if (rangeResult == null) return;
-    hessaTimeRange = rangeResult;
-    DateTime now = DateTime.now();
-    String formattedFromTime = DateFormat.jm('ar_SA').format(DateTime(now.year,
-        now.month, now.day, rangeResult.start.hour, rangeResult.start.minute));
-    String formattedToTime = DateFormat.jm('ar_SA').format(DateTime(now.year,
-        now.month, now.day, rangeResult.end.hour, rangeResult.end.minute));
-    hessaTimeController.text = "$formattedFromTime - $formattedToTime";
-    update();
-  }
-
-  @override
-  void onInit() async {
-    hessaDateController = TextEditingController();
-    hessaDateRangeController = DateRangePickerController();
-    hessaTimeController = TextEditingController();
-    locationController = TextEditingController();
-    teacherNameController = TextEditingController();
-    notesController = TextEditingController();
-    await initializeDateFormatting("ar_SA", null);
-    hessaDateFocusNode.addListener(() => update());
-    hessaTimeFocusNode.addListener(() => update());
-    _initPageRequestListener();
-    await checkInternet();
-    super.onInit();
-  }
-
-  @override
-  void dispose() {
-    hessaDateController.dispose();
-    hessaDateRangeController.dispose();
-    hessaTimeController.dispose();
-    locationController.dispose();
-    teacherNameController.dispose();
-    notesController.dispose();
-    hessaDateFocusNode.dispose();
-    hessaTimeFocusNode.dispose();
-    super.dispose();
   }
 
   Future changeAddress(String? result) async {

@@ -6,8 +6,8 @@ abstract class OrderHessaRepo {
   Future<int> addOrEditOrderHessa({
     required int targetGenderId,
     String? notes,
-    String? preferredEndDate,
     required String preferredStartDate,
+    required String preferredEndDate,
     required int sessionTypeId,
     required int productId,
     int? providerId,
