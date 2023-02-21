@@ -1,5 +1,6 @@
 import 'package:hessa_student/app/constants/exports.dart';
 import 'package:hessa_student/app/core/helper_functions.dart';
+import 'package:intl/intl.dart';
 
 import '../../../../generated/locales.g.dart';
 import '../../../data/models/classes/classes.dart';
@@ -28,18 +29,18 @@ class HessaDetailsController extends GetxController {
       "icon": ImagesManager.boardIcon,
       "title": LocaleKeys.hessa_type.tr,
     },
-    {
-      "icon": ImagesManager.timerIcon,
-      "title": LocaleKeys.hessa_duration.tr,
-    },
+    // {
+    //   "icon": ImagesManager.timerIcon,
+    //   "title": LocaleKeys.hessa_duration.tr,
+    // },
     {
       "icon": ImagesManager.addressIcon,
       "title": LocaleKeys.address.tr,
     },
-    {
-      "icon": ImagesManager.classIcon,
-      "title": LocaleKeys.studying_class.tr,
-    },
+    // {
+    //   "icon": ImagesManager.classIcon,
+    //   "title": LocaleKeys.studying_class.tr,
+    // },
   ];
   HessaOrder hessaOrder = Get.arguments ?? HessaOrder();
   final GlobalKey<FormState> formKey = GlobalKey<FormState>();
@@ -57,17 +58,53 @@ class HessaDetailsController extends GetxController {
     super.onInit();
   }
 
+  void initTeacherProperties() {
+    DateTime preferredStartDate = DateFormat('yyyy-MM-dd').parse(
+        (hessaOrderDetails.result?.order?.preferredStartDate ?? '')
+            .split("T")[0]);
+    DateTime preferredStartTime = DateFormat('HH:mm:ss').parse(
+        (hessaOrderDetails.result?.order?.preferredStartDate ?? '')
+            .split("T")[1]);
+    DateTime preferredEndDate = DateFormat('yyyy-MM-dd').parse(
+        (hessaOrderDetails.result?.order?.preferredEndDate ?? '')
+            .split("T")[0]);
+    DateTime preferredEndTime = DateFormat('HH:mm:ss').parse(
+        (hessaOrderDetails.result?.order?.preferredEndDate ?? '')
+            .split("T")[1]);
+
+    hessaProperties[0]["content"] = "${DateFormat.jm('ar_SA').format(
+      DateTime(
+        preferredStartDate.year,
+        preferredStartDate.month,
+        preferredStartDate.day,
+        preferredStartTime.hour,
+        preferredStartTime.minute,
+      ),
+    )} - ${DateFormat.jm('ar_SA').format(
+      DateTime(
+        preferredEndDate.year,
+        preferredEndDate.month,
+        preferredEndDate.day,
+        preferredEndTime.hour,
+        preferredEndTime.minute,
+      ),
+    )}";
+    hessaProperties[1]["content"] =
+        DateFormat("dd MMMM yyyy", "ar_SA").format(preferredStartDate);
+    hessaProperties[2]["content"] =
+        hessaOrderDetails.result?.order?.sessionTypeId == 0
+            ? LocaleKeys.face_to_face.tr
+            : hessaOrderDetails.result?.order?.sessionTypeId == 1
+                ? LocaleKeys.electronic.tr
+                : LocaleKeys.both.tr;
+    hessaProperties[3]["content"] = hessaOrderDetails.result?.productName ?? "";
+    hessaProperties.last["content"] =
+        hessaOrderDetails.result?.address?.addressDetails?.name ?? "";
+    update();
+  }
+
   Future _getClasses() async {
     classes = await _orderHessaRepo.getClasses();
-    // if (classes.result != null && classes.result!.items != null) {
-    //   classes.result!.items!.insert(
-    //     0,
-    //     level.Item(
-    //       id: -1,
-    //       displayName: LocaleKeys.choose_studying_class.tr,
-    //     ),
-    //   );
-    // }
   }
 
   Future checkInternet() async {
@@ -78,7 +115,10 @@ class HessaDetailsController extends GetxController {
         await Future.wait([
           _getClasses(),
           getHessaOrderDetails(),
-        ]).then((value) => isLoading.value = false);
+        ]).then((value) {
+          initTeacherProperties();
+          isLoading.value = false;
+        });
       }
     });
   }

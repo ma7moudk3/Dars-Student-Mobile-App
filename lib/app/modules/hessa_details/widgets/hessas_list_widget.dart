@@ -85,6 +85,7 @@ class HessasListWidget extends GetView<HessaDetailsController> {
                   return HessaPropertyWidget(
                     iconPath: controller.hessaProperties[index]["icon"],
                     title: controller.hessaProperties[index]["title"],
+                    content: controller.hessaProperties[index]["content"] ?? "",
                   );
                 }),
               ),

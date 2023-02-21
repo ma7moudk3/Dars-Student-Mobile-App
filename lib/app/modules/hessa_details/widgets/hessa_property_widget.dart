@@ -5,9 +5,10 @@ class HessaPropertyWidget extends GetView<HessaDetailsController> {
   const HessaPropertyWidget({
     required this.iconPath,
     required this.title,
+    required this.content,
     Key? key,
   }) : super(key: key);
-  final String iconPath, title;
+  final String iconPath, title, content;
 
   @override
   Widget build(BuildContext context) {
@@ -25,7 +26,7 @@ class HessaPropertyWidget extends GetView<HessaDetailsController> {
           ),
           const Spacer(),
           PrimaryText(
-            "11:00 م - 12:00 م",
+            content,
             fontSize: 14.sp,
             fontWeight: FontWeightManager.softLight,
             color: ColorManager.grey5,

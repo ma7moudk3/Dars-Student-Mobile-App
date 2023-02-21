@@ -1,14 +1,14 @@
-import 'address.dart';
+import 'address_details.dart';
 
 class Address {
-  Address? address;
+  AddressDetails? addressDetails;
   dynamic userName;
   String? countryName;
   String? governorateName;
   String? localityName;
 
   Address({
-    this.address,
+    this.addressDetails,
     this.userName,
     this.countryName,
     this.governorateName,
@@ -16,9 +16,9 @@ class Address {
   });
 
   factory Address.fromJson(Map<String, dynamic> json) => Address(
-        address: json['address'] == null
+        addressDetails: json['address'] == null
             ? null
-            : Address.fromJson(json['address'] as Map<String, dynamic>),
+            : AddressDetails.fromJson(json['address'] as Map<String, dynamic>),
         userName: json['userName'] as dynamic,
         countryName: json['countryName'] as String?,
         governorateName: json['governorateName'] as String?,
@@ -26,7 +26,7 @@ class Address {
       );
 
   Map<String, dynamic> toJson() => {
-        'address': address?.toJson(),
+        'address': addressDetails?.toJson(),
         'userName': userName,
         'countryName': countryName,
         'governorateName': governorateName,
