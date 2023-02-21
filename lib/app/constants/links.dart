@@ -38,7 +38,7 @@ class Links {
   static const String getAllHessaTeachers =
       "api/services/app/Providers/GetSearchForProviders";
   static const String getHessaOrderDetails =
-      "api/services/app/Orders/GetOrderForView";
+      "api/services/app/Orders/GetOrderByIdForRequester";
   static const String getHessaTeacher =
       "api/services/app/Providers/GetProviderDetailsForRequester";
   static const String changePassword =

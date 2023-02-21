@@ -4,7 +4,6 @@ import '../../generated/locales.g.dart';
 
 const applicationName = "حصة - الطالب";
 
-
 List<int> hessaProductTypes = [19, 41];
 // 19 is for studying package, 41 is for one hessa, if another product id is added, add it to hessaProductTypes list ..
 

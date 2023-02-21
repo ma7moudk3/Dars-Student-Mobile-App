@@ -7,8 +7,8 @@ class Order {
   dynamic predictionCost;
   dynamic actualCost;
   dynamic totalPayments;
-  DateTime? preferredStartDate;
-  DateTime? preferredEndDate;
+  String? preferredStartDate;
+  String? preferredEndDate;
   dynamic sessionTypeId;
   dynamic productId;
   dynamic providerId;
@@ -60,12 +60,8 @@ class Order {
         predictionCost: json['predictionCost'] as dynamic,
         actualCost: json['actualCost'] as dynamic,
         totalPayments: json['totalPayments'] as dynamic,
-        preferredStartDate: json['preferredStartDate'] == null
-            ? null
-            : DateTime.parse(json['preferredStartDate'] as String),
-        preferredEndDate: json['preferredEndDate'] == null
-            ? null
-            : DateTime.parse(json['preferredEndDate'] as String),
+        preferredStartDate: json['preferredStartDate'] as String?,
+        preferredEndDate: json['preferredEndDate'] as String?,
         sessionTypeId: json['sessionTypeId'] as dynamic,
         productId: json['productId'] as dynamic,
         providerId: json['providerId'] as dynamic,
@@ -93,8 +89,8 @@ class Order {
         'predictionCost': predictionCost,
         'actualCost': actualCost,
         'totalPayments': totalPayments,
-        'preferredStartDate': preferredStartDate?.toIso8601String(),
-        'preferredEndDate': preferredEndDate?.toIso8601String(),
+        'preferredStartDate': preferredStartDate,
+        'preferredEndDate': preferredEndDate,
         'sessionTypeId': sessionTypeId,
         'productId': productId,
         'providerId': providerId,

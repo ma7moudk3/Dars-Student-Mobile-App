@@ -1,33 +1,50 @@
+import 'address.dart';
+import 'level_topic.dart';
 import 'order.dart';
+import 'student.dart';
 
 class Result {
   Order? order;
+  List<LevelTopic>? levelTopics;
+  List<dynamic>? candidateProvider;
+  dynamic providerName;
+  int? providerUserId;
+  String? requesterName;
+  int? requesterUserId;
   String? productName;
-  int? productCategoryId;
-  dynamic productCategoryName;
   dynamic providersNationalIdNumber;
   dynamic requesterUserName;
   dynamic paymentMethodName;
-  String? currencyName;
+  dynamic currencyName;
   dynamic providersNationalIdNumber2;
-  String? addressName;
-  dynamic providerName;
-  dynamic requesterName;
-  dynamic levelTopic;
+  Address? address;
+  List<Student>? students;
+  List<dynamic>? skills;
+  int? categoryId;
+  String? categoryName;
+  String? currentStatusStr;
+  String? levelTopic;
 
   Result({
     this.order,
+    this.levelTopics,
+    this.candidateProvider,
+    this.providerName,
+    this.providerUserId,
+    this.requesterName,
+    this.requesterUserId,
     this.productName,
-    this.productCategoryId,
-    this.productCategoryName,
     this.providersNationalIdNumber,
     this.requesterUserName,
     this.paymentMethodName,
     this.currencyName,
     this.providersNationalIdNumber2,
-    this.addressName,
-    this.providerName,
-    this.requesterName,
+    this.address,
+    this.students,
+    this.skills,
+    this.categoryId,
+    this.categoryName,
+    this.currentStatusStr,
     this.levelTopic,
   });
 
@@ -35,34 +52,54 @@ class Result {
         order: json['order'] == null
             ? null
             : Order.fromJson(json['order'] as Map<String, dynamic>),
+        levelTopics: (json['levelTopics'] as List<dynamic>?)
+            ?.map((e) => LevelTopic.fromJson(e as Map<String, dynamic>))
+            .toList(),
+        candidateProvider: json['candidateProvider'] as List<dynamic>?,
+        providerName: json['providerName'] as dynamic,
+        providerUserId: json['providerUserId'] as int?,
+        requesterName: json['requesterName'] as String?,
+        requesterUserId: json['requesterUserId'] as int?,
         productName: json['productName'] as String?,
-        productCategoryId: json['productCategoryId'] as int?,
-        productCategoryName: json['productCategoryName'] as dynamic,
         providersNationalIdNumber: json['providersNationalIDNumber'] as dynamic,
         requesterUserName: json['requesterUser_Name'] as dynamic,
         paymentMethodName: json['paymentMethodName'] as dynamic,
-        currencyName: json['currencyName'] as String?,
+        currencyName: json['currencyName'] as dynamic,
         providersNationalIdNumber2:
             json['providersNationalIDNumber2'] as dynamic,
-        addressName: json['addressName'] as String?,
-        providerName: json['providerName'] as dynamic,
-        requesterName: json['requesterName'] as dynamic,
-        levelTopic: json['levelTopic'] as dynamic,
+        address: json['address'] == null
+            ? null
+            : Address.fromJson(json['address'] as Map<String, dynamic>),
+        students: (json['students'] as List<dynamic>?)
+            ?.map((e) => Student.fromJson(e as Map<String, dynamic>))
+            .toList(),
+        skills: json['skills'] as List<dynamic>?,
+        categoryId: json['categoryId'] as int?,
+        categoryName: json['categoryName'] as String?,
+        currentStatusStr: json['currentStatusStr'] as String?,
+        levelTopic: json['levelTopic'] as String?,
       );
 
   Map<String, dynamic> toJson() => {
         'order': order?.toJson(),
+        'levelTopics': levelTopics?.map((e) => e.toJson()).toList(),
+        'candidateProvider': candidateProvider,
+        'providerName': providerName,
+        'providerUserId': providerUserId,
+        'requesterName': requesterName,
+        'requesterUserId': requesterUserId,
         'productName': productName,
-        'productCategoryId': productCategoryId,
-        'productCategoryName': productCategoryName,
         'providersNationalIDNumber': providersNationalIdNumber,
         'requesterUser_Name': requesterUserName,
         'paymentMethodName': paymentMethodName,
         'currencyName': currencyName,
         'providersNationalIDNumber2': providersNationalIdNumber2,
-        'addressName': addressName,
-        'providerName': providerName,
-        'requesterName': requesterName,
+        'address': address?.toJson(),
+        'students': students?.map((e) => e.toJson()).toList(),
+        'skills': skills,
+        'categoryId': categoryId,
+        'categoryName': categoryName,
+        'currentStatusStr': currentStatusStr,
         'levelTopic': levelTopic,
       };
 }

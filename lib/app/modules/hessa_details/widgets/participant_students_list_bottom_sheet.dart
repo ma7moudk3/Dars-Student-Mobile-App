@@ -2,6 +2,7 @@ import 'package:hessa_student/app/modules/hessa_details/controllers/hessa_detail
 
 import '../../../../generated/locales.g.dart';
 import '../../../constants/exports.dart';
+import '../../../data/models/classes/item.dart';
 
 class ParticipantListBottomSheetContent
     extends GetView<HessaDetailsController> {
@@ -42,14 +43,16 @@ class ParticipantListBottomSheetContent
               children: [
                 PrimaryText(
                   LocaleKeys.participant_students,
-                  fontSize: 16.sp,
+                  fontSize: 16,
                   fontWeight: FontWeightManager.light,
                 ),
                 SizedBox(height: 15.h),
                 Expanded(
                   child: SingleChildScrollView(
                     child: ListView.builder(
-                        itemCount: 3,
+                        itemCount: controller
+                                .hessaOrderDetails.result?.students?.length ??
+                            0,
                         shrinkWrap: true,
                         physics: const NeverScrollableScrollPhysics(),
                         itemBuilder: (BuildContext context, int index) {
@@ -82,17 +85,48 @@ class ParticipantListBottomSheetContent
                                           CrossAxisAlignment.start,
                                       children: [
                                         PrimaryText(
-                                          "وليد علي",
+                                          controller.hessaOrderDetails.result
+                                                  ?.students?[index].name ??
+                                              "",
                                         ),
-                                        SizedBox(height: 15.h),
+                                        SizedBox(height: 10.h),
                                         Row(
                                           children: [
                                             SvgPicture.asset(
                                                 ImagesManager.classIcon),
                                             SizedBox(width: 5.w),
                                             PrimaryText(
-                                              "الصف الثاني",
-                                              fontSize: 14.sp,
+                                              controller.classes.result !=
+                                                          null &&
+                                                      controller.classes.result!
+                                                              .items !=
+                                                          null
+                                                  ? controller.classes.result!
+                                                              .items!
+                                                              .firstWhereOrNull((Item level) =>
+                                                                  level.id ==
+                                                                  controller
+                                                                      .hessaOrderDetails
+                                                                      .result
+                                                                      ?.students?[
+                                                                          index]
+                                                                      .levelId) !=
+                                                          null
+                                                      ? controller.classes
+                                                              .result!.items!
+                                                              .firstWhereOrNull(
+                                                                  (Item level) =>
+                                                                      level.id ==
+                                                                      controller
+                                                                          .hessaOrderDetails
+                                                                          .result
+                                                                          ?.students?[index]
+                                                                          .levelId)!
+                                                              .displayName ??
+                                                          ""
+                                                      : ""
+                                                  : "",
+                                              fontSize: 14,
                                               color: ColorManager.fontColor7,
                                               fontWeight:
                                                   FontWeightManager.softLight,
@@ -119,7 +153,7 @@ class ParticipantListBottomSheetContent
                                           child: Icon(
                                             Icons.check_rounded,
                                             color: ColorManager.primary,
-                                            size: 13.sp,
+                                            size: 13,
                                           ),
                                         ),
                                       ),

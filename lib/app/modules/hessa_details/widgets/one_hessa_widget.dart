@@ -14,6 +14,7 @@ class OneHessaWidget extends GetView<HessaDetailsController> {
 
   @override
   Widget build(BuildContext context) {
+    log(controller.hessaOrder.toJson().toString());
     return Column(
       children: [
         SizedBox(height: 22.h),
@@ -88,13 +89,14 @@ class OneHessaWidget extends GetView<HessaDetailsController> {
                 width: Get.width,
                 height: 100.h,
                 child: ListView.builder(
-                  itemCount: 3,
+                  itemCount:
+                      controller.hessaOrderDetails.result?.students?.length ??
+                          0,
                   scrollDirection: Axis.horizontal,
                   shrinkWrap: true,
-                  // physics: const NeverScrollableScrollPhysics(),
                   itemBuilder: (BuildContext context, int index) {
                     return Padding(
-                      padding: EdgeInsets.only(left: 15.w),
+                      padding: EdgeInsets.only(left: 10.w),
                       child: GestureDetector(
                         behavior: HitTestBehavior.opaque,
                         onTap: () {
@@ -127,8 +129,10 @@ class OneHessaWidget extends GetView<HessaDetailsController> {
                             ),
                             SizedBox(width: 10.w),
                             PrimaryText(
-                              'محمد عبد الله',
-                              fontSize: 14.sp,
+                              controller.hessaOrderDetails.result
+                                      ?.students?[index].name ??
+                                  "",
+                              fontSize: 14,
                               fontWeight: FontWeightManager.softLight,
                             ),
                           ],

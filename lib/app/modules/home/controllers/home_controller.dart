@@ -28,6 +28,7 @@ class HomeController extends GetxController {
     }
     super.onReady();
   }
+
   @override
   void onInit() async {
     await checkInternet();
