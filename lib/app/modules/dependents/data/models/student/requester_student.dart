@@ -31,7 +31,8 @@ class RequesterStudent {
     return RequesterStudent(
       name: json['name'] as String?,
       requesterStudentPhoto: json['requesterStudentPhoto'] as String?,
-      requesterStudentPhotoFileName: json['requesterStudentPhotoFileName'] as String?,
+      requesterStudentPhotoFileName:
+          json['requesterStudentPhotoFileName'] as String?,
       genderId: json['genderId'] as int?,
       schoolName: json['schoolName'] as String?,
       details: json['details'] as String?,

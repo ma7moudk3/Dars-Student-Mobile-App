@@ -1,3 +1,5 @@
+import 'package:flutter/services.dart';
+
 import '../../app/constants/exports.dart';
 import '../../generated/locales.g.dart';
 import 'global_button.dart';
@@ -7,10 +9,11 @@ class ConfirmBackDialogContent extends StatelessWidget {
     Key? key,
     this.title,
     this.subTitle,
+    this.isCloseApp = false,
   }) : super(key: key);
 
   final String? title, subTitle;
-
+  final bool isCloseApp;
   @override
   Widget build(BuildContext context) {
     return Material(
@@ -57,7 +60,13 @@ class ConfirmBackDialogContent extends StatelessWidget {
                       Get.back();
                     }
                     Future.delayed(const Duration(milliseconds: 280))
-                        .then((value) => Get.back());
+                        .then((value) {
+                      if (isCloseApp) {
+                        SystemNavigator.pop();
+                      } else {
+                        Get.back();
+                      }
+                    });
                   },
                   title: LocaleKeys.ok.tr,
                 ),

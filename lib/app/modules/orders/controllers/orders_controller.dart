@@ -22,7 +22,7 @@ class OrdersController extends GetxController {
     });
   }
 
-  void refreshOrdersPagingController() {
+  void refreshPagingController() {
     pagingController.refresh();
     update();
   }

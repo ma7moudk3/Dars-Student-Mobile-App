@@ -30,6 +30,7 @@ import '../../addresses/data/repos/addresses_repo_implement.dart';
 import '../../dependents/data/models/student/student.dart';
 import '../../dependents/data/repos/dependents_repo.dart';
 import '../../dependents/data/repos/dependents_repo_implement.dart';
+import '../../home/controllers/home_controller.dart';
 import '../../preferred_teachers/data/models/preferred_teacher/preferred_teacher.dart';
 import '../../preferred_teachers/data/repos/preferred_teachers_repo_implement.dart';
 import '../data/repos/order_hessa_repo_implement.dart';
@@ -186,7 +187,9 @@ class OrderHessaController extends GetxController {
           Get.back();
         }
         final OrdersController ordersController = Get.find<OrdersController>();
-        ordersController.refreshOrdersPagingController();
+        ordersController.refreshPagingController();
+        final HomeController homeController = Get.find<HomeController>();
+        await homeController.getMyOrders();
         await Future.delayed(const Duration(milliseconds: 550))
             .then((value) async {
           Get.back();

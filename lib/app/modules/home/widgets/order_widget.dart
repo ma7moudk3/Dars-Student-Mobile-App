@@ -1,4 +1,3 @@
-import 'package:hessa_student/app/core/helper_functions.dart';
 import 'package:hessa_student/app/routes/app_pages.dart';
 import 'package:hessa_student/generated/locales.g.dart';
 import 'package:intl/intl.dart';
@@ -22,10 +21,7 @@ class OrderWidget extends GetView<HomeController> {
     return GestureDetector(
       behavior: HitTestBehavior.opaque,
       onTap: () async {
-        await Get.toNamed(Routes.HESSA_DETAILS, arguments: {
-          "hessa_type": [HessaType.oneHessa, HessaType.studyingPackage]
-              .randomItem(), // temporarily :)
-        });
+        await Get.toNamed(Routes.HESSA_DETAILS, arguments: hessaOrder);
       },
       child: Container(
         height: 186.h,

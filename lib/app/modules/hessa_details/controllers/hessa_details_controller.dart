@@ -1,7 +1,11 @@
-import 'package:hessa_student/app/constants/constants.dart';
 import 'package:hessa_student/app/constants/exports.dart';
+import 'package:hessa_student/app/core/helper_functions.dart';
 
 import '../../../../generated/locales.g.dart';
+import '../../home/data/models/hessa_order.dart';
+import '../data/models/hessa_order_details/hessa_order_details.dart';
+import '../data/repos/hessa_details_repo.dart';
+import '../data/repos/hessa_details_repo_implement.dart';
 
 class HessaDetailsController extends GetxController {
   List<Map<String, dynamic>> hessaProperties = [
@@ -34,16 +38,37 @@ class HessaDetailsController extends GetxController {
       "title": LocaleKeys.studying_class.tr,
     },
   ];
-  HessaType hessaType = Get.arguments != null
-      ? Get.arguments["hessa_type"] ?? HessaType.oneHessa
-      : HessaType.oneHessa;
+  HessaOrder hessaOrder = Get.arguments ?? HessaOrder();
   final GlobalKey<FormState> formKey = GlobalKey<FormState>();
   late TextEditingController cancelReasonController;
-
+  final HessaDetailsRepo _hessaDetailsRepoImplement =
+      HessaDetailsRepoImplement();
+  HessaOrderDetails hessaOrderDetails = HessaOrderDetails();
+  RxBool isInternetConnected = true.obs, isLoading = true.obs;
   @override
-  void onInit() {
+  void onInit() async {
     cancelReasonController = TextEditingController();
+    await checkInternet();
     super.onInit();
+  }
+
+  Future checkInternet() async {
+    await checkInternetConnection(timeout: 10)
+        .then((bool internetStatus) async {
+      isInternetConnected.value = internetStatus;
+      if (isInternetConnected.value) {
+        await Future.wait([
+          getHessaOrderDetails(),
+        ]).then((value) => isLoading.value = false);
+      }
+    });
+  }
+
+  Future getHessaOrderDetails() async {
+    if (hessaOrder.id != null) {
+      hessaOrderDetails = await _hessaDetailsRepoImplement.getHessaOrderDetails(
+          hessaOrderId: hessaOrder.id!);
+    }
   }
 
   @override

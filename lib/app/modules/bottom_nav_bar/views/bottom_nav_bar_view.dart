@@ -23,6 +23,7 @@ class BottomNavBarView extends GetView<BottomNavBarController> {
                 ),
                 child: ConfirmBackDialogContent(
                   subTitle: LocaleKeys.wanna_out.tr,
+                  isCloseApp: true,
                 ),
               ),
             ),

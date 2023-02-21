@@ -37,6 +37,8 @@ class Links {
   static const String refreshToken = "api/TokenAuth/RefreshToken";
   static const String getAllHessaTeachers =
       "api/services/app/Providers/GetSearchForProviders";
+  static const String getHessaOrderDetails =
+      "api/services/app/Orders/GetOrderForView";
   static const String getHessaTeacher =
       "api/services/app/Providers/GetProviderDetailsForRequester";
   static const String changePassword =
