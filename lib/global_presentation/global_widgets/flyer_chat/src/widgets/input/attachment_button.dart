@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:hessa_student/global_presentation/global_features/color_manager.dart';
 
 import '../state/inherited_chat_theme.dart';
@@ -33,9 +34,9 @@ class AttachmentButton extends StatelessWidget {
               0,
             ),
         child: IconButton(
-          constraints: const BoxConstraints(
-            minHeight: 40,
-            minWidth: 40,
+          constraints: BoxConstraints(
+            minHeight: 35.h,
+            minWidth: 35.w,
           ),
           icon: isLoading
               ? SizedBox(

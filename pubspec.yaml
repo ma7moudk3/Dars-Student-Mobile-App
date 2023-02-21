@@ -59,6 +59,11 @@ dependencies:
   
 dev_dependencies: 
   flutter_lints: ^2.0.0
+  flutter_native_splash:
+flutter_native_splash:
+  color: "#5B83F9"
+  android: true
+  ios: true
   flutter_test: 
     sdk: flutter
   change_app_package_name: ^0.1.3

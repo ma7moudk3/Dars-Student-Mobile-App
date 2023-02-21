@@ -24,6 +24,7 @@ class ChatView extends GetView<ChatController> {
 
   @override
   Widget build(BuildContext context) {
+    Get.put(ChatController());
     return Scaffold(
       appBar: CustomAppBar(
         title: "محمد جميل",
@@ -43,233 +44,236 @@ class ChatView extends GetView<ChatController> {
         ),
       ),
       body: GetBuilder<ChatController>(builder: (ChatController controller) {
-        return Padding(
-          padding: EdgeInsets.only(
-            top: 24.h,
-          ),
-          child: Container(
-            width: Get.width,
-            decoration: BoxDecoration(
-              color: ColorManager.white,
-              borderRadius: BorderRadius.circular(15.0),
-              boxShadow: const [
-                BoxShadow(
-                  color: Color(0x1a000000),
-                  offset: Offset(0, 1),
-                  blurRadius: 8,
-                ),
-              ],
+        return SafeArea(
+          child: Padding(
+            padding: EdgeInsets.only(
+              top: 24.h,
             ),
-            child: Column(
-              children: [
-                Padding(
-                  padding:
-                      EdgeInsets.symmetric(horizontal: 16.w, vertical: 16.h),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Row(
-                        mainAxisSize: MainAxisSize.min,
-                        children: [
-                          StatefulBuilder(
-                              builder: (BuildContext context, setState) {
-                            String teacherPicture =
-                                "${Links.baseLink}${Links.profileImageById}?userId=${-1}";
-                            return Container(
-                              width: 60.w,
-                              height: 60.h,
-                              decoration: BoxDecoration(
-                                image: DecorationImage(
-                                  // image: CachedNetworkImageProvider(
-                                  //   teacherPicture, // the user that is being chatted with
-                                  //   errorListener: () {
-                                  //     setState(() {
-                                  //       teacherPicture =
-                                  //           "https://www.shareicon.net/data/2016/06/10/586098_guest_512x512.png";
-                                  //     });
-                                  //   },
-                                  // ),
-                                  image: AssetImage(ImagesManager.avatar),
-                                  fit: BoxFit.cover,
+            child: Container(
+              width: Get.width,
+              decoration: BoxDecoration(
+                color: ColorManager.white,
+                borderRadius: BorderRadius.circular(15.0),
+                boxShadow: const [
+                  BoxShadow(
+                    color: Color(0x1a000000),
+                    offset: Offset(0, 1),
+                    blurRadius: 8,
+                  ),
+                ],
+              ),
+              child: Column(
+                children: [
+                  Padding(
+                    padding:
+                        EdgeInsets.symmetric(horizontal: 16.w, vertical: 16.h),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Row(
+                          mainAxisSize: MainAxisSize.min,
+                          children: [
+                            StatefulBuilder(
+                                builder: (BuildContext context, setState) {
+                              String teacherPicture =
+                                  "${Links.baseLink}${Links.profileImageById}?userId=${-1}";
+                              return Container(
+                                width: 60.w,
+                                height: 60.h,
+                                decoration: BoxDecoration(
+                                  image: DecorationImage(
+                                    // image: CachedNetworkImageProvider(
+                                    //   teacherPicture, // the user that is being chatted with
+                                    //   errorListener: () {
+                                    //     setState(() {
+                                    //       teacherPicture =
+                                    //           "https://www.shareicon.net/data/2016/06/10/586098_guest_512x512.png";
+                                    //     });
+                                    //   },
+                                    // ),
+                                    image: AssetImage(ImagesManager.avatar),
+                                    fit: BoxFit.cover,
+                                  ),
+                                  borderRadius: BorderRadius.circular(15),
                                 ),
-                                borderRadius: BorderRadius.circular(15),
-                              ),
-                            );
-                          }),
-                          SizedBox(width: 16.w),
-                          Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              PrimaryText(
-                                "محمد جميل",
-                                fontSize: 14,
-                                color: ColorManager.primary,
-                                fontWeight: FontWeightManager.light,
-                              ),
-                              SizedBox(height: 4.h),
-                              PrimaryText(
-                                "نابلس ، الضفة",
-                                fontSize: 14,
-                                color: ColorManager.borderColor2,
-                                fontWeight: FontWeightManager.softLight,
-                              ),
-                            ],
-                          ),
-                          const Spacer(),
-                          Container(
-                            width: 140.w,
-                            height: 30.h,
-                            decoration: BoxDecoration(
-                              color: ColorManager.yellow.withOpacity(0.15),
-                              borderRadius: BorderRadius.circular(10),
+                              );
+                            }),
+                            SizedBox(width: 16.w),
+                            Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                PrimaryText(
+                                  "محمد جميل",
+                                  fontSize: 14,
+                                  color: ColorManager.primary,
+                                  fontWeight: FontWeightManager.light,
+                                ),
+                                SizedBox(height: 4.h),
+                                PrimaryText(
+                                  "نابلس ، الضفة",
+                                  fontSize: 14,
+                                  color: ColorManager.borderColor2,
+                                  fontWeight: FontWeightManager.softLight,
+                                ),
+                              ],
                             ),
-                            child: Center(
-                              child: Row(
-                                mainAxisSize: MainAxisSize.min,
-                                mainAxisAlignment: MainAxisAlignment.center,
-                                children: [
-                                  SizedBox(width: 8.w),
-                                  Container(
-                                    width: 16.w,
-                                    height: 16.h,
-                                    decoration: BoxDecoration(
-                                      borderRadius: BorderRadius.circular(5),
-                                      border: Border.all(
-                                        color: ColorManager.yellow,
-                                        width: 2,
+                            const Spacer(),
+                            Container(
+                              width: 140.w,
+                              height: 30.h,
+                              decoration: BoxDecoration(
+                                color: ColorManager.yellow.withOpacity(0.15),
+                                borderRadius: BorderRadius.circular(10),
+                              ),
+                              child: Center(
+                                child: Row(
+                                  mainAxisSize: MainAxisSize.min,
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  children: [
+                                    SizedBox(width: 8.w),
+                                    Container(
+                                      width: 16.w,
+                                      height: 16.h,
+                                      decoration: BoxDecoration(
+                                        borderRadius: BorderRadius.circular(5),
+                                        border: Border.all(
+                                          color: ColorManager.yellow,
+                                          width: 2,
+                                        ),
+                                      ),
+                                      child: Center(
+                                        child: Icon(
+                                          Icons.add_rounded,
+                                          color: ColorManager.yellow,
+                                          size: 10.sp,
+                                        ),
                                       ),
                                     ),
-                                    child: Center(
-                                      child: Icon(
-                                        Icons.add_rounded,
-                                        color: ColorManager.yellow,
-                                        size: 10.sp,
-                                      ),
+                                    SizedBox(width: 8.w),
+                                    PrimaryText(
+                                      "اعتماد المدرس",
+                                      fontSize: 14,
+                                      color: ColorManager.yellow,
+                                      fontWeight: FontWeightManager.light,
                                     ),
-                                  ),
-                                  SizedBox(width: 8.w),
-                                  PrimaryText(
-                                    "اعتماد المدرس",
-                                    fontSize: 14,
-                                    color: ColorManager.yellow,
-                                    fontWeight: FontWeightManager.light,
-                                  ),
-                                ],
+                                  ],
+                                ),
                               ),
                             ),
-                          ),
-                        ],
-                      ),
-                      SizedBox(height: 16.h),
-                      moreDivider(),
-                    ],
-                  ),
-                ),
-                Expanded(
-                  child: Chat(
-                    l10n: Get.locale!.languageCode != "ar"
-                        ? const ChatL10nEn()
-                        : const ChatL10nAr(),
-                    onMessageLongPress:
-                        (BuildContext context, types.Message message) async {
-                      await controller.handleOnLongPressMessage(
-                          message, context);
-                    },
-                    disableImageGallery: true,
-                    user: types.User(
-                      id: CacheHelper.instance.getUserId().toString(),
-                    ),
-                    messages: controller.messages,
-                    // messages: const [],
-                    showUserAvatars: true,
-                    showUserNames: false,
-                    textMessageBuilder: (types.TextMessage message,
-                        {required int messageWidth, required bool showName}) {
-                      return TextMessageWidget(
-                        message: message,
-                        messageWidth: messageWidth,
-                        showName: showName,
-                      );
-                    },
-                    imageMessageBuilder: (types.ImageMessage message,
-                        {required int messageWidth}) {
-                      return ImageMessageWidget(
-                        message: message,
-                        messageWidth: messageWidth,
-                      );
-                    },
-                    fileMessageBuilder: (types.FileMessage message,
-                        {required int messageWidth}) {
-                      return FileMessageWidget(
-                        message: message,
-                        messageWidth: messageWidth,
-                      );
-                    },
-                    onSendPressed: (types.PartialText message) {},
-                    theme: DefaultChatTheme(
-                      inputMargin: EdgeInsets.only(
-                          bottom: 16.h, right: 16.w, left: 16.w),
-                      primaryColor: ColorManager.primary,
-                      inputTextColor: ColorManager.fontColor,
-                      inputTextCursorColor: ColorManager.primary,
-                      inputBorderRadius: BorderRadius.circular(15),
-                      attachmentButtonIcon: Image.asset(
-                        'assets/images/flyer_chat/attachment_icon.png',
-                        color: ColorManager.borderColor2,
-                        height: 40.h,
-                        width: 40.w,
-                      ),
-                      sendButtonIcon: Image.asset(
-                        'assets/images/flyer_chat/send_icon.png',
-                        height: 35.h,
-                        width: 35.w,
-                      ),
-                      userAvatarImageBackgroundColor:
-                          ColorManager.grey.withOpacity(0.4),
-                      inputTextStyle: const TextStyle(
-                        fontSize: 16,
-                        fontWeight: FontWeightManager.light,
-                        height: 1.5,
-                        fontFamily: FontConstants.fontFamily,
-                      ),
-                      emptyChatPlaceholderTextStyle: TextStyle(
-                        fontSize: 16,
-                        fontWeight: FontWeightManager.light,
-                        height: 1.5,
-                        color: ColorManager.fontColor7,
-                        fontFamily: FontConstants.fontFamily,
-                      ),
-                      inputBackgroundColor: ColorManager.darkAccent2,
-                    ),
-                    onAttachmentPressed: controller.handleAtachmentPressed,
-                    dateHeaderBuilder: (dateHeader) {
-                      return Center(
-                        child: Container(
-                          margin: EdgeInsets.only(bottom: 15.h, top: 5.h),
-                          child: PrimaryText(
-                            intl.DateFormat.yMEd().format(dateHeader.dateTime),
-                            fontSize: 13,
-                            color: ColorManager.fontColor7,
-                          ),
+                          ],
                         ),
-                      );
-                    },
-                    isAttachmentUploading: controller.isAttachmentUploading,
-                    onMessageTap: controller.handleMessageTap,
-                    onPreviewDataFetched: controller.handlePreviewDataFetched,
-                    customBottomWidget: Input(
-                      isAttachmentUploading: controller.isAttachmentUploading,
+                        SizedBox(height: 16.h),
+                        moreDivider(),
+                      ],
+                    ),
+                  ),
+                  Expanded(
+                    child: Chat(
+                      l10n: Get.locale!.languageCode != "ar"
+                          ? const ChatL10nEn()
+                          : const ChatL10nAr(),
+                      onMessageLongPress:
+                          (BuildContext context, types.Message message) async {
+                        await controller.handleOnLongPressMessage(
+                            message, context);
+                      },
+                      disableImageGallery: true,
+                      user: types.User(
+                        id: CacheHelper.instance.getUserId().toString(),
+                      ),
+                      messages: controller.messages,
+                      // messages: const [],
+                      showUserAvatars: true,
+                      showUserNames: false,
+                      textMessageBuilder: (types.TextMessage message,
+                          {required int messageWidth, required bool showName}) {
+                        return TextMessageWidget(
+                          message: message,
+                          messageWidth: messageWidth,
+                          showName: showName,
+                        );
+                      },
+                      imageMessageBuilder: (types.ImageMessage message,
+                          {required int messageWidth}) {
+                        return ImageMessageWidget(
+                          message: message,
+                          messageWidth: messageWidth,
+                        );
+                      },
+                      fileMessageBuilder: (types.FileMessage message,
+                          {required int messageWidth}) {
+                        return FileMessageWidget(
+                          message: message,
+                          messageWidth: messageWidth,
+                        );
+                      },
+                      onSendPressed: (types.PartialText message) {},
+                      theme: DefaultChatTheme(
+                        inputMargin: EdgeInsets.only(
+                            bottom: 10.h, right: 16.w, left: 16.w, top:  10.h),
+                        primaryColor: ColorManager.primary,
+                        inputTextColor: ColorManager.fontColor,
+                        inputTextCursorColor: ColorManager.primary,
+                        inputBorderRadius: BorderRadius.circular(15),
+                        attachmentButtonIcon: Image.asset(
+                          'assets/images/flyer_chat/attachment_icon.png',
+                          color: ColorManager.borderColor2,
+                          height: 35.h,
+                          width: 35.w,
+                        ),
+                        sendButtonIcon: Image.asset(
+                          'assets/images/flyer_chat/send_icon.png',
+                          height: 35.h,
+                          width: 35.w,
+                        ),
+                        userAvatarImageBackgroundColor:
+                            ColorManager.grey.withOpacity(0.4),
+                        inputTextStyle: const TextStyle(
+                          fontSize: 16,
+                          fontWeight: FontWeightManager.light,
+                          height: 1.5,
+                          fontFamily: FontConstants.fontFamily,
+                        ),
+                        emptyChatPlaceholderTextStyle: TextStyle(
+                          fontSize: 16,
+                          fontWeight: FontWeightManager.light,
+                          height: 1.5,
+                          color: ColorManager.fontColor7,
+                          fontFamily: FontConstants.fontFamily,
+                        ),
+                        inputBackgroundColor: ColorManager.darkAccent2,
+                      ),
                       onAttachmentPressed: controller.handleAtachmentPressed,
-                      onSendPressed: controller.handleSendPressed,
-                      options: InputOptions(
-                        onTextChanged: (String? value) async {},
-                        sendButtonVisibilityMode:
-                            SendButtonVisibilityMode.editing,
+                      dateHeaderBuilder: (dateHeader) {
+                        return Center(
+                          child: Container(
+                            margin: EdgeInsets.only(bottom: 15.h, top: 5.h),
+                            child: PrimaryText(
+                              intl.DateFormat.yMEd()
+                                  .format(dateHeader.dateTime),
+                              fontSize: 13,
+                              color: ColorManager.fontColor7,
+                            ),
+                          ),
+                        );
+                      },
+                      isAttachmentUploading: controller.isAttachmentUploading,
+                      onMessageTap: controller.handleMessageTap,
+                      onPreviewDataFetched: controller.handlePreviewDataFetched,
+                      customBottomWidget: Input(
+                        isAttachmentUploading: controller.isAttachmentUploading,
+                        onAttachmentPressed: controller.handleAtachmentPressed,
+                        onSendPressed: controller.handleSendPressed,
+                        options: InputOptions(
+                          onTextChanged: (String? value) async {},
+                          sendButtonVisibilityMode:
+                              SendButtonVisibilityMode.editing,
+                        ),
                       ),
                     ),
                   ),
-                ),
-              ],
+                ],
+              ),
             ),
           ),
         );

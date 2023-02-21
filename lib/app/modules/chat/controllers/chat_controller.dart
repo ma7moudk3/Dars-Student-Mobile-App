@@ -95,92 +95,96 @@ class ChatController extends GetxController with WidgetsBindingObserver {
       showCupertinoModalPopup(
           context: Get.context!,
           builder: (BuildContext context) {
-            return CupertinoActionSheet(
-              actions: [
-                CupertinoActionSheetAction(
-                  child: PrimaryText(LocaleKeys.camera.tr),
-                  onPressed: () async {
-                    Get.back();
-                    await handleImageSelection(imageSource: ImageSource.camera);
-                  },
-                ),
-                CupertinoActionSheetAction(
-                  child: PrimaryText("gallery".tr),
-                  onPressed: () async {
-                    Get.back();
-                    await handleImageSelection(
-                        imageSource: ImageSource.gallery);
-                  },
-                ),
-                Visibility(
-                  visible: isFileFunctionalityNeeded,
-                  child: CupertinoActionSheetAction(
-                    // the file functionality is not required at the moment
-                    child: PrimaryText("file".tr),
+            return SafeArea(
+              child: CupertinoActionSheet(
+                actions: [
+                  CupertinoActionSheetAction(
+                    child: PrimaryText(LocaleKeys.camera.tr),
                     onPressed: () async {
                       Get.back();
-                      await handleFileSelection();
+                      await handleImageSelection(imageSource: ImageSource.camera);
                     },
                   ),
-                ),
-                CupertinoActionSheetAction(
-                  child: PrimaryText("close".tr),
-                  onPressed: () {
-                    Get.back();
-                  },
-                ),
-              ],
+                  CupertinoActionSheetAction(
+                    child: PrimaryText("gallery".tr),
+                    onPressed: () async {
+                      Get.back();
+                      await handleImageSelection(
+                          imageSource: ImageSource.gallery);
+                    },
+                  ),
+                  Visibility(
+                    visible: isFileFunctionalityNeeded,
+                    child: CupertinoActionSheetAction(
+                      // the file functionality is not required at the moment
+                      child: PrimaryText("file".tr),
+                      onPressed: () async {
+                        Get.back();
+                        await handleFileSelection();
+                      },
+                    ),
+                  ),
+                  CupertinoActionSheetAction(
+                    child: PrimaryText("close".tr),
+                    onPressed: () {
+                      Get.back();
+                    },
+                  ),
+                ],
+              ),
             );
           });
     } else {
       Get.bottomSheet(
-        Padding(
-          padding: EdgeInsets.symmetric(horizontal: 16.w, vertical: 20.h),
-          child: SizedBox(
-            height: isFileFunctionalityNeeded == true
-                ? Get.height * 0.18
-                : Get.height * 0.13,
-            child: ListView(
-              children: [
-                ListTile(
-                  leading: const Icon(
-                    Icons.camera_alt_rounded,
-                    size: 25,
-                  ),
-                  title: PrimaryText("camera".tr),
-                  onTap: () async {
-                    Get.back();
-                    await handleImageSelection(imageSource: ImageSource.camera);
-                  },
-                ),
-                ListTile(
-                  leading: const Icon(
-                    Icons.photo_rounded,
-                    size: 25,
-                  ),
-                  title: PrimaryText("gallery".tr),
-                  onTap: () async {
-                    Get.back();
-                    await handleImageSelection(
-                        imageSource: ImageSource.gallery);
-                  },
-                ),
-                Visibility(
-                  visible: isFileFunctionalityNeeded,
-                  child: ListTile(
-                    // the file functionality is not required at the moment
+        SafeArea(
+          child: Padding(
+            padding: EdgeInsets.symmetric(horizontal: 16.w, vertical: 20.h),
+            child: SizedBox(
+              height: isFileFunctionalityNeeded == true
+                  ? Get.height * 0.18
+                  : Get.height * 0.13,
+              child: ListView(
+                children: [
+                  ListTile(
                     leading: const Icon(
-                      Icons.file_present_rounded,
+                      Icons.camera_alt_rounded,
                       size: 25,
                     ),
-                    title: PrimaryText("file".tr),
+                    title: PrimaryText("camera".tr),
                     onTap: () async {
                       Get.back();
-                      await handleFileSelection();
+                      await handleImageSelection(imageSource: ImageSource.camera);
                     },
                   ),
-                ),
-              ],
+                  ListTile(
+                    leading: const Icon(
+                      Icons.photo_rounded,
+                      size: 25,
+                    ),
+                    title: PrimaryText("gallery".tr),
+                    onTap: () async {
+                      Get.back();
+                      await handleImageSelection(
+                          imageSource: ImageSource.gallery);
+                    },
+                  ),
+                  Visibility(
+                    visible: isFileFunctionalityNeeded,
+                    child: ListTile(
+                      // the file functionality is not required at the moment
+                      leading: const Icon(
+                        Icons.file_present_rounded,
+                        size: 25,
+                      ),
+                      title: PrimaryText("file".tr),
+                      onTap: () async {
+                        Get.back();
+                        await handleFileSelection();
+                      },
+                    ),
+                  ),
+                ],
+              ),
             ),
           ),
         ),
@@ -294,145 +298,32 @@ class ChatController extends GetxController with WidgetsBindingObserver {
       showCupertinoModalPopup(
         context: context,
         builder: (BuildContext context) {
-          return CupertinoActionSheet(
-            actions: [
-              Visibility(
-                visible: message.author.id ==
-                    CacheHelper.instance.getUserId().toString(),
-                child: CupertinoActionSheetAction(
-                  child: PrimaryText(
-                    LocaleKeys.delete_message.tr,
-                    fontSize: 16,
-                    fontWeight: FontWeightManager.softLight,
-                    color: ColorManager.accent,
-                  ),
-                  onPressed: () async {
-                    Get.back();
-                    // await FirebaseChatCore.instance.deleteMessage(
-                    //     Get.arguments["room"].id, message.id);
-                    if (message.type == MessageType.image) {
-                      types.ImageMessage imageMessage =
-                          message as types.ImageMessage;
-                      // await controller.deleteFileFromStorage(
-                      //     fileUrl: imageMessage.uri);
-                    } else if (message.type == MessageType.file) {
-                      types.FileMessage fileMessage =
-                          message as types.FileMessage;
-                      // await controller.deleteFileFromStorage(
-                      //     fileUrl: fileMessage.uri);
-                    }
-                  },
-                ),
-              ),
-              Visibility(
-                visible: message.type == MessageType.image,
-                child: CupertinoActionSheetAction(
-                  child: PrimaryText(
-                    LocaleKeys.download_image.tr,
-                    fontSize: 16,
-                    fontWeight: FontWeightManager.softLight,
-                  ),
-                  onPressed: () async {
-                    Get.back();
-                    try {
-                      showLoadingDialog();
-                      types.ImageMessage imageMessage =
-                          message as types.ImageMessage;
-                      if (imageMessage.uri.isNotEmpty) {
-                        await GallerySaver.saveImage(imageMessage.uri,
-                                albumName: 'Hessa Student')
-                            .then((value) {
-                          CustomSnackBar.showCustomSnackBar(
-                              title: LocaleKeys.success.tr,
-                              message: LocaleKeys.image_saved.tr);
-                        });
-                      }
-                      if (Get.isDialogOpen!) {
-                        Get.back();
-                      }
-                    } on PlatformException catch (error) {
-                      log(error.toString());
-                    }
-                  },
-                ),
-              ),
-              Visibility(
-                visible: message.type == MessageType.text,
-                child: CupertinoActionSheetAction(
-                  child: PrimaryText(
-                    LocaleKeys.copy_message.tr,
-                    fontSize: 16,
-                    fontWeight: FontWeightManager.softLight,
-                  ),
-                  onPressed: () async {
-                    Get.back();
-                    await Clipboard.setData(
-                      ClipboardData(text: (message as types.TextMessage).text),
-                    ).then((value) {
-                      CustomSnackBar.showCustomInfoSnackBar(
-                          title: LocaleKeys.note.tr,
-                          message: LocaleKeys.message_copied_succesfully.tr);
-                    });
-                  },
-                ),
-              ),
-              CupertinoActionSheetAction(
-                child: PrimaryText(
-                  LocaleKeys.close.tr,
-                  fontSize: 16,
-                  fontWeight: FontWeightManager.softLight,
-                ),
-                onPressed: () => Get.back(),
-              ),
-            ],
-          );
-        },
-      );
-    } else {
-      if ((message.type == MessageType.file) &&
-          message.author.id != CacheHelper.instance.getUserId().toString()) {
-        return; // do nothing
-      }
-      Get.bottomSheet(
-        Padding(
-          padding: EdgeInsets.symmetric(horizontal: 16.w, vertical: 20.h),
-          child: SizedBox(
-            height: ((message.type == MessageType.text ||
-                        message.type == MessageType.image) &&
-                    message.author.id ==
-                        CacheHelper.instance.getUserId().toString())
-                ? (Get.height * 0.13).h
-                : (Get.height * 0.06).h,
-            child: ListView(
-              children: [
+          return SafeArea(
+            child: CupertinoActionSheet(
+              actions: [
                 Visibility(
                   visible: message.author.id ==
                       CacheHelper.instance.getUserId().toString(),
-                  child: ListTile(
-                    leading: Icon(
-                      Icons.delete_rounded,
-                      color: ColorManager.accent,
-                      size: 25,
-                    ),
-                    title: PrimaryText(
+                  child: CupertinoActionSheetAction(
+                    child: PrimaryText(
                       LocaleKeys.delete_message.tr,
-                      color: ColorManager.accent,
-                      fontWeight: FontWeightManager.softLight,
                       fontSize: 16,
+                      fontWeight: FontWeightManager.softLight,
+                      color: ColorManager.accent,
                     ),
-                    onTap: () async {
+                    onPressed: () async {
                       Get.back();
                       // await FirebaseChatCore.instance.deleteMessage(
                       //     Get.arguments["room"].id, message.id);
                       if (message.type == MessageType.image) {
                         types.ImageMessage imageMessage =
                             message as types.ImageMessage;
-                        // await controller.deleteFileFromFirebaseStorage(
+                        // await controller.deleteFileFromStorage(
                         //     fileUrl: imageMessage.uri);
                       } else if (message.type == MessageType.file) {
                         types.FileMessage fileMessage =
                             message as types.FileMessage;
-                        // await controller.deleteFileFromFirebaseStorage(
+                        // await controller.deleteFileFromStorage(
                         //     fileUrl: fileMessage.uri);
                       }
                     },
@@ -440,17 +331,13 @@ class ChatController extends GetxController with WidgetsBindingObserver {
                 ),
                 Visibility(
                   visible: message.type == MessageType.image,
-                  child: ListTile(
-                    leading: const Icon(
-                      Icons.download_rounded,
-                      size: 25,
-                    ),
-                    title: PrimaryText(
+                  child: CupertinoActionSheetAction(
+                    child: PrimaryText(
                       LocaleKeys.download_image.tr,
                       fontSize: 16,
                       fontWeight: FontWeightManager.softLight,
                     ),
-                    onTap: () async {
+                    onPressed: () async {
                       Get.back();
                       try {
                         showLoadingDialog();
@@ -459,19 +346,16 @@ class ChatController extends GetxController with WidgetsBindingObserver {
                         if (imageMessage.uri.isNotEmpty) {
                           await GallerySaver.saveImage(imageMessage.uri,
                                   albumName: 'Hessa Student')
-                              .then((bool? value) {
-                            if (Get.isDialogOpen!) {
-                              Get.back();
-                            }
+                              .then((value) {
                             CustomSnackBar.showCustomSnackBar(
                                 title: LocaleKeys.success.tr,
                                 message: LocaleKeys.image_saved.tr);
                           });
                         }
-                      } on PlatformException catch (error) {
                         if (Get.isDialogOpen!) {
                           Get.back();
                         }
+                      } on PlatformException catch (error) {
                         log(error.toString());
                       }
                     },
@@ -479,21 +363,16 @@ class ChatController extends GetxController with WidgetsBindingObserver {
                 ),
                 Visibility(
                   visible: message.type == MessageType.text,
-                  child: ListTile(
-                    leading: const Icon(
-                      Icons.copy_rounded,
-                      size: 25,
-                    ),
-                    title: PrimaryText(
+                  child: CupertinoActionSheetAction(
+                    child: PrimaryText(
                       LocaleKeys.copy_message.tr,
                       fontSize: 16,
                       fontWeight: FontWeightManager.softLight,
                     ),
-                    onTap: () async {
+                    onPressed: () async {
                       Get.back();
                       await Clipboard.setData(
-                        ClipboardData(
-                            text: (message as types.TextMessage).text),
+                        ClipboardData(text: (message as types.TextMessage).text),
                       ).then((value) {
                         CustomSnackBar.showCustomInfoSnackBar(
                             title: LocaleKeys.note.tr,
@@ -502,7 +381,136 @@ class ChatController extends GetxController with WidgetsBindingObserver {
                     },
                   ),
                 ),
+                CupertinoActionSheetAction(
+                  child: PrimaryText(
+                    LocaleKeys.close.tr,
+                    fontSize: 16,
+                    fontWeight: FontWeightManager.softLight,
+                  ),
+                  onPressed: () => Get.back(),
+                ),
               ],
+            ),
+          );
+        },
+      );
+    } else {
+      if ((message.type == MessageType.file) &&
+          message.author.id != CacheHelper.instance.getUserId().toString()) {
+        return; // do nothing
+      }
+      await Get.bottomSheet(
+        SafeArea(
+          child: Padding(
+            padding: EdgeInsets.symmetric(horizontal: 16.w, vertical: 20.h),
+            child: SizedBox(
+              height: ((message.type == MessageType.text ||
+                          message.type == MessageType.image) &&
+                      message.author.id ==
+                          CacheHelper.instance.getUserId().toString())
+                  ? (Get.height * 0.13).h
+                  : (Get.height * 0.06).h,
+              child: ListView(
+                children: [
+                  Visibility(
+                    visible: message.author.id ==
+                        CacheHelper.instance.getUserId().toString(),
+                    child: ListTile(
+                      leading: Icon(
+                        Icons.delete_rounded,
+                        color: ColorManager.accent,
+                        size: 25,
+                      ),
+                      title: PrimaryText(
+                        LocaleKeys.delete_message.tr,
+                        color: ColorManager.accent,
+                        fontWeight: FontWeightManager.softLight,
+                        fontSize: 16,
+                      ),
+                      onTap: () async {
+                        Get.back();
+                        // await FirebaseChatCore.instance.deleteMessage(
+                        //     Get.arguments["room"].id, message.id);
+                        if (message.type == MessageType.image) {
+                          types.ImageMessage imageMessage =
+                              message as types.ImageMessage;
+                          // await controller.deleteFileFromFirebaseStorage(
+                          //     fileUrl: imageMessage.uri);
+                        } else if (message.type == MessageType.file) {
+                          types.FileMessage fileMessage =
+                              message as types.FileMessage;
+                          // await controller.deleteFileFromFirebaseStorage(
+                          //     fileUrl: fileMessage.uri);
+                        }
+                      },
+                    ),
+                  ),
+                  Visibility(
+                    visible: message.type == MessageType.image,
+                    child: ListTile(
+                      leading: const Icon(
+                        Icons.download_rounded,
+                        size: 25,
+                      ),
+                      title: PrimaryText(
+                        LocaleKeys.download_image.tr,
+                        fontSize: 16,
+                        fontWeight: FontWeightManager.softLight,
+                      ),
+                      onTap: () async {
+                        Get.back();
+                        try {
+                          showLoadingDialog();
+                          types.ImageMessage imageMessage =
+                              message as types.ImageMessage;
+                          if (imageMessage.uri.isNotEmpty) {
+                            await GallerySaver.saveImage(imageMessage.uri,
+                                    albumName: 'Hessa Student')
+                                .then((bool? value) {
+                              if (Get.isDialogOpen!) {
+                                Get.back();
+                              }
+                              CustomSnackBar.showCustomSnackBar(
+                                  title: LocaleKeys.success.tr,
+                                  message: LocaleKeys.image_saved.tr);
+                            });
+                          }
+                        } on PlatformException catch (error) {
+                          if (Get.isDialogOpen!) {
+                            Get.back();
+                          }
+                          log(error.toString());
+                        }
+                      },
+                    ),
+                  ),
+                  Visibility(
+                    visible: message.type == MessageType.text,
+                    child: ListTile(
+                      leading: const Icon(
+                        Icons.copy_rounded,
+                        size: 25,
+                      ),
+                      title: PrimaryText(
+                        LocaleKeys.copy_message.tr,
+                        fontSize: 16,
+                        fontWeight: FontWeightManager.softLight,
+                      ),
+                      onTap: () async {
+                        Get.back();
+                        await Clipboard.setData(
+                          ClipboardData(
+                              text: (message as types.TextMessage).text),
+                        ).then((value) {
+                          CustomSnackBar.showCustomInfoSnackBar(
+                              title: LocaleKeys.note.tr,
+                              message: LocaleKeys.message_copied_succesfully.tr);
+                        });
+                      },
+                    ),
+                  ),
+                ],
+              ),
             ),
           ),
         ),

@@ -161,8 +161,11 @@ class _InputState extends State<Input> {
 
     return Focus(
       autofocus: true,
-      child: Padding(
+      child: Container(
         padding: InheritedChatTheme.of(context).theme.inputMargin,
+        decoration: BoxDecoration(
+          borderRadius: InheritedChatTheme.of(context).theme.inputBorderRadius,
+        ),
         child: Material(
           borderRadius: InheritedChatTheme.of(context).theme.inputBorderRadius,
           color: ColorManager.transparent,
@@ -186,10 +189,11 @@ class _InputState extends State<Input> {
                     ),
                   ),
                   padding: EdgeInsets.only(
-                      top: _sendButtonVisible ? 8.5.h : 16.h,
-                      bottom: _sendButtonVisible ? 8.5.h : 16.h,
-                      right: 16.w,
-                      left: 16.w),
+                    top: _sendButtonVisible ? 8.5.h : 16.h,
+                    bottom: _sendButtonVisible ? 8.5.h : 16.h,
+                    right: 16.w,
+                    left: 16.w,
+                  ),
                   child: TextField(
                     controller: _textController,
                     cursorColor: InheritedChatTheme.of(context)
