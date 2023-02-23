@@ -87,37 +87,45 @@ class AboutHessaView extends GetView<AboutHessaController> {
                               ),
                             ),
                             SizedBox(height: 14.h),
-                            PrimaryText(
-                              LocaleKeys.follow_us,
-                              fontSize: 18.sp,
-                              fontWeight: FontWeightManager.light,
-                              color: ColorManager.primary,
-                            ),
-                            SizedBox(height: 14.h),
-                            Row(
-                              mainAxisAlignment: MainAxisAlignment.start,
-                              children: [
-                                GestureDetector(
-                                  behavior: HitTestBehavior.opaque,
-                                  onTap: () {},
-                                  child: SvgPicture.asset(
-                                      ImagesManager.whatsappIcon),
-                                ),
-                                SizedBox(width: 12.w),
-                                GestureDetector(
-                                  behavior: HitTestBehavior.opaque,
-                                  onTap: () {},
-                                  child: SvgPicture.asset(
-                                      ImagesManager.instagramIcon),
-                                ),
-                                SizedBox(width: 12.w),
-                                GestureDetector(
-                                  behavior: HitTestBehavior.opaque,
-                                  onTap: () {},
-                                  child: SvgPicture.asset(
-                                      ImagesManager.facebookIcon),
-                                ),
-                              ],
+                            Visibility(
+                              visible: false,
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  PrimaryText(
+                                    LocaleKeys.follow_us,
+                                    fontSize: 18.sp,
+                                    fontWeight: FontWeightManager.light,
+                                    color: ColorManager.primary,
+                                  ),
+                                  SizedBox(height: 14.h),
+                                  Row(
+                                    mainAxisAlignment: MainAxisAlignment.start,
+                                    children: [
+                                      GestureDetector(
+                                        behavior: HitTestBehavior.opaque,
+                                        onTap: () {},
+                                        child: SvgPicture.asset(
+                                            ImagesManager.whatsappIcon),
+                                      ),
+                                      SizedBox(width: 12.w),
+                                      GestureDetector(
+                                        behavior: HitTestBehavior.opaque,
+                                        onTap: () {},
+                                        child: SvgPicture.asset(
+                                            ImagesManager.instagramIcon),
+                                      ),
+                                      SizedBox(width: 12.w),
+                                      GestureDetector(
+                                        behavior: HitTestBehavior.opaque,
+                                        onTap: () {},
+                                        child: SvgPicture.asset(
+                                            ImagesManager.facebookIcon),
+                                      ),
+                                    ],
+                                  ),
+                                ],
+                              ),
                             ),
                           ],
                         ),

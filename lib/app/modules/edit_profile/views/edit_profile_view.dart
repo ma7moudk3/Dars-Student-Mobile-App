@@ -105,9 +105,10 @@ class EditProfileView extends GetView<EditProfileController> {
           child: SingleChildScrollView(
             child: Padding(
               padding: EdgeInsets.only(
+                top: 25.h,
                 left: 16.w,
                 right: 16.w,
-                bottom: 16.h,
+                bottom: 20.h,
               ),
               child: Column(
                 children: [
@@ -374,7 +375,89 @@ class EditProfileView extends GetView<EditProfileController> {
                                     ],
                                   ),
                                 ),
-                                SizedBox(height: 13.h),
+                                SizedBox(height: 12.h),
+                                PrimaryTextField(
+                                  fontSize: 14.sp,
+                                  readOnly: true,
+                                  ifReadOnlyTextColor: ColorManager.fontColor7,
+                                  controller: controller.dateOfBirthController,
+                                  title: LocaleKeys.date_of_birth,
+                                  borderRadius: BorderRadius.circular(14),
+                                  focusNode: controller.dateOfBirthFocusNode,
+                                  titleFontWeight: FontWeightManager.softLight,
+                                  onTap: () async {
+                                    // TODO: UNCOMMENT THIS CODE WHEN EDITING THE DATE OF BIRTH IS NEEDED
+                                    // DateTime maxdate = DateTime(
+                                    //   DateTime.now().year - 18,
+                                    //   DateTime.now().month,
+                                    //   DateTime.now().day,
+                                    // );
+                                    // await Get.bottomSheet(
+                                    //   isScrollControlled: true,
+                                    //   shape: const RoundedRectangleBorder(
+                                    //     borderRadius: BorderRadius.only(
+                                    //       topLeft: Radius.circular(20),
+                                    //       topRight: Radius.circular(20),
+                                    //     ),
+                                    //   ),
+                                    //   DateOfBirthBottomSheetContent(
+                                    //     maxdate: maxdate,
+                                    //     onSelectionChanged:
+                                    //         (DateRangePickerSelectionChangedArgs
+                                    //             dateRangePickerSelectionChangedArgs) {
+                                    //       controller.changeDate(
+                                    //           dateRangePickerSelectionChangedArgs);
+                                    //     },
+                                    //     dateOfBirth: controller.dateOfBirth,
+                                    //     dateOfBirthRangeController: controller
+                                    //         .dateOfBirthRangeController,
+                                    //   ),
+                                    //   backgroundColor: ColorManager.white,
+                                    // );
+                                  },
+                                  suffixIcon: Container(
+                                    margin:
+                                        EdgeInsets.symmetric(horizontal: 14.w),
+                                    child: SvgPicture.asset(
+                                      ImagesManager.calendarIcon,
+                                      width: 22.w,
+                                      height: 22.h,
+                                      color: controller
+                                              .dateOfBirthIconErrorColor ??
+                                          (controller
+                                                  .dateOfBirthFocusNode.hasFocus
+                                              ? (controller
+                                                      .dateOfBirthIconErrorColor ??
+                                                  ColorManager.primary)
+                                              : ColorManager.primaryLight),
+                                    ),
+                                  ),
+                                  suffixIconConstraints: BoxConstraints(
+                                    minHeight: 22.h,
+                                    minWidth: 22.w,
+                                  ),
+                                  enabledBorder: OutlineInputBorder(
+                                    borderRadius: BorderRadius.circular(14),
+                                    borderSide: BorderSide(
+                                        color: ColorManager.borderColor2),
+                                  ),
+                                  focusedBorder: OutlineInputBorder(
+                                    borderRadius: BorderRadius.circular(14),
+                                    borderSide:
+                                        BorderSide(color: ColorManager.primary),
+                                  ),
+                                  errorBorder: OutlineInputBorder(
+                                    borderRadius: BorderRadius.circular(14),
+                                    borderSide:
+                                        BorderSide(color: ColorManager.red),
+                                  ),
+                                  borderSide: BorderSide(
+                                    color: ColorManager.primary,
+                                  ),
+                                  hintText: LocaleKeys.choose_date_of_birth,
+                                  validator: (String? dateOfBirth) => controller
+                                      .validateDateOfBirth(dateOfBirth),
+                                ),
                                 IntlPhoneNumberTextField(
                                   isRequired: true,
                                   controller: controller.phoneController,
@@ -405,72 +488,98 @@ class EditProfileView extends GetView<EditProfileController> {
                                 ),
                                 SizedBox(height: 20.h),
                                 Row(
-                                  mainAxisAlignment: MainAxisAlignment.start,
                                   children: [
-                                    Row(
-                                      children: [
-                                        PrimaryText(
-                                          LocaleKeys.gender,
-                                          color: ColorManager.fontColor,
-                                          fontWeight: FontWeightManager.light,
-                                          fontSize: 14.sp,
-                                        ),
-                                        SizedBox(width: 2.w),
-                                        PrimaryText(
-                                          "*",
-                                          fontSize: 16.sp,
-                                          fontWeight:
-                                              FontWeightManager.softLight,
-                                          color: ColorManager.accent,
-                                        ),
-                                      ],
+                                    PrimaryText(
+                                      "${LocaleKeys.gender.tr} : ",
+                                      color: ColorManager.fontColor,
+                                      fontWeight: FontWeightManager.light,
+                                      fontSize: 14.sp,
                                     ),
-                                    SizedBox(width: 38.w),
-                                    Row(
-                                      children: List.generate(2, (int index) {
-                                        return GestureDetector(
-                                          onTap: () {
-                                            controller.changeGender(index);
-                                          },
-                                          child: Container(
-                                            width: 60.w,
-                                            height: 32.h,
-                                            margin: EdgeInsets.only(
-                                              right: index == 0 ? 0 : 10.w,
-                                            ),
-                                            decoration: BoxDecoration(
-                                              color: controller.gender == index
-                                                  ? ColorManager.primary
-                                                  : ColorManager.transparent,
-                                              borderRadius:
-                                                  BorderRadius.circular(8),
-                                              border: controller.gender != index
-                                                  ? Border.all(
-                                                      color:
-                                                          ColorManager.primary,
-                                                      width: 1,
-                                                    )
-                                                  : null,
-                                              boxShadow: const [],
-                                            ),
-                                            child: Center(
-                                              child: PrimaryText(
-                                                index == 0
-                                                    ? LocaleKeys.male
-                                                    : LocaleKeys.female,
-                                                color: controller.gender ==
-                                                        index
-                                                    ? ColorManager.white
-                                                    : ColorManager.borderColor,
-                                                fontWeight:
-                                                    FontWeightManager.light,
-                                              ),
-                                            ),
-                                          ),
-                                        );
-                                      }),
+                                    SizedBox(width: 10.w),
+                                    PrimaryText(
+                                      controller.gender == 0
+                                          ? LocaleKeys.male.tr
+                                          : LocaleKeys.female.tr,
+                                      color: ColorManager.primary,
+                                      fontWeight: FontWeightManager.light,
+                                      fontSize: 14.sp,
                                     ),
                                   ],
+                                ),
+                                Visibility(
+                                  visible:
+                                      false, // TODO: CHANGE THIS TO TRUE WHEN EDITING THE GENDER IS NEEDED/POSSIBLE
+                                  child: Row(
+                                    mainAxisAlignment: MainAxisAlignment.start,
+                                    children: [
+                                      Row(
+                                        children: [
+                                          PrimaryText(
+                                            LocaleKeys.gender.tr,
+                                            color: ColorManager.fontColor,
+                                            fontWeight: FontWeightManager.light,
+                                            fontSize: 14.sp,
+                                          ),
+                                          SizedBox(width: 2.w),
+                                          PrimaryText(
+                                            "*",
+                                            fontSize: 16.sp,
+                                            fontWeight:
+                                                FontWeightManager.softLight,
+                                            color: ColorManager.accent,
+                                          ),
+                                        ],
+                                      ),
+                                      SizedBox(width: 38.w),
+                                      Row(
+                                        children: List.generate(2, (int index) {
+                                          return GestureDetector(
+                                            onTap: () {
+                                              controller.changeGender(index);
+                                            },
+                                            child: Container(
+                                              width: 60.w,
+                                              height: 32.h,
+                                              margin: EdgeInsets.only(
+                                                right: index == 0 ? 0 : 10.w,
+                                              ),
+                                              decoration: BoxDecoration(
+                                                color: controller.gender ==
+                                                        index
+                                                    ? ColorManager.primary
+                                                    : ColorManager.transparent,
+                                                borderRadius:
+                                                    BorderRadius.circular(8),
+                                                border:
+                                                    controller.gender != index
+                                                        ? Border.all(
+                                                            color: ColorManager
+                                                                .primary,
+                                                            width: 1,
+                                                          )
+                                                        : null,
+                                                boxShadow: const [],
+                                              ),
+                                              child: Center(
+                                                child: PrimaryText(
+                                                  index == 0
+                                                      ? LocaleKeys.male
+                                                      : LocaleKeys.female,
+                                                  color:
+                                                      controller.gender == index
+                                                          ? ColorManager.white
+                                                          : ColorManager
+                                                              .borderColor,
+                                                  fontWeight:
+                                                      FontWeightManager.light,
+                                                ),
+                                              ),
+                                            ),
+                                          );
+                                        }),
+                                      ),
+                                    ],
+                                  ),
                                 ),
                               ],
                             );
@@ -479,7 +588,7 @@ class EditProfileView extends GetView<EditProfileController> {
                       ),
                     ),
                   ),
-                  SizedBox(height: 36.h),
+                  SizedBox(height: 25.h),
                   SafeArea(
                     child: Padding(
                       padding: EdgeInsets.symmetric(horizontal: 16.w),

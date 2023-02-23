@@ -84,4 +84,5 @@ class Links {
   static const String allMyAddresses =
       "api/services/app/Requesters/GetRequesterAddressForEdit";
   static const String deleteAddress = "api/services/app/Addresses/Delete";
+  static const String deleteNotification = "api/services/app/Notification/DeleteNotification";
 }

@@ -7,6 +7,8 @@ import 'package:hessa_student/app/modules/login/data/models/current_user_profile
 import 'package:hessa_student/app/modules/login/data/repos/login_repo.dart';
 import 'package:hessa_student/global_presentation/global_widgets/loading.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:intl/intl.dart';
+import 'package:syncfusion_flutter_datepicker/datepicker.dart';
 
 import '../../../../generated/locales.g.dart';
 import '../../../../global_presentation/global_widgets/custom_snack_bar.dart';
@@ -24,12 +26,16 @@ import '../data/repos/edit_profile_repo_implement.dart';
 class EditProfileController extends GetxController {
   late TextEditingController fullNameController,
       emailController,
-      phoneController;
+      phoneController,
+      dateOfBirthController;
+  late DateRangePickerController dateOfBirthRangeController;
   final GlobalKey<FormState> formKey = GlobalKey<FormState>();
+  DateTime dateOfBirth = DateTime.now();
   FocusNode fullNameFocusNode = FocusNode(),
       emailFocusNode = FocusNode(),
-      phoneFocusNode = FocusNode();
-  Color? fullNameErrorIconColor, emailErrorIconColor;
+      phoneFocusNode = FocusNode(),
+      dateOfBirthFocusNode = FocusNode();
+  Color? fullNameErrorIconColor, emailErrorIconColor, dateOfBirthIconErrorColor;
   PhoneNumber phoneNumber =
       PhoneNumber(countryISOCode: "", countryCode: "", number: "");
   String? dialCode, countryCode;
@@ -54,6 +60,37 @@ class EditProfileController extends GetxController {
     super.onInit();
   }
 
+  String? validateDateOfBirth(String? dateOfBirth) {
+    if (dateOfBirth != null && dateOfBirth.isNotEmpty) {
+      // DateTime tempDateTime =
+      //     DateFormat("dd MMMM yyyy", "ar_SA").parse(dateOfBirth);
+      if (dateOfBirth.isEmpty) {
+        dateOfBirthIconErrorColor = Colors.red;
+        update();
+        return LocaleKeys.please_enter_dob.tr;
+        // } else if (!tempDateTime.isAtLeastYearsOld(18)) {
+        //   dateOfBirthIconErrorColor = Colors.red;
+        //   update();
+        //   return LocaleKeys.check_dependent_dob.tr;
+      } else {
+        dateOfBirthIconErrorColor = null;
+        update();
+        return null;
+      }
+    } else {
+      dateOfBirthIconErrorColor = Colors.red;
+      update();
+      return LocaleKeys.please_enter_dob.tr;
+    }
+  }
+
+  void changeDate(DateRangePickerSelectionChangedArgs dateAndTime) {
+    dateOfBirth = dateAndTime.value;
+    dateOfBirthController.text =
+        DateFormat("dd MMMM yyyy", "ar_SA").format(dateOfBirth);
+    update();
+  }
+
   void initData() {
     changeIsEmailAndPhoneConfirmed();
     fullNameController = TextEditingController(
@@ -66,8 +103,22 @@ class EditProfileController extends GetxController {
           ? currentUserInfo.result!.emailAddress ?? ""
           : "",
     );
+    dateOfBirth = currentUserProfileInfo.result != null
+        ? currentUserProfileInfo.result!.requester != null
+            ? currentUserProfileInfo.result!.requester!.doB != null &&
+                    currentUserProfileInfo.result!.requester!.doB!.isNotEmpty
+                ? DateTime.parse(currentUserProfileInfo.result!.requester!.doB!)
+                : DateTime.now()
+            : DateTime.now()
+        : DateTime.now();
+    dateOfBirthController = TextEditingController(
+      text: DateFormat("dd MMMM yyyy", "ar_SA").format(dateOfBirth),
+    );
+    dateOfBirthRangeController = DateRangePickerController();
+    dateOfBirthRangeController.selectedDate = dateOfBirth;
     emailController.addListener(_onEmailChanged);
     emailFocusNode.addListener(() => update());
+    dateOfBirthFocusNode.addListener(() => update());
     phoneController = TextEditingController();
     if (currentUserProfileInfo.result != null &&
         currentUserProfileInfo.result!.phoneNumber != null) {
@@ -140,6 +191,7 @@ class EditProfileController extends GetxController {
             : "",
         id: currentUserProfileInfo.result!.requester!.userId ?? -1,
         email: emailController.text,
+        dateOfBirth: dateOfBirth.toUtc().toString(),
         phoneNumber: phoneNumber.completeNumber,
         gender: gender + 1,
       );
@@ -337,9 +389,12 @@ class EditProfileController extends GetxController {
     fullNameController.dispose();
     fullNameFocusNode.dispose();
     emailController.dispose();
+    dateOfBirthController.dispose();
     emailFocusNode.dispose();
     phoneController.dispose();
     phoneFocusNode.dispose();
+    dateOfBirthRangeController.dispose();
+    dateOfBirthFocusNode.dispose();
     super.dispose();
   }
 

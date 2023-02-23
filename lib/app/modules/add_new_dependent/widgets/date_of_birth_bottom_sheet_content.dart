@@ -2,15 +2,19 @@ import 'package:syncfusion_flutter_datepicker/datepicker.dart';
 
 import '../../../../generated/locales.g.dart';
 import '../../../constants/exports.dart';
-import '../controllers/add_new_dependent_controller.dart';
 
-class DateOfBirthBottomSheetContent extends GetView<AddNewDependentController> {
+class DateOfBirthBottomSheetContent extends StatelessWidget {
   const DateOfBirthBottomSheetContent({
     Key? key,
     required this.maxdate,
+    required this.dateOfBirth,
+    required this.onSelectionChanged,
+    required this.dateOfBirthRangeController,
   }) : super(key: key);
 
-  final DateTime maxdate;
+  final DateTime maxdate, dateOfBirth;
+  final void Function(DateRangePickerSelectionChangedArgs) onSelectionChanged;
+  final DateRangePickerController dateOfBirthRangeController;
 
   @override
   Widget build(BuildContext context) {
@@ -38,10 +42,7 @@ class DateOfBirthBottomSheetContent extends GetView<AddNewDependentController> {
             ),
             height: Get.height * 0.5.h,
             child: SfDateRangePicker(
-              onSelectionChanged: (DateRangePickerSelectionChangedArgs
-                  dateRangePickerSelectionChangedArgs) {
-                // controller.changeDate(dateRangePickerSelectionChangedArgs);
-              },
+              onSelectionChanged: onSelectionChanged,
               monthViewSettings: const DateRangePickerMonthViewSettings(
                   showTrailingAndLeadingDates: true),
               enableMultiView: false,
@@ -62,9 +63,9 @@ class DateOfBirthBottomSheetContent extends GetView<AddNewDependentController> {
                 fontFamily: FontConstants.fontFamily,
               ),
               backgroundColor: ColorManager.white,
-              controller: controller.dateOfBirthRangeController,
+              controller: dateOfBirthRangeController,
               navigationMode: DateRangePickerNavigationMode.snap,
-              initialDisplayDate: controller.dateOfBirth,
+              initialDisplayDate: dateOfBirth,
               headerStyle: DateRangePickerHeaderStyle(
                 textAlign: TextAlign.center,
                 textStyle: TextStyle(
@@ -110,24 +111,32 @@ class DateOfBirthBottomSheetContent extends GetView<AddNewDependentController> {
               ),
             ),
           ),
-          SizedBox(height: 10.h),
-          Padding(
-            padding: EdgeInsets.symmetric(horizontal: 16.w),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.start,
+          Visibility(
+            visible:
+                false, // TODO: just for now, remove it later when we need the note (validation)
+            child: Column(
               children: [
-                PrimaryText(
-                  "${LocaleKeys.note.tr}: ",
-                  color: ColorManager.red,
+                SizedBox(height: 10.h),
+                Padding(
+                  padding: EdgeInsets.symmetric(horizontal: 16.w),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.start,
+                    children: [
+                      PrimaryText(
+                        "${LocaleKeys.note.tr}: ",
+                        color: ColorManager.red,
+                      ),
+                      PrimaryText(
+                        LocaleKeys.check_dob.tr,
+                        fontWeight: FontWeightManager.softLight,
+                      ),
+                    ],
+                  ),
                 ),
-                PrimaryText(
-                  LocaleKeys.check_dependent_dob,
-                  fontWeight: FontWeightManager.softLight,
-                ),
+                SizedBox(height: 10.h),
               ],
             ),
           ),
-          SizedBox(height: 10.h),
           Padding(
             padding: EdgeInsets.symmetric(
               horizontal: 16.w,

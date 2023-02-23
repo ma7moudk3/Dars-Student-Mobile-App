@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:get/get.dart';
 import 'package:hessa_student/app/core/helper_functions.dart';
 import 'package:hessa_student/app/data/cache_helper.dart';
@@ -25,6 +27,7 @@ class SplashController extends GetxController {
         await Get.offNamed(Routes.ONBOARDING);
       } else {
         if (CacheHelper.instance.authenticated()) {
+          log("isTokenExpired: $isTokenExpired");
           if (isTokenExpired) {
             await _splashRepo.refreshToken().then((UserToken userToken) async {
               if (userToken.result != null &&

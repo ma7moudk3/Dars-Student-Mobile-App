@@ -6,6 +6,7 @@ abstract class EditProfileRepo {
     String? surname, // last name
     String? email,
     String? phoneNumber,
+    String? dateOfBirth,
     int? gender,
     int? paymentMethodId,
     required int id,

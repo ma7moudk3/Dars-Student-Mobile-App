@@ -2,8 +2,11 @@ import 'package:flutter_spinkit/flutter_spinkit.dart';
 
 import '../../app/constants/exports.dart';
 
-Future<dynamic> showLoadingDialog() {
-  return Get.dialog(
+Future<dynamic> showLoadingDialog() async {
+  if (Get.isSnackbarOpen) {
+    return;
+  }
+  return await Get.dialog(
     Container(
       color: ColorManager.black.withOpacity(0.4),
       height: 140.h,
@@ -28,3 +31,4 @@ Future<dynamic> showLoadingDialog() {
     ),
   );
 }
+

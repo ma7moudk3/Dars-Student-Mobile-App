@@ -1,9 +1,11 @@
 import 'dart:developer';
 
 import 'package:hessa_student/app/modules/login/data/repos/login_repo.dart';
-import 'package:hessa_student/global_presentation/global_widgets/custom_snack_bar.dart';
+import 'package:intl/intl.dart';
+import 'package:syncfusion_flutter_datepicker/datepicker.dart';
 
 import '../../../../generated/locales.g.dart';
+import '../../../../global_presentation/global_widgets/custom_snack_bar.dart';
 import '../../../../global_presentation/global_widgets/intl_phone_number_field/phone_number.dart';
 import '../../../../global_presentation/global_widgets/loading.dart';
 import '../../../constants/exports.dart';
@@ -20,17 +22,22 @@ class SignUpController extends GetxController {
       emailController,
       passwordController,
       confimationPasswordController,
-      phoneController;
+      phoneController,
+      dateOfBirthController;
+  late DateRangePickerController dateOfBirthRangeController;
+  DateTime dateOfBirth = DateTime.now();
   FocusNode fullNameFocusNode = FocusNode(),
       emailFocusNode = FocusNode(),
       passwordFocusNode = FocusNode(),
       confimationPasswordFocusNode = FocusNode(),
-      phoneFocusNode = FocusNode();
+      phoneFocusNode = FocusNode(),
+      dateOfBirthFocusNode = FocusNode();
   final SignUpRepo _signUpRepo = SignUpRepoImplement();
   Color? fullNameErrorIconColor,
       emailErrorIconColor,
       passwordErrorIconColor,
-      confimationPasswordErrorIconColor;
+      confimationPasswordErrorIconColor,
+      dateOfBirthIconErrorColor;
   bool tosIsAgreed = false;
   final GlobalKey<FormState> formKey = GlobalKey();
   final LoginRepo _loginRepo = LoginRepoImplement();
@@ -47,6 +54,38 @@ class SignUpController extends GetxController {
     update();
   }
 
+  String? validateDateOfBirth(String? dateOfBirth) {
+    if (dateOfBirth != null && dateOfBirth.isNotEmpty) {
+      // DateTime tempDateTime =
+      //     DateFormat("dd MMMM yyyy", "ar_SA").parse(dateOfBirth);
+      if (dateOfBirth.isEmpty) {
+        dateOfBirthIconErrorColor = Colors.red;
+        update();
+        return LocaleKeys.please_enter_dob.tr;
+        // } else if (!tempDateTime.isAtLeastYearsOld(18)) {
+        //   dateOfBirthIconErrorColor = Colors.red;
+        //   update();
+        //   return LocaleKeys.check_dependent_dob.tr;
+      } else {
+        dateOfBirthIconErrorColor = null;
+        update();
+        return null;
+      }
+    } else {
+      dateOfBirthIconErrorColor = Colors.red;
+      update();
+      return LocaleKeys.please_enter_dob.tr;
+    }
+  }
+
+  void changeDate(DateRangePickerSelectionChangedArgs dateAndTime) {
+    log(dateAndTime.value.toString());
+    dateOfBirth = dateAndTime.value;
+    dateOfBirthController.text =
+        DateFormat("dd MMMM yyyy", "ar_SA").format(dateOfBirth);
+    update();
+  }
+
   @override
   void onInit() {
     fullNameController = TextEditingController();
@@ -54,11 +93,15 @@ class SignUpController extends GetxController {
     passwordController = TextEditingController();
     confimationPasswordController = TextEditingController();
     phoneController = TextEditingController();
+    dateOfBirthController = TextEditingController();
+    dateOfBirthRangeController = DateRangePickerController();
     fullNameFocusNode.addListener(() => update());
     emailFocusNode.addListener(() => update());
     passwordFocusNode.addListener(() => update());
     confimationPasswordFocusNode.addListener(() => update());
     phoneFocusNode.addListener(() => update());
+    dateOfBirthFocusNode.addListener(() => update());
+    dateOfBirthRangeController.dispose();
     super.onInit();
   }
 
@@ -70,6 +113,8 @@ class SignUpController extends GetxController {
       captchaResponse: "",
       fullName: fullNameController.text,
       password: passwordController.text,
+      // DateTime in the form of 2003-11-08T04:46:05.353Z (ISO 8601) (UTC) (yyyy-MM-ddTHH:mm:ss.SSSZ) in dart;
+      dateOfBirth: dateOfBirth.toUtc().toString(),
       gender: gender + 1,
       phoneNumber: phoneNumber ?? "",
     )
@@ -141,12 +186,14 @@ class SignUpController extends GetxController {
     emailController.dispose();
     passwordController.dispose();
     confimationPasswordController.dispose();
+    dateOfBirthController.dispose();
     phoneController.dispose();
     fullNameFocusNode.dispose();
     emailFocusNode.dispose();
     passwordFocusNode.dispose();
     confimationPasswordFocusNode.dispose();
     phoneFocusNode.dispose();
+    dateOfBirthFocusNode.dispose();
     super.dispose();
   }
 

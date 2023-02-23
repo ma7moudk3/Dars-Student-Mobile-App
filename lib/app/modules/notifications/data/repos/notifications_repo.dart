@@ -5,7 +5,7 @@ abstract class NotificationsRepo {
     required int perPage,
     required int page,
   });
-
   Future<int> getUnReadNotificationsCount();
   Future<int> setAllNotificationsAsRead();
+  Future<int> deleteNotification({required String notificationId});
 }

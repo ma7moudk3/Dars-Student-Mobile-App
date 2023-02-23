@@ -1,13 +1,23 @@
+import 'dart:developer';
+
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:flutter_widget_from_html/flutter_widget_from_html.dart';
 import 'package:hessa_student/app/core/helper_functions.dart';
 import 'package:lottie/lottie.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 import '../../../../generated/locales.g.dart';
 import '../../../../global_presentation/global_features/lotties_manager.dart';
 import '../../../../global_presentation/global_widgets/custom_app_bar.dart';
 import '../../../constants/exports.dart';
 import '../controllers/static_page_controller.dart';
+
+String? encodeQueryParameters(Map<String, String> params) {
+  return params.entries
+      .map((MapEntry<String, String> e) =>
+          '${Uri.encodeComponent(e.key)}=${Uri.encodeComponent(e.value)}')
+      .join('&');
+}
 
 class StaticPageView extends GetView<StaticPageController> {
   const StaticPageView({super.key});
@@ -85,6 +95,46 @@ class StaticPageView extends GetView<StaticPageController> {
                       Get.locale!.languageCode != "ar"
                           ? controller.contentManagement.bodyF ?? ""
                           : controller.contentManagement.bodyL ?? "",
+                      enableCaching: true,
+                      onTapUrl: (String url) async {
+                        final Uri link;
+                        if (url.contains("mailto:")) {
+                          String email = url.split("mailto:").length > 1
+                              ? url.split("mailto:")[1]
+                              : url.split("mailto:")[0];
+                          link = Uri(
+                            scheme: 'mailto',
+                            path: email,
+                            query: encodeQueryParameters(<String, String>{
+                              'subject': '',
+                              'body': '',
+                            }),
+                          );
+                        } else if (url.contains("sms")) {
+                          String phone = url.split("sms:").length > 1
+                              ? url.split("sms:")[1]
+                              : url.split("sms:")[0];
+                          link = Uri(
+                            scheme: 'sms',
+                            path: phone,
+                            queryParameters: <String, String>{
+                              'body': Uri.encodeComponent(
+                                  'مرحباً! أريد الحصول على المزيد من المعلومات حول: '),
+                            },
+                          );
+                        } else {
+                          link = Uri.parse(url);
+                        }
+                        try {
+                          await launchUrl(
+                            link,
+                            mode: LaunchMode.externalApplication,
+                          );
+                        } on Exception catch (e) {
+                          log("Error: $e");
+                        }
+                        return true;
+                      },
                       textStyle: TextStyle(
                         color: ColorManager.fontColor,
                         fontSize: (16).sp,

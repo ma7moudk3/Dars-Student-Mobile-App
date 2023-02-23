@@ -1,6 +1,5 @@
 import 'dart:developer';
 import 'dart:math' as math;
-import 'package:hessa_student/app/modules/login/data/models/current_user_info/current_user_info.dart';
 
 import '../../../../../global_presentation/global_widgets/loading.dart';
 import '../../../../constants/exports.dart';
@@ -15,6 +14,7 @@ class SignUpRepoImplement extends SignUpRepo {
     required String fullName,
     required String phoneNumber,
     required String emailAddress,
+    required String dateOfBirth,
     required String password,
     required String captchaResponse,
   }) async {
@@ -32,6 +32,7 @@ class SignUpRepoImplement extends SignUpRepo {
       "gender": gender,
       "userName": userName,
       "phoneNumber": phoneNumber,
+      "doB": dateOfBirth,
       "emailAddress": emailAddress,
       "userType": 2, // 2 => Student , 1 => Teacher
       "captchaResponse": captchaResponse

@@ -102,6 +102,7 @@ class EditProfileRepoImplement extends EditProfileRepo {
     String? phoneNumber,
     int? gender,
     int? paymentMethodId,
+    String? dateOfBirth,
     required int id,
   }) async {
     int statusCode = 200;
@@ -127,6 +128,9 @@ class EditProfileRepoImplement extends EditProfileRepo {
       }
       if (phoneNumber != null) {
         data["phoneNumber"] = phoneNumber;
+      }
+      if(dateOfBirth != null){
+        data["doB"] = dateOfBirth;
       }
       Map<String, dynamic> headers = {
         'Accept-Language': Get.locale != null ? Get.locale!.languageCode : 'ar',

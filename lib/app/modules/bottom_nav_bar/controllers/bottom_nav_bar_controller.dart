@@ -1,7 +1,9 @@
 import 'dart:developer';
 
 import 'package:dio/dio.dart';
+import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:hessa_student/app/constants/exports.dart';
+import 'package:hessa_student/app/data/cache_helper.dart';
 import 'package:hessa_student/app/modules/orders/views/orders_view.dart';
 import 'package:hessa_student/app/modules/home/views/home_view.dart';
 import 'package:hessa_student/app/modules/messages/views/messages_view.dart';
@@ -31,6 +33,8 @@ class BottomNavBarController extends GetxController
       duration: const Duration(milliseconds: 200),
       vsync: this,
     );
+    log("UserId: ${CacheHelper.instance.getUserId()}");
+    log("FcmToken: ${await FirebaseMessaging.instance.getToken()}");
     await getUnReadNotificationsCount();
   }
 

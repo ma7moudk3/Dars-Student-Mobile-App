@@ -1,3 +1,4 @@
+
 import 'package:get/get.dart';
 
 import '../../../core/helper_functions.dart';
@@ -11,6 +12,7 @@ class AboutHessaController extends GetxController {
   final StaticPageRepo _staticPageRepo = StaticPageRepoImplement();
   ContentManagement aboutHessa = ContentManagement(),
       socialMedia = ContentManagement();
+  String? facebookURL, instagramURL, whatsAppNumber;
   RxBool isLoading = true.obs, isInternetConnected = true.obs;
 
   @override
@@ -37,9 +39,20 @@ class AboutHessaController extends GetxController {
   }
 
   Future _getSocialMediaContactMethods() async {
-    socialMedia = await _staticPageRepo.getStaticPage(
-      staticPageId: 8,
-    );
+    // socialMedia = await _staticPageRepo.getStaticPage(
+    //   staticPageId: 8,
+    // );
+    // RegExp instagramRegEx = RegExp(r'Instagram: <a href="(.+?)"');
+    // RegExp facebookRegEx = RegExp(r'Facebook: <a href="(.+?)"');
+    // RegExp whatsappRegEx = RegExp(r'Whatsapp: (.+?)<');
+
+    // String instagramUrl = instagramRegEx.firstMatch(socialMedia.body ?? "")?.group(1) ?? "";
+    // String facebookUrl = facebookRegEx.firstMatch(socialMedia.body ?? "")?.group(1) ?? "";
+    // String whatsappNumber = whatsappRegEx.firstMatch(socialMedia.body ?? "")?.group(1) ?? "";
+
+    // log('Instagram URL: $instagramUrl');
+    // log('Facebook URL: $facebookUrl');
+    // log('WhatsApp Number: $whatsappNumber');
   }
 
   @override

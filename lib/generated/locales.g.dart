@@ -254,10 +254,13 @@ class LocaleKeys {
   static const upload_picture = 'upload_picture';
   static const upload_new_picture = 'upload_new_picture';
   static const date_of_birth = 'date_of_birth';
+  static const choose_dependent_date_of_birth =
+      'choose_dependent_date_of_birth';
   static const choose_date_of_birth = 'choose_date_of_birth';
   static const please_enter_dob = 'please_enter_dob';
   static const please_enter_hessa_date = 'please_enter_hessa_date';
   static const check_dependent_dob = 'check_dependent_dob';
+  static const check_dob = 'check_dob';
   static const check_hessa_date = 'check_hessa_date';
   static const confirm = 'confirm';
   static const save = 'save';
@@ -396,6 +399,8 @@ class LocaleKeys {
   static const june = 'june';
   static const july = 'july';
   static const august = 'august';
+  static const notification_deleted_successfully =
+      'notification_deleted_successfully';
   static const september = 'september';
   static const october = 'october';
   static const november = 'november';
@@ -405,6 +410,8 @@ class LocaleKeys {
   static const please_enter_cvv = 'please_enter_cvv';
   static const cvv_is_invalid = 'cvv_is_invalid';
   static const please_choose_card_type = 'please_choose_card_type';
+  static const please_choose_a_valid_notification_to_delete =
+      'please_choose_a_valid_notification_to_delete';
   static const check_card_type = 'check_card_type';
   static const hessa_started = 'hessa_started';
   static const intersted_teachers = 'intersted_teachers';
@@ -419,8 +426,7 @@ class LocaleKeys {
   static const search_filter = 'search_filter';
   static const choose = 'choose';
   static const academic_learning = 'academic_learning';
-  static const looks_like_the_server_is_taking_to_long_to_respond_please_try_again_in_sometime =
-      'looks_like_the_server_is_taking_to_long_to_respond_please_try_again_in_sometime';
+  static const serverNotResponding = 'serverNotResponding';
   static const skill = 'skill';
   static const data_entry_error = 'data_entry_error';
   static const choose_skill = 'choose_skill';
@@ -689,10 +695,12 @@ class Locales {
     'upload_picture': 'رفع صورة',
     'upload_new_picture': 'رفع صورة جديدة',
     'date_of_birth': 'تاريخ الميلاد',
-    'choose_date_of_birth': 'اختر تاريخ ميلاد التابع',
+    'choose_dependent_date_of_birth': 'اختر تاريخ ميلاد التابع',
+    'choose_date_of_birth': 'اختر تاريخ الميلاد',
     'please_enter_dob': 'الرجاء إدخال تاريخ الميلاد',
     'please_enter_hessa_date': 'الرجاء إدخال تاريخ الحصة',
     'check_dependent_dob': 'يجب أن يكون عمر التابع 10 أعواماً على الأقل',
+    'check_dob': 'يجب أن يكون العمر 18 عاماً على الأقل',
     'check_hessa_date': 'يجب أن يكون تاريخ الحصة الى بعدَ سنة كحد أقصى',
     'confirm': 'تأكيد',
     'save': 'حفظ',
@@ -830,6 +838,7 @@ class Locales {
     'june': 'يونيو',
     'july': 'يوليو',
     'august': 'أغسطس',
+    'notification_deleted_successfully': 'تم حذف الإشعار بنجاح',
     'september': 'سبتمبر',
     'october': 'أكتوبر',
     'november': 'نوفمبر',
@@ -839,6 +848,8 @@ class Locales {
     'please_enter_cvv': 'أدخل CVV',
     'cvv_is_invalid': 'CVV غير صالح',
     'please_choose_card_type': 'إختر نوع البطاقة',
+    'please_choose_a_valid_notification_to_delete':
+        'الرجاء اختيار إشعار صالح للحذف',
     'check_card_type': 'تحقق من نوع البطاقة',
     'hessa_started': 'بدأت الحصة',
     'intersted_teachers': 'مدرسين مهتمين بتقديم الحصة',
@@ -853,8 +864,7 @@ class Locales {
     'search_filter': 'فلتر البحث',
     'choose': 'اختر',
     'academic_learning': 'تعليم الأكاديمي',
-    'looks_like_the_server_is_taking_to_long_to_respond_please_try_again_in_sometime':
-        'السيرفر يستغرق وقتًا طويلاً للرد ، يرجى المحاولة في وقت لاحق',
+    'serverNotResponding': 'السيرفر يستغرق وقتًا طويلاً للرد, حاول مرة أخرى',
     'skill': 'مهارة',
     'data_entry_error': 'خطأ في إدخال البيانات',
     'choose_skill': 'اختر المهارة',

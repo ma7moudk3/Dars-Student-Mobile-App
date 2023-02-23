@@ -77,7 +77,7 @@ class HessaTeachersController extends GetxController {
     teacherFilterFactor = value;
     update();
   }
-
+  
   Future resetTeachers() async {
     searchTextController.clear();
     levelId = null;

@@ -122,4 +122,44 @@ class NotificationsRepoImplement extends NotificationsRepo {
     }
     return statusCode;
   }
+
+  @override
+  Future<int> deleteNotification({required String notificationId}) async {
+    int statusCode = 200;
+    try {
+      Map<String, dynamic> headers = {
+        'Accept-Language': Get.locale != null ? Get.locale!.languageCode : 'ar',
+        'Content-Type': 'application/json',
+        'Accept': 'application/json',
+        "Authorization": "Bearer ${CacheHelper.instance.getAccessToken()}"
+      };
+      Map<String, dynamic> queryParameters = {
+        "Id": notificationId,
+      };
+      await DioHelper.delete(
+        headers: headers,
+        queryParameters: queryParameters,
+        Links.deleteNotification,
+        onSuccess: (response) {
+          statusCode = response.statusCode ?? 200;
+          if (Get.isDialogOpen!) {
+            Get.back();
+          }
+        },
+        onError: (error) {
+          statusCode = error.response?.statusCode ?? 400;
+          if (Get.isDialogOpen!) {
+            Get.back();
+          }
+          CustomSnackBar.showCustomErrorSnackBar(
+            title: LocaleKeys.error.tr,
+            message: error.response?.data["error"]?["message"] ?? error.message,
+          );
+        },
+      );
+    } catch (e) {
+      log("deleteNotification DioError $e");
+    }
+    return statusCode;
+  }
 }

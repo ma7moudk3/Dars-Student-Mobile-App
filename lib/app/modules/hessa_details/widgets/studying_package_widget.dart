@@ -60,7 +60,9 @@ class StudyingPackageWidget extends GetView<HessaDetailsController> {
                     ),
                     Expanded(
                       child: ListView.builder(
-                        itemCount: 4,
+                        itemCount: controller
+                                .hessaOrderDetails.result?.students?.length ??
+                            0,
                         scrollDirection: Axis.horizontal,
                         shrinkWrap: true,
                         // physics: const NeverScrollableScrollPhysics(),
@@ -99,7 +101,9 @@ class StudyingPackageWidget extends GetView<HessaDetailsController> {
                                   ),
                                   SizedBox(width: 10.w),
                                   PrimaryText(
-                                    'محمد عبد الله',
+                                    controller.hessaOrderDetails.result
+                                            ?.students?[index].name ??
+                                        '',
                                     fontSize: 14.sp,
                                     fontWeight: FontWeightManager.softLight,
                                   ),

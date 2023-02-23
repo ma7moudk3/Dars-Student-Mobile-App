@@ -29,7 +29,7 @@ class LoginRepoImplement extends LoginRepo {
       "userType": 2 // student
     };
     if (token != null) {
-      data['fcmtoken'] = token;
+      data['fcmToken'] = token;
       await CacheHelper.instance.setFcmToken(token);
     }
     await DioHelper.post(Links.login, data: data, onSuccess: (response) async {
@@ -118,7 +118,7 @@ class LoginRepoImplement extends LoginRepo {
       "userType": 2 // student
     };
     if (token != null) {
-      data['fcmtoken'] = token;
+      data['fcmToken'] = token;
       await CacheHelper.instance.setFcmToken(token);
     }
     await DioHelper.post(Links.externalAuthenticate, data: data,
@@ -193,7 +193,7 @@ class LoginRepoImplement extends LoginRepo {
       "userType": 2 // student
     };
     if (token != null) {
-      data['fcmtoken'] = token;
+      data['fcmToken'] = token;
       await CacheHelper.instance.setFcmToken(token);
     }
     await DioHelper.post(Links.externalAuthenticate, data: data,

@@ -255,6 +255,15 @@ Future _clearAllCaches() async {
   ]);
 }
 
+extension IsAtLeastYearsOld on DateTime {
+  bool isAtLeastYearsOld(int years) {
+    DateTime now = DateTime.now();
+    DateTime boundaryDate = DateTime(now.year - years, now.month, now.day);
+    DateTime thisDate = DateTime(year, month, day);
+    return thisDate.compareTo(boundaryDate) <= 0;
+  }
+}
+
 String? extractLink(String input) {
   var elements = linkify(input,
       options: const LinkifyOptions(

@@ -3,7 +3,6 @@ import 'dart:developer';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:hessa_student/app/constants/exports.dart';
-import 'package:hessa_student/app/core/helper_functions.dart';
 import 'package:hessa_student/generated/locales.g.dart';
 import 'package:hessa_student/global_presentation/global_features/lotties_manager.dart';
 import 'package:infinite_scroll_pagination/infinite_scroll_pagination.dart';
@@ -42,7 +41,7 @@ class NotificationsView extends GetView<NotificationsController> {
           builder: (NotificationsController controller) {
         if (controller.isInternetConnected.value == true) {
           return Padding(
-              padding: EdgeInsets.symmetric(vertical: 20.h, horizontal: 16.w),
+              padding: EdgeInsets.symmetric(vertical: 16.h, horizontal: 16.w),
               child: Column(
                 children: [
                   GetBuilder<NotificationsController>(
@@ -138,15 +137,10 @@ class NotificationsView extends GetView<NotificationsController> {
                             },
                             itemBuilder: (BuildContext context,
                                 Item notification, int index) {
-                              // log(notification.notification!.creationTime
-                              //     .toString());
                               return NotificationWidget(
+                                index: index,
                                 iconPath: ImagesManager.checkIcon,
-                                title:
-                                    notification.notification?.data?.message ??
-                                        "",
-                                time: notification.notification!.creationTime!
-                                    .timeAgoCustom(),
+                                itemNotification: notification,
                                 onTap: () async {
                                   FcmHelper.showNotification(
                                       const RemoteMessage(data: {

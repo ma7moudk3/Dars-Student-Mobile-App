@@ -63,8 +63,8 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
                                 top: 0,
                                 right: 0,
                                 child: Container(
-                                  width: 10.w,
-                                  height: 10.h,
+                                  width: 11.w,
+                                  height: 11.h,
                                   decoration: BoxDecoration(
                                     color: ColorManager.yellow,
                                     shape: BoxShape.circle,
@@ -73,6 +73,20 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
                                         color: Colors.white,
                                         width: 1,
                                       ),
+                                    ),
+                                  ),
+                                  child: Center(
+                                    child: PrimaryText(
+                                      controller.unReadNotificationsCount
+                                                  .value >
+                                              9
+                                          ? '+9'
+                                          : controller
+                                              .unReadNotificationsCount.value
+                                              .toString(),
+                                      fontSize: 5.5,
+                                      fontWeight: FontWeightManager.bold,
+                                      color: Colors.white,
                                     ),
                                   ),
                                 ),

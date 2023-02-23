@@ -5,6 +5,7 @@ abstract class SignUpRepo {
     required String phoneNumber,
     required String emailAddress,
     required String password,
+    required String dateOfBirth,
     required String captchaResponse,
   });
 }

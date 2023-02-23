@@ -1,5 +1,6 @@
 import 'package:flutter_keyboard_visibility/flutter_keyboard_visibility.dart';
 import 'package:hessa_student/app/modules/sign_up/controllers/sign_up_controller.dart';
+import 'package:syncfusion_flutter_datepicker/datepicker.dart';
 
 import '../../../../generated/locales.g.dart';
 import '../../../../global_presentation/global_widgets/custom_snack_bar.dart';
@@ -8,6 +9,7 @@ import '../../../../global_presentation/global_widgets/intl_phone_number_widget.
 import '../../../constants/exports.dart';
 import '../../../core/helper_functions.dart';
 import '../../../routes/app_pages.dart';
+import '../../add_new_dependent/widgets/date_of_birth_bottom_sheet_content.dart';
 
 class SignUpContent extends GetView<SignUpController> {
   const SignUpContent({
@@ -150,6 +152,81 @@ class SignUpContent extends GetView<SignUpController> {
                         controller.changePhoneNumber(phoneNumber),
                   ),
                   SizedBox(height: 10.h),
+                  PrimaryTextField(
+                    fontSize: 14.sp,
+                    readOnly: true,
+                    ifReadOnlyTextColor: ColorManager.fontColor7,
+                    controller: controller.dateOfBirthController,
+                    title: LocaleKeys.date_of_birth,
+                    borderRadius: BorderRadius.circular(14),
+                    focusNode: controller.dateOfBirthFocusNode,
+                    titleFontWeight: FontWeightManager.softLight,
+                    onTap: () async {
+                      DateTime maxdate = DateTime(
+                        DateTime.now().year - 18,
+                        DateTime.now().month,
+                        DateTime.now().day,
+                      );
+                      await Get.bottomSheet(
+                        isScrollControlled: true,
+                        shape: const RoundedRectangleBorder(
+                          borderRadius: BorderRadius.only(
+                            topLeft: Radius.circular(20),
+                            topRight: Radius.circular(20),
+                          ),
+                        ),
+                        DateOfBirthBottomSheetContent(
+                          maxdate: maxdate,
+                          onSelectionChanged:
+                              (DateRangePickerSelectionChangedArgs
+                                  dateRangePickerSelectionChangedArgs) {
+                            controller.changeDate(
+                                dateRangePickerSelectionChangedArgs);
+                          },
+                          dateOfBirth: controller.dateOfBirth,
+                          dateOfBirthRangeController:
+                              controller.dateOfBirthRangeController,
+                        ),
+                        backgroundColor: ColorManager.white,
+                      );
+                    },
+                    suffixIcon: Container(
+                      margin: EdgeInsets.symmetric(horizontal: 14.w),
+                      child: SvgPicture.asset(
+                        ImagesManager.calendarIcon,
+                        width: 22.w,
+                        height: 22.h,
+                        color: controller.dateOfBirthIconErrorColor ??
+                            (controller.dateOfBirthFocusNode.hasFocus
+                                ? (controller.dateOfBirthIconErrorColor ??
+                                    ColorManager.primary)
+                                : ColorManager.primaryLight),
+                      ),
+                    ),
+                    suffixIconConstraints: BoxConstraints(
+                      minHeight: 22.h,
+                      minWidth: 22.w,
+                    ),
+                    enabledBorder: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(14),
+                      borderSide: BorderSide(color: ColorManager.borderColor2),
+                    ),
+                    focusedBorder: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(14),
+                      borderSide: BorderSide(color: ColorManager.primary),
+                    ),
+                    errorBorder: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(14),
+                      borderSide: BorderSide(color: ColorManager.red),
+                    ),
+                    borderSide: BorderSide(
+                      color: ColorManager.primary,
+                    ),
+                    hintText: LocaleKeys.choose_date_of_birth,
+                    validator: (String? dateOfBirth) =>
+                        controller.validateDateOfBirth(dateOfBirth),
+                  ),
+                  SizedBox(height: 12.h),
                   PrimaryTextField(
                     isRequired: true,
                     cursorColor: ColorManager.primary,

@@ -447,7 +447,7 @@ class DioHelper {
     log("apiException message: ${apiException.message}");
     String msg = apiException.message.toLowerCase().contains("timeout")
         ? LocaleKeys
-            .looks_like_the_server_is_taking_to_long_to_respond_please_try_again_in_sometime
+            .serverNotResponding
             .tr
         : (apiException.response?.data?["error"]['message'] ??
             LocaleKeys.something_went_wrong.tr);

@@ -20,15 +20,6 @@ import '../../../constants/exports.dart';
 import '../../../data/models/classes/classes.dart';
 import '../../../data/models/student_relation/student_relation.dart';
 
-extension IsAtLeastYearsOld on DateTime {
-  bool isAtLeastYearsOld(int years) {
-    DateTime now = DateTime.now();
-    DateTime boundaryDate = DateTime(now.year - years, now.month, now.day);
-    DateTime thisDate = DateTime(year, month, day);
-    return thisDate.compareTo(boundaryDate) <= 0;
-  }
-}
-
 class AddNewDependentController extends GetxController {
   final GlobalKey<FormState> formKey = GlobalKey<FormState>();
   late TextEditingController nameController,
