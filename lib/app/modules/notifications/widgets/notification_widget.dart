@@ -1,9 +1,11 @@
+import 'package:animator/animator.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
 
 import '../../../constants/exports.dart';
 import '../../../core/helper_functions.dart';
 import '../controllers/notifications_controller.dart';
 import '../data/models/notification_data/item.dart';
+import 'delete_notification_dialog_content.dart';
 
 class NotificationWidget extends GetView<NotificationsController> {
   NotificationWidget({
@@ -25,24 +27,50 @@ class NotificationWidget extends GetView<NotificationsController> {
             builder: (NotificationsController controller) {
       return GestureDetector(
         onTap: () async {
-          await controller.deleteNotification(
-              notificationId: itemNotification.id ?? "");
-        },
-        child: Container(
-          width: 75.w,
-          margin: EdgeInsets.only(right: 7.w),
-          decoration: BoxDecoration(
-            color: ColorManager.red.withOpacity(0.20),
-            borderRadius: BorderRadius.circular(15),
-          ),
-          child: Center(
-            child: SvgPicture.asset(
-              ImagesManager.deleteIcon,
-              width: 25.w,
-              height: 25.h,
+          await Get.dialog(
+            Container(
+              color: ColorManager.black.withOpacity(0.1),
+              height: 140.h,
+              width: 140.w,
+              child: Center(
+                child: Container(
+                  width: Get.width,
+                  margin: EdgeInsets.symmetric(
+                    horizontal: 18.w,
+                  ),
+                  child: DeleteNotificationDialogContent(
+                    deleteNotificationFunction: () async {
+                      await controller.deleteNotification(
+                          notificationId: itemNotification.id ?? "");
+                    },
+                  ),
+                ),
+              ),
             ),
-          ),
-        ),
+          );
+        },
+        child: Animator<double>(
+            duration: const Duration(milliseconds: 1000),
+            cycles: 0,
+            curve: Curves.elasticIn,
+            tween: Tween<double>(begin: 20.0, end: 25.0),
+            builder: (context, animatorState, child) {
+              return Container(
+                width: 75.w,
+                margin: EdgeInsets.only(right: 7.w),
+                decoration: BoxDecoration(
+                  color: ColorManager.red.withOpacity(0.20),
+                  borderRadius: BorderRadius.circular(15),
+                ),
+                child: Center(
+                  child: SvgPicture.asset(
+                    ImagesManager.deleteIcon,
+                    width: animatorState.value * 2.2,
+                    height: animatorState.value * 1.4,
+                  ),
+                ),
+              );
+            }),
       );
     });
     return GestureDetector(

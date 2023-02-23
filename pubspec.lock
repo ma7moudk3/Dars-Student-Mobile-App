@@ -25,6 +25,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "1.0.1"
+  animator:
+    dependency: "direct main"
+    description:
+      name: animator
+      sha256: "5a99c15dc79e09dc62f3d3f1f24c2b2a1765ff51ec7445bf9509e5a70ece8025"
+      url: "https://pub.dev"
+    source: hosted
+    version: "3.2.0"
   archive:
     dependency: transitive
     description:
@@ -917,6 +925,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "1.0.4"
+  navigation_builder:
+    dependency: transitive
+    description:
+      name: navigation_builder
+      sha256: cbf966253e1f5b1798f3fbcae571fb6d452e5c7a606a5c451e2b9a3d343920f0
+      url: "https://pub.dev"
+    source: hosted
+    version: "0.0.2+4"
   nested:
     dependency: transitive
     description:
@@ -1218,6 +1234,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "1.11.0"
+  states_rebuilder:
+    dependency: transitive
+    description:
+      name: states_rebuilder
+      sha256: e8612993e97a5caeb9d983f6081304ef10868ba436ae49a723ee089ab51e2d12
+      url: "https://pub.dev"
+    source: hosted
+    version: "6.2.0"
   stream_channel:
     dependency: transitive
     description:

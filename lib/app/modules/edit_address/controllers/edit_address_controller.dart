@@ -48,6 +48,25 @@ class EditAddressController extends GetxController {
     super.onInit();
   }
 
+  bool isDataChanged() {
+    if (selectedCountry.id != addressToEdit.address?.countryId) {
+      return true;
+    }
+    if (selectedGovernorate.id != addressToEdit.address?.governorateId) {
+      return true;
+    }
+    if (selectedLocality.id != addressToEdit.address?.localityId) {
+      return true;
+    }
+    if (addressController.text != addressToEdit.address?.name) {
+      return true;
+    }
+    if (addressDescriptionController.text != addressToEdit.address?.address1) {
+      return true;
+    }
+    return false;
+  }
+
   Future changeCountry(String? result) async {
     isGovernorateDropDownLoading = true;
     isLocalityDropDownLoading = true;

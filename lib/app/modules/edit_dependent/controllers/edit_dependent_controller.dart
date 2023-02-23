@@ -88,6 +88,26 @@ class EditDependentController extends GetxController {
     super.onInit();
   }
 
+  bool isDataChanged() {
+    if (nameController.text != studentToEdit.requesterStudent?.name ||
+        notesController.text != studentToEdit.requesterStudent?.details ||
+        image != null ||
+        dependentGender !=
+            (studentToEdit.requesterStudent?.genderId != null
+                ? (studentToEdit.requesterStudent!.genderId! - 1)
+                : 0) ||
+        selectedClass.id != studentToEdit.requesterStudent?.levelId ||
+        selectedStudentRelation.id !=
+            studentToEdit.requesterStudent?.relationId ||
+        selectedSchoolType.id != studentToEdit.requesterStudent?.schoolTypeId ||
+        schoolNameController.text !=
+            studentToEdit.requesterStudent?.schoolName) {
+      return true;
+    } else {
+      return false;
+    }
+  }
+
   Future checkInternet() async {
     await checkInternetConnection(timeout: 10).then(
       (bool internetStatus) async {

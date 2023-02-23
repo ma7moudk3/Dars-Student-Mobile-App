@@ -1,3 +1,4 @@
+import 'package:animator/animator.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
 
 import '../../../../global_presentation/global_widgets/inner_shadow_widget.dart';
@@ -5,9 +6,10 @@ import '../../../constants/exports.dart';
 import '../../../core/helper_functions.dart';
 import '../../../routes/app_pages.dart';
 import '../controllers/messages_controller.dart';
+import 'delete_message_dialog_content.dart';
 
-class Message extends GetView<MessagesController> {
-  const Message({
+class MessageWidget extends GetView<MessagesController> {
+  const MessageWidget({
     super.key,
     required this.index,
     this.isLastIndex = false,
@@ -22,22 +24,48 @@ class Message extends GetView<MessagesController> {
         builder: (MessagesController controller) {
       return GestureDetector(
         onTap: () async {
-          controller.deleteMessage();
-        },
-        child: Container(
-          width: 85.w,
-          decoration: BoxDecoration(
-            color: ColorManager.red.withOpacity(0.20),
-            borderRadius: BorderRadius.circular(15),
-          ),
-          child: Center(
-            child: SvgPicture.asset(
-              ImagesManager.deleteIcon,
-              width: 25.w,
-              height: 25.h,
+          await Get.dialog(
+            Container(
+              color: ColorManager.black.withOpacity(0.1),
+              height: 140.h,
+              width: 140.w,
+              child: Center(
+                child: Container(
+                  width: Get.width,
+                  margin: EdgeInsets.symmetric(
+                    horizontal: 18.w,
+                  ),
+                  child: DeleteMessageDialogContent(
+                    deleteMessageFunction: () async {
+                      controller.deleteMessage(); // TODO: implement deleteMessage function
+                    },
+                  ),
+                ),
+              ),
             ),
-          ),
-        ),
+          );
+        },
+        child: Animator<double>(
+            duration: const Duration(milliseconds: 1000),
+            cycles: 0,
+            curve: Curves.elasticIn,
+            tween: Tween<double>(begin: 20.0, end: 25.0),
+            builder: (context, animatorState, child) {
+              return Container(
+                width: 85.w,
+                decoration: BoxDecoration(
+                  color: ColorManager.red.withOpacity(0.20),
+                  borderRadius: BorderRadius.circular(15),
+                ),
+                child: Center(
+                  child: SvgPicture.asset(
+                    ImagesManager.deleteIcon,
+                    width: animatorState.value * 2.2,
+                    height: animatorState.value * 1.5,
+                  ),
+                ),
+              );
+            }),
       );
     });
     return Column(

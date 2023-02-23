@@ -1,5 +1,6 @@
 import 'dart:developer';
 
+import 'package:animator/animator.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
 import 'package:hessa_student/app/modules/preferred_teachers/controllers/preferred_teachers_controller.dart';
@@ -45,21 +46,28 @@ class HessaTeacherWidget extends GetView<HessaTeachersController> {
           await controller.unPreferTeacher(
               teacherId: int.parse(preferredTeacherId));
         },
-        child: Container(
-          width: 75.w,
-          margin: EdgeInsets.only(right: 10.w),
-          decoration: BoxDecoration(
-            color: ColorManager.grey6.withOpacity(0.4),
-            borderRadius: BorderRadius.circular(15),
-          ),
-          child: Center(
-            child: Icon(
-              Icons.favorite_rounded,
-              size: 45,
-              color: ColorManager.red,
-            ),
-          ),
-        ),
+        child: Animator<double>(
+            duration: const Duration(milliseconds: 1000),
+            cycles: 0,
+            curve: Curves.elasticIn,
+            tween: Tween<double>(begin: 20.0, end: 25.0),
+            builder: (context, animatorState, child) {
+              return Container(
+                width: 75.w,
+                margin: EdgeInsets.only(right: 10.w),
+                decoration: BoxDecoration(
+                  color: ColorManager.grey6.withOpacity(0.4),
+                  borderRadius: BorderRadius.circular(15),
+                ),
+                child: Center(
+                  child: Icon(
+                    Icons.favorite_rounded,
+                    size: animatorState.value * 2.2,
+                    color: ColorManager.red,
+                  ),
+                ),
+              );
+            }),
       );
     });
     String teacherName = teacher.runtimeType == HessaTeacher

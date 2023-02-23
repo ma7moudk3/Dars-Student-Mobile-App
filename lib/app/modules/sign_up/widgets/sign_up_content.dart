@@ -155,6 +155,7 @@ class SignUpContent extends GetView<SignUpController> {
                   PrimaryTextField(
                     fontSize: 14.sp,
                     readOnly: true,
+                    isRequired: true,
                     ifReadOnlyTextColor: ColorManager.fontColor7,
                     controller: controller.dateOfBirthController,
                     title: LocaleKeys.date_of_birth,

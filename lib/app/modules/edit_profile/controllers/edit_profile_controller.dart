@@ -138,6 +138,19 @@ class EditProfileController extends GetxController {
     update();
   }
 
+  bool isDataChanged() {
+    bool isEmailChanged =
+        emailController.text != currentUserProfileInfo.result!.emailAddress;
+    isPhoneChanged = phoneNumber.completeNumber !=
+        currentUserProfileInfo.result!.phoneNumber;
+    // ~ doB could be inserted here later if needed + the gender ~
+    return isEmailChanged ||
+        isPhoneChanged ||
+        image.value != null ||
+        (fullNameController.text !=
+            ("${currentUserInfo.result!.name ?? ""} ${currentUserInfo.result!.surname ?? ""}"));
+  }
+
   void changeIsEmailAndPhoneConfirmed() {
     isEmailConfirmed = CacheHelper.instance.getIsEmailConfirmed();
     isPhoneConfirmed = CacheHelper.instance.getIsPhoneConfirmed();

@@ -56,7 +56,7 @@ class MessagesView extends GetView<MessagesController> {
                                 itemCount: controller.length,
                                 shrinkWrap: true,
                                 itemBuilder: (BuildContext context, int index) {
-                                  return Message(
+                                  return MessageWidget(
                                     index: index,
                                     isLastIndex: index == controller.length - 1,
                                   );

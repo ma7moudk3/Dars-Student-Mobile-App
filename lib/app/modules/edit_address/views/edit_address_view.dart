@@ -23,23 +23,27 @@ class EditAddressView extends GetView<EditAddressController> {
   Widget build(BuildContext context) {
     return WillPopScope(
       onWillPop: () async {
-        await Get.dialog(
-          Container(
-            color: ColorManager.black.withOpacity(0.1),
-            height: 140.h,
-            width: 140.w,
-            child: Center(
-              child: Container(
-                width: Get.width,
-                margin: EdgeInsets.symmetric(
-                  horizontal: 18.w,
+        if (controller.isDataChanged()) {
+          await Get.dialog(
+            Container(
+              color: ColorManager.black.withOpacity(0.1),
+              height: 140.h,
+              width: 140.w,
+              child: Center(
+                child: Container(
+                  width: Get.width,
+                  margin: EdgeInsets.symmetric(
+                    horizontal: 18.w,
+                  ),
+                  child: const ConfirmBackDialogContent(),
                 ),
-                child: const ConfirmBackDialogContent(),
               ),
             ),
-          ),
-        );
-        return false;
+          );
+          return false;
+        } else {
+          return true;
+        }
       },
       child: Scaffold(
         appBar: CustomAppBar(

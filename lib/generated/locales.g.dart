@@ -146,6 +146,10 @@ class LocaleKeys {
   static const logout = 'logout';
   static const address_deletion = 'address_deletion';
   static const student_deletion = 'student_deletion';
+  static const notification_deletion = 'notification_deletion';
+  static const chat_deletion = 'chat_deletion';
+  static const wanna_delete_notification = 'wanna_delete_notification';
+  static const wanna_delete_chat = 'wanna_delete_chat';
   static const wanna_delete_address = 'wanna_delete_address';
   static const wanna_delete_student = 'wanna_delete_student';
   static const edit_profile = 'edit_profile';
@@ -589,6 +593,10 @@ class Locales {
     'logout': 'تسجيل الخروج',
     'address_deletion': 'حذف العنوان',
     'student_deletion': 'حذف الطالب',
+    'notification_deletion': 'حذف الإشعار',
+    'chat_deletion': 'حذف المحادثة؟',
+    'wanna_delete_notification': 'هل تريد حذف هذا الإشعار؟',
+    'wanna_delete_chat': 'هل تريد حذف هذه المحادثة؟',
     'wanna_delete_address': 'هل تريد حذف هذا العنوان؟',
     'wanna_delete_student': 'هل تريد حذف هذا الطالب؟',
     'edit_profile': 'تعديل الملف الشخصي',
