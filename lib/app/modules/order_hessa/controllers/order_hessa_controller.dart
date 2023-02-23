@@ -50,7 +50,7 @@ class OrderHessaController extends GetxController {
   int hessaCategory = 0; // 0 academic learning, 1 skills
   int teacherGender =
       0; // 1 male, 2 female, 3 both , starts from zero just for the sake of the UI
-  int orderType = 0; // 0 one hessa, 1 school package
+  int orderType = 0; // 0 one hessa, 1 school package , orderType is productId
   static const _pageSize = 3; // 3 students per page >> student = dependent
   final DependentsRepo _dependentsRepo = DependentsRepoImplement();
   List<Student> students = [];
@@ -102,6 +102,22 @@ class OrderHessaController extends GetxController {
     _initPageRequestListener();
     await checkInternet();
     super.onInit();
+  }
+
+  bool isDataChanged() {
+    return hessaDateController.text.isNotEmpty ||
+        hessaTimeRange != null ||
+        (selectedAddress != addresses.first) ||
+        selectedStudents.isNotEmpty ||
+        selectedTopics.isNotEmpty ||
+        selectedSkills.isNotEmpty ||
+        sessionWay != 0 ||
+        hessaCategory != 0 ||
+        orderType != 0 ||
+        teacherGender != 0 ||
+        teacherNameController.text.isNotEmpty ||
+        notesController.text.isNotEmpty ||
+        chosenTeacher != null;
   }
 
   @override
