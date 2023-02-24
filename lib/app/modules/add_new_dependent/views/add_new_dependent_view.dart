@@ -80,7 +80,7 @@ class AddNewDependentView extends GetView<AddNewDependentController> {
                       Icons.camera_alt_rounded,
                       size: 25,
                     ),
-                    title: PrimaryText("camera".tr),
+                    title: PrimaryText(LocaleKeys.camera.tr),
                     onTap: () async {
                       Get.back();
                       await controller.handleImageSelection(
@@ -92,7 +92,7 @@ class AddNewDependentView extends GetView<AddNewDependentController> {
                       Icons.photo_rounded,
                       size: 25,
                     ),
-                    title: PrimaryText("gallery".tr),
+                    title: PrimaryText(LocaleKeys.gallery..tr),
                     onTap: () async {
                       Get.back();
                       await controller.handleImageSelection(

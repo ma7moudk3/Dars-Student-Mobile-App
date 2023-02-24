@@ -65,7 +65,7 @@ class SignUpController extends GetxController {
         // } else if (!tempDateTime.isAtLeastYearsOld(18)) {
         //   dateOfBirthIconErrorColor = Colors.red;
         //   update();
-        //   return LocaleKeys.check_dependent_dob.tr;
+        //   return LocaleKeys.check_dob.tr;
       } else {
         dateOfBirthIconErrorColor = null;
         update();

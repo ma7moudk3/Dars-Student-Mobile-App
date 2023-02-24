@@ -49,8 +49,10 @@ class EditProfileController extends GetxController {
       CacheHelper.instance.getCachedCurrentUserProfileInfo() ??
           CurrentUserProfileInfo();
   final LoginRepo _loginRepo = LoginRepoImplement();
-  bool isEmailChanged = false, isPhoneChanged = false;
-  bool isEmailConfirmed = false, isPhoneConfirmed = false;
+  bool isEmailChanged = false,
+      isPhoneChanged = false,
+      isEmailConfirmed = false,
+      isPhoneConfirmed = false;
   GenerateOtpCode generateOtpCode = GenerateOtpCode();
   final VerifyAccountRepo _verifyAccountRepo = VerifyAccountRepoImplement();
 
@@ -122,7 +124,7 @@ class EditProfileController extends GetxController {
     phoneController = TextEditingController();
     if (currentUserProfileInfo.result != null &&
         currentUserProfileInfo.result!.phoneNumber != null) {
-      _seperatePhoneAndDialCode(
+      _separatePhoneAndDialCode(
           phoneWithDialCode: currentUserProfileInfo.result!.phoneNumber!);
     }
     gender = currentUserProfileInfo.result != null
@@ -342,7 +344,7 @@ class EditProfileController extends GetxController {
     update();
   }
 
-  void _seperatePhoneAndDialCode({required String phoneWithDialCode}) {
+  void _separatePhoneAndDialCode({required String phoneWithDialCode}) {
     List<Map<String, String>> allowedCountries = [
       {"name": "Palestine", "dial_code": "+970", "code": "PS"},
       {"name": "Israel", "dial_code": "+972", "code": "IL"},
