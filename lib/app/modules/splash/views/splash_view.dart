@@ -47,10 +47,17 @@ class SplashView extends GetView<SplashController> {
                         width: 95.w,
                         height: 95.h,
                       ),
-                      SizedBox(height: 20.h),
+                      SizedBox(height: 10.h),
                       PrimaryText(
                         LocaleKeys.hessaApp,
                         fontSize: 26.sp,
+                        fontWeight: FontWeightManager.light,
+                        color: Colors.white,
+                      ),
+                      SizedBox(height: 5.h),
+                      PrimaryText(
+                        LocaleKeys.student,
+                        fontSize: 22.sp,
                         fontWeight: FontWeightManager.light,
                         color: Colors.white,
                       ),

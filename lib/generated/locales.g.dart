@@ -269,6 +269,7 @@ class LocaleKeys {
   static const confirm = 'confirm';
   static const save = 'save';
   static const note = 'note';
+  static const student = 'student';
   static const no_results_found = 'no_results_found';
   static const no_addresses_found = 'no_addresses_found';
   static const add_new_address = 'add_new_address';
@@ -713,6 +714,7 @@ class Locales {
     'confirm': 'تأكيد',
     'save': 'حفظ',
     'note': 'مُلاحظة',
+    'student': 'الطالب',
     'no_results_found': 'نأسف! لم نجد نتائج بحث',
     'no_addresses_found': 'نأسف! لم يتم العثور على عناوين خاصة بك',
     'add_new_address': 'إضافة عنوان جديد',
