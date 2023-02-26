@@ -34,35 +34,40 @@ class SplashView extends GetView<SplashController> {
                 color: Colors.white,
               ),
             ),
-            Obx(
-              () => Center(
-                child: AnimatedScale(
-                  scale: controller.scale.value,
-                  duration: const Duration(milliseconds: 500),
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      SvgPicture.asset(
-                        ImagesManager.fullLogo,
-                        width: 95.w,
-                        height: 95.h,
-                      ),
-                      SizedBox(height: 10.h),
-                      PrimaryText(
-                        LocaleKeys.hessaApp,
-                        fontSize: 26.sp,
-                        fontWeight: FontWeightManager.light,
-                        color: Colors.white,
-                      ),
-                      SizedBox(height: 5.h),
-                      PrimaryText(
-                        LocaleKeys.student,
-                        fontSize: 22.sp,
-                        fontWeight: FontWeightManager.light,
-                        color: Colors.white,
-                      ),
-                      SizedBox(height: 140.h),
-                    ],
+            Positioned(
+              top: 120.h,
+              left: 100.w,
+              right: 100.w,
+              child: Obx(
+                () => Center(
+                  child: AnimatedScale(
+                    scale: controller.scale.value,
+                    duration: const Duration(milliseconds: 500),
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        SvgPicture.asset(
+                          ImagesManager.fullLogo,
+                          width: 95.w,
+                          height: 95.h,
+                        ),
+                        SizedBox(height: 10.h),
+                        PrimaryText(
+                          LocaleKeys.hessaApp,
+                          fontSize: 24.sp,
+                          fontWeight: FontWeightManager.light,
+                          color: Colors.white,
+                        ),
+                        SizedBox(height: 5.h),
+                        PrimaryText(
+                          LocaleKeys.student,
+                          fontSize: 20.sp,
+                          fontWeight: FontWeightManager.light,
+                          color: Colors.white,
+                        ),
+                        SizedBox(height: 140.h),
+                      ],
+                    ),
                   ),
                 ),
               ),

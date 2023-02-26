@@ -66,6 +66,13 @@ class LoginOrSignUpView extends GetView<LoginOrSignUpController> {
                           fontWeight: FontWeightManager.light,
                           color: Colors.white,
                         ),
+                        SizedBox(height: 5.h),
+                        PrimaryText(
+                          LocaleKeys.student,
+                          fontSize: 20.sp,
+                          fontWeight: FontWeightManager.light,
+                          color: Colors.white,
+                        ),
                       ],
                     ),
                   ),
