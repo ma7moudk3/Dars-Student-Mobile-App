@@ -25,7 +25,7 @@ class AddNewDependentView extends GetView<AddNewDependentController> {
     bool isFileFunctionalityNeeded = false;
     Future handleAttachmentPressed() async {
       if (Platform.isIOS) {
-        showCupertinoModalPopup(
+        await showCupertinoModalPopup(
             context: context,
             builder: (BuildContext context) {
               return CupertinoActionSheet(
@@ -66,7 +66,7 @@ class AddNewDependentView extends GetView<AddNewDependentController> {
               );
             });
       } else {
-        Get.bottomSheet(
+        await Get.bottomSheet(
           Padding(
             padding: EdgeInsets.symmetric(horizontal: 16.w, vertical: 20.h),
             child: SizedBox(

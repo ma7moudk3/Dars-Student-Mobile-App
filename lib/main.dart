@@ -42,7 +42,7 @@ void main() async {
           initialRoute: AppPages.INITIAL,
           getPages: AppPages.routes,
           locale: const Locale("ar"), // it's arabic for right now
-          theme: getApplicationTheme(),
+          theme: getApplicationTheme(), // it's light theme for right now
           translationsKeys: AppTranslation.translations,
         );
       },

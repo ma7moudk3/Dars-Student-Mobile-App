@@ -66,6 +66,7 @@ class DateOfBirthBottomSheetContent extends StatelessWidget {
               controller: dateOfBirthRangeController,
               navigationMode: DateRangePickerNavigationMode.snap,
               initialDisplayDate: dateOfBirth,
+              initialSelectedDate: dateOfBirth,
               headerStyle: DateRangePickerHeaderStyle(
                 textAlign: TextAlign.center,
                 textStyle: TextStyle(

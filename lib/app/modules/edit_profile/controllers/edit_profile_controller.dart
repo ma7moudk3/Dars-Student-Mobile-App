@@ -204,8 +204,11 @@ class EditProfileController extends GetxController {
         surname: fullNameController.text.split(" ").length > 1
             ? fullNameController.text.split(" ")[1]
             : "",
-        id: currentUserProfileInfo.result!.requester!.userId ?? -1,
+        id: currentUserProfileInfo.result!.requester!.id ?? -1,
         email: emailController.text,
+        paymentMethodId:
+            currentUserProfileInfo.result?.requester?.paymentMethodId ??
+                2, // 2 is cash, just for now :) // TODO: change this later
         dateOfBirth: dateOfBirth.toUtc().toString(),
         phoneNumber: phoneNumber.completeNumber,
         gender: gender + 1,

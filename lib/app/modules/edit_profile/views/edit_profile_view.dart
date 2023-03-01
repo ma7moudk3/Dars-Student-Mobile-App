@@ -5,6 +5,7 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:hessa_student/app/core/helper_functions.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:syncfusion_flutter_datepicker/datepicker.dart';
 
 import '../../../../generated/locales.g.dart';
 import '../../../../global_presentation/global_widgets/confirm_back_dialog_content.dart';
@@ -16,6 +17,7 @@ import '../../../constants/exports.dart';
 import '../../../constants/links.dart';
 import '../../../data/cache_helper.dart';
 import '../../../routes/app_pages.dart';
+import '../../add_new_dependent/widgets/date_of_birth_bottom_sheet_content.dart';
 import '../controllers/edit_profile_controller.dart';
 
 class EditProfileView extends GetView<EditProfileController> {
@@ -390,34 +392,33 @@ class EditProfileView extends GetView<EditProfileController> {
                                   focusNode: controller.dateOfBirthFocusNode,
                                   titleFontWeight: FontWeightManager.softLight,
                                   onTap: () async {
-                                    // TODO: UNCOMMENT THIS CODE WHEN EDITING THE DATE OF BIRTH IS NEEDED
-                                    // DateTime maxdate = DateTime(
-                                    //   DateTime.now().year - 18,
-                                    //   DateTime.now().month,
-                                    //   DateTime.now().day,
-                                    // );
-                                    // await Get.bottomSheet(
-                                    //   isScrollControlled: true,
-                                    //   shape: const RoundedRectangleBorder(
-                                    //     borderRadius: BorderRadius.only(
-                                    //       topLeft: Radius.circular(20),
-                                    //       topRight: Radius.circular(20),
-                                    //     ),
-                                    //   ),
-                                    //   DateOfBirthBottomSheetContent(
-                                    //     maxdate: maxdate,
-                                    //     onSelectionChanged:
-                                    //         (DateRangePickerSelectionChangedArgs
-                                    //             dateRangePickerSelectionChangedArgs) {
-                                    //       controller.changeDate(
-                                    //           dateRangePickerSelectionChangedArgs);
-                                    //     },
-                                    //     dateOfBirth: controller.dateOfBirth,
-                                    //     dateOfBirthRangeController: controller
-                                    //         .dateOfBirthRangeController,
-                                    //   ),
-                                    //   backgroundColor: ColorManager.white,
-                                    // );
+                                    DateTime maxdate = DateTime(
+                                      DateTime.now().year - 18,
+                                      DateTime.now().month,
+                                      DateTime.now().day,
+                                    );
+                                    await Get.bottomSheet(
+                                      isScrollControlled: true,
+                                      shape: const RoundedRectangleBorder(
+                                        borderRadius: BorderRadius.only(
+                                          topLeft: Radius.circular(20),
+                                          topRight: Radius.circular(20),
+                                        ),
+                                      ),
+                                      DateOfBirthBottomSheetContent(
+                                        maxdate: maxdate,
+                                        onSelectionChanged:
+                                            (DateRangePickerSelectionChangedArgs
+                                                dateRangePickerSelectionChangedArgs) {
+                                          controller.changeDate(
+                                              dateRangePickerSelectionChangedArgs);
+                                        },
+                                        dateOfBirth: controller.dateOfBirth,
+                                        dateOfBirthRangeController: controller
+                                            .dateOfBirthRangeController,
+                                      ),
+                                      backgroundColor: ColorManager.white,
+                                    );
                                   },
                                   suffixIcon: Container(
                                     margin:
@@ -491,28 +492,27 @@ class EditProfileView extends GetView<EditProfileController> {
                                   ),
                                 ),
                                 SizedBox(height: 20.h),
-                                Row(
-                                  children: [
-                                    PrimaryText(
-                                      "${LocaleKeys.gender.tr} : ",
-                                      color: ColorManager.fontColor,
-                                      fontWeight: FontWeightManager.light,
-                                      fontSize: 14.sp,
-                                    ),
-                                    SizedBox(width: 10.w),
-                                    PrimaryText(
-                                      controller.gender == 0
-                                          ? LocaleKeys.male.tr
-                                          : LocaleKeys.female.tr,
-                                      color: ColorManager.primary,
-                                      fontWeight: FontWeightManager.light,
-                                      fontSize: 14.sp,
-                                    ),
-                                  ],
-                                ),
+                                // Row(
+                                //   children: [
+                                //     PrimaryText(
+                                //       "${LocaleKeys.gender.tr} : ",
+                                //       color: ColorManager.fontColor,
+                                //       fontWeight: FontWeightManager.light,
+                                //       fontSize: 14.sp,
+                                //     ),
+                                //     SizedBox(width: 10.w),
+                                //     PrimaryText(
+                                //       controller.gender == 0
+                                //           ? LocaleKeys.male.tr
+                                //           : LocaleKeys.female.tr,
+                                //       color: ColorManager.primary,
+                                //       fontWeight: FontWeightManager.light,
+                                //       fontSize: 14.sp,
+                                //     ),
+                                //   ],
+                                // ),
                                 Visibility(
-                                  visible:
-                                      false, // TODO: CHANGE THIS TO TRUE WHEN EDITING THE GENDER IS NEEDED/POSSIBLE
+                                  visible: true,
                                   child: Row(
                                     mainAxisAlignment: MainAxisAlignment.start,
                                     children: [

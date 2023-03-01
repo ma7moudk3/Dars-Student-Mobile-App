@@ -109,7 +109,7 @@ class EditProfileRepoImplement extends EditProfileRepo {
     try {
       Map<String, dynamic> data = {
         "id": id,
-        // "userId" : CacheHelper.instance.getUserId(),
+        "userId" : CacheHelper.instance.getUserId(),
       };
       if (firstName != null) {
         data["name"] = firstName;
