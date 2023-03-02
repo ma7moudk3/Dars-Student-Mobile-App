@@ -95,13 +95,8 @@ class ProfileController extends GetxController {
 
   @override
   void onInit() {
-    if (currentUserProfileInfo.value != null &&
-        currentUserProfileInfo.value!.result != null &&
-        currentUserProfileInfo.value!.result!.requester != null &&
-        currentUserProfileInfo.value!.result!.requester!.userId != null) {
-      userPicture =
-          "${Links.baseLink}${Links.profileImageById}?userId=${currentUserProfileInfo.value!.result!.requester!.userId}";
-    }
+    userPicture =
+        "${Links.baseLink}${Links.profileImageById}?userId=${currentUserProfileInfo.value?.result?.requester?.userId ?? -1}";
     super.onInit();
   }
 

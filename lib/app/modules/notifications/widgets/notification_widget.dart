@@ -138,6 +138,7 @@ class NotificationWidget extends GetView<NotificationsController> {
                                     "")
                             ? TextDirection.ltr
                             : TextDirection.rtl,
+                        textAlign: TextAlign.start,
                         overflow: TextOverflow.ellipsis,
                       ),
                     ),

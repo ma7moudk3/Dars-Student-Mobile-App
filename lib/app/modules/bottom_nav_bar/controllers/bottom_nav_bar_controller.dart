@@ -40,6 +40,7 @@ class BottomNavBarController extends GetxController
 
   void setNotificationCount(int count) {
     unReadNotificationsCount.value = count;
+    update();
   }
 
   Future getUnReadNotificationsCount() async {

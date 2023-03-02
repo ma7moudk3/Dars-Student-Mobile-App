@@ -90,7 +90,7 @@ class LoginController extends GetxController {
             developer.log("isPhoneConfirmed? $isPhoneConfirmed");
             if (currentUserInfo.result != null &&
                 ((!isEmailConfirmed) || (!isPhoneConfirmed))) {
-              Future.wait([
+              await Future.wait([
                 CacheHelper.instance.setIsEmailConfirmed(
                     currentUserInfo.result!.isEmailConfirmed ?? false),
                 CacheHelper.instance.setIsPhoneConfirmed(
