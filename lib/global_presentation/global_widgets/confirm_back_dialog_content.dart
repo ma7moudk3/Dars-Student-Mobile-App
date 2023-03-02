@@ -10,10 +10,12 @@ class ConfirmBackDialogContent extends StatelessWidget {
     this.title,
     this.subTitle,
     this.isCloseApp = false,
+    this.onBack,
   }) : super(key: key);
 
   final String? title, subTitle;
   final bool isCloseApp;
+  final void Function()? onBack;
   @override
   Widget build(BuildContext context) {
     return Material(
@@ -56,6 +58,9 @@ class ConfirmBackDialogContent extends StatelessWidget {
                 PrimaryButton(
                   width: 142.w,
                   onPressed: () async {
+                    if (onBack != null) {
+                      onBack!();
+                    }
                     if (Get.isDialogOpen!) {
                       Get.back();
                     }

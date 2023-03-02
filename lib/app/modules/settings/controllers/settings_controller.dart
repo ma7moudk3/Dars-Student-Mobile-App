@@ -23,6 +23,12 @@ class SettingsController extends GetxController {
       newPasswordErrorIconColor,
       confirmPasswordErrorIconColor;
 
+  bool isDataChanged() {
+    return (oldPasswordController.text.isNotEmpty ||
+        newPasswordController.text.isNotEmpty ||
+        confirmPasswordController.text.isNotEmpty);
+  }
+
   String? validateOldPassword(String? oldPasswordFieldValue) {
     if (oldPasswordFieldValue == null || oldPasswordFieldValue.isEmpty) {
       oldPasswordErrorIconColor = Colors.red;

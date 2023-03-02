@@ -135,27 +135,34 @@ class ParticipantListBottomSheetContent
                                         ),
                                       ],
                                     ),
-                                    const Spacer(),
-                                    GestureDetector(
-                                      onTap: () async {},
-                                      child: Container(
-                                        height: 22.h,
-                                        width: 20.w,
-                                        decoration: BoxDecoration(
-                                          borderRadius:
-                                              BorderRadius.circular(8),
-                                          border: Border.all(
-                                            color: ColorManager.primary,
-                                            width: 2.w,
+                                    Visibility(
+                                      visible: false, // TODO: change to true when the requirement is clear
+                                    child: Row(
+                                        children: [
+                                          const Spacer(),
+                                          GestureDetector(
+                                            onTap: () async {},
+                                            child: Container(
+                                              height: 22.h,
+                                              width: 20.w,
+                                              decoration: BoxDecoration(
+                                                borderRadius:
+                                                    BorderRadius.circular(8),
+                                                border: Border.all(
+                                                  color: ColorManager.primary,
+                                                  width: 2.w,
+                                                ),
+                                              ),
+                                              child: Center(
+                                                child: Icon(
+                                                  Icons.check_rounded,
+                                                  color: ColorManager.primary,
+                                                  size: 15,
+                                                ),
+                                              ),
+                                            ),
                                           ),
-                                        ),
-                                        child: Center(
-                                          child: Icon(
-                                            Icons.check_rounded,
-                                            color: ColorManager.primary,
-                                            size: 13,
-                                          ),
-                                        ),
+                                        ],
                                       ),
                                     ),
                                   ],

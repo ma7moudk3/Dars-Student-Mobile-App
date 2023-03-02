@@ -1,10 +1,7 @@
-import 'dart:developer';
 
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:hessa_student/app/constants/exports.dart';
 import 'package:hessa_student/app/modules/addresses/data/models/address_result/address_result.dart';
-import 'package:hessa_student/global_presentation/global_widgets/custom_snack_bar.dart';
-import 'package:hessa_student/global_presentation/global_widgets/loading.dart';
 import 'package:infinite_scroll_pagination/infinite_scroll_pagination.dart';
 import 'package:lottie/lottie.dart';
 
@@ -196,14 +193,7 @@ class AddressesView extends GetView<AddressesController> {
                         ),
                         child: PrimaryButton(
                           onPressed: () async {
-                            // await Get.toNamed(Routes.ADD_NEW_ADDRESS);
-                            CustomSnackBar.showCustomSnackBar(
-                                title: "", message: "");
-                            log(Get.isSnackbarOpen.toString());
-                            // Get.back();
-                            if (Get.isSnackbarOpen) {}
-                            showLoadingDialog();
-                            // Future.delayed(const Duration(seconds: 1)).then((value) => Get.back());
+                            await Get.toNamed(Routes.ADD_NEW_ADDRESS);
                           },
                           title: LocaleKeys.add_new_address.tr,
                         ),

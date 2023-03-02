@@ -14,23 +14,29 @@ class ChangePasswordBottomSheetContent extends GetView<SettingsController> {
     Get.put(SettingsController());
     return WillPopScope(
       onWillPop: () async {
-        await Get.dialog(
-          Container(
-            color: ColorManager.black.withOpacity(0.1),
-            height: 140.h,
-            width: 140.w,
-            child: Center(
-              child: Container(
-                width: Get.width,
-                margin: EdgeInsets.symmetric(
-                  horizontal: 18.w,
+        if (controller.isDataChanged()) {
+          await Get.dialog(
+            Container(
+              color: ColorManager.black.withOpacity(0.1),
+              height: 140.h,
+              width: 140.w,
+              child: Center(
+                child: Container(
+                  width: Get.width,
+                  margin: EdgeInsets.symmetric(
+                    horizontal: 18.w,
+                  ),
+                  child: ConfirmBackDialogContent(
+                    onBack: controller.clearData,
+                  ),
                 ),
-                child: const ConfirmBackDialogContent(),
               ),
             ),
-          ),
-        );
-        return false;
+          );
+          return false;
+        } else {
+          return true;
+        }
       },
       child: SafeArea(
         child: Wrap(
