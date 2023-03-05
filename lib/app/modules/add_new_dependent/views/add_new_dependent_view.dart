@@ -131,45 +131,53 @@ class AddNewDependentView extends GetView<AddNewDependentController> {
 
     return WillPopScope(
       onWillPop: () async {
-        await Get.dialog(
-          Container(
-            color: ColorManager.black.withOpacity(0.1),
-            height: 140.h,
-            width: 140.w,
-            child: Center(
-              child: Container(
-                width: Get.width,
-                margin: EdgeInsets.symmetric(
-                  horizontal: 18.w,
+        if (controller.isDataChanged()) {
+          await Get.dialog(
+            Container(
+              color: ColorManager.black.withOpacity(0.1),
+              height: 140.h,
+              width: 140.w,
+              child: Center(
+                child: Container(
+                  width: Get.width,
+                  margin: EdgeInsets.symmetric(
+                    horizontal: 18.w,
+                  ),
+                  child: const ConfirmBackDialogContent(),
                 ),
-                child: const ConfirmBackDialogContent(),
               ),
             ),
-          ),
-        );
-        return false;
+          );
+          return false;
+        } else {
+          return true;
+        }
       },
       child: Scaffold(
         appBar: CustomAppBar(
           title: LocaleKeys.add_dependent,
           leading: GestureDetector(
             onTap: () async {
-              await Get.dialog(
-                Container(
-                  color: ColorManager.black.withOpacity(0.1),
-                  height: 140.h,
-                  width: 140.w,
-                  child: Center(
-                    child: Container(
-                      width: Get.width,
-                      margin: EdgeInsets.symmetric(
-                        horizontal: 18.w,
+              if (controller.isDataChanged()) {
+                await Get.dialog(
+                  Container(
+                    color: ColorManager.black.withOpacity(0.1),
+                    height: 140.h,
+                    width: 140.w,
+                    child: Center(
+                      child: Container(
+                        width: Get.width,
+                        margin: EdgeInsets.symmetric(
+                          horizontal: 18.w,
+                        ),
+                        child: const ConfirmBackDialogContent(),
                       ),
-                      child: const ConfirmBackDialogContent(),
                     ),
                   ),
-                ),
-              );
+                );
+              } else {
+                Get.back();
+              }
             },
             behavior: HitTestBehavior.opaque,
             child: Padding(

@@ -1,7 +1,9 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:hessa_student/app/modules/hessa_details/controllers/hessa_details_controller.dart';
 
 import '../../../../generated/locales.g.dart';
 import '../../../constants/exports.dart';
+import '../../../constants/links.dart';
 import '../../../data/models/classes/item.dart';
 
 class ParticipantListBottomSheetContent
@@ -56,6 +58,8 @@ class ParticipantListBottomSheetContent
                         shrinkWrap: true,
                         physics: const NeverScrollableScrollPhysics(),
                         itemBuilder: (BuildContext context, int index) {
+                          String studentPicture =
+                              "${Links.baseLink}${Links.nonUsersProfileImageByToken}?id=${controller.hessaOrderDetails.result?.students?[index].requesterStudentPhoto ?? -1}";
                           return Padding(
                             padding: EdgeInsets.symmetric(vertical: 5.h),
                             child: Column(
@@ -63,22 +67,33 @@ class ParticipantListBottomSheetContent
                                 Row(
                                   children: [
                                     SizedBox(width: 10.w),
-                                    Container(
-                                      width: 58.w,
-                                      height: 65.h,
-                                      decoration: BoxDecoration(
-                                        image: DecorationImage(
-                                          image:
-                                              AssetImage(ImagesManager.avatar),
-                                          fit: BoxFit.cover,
+                                    StatefulBuilder(builder:
+                                        (BuildContext context, setState) {
+                                      return Container(
+                                        width: 58.w,
+                                        height: 65.h,
+                                        decoration: BoxDecoration(
+                                          image: DecorationImage(
+                                            image: CachedNetworkImageProvider(
+                                              studentPicture,
+                                              errorListener: () {
+                                                setState(() {
+                                                  studentPicture =
+                                                      "https://www.shareicon.net/data/2016/06/10/586098_guest_512x512.png";
+                                                });
+                                              },
+                                            ),
+                                            fit: BoxFit.cover,
+                                          ),
+                                          border: Border.all(
+                                            width: 1,
+                                            color: ColorManager.primary,
+                                          ),
+                                          borderRadius:
+                                              BorderRadius.circular(20),
                                         ),
-                                        border: Border.all(
-                                          width: 1,
-                                          color: ColorManager.primary,
-                                        ),
-                                        borderRadius: BorderRadius.circular(20),
-                                      ),
-                                    ),
+                                      );
+                                    }),
                                     SizedBox(width: 10.w),
                                     Column(
                                       crossAxisAlignment:
@@ -136,8 +151,9 @@ class ParticipantListBottomSheetContent
                                       ],
                                     ),
                                     Visibility(
-                                      visible: false, // TODO: change to true when the requirement is clear
-                                    child: Row(
+                                      visible:
+                                          false, // TODO: change to true when the requirement is clear
+                                      child: Row(
                                         children: [
                                           const Spacer(),
                                           GestureDetector(

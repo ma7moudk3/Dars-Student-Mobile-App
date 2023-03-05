@@ -1,8 +1,10 @@
 import 'dart:developer';
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:hessa_student/app/modules/hessa_details/widgets/participant_students_list_bottom_sheet.dart';
 import 'package:hessa_student/app/modules/hessa_details/widgets/studying_hours_widget.dart';
 import '../../../../generated/locales.g.dart';
 import '../../../constants/exports.dart';
+import '../../../constants/links.dart';
 import '../../../core/helper_functions.dart';
 import '../../../routes/app_pages.dart';
 import '../controllers/hessa_details_controller.dart';
@@ -67,6 +69,8 @@ class StudyingPackageWidget extends GetView<HessaDetailsController> {
                         shrinkWrap: true,
                         // physics: const NeverScrollableScrollPhysics(),
                         itemBuilder: (BuildContext context, int index) {
+                          String studentPicture =
+                              "${Links.baseLink}${Links.nonUsersProfileImageByToken}?id=${controller.hessaOrderDetails.result?.students?[index].requesterStudentPhoto ?? -1}";
                           return Padding(
                             padding: EdgeInsets.only(left: 15.w),
                             child: GestureDetector(
@@ -77,28 +81,37 @@ class StudyingPackageWidget extends GetView<HessaDetailsController> {
                               },
                               child: Row(
                                 children: [
-                                  Container(
-                                    width: 44.w,
-                                    height: 44.h,
-                                    decoration: BoxDecoration(
-                                      image: DecorationImage(
-                                        image: AssetImage(
-                                          ImagesManager.avatar,
+                                  StatefulBuilder(builder:
+                                      (BuildContext context, setState) {
+                                    return Container(
+                                      width: 44.w,
+                                      height: 44.h,
+                                      decoration: BoxDecoration(
+                                        image: DecorationImage(
+                                          image: CachedNetworkImageProvider(
+                                            studentPicture,
+                                            errorListener: () {
+                                              setState(() {
+                                                studentPicture =
+                                                    "https://www.shareicon.net/data/2016/06/10/586098_guest_512x512.png";
+                                              });
+                                            },
+                                          ),
+                                          fit: BoxFit.cover,
                                         ),
-                                        fit: BoxFit.cover,
+                                        borderRadius: BorderRadius.circular(12),
+                                        boxShadow: [
+                                          BoxShadow(
+                                            color: const Color(0x19000000)
+                                                .withOpacity(0.07),
+                                            spreadRadius: 0,
+                                            offset: const Offset(0, 12),
+                                            blurRadius: 15,
+                                          ),
+                                        ],
                                       ),
-                                      borderRadius: BorderRadius.circular(12),
-                                      boxShadow: [
-                                        BoxShadow(
-                                          color: const Color(0x19000000)
-                                              .withOpacity(0.07),
-                                          spreadRadius: 0,
-                                          offset: const Offset(0, 12),
-                                          blurRadius: 15,
-                                        ),
-                                      ],
-                                    ),
-                                  ),
+                                    );
+                                  }),
                                   SizedBox(width: 10.w),
                                   PrimaryText(
                                     controller.hessaOrderDetails.result

@@ -161,7 +161,7 @@ class DependentsListBottomSheetContent extends GetView<OrderHessaController> {
                                 return GetBuilder<OrderHessaController>(
                                     builder: (OrderHessaController controller) {
                                   String studentPicture =
-                                      "${Links.baseLink}${Links.profileImageById}?userId=${student.requesterStudent?.id ?? -1}";
+                                      "${Links.baseLink}${Links.nonUsersProfileImageByToken}?id=${student.requesterStudent?.requesterStudentPhoto ?? -1}";
                                   return CheckboxListTile(
                                     side: BorderSide(
                                       color: ColorManager.borderColor2,
@@ -169,14 +169,13 @@ class DependentsListBottomSheetContent extends GetView<OrderHessaController> {
                                     ),
                                     value: controller.selectedStudents
                                             .firstWhereOrNull(
-                                                (Student tempStudent) =>
-                                                    (tempStudent
-                                                            .requesterStudent
-                                                            ?.id ??
-                                                        -1) ==
-                                                    (student.requesterStudent
-                                                            ?.id ??
-                                                        0)) !=
+                                          (Student tempStudent) =>
+                                              (tempStudent
+                                                      .requesterStudent?.id ??
+                                                  -1) ==
+                                              (student.requesterStudent?.id ??
+                                                  0),
+                                        ) !=
                                         null, // like contains
                                     title: Column(
                                       mainAxisSize: MainAxisSize.min,

@@ -38,7 +38,10 @@ class EditProfileRepoImplement extends EditProfileRepo {
       await DioHelper.put(
         data: data,
         headers: headers,
-        Links.updateProfilePicture,
+        isForStudent
+            ? Links
+                .updateProfilePicture // TODO: change this to update student profile picture if needed
+            : Links.updateProfilePicture,
         onSuccess: (response) async {
           if (response.statusCode == 200 && response.data['success'] == true) {
             fileToken = response.data['result']['fileToken'];
@@ -109,7 +112,7 @@ class EditProfileRepoImplement extends EditProfileRepo {
     try {
       Map<String, dynamic> data = {
         "id": id,
-        "userId" : CacheHelper.instance.getUserId(),
+        "userId": CacheHelper.instance.getUserId(),
       };
       if (firstName != null) {
         data["name"] = firstName;
@@ -129,7 +132,7 @@ class EditProfileRepoImplement extends EditProfileRepo {
       if (phoneNumber != null) {
         data["phoneNumber"] = phoneNumber;
       }
-      if(dateOfBirth != null){
+      if (dateOfBirth != null) {
         data["doB"] = dateOfBirth;
       }
       Map<String, dynamic> headers = {

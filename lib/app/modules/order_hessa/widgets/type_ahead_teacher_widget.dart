@@ -12,7 +12,7 @@ class TypeAheadPreferredTeacherWidget extends GetView<OrderHessaController> {
   @override
   Widget build(BuildContext context) {
     String teacherPicture =
-        "${Links.baseLink}${Links.profileImageById}?userId=${teacher.preferredProvider?.providerId ?? -1}";
+        "${Links.baseLink}${Links.profileImageById}?userId=${teacher.preferredProvider?.providerUserId ?? -1}";
     double teacherRate = teacher.providerRate ?? 0.0;
     return Padding(
       padding: const EdgeInsets.all(5.0),

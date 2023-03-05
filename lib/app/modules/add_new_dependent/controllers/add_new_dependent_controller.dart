@@ -70,6 +70,16 @@ class AddNewDependentController extends GetxController {
     super.onInit();
   }
 
+  bool isDataChanged() {
+    return nameController.text.isNotEmpty ||
+        notesController.text.isNotEmpty ||
+        schoolNameController.text.isNotEmpty ||
+        selectedClass.id != null ||
+        selectedSchoolType.id != null ||
+        selectedStudentRelation.id != null ||
+        image != null;
+  }
+
   Future checkInternet() async {
     await checkInternetConnection(timeout: 10).then(
       (bool internetStatus) async {

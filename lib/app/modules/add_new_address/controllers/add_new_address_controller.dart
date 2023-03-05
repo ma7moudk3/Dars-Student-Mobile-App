@@ -106,6 +106,14 @@ class AddNewAddressController extends GetxController {
     }
   }
 
+  bool isDataChanged() {
+    return (addressDescriptionController.text.isNotEmpty ||
+        addressController.text.isNotEmpty ||
+        selectedCountry.id != null ||
+        selectedGovernorate.id != null ||
+        selectedLocality.id != null);
+  }
+
   Future changeLocality(String? result) async {
     if (localities.result != null && result != null) {
       for (var locality in localities.result ?? <locality.Result>[]) {

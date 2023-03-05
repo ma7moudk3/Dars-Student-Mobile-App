@@ -134,7 +134,7 @@ class EditDependentView extends GetView<EditDependentController> {
     }
 
     String studentPicture =
-        "${Links.baseLink}${Links.profileImageById}?userId=${controller.studentToEdit.requesterStudent?.id ?? -1}";
+        "${Links.baseLink}${Links.nonUsersProfileImageByToken}?id=${controller.studentToEdit.requesterStudent?.requesterStudentPhoto ?? -1}";
     return WillPopScope(
       onWillPop: () async {
         if (controller.isDataChanged()) {
