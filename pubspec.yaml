@@ -57,6 +57,7 @@ dependencies:
   dart_emoji: ^0.2.0+2
   gallery_saver: ^2.3.2
   animator: ^3.2.0
+  flutter_launcher_icons: ^0.12.0
   
 dev_dependencies: 
   flutter_lints: ^2.0.0
@@ -68,11 +69,11 @@ flutter_native_splash:
   flutter_test: 
     sdk: flutter
   change_app_package_name: ^0.1.3
-  flutter_launcher_icons: ^0.11.0
+  flutter_launcher_icons: ^0.12.0
 flutter_icons:
+  image_path: "assets/images/dars-icon.png"  
   android: true
   ios: true
-  image_path: "assets/images/hessa-icon.png"  
 flutter: 
   uses-material-design: true
 
