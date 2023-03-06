@@ -78,6 +78,7 @@ flutter:
 
   assets: 
     - assets/images/
+    - assets/images/splash_backgrounds/
     - assets/flags/
     - assets/lottieJSONS/
     - assets/images/login_or_sign_up/

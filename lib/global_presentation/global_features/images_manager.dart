@@ -1,6 +1,5 @@
 class ImagesManager {
   static String fullLogo = "assets/svg/logo.svg";
-  static String splashBackground = "assets/images/splash_background.png";
   static String loginOrSignUpBackground1 =
       "assets/images/login_or_sign_up/login_background1.png";
   static String loginOrSignUpBackground2 =

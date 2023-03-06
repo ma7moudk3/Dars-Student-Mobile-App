@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import '../../../../generated/locales.g.dart';
 import '../../../constants/exports.dart';
 import '../controllers/splash_controller.dart';
@@ -6,6 +8,10 @@ class SplashView extends GetView<SplashController> {
   const SplashView({Key? key}) : super(key: key);
   @override
   Widget build(BuildContext context) {
+    Random random = Random();
+    int randomNumber = random.nextInt(4) + 1;
+    String splashBackground =
+        "assets/images/splash_backgrounds/splash_background$randomNumber.png";
     return Stack(
       children: [
         Container(
@@ -13,7 +19,7 @@ class SplashView extends GetView<SplashController> {
           width: Get.width,
           decoration: BoxDecoration(
             image: DecorationImage(
-              image: AssetImage(ImagesManager.splashBackground),
+              image: AssetImage(splashBackground),
               fit: BoxFit.cover,
             ),
           ),
