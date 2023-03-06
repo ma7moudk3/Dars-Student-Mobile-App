@@ -56,7 +56,7 @@ class LoginView extends GetView<LoginController> {
                           ),
                           SizedBox(height: 5.h),
                           PrimaryText(
-                            LocaleKeys.welcome_in_hessa_we_missed_you,
+                            LocaleKeys.welcome_in_dars_we_missed_you,
                             fontSize: 14.sp,
                             fontWeight: FontWeightManager.softLight,
                             color: ColorManager.white,

@@ -61,7 +61,7 @@ class LoginOrSignUpView extends GetView<LoginOrSignUpController> {
                         ),
                         SizedBox(height: 20.h),
                         PrimaryText(
-                          LocaleKeys.hessaApp,
+                          LocaleKeys.darsApp,
                           fontSize: 26.sp,
                           fontWeight: FontWeightManager.light,
                           color: Colors.white,

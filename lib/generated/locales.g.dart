@@ -13,14 +13,13 @@ class LocaleKeys {
   static const error = 'error';
   static const password = 'password';
   static const old_password = 'old_password';
-  static const hessaApp = 'hessaApp';
+  static const darsApp = 'darsApp';
   static const contentRight = 'contentRight';
   static const skip = 'skip';
   static const next = 'next';
   static const sign_in_now = 'sign_in_now';
   static const do_your_sign_in = 'do_your_sign_in';
-  static const welcome_in_hessa_we_missed_you =
-      'welcome_in_hessa_we_missed_you';
+  static const welcome_in_dars_we_missed_you = 'welcome_in_dars_we_missed_you';
   static const email = 'email';
   static const enter_email = 'enter_email';
   static const dependent_added_successfully = 'dependent_added_successfully';
@@ -49,7 +48,7 @@ class LocaleKeys {
       'forgot_password_email_link_sent';
   static const revise_your_email_to_restore_password =
       'revise_your_email_to_restore_password';
-  static const my_hessa_balance = 'my_hessa_balance';
+  static const my_dars_balance = 'my_dars_balance';
   static const new_password = 'new_password';
   static const payment_ways = 'payment_ways';
   static const do_you_forgot_password = 'do_you_forgot_password';
@@ -72,7 +71,7 @@ class LocaleKeys {
   static const password_must_be_at_least_6_characters =
       'password_must_be_at_least_6_characters';
   static const make_a_featured_account = 'make_a_featured_account';
-  static const welcome_in_hessa = 'welcome_in_hessa';
+  static const welcome_in_dars = 'welcome_in_dars';
   static const gender = 'gender';
   static const full_name = 'full_name';
   static const my_orders = 'my_orders';
@@ -101,7 +100,7 @@ class LocaleKeys {
   static const please_choose_a_valid_student_to_delete =
       'please_choose_a_valid_student_to_delete';
   static const email_already_verified = 'email_already_verified';
-  static const for_hessa = 'for_hessa';
+  static const for_dars = 'for_dars';
   static const address_deleted_successfully = 'address_deleted_successfully';
   static const student_deleted_successfully = 'student_deleted_successfully';
   static const school_name = 'school_name';
@@ -155,14 +154,14 @@ class LocaleKeys {
   static const edit_profile = 'edit_profile';
   static const change_password = 'change_password';
   static const change_language = 'change_language';
-  static const order_new_hessa = 'order_new_hessa';
-  static const hessa_teachers = 'hessa_teachers';
+  static const order_new_dars = 'order_new_dars';
+  static const dars_teachers = 'dars_teachers';
   static const recent_orders = 'recent_orders';
   static const no_orders_currently = 'no_orders_currently';
-  static const you_can_add_new_hessa_order = 'you_can_add_new_hessa_order';
+  static const you_can_add_new_dars_order = 'you_can_add_new_dars_order';
   static const more = 'more';
   static const welcome = 'welcome';
-  static const order_hessa = 'order_hessa';
+  static const order_dars = 'order_dars';
   static const fill_the_student_form = 'fill_the_student_form';
   static const student_name = 'student_name';
   static const locality = 'locality';
@@ -184,7 +183,7 @@ class LocaleKeys {
   static const studying_subjects = 'studying_subjects';
   static const cancel = 'cancel';
   static const choose_studying_subject = 'choose_studying_subject';
-  static const order_hessa_category = 'order_hessa_category';
+  static const order_dars_category = 'order_dars_category';
   static const choose_studying_subjects = 'choose_studying_subjects';
   static const choose_skills = 'choose_skills';
   static const edit_address = 'edit_address';
@@ -211,14 +210,14 @@ class LocaleKeys {
   static const message_copied_succesfully = 'message_copied_succesfully';
   static const please_select_class = 'please_select_class';
   static const please_select_subject = 'please_select_subject';
-  static const one_hessa = 'one_hessa';
+  static const one_dars = 'one_dars';
   static const school_package = 'school_package';
   static const school_package_description = 'school_package_description';
-  static const hessa_duration = 'hessa_duration';
-  static const choose_hessa_duration = 'choose_hessa_duration';
-  static const hessa_time_and_date = 'hessa_time_and_date';
-  static const chosen_hessa_date = 'chosen_hessa_date';
-  static const chosen_hessa_time_and_date = 'chosen_hessa_time_and_date';
+  static const dars_duration = 'dars_duration';
+  static const choose_dars_duration = 'choose_dars_duration';
+  static const dars_time_and_date = 'dars_time_and_date';
+  static const chosen_dars_date = 'chosen_dars_date';
+  static const chosen_dars_time_and_date = 'chosen_dars_time_and_date';
   static const location = 'location';
   static const choose_location = 'choose_location';
   static const teacher_name = 'teacher_name';
@@ -243,8 +242,8 @@ class LocaleKeys {
   static const card_holder_name_should_have_space =
       'card_holder_name_should_have_space';
   static const should_have_space = 'should_have_space';
-  static const choose_hessa_date = 'choose_hessa_date';
-  static const choose_hessa_time = 'choose_hessa_time';
+  static const choose_dars_date = 'choose_dars_date';
+  static const choose_dars_time = 'choose_dars_time';
   static const submit_form = 'submit_form';
   static const from = 'from';
   static const to = 'to';
@@ -262,10 +261,10 @@ class LocaleKeys {
       'choose_dependent_date_of_birth';
   static const choose_date_of_birth = 'choose_date_of_birth';
   static const please_enter_dob = 'please_enter_dob';
-  static const please_enter_hessa_date = 'please_enter_hessa_date';
+  static const please_enter_dars_date = 'please_enter_dars_date';
   static const check_dependent_dob = 'check_dependent_dob';
   static const check_dob = 'check_dob';
-  static const check_hessa_date = 'check_hessa_date';
+  static const check_dars_date = 'check_dars_date';
   static const confirm = 'confirm';
   static const save = 'save';
   static const note = 'note';
@@ -279,8 +278,8 @@ class LocaleKeys {
   static const teacher_details = 'teacher_details';
   static const gallery = 'gallery';
   static const file = 'file';
-  static const privacy_policy_in_hessa = 'privacy_policy_in_hessa';
-  static const terms_and_conditions_in_hessa = 'terms_and_conditions_in_hessa';
+  static const privacy_policy_in_dars = 'privacy_policy_in_dars';
+  static const terms_and_conditions_in_dars = 'terms_and_conditions_in_dars';
   static const year = 'year';
   static const years = 'years';
   static const month = 'month';
@@ -328,8 +327,8 @@ class LocaleKeys {
   static const resend_code_after = 'resend_code_after';
   static const no_transaction_has_been_made_on_your_payments =
       'no_transaction_has_been_made_on_your_payments';
-  static const please_complete_your_profile_information_to_benefit_from_hessa_services =
-      'please_complete_your_profile_information_to_benefit_from_hessa_services';
+  static const please_complete_your_profile_information_to_benefit_from_dars_services =
+      'please_complete_your_profile_information_to_benefit_from_dars_services';
   static const resend_code = 'resend_code';
   static const check_pin = 'check_pin';
   static const you_do_not_have_notifications_at_the_present_time =
@@ -360,7 +359,7 @@ class LocaleKeys {
       'the_verification_code_has_been_sent_to_the_phone_number';
   static const the_verification_code_has_been_sent_to_the_email =
       'the_verification_code_has_been_sent_to_the_email';
-  static const about_hessa = 'about_hessa';
+  static const about_dars = 'about_dars';
   static const success = 'success';
   static const verify_email = 'verify_email';
   static const verified_successfully = 'verified_successfully';
@@ -378,13 +377,13 @@ class LocaleKeys {
   static const enter_address_description = 'enter_address_description';
   static const please_enter_message_content = 'please_enter_message_content';
   static const check_message_content = 'check_message_content';
-  static const hessa_details = 'hessa_details';
+  static const dars_details = 'dars_details';
   static const studying_hour = 'studying_hour';
-  static const hessa = 'hessa';
+  static const dars = 'dars';
   static const timing = 'timing';
   static const date = 'date';
   static const session = 'session';
-  static const hessa_type = 'hessa_type';
+  static const dars_type = 'dars_type';
   static const follow_us = 'follow_us';
   static const expiry_date = 'expiry_date';
   static const choose_expiry_date = 'choose_expiry_date';
@@ -393,7 +392,7 @@ class LocaleKeys {
   static const expiry_year_invalid = 'expiry_year_invalid';
   static const card_has_expired = 'card_has_expired';
   static const teachers_list = 'teachers_list';
-  static const explore_hessa_teachers = 'explore_hessa_teachers';
+  static const explore_dars_teachers = 'explore_dars_teachers';
   static const participant_students = 'participant_students';
   static const teacher = 'teacher';
   static const january = 'january';
@@ -411,20 +410,20 @@ class LocaleKeys {
   static const november = 'november';
   static const december = 'december';
   static const participants = 'participants';
-  static const cancel_hessa = 'cancel_hessa';
+  static const cancel_dars = 'cancel_dars';
   static const please_enter_cvv = 'please_enter_cvv';
   static const cvv_is_invalid = 'cvv_is_invalid';
   static const please_choose_card_type = 'please_choose_card_type';
   static const please_choose_a_valid_notification_to_delete =
       'please_choose_a_valid_notification_to_delete';
   static const check_card_type = 'check_card_type';
-  static const hessa_started = 'hessa_started';
+  static const dars_started = 'dars_started';
   static const intersted_teachers = 'intersted_teachers';
   static const order_added_successfully = 'order_added_successfully';
   static const add_new_order = 'add_new_order';
   static const approve_teacher = 'approve_teacher';
-  static const confirm_canceling_hessa = 'confirm_canceling_hessa';
-  static const canceling_hessa_reason = 'canceling_hessa_reason';
+  static const confirm_canceling_dars = 'confirm_canceling_dars';
+  static const canceling_dars_reason = 'canceling_dars_reason';
   static const cofirm_canceling = 'cofirm_canceling';
   static const back = 'back';
   static const search_for_teacher = 'search_for_teacher';
@@ -449,16 +448,16 @@ class LocaleKeys {
   static const subjects = 'subjects';
   static const classes = 'classes';
   static const skills = 'skills';
-  static const rating_previous_hessas = 'rating_previous_hessas';
+  static const rating_previous_darses = 'rating_previous_darses';
   static const teacher_rating = 'teacher_rating';
   static const rate = 'rate';
   static const how_was_your_experience_with_the_teacher =
       'how_was_your_experience_with_the_teacher';
-  static const you_cannot_cancel_this_hessa = 'you_cannot_cancel_this_hessa';
-  static const due_to_the_starting_time_of_the_hessa =
-      'due_to_the_starting_time_of_the_hessa';
-  static const to_help_you_please_enter_canceling_hessa_reason =
-      'to_help_you_please_enter_canceling_hessa_reason';
+  static const you_cannot_cancel_this_dars = 'you_cannot_cancel_this_dars';
+  static const due_to_the_starting_time_of_the_dars =
+      'due_to_the_starting_time_of_the_dars';
+  static const to_help_you_please_enter_canceling_dars_reason =
+      'to_help_you_please_enter_canceling_dars_reason';
 }
 
 class Locales {
@@ -466,20 +465,20 @@ class Locales {
     'error': 'حدث خطأ ما',
     'password': 'كلمة المرور',
     'old_password': 'كلمة المرور القديمة',
-    'hessaApp': 'تطبيق حصة',
+    'darsApp': 'تطبيق درس',
     'contentRight': 'جميع الحقوق محفوظة ',
     'skip': 'تخطي',
     'next': 'التالي',
     'sign_in_now': 'سجّل دخول الآن',
     'do_your_sign_in': 'قم بتسجيل دخولك',
-    'welcome_in_hessa_we_missed_you': 'مرحباً بعودتك في حصة، لقد افتقدناك',
+    'welcome_in_dars_we_missed_you': 'مرحباً بعودتك في درس، لقد افتقدناك',
     'email': 'البريد الإلكتروني',
     'enter_email': 'عنوان البريد الإلكتروني',
     'dependent_added_successfully': 'تمت إضافة التابع بنجاح',
     'address_edited_successfully': 'تم تعديل العنوان بنجاح',
     'enter_password': 'أدخل كلمة المرور',
     'enter_old_password': 'أدخل كلمة المرور القديمة',
-    'enjoy_the_app': 'استمتع مع حصة',
+    'enjoy_the_app': 'استمتع مع درس',
     'no_messages_yet': 'لا توجد رسائل بعد',
     'welcoming': 'يسعدنا رؤيتك مرة أخرى',
     'add_new_dependent': 'اضافة تابع جديد',
@@ -501,7 +500,7 @@ class Locales {
     'forgot_password_email_link_sent': 'تم إرسال البريد الإلكتروني',
     'revise_your_email_to_restore_password':
         'يرجى مراجعة بريدك الإلكتروني لإعادة تعيين كلمة المرور',
-    'my_hessa_balance': 'رصيدي في حِصّة',
+    'my_dars_balance': 'رصيدي في درس',
     'new_password': 'كلمة المرور الجديدة',
     'payment_ways': 'طرق الدفع',
     'do_you_forgot_password': 'هل نسيت كلمة المرور؟',
@@ -524,7 +523,7 @@ class Locales {
     'password_must_be_at_least_6_characters':
         'كلمة المرور يجب أن تكون 6 أحرف على الأقل',
     'make_a_featured_account': 'قم بإنشاء حساب مميز',
-    'welcome_in_hessa': 'مرحبا بقدومك إلى حِصّة',
+    'welcome_in_dars': 'مرحبا بقدومك إلى درس',
     'gender': 'الجنس',
     'full_name': 'الاسم الكامل',
     'my_orders': 'طلباتي',
@@ -550,7 +549,7 @@ class Locales {
     'please_choose_a_valid_address_to_delete': 'الرجاء اختيار عنوان صحيح للحذف',
     'please_choose_a_valid_student_to_delete': 'الرجاء اختيار طالب صحيح للحذف',
     'email_already_verified': 'البريد الإلكتروني مؤكد بالفعل',
-    'for_hessa': 'لحِصّة',
+    'for_dars': 'لدرس',
     'address_deleted_successfully': 'تم حذف العنوان بنجاح',
     'student_deleted_successfully': 'تم حذف الطالب بنجاح',
     'school_name': 'اسم المدرسة',
@@ -603,14 +602,14 @@ class Locales {
     'edit_profile': 'تعديل الملف الشخصي',
     'change_password': 'تغيير كلمة المرور',
     'change_language': 'تغيير اللغة',
-    'order_new_hessa': 'طلب حصة جديدة',
-    'hessa_teachers': 'مدرسيّ حصة',
+    'order_new_dars': 'طلب درس جديدة',
+    'dars_teachers': 'مدرسيّ درس',
     'recent_orders': 'أحدث طلباتك',
     'no_orders_currently': 'لا يوجد لديك طلبات حالياً',
-    'you_can_add_new_hessa_order': 'يمكنك إضافة طلب حصة جديد ',
+    'you_can_add_new_dars_order': 'يمكنك إضافة طلب درس جديد ',
     'more': 'المزيد',
     'welcome': 'مرحباً',
-    'order_hessa': 'طلب حصة',
+    'order_dars': 'طلب درس',
     'fill_the_student_form':
         'قم بتعبئة المعلومات الخاصة بطالب المدرسة لاستكمال الطلب الخاص بك',
     'student_name': 'اسم الطالب',
@@ -633,7 +632,7 @@ class Locales {
     'studying_subjects': 'المواد الدراسية',
     'cancel': 'إلغاء',
     'choose_studying_subject': 'اختر المادة الدراسية',
-    'order_hessa_category': 'تصنيف الطلب',
+    'order_dars_category': 'تصنيف الطلب',
     'choose_studying_subjects': 'اختر المواد الدراسية',
     'choose_skills': 'اختر المهارات',
     'edit_address': 'تعديل العنوان',
@@ -657,14 +656,14 @@ class Locales {
     'message_copied_succesfully': 'تم نسخ الرسالة بنجاح',
     'please_select_class': 'الرجاء اختيار الصف الدراسي',
     'please_select_subject': 'الرجاء اختيار المادة الدراسية',
-    'one_hessa': 'حصة واحدة',
+    'one_dars': 'درس واحدة',
     'school_package': 'حقيبة مدرسية',
     'school_package_description': 'حصص مستمرة تصل لمدة 20 ساعة تدريسية',
-    'hessa_duration': 'مدة الحصة',
-    'choose_hessa_duration': 'اختر مدة الحصة',
-    'hessa_time_and_date': 'تاريخ ووقت الحصة',
-    'chosen_hessa_date': 'تاريخ الحصة المختارة',
-    'chosen_hessa_time_and_date': 'تاريخ ووقت الحصة المختارة',
+    'dars_duration': 'مدة الدرس',
+    'choose_dars_duration': 'اختر مدة الدرس',
+    'dars_time_and_date': 'تاريخ ووقت الدرس',
+    'chosen_dars_date': 'تاريخ الدرس المختارة',
+    'chosen_dars_time_and_date': 'تاريخ ووقت الدرس المختارة',
     'location': 'الموقع الجغرافي',
     'choose_location': 'اختر الموقع الجغرافي',
     'teacher_name': 'اسم المدرّس',
@@ -689,8 +688,8 @@ class Locales {
         'اسم صاحب البطاقة يجب أن يحتوي على مسافة مثلاً: Ahmed Alashi',
     'should_have_space':
         'الاسم الكامل يجب أن يحتوي على مسافة مثلاً: أحمد محمود',
-    'choose_hessa_date': 'اختر تاريخ الحصة',
-    'choose_hessa_time': 'اختر وقت الحصة',
+    'choose_dars_date': 'اختر تاريخ الدرس',
+    'choose_dars_time': 'اختر وقت الدرس',
     'submit_form': 'إرسال الطلب',
     'from': 'من',
     'to': 'إلى',
@@ -707,10 +706,10 @@ class Locales {
     'choose_dependent_date_of_birth': 'اختر تاريخ ميلاد التابع',
     'choose_date_of_birth': 'اختر تاريخ الميلاد',
     'please_enter_dob': 'الرجاء إدخال تاريخ الميلاد',
-    'please_enter_hessa_date': 'الرجاء إدخال تاريخ الحصة',
+    'please_enter_dars_date': 'الرجاء إدخال تاريخ الدرس',
     'check_dependent_dob': 'يجب أن يكون عمر التابع 10 أعواماً على الأقل',
     'check_dob': 'يجب أن يكون العمر 18 عاماً على الأقل',
-    'check_hessa_date': 'يجب أن يكون تاريخ الحصة الى بعدَ سنة كحد أقصى',
+    'check_dars_date': 'يجب أن يكون تاريخ الدرس الى بعدَ سنة كحد أقصى',
     'confirm': 'تأكيد',
     'save': 'حفظ',
     'note': 'مُلاحظة',
@@ -724,8 +723,8 @@ class Locales {
     'teacher_details': 'بيانات المعلّم',
     'gallery': 'المعرض',
     'file': 'ملف',
-    'privacy_policy_in_hessa': 'سياسة الخصوصية في حصة',
-    'terms_and_conditions_in_hessa': 'الشروط والأحكام في حصة',
+    'privacy_policy_in_dars': 'سياسة الخصوصية في درس',
+    'terms_and_conditions_in_dars': 'الشروط والأحكام في درس',
     'year': 'سنة',
     'years': 'سنوات',
     'month': 'شهر',
@@ -774,8 +773,8 @@ class Locales {
     'resend_code_after': 'إعادة إرسال الكود بعد',
     'no_transaction_has_been_made_on_your_payments':
         'لم يتم إجراء أي حركة على مدفوعاتك!',
-    'please_complete_your_profile_information_to_benefit_from_hessa_services':
-        'يرجى إكمال معلومات الملف الشخصي لتتمكن من الاستفادة من خدمات حصة',
+    'please_complete_your_profile_information_to_benefit_from_dars_services':
+        'يرجى إكمال معلومات الملف الشخصي لتتمكن من الاستفادة من خدمات درس',
     'resend_code': 'إعادة إرسال الكود',
     'check_pin': 'تحقّق',
     'you_do_not_have_notifications_at_the_present_time':
@@ -804,7 +803,7 @@ class Locales {
         'تم إرسال رمز التحقق إلى رقم الهاتف',
     'the_verification_code_has_been_sent_to_the_email':
         'تم إرسال رمز التحقق إلى البريد الإلكتروني',
-    'about_hessa': 'عن حصة',
+    'about_dars': 'عن درس',
     'success': 'عملية ناجحة',
     'verify_email': 'تأكيد البريد الإلكتروني',
     'verified_successfully': 'تم التأكيد بنجاح',
@@ -822,13 +821,13 @@ class Locales {
     'enter_address_description': 'اكتب وصف العنوان',
     'please_enter_message_content': 'الرجاء إدخال نص الرسالة ...',
     'check_message_content': 'تحقق من نص الرسالة المُدخل',
-    'hessa_details': 'تفاصيل الحصة',
+    'dars_details': 'تفاصيل الدرس',
     'studying_hour': 'ساعة تدريسية',
-    'hessa': 'الحصة',
+    'dars': 'الدرس',
     'timing': 'التوقيت',
     'date': 'التاريخ',
     'session': 'الجلسة',
-    'hessa_type': 'نوع الحصة',
+    'dars_type': 'نوع الدرس',
     'follow_us': 'تابعنا',
     'expiry_date': 'تاريخ الانتهاء',
     'choose_expiry_date': 'اختر تاريخ الانتهاء',
@@ -837,7 +836,7 @@ class Locales {
     'expiry_year_invalid': 'سنة الانتهاء غير صالحة',
     'card_has_expired': 'انتهت صلاحية البطاقة',
     'teachers_list': 'قائمة المعلمين',
-    'explore_hessa_teachers': 'استكشف معلمين حصة',
+    'explore_dars_teachers': 'استكشف معلمين درس',
     'participant_students': 'الطلاب المشاركين',
     'teacher': 'المدرس',
     'january': 'يناير',
@@ -854,20 +853,20 @@ class Locales {
     'november': 'نوفمبر',
     'december': 'ديسمبر',
     'participants': 'مشاركين',
-    'cancel_hessa': 'إلغاء الحصة',
+    'cancel_dars': 'إلغاء الدرس',
     'please_enter_cvv': 'أدخل CVV',
     'cvv_is_invalid': 'CVV غير صالح',
     'please_choose_card_type': 'إختر نوع البطاقة',
     'please_choose_a_valid_notification_to_delete':
         'الرجاء اختيار إشعار صالح للحذف',
     'check_card_type': 'تحقق من نوع البطاقة',
-    'hessa_started': 'بدأت الحصة',
-    'intersted_teachers': 'مدرسين مهتمين بتقديم الحصة',
+    'dars_started': 'بدأت الدرس',
+    'intersted_teachers': 'مدرسين مهتمين بتقديم الدرس',
     'order_added_successfully': 'تم إضافة الطلب بنجاح',
-    'add_new_order': 'إضافة طلب حصة جديد',
+    'add_new_order': 'إضافة طلب درس جديد',
     'approve_teacher': 'اعتماد المدرّس',
-    'confirm_canceling_hessa': 'تأكيد الغاء الحصة',
-    'canceling_hessa_reason': 'سبب الغاء الحصة',
+    'confirm_canceling_dars': 'تأكيد الغاء الدرس',
+    'canceling_dars_reason': 'سبب الغاء الدرس',
     'cofirm_canceling': 'تأكيد الإلغاء',
     'back': 'رجوع',
     'search_for_teacher': 'ابحث عن مدرس',
@@ -892,14 +891,14 @@ class Locales {
     'subjects': 'المواد',
     'classes': 'الصفوف',
     'skills': 'المهارات',
-    'rating_previous_hessas': 'تقييم الحصص السابقة',
+    'rating_previous_darses': 'تقييم الحصص السابقة',
     'teacher_rating': 'تقييم المدرس',
     'rate': 'تقييم',
     'how_was_your_experience_with_the_teacher': 'كيف كانت تجربتك مع المدرس؟',
-    'you_cannot_cancel_this_hessa': 'لا يمكنك إلغاء هذه الحصة!',
-    'due_to_the_starting_time_of_the_hessa':
-        'لا يمكنك الغاء الحصة و ذلك لاقتراب بدء موعد الحصة',
-    'to_help_you_please_enter_canceling_hessa_reason':
-        'لمساعدتك يرجى أن توضح لنا سبب الغاء الحصة',
+    'you_cannot_cancel_this_dars': 'لا يمكنك إلغاء هذه الدرس!',
+    'due_to_the_starting_time_of_the_dars':
+        'لا يمكنك الغاء الدرس و ذلك لاقتراب بدء موعد الدرس',
+    'to_help_you_please_enter_canceling_dars_reason':
+        'لمساعدتك يرجى أن توضح لنا سبب الغاء الدرس',
   };
 }

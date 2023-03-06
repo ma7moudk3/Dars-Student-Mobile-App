@@ -27,7 +27,7 @@ class HessaDetailsController extends GetxController {
     },
     {
       "icon": ImagesManager.boardIcon,
-      "title": LocaleKeys.hessa_type.tr,
+      "title": LocaleKeys.dars_type.tr,
     },
     // {
     //   "icon": ImagesManager.timerIcon,

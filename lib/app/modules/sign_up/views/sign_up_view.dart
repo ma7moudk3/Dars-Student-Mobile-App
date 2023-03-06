@@ -46,7 +46,7 @@ class SignUpView extends GetView<SignUpController> {
                       ),
                       SizedBox(height: 5.h),
                       PrimaryText(
-                        LocaleKeys.welcome_in_hessa,
+                        LocaleKeys.welcome_in_dars,
                         fontSize: 14.sp,
                         fontWeight: FontWeightManager.softLight,
                         color: ColorManager.white,

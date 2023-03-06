@@ -25,7 +25,7 @@ class HessasListWidget extends GetView<HessaDetailsController> {
                 colorCurve: Curves.bounceIn,
                 onExpansionChanged: (bool isExpanded) => log('$isExpanded'),
                 title: PrimaryText(
-                  "${LocaleKeys.hessa.tr} (${index + 1})",
+                  "${LocaleKeys.dars.tr} (${index + 1})",
                   fontSize: 14.sp,
                   fontWeight: FontWeightManager.softLight,
                 ),

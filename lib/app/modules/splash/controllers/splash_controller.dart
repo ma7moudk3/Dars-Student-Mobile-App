@@ -11,14 +11,12 @@ import '../../../routes/app_pages.dart';
 import '../data/models/user_token/user_token.dart';
 
 class SplashController extends GetxController {
-  RxDouble positionBottom = Get.height.obs;
   RxDouble scale = 0.0.obs;
   final SplashRepo _splashRepo = SplashRepoImplement();
   @override
   void onInit() async {
     super.onInit();
     await Future.delayed(const Duration(milliseconds: 500), () async {
-      positionBottom.value = 0;
       scale.value = 1;
     });
     bool isTokenExpired = isAccessTokenExpired();

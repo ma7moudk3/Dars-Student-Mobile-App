@@ -138,7 +138,7 @@ class OrdersView extends GetView<OrdersController> {
                                     color: ColorManager.fontColor,
                                   ),
                                   PrimaryText(
-                                    LocaleKeys.you_can_add_new_hessa_order.tr,
+                                    LocaleKeys.you_can_add_new_dars_order.tr,
                                     fontSize: 16.sp,
                                     fontWeight: FontWeightManager.light,
                                     color: ColorManager.grey5,

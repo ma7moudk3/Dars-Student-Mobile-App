@@ -251,9 +251,9 @@ class HessaDateAndTimePickerWidget extends GetView<OrderHessaController> {
                                 children: [
                                   PrimaryText(
                                     controller.hessaTimeController.text.isEmpty
-                                        ? LocaleKeys.chosen_hessa_date.tr
+                                        ? LocaleKeys.chosen_dars_date.tr
                                         : LocaleKeys
-                                            .chosen_hessa_time_and_date.tr,
+                                            .chosen_dars_time_and_date.tr,
                                     color: ColorManager.fontColor,
                                     fontSize: 14.sp,
                                     fontWeight: FontWeightManager.softLight,
@@ -378,8 +378,8 @@ class HessaDateAndTimePickerWidget extends GetView<OrderHessaController> {
       ),
       textDirection: TextDirection.rtl,
       hintText: index == 0
-          ? LocaleKeys.choose_hessa_date
-          : LocaleKeys.choose_hessa_time,
+          ? LocaleKeys.choose_dars_date
+          : LocaleKeys.choose_dars_time,
       validator: index == 0
           ? ((String? hessaDate) => controller.validateHessaDate(hessaDate))
           : ((String? hessaTime) => controller.validateHessaTime(hessaTime)),

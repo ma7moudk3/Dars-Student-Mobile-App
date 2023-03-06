@@ -16,7 +16,7 @@ class HessaDetailsView extends GetView<HessaDetailsController> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: CustomAppBar(
-        title: LocaleKeys.hessa_details.tr,
+        title: LocaleKeys.dars_details.tr,
         leading: GestureDetector(
           onTap: () {
             Get.back();

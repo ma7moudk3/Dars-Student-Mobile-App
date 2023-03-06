@@ -441,11 +441,11 @@ class OrderHessaController extends GetxController {
       if (hessaDate.isEmpty) {
         hessaDateErrorIconColor = Colors.red;
         update();
-        return LocaleKeys.please_enter_hessa_date.tr;
+        return LocaleKeys.please_enter_dars_date.tr;
       } else if (!tempDateTime.isAtMaximumYears(1)) {
         hessaDateErrorIconColor = Colors.red;
         update();
-        return LocaleKeys.check_hessa_date.tr;
+        return LocaleKeys.check_dars_date.tr;
       } else {
         hessaDateErrorIconColor = null;
       }
@@ -453,7 +453,7 @@ class OrderHessaController extends GetxController {
     } else {
       hessaDateErrorIconColor = Colors.red;
       update();
-      return LocaleKeys.please_enter_hessa_date.tr;
+      return LocaleKeys.please_enter_dars_date.tr;
     }
     update();
     return null;
@@ -465,7 +465,7 @@ class OrderHessaController extends GetxController {
     } else {
       hessaTimeErrorIconColor = Colors.red;
       update();
-      return LocaleKeys.please_enter_hessa_date.tr;
+      return LocaleKeys.please_enter_dars_date.tr;
     }
     update();
     return null;

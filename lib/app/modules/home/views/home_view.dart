@@ -99,7 +99,7 @@ class HomeView extends GetView<HomeController> {
                               children: [
                                 HessaGridViewItem(
                                   imagePath: ImagesManager.notebookIcon,
-                                  title: LocaleKeys.order_new_hessa.tr,
+                                  title: LocaleKeys.order_new_dars.tr,
                                   onTap: () async {
                                     await Get.toNamed(Routes.ORDER_HESSA);
                                   },
@@ -107,7 +107,7 @@ class HomeView extends GetView<HomeController> {
                                 ),
                                 HessaGridViewItem(
                                   imagePath: ImagesManager.teachersIcon,
-                                  title: LocaleKeys.hessa_teachers.tr,
+                                  title: LocaleKeys.dars_teachers.tr,
                                   onTap: () async {
                                     await Get.toNamed(Routes.HESSA_TEACHERS);
                                   },
@@ -162,7 +162,7 @@ class HomeView extends GetView<HomeController> {
                                           ),
                                           PrimaryText(
                                             LocaleKeys
-                                                .you_can_add_new_hessa_order.tr,
+                                                .you_can_add_new_dars_order.tr,
                                             fontSize: 16.sp,
                                             fontWeight: FontWeightManager.light,
                                             color: ColorManager.grey5,

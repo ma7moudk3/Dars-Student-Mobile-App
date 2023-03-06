@@ -74,7 +74,7 @@ class TeacherDetailsView extends GetView<TeacherDetailsController> {
                               SvgPicture.asset(ImagesManager.ratingIcon),
                               SizedBox(width: 8.w),
                               PrimaryText(
-                                LocaleKeys.rating_previous_hessas,
+                              LocaleKeys.rating_previous_darses,
                                 fontSize: 14.sp,
                                 fontWeight: FontWeightManager.softLight,
                                 color: ColorManager.fontColor,

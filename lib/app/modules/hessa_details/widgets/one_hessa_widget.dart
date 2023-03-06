@@ -45,7 +45,7 @@ class OneHessaWidget extends GetView<HessaDetailsController> {
                     ),
                     child: Center(
                       child: PrimaryText(
-                        LocaleKeys.hessa_started.tr,
+                        LocaleKeys.dars_started.tr,
                         color: ColorManager.green,
                         fontWeight: FontWeightManager.softLight,
                       ),
@@ -404,7 +404,7 @@ class OneHessaWidget extends GetView<HessaDetailsController> {
               ).whenComplete(() => controller.clearData());
             },
             // isDisabled: true, // to be changed later
-            title: LocaleKeys.cancel_hessa.tr,
+            title: LocaleKeys.cancel_dars.tr,
           ),
         ),
       ],

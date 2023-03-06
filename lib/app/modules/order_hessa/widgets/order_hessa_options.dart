@@ -185,7 +185,7 @@ class OrderHessaOptions extends GetView<OrderHessaController> {
                   child: Center(
                     child: PrimaryText(
                       index == 0
-                          ? LocaleKeys.one_hessa
+                          ? LocaleKeys.one_dars
                           : LocaleKeys.school_package,
                       color: controller.orderType == index
                           ? ColorManager.white

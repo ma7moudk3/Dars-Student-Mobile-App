@@ -79,7 +79,7 @@ class SettingsView extends GetView<SettingsController> {
               onTap: () async =>
                   await Get.toNamed(Routes.STATIC_PAGE, arguments: {
                 "pageTitle": LocaleKeys.privacy_policy.tr,
-                "pageSubTitle": LocaleKeys.privacy_policy_in_hessa.tr,
+                "pageSubTitle": LocaleKeys.privacy_policy_in_dars.tr,
                 "staticPageId": 3,
               }),
             ),
@@ -94,7 +94,7 @@ class SettingsView extends GetView<SettingsController> {
               onTap: () async =>
                   await Get.toNamed(Routes.STATIC_PAGE, arguments: {
                 "pageTitle": LocaleKeys.terms_and_conditions.tr,
-                "pageSubTitle": LocaleKeys.terms_and_conditions_in_hessa.tr,
+                "pageSubTitle": LocaleKeys.terms_and_conditions_in_dars.tr,
                 "staticPageId": 4,
               }),
             ),
@@ -102,7 +102,7 @@ class SettingsView extends GetView<SettingsController> {
             MoreItem(
               textSettingsColor: ColorManager.fontColor2,
               settingsColor: ColorManager.white,
-              title: LocaleKeys.about_hessa.tr,
+              title: LocaleKeys.about_dars.tr,
               iconPath: ImagesManager.aboutHessaIcon,
               color: ColorManager.primaryLight.withOpacity(0.15),
               iconColor: ColorManager.primaryLight,

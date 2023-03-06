@@ -56,7 +56,7 @@ class WalletView extends GetView<WalletController> {
                       ),
                       WalletGridViewItem(
                         imagePath: ImagesManager.walletIcon,
-                        title: LocaleKeys.my_hessa_balance.tr,
+                        title: LocaleKeys.my_dars_balance.tr,
                         cash: 950.6,
                         onTap: () async {},
                         iconBackgroundColor: ColorManager.primary,
@@ -283,7 +283,7 @@ class WalletView extends GetView<WalletController> {
                       SizedBox(height: 8.h),
                       PrimaryText(
                         LocaleKeys
-                            .please_complete_your_profile_information_to_benefit_from_hessa_services
+                            .please_complete_your_profile_information_to_benefit_from_dars_services
                             .tr,
                         fontSize: 16.sp,
                         textAlign: TextAlign.center,

@@ -236,7 +236,7 @@ class StudyingPackageWidget extends GetView<HessaDetailsController> {
               PrimaryButton(
                 onPressed: () {},
                 isDisabled: true, // to be changed later
-                title: LocaleKeys.cancel_hessa.tr,
+                title: LocaleKeys.cancel_dars.tr,
               ),
               SizedBox(height: 65.h),
             ],

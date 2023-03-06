@@ -58,14 +58,14 @@ class CancelHessaBottomSheetContent extends GetView<HessaDetailsController> {
                           ),
                           SizedBox(height: 10.h),
                           PrimaryText(
-                            LocaleKeys.confirm_canceling_hessa,
+                            LocaleKeys.confirm_canceling_dars,
                             fontSize: 16.sp,
                             fontWeight: FontWeightManager.light,
                           ),
                           SizedBox(height: 5.h),
                           PrimaryText(
                             LocaleKeys
-                                .to_help_you_please_enter_canceling_hessa_reason,
+                                .to_help_you_please_enter_canceling_dars_reason,
                             fontSize: 14.sp,
                             fontWeight: FontWeightManager.light,
                             color: ColorManager.fontColor7,
@@ -99,7 +99,7 @@ class CancelHessaBottomSheetContent extends GetView<HessaDetailsController> {
                             borderSide: BorderSide(
                               color: ColorManager.primary,
                             ),
-                            hintText: LocaleKeys.canceling_hessa_reason,
+                            hintText: LocaleKeys.canceling_dars_reason,
                           ),
                           const Spacer(),
                           Row(

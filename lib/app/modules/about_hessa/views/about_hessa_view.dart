@@ -15,7 +15,7 @@ class AboutHessaView extends GetView<AboutHessaController> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: CustomAppBar(
-        title: LocaleKeys.about_hessa,
+        title: LocaleKeys.about_dars,
         leading: GestureDetector(
           onTap: () {
             Get.back();
@@ -67,7 +67,7 @@ class AboutHessaView extends GetView<AboutHessaController> {
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
                             PrimaryText(
-                              LocaleKeys.about_hessa,
+                              LocaleKeys.about_dars,
                               fontSize: 16.sp,
                               fontWeight: FontWeightManager.light,
                               color: ColorManager.primary,

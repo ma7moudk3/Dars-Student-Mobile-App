@@ -25,7 +25,7 @@ class CannotCancelHessaDialogContent extends GetView<HessaDetailsController> {
             ),
             SizedBox(height: 20.h),
             PrimaryText(
-              LocaleKeys.you_cannot_cancel_this_hessa.tr,
+              LocaleKeys.you_cannot_cancel_this_dars.tr,
               fontSize: 18.sp,
               fontWeight: FontWeightManager.light,
             ),
@@ -33,7 +33,7 @@ class CannotCancelHessaDialogContent extends GetView<HessaDetailsController> {
             SizedBox(
               width: 240.w,
               child: PrimaryText(
-                LocaleKeys.due_to_the_starting_time_of_the_hessa.tr,
+                LocaleKeys.due_to_the_starting_time_of_the_dars.tr,
                 fontSize: 15.sp,
                 textAlign: TextAlign.center,
                 maxLines: 2,

@@ -51,7 +51,7 @@ class OrderHessaView extends GetView<OrderHessaController> {
       },
       child: Scaffold(
         appBar: CustomAppBar(
-          title: LocaleKeys.order_hessa,
+          title: LocaleKeys.order_dars,
           leading: GestureDetector(
             behavior: HitTestBehavior.opaque,
             onTap: () async {
@@ -113,7 +113,7 @@ class OrderHessaView extends GetView<OrderHessaController> {
                                   ),
                                   SizedBox(width: 10.w),
                                   PrimaryText(
-                                    LocaleKeys.order_new_hessa,
+                                    LocaleKeys.order_new_dars,
                                     fontSize: 16.sp,
                                     fontWeight: FontWeightManager.softLight,
                                     color: ColorManager.fontColor,
@@ -280,7 +280,7 @@ class OrderHessaView extends GetView<OrderHessaController> {
                                       Row(
                                         children: [
                                           PrimaryText(
-                                            LocaleKeys.order_hessa_category,
+                                            LocaleKeys.order_dars_category,
                                             fontSize: 14.sp,
                                             fontWeight:
                                                 FontWeightManager.softLight,
@@ -588,7 +588,7 @@ class OrderHessaView extends GetView<OrderHessaController> {
                                       Row(
                                         children: [
                                           PrimaryText(
-                                            LocaleKeys.hessa_time_and_date,
+                                            LocaleKeys.dars_time_and_date,
                                             fontSize: 14.sp,
                                             fontWeight:
                                                 FontWeightManager.softLight,

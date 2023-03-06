@@ -49,7 +49,7 @@ class HessaTeachersView extends GetView<HessaTeachersController> {
         },
         child: Scaffold(
           appBar: CustomAppBar(
-            title: LocaleKeys.hessa_teachers,
+            title: LocaleKeys.dars_teachers,
             leading: GestureDetector(
               onTap: () async {
                 if (controller.toggleFilter) {

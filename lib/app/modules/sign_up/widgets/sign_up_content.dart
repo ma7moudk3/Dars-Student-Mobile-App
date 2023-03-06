@@ -415,7 +415,7 @@ class SignUpContent extends GetView<SignUpController> {
                               await Get.toNamed(Routes.STATIC_PAGE, arguments: {
                                 "pageTitle": LocaleKeys.terms_and_conditions.tr,
                                 "pageSubTitle":
-                                    LocaleKeys.terms_and_conditions_in_hessa.tr,
+                                    LocaleKeys.terms_and_conditions_in_dars.tr,
                                 "staticPageId": 4,
                               });
                             },
@@ -427,7 +427,7 @@ class SignUpContent extends GetView<SignUpController> {
                             ),
                           ),
                           PrimaryText(
-                            LocaleKeys.for_hessa,
+                            LocaleKeys.for_dars,
                             color: ColorManager.fontColor,
                             fontSize: 13.sp,
                             fontWeight: FontWeightManager.softLight,
