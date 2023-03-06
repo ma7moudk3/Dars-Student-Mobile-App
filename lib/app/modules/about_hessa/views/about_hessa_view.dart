@@ -41,7 +41,7 @@ class AboutHessaView extends GetView<AboutHessaController> {
                   children: [
                     SizedBox(height: 30.h),
                     SvgPicture.asset(
-                      ImagesManager.hessaLogo,
+                      ImagesManager.darsLogo,
                       height: 100.h,
                       width: 100.w,
                     ),

@@ -103,7 +103,7 @@ class SettingsView extends GetView<SettingsController> {
               textSettingsColor: ColorManager.fontColor2,
               settingsColor: ColorManager.white,
               title: LocaleKeys.about_dars.tr,
-              iconPath: ImagesManager.aboutHessaIcon,
+              iconPath: ImagesManager.aboutDarsIcon,
               color: ColorManager.primaryLight.withOpacity(0.15),
               iconColor: ColorManager.primaryLight,
               onTap: () async =>

@@ -39,7 +39,7 @@ class SplashView extends GetView<SplashController> {
                   ),
                 ),
                 Positioned(
-                  top: 120.h,
+                  bottom: (Get.height * 0.23).h,
                   left: 100.w,
                   right: 100.w,
                   child: Obx(
@@ -52,8 +52,6 @@ class SplashView extends GetView<SplashController> {
                           children: [
                             SvgPicture.asset(
                               ImagesManager.fullLogo,
-                              width: 95.w,
-                              height: 95.h,
                             ),
                             SizedBox(height: 10.h),
                             PrimaryText(

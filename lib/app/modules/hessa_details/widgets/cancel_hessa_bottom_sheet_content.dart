@@ -52,7 +52,7 @@ class CancelHessaBottomSheetContent extends GetView<HessaDetailsController> {
                         mainAxisSize: MainAxisSize.min,
                         children: [
                           SvgPicture.asset(
-                            ImagesManager.cancelHessaIcon,
+                            ImagesManager.cancelDarsIcon,
                             width: 122.w,
                             height: 122.h,
                           ),

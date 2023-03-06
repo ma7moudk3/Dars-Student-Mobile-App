@@ -56,8 +56,8 @@ class LoginOrSignUpView extends GetView<LoginOrSignUpController> {
                       children: [
                         SvgPicture.asset(
                           ImagesManager.fullLogo,
-                          width: 90.w,
-                          height: 90.h,
+                          width: 120.w,
+                          height: 120.h,
                         ),
                         SizedBox(height: 20.h),
                         PrimaryText(

@@ -50,7 +50,7 @@ class ImagesManager {
   static String madaIcon = "assets/svg/icons/mada.svg";
   static String masterCardIcon = "assets/svg/icons/master_card.svg";
   static String headphoneIcon = "assets/svg/icons/headphone.svg";
-  static String aboutHessaIcon = "assets/svg/icons/about_hessa.svg";
+  static String aboutDarsIcon = "assets/svg/icons/about_dars.svg";
   static String checkIcon = "assets/svg/icons/check.svg";
   static String wrongIcon = "assets/svg/icons/wrong.svg";
   static String creditCardIcon = "assets/svg/icons/credit_card.svg";
@@ -71,14 +71,14 @@ class ImagesManager {
   static String starFilledRoundedIcon =
       "assets/svg/icons/star_filled_rounded.svg";
   static String starUnfilledIcon = "assets/svg/icons/star_unfilled.svg";
-  static String cancelHessaIcon = "assets/svg/icons/cancel.svg";
+  static String cancelDarsIcon = "assets/svg/icons/cancel.svg";
   static String filterIcon = "assets/svg/icons/filter.svg";
   static String tagIcon = "assets/svg/icons/tag.svg";
   static String qualificationIcon = "assets/svg/icons/qualification.svg";
   static String ratingIcon = "assets/svg/icons/rating.svg";
   static String noOrders = "assets/svg/no_orders.svg";
   static String teacherRating = "assets/svg/teacher_rating.svg";
-  static String hessaLogo = "assets/svg/hessa_logo.svg";
+  static String darsLogo = "assets/svg/dars_logo.svg";
   static String whatsappIcon = "assets/svg/icons/whatsapp.svg";
   static String instagramIcon = "assets/svg/icons/instagram.svg";
   static String facebookIcon = "assets/svg/icons/facebook.svg";
