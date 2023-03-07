@@ -70,7 +70,7 @@ flutter_native_splash:
   flutter_test: 
     sdk: flutter
 flutter_icons:
-  image_path: "assets/images/dars-ios.png"  
+  image_path: "assets/images/dars_icon.png"  
   adaptive_icon_foreground: "assets/images/dars_foreground_icon.png"
   adaptive_icon_background: "assets/images/dars_background_icon.png"
   android: true
