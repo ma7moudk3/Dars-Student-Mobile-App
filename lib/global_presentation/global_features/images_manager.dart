@@ -84,6 +84,7 @@ class ImagesManager {
   static String emailVerificationSentIcon =
       "assets/svg/icons/email_verification_sent.svg";
   static String descendingIcon = "assets/svg/icons/descending.svg";
+  static String ascendingIcon = "assets/svg/icons/ascending.svg";
   static String envelopeIcon = "assets/svg/icons/envelope.svg";
   static String mobileIcon = "assets/svg/icons/mobile.svg";
   static String cameraIcon = "assets/svg/icons/camera.svg";

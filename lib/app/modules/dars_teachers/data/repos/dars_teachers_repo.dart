@@ -9,7 +9,7 @@ abstract class DarsTeachersRepo {
   Future<List<DarsTeacher>> getDarsTeachers({
     String? searchValue,
     String? sortingField,
-    String sortingOrder = "DESC",
+    String? sortingOrder,
     int? genderId,
     int? levelId,
     int? countryId,

@@ -27,6 +27,8 @@ class LocaleKeys {
   static const enter_password = 'enter_password';
   static const enter_old_password = 'enter_old_password';
   static const enjoy_the_app = 'enjoy_the_app';
+  static const sort_ascending = 'sort_ascending';
+  static const sort_descending = 'sort_descending';
   static const no_messages_yet = 'no_messages_yet';
   static const welcoming = 'welcoming';
   static const add_new_dependent = 'add_new_dependent';
@@ -434,13 +436,16 @@ class LocaleKeys {
   static const skill = 'skill';
   static const data_entry_error = 'data_entry_error';
   static const choose_skill = 'choose_skill';
+  static const choose_sort_type = 'choose_sort_type';
   static const search_results = 'search_results';
   static const delete_message = 'delete_message';
-  static const most_requested = 'most_requested';
+  static const most_rated = 'most_rated';
+  static const less_rated = 'less_rated';
   static const download_image = 'download_image';
   static const brief = 'brief';
   static const about_teacher = 'about_teacher';
   static const read_more = 'read_more';
+  static const select_all = 'select_all';
   static const read_less = 'read_less';
   static const password_changed_successfully = 'password_changed_successfully';
   static const education_level = 'education_level';
@@ -479,6 +484,8 @@ class Locales {
     'enter_password': 'أدخل كلمة المرور',
     'enter_old_password': 'أدخل كلمة المرور القديمة',
     'enjoy_the_app': 'استمتع مع درس',
+    'sort_ascending': 'رتب تصاعدي',
+    'sort_descending': 'رتب تنازلي',
     'no_messages_yet': 'لا توجد رسائل بعد',
     'welcoming': 'يسعدنا رؤيتك مرة أخرى',
     'add_new_dependent': 'اضافة تابع جديد',
@@ -877,13 +884,16 @@ class Locales {
     'skill': 'مهارة',
     'data_entry_error': 'خطأ في إدخال البيانات',
     'choose_skill': 'اختر المهارة',
+    'choose_sort_type': 'اختر نوع الترتيب',
     'search_results': 'نتائج البحث',
     'delete_message': 'حذف الرسالة',
-    'most_requested': 'الأكثر طلباً',
+    'most_rated': 'الأكثر تقييماً',
+    'less_rated': 'الأقل تقييماً',
     'download_image': 'تحميل الصورة',
     'brief': 'نُبذة',
     'about_teacher': 'عن المدرس',
     'read_more': 'رؤية المزيد',
+    'select_all': 'اختر الكل',
     'read_less': 'رؤية أقل',
     'password_changed_successfully': 'تم تغيير كلمة المرور بنجاح',
     'education_level': 'المستوى التعليمي',

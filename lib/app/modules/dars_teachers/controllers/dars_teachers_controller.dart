@@ -56,7 +56,7 @@ class DarsTeachersController extends GetxController {
   country.Result selectedCountry = country.Result();
   governorate.Result selectedGovernorate = governorate.Result();
   skill.Item selectedSkill = skill.Item();
-  // String? sortType;
+  String? sortType;
   int? levelId, topicId, skillId, genderId, countryId, governorateId;
   final AddNewAddressRepo _addNewAddressRepo = AddNewAddressRepoImplement();
   List<Map<String, dynamic>> filterList = [];
@@ -77,7 +77,7 @@ class DarsTeachersController extends GetxController {
     teacherFilterFactor = value;
     update();
   }
-  
+
   Future resetTeachers() async {
     searchTextController.clear();
     levelId = null;
@@ -100,7 +100,7 @@ class DarsTeachersController extends GetxController {
     });
     teacherGender = 0;
     teacherFilterFactor = 0;
-    // sortType = null;
+    sortType = null;
     toggleSort = false;
     toggleFilter = false;
     toggleSearch = false;
@@ -109,12 +109,19 @@ class DarsTeachersController extends GetxController {
     update();
   }
 
-  // Future sortTeacher({required String sortType}) async {
-  //   this.sortType = sortType;
-  //   toggleSort = true;
-  //   pagingController.refresh();
-  //   update();
-  // }
+  Future sortTeacherByRating({String sortType = "All"}) async {
+    if (sortType == "All") {
+      this.sortType = null;
+      toggleSort = false;
+      pagingController.refresh();
+      update();
+      return;
+    }
+    this.sortType = "rate $sortType";
+    toggleSort = true;
+    pagingController.refresh();
+    update();
+  }
 
   Future filterTeachers({
     int? levelId,
@@ -519,6 +526,8 @@ class DarsTeachersController extends GetxController {
           skillId: skillId,
           topicId: topicId,
           levelId: levelId,
+          sortingField: sortType?.split(" ").first, // "rate DESC" => "rate"
+          sortingOrder: sortType?.split(" ").last,
         );
         final isLastPage = darsTeachers.length < _pageSize;
         if (isLastPage) {

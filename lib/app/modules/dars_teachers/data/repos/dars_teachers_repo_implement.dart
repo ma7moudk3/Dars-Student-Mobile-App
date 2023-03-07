@@ -19,7 +19,7 @@ class DarsTeachersRepoImplement extends DarsTeachersRepo {
   Future<List<DarsTeacher>> getDarsTeachers({
     String? searchValue,
     String? sortingField,
-    String sortingOrder = "DESC",
+    String? sortingOrder,
     int? genderId,
     int? countryId,
     int? governorateId,
@@ -39,7 +39,7 @@ class DarsTeachersRepoImplement extends DarsTeachersRepo {
     if (searchValue != null && searchValue.isNotEmpty) {
       queryParameters["Filter"] = searchValue;
     }
-    if (sortingField != null) {
+    if (sortingField != null && sortingOrder != null) {
       sorting = "$sortingField $sortingOrder"; // example: "rate DESC"
       queryParameters["Sorting"] = sorting;
     }

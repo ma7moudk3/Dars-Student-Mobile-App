@@ -7,6 +7,7 @@ import 'package:lottie/lottie.dart';
 import '../../../../generated/locales.g.dart';
 import '../../../../global_presentation/global_widgets/confirm_back_dialog_content.dart';
 import '../../../../global_presentation/global_widgets/custom_app_bar.dart';
+import '../../../../global_presentation/global_widgets/pop_up_menu.dart';
 import '../../../../global_presentation/global_widgets/search_bar.dart';
 import '../../../core/helper_functions.dart';
 import '../../../routes/app_pages.dart';
@@ -217,28 +218,129 @@ class DarsTeachersView extends GetView<DarsTeachersController> {
                     child: Column(
                       children: [
                         Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
                             PrimaryText(
                               LocaleKeys.search_results,
                               fontSize: 16.sp,
                             ),
-                            GestureDetector(
-                              onTap: () {},
-                              child: Row(
+                            const Spacer(),
+                            GetBuilder<DarsTeachersController>(
+                                builder: (DarsTeachersController controller) {
+                              return Row(
                                 children: [
                                   PrimaryText(
-                                    LocaleKeys.most_requested,
-                                    fontSize: 16.sp,
+                                    controller.sortType == null
+                                        ? LocaleKeys.choose_sort_type
+                                        : controller.sortType
+                                                    ?.contains("DESC") ==
+                                                true
+                                            ? LocaleKeys.most_rated
+                                            : LocaleKeys.less_rated,
+                                    fontSize: 16,
                                     color: ColorManager.fontColor7,
                                   ),
-                                  SizedBox(width: 5.w),
-                                  SvgPicture.asset(
-                                    ImagesManager.descendingIcon,
+                                  PopUpMenu(
+                                    menulist: [
+                                      PopupMenuItem(
+                                        textStyle: const TextStyle(
+                                          fontFamily: FontConstants.fontFamily,
+                                        ),
+                                        onTap: () async => await controller
+                                            .sortTeacherByRating(
+                                          sortType: "DESC",
+                                        ),
+                                        child: ListTile(
+                                          splashColor: Colors.transparent,
+                                          leading: Transform.scale(
+                                            scaleY: -1,
+                                            child: SvgPicture.asset(
+                                              ImagesManager.descendingIcon,
+                                              color: ColorManager.fontColor
+                                                  .withOpacity(0.7),
+                                              height: 20.h,
+                                              width: 20.w,
+                                            ),
+                                          ),
+                                          title: PrimaryText(
+                                            LocaleKeys.most_rated.tr,
+                                            color: ColorManager.fontColor,
+                                          ),
+                                        ),
+                                      ),
+                                      PopupMenuItem(
+                                        textStyle: const TextStyle(
+                                          fontFamily: FontConstants.fontFamily,
+                                        ),
+                                        onTap: () async => await controller
+                                            .sortTeacherByRating(
+                                          sortType: "ASC",
+                                        ),
+                                        child: ListTile(
+                                          splashColor: Colors.transparent,
+                                          leading: SvgPicture.asset(
+                                            ImagesManager.descendingIcon,
+                                            color: ColorManager.fontColor
+                                                .withOpacity(0.7),
+                                            height: 20.h,
+                                            width: 20.w,
+                                          ),
+                                          title: PrimaryText(
+                                            LocaleKeys.less_rated.tr,
+                                            color: ColorManager.fontColor,
+                                          ),
+                                        ),
+                                      ),
+                                      PopupMenuItem(
+                                        textStyle: const TextStyle(
+                                          fontFamily: FontConstants.fontFamily,
+                                        ),
+                                        onTap: () async => await controller
+                                            .sortTeacherByRating(),
+                                        child: ListTile(
+                                          splashColor: Colors.transparent,
+                                          leading: Icon(
+                                            Icons.select_all_rounded,
+                                            color: ColorManager.fontColor
+                                                .withOpacity(0.7),
+                                            size: 23,
+                                          ),
+                                          title: PrimaryText(
+                                            LocaleKeys.select_all.tr,
+                                            color: ColorManager.fontColor,
+                                          ),
+                                        ),
+                                      ),
+                                    ],
+                                    icon: controller.sortType == null
+                                        ? Icon(
+                                            Icons.more_vert_rounded,
+                                            color: ColorManager.fontColor
+                                                .withOpacity(0.7),
+                                          )
+                                        : controller.sortType
+                                                    ?.contains("DESC") ==
+                                                true
+                                            ? Transform.scale(
+                                                scaleY: -1,
+                                                child: SvgPicture.asset(
+                                                  ImagesManager.descendingIcon,
+                                                  color: ColorManager.fontColor
+                                                      .withOpacity(0.7),
+                                                  height: 20.h,
+                                                  width: 20.w,
+                                                ),
+                                              )
+                                            : SvgPicture.asset(
+                                                ImagesManager.descendingIcon,
+                                                color: ColorManager.fontColor
+                                                    .withOpacity(0.7),
+                                                height: 20.h,
+                                                width: 20.w,
+                                              ),
                                   ),
                                 ],
-                              ),
-                            ),
+                              );
+                            }),
                           ],
                         ),
                       ],
