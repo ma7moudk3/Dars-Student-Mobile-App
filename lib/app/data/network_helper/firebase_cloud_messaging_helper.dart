@@ -100,7 +100,7 @@ class FcmHelper {
     //   title: message.notification?.title ?? 'Title',
     //   body: message.notification?.body ?? 'Body',
     //   // icon: '@drawable/ic_launcher',
-    //   // largeIcon: DrawableResourceAndroidBitmap('@mipmap/hessa_icon'),
+    //   // largeIcon: DrawableResourceAndroidBitmap('@mipmap/dars_icon'),
     // );
     showNotification(message, "${message.data}");
   }
@@ -139,7 +139,7 @@ class FcmHelper {
   static _initNotification() async {
     const AndroidInitializationSettings initializationSettingsAndroid =
         AndroidInitializationSettings(
-      'hessa_icon',
+      'dars_icon',
     );
 
     const DarwinInitializationSettings initializationSettingsIOS =
