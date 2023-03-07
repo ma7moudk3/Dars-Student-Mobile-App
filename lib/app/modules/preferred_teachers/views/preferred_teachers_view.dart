@@ -7,7 +7,7 @@ import '../../../../generated/locales.g.dart';
 import '../../../../global_presentation/global_features/lotties_manager.dart';
 import '../../../../global_presentation/global_widgets/custom_app_bar.dart';
 import '../../../constants/exports.dart';
-import '../../hessa_teachers/widgets/hessa_teacher_widget.dart';
+import '../../dars_teachers/widgets/dars_teacher_widget.dart';
 import '../controllers/preferred_teachers_controller.dart';
 
 class PreferredTeachersView extends GetView<PreferredTeachersController> {
@@ -122,7 +122,7 @@ class PreferredTeachersView extends GetView<PreferredTeachersController> {
                           },
                           itemBuilder: (BuildContext context,
                               PreferredTeacher teacher, int index) {
-                            return HessaTeacherWidget(
+                            return TeacherWidget(
                               teacher: teacher,
                             );
                           },

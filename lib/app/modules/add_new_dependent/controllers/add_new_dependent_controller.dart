@@ -4,7 +4,7 @@ import 'package:hessa_student/app/data/models/school_types/school_types.dart';
 import 'package:hessa_student/app/modules/add_new_dependent/data/repos/add_new_dependent_repo.dart';
 import 'package:hessa_student/app/modules/add_new_dependent/data/repos/add_new_dependent_repo_implement.dart';
 import 'package:hessa_student/app/modules/dependents/controllers/dependents_controller.dart';
-import 'package:hessa_student/app/modules/order_hessa/controllers/order_hessa_controller.dart';
+import 'package:hessa_student/app/modules/order_dars/controllers/order_dars_controller.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:intl/intl.dart';
 import 'package:syncfusion_flutter_datepicker/datepicker.dart';
@@ -33,7 +33,7 @@ class AddNewDependentController extends GetxController {
       dateOfBirthFocusNode = FocusNode(),
       schoolNameFocusNode = FocusNode();
   DateTime dateOfBirth = DateTime.now();
-  bool isFromOrderHessa = false;
+  bool isFromOrderDars = false;
   Color? nameIconErrorColor,
       schoolNameIconErrorColor,
       uplpoadPictureFileIconErrorColor,
@@ -63,8 +63,8 @@ class AddNewDependentController extends GetxController {
     nameFocusNode.addListener(() => update());
     uplpoadPictureFileFocusNode.addListener(() => update());
     dateOfBirthFocusNode.addListener(() => update());
-    isFromOrderHessa = Get.arguments != null
-        ? Get.arguments["isFromOrderHessa"] ?? false
+    isFromOrderDars = Get.arguments != null
+        ? Get.arguments["isFromOrderDars"] ?? false
         : false;
     await checkInternet();
     super.onInit();
@@ -117,14 +117,14 @@ class AddNewDependentController extends GetxController {
       }
       await Future.delayed(const Duration(milliseconds: 550))
           .then((value) async {
-        if (isFromOrderHessa == false) {
+        if (isFromOrderDars == false) {
           final DependentsController dependentsController =
               Get.find<DependentsController>();
           dependentsController.refreshPagingController();
         } else {
-          final OrderHessaController orderHessaController =
-              Get.find<OrderHessaController>();
-          orderHessaController.refreshStudentsPagingController();
+          final OrderDarsController orderDarsController =
+              Get.find<OrderDarsController>();
+          orderDarsController.refreshStudentsPagingController();
         }
         Get.back();
         CustomSnackBar.showCustomSnackBar(

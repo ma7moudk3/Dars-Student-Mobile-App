@@ -62,7 +62,7 @@ class PreferredTeachersController extends GetxController {
         isInternetConnected.value = false;
       }
     } on DioError catch (e) {
-      log("getHessaTeachers DioError ${e.message}");
+      log("getPreferredTeachers DioError ${e.message}");
     }
     update();
   }

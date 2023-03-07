@@ -5,7 +5,7 @@ import 'package:intl/intl.dart';
 import '../../../constants/constants.dart';
 import '../../../constants/exports.dart';
 import '../controllers/home_controller.dart';
-import '../data/models/hessa_order.dart';
+import '../data/models/dars_order.dart';
 
 class OrderWidget extends GetView<HomeController> {
   final bool isFirst;
@@ -13,15 +13,15 @@ class OrderWidget extends GetView<HomeController> {
   const OrderWidget({
     Key? key,
     this.isFirst = false,
-    required this.hessaOrder,
+    required this.darsOrder,
   }) : super(key: key);
-  final HessaOrder hessaOrder;
+  final DarsOrder darsOrder;
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
       behavior: HitTestBehavior.opaque,
       onTap: () async {
-        await Get.toNamed(Routes.HESSA_DETAILS, arguments: hessaOrder);
+        await Get.toNamed(Routes.DARS_DETAILS, arguments: darsOrder);
       },
       child: Container(
         height: 186.h,
@@ -52,7 +52,7 @@ class OrderWidget extends GetView<HomeController> {
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     PrimaryText(
-                      DateTime.parse(hessaOrder.preferredStartDate ?? '')
+                      DateTime.parse(darsOrder.preferredStartDate ?? '')
                           .day
                           .toString()
                           .padLeft(2, '0'),
@@ -62,7 +62,7 @@ class OrderWidget extends GetView<HomeController> {
                     ),
                     PrimaryText(
                       months[DateFormat('yyyy-MM-ddTHH:mm:ss')
-                                  .parse(hessaOrder.preferredStartDate ?? '')
+                                  .parse(darsOrder.preferredStartDate ?? '')
                                   .month -
                               1]
                           .toString(),
@@ -146,12 +146,12 @@ class OrderWidget extends GetView<HomeController> {
                               ),
                               SizedBox(width: 5.w),
                               PrimaryText(
-                                hessaOrder.preferredStartDate != null
-                                    ? hessaOrder.preferredEndDate != null
-                                        ? '${DateFormat('h:mm a', 'ar_SA').format(DateTime.parse(hessaOrder.preferredStartDate ?? ''))} - ${DateFormat('h:mm a', 'ar_SA').format(DateTime.parse(hessaOrder.preferredEndDate ?? ''))}'
+                                darsOrder.preferredStartDate != null
+                                    ? darsOrder.preferredEndDate != null
+                                        ? '${DateFormat('h:mm a', 'ar_SA').format(DateTime.parse(darsOrder.preferredStartDate ?? ''))} - ${DateFormat('h:mm a', 'ar_SA').format(DateTime.parse(darsOrder.preferredEndDate ?? ''))}'
                                         : DateFormat('h:mm a', 'ar_SA').format(
                                             DateTime.parse(
-                                                hessaOrder.preferredStartDate ??
+                                                darsOrder.preferredStartDate ??
                                                     ''))
                                     : '',
                                 fontSize: 13.sp,
@@ -174,7 +174,7 @@ class OrderWidget extends GetView<HomeController> {
                               SizedBox(
                                 width: 75.w,
                                 child: PrimaryText(
-                                  "${hessaOrder.studentCount ?? 0} ${LocaleKeys.participants.tr}",
+                                  "${darsOrder.studentCount ?? 0} ${LocaleKeys.participants.tr}",
                                   fontSize: 14,
                                   color: ColorManager.fontColor7,
                                   fontWeight: FontWeightManager.softLight,

@@ -3,26 +3,26 @@ import 'dart:developer';
 import 'package:get/get.dart';
 import 'package:hessa_student/app/core/helper_functions.dart';
 import 'package:hessa_student/app/data/cache_helper.dart';
-import 'package:hessa_student/app/modules/hessa_teachers/data/models/hessa_teacher.dart';
-import 'package:hessa_student/app/modules/teacher_details/data/models/hessa_teacher_details/hessa_teacher_details.dart';
-import 'package:hessa_student/app/modules/teacher_details/data/models/hessa_teacher_details/provider_skill.dart';
+import 'package:hessa_student/app/modules/teacher_details/data/models/teacher_details/dars_teacher_details.dart';
+import 'package:hessa_student/app/modules/teacher_details/data/models/teacher_details/provider_skill.dart';
 import 'package:hessa_student/app/modules/teacher_details/data/repos/teacher_details_repo.dart';
 
 import '../../../../generated/locales.g.dart';
 import '../../../../global_presentation/global_features/images_manager.dart';
-import '../data/models/hessa_teacher_details/provider_teaching_topic.dart';
+import '../../dars_teachers/data/models/dars_teacher.dart';
+import '../data/models/teacher_details/provider_teaching_topic.dart';
 import '../data/repos/teacher_details_repo_implement.dart';
 
 class TeacherDetailsController extends GetxController {
   int currentStar = -1;
   RxBool isInternetConnected = true.obs, isLoading = true.obs;
   bool? isFavorite;
-  dynamic hessaTeacher = Get.arguments != null
-      ? Get.arguments["teacher"] ?? HessaTeacher()
-      : HessaTeacher();
+  dynamic darsTeacher = Get.arguments != null
+      ? Get.arguments["teacher"] ?? DarsTeacher()
+      : DarsTeacher();
   int teacherId = int.parse(
       Get.arguments != null && Get.arguments["teacher"] != null
-          ? Get.arguments["teacher"].runtimeType == HessaTeacher
+          ? Get.arguments["teacher"].runtimeType == DarsTeacher
               ? Get.arguments["teacher"].id.toString()
               : Get.arguments["teacher"].preferredProvider != null
                   ? Get.arguments["teacher"].preferredProvider!.providerId
@@ -30,7 +30,7 @@ class TeacherDetailsController extends GetxController {
                   : "-1"
           : "-1");
   final TeacherDetailsRepo _teacherDetailsRepo = TeacherDetailsRepoImplement();
-  HessaTeacherDetails hessaTeacherDetails = HessaTeacherDetails();
+  DarsTeacherDetails darsTeacherDetails = DarsTeacherDetails();
   List<Map<String, dynamic>> teacherProperties = [
     // {
     //   "icon": ImagesManager.flagIcon,
@@ -66,23 +66,23 @@ class TeacherDetailsController extends GetxController {
       isInternetConnected.value = internetStatus;
       if (isInternetConnected.value) {
         await getTeacherDetails().then((value) {
-          if (hessaTeacherDetails.result != null &&
-              hessaTeacherDetails.result!.providerSkill != null) {
-            teacherProperties[0]["content"] = hessaTeacherDetails
+          if (darsTeacherDetails.result != null &&
+              darsTeacherDetails.result!.providerSkill != null) {
+            teacherProperties[0]["content"] = darsTeacherDetails
                 .result!.providerTeachingTopic!
                 .map((ProviderTeachingTopic providerTeachingTopic) =>
                     providerTeachingTopic.topicName ?? "")
                 .toSet()
                 .toList()
                 .join(", ");
-            teacherProperties[1]["content"] = hessaTeacherDetails
+            teacherProperties[1]["content"] = darsTeacherDetails
                 .result!.providerTeachingTopic!
                 .map((ProviderTeachingTopic providerTeachingTopic) =>
                     providerTeachingTopic.levelName ?? "")
                 .toSet()
                 .toList()
                 .join(", ");
-            teacherProperties[2]["content"] = hessaTeacherDetails
+            teacherProperties[2]["content"] = darsTeacherDetails
                 .result!.providerSkill!
                 .map((ProviderSkill providerSkill) =>
                     providerSkill.skillName ?? "")
@@ -103,15 +103,15 @@ class TeacherDetailsController extends GetxController {
       update();
       if (isFavorite == true) {
         await _teacherDetailsRepo.addTeacherToFavorite(
-          teacherId: hessaTeacher.runtimeType == HessaTeacher
-              ? hessaTeacher.id ?? -1
-              : hessaTeacher.preferredProvider!.providerId ?? -1,
+          teacherId: darsTeacher.runtimeType == DarsTeacher
+              ? darsTeacher.id ?? -1
+              : darsTeacher.preferredProvider!.providerId ?? -1,
         );
       } else {
         await _teacherDetailsRepo.removeTeacherFromFavorite(
-          teacherId: hessaTeacher.runtimeType == HessaTeacher
-              ? hessaTeacher.id ?? -1
-              : hessaTeacher.preferredProvider!.providerId ?? -1,
+          teacherId: darsTeacher.runtimeType == DarsTeacher
+              ? darsTeacher.id ?? -1
+              : darsTeacher.preferredProvider!.providerId ?? -1,
         );
       }
     }
@@ -119,11 +119,11 @@ class TeacherDetailsController extends GetxController {
 
   Future getTeacherDetails() async {
     try {
-      hessaTeacherDetails = await _teacherDetailsRepo.getTeacherDetails(
+      darsTeacherDetails = await _teacherDetailsRepo.getTeacherDetails(
         teacherId: teacherId,
       );
-      if (hessaTeacherDetails.result != null) {
-        isFavorite = hessaTeacherDetails.result!.isPreferred ?? false;
+      if (darsTeacherDetails.result != null) {
+        isFavorite = darsTeacherDetails.result!.isPreferred ?? false;
       }
     } catch (e) {
       log("getTeacherDetails error: $e");

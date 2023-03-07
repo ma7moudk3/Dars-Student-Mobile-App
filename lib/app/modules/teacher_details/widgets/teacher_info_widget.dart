@@ -2,7 +2,7 @@ import 'package:cached_network_image/cached_network_image.dart';
 
 import '../../../constants/exports.dart';
 import '../../../constants/links.dart';
-import '../../hessa_teachers/data/models/hessa_teacher.dart';
+import '../../dars_teachers/data/models/dars_teacher.dart';
 import '../controllers/teacher_details_controller.dart';
 
 class TeacherInfo extends GetView<TeacherDetailsController> {
@@ -12,21 +12,21 @@ class TeacherInfo extends GetView<TeacherDetailsController> {
 
   @override
   Widget build(BuildContext context) {
-    String teacherPicture = controller.hessaTeacherDetails.result != null
-        ? controller.hessaTeacherDetails.result!.providers != null &&
-                controller.hessaTeacherDetails.result!.providers!.userId != null
-            ? "${Links.baseLink}${Links.profileImageById}?userId=${controller.hessaTeacherDetails.result!.providers!.userId.toString()}"
+    String teacherPicture = controller.darsTeacherDetails.result != null
+        ? controller.darsTeacherDetails.result!.providers != null &&
+                controller.darsTeacherDetails.result!.providers!.userId != null
+            ? "${Links.baseLink}${Links.profileImageById}?userId=${controller.darsTeacherDetails.result!.providers!.userId.toString()}"
             : "https://www.shareicon.net/data/2016/06/10/586098_guest_512x512.png"
         : "https://www.shareicon.net/data/2016/06/10/586098_guest_512x512.png";
-    String country = controller.hessaTeacher.runtimeType == HessaTeacher
-            ? controller.hessaTeacher.country ?? ""
-            : controller.hessaTeacher.country ?? "",
-        governorate = controller.hessaTeacher.runtimeType == HessaTeacher
-            ? controller.hessaTeacher.governorate ?? ""
-            : controller.hessaTeacher.governorate ?? "";
-    double teacherRate = controller.hessaTeacher.runtimeType == HessaTeacher
-        ? controller.hessaTeacher.rate ?? 0.0
-        : controller.hessaTeacher.providerRate ?? 0.0;
+    String country = controller.darsTeacher.runtimeType == DarsTeacher
+            ? controller.darsTeacher.country ?? ""
+            : controller.darsTeacher.country ?? "",
+        governorate = controller.darsTeacher.runtimeType == DarsTeacher
+            ? controller.darsTeacher.governorate ?? ""
+            : controller.darsTeacher.governorate ?? "";
+    double teacherRate = controller.darsTeacher.runtimeType == DarsTeacher
+        ? controller.darsTeacher.rate ?? 0.0
+        : controller.darsTeacher.providerRate ?? 0.0;
     return GetBuilder<TeacherDetailsController>(
         builder: (TeacherDetailsController controller) {
       return Row(
@@ -58,8 +58,8 @@ class TeacherInfo extends GetView<TeacherDetailsController> {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               PrimaryText(
-                controller.hessaTeacherDetails.result != null
-                    ? controller.hessaTeacherDetails.result!.userName ?? ""
+                controller.darsTeacherDetails.result != null
+                    ? controller.darsTeacherDetails.result!.userName ?? ""
                     : "",
                 fontSize: 16.sp,
               ),
@@ -75,17 +75,17 @@ class TeacherInfo extends GetView<TeacherDetailsController> {
                   ? Row(
                       children: [
                         Icon(
-                          controller.hessaTeacherDetails.result != null &&
-                                  controller.hessaTeacherDetails.result!
+                          controller.darsTeacherDetails.result != null &&
+                                  controller.darsTeacherDetails.result!
                                           .providers !=
                                       null &&
-                                  controller.hessaTeacherDetails.result!
+                                  controller.darsTeacherDetails.result!
                                           .providers!.rate !=
                                       null
-                              ? (controller.hessaTeacherDetails.result!
+                              ? (controller.darsTeacherDetails.result!
                                               .providers!.rate <=
                                           5 &&
-                                      controller.hessaTeacherDetails.result!
+                                      controller.darsTeacherDetails.result!
                                               .providers!.rate >
                                           4)
                                   ? Icons.star_rounded

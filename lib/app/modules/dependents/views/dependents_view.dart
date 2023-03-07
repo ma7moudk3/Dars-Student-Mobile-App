@@ -12,7 +12,7 @@ import '../../../../global_presentation/global_widgets/custom_app_bar.dart';
 import '../../../constants/exports.dart';
 import '../../../constants/links.dart';
 import '../../../routes/app_pages.dart';
-import '../../order_hessa/widgets/delete_student_dialog_content.dart';
+import '../../order_dars/widgets/delete_student_dialog_content.dart';
 import '../controllers/dependents_controller.dart';
 import '../widgets/dependent_info_bottom_sheet_content.dart';
 import '../widgets/no_dependents_widget.dart';

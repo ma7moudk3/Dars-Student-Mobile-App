@@ -1,7 +1,7 @@
 import 'package:get/get.dart';
 
-import '../modules/about_hessa/bindings/about_hessa_binding.dart';
-import '../modules/about_hessa/views/about_hessa_view.dart';
+import '../modules/about_dars/bindings/about_dars_binding.dart';
+import '../modules/about_dars/views/about_dars_view.dart';
 import '../modules/add_new_address/bindings/add_new_address_binding.dart';
 import '../modules/add_new_address/views/add_new_address_view.dart';
 import '../modules/add_new_dependent/bindings/add_new_dependent_binding.dart';
@@ -16,6 +16,7 @@ import '../modules/chat/bindings/chat_binding.dart';
 import '../modules/chat/views/chat_view.dart';
 import '../modules/connection_failed/bindings/connection_failed_binding.dart';
 import '../modules/connection_failed/views/connection_failed_view.dart';
+import '../modules/dars_details/bindings/dars_details_binding.dart';
 import '../modules/dependents/bindings/dependents_binding.dart';
 import '../modules/dependents/views/dependents_view.dart';
 import '../modules/edit_address/bindings/edit_address_binding.dart';
@@ -26,10 +27,9 @@ import '../modules/edit_profile/bindings/edit_profile_binding.dart';
 import '../modules/edit_profile/views/edit_profile_view.dart';
 import '../modules/forgot_password/bindings/forgot_password_binding.dart';
 import '../modules/forgot_password/views/forgot_password_view.dart';
-import '../modules/hessa_details/bindings/hessa_details_binding.dart';
-import '../modules/hessa_details/views/hessa_details_view.dart';
-import '../modules/hessa_teachers/bindings/hessa_teachers_binding.dart';
-import '../modules/hessa_teachers/views/hessa_teachers_view.dart';
+import '../modules/dars_details/views/dars_details_view.dart';
+import '../modules/dars_teachers/bindings/dars_teachers_binding.dart';
+import '../modules/dars_teachers/views/dars_teachers_view.dart';
 import '../modules/home/bindings/home_binding.dart';
 import '../modules/home/views/home_view.dart';
 import '../modules/login/bindings/login_binding.dart';
@@ -42,8 +42,8 @@ import '../modules/notifications/bindings/notifications_binding.dart';
 import '../modules/notifications/views/notifications_view.dart';
 import '../modules/onboarding/bindings/onboarding_binding.dart';
 import '../modules/onboarding/views/onboarding_view.dart';
-import '../modules/order_hessa/bindings/order_hessa_binding.dart';
-import '../modules/order_hessa/views/order_hessa_view.dart';
+import '../modules/order_dars/bindings/order_dars_binding.dart';
+import '../modules/order_dars/views/order_dars_view.dart';
 import '../modules/orders/bindings/orders_binding.dart';
 import '../modules/orders/views/orders_view.dart';
 import '../modules/preferred_teachers/bindings/preferred_teachers_binding.dart';
@@ -168,9 +168,9 @@ class AppPages {
       transitionDuration: const Duration(milliseconds: 400),
     ),
     GetPage(
-      name: _Paths.ORDER_HESSA,
-      page: () => const OrderHessaView(),
-      binding: OrderHessaBinding(),
+      name: _Paths.ORDER_DARS,
+      page: () => const OrderDarsView(),
+      binding: OrderDarsBinding(),
       transition: Transition.cupertino,
       transitionDuration: const Duration(milliseconds: 400),
     ),
@@ -210,16 +210,16 @@ class AppPages {
       transitionDuration: const Duration(milliseconds: 400),
     ),
     GetPage(
-      name: _Paths.HESSA_TEACHERS,
-      page: () => const HessaTeachersView(),
-      binding: HessaTeachersBinding(),
+      name: _Paths.DARS_TEACHERS,
+      page: () => const DarsTeachersView(),
+      binding: DarsTeachersBinding(),
       transition: Transition.cupertino,
       transitionDuration: const Duration(milliseconds: 400),
     ),
     GetPage(
-      name: _Paths.HESSA_DETAILS,
-      page: () => const HessaDetailsView(),
-      binding: HessaDetailsBinding(),
+      name: _Paths.DARS_DETAILS,
+      page: () => const DarsDetailsView(),
+      binding: DarsDetailsBinding(),
       transition: Transition.cupertino,
       transitionDuration: const Duration(milliseconds: 400),
     ),
@@ -231,9 +231,9 @@ class AppPages {
       transitionDuration: const Duration(milliseconds: 400),
     ),
     GetPage(
-      name: _Paths.ABOUT_HESSA,
-      page: () => const AboutHessaView(),
-      binding: AboutHessaBinding(),
+      name: _Paths.ABOUT_DARS,
+      page: () => const AboutDarsView(),
+      binding: AboutDarsBinding(),
       transition: Transition.cupertino,
       transitionDuration: const Duration(milliseconds: 400),
     ),
@@ -260,7 +260,7 @@ class AppPages {
     ),
     GetPage(
       name: _Paths.CHAT,
-      page: () => ChatView(),
+      page: () => const ChatView(),
       binding: ChatBinding(),
       transition: Transition.cupertino,
       transitionDuration: const Duration(milliseconds: 400),

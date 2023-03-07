@@ -9,6 +9,7 @@ import 'package:flutter/services.dart';
 import 'package:flutter_chat_types/flutter_chat_types.dart' as types;
 import 'package:flutter_chat_types/flutter_chat_types.dart';
 import 'package:gallery_saver/gallery_saver.dart';
+import 'package:hessa_student/app/constants/constants.dart';
 import 'package:image_picker/image_picker.dart';
 
 import '../../../../generated/locales.g.dart';
@@ -46,7 +47,7 @@ class ChatController extends GetxController with WidgetsBindingObserver {
         lastName: 'Doe',
       ),
       id: '4',
-      text: "وعليكم السلام أريد الاستفسار عن حصص الرياضيات للصف الاول",
+      text: "وعليكم السلام أريد الاستفسار عن دروس الرياضيات للصف الاول",
     ),
     const types.TextMessage(
       author: types.User(
@@ -347,7 +348,7 @@ class ChatController extends GetxController with WidgetsBindingObserver {
                             message as types.ImageMessage;
                         if (imageMessage.uri.isNotEmpty) {
                           await GallerySaver.saveImage(imageMessage.uri,
-                                  albumName: 'Hessa Student')
+                                  albumName: applicationName)
                               .then((value) {
                             CustomSnackBar.showCustomSnackBar(
                                 title: LocaleKeys.success.tr,
@@ -468,7 +469,7 @@ class ChatController extends GetxController with WidgetsBindingObserver {
                               message as types.ImageMessage;
                           if (imageMessage.uri.isNotEmpty) {
                             await GallerySaver.saveImage(imageMessage.uri,
-                                    albumName: 'Hessa Student')
+                                    albumName: applicationName)
                                 .then((bool? value) {
                               if (Get.isDialogOpen!) {
                                 Get.back();

@@ -107,7 +107,7 @@ class SettingsView extends GetView<SettingsController> {
               color: ColorManager.primaryLight.withOpacity(0.15),
               iconColor: ColorManager.primaryLight,
               onTap: () async =>
-                  await Get.toNamed(Routes.ABOUT_HESSA, arguments: {
+                  await Get.toNamed(Routes.ABOUT_DARS, arguments: {
                 "staticPageId": 5,
               }),
             ),

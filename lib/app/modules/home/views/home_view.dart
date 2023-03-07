@@ -8,7 +8,7 @@ import 'package:lottie/lottie.dart';
 
 import '../../../../global_presentation/global_widgets/custom_app_bar.dart';
 import '../controllers/home_controller.dart';
-import '../widgets/hessa_grid_view_item.dart';
+import '../widgets/dars_grid_view_item.dart';
 import '../widgets/order_widget.dart';
 import '../widgets/home_profile_info_widget.dart';
 
@@ -97,19 +97,19 @@ class HomeView extends GetView<HomeController> {
                               mainAxisSpacing: 15.h,
                               physics: const NeverScrollableScrollPhysics(),
                               children: [
-                                HessaGridViewItem(
+                                DarsGridViewItem(
                                   imagePath: ImagesManager.notebookIcon,
                                   title: LocaleKeys.order_new_dars.tr,
                                   onTap: () async {
-                                    await Get.toNamed(Routes.ORDER_HESSA);
+                                    await Get.toNamed(Routes.ORDER_DARS);
                                   },
                                   iconBackgroundColor: ColorManager.primary,
                                 ),
-                                HessaGridViewItem(
+                                DarsGridViewItem(
                                   imagePath: ImagesManager.teachersIcon,
                                   title: LocaleKeys.dars_teachers.tr,
                                   onTap: () async {
-                                    await Get.toNamed(Routes.HESSA_TEACHERS);
+                                    await Get.toNamed(Routes.DARS_TEACHERS);
                                   },
                                   iconBackgroundColor: ColorManager.yellow,
                                 ),
@@ -145,7 +145,7 @@ class HomeView extends GetView<HomeController> {
                             GetBuilder<HomeController>(
                                 init: HomeController(),
                                 builder: (HomeController controller) {
-                                  if (controller.recentHessaOrders.isEmpty) {
+                                  if (controller.recentDarsOrders.isEmpty) {
                                     return Center(
                                       child: Column(
                                         children: [
@@ -177,7 +177,7 @@ class HomeView extends GetView<HomeController> {
                                         SizedBox(height: 20.h),
                                         ListView.builder(
                                           itemCount: controller
-                                              .recentHessaOrders.length,
+                                              .recentDarsOrders.length,
                                           shrinkWrap: true,
                                           physics:
                                               const NeverScrollableScrollPhysics(),
@@ -185,8 +185,8 @@ class HomeView extends GetView<HomeController> {
                                               int index) {
                                             return OrderWidget(
                                               isFirst: index == 0,
-                                              hessaOrder: controller
-                                                  .recentHessaOrders[index],
+                                              darsOrder: controller
+                                                  .recentDarsOrders[index],
                                             );
                                           },
                                         ),

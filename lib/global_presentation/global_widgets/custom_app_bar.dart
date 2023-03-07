@@ -105,7 +105,7 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
                   action ??
                       GestureDetector(
                         onTap: () async => await Get.toNamed(
-                            Routes.HESSA_TEACHERS,
+                            Routes.DARS_TEACHERS,
                             arguments: {
                               'searchFocus': true,
                             }),
@@ -187,7 +187,7 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
                 action ??
                     GestureDetector(
                       onTap: () async =>
-                          await Get.toNamed(Routes.HESSA_TEACHERS, arguments: {
+                          await Get.toNamed(Routes.DARS_TEACHERS, arguments: {
                         'searchFocus': true,
                       }),
                       child: SvgPicture.asset(

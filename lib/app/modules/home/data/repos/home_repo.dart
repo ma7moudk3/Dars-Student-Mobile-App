@@ -1,5 +1,5 @@
-import '../models/hessa_order.dart';
+import '../models/dars_order.dart';
 
 abstract class HomeRepo {
-  Future<List<HessaOrder>> getRecentHessaOrders();
+  Future<List<DarsOrder>> getRecentDarsOrders();
 }

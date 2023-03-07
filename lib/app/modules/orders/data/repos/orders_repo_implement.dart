@@ -8,15 +8,15 @@ import '../../../../../global_presentation/global_widgets/custom_snack_bar.dart'
 import '../../../../constants/links.dart';
 import '../../../../data/cache_helper.dart';
 import '../../../../data/network_helper/dio_helper.dart';
-import '../../../home/data/models/hessa_order.dart';
+import '../../../home/data/models/dars_order.dart';
 
 class OrdersRepoImplement extends OrdersRepo {
   @override
-  Future<List<HessaOrder>> getHessaOrders({
+  Future<List<DarsOrder>> getDarsOrders({
     required int page,
     required int perPage,
   }) async {
-    List<HessaOrder> recentHessaOrders = [];
+    List<DarsOrder> recentDarsOrders = [];
     try {
       Map<String, dynamic> headers = {
         'Accept-Language': Get.locale != null ? Get.locale!.languageCode : 'ar',
@@ -38,8 +38,8 @@ class OrdersRepoImplement extends OrdersRepo {
           if (result != null &&
               result["result"] != null &&
               result["result"]["items"] != null) {
-            for (var hessaOrder in result["result"]["items"]) {
-              recentHessaOrders.add(HessaOrder.fromJson(hessaOrder));
+            for (var darsOrder in result["result"]["items"]) {
+              recentDarsOrders.add(DarsOrder.fromJson(darsOrder));
             }
           }
         },
@@ -51,8 +51,8 @@ class OrdersRepoImplement extends OrdersRepo {
         },
       );
     } catch (e) {
-      log("Error in OrdersRepoImplement.getHessaOrders: $e");
+      log("Error in OrdersRepoImplement.getDarsOrders: $e");
     }
-    return recentHessaOrders;
+    return recentDarsOrders;
   }
 }

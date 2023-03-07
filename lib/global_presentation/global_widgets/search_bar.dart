@@ -1,5 +1,5 @@
 import 'package:hessa_student/app/constants/exports.dart';
-import 'package:hessa_student/app/modules/hessa_teachers/controllers/hessa_teachers_controller.dart';
+import 'package:hessa_student/app/modules/dars_teachers/controllers/dars_teachers_controller.dart';
 
 import '../../app/core/helper_functions.dart';
 import '../../app/routes/app_pages.dart';
@@ -20,8 +20,8 @@ class SearchBar extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return GetBuilder<HessaTeachersController>(
-        builder: (HessaTeachersController controller) {
+    return GetBuilder<DarsTeachersController>(
+        builder: (DarsTeachersController controller) {
       const TextStyle textStyle = TextStyle(
         fontFamily: FontConstants.fontFamily,
         fontSize: 17,

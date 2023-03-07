@@ -8,7 +8,7 @@ import '../../../core/helper_functions.dart';
 import '../controllers/teacher_details_controller.dart';
 import '../widgets/about_teacher_widget.dart';
 import '../widgets/teacher_brief_widget.dart';
-import '../widgets/teacher_hessa_rating_widget.dart';
+import '../widgets/teacher_dars_rating_widget.dart';
 import '../widgets/teacher_info_widget.dart';
 
 class TeacherDetailsView extends GetView<TeacherDetailsController> {
@@ -22,8 +22,8 @@ class TeacherDetailsView extends GetView<TeacherDetailsController> {
         if (controller.isLoading.value == false) {
           return Scaffold(
             appBar: CustomAppBar(
-              title: controller.hessaTeacherDetails.result != null
-                  ? controller.hessaTeacherDetails.result!.userName ?? ""
+              title: controller.darsTeacherDetails.result != null
+                  ? controller.darsTeacherDetails.result!.userName ?? ""
                   : "",
               leading: GestureDetector(
                 onTap: () {
@@ -49,7 +49,7 @@ class TeacherDetailsView extends GetView<TeacherDetailsController> {
                   children: [
                     const TeacherInfo(),
                     SizedBox(height: 27.h),
-                    const HessaTeacherBrief(),
+                    const DarsTeacherBrief(),
                     SizedBox(height: 28.h),
                     const AboutTeacher(),
                     SizedBox(height: 25.h),
@@ -91,7 +91,7 @@ class TeacherDetailsView extends GetView<TeacherDetailsController> {
                             itemBuilder: (BuildContext context, int index) {
                               return Column(
                                 children: [
-                                  const TeacherHessaRating(),
+                                  const TeacherDarsRating(),
                                   Visibility(
                                     visible: index != 2,
                                     child: moreDivider(),

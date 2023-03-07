@@ -1,4 +1,5 @@
 import 'package:flutter_spinkit/flutter_spinkit.dart';
+import 'package:hessa_student/app/modules/home/data/models/dars_order.dart';
 import 'package:infinite_scroll_pagination/infinite_scroll_pagination.dart';
 import 'package:lottie/lottie.dart';
 
@@ -7,7 +8,6 @@ import '../../../../global_presentation/global_features/lotties_manager.dart';
 import '../../../../global_presentation/global_widgets/custom_app_bar.dart';
 import '../../../constants/exports.dart';
 import '../../../routes/app_pages.dart';
-import '../../home/data/models/hessa_order.dart';
 import '../../home/widgets/order_widget.dart';
 import '../controllers/orders_controller.dart';
 
@@ -24,7 +24,7 @@ class OrdersView extends GetView<OrdersController> {
         action: GestureDetector(
           behavior: HitTestBehavior.opaque,
           onTap: () async {
-            await Get.toNamed(Routes.ORDER_HESSA);
+            await Get.toNamed(Routes.ORDER_DARS);
           },
           child: Container(
             width: 20.w,
@@ -63,12 +63,12 @@ class OrdersView extends GetView<OrdersController> {
                     Expanded(
                       child: GetBuilder<OrdersController>(
                           builder: (OrdersController controller) {
-                        return PagedListView<int, HessaOrder>(
+                        return PagedListView<int, DarsOrder>(
                           padding: EdgeInsets.symmetric(
                               horizontal: 5.w, vertical: 4.h),
                           pagingController: controller.pagingController,
                           builderDelegate:
-                              PagedChildBuilderDelegate<HessaOrder>(
+                              PagedChildBuilderDelegate<DarsOrder>(
                             animateTransitions: true,
                             transitionDuration:
                                 const Duration(milliseconds: 350),
@@ -146,7 +146,7 @@ class OrdersView extends GetView<OrdersController> {
                                   SizedBox(height: 25.h),
                                   PrimaryButton(
                                     onPressed: () async {
-                                      await Get.toNamed(Routes.ORDER_HESSA);
+                                      await Get.toNamed(Routes.ORDER_DARS);
                                     },
                                     title: LocaleKeys.add_new_order.tr,
                                     width: (Get.width * 0.55).w,
@@ -155,10 +155,10 @@ class OrdersView extends GetView<OrdersController> {
                               );
                             },
                             itemBuilder: (BuildContext context,
-                                HessaOrder order, int index) {
+                                DarsOrder order, int index) {
                               return OrderWidget(
                                 isFirst: index == 0,
-                                hessaOrder: order,
+                                darsOrder: order,
                               );
                             },
                           ),

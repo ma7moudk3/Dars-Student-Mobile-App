@@ -2,7 +2,7 @@ import 'dart:developer';
 
 import 'package:hessa_student/app/data/cache_helper.dart';
 import 'package:hessa_student/app/data/network_helper/dio_helper.dart';
-import 'package:hessa_student/app/modules/teacher_details/data/models/hessa_teacher_details/hessa_teacher_details.dart';
+import 'package:hessa_student/app/modules/teacher_details/data/models/teacher_details/dars_teacher_details.dart';
 import 'package:hessa_student/app/modules/teacher_details/data/repos/teacher_details_repo.dart';
 
 import '../../../../constants/exports.dart';
@@ -10,10 +10,10 @@ import '../../../../constants/links.dart';
 
 class TeacherDetailsRepoImplement extends TeacherDetailsRepo {
   @override
-  Future<HessaTeacherDetails> getTeacherDetails({
+  Future<DarsTeacherDetails> getTeacherDetails({
     required int teacherId,
   }) async {
-    HessaTeacherDetails hessaTeacherDetails = HessaTeacherDetails();
+    DarsTeacherDetails darsTeacherDetails = DarsTeacherDetails();
     Map<String, dynamic> queryParameters = {
           "id": teacherId,
         },
@@ -25,17 +25,17 @@ class TeacherDetailsRepoImplement extends TeacherDetailsRepo {
           'Authorization': 'Bearer ${CacheHelper.instance.getAccessToken()}',
         };
     await DioHelper.get(
-      Links.getHessaTeacher,
+      Links.getDarsTeacher,
       queryParameters: queryParameters,
       headers: headers,
       onSuccess: (response) {
-        hessaTeacherDetails = HessaTeacherDetails.fromJson(response.data);
+        darsTeacherDetails = DarsTeacherDetails.fromJson(response.data);
       },
       onError: (error) {
         log("getTeacherDetails error: $error");
       },
     );
-    return hessaTeacherDetails;
+    return darsTeacherDetails;
   }
 
   @override

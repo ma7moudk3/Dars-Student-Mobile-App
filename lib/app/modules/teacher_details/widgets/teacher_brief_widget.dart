@@ -6,8 +6,8 @@ import '../../../constants/exports.dart';
 import '../../../core/helper_functions.dart';
 import '../controllers/teacher_details_controller.dart';
 
-class HessaTeacherBrief extends GetView<TeacherDetailsController> {
-  const HessaTeacherBrief({
+class DarsTeacherBrief extends GetView<TeacherDetailsController> {
+  const DarsTeacherBrief({
     super.key,
   });
 
@@ -47,20 +47,20 @@ class HessaTeacherBrief extends GetView<TeacherDetailsController> {
           StatefulBuilder(builder: (BuildContext context, setState) {
             return Linkify(
               onOpen: (LinkableElement link) async {
-                if (extractLink(controller.hessaTeacherDetails.result != null
-                        ? controller.hessaTeacherDetails.result!.providers !=
+                if (extractLink(controller.darsTeacherDetails.result != null
+                        ? controller.darsTeacherDetails.result!.providers !=
                                 null
-                            ? controller.hessaTeacherDetails.result!.providers!
+                            ? controller.darsTeacherDetails.result!.providers!
                                     .aboutMe ??
                                 ""
                             : ""
                         : "") !=
                     null) {
                   final url = Uri.parse(extractLink(
-                      controller.hessaTeacherDetails.result != null
-                          ? controller.hessaTeacherDetails.result!.providers !=
+                      controller.darsTeacherDetails.result != null
+                          ? controller.darsTeacherDetails.result!.providers !=
                                   null
-                              ? controller.hessaTeacherDetails.result!
+                              ? controller.darsTeacherDetails.result!
                                       .providers!.aboutMe ??
                                   ""
                               : ""
@@ -78,20 +78,20 @@ class HessaTeacherBrief extends GetView<TeacherDetailsController> {
                 }
               },
               textDirection: detectLang(
-                      text: controller.hessaTeacherDetails.result != null
-                          ? controller.hessaTeacherDetails.result!.providers !=
+                      text: controller.darsTeacherDetails.result != null
+                          ? controller.darsTeacherDetails.result!.providers !=
                                   null
-                              ? controller.hessaTeacherDetails.result!
+                              ? controller.darsTeacherDetails.result!
                                       .providers!.aboutMe ??
                                   ""
                               : ""
                           : "")
                   ? TextDirection.ltr
                   : TextDirection.rtl,
-              text: controller.hessaTeacherDetails.result != null
-                  ? controller.hessaTeacherDetails.result!.providers != null
+              text: controller.darsTeacherDetails.result != null
+                  ? controller.darsTeacherDetails.result!.providers != null
                       ? controller
-                              .hessaTeacherDetails.result!.providers!.aboutMe ??
+                              .darsTeacherDetails.result!.providers!.aboutMe ??
                           ""
                       : ""
                   : "",
@@ -105,18 +105,18 @@ class HessaTeacherBrief extends GetView<TeacherDetailsController> {
             );
           }),
           // PrimaryText(
-          //   controller.hessaTeacherDetails.result != null
-          //       ? controller.hessaTeacherDetails.result!.providers != null
+          //   controller.darsTeacherDetails.result != null
+          //       ? controller.darsTeacherDetails.result!.providers != null
           //           ? controller
-          //                   .hessaTeacherDetails.result!.providers!.aboutMe ??
+          //                   .darsTeacherDetails.result!.providers!.aboutMe ??
           //               ""
           //           : ""
           //       : "",
           //   textDirection: detectLang(
-          //           text: controller.hessaTeacherDetails.result != null
-          //               ? controller.hessaTeacherDetails.result!.providers !=
+          //           text: controller.darsTeacherDetails.result != null
+          //               ? controller.darsTeacherDetails.result!.providers !=
           //                       null
-          //                   ? controller.hessaTeacherDetails.result!.providers!
+          //                   ? controller.darsTeacherDetails.result!.providers!
           //                           .aboutMe ??
           //                       ""
           //                   : ""

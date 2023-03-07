@@ -9,15 +9,12 @@ import '../../../../generated/locales.g.dart';
 import '../../../../global_presentation/global_widgets/custom_snack_bar.dart';
 import '../../../../global_presentation/global_widgets/loading.dart';
 import '../../../routes/app_pages.dart';
-import '../../order_hessa/data/repos/order_hessa_repo.dart';
-import '../../order_hessa/data/repos/order_hessa_repo_implement.dart';
 import '../data/models/student/student.dart';
 import '../data/repos/dependents_repo.dart';
 import '../data/repos/dependents_repo_implement.dart';
 
 class DependentsController extends GetxController {
   RxBool isInternetConnected = true.obs;
-  final OrderHessaRepo _orderHessaRepo = OrderHessaRepoImplement();
   final DependentsRepo _dependentsRepo = DependentsRepoImplement();
   static const _pageSize = 6; // 6 students per page
   PagingController<int, Student> pagingController = PagingController(

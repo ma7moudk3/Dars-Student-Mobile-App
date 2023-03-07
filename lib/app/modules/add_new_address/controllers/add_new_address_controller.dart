@@ -3,7 +3,6 @@ import 'package:hessa_student/app/data/models/governorates/governorates.dart';
 import 'package:hessa_student/app/modules/add_new_address/data/repos/add_new_address_repo.dart';
 import 'package:hessa_student/app/modules/add_new_address/data/repos/add_new_address_repo_implement.dart';
 import 'package:hessa_student/app/modules/addresses/controllers/addresses_controller.dart';
-import 'package:hessa_student/app/modules/order_hessa/controllers/order_hessa_controller.dart';
 
 import '../../../../generated/locales.g.dart';
 import '../../../../global_presentation/global_widgets/custom_snack_bar.dart';
@@ -14,6 +13,7 @@ import '../../../data/models/countries/result.dart' as country;
 import '../../../data/models/governorates/result.dart' as governorate;
 import '../../../data/models/localities/result.dart' as locality;
 import '../../../data/models/localities/localities.dart';
+import '../../order_dars/controllers/order_dars_controller.dart';
 
 class AddNewAddressController extends GetxController {
   final GlobalKey<FormState> formKey = GlobalKey<FormState>();
@@ -29,7 +29,7 @@ class AddNewAddressController extends GetxController {
   RxBool isInternetConnected = true.obs, isLoading = true.obs;
   bool isGovernorateDropDownLoading = false, isLocalityDropDownLoading = false;
   final AddNewAddressRepo _addNewAddressRepo = AddNewAddressRepoImplement();
-  bool isFromOrderHessa = false;
+  bool isFromOrderDars = false;
   @override
   void onInit() async {
     addressDescriptionController = TextEditingController();
@@ -37,8 +37,8 @@ class AddNewAddressController extends GetxController {
     addressFocusNode.addListener(() => update());
     addressDescriptionFocusNode.addListener(() => update());
     await checkInternet();
-    isFromOrderHessa = Get.arguments != null
-        ? Get.arguments["isFromOrderHessa"] ?? false
+    isFromOrderDars = Get.arguments != null
+        ? Get.arguments["isFromOrderDars"] ?? false
         : false;
     super.onInit();
   }
@@ -225,7 +225,7 @@ class AddNewAddressController extends GetxController {
           if (Get.isDialogOpen!) {
             Get.back();
           }
-          if (isFromOrderHessa == false) {
+          if (isFromOrderDars == false) {
             await Future.delayed(const Duration(milliseconds: 550))
                 .then((value) async {
               final AddressesController addressesController =
@@ -240,10 +240,10 @@ class AddNewAddressController extends GetxController {
           } else {
             await Future.delayed(const Duration(milliseconds: 550))
                 .then((value) async {
-              final OrderHessaController orderHessaController =
-                  Get.find<OrderHessaController>();
+              final OrderDarsController orderDarsController =
+                  Get.find<OrderDarsController>();
               showLoadingDialog();
-              await orderHessaController.getMyAddresses().then((value) async {
+              await orderDarsController.getMyAddresses().then((value) async {
                 await Future.delayed(const Duration(milliseconds: 850))
                     .then((value) {
                   if (Get.isDialogOpen!) {

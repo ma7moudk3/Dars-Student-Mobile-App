@@ -1,6 +1,6 @@
 import 'dart:developer';
 
-import 'package:hessa_student/app/modules/home/data/models/hessa_order.dart';
+import 'package:hessa_student/app/modules/home/data/models/dars_order.dart';
 import 'package:hessa_student/app/modules/home/data/repos/home_repo.dart';
 
 import '../../../../../generated/locales.g.dart';
@@ -12,8 +12,8 @@ import '../../../../data/network_helper/dio_helper.dart';
 
 class HomeRepoImplement extends HomeRepo {
   @override
-  Future<List<HessaOrder>> getRecentHessaOrders() async {
-    List<HessaOrder> recentHessaOrders = [];
+  Future<List<DarsOrder>> getRecentDarsOrders() async {
+    List<DarsOrder> recentDarsOrders = [];
     try {
       Map<String, dynamic> headers = {
         'Accept-Language': Get.locale != null ? Get.locale!.languageCode : 'ar',
@@ -34,8 +34,8 @@ class HomeRepoImplement extends HomeRepo {
           if (result != null &&
               result["result"] != null &&
               result["result"]["items"] != null) {
-            for (var hessaOrder in result["result"]["items"]) {
-              recentHessaOrders.add(HessaOrder.fromJson(hessaOrder));
+            for (var darsOrder in result["result"]["items"]) {
+              recentDarsOrders.add(DarsOrder.fromJson(darsOrder));
             }
           }
         },
@@ -47,8 +47,8 @@ class HomeRepoImplement extends HomeRepo {
         },
       );
     } catch (e) {
-      log("Error in HomeRepoImplement.getRecentHessaOrders: $e");
+      log("Error in HomeRepoImplement.getRecentDarsOrders: $e");
     }
-    return recentHessaOrders;
+    return recentDarsOrders;
   }
 }

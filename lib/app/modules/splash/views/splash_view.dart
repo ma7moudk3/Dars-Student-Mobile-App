@@ -9,7 +9,7 @@ class SplashView extends GetView<SplashController> {
   @override
   Widget build(BuildContext context) {
     Random random = Random();
-    int randomNumber = random.nextInt(4) + 1;
+    int randomNumber = random.nextInt(5) + 1;
     String splashBackground =
         "assets/images/splash_backgrounds/splash_background$randomNumber.png";
     return Stack(

@@ -35,11 +35,11 @@ class Links {
   static const String getMyOrders =
       "api/services/app/Orders/GetMyOrderForRequester";
   static const String refreshToken = "api/TokenAuth/RefreshToken";
-  static const String getAllHessaTeachers =
+  static const String getAllDarsTeachers =
       "api/services/app/Providers/GetSearchForProviders";
-  static const String getHessaOrderDetails =
+  static const String getDarsOrderDetails =
       "api/services/app/Orders/GetOrderByIdForRequester";
-  static const String getHessaTeacher =
+  static const String getDarsTeacher =
       "api/services/app/Providers/GetProviderDetailsForRequester";
   static const String changePassword =
       "api/services/app/Profile/ChangePassword";
@@ -71,7 +71,7 @@ class Links {
   static const String
       addOrEditStudent = // dependent >> student relation >> son, daughter, ...
       "api/services/app/RequesterStudents/CreateOrEdit";
-  static const String addOrEditOrderHessa =
+  static const String addOrEditOrderDars =
       "api/services/app/Orders/CreateOrEdit";
   static const String deleteMyStudent =
       "api/services/app/RequesterStudents/Delete";
