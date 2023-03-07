@@ -27,7 +27,9 @@ class OrderHessaView extends GetView<OrderHessaController> {
   Widget build(BuildContext context) {
     return WillPopScope(
       onWillPop: () async {
-        if (controller.isDataChanged()) {
+        if (!controller.isDataChanged()) {
+          return true;
+        } else {
           await Get.dialog(
             Container(
               color: ColorManager.black.withOpacity(0.1),
@@ -45,8 +47,6 @@ class OrderHessaView extends GetView<OrderHessaController> {
             ),
           );
           return false;
-        } else {
-          return true;
         }
       },
       child: Scaffold(

@@ -18,7 +18,7 @@ import '../../../constants/exports.dart';
 import '../../../data/cache_helper.dart';
 
 class ChatController extends GetxController with WidgetsBindingObserver {
-  bool isAttachmentUploading = false, isFileFunctionalityNeeded = false;
+  bool isAttachmentUploading = false, isFileFunctionalityNeeded = true;
   List<types.Message> messages = [
     const types.TextMessage(
       author: types.User(
