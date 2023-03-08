@@ -1,22 +1,22 @@
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:hessa_student/app/constants/exports.dart';
-import 'package:hessa_student/app/modules/dars_details/widgets/one_dars_widget.dart';
+import 'package:hessa_student/app/modules/order_details/widgets/one_dars_widget.dart';
 import 'package:lottie/lottie.dart';
 import '../../../../generated/locales.g.dart';
 import '../../../../global_presentation/global_features/lotties_manager.dart';
 import '../../../../global_presentation/global_widgets/custom_app_bar.dart';
 import '../../../constants/constants.dart';
-import '../controllers/dars_details_controller.dart';
+import '../controllers/order_details_controller.dart';
 import '../widgets/studying_package_widget.dart';
 
-class DarsDetailsView extends GetView<DarsDetailsController> {
-  const DarsDetailsView({super.key});
+class OrderDetailsView extends GetView<OrderDetailsController> {
+  const OrderDetailsView({super.key});
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: CustomAppBar(
-        title: LocaleKeys.dars_details.tr,
+        title: LocaleKeys.order_details.tr,
         leading: GestureDetector(
           onTap: () {
             Get.back();
@@ -34,8 +34,8 @@ class DarsDetailsView extends GetView<DarsDetailsController> {
         action: const SizedBox.shrink(),
       ),
       body: SafeArea(
-        child: GetX<DarsDetailsController>(
-            builder: (DarsDetailsController controller) {
+        child: GetX<OrderDetailsController>(
+            builder: (OrderDetailsController controller) {
           if (controller.isInternetConnected.value == true) {
             if (controller.isLoading.value == false) {
               if (controller.darsOrderDetails.result?.order?.productId ==
@@ -55,8 +55,8 @@ class DarsDetailsView extends GetView<DarsDetailsController> {
                   backgroundColor: ColorManager.primary,
                   onRefresh: () async => await controller.checkInternet(),
                   child: SingleChildScrollView(
-                    child: GetBuilder<DarsDetailsController>(
-                        builder: (DarsDetailsController controller) {
+                    child: GetBuilder<OrderDetailsController>(
+                        builder: (OrderDetailsController controller) {
                       int productId = controller
                               .darsOrderDetails.result?.order?.productId ??
                           -1;

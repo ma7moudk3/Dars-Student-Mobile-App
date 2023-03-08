@@ -17,7 +17,7 @@ class NotificationsRepoImplement extends NotificationsRepo {
     required int page,
   }) async {
     List<Item> notifications = [];
-    try {
+    // try {
       Map<String, dynamic> queryParameters = {
         "SkipCount": (page - 1) * perPage,
         "MaxResultCount": perPage,
@@ -49,9 +49,9 @@ class NotificationsRepoImplement extends NotificationsRepo {
           );
         },
       );
-    } catch (e) {
-      log("getNotifications DioError $e");
-    }
+    // } catch (e) {
+    //   log("getNotifications DioError $e");
+    // }
     return notifications;
   }
 

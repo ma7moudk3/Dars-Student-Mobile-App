@@ -1,6 +1,6 @@
 import 'result.dart';
 
-class DarsOrderDetails {
+class OrderDetails {
   Result? result;
   dynamic targetUrl;
   bool? success;
@@ -8,7 +8,7 @@ class DarsOrderDetails {
   bool? unAuthorizedRequest;
   bool? abp;
 
-  DarsOrderDetails({
+  OrderDetails({
     this.result,
     this.targetUrl,
     this.success,
@@ -17,8 +17,8 @@ class DarsOrderDetails {
     this.abp,
   });
 
-  factory DarsOrderDetails.fromJson(Map<String, dynamic> json) {
-    return DarsOrderDetails(
+  factory OrderDetails.fromJson(Map<String, dynamic> json) {
+    return OrderDetails(
       result: json['result'] == null
           ? null
           : Result.fromJson(json['result'] as Map<String, dynamic>),

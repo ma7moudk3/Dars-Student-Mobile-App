@@ -1,16 +1,16 @@
 import 'dart:developer';
 import 'package:cached_network_image/cached_network_image.dart';
-import 'package:hessa_student/app/modules/dars_details/widgets/participant_students_list_bottom_sheet.dart';
-import 'package:hessa_student/app/modules/dars_details/widgets/studying_hours_widget.dart';
+import 'package:hessa_student/app/modules/order_details/widgets/participant_students_list_bottom_sheet.dart';
+import 'package:hessa_student/app/modules/order_details/widgets/studying_hours_widget.dart';
 import '../../../../generated/locales.g.dart';
 import '../../../constants/exports.dart';
 import '../../../constants/links.dart';
 import '../../../core/helper_functions.dart';
 import '../../../routes/app_pages.dart';
-import '../controllers/dars_details_controller.dart';
+import '../controllers/order_details_controller.dart';
 import 'droos_list_widget.dart';
 
-class StudyingPackageWidget extends GetView<DarsDetailsController> {
+class StudyingPackageWidget extends GetView<OrderDetailsController> {
   const StudyingPackageWidget({
     Key? key,
   }) : super(key: key);

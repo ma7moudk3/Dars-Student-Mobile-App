@@ -1,8 +1,8 @@
 import '../../../../generated/locales.g.dart';
 import '../../../constants/exports.dart';
-import '../controllers/dars_details_controller.dart';
+import '../controllers/order_details_controller.dart';
 
-class StudyingHoursDars extends GetView<DarsDetailsController> {
+class StudyingHoursDars extends GetView<OrderDetailsController> {
   const StudyingHoursDars({
     Key? key,
   }) : super(key: key);

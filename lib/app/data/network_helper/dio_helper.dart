@@ -1,6 +1,7 @@
 // ignore_for_file: constant_identifier_names
 
 import 'dart:async';
+import 'dart:convert';
 import 'dart:developer';
 import 'dart:io';
 import 'package:dio/adapter.dart';
@@ -446,9 +447,7 @@ class DioHelper {
   static handleApiError(ApiException apiException) {
     log("apiException message: ${apiException.message}");
     String msg = apiException.message.toLowerCase().contains("timeout")
-        ? LocaleKeys
-            .serverNotResponding
-            .tr
+        ? LocaleKeys.serverNotResponding.tr
         : (apiException.response?.data?["error"]['message'] ??
             LocaleKeys.something_went_wrong.tr);
     log("msg1  $msg");
@@ -479,13 +478,15 @@ final dioLoggerInterceptor =
     headers += "| $key: $value";
   });
   log("┌------------------------------------------------------------------------------");
+  // final parsedJson = json.decode(options.data);
   log('''| [DIO] Request: ${options.method} ${options.uri}
 | ${options.data.toString()}
 | Headers:\n$headers''');
   log("├------------------------------------------------------------------------------");
   handler.next(options); //continue
 }, onResponse: (Response response, handler) async {
-  log(response.data.toString());
+  final parsedJson = const JsonEncoder.withIndent('  ').convert(response.data);
+  log(parsedJson.toString());
   log("└------------------------------------------------------------------------------");
   handler.next(response);
   // return response; // continue

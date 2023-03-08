@@ -16,7 +16,7 @@ import '../modules/chat/bindings/chat_binding.dart';
 import '../modules/chat/views/chat_view.dart';
 import '../modules/connection_failed/bindings/connection_failed_binding.dart';
 import '../modules/connection_failed/views/connection_failed_view.dart';
-import '../modules/dars_details/bindings/dars_details_binding.dart';
+import '../modules/order_details/bindings/dars_details_binding.dart';
 import '../modules/dependents/bindings/dependents_binding.dart';
 import '../modules/dependents/views/dependents_view.dart';
 import '../modules/edit_address/bindings/edit_address_binding.dart';
@@ -27,7 +27,7 @@ import '../modules/edit_profile/bindings/edit_profile_binding.dart';
 import '../modules/edit_profile/views/edit_profile_view.dart';
 import '../modules/forgot_password/bindings/forgot_password_binding.dart';
 import '../modules/forgot_password/views/forgot_password_view.dart';
-import '../modules/dars_details/views/dars_details_view.dart';
+import '../modules/order_details/views/order_details_view.dart';
 import '../modules/dars_teachers/bindings/dars_teachers_binding.dart';
 import '../modules/dars_teachers/views/dars_teachers_view.dart';
 import '../modules/home/bindings/home_binding.dart';
@@ -218,7 +218,7 @@ class AppPages {
     ),
     GetPage(
       name: _Paths.DARS_DETAILS,
-      page: () => const DarsDetailsView(),
+      page: () => const OrderDetailsView(),
       binding: DarsDetailsBinding(),
       transition: Transition.cupertino,
       transitionDuration: const Duration(milliseconds: 400),

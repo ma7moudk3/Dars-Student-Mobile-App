@@ -7,7 +7,22 @@ const applicationName = "دَرْس - الطالب";
 List<int> darsProductTypes = [19, 41];
 // 19 is for studying package, 41 is for one dars, if another product id is added, add it to darsProductTypes list ..
 
-enum DarsStatus { confirmed, started, canceled, finished }
+enum SessionStatus {
+  notStarted,
+  inProgress,
+  paused,
+  completed,
+  cancelled
+}
+
+enum OrderStatus {
+  submitted,
+  confirmed,
+  started,
+  tempPaused,
+  completed,
+  cancelled
+}
 
 enum PaymentStatus { fullyPaid, partiallyPaid, unpaid }
 

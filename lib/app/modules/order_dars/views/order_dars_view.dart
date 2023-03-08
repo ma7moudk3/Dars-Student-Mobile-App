@@ -27,7 +27,10 @@ class OrderDarsView extends GetView<OrderDarsController> {
   Widget build(BuildContext context) {
     return WillPopScope(
       onWillPop: () async {
-        if (!controller.isDataChanged()) {
+        if (!Get.isRegistered<OrderDarsController>()) {
+          return true;
+        }
+        if (!controller.isDataChanged() || controller.isLoading.value) {
           return true;
         } else {
           await Get.dialog(
@@ -55,6 +58,9 @@ class OrderDarsView extends GetView<OrderDarsController> {
           leading: GestureDetector(
             behavior: HitTestBehavior.opaque,
             onTap: () async {
+              if (!Get.isRegistered<OrderDarsController>()) {
+                Get.back();
+              }
               if (controller.isDataChanged()) {
                 await Get.dialog(
                   Container(
@@ -335,12 +341,12 @@ class OrderDarsView extends GetView<OrderDarsController> {
                                                       ? LocaleKeys
                                                           .academic_learning
                                                       : LocaleKeys.skill,
-                                                  color: controller
-                                                              .darsCategory ==
-                                                          index
-                                                      ? ColorManager.white
-                                                      : ColorManager
-                                                          .borderColor,
+                                                  color:
+                                                      controller.darsCategory ==
+                                                              index
+                                                          ? ColorManager.white
+                                                          : ColorManager
+                                                              .borderColor,
                                                   fontWeight: FontWeightManager
                                                       .softLight,
                                                 ),
@@ -754,8 +760,8 @@ class OrderDarsView extends GetView<OrderDarsController> {
                                       Row(
                                         children: [
                                           PrimaryText(
-                                            LocaleKeys.teacher_name,
-                                            fontSize: 14.sp,
+                                            LocaleKeys.preferred_teacher_name,
+                                            fontSize: 14,
                                             fontWeight:
                                                 FontWeightManager.softLight,
                                             color: ColorManager.fontColor,

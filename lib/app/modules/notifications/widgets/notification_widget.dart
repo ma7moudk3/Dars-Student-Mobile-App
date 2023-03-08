@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:animator/animator.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
 
@@ -22,6 +24,7 @@ class NotificationWidget extends GetView<NotificationsController> {
   final int index;
   @override
   Widget build(BuildContext context) {
+    log(itemNotification.toJson().toString());
     Widget deleteNotificationBackgroundWidget =
         GetBuilder<NotificationsController>(
             builder: (NotificationsController controller) {
@@ -84,10 +87,6 @@ class NotificationWidget extends GetView<NotificationsController> {
             motion: const ScrollMotion(),
             extentRatio: 0.25,
             closeThreshold: 0.2,
-            // dismissible: DismissiblePane(
-            //   dismissThreshold: 0.2,
-            //   onDismissed: () {},
-            // ),
             dragDismissible: false,
             children: [deleteNotificationBackgroundWidget],
           ),
@@ -128,14 +127,26 @@ class NotificationWidget extends GetView<NotificationsController> {
                     SizedBox(
                       width: 220.w,
                       child: PrimaryText(
-                        itemNotification.notification?.data?.message ?? "",
+                        itemNotification
+                                    .notification?.data?.message.runtimeType ==
+                                String
+                            ? itemNotification.notification?.data?.message ?? ""
+                            : itemNotification
+                                    .notification?.data?.properties?.body ??
+                                "",
                         fontWeight: FontWeightManager.softLight,
                         fontSize: 14.sp,
                         maxLines: 2,
                         textDirection: detectLang(
-                                text: itemNotification
-                                        .notification?.data?.message ??
-                                    "")
+                                text: itemNotification.notification?.data
+                                            ?.message.runtimeType ==
+                                        String
+                                    ? itemNotification
+                                            .notification?.data?.message ??
+                                        ""
+                                    : itemNotification.notification?.data
+                                            ?.properties?.body ??
+                                        "")
                             ? TextDirection.ltr
                             : TextDirection.rtl,
                         textAlign: TextAlign.start,
@@ -144,7 +155,7 @@ class NotificationWidget extends GetView<NotificationsController> {
                     ),
                     SizedBox(height: 10.h),
                     PrimaryText(
-                      itemNotification.notification!.creationTime!
+                      (itemNotification.notification?.creationTime ?? DateTime.now())
                           .timeAgoCustom(),
                       fontWeight: FontWeightManager.softLight,
                       color: ColorManager.fontColor7,

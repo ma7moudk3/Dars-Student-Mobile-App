@@ -1,15 +1,15 @@
 import 'properties.dart';
 
 class Data {
-  String? message;
-  String? type;
+  dynamic message;
+  dynamic type;
   Properties? properties;
 
   Data({this.message, this.type, this.properties});
 
   factory Data.fromJson(Map<String, dynamic> json) => Data(
-        message: json['message'] as String?,
-        type: json['type'] as String?,
+        message: json['message'] as dynamic,
+        type: json['type'] as dynamic,
         properties: json['properties'] == null
             ? null
             : Properties.fromJson(json['properties'] as Map<String, dynamic>),

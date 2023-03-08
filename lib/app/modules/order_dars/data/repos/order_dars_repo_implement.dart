@@ -121,6 +121,17 @@ class OrderDarsRepoImplement extends OrderDarsRepo {
   }) async {
     int statusCode = 200;
     try {
+      /*
+      session status = dars status
+      enum SessionStatus {
+        notStarted,
+        inProgress,
+        paused,
+        completed,
+        cancelled
+      }
+      currentStatusId = 0 >> notStarted
+      */
       Map<String, dynamic> data = {
         "targetGenderId": targetGenderId,
         "currentStatusId": 0,

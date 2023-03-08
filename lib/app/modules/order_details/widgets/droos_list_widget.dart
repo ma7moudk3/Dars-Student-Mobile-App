@@ -3,10 +3,10 @@ import 'dart:developer';
 import '../../../../generated/locales.g.dart';
 import '../../../../global_presentation/global_widgets/expansion_tile_card.dart';
 import '../../../constants/exports.dart';
-import '../controllers/dars_details_controller.dart';
+import '../controllers/order_details_controller.dart';
 import 'dars_property_widget.dart';
 
-class DroosListWidget extends GetView<DarsDetailsController> {
+class DroosListWidget extends GetView<OrderDetailsController> {
   const DroosListWidget({
     Key? key,
   }) : super(key: key);
@@ -80,12 +80,12 @@ class DroosListWidget extends GetView<DarsDetailsController> {
                   ),
                 ),
                 duration: const Duration(milliseconds: 500),
-                children: List.generate(controller.darsProperties.length,
+                children: List.generate(controller.orderProperties.length,
                     (int index) {
                   return DarsPropertyWidget(
-                    iconPath: controller.darsProperties[index]["icon"],
-                    title: controller.darsProperties[index]["title"],
-                    content: controller.darsProperties[index]["content"] ?? "",
+                    iconPath: controller.orderProperties[index]["icon"],
+                    title: controller.orderProperties[index]["title"],
+                    content: controller.orderProperties[index]["content"] ?? "",
                   );
                 }),
               ),

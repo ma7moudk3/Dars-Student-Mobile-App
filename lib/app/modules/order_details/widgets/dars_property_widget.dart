@@ -1,7 +1,7 @@
 import '../../../constants/exports.dart';
-import '../controllers/dars_details_controller.dart';
+import '../controllers/order_details_controller.dart';
 
-class DarsPropertyWidget extends GetView<DarsDetailsController> {
+class DarsPropertyWidget extends GetView<OrderDetailsController> {
   const DarsPropertyWidget({
     required this.iconPath,
     required this.title,

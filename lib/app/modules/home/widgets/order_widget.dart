@@ -1,13 +1,14 @@
+
 import 'package:hessa_student/app/routes/app_pages.dart';
 import 'package:hessa_student/generated/locales.g.dart';
 import 'package:intl/intl.dart';
 
 import '../../../constants/constants.dart';
 import '../../../constants/exports.dart';
-import '../controllers/home_controller.dart';
+import '../../orders/controllers/orders_controller.dart';
 import '../data/models/dars_order.dart';
 
-class OrderWidget extends GetView<HomeController> {
+class OrderWidget extends GetView<OrdersController> {
   final bool isFirst;
 
   const OrderWidget({
@@ -18,6 +19,27 @@ class OrderWidget extends GetView<HomeController> {
   final DarsOrder darsOrder;
   @override
   Widget build(BuildContext context) {
+    Color orderStatusColor = ColorManager.primary;
+    switch (OrderStatus.values[darsOrder.currentStatusId ?? 0]) {
+      case OrderStatus.submitted:
+        orderStatusColor = ColorManager.primary;
+        break;
+      case OrderStatus.confirmed:
+        orderStatusColor = ColorManager.green;
+        break;
+      case OrderStatus.started:
+        orderStatusColor = ColorManager.green;
+        break;
+      case OrderStatus.tempPaused:
+        orderStatusColor = ColorManager.yellow;
+        break;
+      case OrderStatus.completed:
+        orderStatusColor = ColorManager.green;
+        break;
+      case OrderStatus.cancelled:
+        orderStatusColor = ColorManager.red;
+        break;
+    }
     return GestureDetector(
       behavior: HitTestBehavior.opaque,
       onTap: () async {
@@ -194,14 +216,13 @@ class OrderWidget extends GetView<HomeController> {
                     height: 26.h,
                     decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(8),
-                      color: ColorManager.green
-                          .withOpacity(0.15), // badge color >> could be red
+                      color: orderStatusColor.withOpacity(0.15),
                     ),
                     child: Center(
                       child: PrimaryText(
-                        'بدأت الحصّة', // "اهتمام من قبل 3 مدرسين"
-                        fontSize: 12.sp,
-                        color: ColorManager.green,
+                        darsOrder.currentStatusStr ?? '',
+                        fontSize: 12,
+                        color: orderStatusColor,
                         fontWeight: FontWeightManager.softLight,
                       ),
                     ),

@@ -27,10 +27,12 @@ class LocaleKeys {
   static const enter_password = 'enter_password';
   static const enter_old_password = 'enter_old_password';
   static const enjoy_the_app = 'enjoy_the_app';
+  static const preferred_teacher_name = 'preferred_teacher_name';
   static const sort_ascending = 'sort_ascending';
   static const sort_descending = 'sort_descending';
   static const no_messages_yet = 'no_messages_yet';
   static const welcoming = 'welcoming';
+  static const current_preferred_teacher = 'current_preferred_teacher';
   static const add_new_dependent = 'add_new_dependent';
   static const welcome_back = 'welcome_back';
   static const no_messages_to_see_here = 'no_messages_to_see_here';
@@ -379,7 +381,7 @@ class LocaleKeys {
   static const enter_address_description = 'enter_address_description';
   static const please_enter_message_content = 'please_enter_message_content';
   static const check_message_content = 'check_message_content';
-  static const dars_details = 'dars_details';
+  static const order_details = 'order_details';
   static const studying_hour = 'studying_hour';
   static const dars = 'dars';
   static const timing = 'timing';
@@ -484,10 +486,12 @@ class Locales {
     'enter_password': 'أدخل كلمة المرور',
     'enter_old_password': 'أدخل كلمة المرور القديمة',
     'enjoy_the_app': 'استمتع مع درس',
+    'preferred_teacher_name': 'اسم المعلم الذي تفضله',
     'sort_ascending': 'رتب تصاعدي',
     'sort_descending': 'رتب تنازلي',
     'no_messages_yet': 'لا توجد رسائل بعد',
     'welcoming': 'يسعدنا رؤيتك مرة أخرى',
+    'current_preferred_teacher': 'المعلم المفضّل',
     'add_new_dependent': 'اضافة تابع جديد',
     'welcome_back': 'نأمل أن تكون قد قضيت وقتًا رائعًا\nونحن سعداء بالعودة',
     'no_messages_to_see_here': 'لا يوجد رسائل لعرضها هنا',
@@ -569,13 +573,13 @@ class Locales {
     'country': 'الدولة',
     'please_enter_address_description': 'الرجاء ادخال وصف العنوان',
     'please_enter_address': 'الرجاء ادخال العنوان',
-    'please_enter_teacher_name': 'الرجاء ادخال اسم المدرّس',
+    'please_enter_teacher_name': 'الرجاء ادخال اسم المعلّم',
     'please_enter_dependent_name': 'الرجاء ادخال اسم التابع',
     'check_your_full_name': 'تحقق من اسمك الكامل',
     'check_area': 'تحقق من المنطقة المُدخلة',
     'check_address_description': 'تحقق من وصف العنوان المُدخل',
     'check_address': 'تحقق من العنوان المُدخل',
-    'check_teacher_name': 'تحقق من اسم المدرّس',
+    'check_teacher_name': 'تحقق من اسم المعلّم',
     'check_dependent_name': 'تحقق من اسم التابع',
     'please_enter_confirm_password': 'الرجاء إدخال كلمة مرور مطابقة',
     'check_confirm_password': 'تحقق من أنك أدخلت كلمة مرور مطابقة',
@@ -655,7 +659,7 @@ class Locales {
     'face_to_face': 'وجاهي',
     'electronic': 'إلكتروني',
     'both': 'أيهما',
-    'teacher_gender': 'جنس المدرّس المطلوب',
+    'teacher_gender': 'جنس المعلّم المطلوب',
     'order_type': 'نوع الطلب المراد',
     'please_select_image': 'الرجاء اختيار صورة',
     'image_saved': 'تم حفظ الصورة بنجاح',
@@ -673,8 +677,8 @@ class Locales {
     'chosen_dars_time_and_date': 'تاريخ ووقت الدرس المختارة',
     'location': 'الموقع الجغرافي',
     'choose_location': 'اختر الموقع الجغرافي',
-    'teacher_name': 'اسم المدرّس',
-    'write_teacher_name': 'اكتب اسم المدرّس',
+    'teacher_name': 'اسم المعلّم',
+    'write_teacher_name': 'اكتب اسم المعلّم',
     'write_dependent_name': 'اكتب اسم التابع',
     'notes': 'ملاحظات',
     'card_type': 'نوع البطاقة',
@@ -828,13 +832,13 @@ class Locales {
     'enter_address_description': 'اكتب وصف العنوان',
     'please_enter_message_content': 'الرجاء إدخال نص الرسالة ...',
     'check_message_content': 'تحقق من نص الرسالة المُدخل',
-    'dars_details': 'تفاصيل الدرس',
+    'order_details': 'تفاصيل الطلب',
     'studying_hour': 'ساعة تدريسية',
     'dars': 'الدرس',
     'timing': 'التوقيت',
     'date': 'التاريخ',
     'session': 'الجلسة',
-    'dars_type': 'نوع الدرس',
+    'dars_type': 'نوع الطلب',
     'follow_us': 'تابعنا',
     'expiry_date': 'تاريخ الانتهاء',
     'choose_expiry_date': 'اختر تاريخ الانتهاء',
@@ -871,7 +875,7 @@ class Locales {
     'intersted_teachers': 'معلمين مهتمين بتقديم الدرس',
     'order_added_successfully': 'تم إضافة الطلب بنجاح',
     'add_new_order': 'إضافة طلب درس جديد',
-    'approve_teacher': 'اعتماد المدرّس',
+    'approve_teacher': 'اعتماد المعلّم',
     'confirm_canceling_dars': 'تأكيد الغاء الدرس',
     'canceling_dars_reason': 'سبب الغاء الدرس',
     'cofirm_canceling': 'تأكيد الإلغاء',
@@ -905,7 +909,7 @@ class Locales {
     'teacher_rating': 'تقييم المعلم',
     'rate': 'تقييم',
     'how_was_your_experience_with_the_teacher': 'كيف كانت تجربتك مع المعلم؟',
-    'you_cannot_cancel_this_dars': 'لا يمكنك إلغاء هذه الدرس!',
+    'you_cannot_cancel_this_dars': 'لا يمكنك إلغاء هذا الدرس!',
     'due_to_the_starting_time_of_the_dars':
         'لا يمكنك الغاء الدرس و ذلك لاقتراب بدء موعد الدرس',
     'to_help_you_please_enter_canceling_dars_reason':

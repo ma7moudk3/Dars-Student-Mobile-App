@@ -1,5 +1,5 @@
 import 'package:cached_network_image/cached_network_image.dart';
-import 'package:hessa_student/app/modules/dars_details/controllers/dars_details_controller.dart';
+import 'package:hessa_student/app/modules/order_details/controllers/order_details_controller.dart';
 
 import '../../../../generated/locales.g.dart';
 import '../../../constants/exports.dart';
@@ -7,7 +7,7 @@ import '../../../constants/links.dart';
 import '../../../data/models/classes/item.dart';
 
 class ParticipantListBottomSheetContent
-    extends GetView<DarsDetailsController> {
+    extends GetView<OrderDetailsController> {
   const ParticipantListBottomSheetContent({
     Key? key,
   }) : super(key: key);

@@ -39,6 +39,8 @@ class Links {
       "api/services/app/Providers/GetSearchForProviders";
   static const String getDarsOrderDetails =
       "api/services/app/Orders/GetOrderByIdForRequester";
+  static const String getCandidateProvidersForOrder =
+      "api/services/app/CandidateProviders/GetCandidateProviderByOrder";
   static const String getDarsTeacher =
       "api/services/app/Providers/GetProviderDetailsForRequester";
   static const String changePassword =

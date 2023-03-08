@@ -1,8 +1,8 @@
-import 'package:hessa_student/app/modules/dars_details/controllers/dars_details_controller.dart';
+import 'package:hessa_student/app/modules/order_details/controllers/order_details_controller.dart';
 import '../../../../generated/locales.g.dart';
 import '../../../constants/exports.dart';
 
-class CannotCancelDarsDialogContent extends GetView<DarsDetailsController> {
+class CannotCancelDarsDialogContent extends GetView<OrderDetailsController> {
   const CannotCancelDarsDialogContent({
     Key? key,
   }) : super(key: key);

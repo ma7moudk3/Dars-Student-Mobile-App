@@ -1,10 +1,10 @@
 
 import '../../../../generated/locales.g.dart';
 import '../../../constants/exports.dart';
-import '../controllers/dars_details_controller.dart';
+import '../controllers/order_details_controller.dart';
 import 'you_cant_cancel_dars_dialog_content.dart';
 
-class CancelDarsBottomSheetContent extends GetView<DarsDetailsController> {
+class CancelDarsBottomSheetContent extends GetView<OrderDetailsController> {
   const CancelDarsBottomSheetContent({
     Key? key,
   }) : super(key: key);
@@ -43,8 +43,8 @@ class CancelDarsBottomSheetContent extends GetView<DarsDetailsController> {
                     borderRadius: BorderRadius.circular(10),
                     color: ColorManager.white,
                   ),
-                  child: GetBuilder<DarsDetailsController>(
-                      builder: (DarsDetailsController controller) {
+                  child: GetBuilder<OrderDetailsController>(
+                      builder: (OrderDetailsController controller) {
                     return Form(
                       key: controller.formKey,
                       child: Column(

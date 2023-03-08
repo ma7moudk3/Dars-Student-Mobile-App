@@ -45,8 +45,7 @@ extension IsAtMaximumYears on DateTime {
 }
 
 class OrderDarsController extends GetxController {
-  final GlobalKey<FormState> 
-  formKey = GlobalKey<FormState>();
+  final GlobalKey<FormState> formKey = GlobalKey<FormState>();
   int sessionWay = 0; // 0 face-to-face, 1 electronic, 2 both
   int darsCategory = 0; // 0 academic learning, 1 skills
   int teacherGender =
@@ -108,7 +107,7 @@ class OrderDarsController extends GetxController {
   bool isDataChanged() {
     return darsDateController.text.isNotEmpty ||
         darsTimeRange != null ||
-        (selectedAddress != addresses.first) ||
+        (addresses.isNotEmpty && addresses.first != selectedAddress) ||
         selectedStudents.isNotEmpty ||
         selectedTopics.isNotEmpty ||
         selectedSkills.isNotEmpty ||

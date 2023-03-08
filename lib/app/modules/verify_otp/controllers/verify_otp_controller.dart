@@ -152,7 +152,7 @@ class VerifyOtpController extends GetxController {
     if (Get.isDialogOpen ?? false) {
       Get.back();
     }
-    start = 60;
+    start = generateOtpCode.result?.numberOfSeconds ?? 60;
     startTimer();
     update();
   }
