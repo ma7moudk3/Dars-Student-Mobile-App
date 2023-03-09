@@ -10,7 +10,6 @@ import '../../order_dars/data/repos/order_dars_repo.dart';
 import '../../order_dars/data/repos/order_dars_repo_implement.dart';
 import '../../teacher_details/data/repos/teacher_details_repo.dart';
 import '../../teacher_details/data/repos/teacher_details_repo_implement.dart';
-import '../data/models/candidate_providers/candidate_providers.dart';
 import '../data/models/order_details/order_details.dart';
 import '../data/repos/order_details_repo.dart';
 import '../data/repos/order_details_repo_implement.dart';
@@ -56,7 +55,6 @@ class OrderDetailsController extends GetxController {
   final OrderDetailsRepo _darsDetailsRepoImplement =
       OrderDetailsRepoImplement();
   OrderDetails darsOrderDetails = OrderDetails();
-  CandidateProviders candidateProviders = CandidateProviders();
   RxBool isInternetConnected = true.obs, isLoading = true.obs;
   @override
   void onInit() async {
@@ -135,7 +133,6 @@ class OrderDetailsController extends GetxController {
         await Future.wait([
           _getClasses(),
           getOrderDetails(),
-          getOrderCandidateProviders(),
         ]).then((value) {
           initOrderProperties();
           isLoading.value = false;
@@ -152,14 +149,6 @@ class OrderDetailsController extends GetxController {
     isPreferredTeacherFavorite = darsOrderDetails.result != null &&
         darsOrderDetails.result!.order != null &&
         darsOrderDetails.result!.order!.preferredproviderId != null;
-    update();
-  }
-
-  Future getOrderCandidateProviders() async {
-    if (darsOrder.id != null) {
-      candidateProviders = await _darsDetailsRepoImplement
-          .getCandidateProviders(darsOrder: darsOrder.id!);
-    }
     update();
   }
 

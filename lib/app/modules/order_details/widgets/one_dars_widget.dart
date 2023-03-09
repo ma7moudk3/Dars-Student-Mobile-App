@@ -184,7 +184,9 @@ class OneDarsWidget extends GetView<OrderDetailsController> {
                 if (controller.darsOrderDetails.result?.order
                             ?.preferredprovider !=
                         null &&
-                    (controller.candidateProviders.result ?? []).isEmpty) {
+                    (controller.darsOrderDetails.result?.candidateProvider ??
+                            [])
+                        .isEmpty) {
                   return Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
@@ -361,13 +363,16 @@ class OneDarsWidget extends GetView<OrderDetailsController> {
                       ),
                       SizedBox(height: 15.h),
                       ListView.builder(
-                        itemCount:
-                            controller.candidateProviders.result?.length ?? 0,
+                        itemCount: controller.darsOrderDetails.result
+                                ?.candidateProvider?.length ??
+                            0,
                         physics: const NeverScrollableScrollPhysics(),
                         shrinkWrap: true,
                         itemBuilder: (BuildContext context, int index) {
                           double candidateProviderRate = double.parse(controller
-                                  .candidateProviders.result?[index].rate
+                                  .darsOrderDetails
+                                  .result
+                                  ?.candidateProvider?[index]?["rate"]
                                   .toString() ??
                               "0.0");
                           return GestureDetector(
@@ -408,7 +413,7 @@ class OneDarsWidget extends GetView<OrderDetailsController> {
                                           (BuildContext context, setState) {
                                         String
                                             candidateProviderPicture = // provider = teacher
-                                            "${Links.baseLink}${Links.profileImageById}?userId=${controller.candidateProviders.result?[index].userId ?? -1}";
+                                            "${Links.baseLink}${Links.profileImageById}?userId=${controller.darsOrderDetails.result?.candidateProvider?[index]?["userId"] ?? -1}";
                                         return Container(
                                           width: 58.w,
                                           height: 65.h,
@@ -441,8 +446,9 @@ class OneDarsWidget extends GetView<OrderDetailsController> {
                                       }),
                                       SizedBox(height: 5.h),
                                       PrimaryText(
-                                        controller.candidateProviders
-                                                .result?[index].userName ??
+                                        controller.darsOrderDetails.result
+                                                    ?.candidateProvider?[index]
+                                                ?["userName"] ??
                                             "",
                                         fontSize: 14.sp,
                                         fontWeight: FontWeightManager.softLight,
@@ -523,7 +529,7 @@ class OneDarsWidget extends GetView<OrderDetailsController> {
                                             (BuildContext context, setState) {
                                           String
                                               candidateProviderPicture = // provider = teacher
-                                              "${Links.baseLink}${Links.profileImageById}?userId=${controller.candidateProviders.result?[index].userId ?? -1}";
+                                              "${Links.baseLink}${Links.profileImageById}?userId=${controller.darsOrderDetails.result?.candidateProvider?[index]?["userId"] ?? -1}";
                                           return Container(
                                             width: 50.w,
                                             height: 50.h,
@@ -566,9 +572,10 @@ class OneDarsWidget extends GetView<OrderDetailsController> {
                                                 children: [
                                                   PrimaryText(
                                                     controller
-                                                            .candidateProviders
-                                                            .result?[index]
-                                                            .userName ??
+                                                                .darsOrderDetails
+                                                                .result
+                                                                ?.candidateProvider?[
+                                                            index]?["userName"] ??
                                                         "",
                                                     color:
                                                         ColorManager.fontColor,
@@ -677,12 +684,13 @@ class OneDarsWidget extends GetView<OrderDetailsController> {
           padding: EdgeInsets.only(
             left: 16.w,
             right: 16.w,
-            bottom: Get.height * 0.075.h,
+            bottom: (Get.height * 0.075).h,
           ),
           child: PrimaryButton(
-            isDisabled:
-                controller.darsOrderDetails.result?.order?.currentStatusId ==
-                    OrderStatus.cancelled.index,
+            isDisabled: controller
+                    .darsOrderDetails.result?.order?.currentStatusId ==
+                OrderStatus.cancelled
+                    .index, // TODO: if another condition is added, change this
             onPressed: () async {
               await Get.bottomSheet(
                 isScrollControlled: true,
@@ -696,7 +704,6 @@ class OneDarsWidget extends GetView<OrderDetailsController> {
                 backgroundColor: ColorManager.white,
               ).whenComplete(() => controller.clearData());
             },
-            // isDisabled: true, // to be changed later
             title: LocaleKeys.cancel_dars.tr,
           ),
         ),
