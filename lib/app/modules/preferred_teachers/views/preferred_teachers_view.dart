@@ -115,7 +115,7 @@ class PreferredTeachersView extends GetView<PreferredTeachersController> {
                                 ),
                                 PrimaryText(
                                   LocaleKeys.no_results_found.tr,
-                                  fontSize: 20.sp,
+                                  fontSize: 20,
                                 ),
                               ],
                             );
@@ -140,7 +140,7 @@ class PreferredTeachersView extends GetView<PreferredTeachersController> {
             children: [
               PrimaryText(
                 LocaleKeys.check_your_internet_connection.tr,
-                fontSize: 18.sp,
+                fontSize: 18,
                 fontWeight: FontWeightManager.bold,
                 textAlign: TextAlign.center,
               ),

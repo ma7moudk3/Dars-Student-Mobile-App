@@ -62,14 +62,14 @@ class SplashView extends GetView<SplashController> {
                             SizedBox(height: 10.h),
                             PrimaryText(
                               LocaleKeys.darsApp,
-                              fontSize: 24.sp,
+                              fontSize: 24,
                               fontWeight: FontWeightManager.light,
                               color: Colors.white,
                             ),
                             SizedBox(height: 5.h),
                             PrimaryText(
                               LocaleKeys.student,
-                              fontSize: 20.sp,
+                              fontSize: 20,
                               fontWeight: FontWeightManager.light,
                               color: Colors.white,
                             ),

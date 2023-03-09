@@ -40,14 +40,14 @@ class SignUpView extends GetView<SignUpController> {
                     children: [
                       PrimaryText(
                         LocaleKeys.make_a_featured_account,
-                        fontSize: 18.sp,
+                        fontSize: 18,
                         fontWeight: FontWeightManager.medium,
                         color: ColorManager.white,
                       ),
                       SizedBox(height: 5.h),
                       PrimaryText(
                         LocaleKeys.welcome_in_dars,
-                        fontSize: 14.sp,
+                        fontSize: 14,
                         fontWeight: FontWeightManager.softLight,
                         color: ColorManager.white,
                       ),
@@ -92,7 +92,7 @@ class SignUpView extends GetView<SignUpController> {
                 //   right: 110.w,
                 //   child: PrimaryText(
                 //     "${LocaleKeys.contentRight.tr}${DateTime.now().year.toString()}",
-                //     fontSize: 12.sp,
+                //     fontSize: 12,
                 //     fontWeight: FontWeightManager.light,
                 //     color: Colors.white,
                 //   ),

@@ -16,7 +16,7 @@ class VerifyOtpView extends GetView<VerifyOtpController> {
       width: 56.w,
       height: 56.h,
       textStyle: TextStyle(
-        fontSize: 22.sp,
+        fontSize: 22,
         color: ColorManager.primary,
         fontFamily: FontConstants.fontFamily,
       ),
@@ -91,7 +91,7 @@ class VerifyOtpView extends GetView<VerifyOtpController> {
               child: Icon(
                 Icons.arrow_back_ios,
                 color: ColorManager.fontColor,
-                size: 20.sp,
+                size: 20,
               ),
             ),
           ),
@@ -145,7 +145,7 @@ class VerifyOtpView extends GetView<VerifyOtpController> {
                                               .the_verification_code_has_been_sent_to_the_email
                                               .tr
                                           : "No Data",
-                                  fontSize: 16.sp,
+                                  fontSize: 16,
                                   fontWeight: FontWeightManager.softLight,
                                   textAlign: TextAlign.center,
                                 ),
@@ -158,7 +158,7 @@ class VerifyOtpView extends GetView<VerifyOtpController> {
                                               controller.email!.isNotEmpty)
                                           ? controller.email!
                                           : "No Data",
-                                  fontSize: 17.sp,
+                                  fontSize: 17,
                                   textDirection: TextDirection.ltr,
                                   fontWeight: FontWeightManager.light,
                                   textAlign: TextAlign.center,
@@ -171,7 +171,7 @@ class VerifyOtpView extends GetView<VerifyOtpController> {
                                 PrimaryText(
                                   LocaleKeys
                                       .enter_the_verification_code_here.tr,
-                                  fontSize: 16.sp,
+                                  fontSize: 16,
                                   fontWeight: FontWeightManager.light,
                                   textAlign: TextAlign.center,
                                 ),
@@ -202,7 +202,7 @@ class VerifyOtpView extends GetView<VerifyOtpController> {
                                     pinputAutovalidateMode:
                                         PinputAutovalidateMode.onSubmit,
                                     errorTextStyle: TextStyle(
-                                      fontSize: 12.sp,
+                                      fontSize: 12,
                                       color: ColorManager.red,
                                       fontFamily: FontConstants.fontFamily,
                                     ),
@@ -214,7 +214,7 @@ class VerifyOtpView extends GetView<VerifyOtpController> {
                                           SizedBox(height: 10.h),
                                           PrimaryText(
                                             error ?? "",
-                                            fontSize: 12.sp,
+                                            fontSize: 12,
                                             fontWeight: FontWeightManager.light,
                                             textAlign: TextAlign.start,
                                             color: ColorManager.red,
@@ -256,14 +256,14 @@ class VerifyOtpView extends GetView<VerifyOtpController> {
                                 children: [
                                   PrimaryText(
                                     "${LocaleKeys.resend_code_after.tr}:",
-                                    fontSize: 14.sp,
+                                    fontSize: 14,
                                     fontWeight: FontWeightManager.light,
                                     color: ColorManager.fontColor7,
                                   ),
                                   SizedBox(width: 5.w),
                                   PrimaryText(
                                     controller.start.toString(),
-                                    fontSize: 14.sp,
+                                    fontSize: 14,
                                     fontWeight: FontWeightManager.light,
                                     color: ColorManager.fontColor7,
                                   ),
@@ -278,7 +278,7 @@ class VerifyOtpView extends GetView<VerifyOtpController> {
                                 },
                                 child: PrimaryText(
                                   LocaleKeys.resend_code.tr,
-                                  fontSize: 14.sp,
+                                  fontSize: 14,
                                   textDecoration: TextDecoration.underline,
                                   decorationColor: ColorManager.accent,
                                   color: ColorManager.accent,
@@ -294,7 +294,7 @@ class VerifyOtpView extends GetView<VerifyOtpController> {
                               },
                               borderRadius: BorderRadius.circular(15.h),
                               title: LocaleKeys.check_pin.tr,
-                              fontSize: 14.sp,
+                              fontSize: 14,
                             ),
                           ],
                         ),

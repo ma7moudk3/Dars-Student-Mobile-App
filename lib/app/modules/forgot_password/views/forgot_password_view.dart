@@ -101,7 +101,7 @@ class ForgotPasswordView extends GetView<ForgotPasswordController> {
                                   ? ColorManager.primary
                                   : ColorManager.borderColor2,
                             ),
-                            fontSize: 14.5.sp,
+                            fontSize: 14.5,
                             validator: (String? email) =>
                                 controller.validateEmail(email),
                           ),
@@ -116,7 +116,7 @@ class ForgotPasswordView extends GetView<ForgotPasswordController> {
                                 }
                               }
                             },
-                            fontSize: 15.sp,
+                            fontSize: 15,
                             title: LocaleKeys.restore,
                           ),
                         ],

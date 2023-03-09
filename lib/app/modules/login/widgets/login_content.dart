@@ -39,7 +39,7 @@ class LoginContent extends GetView<LoginController> {
                   cursorColor: ColorManager.primary,
                   focusNode: controller.emailFocusNode,
                   isRequired: true,
-                  fontSize: 14.sp,
+                  fontSize: 14,
                   prefixIcon: Icon(
                     Icons.email_outlined,
                     size: 25,
@@ -152,7 +152,7 @@ class LoginContent extends GetView<LoginController> {
                   },
                   borderRadius: BorderRadius.circular(15.h),
                   title: LocaleKeys.login.tr,
-                  fontSize: 14.sp,
+                  fontSize: 14,
                 ),
                 SizedBox(height: 25.h),
                 Visibility(
@@ -267,7 +267,7 @@ class LoginContent extends GetView<LoginController> {
                       LocaleKeys.dont_have_an_account.tr,
                       color: ColorManager.fontColor,
                       fontWeight: FontWeightManager.softLight,
-                      fontSize: 14.sp,
+                      fontSize: 14,
                     ),
                     TextButton(
                       style: ButtonStyle(
@@ -284,7 +284,7 @@ class LoginContent extends GetView<LoginController> {
                       child: PrimaryText(
                         LocaleKeys.sign_up_new_account.tr,
                         color: ColorManager.primary,
-                        fontSize: 13.sp,
+                        fontSize: 13,
                       ),
                     ),
                   ],

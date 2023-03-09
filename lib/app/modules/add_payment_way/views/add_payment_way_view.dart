@@ -56,7 +56,7 @@ class AddPaymentWayView extends GetView<AddPaymentWayController> {
                   ),
                   SizedBox(height: 30.h),
                   PrimaryTextField(
-                    fontSize: 14.sp,
+                    fontSize: 14,
                     readOnly: true,
                     textDirection: TextDirection.ltr,
                     controller: controller.cardTypeController,
@@ -102,7 +102,7 @@ class AddPaymentWayView extends GetView<AddPaymentWayController> {
                   ),
                   SizedBox(height: 20.h),
                   PrimaryTextField(
-                    fontSize: 14.sp,
+                    fontSize: 14,
                     contentPadding: EdgeInsets.symmetric(horizontal: 16.w),
                     textDirection: TextDirection.ltr,
                     controller: controller.cardHolderNameController,
@@ -130,7 +130,7 @@ class AddPaymentWayView extends GetView<AddPaymentWayController> {
                   ),
                   SizedBox(height: 20.h),
                   PrimaryTextField(
-                    fontSize: 14.sp,
+                    fontSize: 14,
                     inputFormatters: [
                       FilteringTextInputFormatter.digitsOnly,
                       LengthLimitingTextInputFormatter(19),
@@ -171,7 +171,7 @@ class AddPaymentWayView extends GetView<AddPaymentWayController> {
                       SizedBox(
                         width: (Get.width * 0.37).w,
                         child: PrimaryTextField(
-                          fontSize: 14.5.sp,
+                          fontSize: 14.5,
                           inputFormatters: [
                             FilteringTextInputFormatter.digitsOnly,
                             LengthLimitingTextInputFormatter(4),
@@ -219,7 +219,7 @@ class AddPaymentWayView extends GetView<AddPaymentWayController> {
                       SizedBox(
                         width: (Get.width * 0.37).w,
                         child: PrimaryTextField(
-                          fontSize: 14.5.sp,
+                          fontSize: 14.5,
                           textDirection: TextDirection.ltr,
                           inputFormatters: [
                             FilteringTextInputFormatter.digitsOnly,

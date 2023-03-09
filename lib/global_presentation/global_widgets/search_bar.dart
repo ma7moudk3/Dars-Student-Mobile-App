@@ -31,7 +31,7 @@ class SearchBar extends StatelessWidget {
       );
       TextStyle hintStyle = TextStyle(
         fontFamily: FontConstants.fontFamily,
-        fontSize: 17.sp,
+        fontSize: 17,
         letterSpacing: -0.41000000190734864,
         color: ColorManager.borderColor2,
         height: 1.2941176470588236,

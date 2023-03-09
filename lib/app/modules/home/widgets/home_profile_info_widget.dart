@@ -80,7 +80,7 @@ class HomeProfileInfoWidget extends GetView<HomeController> {
             children: [
               PrimaryText(
                 "${controller.currentUserInfo.result != null ? controller.currentUserInfo.result!.name : ""} ${controller.currentUserInfo.result != null ? controller.currentUserInfo.result!.surname : ""}",
-                fontSize: 16.sp,
+                fontSize: 16,
                 fontWeight: FontWeightManager.light,
                 color: ColorManager.black,
               ),
@@ -89,7 +89,7 @@ class HomeProfileInfoWidget extends GetView<HomeController> {
                 controller.currentUserInfo.result != null
                     ? controller.currentUserInfo.result!.emailAddress ?? ""
                     : "",
-                fontSize: 14.sp,
+                fontSize: 14,
                 fontWeight: FontWeightManager.softLight,
                 color: ColorManager.grey,
               ),

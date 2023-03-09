@@ -82,13 +82,13 @@ class DarsTeacherFilterBottomSheetContent
                   ),
                   PrimaryText(
                     LocaleKeys.search_filter,
-                    fontSize: 16.sp,
+                    fontSize: 16,
                     fontWeight: FontWeightManager.softLight,
                   ),
                   SizedBox(height: 10.h),
                   PrimaryText(
                     LocaleKeys.country,
-                    fontSize: 14.sp,
+                    fontSize: 14,
                     fontWeight: FontWeightManager.softLight,
                     color: ColorManager.fontColor,
                   ),
@@ -159,7 +159,7 @@ class DarsTeacherFilterBottomSheetContent
                         children: [
                           PrimaryText(
                             LocaleKeys.city,
-                            fontSize: 14.sp,
+                            fontSize: 14,
                             fontWeight: FontWeightManager.softLight,
                             color: ColorManager.fontColor,
                           ),
@@ -245,7 +245,7 @@ class DarsTeacherFilterBottomSheetContent
                   SizedBox(height: 12.h),
                   PrimaryText(
                     LocaleKeys.choose,
-                    fontSize: 14.sp,
+                    fontSize: 14,
                     fontWeight: FontWeightManager.softLight,
                     color: ColorManager.fontColor,
                   ),
@@ -302,7 +302,7 @@ class DarsTeacherFilterBottomSheetContent
                                                   child: Icon(
                                                     Icons.circle,
                                                     color: ColorManager.primary,
-                                                    size: 8.sp,
+                                                    size: 8,
                                                   ),
                                                 )
                                               : null,
@@ -312,7 +312,7 @@ class DarsTeacherFilterBottomSheetContent
                                           index == 0
                                               ? LocaleKeys.academic_learning
                                               : LocaleKeys.skill,
-                                          fontSize: 14.sp,
+                                          fontSize: 14,
                                           fontWeight:
                                               FontWeightManager.softLight,
                                           color: ColorManager.fontColor,
@@ -486,7 +486,7 @@ class DarsTeacherFilterBottomSheetContent
                                 //     children: [
                                 //       PrimaryText(
                                 //         LocaleKeys.studying_subject,
-                                //         fontSize: 14.sp,
+                                //         fontSize: 14,
                                 //         fontWeight: FontWeightManager.softLight,
                                 //         color: ColorManager.fontColor,
                                 //       ),
@@ -517,7 +517,7 @@ class DarsTeacherFilterBottomSheetContent
                                 //                 10.0, 15.0, 20.0, 15.0),
                                 //             style: TextStyle(
                                 //               color: ColorManager.fontColor,
-                                //               fontSize: 14.sp,
+                                //               fontSize: 14,
                                 //               fontFamily: FontConstants.fontFamily,
                                 //             ),
                                 //             placeholder:
@@ -551,7 +551,7 @@ class DarsTeacherFilterBottomSheetContent
                                 //               child: PrimaryText(
                                 //                 result.displayName ?? "",
                                 //                 color: ColorManager.fontColor,
-                                //                 fontSize: 12.sp,
+                                //                 fontSize: 12,
                                 //               ),
                                 //             );
                                 //           },
@@ -656,7 +656,7 @@ class DarsTeacherFilterBottomSheetContent
                               children: [
                                 PrimaryText(
                                   LocaleKeys.gender,
-                                  fontSize: 14.sp,
+                                  fontSize: 14,
                                   fontWeight: FontWeightManager.softLight,
                                   color: ColorManager.fontColor,
                                 ),
@@ -719,7 +719,7 @@ class DarsTeacherFilterBottomSheetContent
                     children: [
                       PrimaryButton(
                         width: (Get.width * 0.42).w,
-                        fontSize: 16.sp,
+                        fontSize: 16,
                         onPressed: () async {
                           if (await checkInternetConnection(timeout: 10)) {
                             await controller.filterTeachers(

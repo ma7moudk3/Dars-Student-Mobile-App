@@ -83,12 +83,12 @@ class PrimaryTextField extends StatelessWidget {
     var hintStyle = TextStyle(
       color: ColorManager.grey,
       fontFamily: FontConstants.fontFamily,
-      fontSize: 14.sp,
+      fontSize: 14,
     );
     var errorStyle = TextStyle(
       fontFamily: FontConstants.fontFamily,
       color: ColorManager.red,
-      fontSize: 12.sp,
+      fontSize: 12,
     );
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
@@ -101,14 +101,14 @@ class PrimaryTextField extends StatelessWidget {
                           children: [
                             PrimaryText(
                               title,
-                              fontSize: titleFontSize.sp,
+                              fontSize: titleFontSize,
                               fontWeight: titleFontWeight,
                               color: titleColor,
                             ),
                             SizedBox(width: 2.w),
                             PrimaryText(
                               "*",
-                              fontSize: 16.sp,
+                              fontSize: 16,
                               fontWeight: titleFontWeight,
                               color: ColorManager.accent,
                             ),
@@ -116,7 +116,7 @@ class PrimaryTextField extends StatelessWidget {
                         )
                       : PrimaryText(
                           title,
-                          fontSize: titleFontSize.sp,
+                          fontSize: titleFontSize,
                           fontWeight: titleFontWeight,
                           color: titleColor,
                         ),

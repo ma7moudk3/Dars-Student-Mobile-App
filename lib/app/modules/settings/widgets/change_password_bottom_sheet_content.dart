@@ -81,7 +81,7 @@ class ChangePasswordBottomSheetContent extends GetView<SettingsController> {
                           children: [
                             PrimaryText(
                               LocaleKeys.change_password,
-                              fontSize: 16.sp,
+                              fontSize: 16,
                               fontWeight: FontWeightManager.light,
                             ),
                             SizedBox(height: 20.h),
@@ -89,7 +89,7 @@ class ChangePasswordBottomSheetContent extends GetView<SettingsController> {
                               children: [
                                 PasswordTextField(
                                   isRequired: true,
-                                  titleFontSize: 14.sp,
+                                  titleFontSize: 14,
                                   titleSpacing: 15,
                                   titleFontWeight: FontWeightManager.softLight,
                                   focusNode: controller.oldPasswordFocusNode,
@@ -134,7 +134,7 @@ class ChangePasswordBottomSheetContent extends GetView<SettingsController> {
                                 ),
                                 SizedBox(height: 20.h),
                                 PasswordTextField(
-                                  titleFontSize: 14.sp,
+                                  titleFontSize: 14,
                                   isRequired: true,
                                   titleSpacing: 15,
                                   titleFontWeight: FontWeightManager.softLight,
@@ -181,7 +181,7 @@ class ChangePasswordBottomSheetContent extends GetView<SettingsController> {
                                 SizedBox(height: 20.h),
                                 PasswordTextField(
                                   isRequired: true,
-                                  titleFontSize: 14.sp,
+                                  titleFontSize: 14,
                                   titleSpacing: 15,
                                   titleFontWeight: FontWeightManager.softLight,
                                   focusNode:

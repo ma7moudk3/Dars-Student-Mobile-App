@@ -37,7 +37,7 @@ class PaymentWaysBottomSheetContent extends GetView<AddPaymentWayController> {
                 SizedBox(height: 10.h),
                 PrimaryText(
                   LocaleKeys.choosing_card_type.tr,
-                  fontSize: 16.sp,
+                  fontSize: 16,
                   fontWeight: FontWeightManager.light,
                 ),
                 SizedBox(height: 10.h),
@@ -68,7 +68,7 @@ class PaymentWaysBottomSheetContent extends GetView<AddPaymentWayController> {
                                   SizedBox(width: 12.w),
                                   PrimaryText(
                                     controller.cardTypes[index]["title"],
-                                    fontSize: 16.sp,
+                                    fontSize: 16,
                                     fontWeight: FontWeightManager.softLight,
                                   ),
                                   const Spacer(),
@@ -95,7 +95,7 @@ class PaymentWaysBottomSheetContent extends GetView<AddPaymentWayController> {
                                             child: Icon(
                                               Icons.check_rounded,
                                               color: ColorManager.primary,
-                                              size: 16.sp,
+                                              size: 16,
                                             ),
                                           )
                                         : null,

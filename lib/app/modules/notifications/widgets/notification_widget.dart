@@ -135,7 +135,7 @@ class NotificationWidget extends GetView<NotificationsController> {
                                     .notification?.data?.properties?.body ??
                                 "",
                         fontWeight: FontWeightManager.softLight,
-                        fontSize: 14.sp,
+                        fontSize: 14,
                         maxLines: 2,
                         textDirection: detectLang(
                                 text: itemNotification.notification?.data
@@ -160,7 +160,7 @@ class NotificationWidget extends GetView<NotificationsController> {
                       fontWeight: FontWeightManager.softLight,
                       color: ColorManager.fontColor7,
                       textAlign: TextAlign.end,
-                      fontSize: 14.sp,
+                      fontSize: 14,
                     ),
                   ],
                 ),

@@ -27,7 +27,7 @@ class StudyingHoursDars extends GetView<OrderDetailsController> {
           SizedBox(width: 8.w),
           PrimaryText(
             "20 ${LocaleKeys.studying_hour.tr}",
-            fontSize: 16.sp,
+            fontSize: 16,
             fontWeight: FontWeightManager.softLight,
             color: ColorManager.fontColor,
           ),

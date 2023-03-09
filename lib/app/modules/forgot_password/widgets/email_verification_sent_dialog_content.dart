@@ -24,13 +24,13 @@ class EmailVerificationSentDialogContent extends StatelessWidget {
             PrimaryText(
               LocaleKeys.forgot_password_email_link_sent.tr,
               color: ColorManager.primary,
-              fontSize: 16.sp,
+              fontSize: 16,
               fontWeight: FontWeightManager.medium,
             ),
             SizedBox(height: 10.h),
             PrimaryText(
               "${LocaleKeys.revise_your_email_to_restore_password.tr}: $email",
-              fontSize: 14.sp,
+              fontSize: 14,
               maxLines: 2,
               overflow: TextOverflow.ellipsis,
               textAlign: TextAlign.center,
@@ -41,7 +41,7 @@ class EmailVerificationSentDialogContent extends StatelessWidget {
               child: PrimaryButton(
                 onPressed: () => Get.back(),
                 title: LocaleKeys.ok.tr,
-                fontSize: 16.sp,
+                fontSize: 16,
               ),
             ),
           ],

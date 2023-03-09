@@ -58,7 +58,7 @@ class DependentsListBottomSheetContent extends GetView<OrderDarsController> {
                   children: [
                     PrimaryText(
                       LocaleKeys.dependents_list,
-                      fontSize: 14.sp,
+                      fontSize: 14,
                       fontWeight: FontWeightManager.book,
                     ),
                     SizedBox(height: 30.h),
@@ -143,13 +143,13 @@ class DependentsListBottomSheetContent extends GetView<OrderDarsController> {
                                     ),
                                     PrimaryText(
                                       LocaleKeys.there_are_no_dependents,
-                                      fontSize: 18.sp,
+                                      fontSize: 18,
                                       fontWeight: FontWeightManager.softLight,
                                     ),
                                     SizedBox(height: 8.h),
                                     PrimaryText(
                                       LocaleKeys.you_can_add_new_dependent,
-                                      fontSize: 16.sp,
+                                      fontSize: 16,
                                       color: ColorManager.fontColor7,
                                       fontWeight: FontWeightManager.softLight,
                                     ),
@@ -243,7 +243,7 @@ class DependentsListBottomSheetContent extends GetView<OrderDarsController> {
                                                               .first
                                                               .displayName ??
                                                           "",
-                                                      fontSize: 14.sp,
+                                                      fontSize: 14,
                                                       color: ColorManager
                                                           .fontColor7,
                                                       fontWeight:
@@ -360,7 +360,7 @@ class DependentsListBottomSheetContent extends GetView<OrderDarsController> {
                                 //                 child: Icon(
                                 //                   Icons.check_rounded,
                                 //                   color: ColorManager.primary,
-                                //                   size: 13.sp,
+                                //                   size: 13,
                                 //                 ),
                                 //               ),
                                 //             ),
@@ -408,7 +408,7 @@ class DependentsListBottomSheetContent extends GetView<OrderDarsController> {
                                 //                             .dependentsController
                                 //                             .dummyDependents[
                                 //                         index]["class"],
-                                //                     fontSize: 14.sp,
+                                //                     fontSize: 14,
                                 //                     color:
                                 //                         ColorManager.fontColor7,
                                 //                     fontWeight: FontWeightManager
@@ -498,7 +498,7 @@ class DependentsListBottomSheetContent extends GetView<OrderDarsController> {
                                   child: Icon(
                                     Icons.add_rounded,
                                     color: ColorManager.white,
-                                    size: 25.sp,
+                                    size: 25,
                                   ),
                                 ),
                               ),

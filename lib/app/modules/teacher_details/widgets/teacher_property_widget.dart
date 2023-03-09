@@ -23,7 +23,7 @@ class TeacherPropertyWidget extends GetView<TeacherDetailsController> {
           SizedBox(width: 10.w),
           PrimaryText(
             title,
-            fontSize: 13.sp,
+            fontSize: 13,
             fontWeight: FontWeightManager.softLight,
           ),
           const Spacer(),
@@ -44,13 +44,13 @@ class TeacherPropertyWidget extends GetView<TeacherDetailsController> {
               message: content,
               textStyle: TextStyle(
                 color: ColorManager.white,
-                fontSize: 14.sp,
+                fontSize: 14,
                 fontWeight: FontWeightManager.softLight,
                 fontFamily: FontConstants.fontFamily,
               ),
               child: PrimaryText(
                 content,
-                fontSize: 14.sp,
+                fontSize: 14,
                 fontWeight: FontWeightManager.softLight,
                 color: ColorManager.grey5,
                 maxLines: 2,

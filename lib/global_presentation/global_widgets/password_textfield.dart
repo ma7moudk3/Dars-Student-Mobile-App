@@ -60,12 +60,12 @@ class _PasswordTextFieldState extends State<PasswordTextField> {
   Widget build(BuildContext context) {
     var hintStyle = TextStyle(
       color: ColorManager.grey,
-      fontSize: 14.sp,
+      fontSize: 14,
     );
 
     var errorStyle = TextStyle(
       color: Colors.red,
-      fontSize: 14.sp,
+      fontSize: 14,
     );
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
@@ -82,7 +82,7 @@ class _PasswordTextFieldState extends State<PasswordTextField> {
                   SizedBox(width: 2.w),
                   PrimaryText(
                     "*",
-                    fontSize: 16.sp,
+                    fontSize: 16,
                     fontWeight: FontWeightManager.softLight,
                     color: ColorManager.accent,
                   ),
@@ -134,12 +134,12 @@ class _PasswordTextFieldState extends State<PasswordTextField> {
             errorStyle: TextStyle(
               fontFamily: FontConstants.fontFamily,
               color: ColorManager.red,
-              fontSize: 13.sp,
+              fontSize: 13,
             ),
             hintStyle: TextStyle(
               fontFamily: FontConstants.fontFamily,
               color: ColorManager.grey,
-              fontSize: 14.sp,
+              fontSize: 14,
             ),
             border: isDarkMoodEnabled()
                 ? OutlineInputBorder(

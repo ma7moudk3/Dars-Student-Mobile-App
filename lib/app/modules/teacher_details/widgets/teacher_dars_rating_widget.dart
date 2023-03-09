@@ -16,7 +16,7 @@ class TeacherDarsRating extends GetView<TeacherDetailsController> {
             children: [
               PrimaryText(
                 "رياضيات مستوى مبتدئ",
-                fontSize: 14.sp,
+                fontSize: 14,
                 fontWeight: FontWeightManager.softLight,
               ),
               const Spacer(),
@@ -44,7 +44,7 @@ class TeacherDarsRating extends GetView<TeacherDetailsController> {
                   SizedBox(width: 5.w),
                   PrimaryText(
                     "4.5",
-                    fontSize: 14.sp,
+                    fontSize: 14,
                     fontWeight: FontWeightManager.softLight,
                   ),
                 ],
@@ -55,14 +55,14 @@ class TeacherDarsRating extends GetView<TeacherDetailsController> {
             children: [
               PrimaryText(
                 "الصف الاول",
-                fontSize: 14.sp,
+                fontSize: 14,
                 color: ColorManager.fontColor7,
                 fontWeight: FontWeightManager.softLight,
               ),
               const Spacer(),
               PrimaryText(
                 "18 مارس 2022",
-                fontSize: 14.sp,
+                fontSize: 14,
                 color: ColorManager.fontColor7,
                 fontWeight: FontWeightManager.softLight,
               ),

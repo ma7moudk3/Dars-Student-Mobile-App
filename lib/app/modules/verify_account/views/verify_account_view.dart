@@ -46,14 +46,14 @@ class VerifyAccountView extends GetView<VerifyAccountController> {
                     children: [
                       PrimaryText(
                         LocaleKeys.verification_of_the_account,
-                        fontSize: 18.sp,
+                        fontSize: 18,
                         fontWeight: FontWeightManager.medium,
                         color: ColorManager.white,
                       ),
                       SizedBox(height: 5.h),
                       PrimaryText(
                         LocaleKeys.confirm_your_mail_and_your_phone_number,
-                        fontSize: 14.sp,
+                        fontSize: 14,
                         fontWeight: FontWeightManager.softLight,
                         color: ColorManager.white,
                       ),
@@ -96,7 +96,7 @@ class VerifyAccountView extends GetView<VerifyAccountController> {
                                 10.0,
                               ),
                               focusNode: controller.emailFocusNode,
-                              fontSize: 14.sp,
+                              fontSize: 14,
                               readOnly: controller.isEmailConfirmed.value,
                               prefixIcon: Row(
                                 mainAxisSize: MainAxisSize.min,
@@ -141,7 +141,7 @@ class VerifyAccountView extends GetView<VerifyAccountController> {
                                           ? Center(
                                               child: PrimaryText(
                                                 LocaleKeys.confirm.tr,
-                                                fontSize: 14.sp,
+                                                fontSize: 14,
                                                 fontWeight:
                                                     FontWeightManager.light,
                                                 color: ColorManager.white,
@@ -244,7 +244,7 @@ class VerifyAccountView extends GetView<VerifyAccountController> {
                                           ? Center(
                                               child: PrimaryText(
                                                 LocaleKeys.confirm.tr,
-                                                fontSize: 14.sp,
+                                                fontSize: 14,
                                                 fontWeight:
                                                     FontWeightManager.light,
                                                 color: ColorManager.white,

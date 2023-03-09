@@ -40,13 +40,13 @@ class TeacherRatingBottomSheetContent
             SizedBox(height: 24.h),
             PrimaryText(
               LocaleKeys.teacher_rating,
-              fontSize: 18.sp,
+              fontSize: 18,
               fontWeight: FontWeightManager.softLight,
             ),
             SizedBox(height: 3.h),
             PrimaryText(
               LocaleKeys.how_was_your_experience_with_the_teacher,
-              fontSize: 14.sp,
+              fontSize: 14,
               color: ColorManager.fontColor7,
               fontWeight: FontWeightManager.softLight,
             ),
@@ -79,7 +79,7 @@ class TeacherRatingBottomSheetContent
                 // await controller.rateTeacher();
                 Get.back();
               },
-              fontSize: 14.sp,
+              fontSize: 14,
               title: LocaleKeys.rate.tr,
             ),
           ],

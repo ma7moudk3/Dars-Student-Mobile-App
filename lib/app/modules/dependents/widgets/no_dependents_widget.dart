@@ -23,13 +23,13 @@ class NoDependentsWidget extends GetView<DependentsController> {
           ),
           PrimaryText(
             LocaleKeys.there_are_no_dependents,
-            fontSize: 18.sp,
+            fontSize: 18,
             fontWeight: FontWeightManager.softLight,
           ),
           SizedBox(height: 8.h),
           PrimaryText(
             LocaleKeys.you_can_add_new_dependent,
-            fontSize: 16.sp,
+            fontSize: 16,
             color: ColorManager.fontColor7,
             fontWeight: FontWeightManager.softLight,
           ),
@@ -72,7 +72,7 @@ class NoDependentsWidget extends GetView<DependentsController> {
                     PrimaryText(
                       LocaleKeys.add_dependent_or_son,
                       color: ColorManager.white,
-                      fontSize: 16.sp,
+                      fontSize: 16,
                       fontWeight: FontWeightManager.light,
                     ),
                   ],

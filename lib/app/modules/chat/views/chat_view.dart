@@ -150,7 +150,7 @@ class ChatView extends GetView<ChatController> {
                                           child: Icon(
                                             Icons.add_rounded,
                                             color: ColorManager.yellow,
-                                            size: 10.sp,
+                                            size: 10,
                                           ),
                                         ),
                                       ),

@@ -76,7 +76,7 @@ class BottomNavBarView extends GetView<BottomNavBarController> {
                   PrimaryText(
                     controller.icons[index]["label"],
                     color: color,
-                    fontSize: 11.sp,
+                    fontSize: 11,
                     fontWeight: FontWeightManager.book,
                   )
                 ],

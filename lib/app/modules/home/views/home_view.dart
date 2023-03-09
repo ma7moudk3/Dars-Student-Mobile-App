@@ -57,7 +57,7 @@ class HomeView extends GetView<HomeController> {
                               children: [
                                 PrimaryText(
                                   "${LocaleKeys.welcome.tr} ${controller.currentUserInfo.result != null ? controller.currentUserInfo.result!.name : ""} ${controller.currentUserInfo.result != null ? controller.currentUserInfo.result!.surname : ""}",
-                                  fontSize: 16.sp,
+                                  fontSize: 15,
                                   fontWeight: FontWeightManager.light,
                                   color: ColorManager.grey5,
                                 ),
@@ -69,14 +69,14 @@ class HomeView extends GetView<HomeController> {
                                   alignment: Alignment.bottomCenter,
                                   child: Lottie.asset(
                                     LottiesManager.hi,
-                                    width: 32.w,
+                                    width: 28.w,
                                     animate: true,
                                     reverse: true,
                                   ),
                                 ),
                                 // PrimaryText(
                                 //   "...",
-                                //   fontSize: 16.sp,
+                                //   fontSize: 16,
                                 //   fontWeight: FontWeightManager.light,
                                 //   color: ColorManager.grey5,
                                 // ),
@@ -85,7 +85,7 @@ class HomeView extends GetView<HomeController> {
                             SizedBox(height: 5.h),
                             PrimaryText(
                               "${LocaleKeys.what_are_you_looking_for_today.tr} !",
-                              fontSize: 20.sp,
+                              fontSize: 18,
                               fontWeight: FontWeightManager.softLight,
                               color: ColorManager.fontColor,
                             ),
@@ -93,6 +93,7 @@ class HomeView extends GetView<HomeController> {
                             GridView.count(
                               crossAxisCount: 2,
                               shrinkWrap: true,
+                              childAspectRatio: 1.1,
                               crossAxisSpacing: 15.w,
                               mainAxisSpacing: 15.h,
                               physics: const NeverScrollableScrollPhysics(),
@@ -121,7 +122,7 @@ class HomeView extends GetView<HomeController> {
                               children: [
                                 PrimaryText(
                                   "${LocaleKeys.recent_orders.tr} :",
-                                  fontSize: 16.sp,
+                                  fontSize: 16,
                                   fontWeight: FontWeightManager.light,
                                   color: ColorManager.fontColor,
                                 ),
@@ -135,7 +136,7 @@ class HomeView extends GetView<HomeController> {
                                   },
                                   child: PrimaryText(
                                     LocaleKeys.more,
-                                    fontSize: 15.sp,
+                                    fontSize: 15,
                                     fontWeight: FontWeightManager.light,
                                     color: ColorManager.primary,
                                   ),
@@ -156,14 +157,14 @@ class HomeView extends GetView<HomeController> {
                                           ),
                                           PrimaryText(
                                             LocaleKeys.no_orders_currently.tr,
-                                            fontSize: 16.sp,
+                                            fontSize: 16,
                                             fontWeight: FontWeightManager.light,
                                             color: ColorManager.fontColor,
                                           ),
                                           PrimaryText(
                                             LocaleKeys
                                                 .you_can_add_new_dars_order.tr,
-                                            fontSize: 16.sp,
+                                            fontSize: 16,
                                             fontWeight: FontWeightManager.light,
                                             color: ColorManager.grey5,
                                           ),

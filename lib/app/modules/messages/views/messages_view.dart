@@ -75,14 +75,14 @@ class MessagesView extends GetView<MessagesController> {
                                 PrimaryText(
                                   LocaleKeys.no_messages_to_see_here.tr,
                                   color: ColorManager.accent,
-                                  fontSize: 18.sp,
+                                  fontSize: 18,
                                 ),
                                 SizedBox(height: 8.h),
                                 PrimaryText(
                                   LocaleKeys
                                       .start_a_conversation_with_any_of_the_teachers
                                       .tr,
-                                  fontSize: 16.sp,
+                                  fontSize: 16,
                                   textAlign: TextAlign.center,
                                 ),
                               ],

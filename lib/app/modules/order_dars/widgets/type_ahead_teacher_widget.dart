@@ -59,7 +59,7 @@ class TypeAheadPreferredTeacherWidget extends GetView<OrderDarsController> {
                           child: PrimaryText(
                             teacher.providerName ?? "",
                             color: ColorManager.fontColor,
-                            fontSize: 12.sp,
+                            fontSize: 12,
                             maxLines: 1,
                             overflow: TextOverflow.ellipsis,
                           ),
@@ -76,7 +76,7 @@ class TypeAheadPreferredTeacherWidget extends GetView<OrderDarsController> {
                                       : Icons.star_outline_rounded,
                               color: ColorManager.orange,
                               textDirection: TextDirection.ltr,
-                              size: 20.sp,
+                              size: 20,
                             ),
                             SizedBox(
                               width: 40.w,
@@ -85,7 +85,7 @@ class TypeAheadPreferredTeacherWidget extends GetView<OrderDarsController> {
                                     ? teacherRate.toString()
                                     : "0.0",
                                 color: ColorManager.fontColor,
-                                fontSize: 12.sp,
+                                fontSize: 12,
                                 maxLines: 1,
                                 overflow: TextOverflow.ellipsis,
                               ),
@@ -105,7 +105,7 @@ class TypeAheadPreferredTeacherWidget extends GetView<OrderDarsController> {
                             teacher.levelTopic ?? "",
                             color: ColorManager.primary,
                             fontWeight: FontWeightManager.softLight,
-                            fontSize: 11.sp,
+                            fontSize: 11,
                             maxLines: 1,
                             overflow: TextOverflow.ellipsis,
                           ),
@@ -118,7 +118,7 @@ class TypeAheadPreferredTeacherWidget extends GetView<OrderDarsController> {
                                 ? "${teacher.country} - ${teacher.governorate}"
                                 : "${teacher.country}${teacher.governorate}",
                             color: ColorManager.fontColor7,
-                            fontSize: 12.sp,
+                            fontSize: 12,
                             maxLines: 1,
                             overflow: TextOverflow.ellipsis,
                           ),

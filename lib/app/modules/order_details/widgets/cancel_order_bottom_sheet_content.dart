@@ -59,20 +59,20 @@ class CancelDarsBottomSheetContent extends GetView<OrderDetailsController> {
                           SizedBox(height: 10.h),
                           PrimaryText(
                             LocaleKeys.confirm_canceling_dars,
-                            fontSize: 16.sp,
+                            fontSize: 16,
                             fontWeight: FontWeightManager.light,
                           ),
                           SizedBox(height: 5.h),
                           PrimaryText(
                             LocaleKeys
                                 .to_help_you_please_enter_canceling_dars_reason,
-                            fontSize: 14.sp,
+                            fontSize: 14,
                             fontWeight: FontWeightManager.light,
                             color: ColorManager.fontColor7,
                           ),
                           SizedBox(height: 20.h),
                           PrimaryTextField(
-                            fontSize: 14.sp,
+                            fontSize: 14,
                             multiLines: true,
                             maxLines: 6,
                             contentPadding: const EdgeInsets.fromLTRB(

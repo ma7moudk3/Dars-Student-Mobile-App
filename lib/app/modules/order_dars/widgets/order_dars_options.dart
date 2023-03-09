@@ -18,14 +18,14 @@ class OrderDarsOptions extends GetView<OrderDarsController> {
             children: [
               PrimaryText(
                 LocaleKeys.session_way,
-                fontSize: 14.sp,
+                fontSize: 14,
                 fontWeight: FontWeightManager.softLight,
                 color: ColorManager.fontColor,
               ),
               SizedBox(width: 2.w),
               PrimaryText(
                 "*",
-                fontSize: 16.sp,
+                fontSize: 16,
                 fontWeight: FontWeightManager.softLight,
                 color: ColorManager.accent,
               ),
@@ -80,14 +80,14 @@ class OrderDarsOptions extends GetView<OrderDarsController> {
             children: [
               PrimaryText(
                 LocaleKeys.teacher_gender,
-                fontSize: 14.sp,
+                fontSize: 14,
                 fontWeight: FontWeightManager.softLight,
                 color: ColorManager.fontColor,
               ),
               SizedBox(width: 2.w),
               PrimaryText(
                 "*",
-                fontSize: 16.sp,
+                fontSize: 16,
                 fontWeight: FontWeightManager.softLight,
                 color: ColorManager.accent,
               ),
@@ -142,14 +142,14 @@ class OrderDarsOptions extends GetView<OrderDarsController> {
             children: [
               PrimaryText(
                 LocaleKeys.order_type,
-                fontSize: 14.sp,
+                fontSize: 14,
                 fontWeight: FontWeightManager.softLight,
                 color: ColorManager.fontColor,
               ),
               SizedBox(width: 2.w),
               PrimaryText(
                 "*",
-                fontSize: 16.sp,
+                fontSize: 16,
                 fontWeight: FontWeightManager.softLight,
                 color: ColorManager.accent,
               ),
@@ -203,7 +203,7 @@ class OrderDarsOptions extends GetView<OrderDarsController> {
             children: [
               PrimaryText(
                 "${LocaleKeys.school_package.tr}*: ",
-                fontSize: 11.2.sp,
+                fontSize: 11.2,
                 fontWeight: FontWeightManager.softLight,
                 color: ColorManager.red,
               ),
@@ -211,7 +211,7 @@ class OrderDarsOptions extends GetView<OrderDarsController> {
                 width: Get.width * 0.60,
                 child: PrimaryText(
                   LocaleKeys.school_package_description,
-                  fontSize: 11.sp,
+                  fontSize: 11,
                   fontWeight: FontWeightManager.softLight,
                   color: ColorManager.fontColor7,
                   overflow: TextOverflow.ellipsis,

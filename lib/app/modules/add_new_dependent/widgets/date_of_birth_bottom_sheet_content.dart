@@ -58,7 +58,7 @@ class DateOfBirthBottomSheetContent extends StatelessWidget {
               selectionRadius: 20,
               selectionTextStyle: TextStyle(
                 color: ColorManager.primary,
-                fontSize: (14).sp,
+                fontSize: (14),
                 fontWeight: FontWeightManager.softLight,
                 fontFamily: FontConstants.fontFamily,
               ),
@@ -71,27 +71,27 @@ class DateOfBirthBottomSheetContent extends StatelessWidget {
                 textAlign: TextAlign.center,
                 textStyle: TextStyle(
                   color: ColorManager.fontColor,
-                  fontSize: (14).sp,
+                  fontSize: (14),
                   fontWeight: FontWeightManager.light,
                   fontFamily: FontConstants.fontFamily,
                 ),
               ),
               rangeTextStyle: TextStyle(
                 color: ColorManager.fontColor,
-                fontSize: (14).sp,
+                fontSize: (14),
                 fontWeight: FontWeightManager.light,
                 fontFamily: FontConstants.fontFamily,
               ),
               monthCellStyle: DateRangePickerMonthCellStyle(
                 textStyle: TextStyle(
                   color: ColorManager.fontColor,
-                  fontSize: (14).sp,
+                  fontSize: (14),
                   fontWeight: FontWeightManager.softLight,
                   fontFamily: FontConstants.fontFamily,
                 ),
                 todayTextStyle: TextStyle(
                   color: ColorManager.fontColor,
-                  fontSize: (14).sp,
+                  fontSize: (14),
                   fontWeight: FontWeightManager.softLight,
                   fontFamily: FontConstants.fontFamily,
                 ),
@@ -101,7 +101,7 @@ class DateOfBirthBottomSheetContent extends StatelessWidget {
                 ),
                 disabledDatesTextStyle: TextStyle(
                   color: ColorManager.grey,
-                  fontSize: (14).sp,
+                  fontSize: (14),
                   fontWeight: FontWeightManager.softLight,
                   fontFamily: FontConstants.fontFamily,
                 ),

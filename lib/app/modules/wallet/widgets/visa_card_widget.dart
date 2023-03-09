@@ -55,7 +55,7 @@ class VisaCardWidget extends GetView<WalletController> {
               cardNumber != null && cardNumber!.isNotEmpty
                   ? cardNumber!
                   : (isAddCard ? "XXXX XXXX XXXX XXXX" : "3384 4003 4885 2334"),
-              fontSize: 18.sp,
+              fontSize: 18,
               fontWeight: FontWeightManager.softLight,
               textDirection: TextDirection.ltr,
             ),
@@ -68,13 +68,13 @@ class VisaCardWidget extends GetView<WalletController> {
                   children: [
                     PrimaryText(
                       "CARD HOLDER",
-                      fontSize: 9.sp,
+                      fontSize: 9,
                       fontWeight: FontWeightManager.light,
                       letterSpacing: 1.5,
                     ),
                     PrimaryText(
                       "EXP DATE",
-                      fontSize: 9.sp,
+                      fontSize: 9,
                       fontWeight: FontWeightManager.light,
                       color: ColorManager.primary,
                       letterSpacing: 1.5,
@@ -88,7 +88,7 @@ class VisaCardWidget extends GetView<WalletController> {
                       cardHolderName != null && cardHolderName!.isNotEmpty
                           ? cardHolderName!
                           : (isAddCard ? "FirstName LastName" : "Waleed .A"),
-                      fontSize: 16.sp,
+                      fontSize: 16,
                       fontWeight: FontWeightManager.softLight,
                     ),
                     PrimaryText(
@@ -97,7 +97,7 @@ class VisaCardWidget extends GetView<WalletController> {
                           : (isAddCard
                               ? "MM/YY"
                               : "${DateTime.now().month}/${DateTime.now().year}"),
-                      fontSize: 16.sp,
+                      fontSize: 16,
                       fontWeight: FontWeightManager.softLight,
                     ),
                   ],

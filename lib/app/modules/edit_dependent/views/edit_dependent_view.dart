@@ -268,7 +268,7 @@ class EditDependentView extends GetView<EditDependentController> {
                                     ),
                                   ),
                                   PrimaryTextField(
-                                    fontSize: 14.sp,
+                                    fontSize: 14,
                                     isRequired: true,
                                     controller: controller.nameController,
                                     title: LocaleKeys.name,
@@ -317,7 +317,7 @@ class EditDependentView extends GetView<EditDependentController> {
                                   ),
                                   SizedBox(height: 12.h),
                                   PrimaryTextField(
-                                    fontSize: 14.sp,
+                                    fontSize: 14,
                                     readOnly: true,
                                     ifReadOnlyTextColor:
                                         ColorManager.fontColor7,
@@ -380,14 +380,14 @@ class EditDependentView extends GetView<EditDependentController> {
                                     children: [
                                       PrimaryText(
                                         LocaleKeys.student_relation,
-                                        fontSize: 14.sp,
+                                        fontSize: 14,
                                         fontWeight: FontWeightManager.softLight,
                                         color: ColorManager.fontColor,
                                       ),
                                       SizedBox(width: 2.w),
                                       PrimaryText(
                                         "*",
-                                        fontSize: 16.sp,
+                                        fontSize: 16,
                                         fontWeight: FontWeightManager.softLight,
                                         color: ColorManager.accent,
                                       ),
@@ -458,14 +458,14 @@ class EditDependentView extends GetView<EditDependentController> {
                                     children: [
                                       PrimaryText(
                                         LocaleKeys.school_type,
-                                        fontSize: 14.sp,
+                                        fontSize: 14,
                                         fontWeight: FontWeightManager.softLight,
                                         color: ColorManager.fontColor,
                                       ),
                                       SizedBox(width: 2.w),
                                       PrimaryText(
                                         "*",
-                                        fontSize: 16.sp,
+                                        fontSize: 16,
                                         fontWeight: FontWeightManager.softLight,
                                         color: ColorManager.accent,
                                       ),
@@ -533,7 +533,7 @@ class EditDependentView extends GetView<EditDependentController> {
                                   ),
                                   SizedBox(height: 12.h),
                                   PrimaryTextField(
-                                    fontSize: 14.sp,
+                                    fontSize: 14,
                                     isRequired: true,
                                     controller: controller.schoolNameController,
                                     title: LocaleKeys.school_name,
@@ -549,7 +549,7 @@ class EditDependentView extends GetView<EditDependentController> {
                                         color: controller
                                                 .schoolNameIconErrorColor ??
                                             ColorManager.primary,
-                                        size: 22.sp,
+                                        size: 22,
                                       ),
                                     ),
                                     prefixIconConstraints: BoxConstraints(
@@ -585,14 +585,14 @@ class EditDependentView extends GetView<EditDependentController> {
                                     children: [
                                       PrimaryText(
                                         LocaleKeys.studying_class,
-                                        fontSize: 14.sp,
+                                        fontSize: 14,
                                         fontWeight: FontWeightManager.softLight,
                                         color: ColorManager.fontColor,
                                       ),
                                       SizedBox(width: 2.w),
                                       PrimaryText(
                                         "*",
-                                        fontSize: 16.sp,
+                                        fontSize: 16,
                                         fontWeight: FontWeightManager.softLight,
                                         color: ColorManager.accent,
                                       ),
@@ -661,7 +661,7 @@ class EditDependentView extends GetView<EditDependentController> {
                                   ),
                                   SizedBox(height: 12.h),
                                   PrimaryTextField(
-                                    fontSize: 14.sp,
+                                    fontSize: 14,
                                     multiLines: true,
                                     maxLines: 8,
                                     contentPadding: const EdgeInsets.fromLTRB(
@@ -694,7 +694,7 @@ class EditDependentView extends GetView<EditDependentController> {
                                   ),
                                   // PrimaryText(
                                   //   LocaleKeys.studying_subject,
-                                  //   fontSize: 14.sp,
+                                  //   fontSize: 14,
                                   //   fontWeight: FontWeightManager.softLight,
                                   //   color: ColorManager.fontColor,
                                   // ),
@@ -763,14 +763,14 @@ class EditDependentView extends GetView<EditDependentController> {
                                     children: [
                                       PrimaryText(
                                         LocaleKeys.gender,
-                                        fontSize: 14.sp,
+                                        fontSize: 14,
                                         fontWeight: FontWeightManager.softLight,
                                         color: ColorManager.fontColor,
                                       ),
                                       SizedBox(width: 2.w),
                                       PrimaryText(
                                         "*",
-                                        fontSize: 16.sp,
+                                        fontSize: 16,
                                         fontWeight: FontWeightManager.softLight,
                                         color: ColorManager.accent,
                                       ),
@@ -872,7 +872,7 @@ class EditDependentView extends GetView<EditDependentController> {
                               }
                             }
                           },
-                          fontSize: 15.sp,
+                          fontSize: 15,
                           title: LocaleKeys.edit_dependent.tr,
                         ),
                       )
@@ -895,7 +895,7 @@ class EditDependentView extends GetView<EditDependentController> {
               children: [
                 PrimaryText(
                   LocaleKeys.check_your_internet_connection.tr,
-                  fontSize: 18.sp,
+                  fontSize: 18,
                   fontWeight: FontWeightManager.bold,
                   textAlign: TextAlign.center,
                 ),
