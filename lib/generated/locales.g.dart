@@ -200,6 +200,7 @@ class LocaleKeys {
       'please_choose_governorate_first';
   static const search_for_subject = 'search_for_subject';
   static const session_way = 'session_way';
+  static const order_edited_successfully = 'order_edited_successfully';
   static const please_select_student_relation =
       'please_select_student_relation';
   static const student_relation = 'student_relation';
@@ -251,6 +252,7 @@ class LocaleKeys {
   static const choose_dars_time = 'choose_dars_time';
   static const submit_form = 'submit_form';
   static const from = 'from';
+  static const update_order_dars = 'update_order_dars';
   static const to = 'to';
   static const dependents_title = 'dependents_title';
   static const there_are_no_dependents = 'there_are_no_dependents';
@@ -416,9 +418,14 @@ class LocaleKeys {
   static const november = 'november';
   static const december = 'december';
   static const participants = 'participants';
-  static const cancel_dars = 'cancel_dars';
+  static const cancel_order_dars = 'cancel_order_dars';
+  static const order_already_cancelled = 'order_already_cancelled';
+  static const edit_order_dars = 'edit_order_dars';
   static const please_enter_cvv = 'please_enter_cvv';
   static const cvv_is_invalid = 'cvv_is_invalid';
+  static const please_enter_cancel_order_reason =
+      'please_enter_cancel_order_reason';
+  static const check_cancel_order_reason = 'check_cancel_order_reason';
   static const please_choose_card_type = 'please_choose_card_type';
   static const please_choose_a_valid_notification_to_delete =
       'please_choose_a_valid_notification_to_delete';
@@ -431,6 +438,7 @@ class LocaleKeys {
   static const confirm_canceling_dars = 'confirm_canceling_dars';
   static const canceling_dars_reason = 'canceling_dars_reason';
   static const cofirm_canceling = 'cofirm_canceling';
+  static const no_candidate_providers = 'no_candidate_providers';
   static const no_candidate_providers_yet = 'no_candidate_providers_yet';
   static const candidate_provider_approved_successfully =
       'candidate_provider_approved_successfully';
@@ -659,6 +667,7 @@ class Locales {
     'please_choose_governorate_first': 'الرجاء اختيار المدينة أولاً',
     'search_for_subject': 'ابحث عن مادة دراسية',
     'session_way': 'طريقة الجلسة',
+    'order_edited_successfully': 'تم تعديل الطلب بنجاح',
     'please_select_student_relation': 'الرجاء اختيار صلة القرابة',
     'student_relation': 'صلة القرابة',
     'choose_student_relation': 'اختر صلة القرابة',
@@ -709,6 +718,7 @@ class Locales {
     'choose_dars_time': 'اختر وقت الدرس',
     'submit_form': 'إرسال الطلب',
     'from': 'من',
+    'update_order_dars': 'تعديل الطلب',
     'to': 'إلى',
     'dependents_title': 'التابعين',
     'there_are_no_dependents': 'لا يوجد لديك تابعين/أبنائك',
@@ -855,7 +865,7 @@ class Locales {
     'teachers_list': 'قائمة المعلمين',
     'explore_dars_teachers': 'استكشف معلمين درس',
     'participant_students': 'الطلاب المشاركين',
-    'teacher': 'المعلم',
+    'teacher': 'المعلّم',
     'january': 'يناير',
     'february': 'فبراير',
     'march': 'مارس',
@@ -871,9 +881,13 @@ class Locales {
     'november': 'نوفمبر',
     'december': 'ديسمبر',
     'participants': 'مشاركين',
-    'cancel_dars': 'إلغاء الدرس',
+    'cancel_order_dars': 'إلغاء طلب الدرس',
+    'order_already_cancelled': 'تم إلغاء هذا الطلب من قبلك',
+    'edit_order_dars': 'تعديل طلب الدرس',
     'please_enter_cvv': 'أدخل CVV',
     'cvv_is_invalid': 'CVV غير صالح',
+    'please_enter_cancel_order_reason': 'الرجاء إدخال سبب الغاء الطلب',
+    'check_cancel_order_reason': 'تحقق من سبب الغاء الطلب',
     'please_choose_card_type': 'إختر نوع البطاقة',
     'please_choose_a_valid_notification_to_delete':
         'الرجاء اختيار إشعار صالح للحذف',
@@ -883,9 +897,10 @@ class Locales {
     'order_added_successfully': 'تم إضافة الطلب بنجاح',
     'add_new_order': 'إضافة طلب درس جديد',
     'approve_teacher': 'اعتماد المعلّم',
-    'confirm_canceling_dars': 'تأكيد الغاء الدرس',
-    'canceling_dars_reason': 'سبب الغاء الدرس',
+    'confirm_canceling_dars': 'تأكيد الغاء طلب الدرس',
+    'canceling_dars_reason': 'سبب الغاء طلب الدرس',
     'cofirm_canceling': 'تأكيد الإلغاء',
+    'no_candidate_providers': 'لم يكن هناك مُعلّمين مهتمين',
     'no_candidate_providers_yet': 'لا يوجد مُعلّمين مهتمين بعد',
     'candidate_provider_approved_successfully': 'تم اعتماد مُعلّم بنجاح',
     'back': 'رجوع',
@@ -918,10 +933,10 @@ class Locales {
     'teacher_rating': 'تقييم المعلم',
     'rate': 'تقييم',
     'how_was_your_experience_with_the_teacher': 'كيف كانت تجربتك مع المعلم؟',
-    'you_cannot_cancel_this_dars': 'لا يمكنك إلغاء هذا الدرس!',
+    'you_cannot_cancel_this_dars': 'لا يمكنك إلغاء طلب هذا الدرس!',
     'due_to_the_starting_time_of_the_dars':
-        'لا يمكنك الغاء الدرس و ذلك لاقتراب بدء موعد الدرس',
+        'لا يمكنك الغاء طلب الدرس و ذلك لاقتراب بدء موعد الدرس',
     'to_help_you_please_enter_canceling_dars_reason':
-        'لمساعدتك يرجى أن توضح لنا سبب الغاء الدرس',
+        'لمساعدتك يرجى أن توضح لنا سبب الغاء طلب الدرس',
   };
 }

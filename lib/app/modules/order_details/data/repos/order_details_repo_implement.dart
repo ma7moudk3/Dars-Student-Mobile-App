@@ -1,5 +1,6 @@
 import 'dart:developer';
 
+import 'package:hessa_student/app/constants/constants.dart';
 import 'package:hessa_student/app/constants/links.dart';
 import 'package:hessa_student/app/data/network_helper/dio_helper.dart';
 import 'package:hessa_student/app/modules/order_details/data/models/candidate_providers/candidate_providers.dart';
@@ -76,5 +77,40 @@ class OrderDetailsRepoImplement extends OrderDetailsRepo {
     //   log("OrderDetailsRepoImplement.getCandidateProviders: $e");
     // }
     return candidateProviders;
+  }
+
+  @override
+  Future<int> cancelDarsOrder(
+      {required int darsOrderId, required String reason}) async {
+    int statusCode = 200;
+    try {
+      await DioHelper.post(
+        headers: headers,
+        Links.cancelOrder,
+        data: {
+          "notes": reason,
+          "orderId": darsOrderId,
+        },
+        onSuccess: (response) {
+          statusCode = response.statusCode ?? 200;
+          if (Get.isDialogOpen!) {
+            Get.back();
+          }
+        },
+        onError: (error) {
+          statusCode = error.statusCode ?? 400;
+          if (Get.isDialogOpen!) {
+            Get.back();
+          }
+        },
+      );
+    } catch (e) {
+      statusCode = 400;
+      log("OrderDetailsRepoImplement.cancelDarsOrder: $e");
+      if (Get.isDialogOpen!) {
+        Get.back();
+      }
+    }
+    return statusCode;
   }
 }

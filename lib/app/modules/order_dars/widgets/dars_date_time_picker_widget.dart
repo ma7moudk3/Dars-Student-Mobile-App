@@ -103,6 +103,7 @@ class DarsDateAndTimePickerWidget extends GetView<OrderDarsController> {
                         controller: controller.darsDateRangeController,
                         navigationMode: DateRangePickerNavigationMode.snap,
                         initialDisplayDate: controller.darsDate,
+                        initialSelectedDate: controller.darsDate,
                         headerStyle: DateRangePickerHeaderStyle(
                           textAlign: TextAlign.center,
                           textStyle: TextStyle(

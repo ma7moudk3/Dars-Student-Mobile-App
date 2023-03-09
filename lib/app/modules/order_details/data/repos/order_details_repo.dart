@@ -9,4 +9,9 @@ abstract class OrderDetailsRepo {
   Future<CandidateProviders> getCandidateProviders({
     required int darsOrder,
   });
+
+  Future<int> cancelDarsOrder({
+    required int darsOrderId,
+    required String reason,
+  });
 }

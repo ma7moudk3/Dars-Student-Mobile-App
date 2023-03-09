@@ -16,7 +16,8 @@ import '../modules/chat/bindings/chat_binding.dart';
 import '../modules/chat/views/chat_view.dart';
 import '../modules/connection_failed/bindings/connection_failed_binding.dart';
 import '../modules/connection_failed/views/connection_failed_view.dart';
-import '../modules/order_details/bindings/dars_details_binding.dart';
+import '../modules/dars_teachers/bindings/dars_teachers_binding.dart';
+import '../modules/dars_teachers/views/dars_teachers_view.dart';
 import '../modules/dependents/bindings/dependents_binding.dart';
 import '../modules/dependents/views/dependents_view.dart';
 import '../modules/edit_address/bindings/edit_address_binding.dart';
@@ -27,9 +28,6 @@ import '../modules/edit_profile/bindings/edit_profile_binding.dart';
 import '../modules/edit_profile/views/edit_profile_view.dart';
 import '../modules/forgot_password/bindings/forgot_password_binding.dart';
 import '../modules/forgot_password/views/forgot_password_view.dart';
-import '../modules/order_details/views/order_details_view.dart';
-import '../modules/dars_teachers/bindings/dars_teachers_binding.dart';
-import '../modules/dars_teachers/views/dars_teachers_view.dart';
 import '../modules/home/bindings/home_binding.dart';
 import '../modules/home/views/home_view.dart';
 import '../modules/login/bindings/login_binding.dart';
@@ -44,6 +42,8 @@ import '../modules/onboarding/bindings/onboarding_binding.dart';
 import '../modules/onboarding/views/onboarding_view.dart';
 import '../modules/order_dars/bindings/order_dars_binding.dart';
 import '../modules/order_dars/views/order_dars_view.dart';
+import '../modules/order_details/bindings/dars_details_binding.dart';
+import '../modules/order_details/views/order_details_view.dart';
 import '../modules/orders/bindings/orders_binding.dart';
 import '../modules/orders/views/orders_view.dart';
 import '../modules/preferred_teachers/bindings/preferred_teachers_binding.dart';
@@ -288,7 +288,7 @@ class AppPages {
     ),
     GetPage(
       name: _Paths.PROFILE_INFORMATION,
-      page: () => ProfileInformationView(),
+      page: () => const ProfileInformationView(),
       binding: ProfileInformationBinding(),
       transition: Transition.cupertino,
       transitionDuration: const Duration(milliseconds: 400),
@@ -325,11 +325,15 @@ class AppPages {
       name: _Paths.EDIT_ADDRESS,
       page: () => const EditAddressView(),
       binding: EditAddressBinding(),
+      transition: Transition.cupertino,
+      transitionDuration: const Duration(milliseconds: 400),
     ),
     GetPage(
       name: _Paths.EDIT_DEPENDENT,
       page: () => const EditDependentView(),
       binding: EditDependentBinding(),
+      transition: Transition.cupertino,
+      transitionDuration: const Duration(milliseconds: 400),
     ),
   ];
 }

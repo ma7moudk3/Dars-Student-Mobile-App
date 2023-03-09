@@ -54,7 +54,10 @@ class OrderDarsView extends GetView<OrderDarsController> {
       },
       child: Scaffold(
         appBar: CustomAppBar(
-          title: LocaleKeys.order_dars,
+          title:
+              controller.orderIdToEdit != null && controller.orderIdToEdit != -1
+                  ? LocaleKeys.edit_order_dars
+                  : LocaleKeys.order_dars,
           leading: GestureDetector(
             behavior: HitTestBehavior.opaque,
             onTap: () async {
@@ -785,8 +788,8 @@ class OrderDarsView extends GetView<OrderDarsController> {
                                             controller.suggestionsBoxController,
                                         textFieldConfiguration:
                                             CupertinoTextFieldConfiguration(
-                                          controller:
-                                              controller.teacherNameController,
+                                          controller: controller
+                                              .preferredTeacherNameController,
                                           decoration: BoxDecoration(
                                             borderRadius:
                                                 BorderRadius.circular(15),
@@ -835,6 +838,7 @@ class OrderDarsView extends GetView<OrderDarsController> {
                                                     searchValue: searchValue
                                                         .toLowerCase());
                                           } else {
+                                            controller.selectTeacher(null);
                                             return <PreferredTeacher>[];
                                           }
                                         },
@@ -882,6 +886,7 @@ class OrderDarsView extends GetView<OrderDarsController> {
                                           controller.selectTeacher(teacher);
                                         },
                                         errorBuilder: (context, error) {
+                                          controller.selectTeacher(null);
                                           return PrimaryText(
                                             error.toString(),
                                             color: ColorManager.red,
@@ -966,11 +971,14 @@ class OrderDarsView extends GetView<OrderDarsController> {
                                   } else {
                                     if (controller.formKey.currentState!
                                         .validate()) {
-                                      await controller.addNewOrderDars();
+                                      await controller.addOrEditOrderDars();
                                     }
                                   }
                                 },
-                                title: LocaleKeys.submit_form,
+                                title: controller.orderIdToEdit != null &&
+                                        controller.orderIdToEdit != -1
+                                    ? LocaleKeys.update_order_dars
+                                    : LocaleKeys.submit_form,
                               )
                             ],
                           ),

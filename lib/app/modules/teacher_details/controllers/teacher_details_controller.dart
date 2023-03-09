@@ -21,7 +21,7 @@ class TeacherDetailsController extends GetxController {
   bool? isFavorite;
   int teacherId = Get.arguments["teacherId"] ?? -1;
   // accept candidate provider (teacher) for order
-  int orderIdForAccept = Get.arguments["orderId"] ?? -1;
+  int? orderIdForAccept = Get.arguments?["orderId"];
   final TeacherDetailsRepo _teacherDetailsRepo = TeacherDetailsRepoImplement();
   DarsTeacherDetails darsTeacherDetails = DarsTeacherDetails();
   List<Map<String, dynamic>> teacherProperties = [
@@ -107,11 +107,11 @@ class TeacherDetailsController extends GetxController {
   }
 
   Future acceptCandidateProvider() async {
-    if (orderIdForAccept != -1 && teacherId != -1) {
+    if (orderIdForAccept != null && orderIdForAccept != -1 && teacherId != -1) {
       showLoadingDialog();
       await _teacherDetailsRepo
           .acceptCandidateProviderForOrder(
-        orderId: orderIdForAccept,
+        orderId: orderIdForAccept!,
         candidateProviderId: teacherId,
       )
           .then((int statusCode) async {

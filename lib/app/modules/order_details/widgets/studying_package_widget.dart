@@ -236,7 +236,7 @@ class StudyingPackageWidget extends GetView<OrderDetailsController> {
               PrimaryButton(
                 onPressed: () {},
                 isDisabled: true, // to be changed later
-                title: LocaleKeys.cancel_dars.tr,
+                title: LocaleKeys.cancel_order_dars.tr,
               ),
               SizedBox(height: 65.h),
             ],

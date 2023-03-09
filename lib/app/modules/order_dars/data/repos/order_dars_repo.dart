@@ -2,6 +2,8 @@ import 'package:hessa_student/app/data/models/classes/classes.dart';
 import 'package:hessa_student/app/data/models/skills/skills.dart';
 import 'package:hessa_student/app/data/models/topics/topics.dart';
 
+import '../models/order_dars_to_edit/order_dars_to_edit.dart';
+
 abstract class OrderDarsRepo {
   Future<int> addOrEditOrderDars({
     required int targetGenderId,
@@ -17,7 +19,7 @@ abstract class OrderDarsRepo {
     required List<int> orderTopicsOrSkillsIDs,
     int? id, // dars Id,
     int? paymentMethodId,
-    double? rate,
+    int? rate,
     String? rateNotes,
     int? currencyId,
   });
@@ -25,4 +27,6 @@ abstract class OrderDarsRepo {
   Future<Classes> getClasses();
   Future<Topics> getTopics();
   Future<Skills> getSkills();
+
+  Future<OrderDarsToEdit> getOrderDarsToEdit({required int orderDarsToEditId});
 }

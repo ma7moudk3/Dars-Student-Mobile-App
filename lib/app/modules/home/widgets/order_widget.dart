@@ -19,7 +19,8 @@ class OrderWidget extends GetView<OrdersController> {
   @override
   Widget build(BuildContext context) {
     Color orderStatusColor = ColorManager.primary;
-    OrderStatus orderStatus = OrderStatus.values[darsOrder.currentStatusId ?? 0];
+    OrderStatus orderStatus =
+        OrderStatus.values[darsOrder.currentStatusId ?? 0];
     switch (orderStatus) {
       case OrderStatus.submitted:
         orderStatusColor = ColorManager.primary;

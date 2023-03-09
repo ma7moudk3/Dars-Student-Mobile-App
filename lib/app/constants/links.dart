@@ -16,6 +16,10 @@ class Links {
       'api/services/app/Profile/ActivateEmail';
   static const String acceptCandidateProviderToOrder =
       'api/services/app/Orders/PostAcceptProviderToOrder';
+  static const String getOrderForEdit =
+      'api/services/app/Orders/GetOrderForEdit';
+  static const String cancelOrder =
+      'api/services/app/Orders/PostCancelOrder';
   static const String verifyOTPCodeMobile =
       'api/services/app/Profile/ActivateMobile';
   static const String getAllNotifications =

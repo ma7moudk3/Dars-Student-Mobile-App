@@ -4,6 +4,8 @@ import 'dart:developer';
 import 'package:dio/dio.dart';
 import 'package:hessa_student/app/core/helper_functions.dart';
 import 'package:hessa_student/app/data/models/skills/item.dart' as skill;
+import 'package:hessa_student/app/modules/order_dars/data/models/order_dars_to_edit/order_dars_to_edit.dart';
+import 'package:hessa_student/app/modules/order_details/controllers/order_details_controller.dart';
 import 'package:hessa_student/app/modules/orders/controllers/orders_controller.dart';
 import 'package:hessa_student/app/modules/preferred_teachers/data/repos/preferred_teachers_repo.dart';
 import 'package:infinite_scroll_pagination/infinite_scroll_pagination.dart';
@@ -46,6 +48,7 @@ extension IsAtMaximumYears on DateTime {
 
 class OrderDarsController extends GetxController {
   final GlobalKey<FormState> formKey = GlobalKey<FormState>();
+  int? orderIdToEdit = Get.arguments?["orderIdToEdit"];
   int sessionWay = 0; // 0 face-to-face, 1 electronic, 2 both
   int darsCategory = 0; // 0 academic learning, 1 skills
   int teacherGender =
@@ -58,10 +61,12 @@ class OrderDarsController extends GetxController {
       firstPageKey: 1); // Student = RequesterDependent or RequesterStudent :)
   final PreferredTeachersRepo _darsTeacherRepo =
       PreferredTeachersRepoImplement();
+  List<PreferredTeacher> preferredDarsTeachers = [];
+  OrderDarsToEdit orderDarsToEdit = OrderDarsToEdit();
   late TextEditingController darsDateController,
       darsTimeController,
       locationController,
-      teacherNameController,
+      preferredTeacherNameController,
       notesController;
   DateTime darsDate = DateTime.now();
   TimeRangeResult? darsTimeRange;
@@ -86,7 +91,7 @@ class OrderDarsController extends GetxController {
   List<AddressResult> addresses = [];
   AddressResult? selectedAddress;
   bool isAddressDropDownLoading = false;
-  PreferredTeacher? chosenTeacher;
+  PreferredTeacher? chosenPreferredTeacher;
 
   @override
   void onInit() async {
@@ -94,7 +99,7 @@ class OrderDarsController extends GetxController {
     darsDateRangeController = DateRangePickerController();
     darsTimeController = TextEditingController();
     locationController = TextEditingController();
-    teacherNameController = TextEditingController();
+    preferredTeacherNameController = TextEditingController();
     notesController = TextEditingController();
     await initializeDateFormatting("ar_SA", null);
     darsDateFocusNode.addListener(() => update());
@@ -115,9 +120,9 @@ class OrderDarsController extends GetxController {
         darsCategory != 0 ||
         orderType != 0 ||
         teacherGender != 0 ||
-        teacherNameController.text.isNotEmpty ||
+        preferredTeacherNameController.text.isNotEmpty ||
         notesController.text.isNotEmpty ||
-        chosenTeacher != null;
+        chosenPreferredTeacher != null;
   }
 
   @override
@@ -126,7 +131,7 @@ class OrderDarsController extends GetxController {
     darsDateRangeController.dispose();
     darsTimeController.dispose();
     locationController.dispose();
-    teacherNameController.dispose();
+    preferredTeacherNameController.dispose();
     notesController.dispose();
     darsDateFocusNode.dispose();
     darsTimeFocusNode.dispose();
@@ -152,7 +157,7 @@ class OrderDarsController extends GetxController {
     update();
   }
 
-  Future addNewOrderDars() async {
+  Future addOrEditOrderDars() async {
     showLoadingDialog();
     List<int> selectedTopicsOrSkills = [];
     if (darsCategory == 0) {
@@ -194,8 +199,15 @@ class OrderDarsController extends GetxController {
       targetGenderId: teacherGender + 1,
       preferredStartDate: preferredStartDate,
       preferredEndDate: preferredEndDate,
-      preferredProviderId: chosenTeacher?.preferredProvider?.providerId ?? -1,
+      currencyId: orderDarsToEdit.result?.order?.currencyId,
+      paymentMethodId: orderDarsToEdit.result?.order?.paymentMethodId,
+      providerId: orderDarsToEdit.result?.order?.providerId,
+      rate: orderDarsToEdit.result?.order?.rate,
+      rateNotes: orderDarsToEdit.result?.order?.rateNotes,
+      preferredProviderId:
+          chosenPreferredTeacher?.preferredProvider?.providerId ?? -1,
       notes: notesController.text,
+      id: orderIdToEdit,
     )
         .then((int statusCode) async {
       if (statusCode == 200) {
@@ -206,12 +218,19 @@ class OrderDarsController extends GetxController {
         ordersController.refreshPagingController();
         final HomeController homeController = Get.find<HomeController>();
         await homeController.getMyOrders();
+        if (Get.isRegistered<OrderDetailsController>()) {
+          final OrderDetailsController orderDetailsController =
+              Get.find<OrderDetailsController>();
+          await orderDetailsController.getOrderDetails();
+        }
         await Future.delayed(const Duration(milliseconds: 550))
             .then((value) async {
           Get.back();
           CustomSnackBar.showCustomSnackBar(
             title: LocaleKeys.success.tr,
-            message: LocaleKeys.order_added_successfully.tr,
+            message: orderIdToEdit != null && orderIdToEdit != -1
+                ? LocaleKeys.order_edited_successfully.tr
+                : LocaleKeys.order_added_successfully.tr,
           );
         });
       }
@@ -244,12 +263,12 @@ class OrderDarsController extends GetxController {
     });
   }
 
-  Future getMyStudents({required int page}) async {
+  Future getMyStudents({required int page, int? pageSize}) async {
     try {
       if (await checkInternetConnection(timeout: 10)) {
-        students =
-            await _dependentsRepo.getMyStudents(page: page, perPage: _pageSize);
-        final isLastPage = students.length < _pageSize;
+        students = await _dependentsRepo.getMyStudents(
+            page: page, perPage: pageSize ?? _pageSize);
+        final isLastPage = students.length < (pageSize ?? _pageSize);
         if (isLastPage) {
           pagingController.appendLastPage(students);
         } else {
@@ -267,14 +286,14 @@ class OrderDarsController extends GetxController {
 
   Future<List<PreferredTeacher>> searchTeacher(
       {required String searchValue}) async {
-    return teachers = await getDarsTeachers(page: 1, searchValue: searchValue);
+    return teachers =
+        await getDarsPreferredTeachers(page: 1, searchValue: searchValue);
   }
 
-  Future<List<PreferredTeacher>> getDarsTeachers({
+  Future<List<PreferredTeacher>> getDarsPreferredTeachers({
     required int page,
     required String searchValue,
   }) async {
-    List<PreferredTeacher> preferredDarsTeachers = [];
     try {
       if (await checkInternetConnection(timeout: 10)) {
         preferredDarsTeachers = await _darsTeacherRepo.getPreferredTeachers(
@@ -292,9 +311,9 @@ class OrderDarsController extends GetxController {
     return preferredDarsTeachers;
   }
 
-  void selectTeacher(PreferredTeacher teacher) {
-    teacherNameController.text = teacher.providerName ?? "";
-    chosenTeacher = teacher;
+  void selectTeacher(PreferredTeacher? teacher) {
+    preferredTeacherNameController.text = teacher?.providerName ?? "";
+    chosenPreferredTeacher = teacher;
     update();
   }
 
@@ -309,9 +328,10 @@ class OrderDarsController extends GetxController {
       if (addresses.isNotEmpty) {
         selectedAddress = addresses.first;
       }
+      log("addresses ${addresses.length}");
       isAddressDropDownLoading = false;
-      update();
     });
+    update();
   }
 
   Future showMultiSelectTopics() async {
@@ -519,35 +539,140 @@ class OrderDarsController extends GetxController {
         .then((bool internetStatus) async {
       isInternetConnected.value = internetStatus;
       if (isInternetConnected.value) {
-        await Future.wait([
-          _getClasses(),
-          _getTopics(),
-          _getSkills(),
+        isLoading.value = true;
+        List<Future> futures = [
+          getClasses(),
+          getTopics(),
+          getSkills(),
           getMyAddresses(),
-        ]).then((value) => isLoading.value = false);
+        ];
+        await Future.wait(futures).then((value) async {
+          if (orderIdToEdit != null && orderIdToEdit != -1) {
+            await getMyStudents(page: 1, pageSize: 100).then((value) async {
+              await getDarsPreferredTeachers(page: 1, searchValue: "")
+                  .then((value) async {
+                await getOrderToEdit().then((value) => isLoading.value = false);
+              });
+            });
+          } else {
+            isLoading.value = false;
+          }
+        });
+        update();
       }
     });
   }
 
-  Future _getClasses() async {
+  Future getOrderToEdit() async {
+    if (orderIdToEdit != null && orderIdToEdit != -1) {
+      await _orderDarsRepo
+          .getOrderDarsToEdit(orderDarsToEditId: orderIdToEdit!)
+          .then((OrderDarsToEdit orderDarsToEdit) {
+        this.orderDarsToEdit = orderDarsToEdit;
+        log("addreses ${addresses.length}");
+        selectedAddress = addresses.firstWhereOrNull(
+          (AddressResult address) {
+            return (address.address?.id ?? -1) ==
+                (orderDarsToEdit.result?.order?.addressId ?? 0);
+          },
+        );
+        selectedStudents = students.where((Student student) {
+          return (orderDarsToEdit.result?.order?.orderStudentId ?? [])
+              .contains(student.requesterStudent?.id ?? -1);
+        }).toList();
+        update();
+        // 19 is for studying package, 41 is for one dars
+        orderType =
+            (orderDarsToEdit.result?.order?.productId ?? 0) == 41 ? 0 : 1;
+        sessionWay = orderDarsToEdit.result?.order?.sessionTypeId ??
+            0; // 0 is for face to face, 1 is for online, 2 is for both
+        teacherGender =
+            (orderDarsToEdit.result?.order?.targetGenderId ?? 1) - 1;
+        // darsCategory = orderDarsToEdit.result?.order?.darsCategoryId ?? 0; // TODO: get darsCategory
+        //TODO: check darsCategory >> // 0 academic learning, 1 skills
+        if (darsCategory == 0) {
+          selectedTopics = (topics.result ?? <topic.Result>[])
+              .where((topic.Result topic) {
+                return (orderDarsToEdit.result?.order?.orderTopicOrSkillId ??
+                        [])
+                    .contains(topic.id ?? -1);
+              })
+              .toList()
+              .map((topic.Result topic) {
+                return topic.displayName ?? "";
+              })
+              .toList();
+        } else {
+          selectedSkills = (skills.result?.items ?? <skill.Item>[])
+              .where((skill.Item skill) {
+                return (orderDarsToEdit.result?.order?.orderTopicOrSkillId ??
+                        [])
+                    .contains(skill.id ?? -1);
+              })
+              .toList()
+              .map((skill.Item skill) {
+                return skill.displayName ?? "";
+              })
+              .toList();
+        }
+        darsDate = DateTime.parse(
+            orderDarsToEdit.result?.order?.preferredStartDate ??
+                ""); // or preferredEndDate
+        darsDateController.text =
+            DateFormat("dd MMMM yyyy", "ar_SA").format(darsDate);
+        DateTime preferredStartDate = DateTime.parse(
+            orderDarsToEdit.result?.order?.preferredStartDate ?? "");
+        DateTime preferredEndDate = DateTime.parse(
+            orderDarsToEdit.result?.order?.preferredEndDate ?? "");
+        darsTimeRange = TimeRangeResult(
+          TimeOfDay(
+            hour: preferredStartDate.hour,
+            minute: preferredStartDate.minute,
+          ),
+          TimeOfDay(
+            hour: preferredEndDate.hour,
+            minute: preferredEndDate.minute,
+          ),
+        );
+        String formattedFromTime = DateFormat.jm('ar_SA').format(DateTime(
+            preferredStartDate.year,
+            preferredStartDate.month,
+            preferredStartDate.day,
+            darsTimeRange?.start.hour ?? 0,
+            darsTimeRange?.start.minute ?? 0));
+        String formattedToTime = DateFormat.jm('ar_SA').format(DateTime(
+            preferredEndDate.year,
+            preferredEndDate.month,
+            preferredEndDate.day,
+            darsTimeRange?.end.hour ?? 0,
+            darsTimeRange?.end.minute ?? 0));
+        darsTimeController.text = "$formattedFromTime - $formattedToTime";
+        notesController.text = orderDarsToEdit.result?.order?.notes ?? "";
+        chosenPreferredTeacher = preferredDarsTeachers
+            .firstWhereOrNull((PreferredTeacher preferredTeacher) {
+          return (orderDarsToEdit.result?.order?.preferredproviderId ?? -1) ==
+              (preferredTeacher.preferredProvider?.providerId ?? 0);
+        });
+        preferredTeacherNameController.text =
+            chosenPreferredTeacher?.providerName ?? "";
+      });
+    }
+    update();
+  }
+
+  Future getClasses() async {
     classes = await _orderDarsRepo.getClasses();
-    // if (classes.result != null && classes.result!.items != null) {
-    //   classes.result!.items!.insert(
-    //     0,
-    //     level.Item(
-    //       id: -1,
-    //       displayName: LocaleKeys.choose_studying_class.tr,
-    //     ),
-    //   );
-    // }
+    update();
   }
 
-  Future _getTopics() async {
+  Future getTopics() async {
     topics = await _orderDarsRepo.getTopics();
+    update();
   }
 
-  Future _getSkills() async {
+  Future getSkills() async {
     skills = await _orderDarsRepo.getSkills();
+    update();
   }
 
   void changeSessionWay(int value) {

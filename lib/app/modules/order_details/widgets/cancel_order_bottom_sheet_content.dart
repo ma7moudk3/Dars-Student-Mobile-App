@@ -1,7 +1,6 @@
 import '../../../../generated/locales.g.dart';
 import '../../../constants/exports.dart';
 import '../controllers/order_details_controller.dart';
-import 'you_cant_cancel_dars_dialog_content.dart';
 
 class CancelDarsBottomSheetContent extends GetView<OrderDetailsController> {
   const CancelDarsBottomSheetContent({
@@ -99,6 +98,8 @@ class CancelDarsBottomSheetContent extends GetView<OrderDetailsController> {
                               color: ColorManager.primary,
                             ),
                             hintText: LocaleKeys.canceling_dars_reason,
+                            validator: (String? value) =>
+                                controller.validateCancelReason(value),
                           ),
                           const Spacer(),
                           Row(
@@ -111,29 +112,7 @@ class CancelDarsBottomSheetContent extends GetView<OrderDetailsController> {
                                 onPressed: () async {
                                   if (controller.formKey.currentState!
                                       .validate()) {
-                                    // await controller.cancelDars();
-                                    // or currently you can't cancel dars dialog
-                                    Get.back();
-                                    await Get.dialog(
-                                      Container(
-                                        color:
-                                            ColorManager.black.withOpacity(0.1),
-                                        height: 230.h,
-                                        width: 312.w,
-                                        child: Center(
-                                          child: Container(
-                                            width: Get.width,
-                                            margin: EdgeInsets.symmetric(
-                                              horizontal: 18.w,
-                                            ),
-                                            child:
-                                                const CannotCancelDarsDialogContent(),
-                                          ),
-                                        ),
-                                      ),
-                                      transitionCurve: Curves.easeInOutBack,
-                                      barrierDismissible: true,
-                                    );
+                                    await controller.cancelOrder();
                                   }
                                 },
                                 title: LocaleKeys.cofirm_canceling.tr,
@@ -141,15 +120,12 @@ class CancelDarsBottomSheetContent extends GetView<OrderDetailsController> {
                               PrimaryButton(
                                 width: 160.w,
                                 color: ColorManager.fontColor6,
-                                fontColor: ColorManager.grey5,
+                                fontColor: ColorManager.fontColor,
+                                fontSize: 15,
                                 borderSide: BorderSide.none,
                                 onPressed: () async {
-                                  if (controller.formKey.currentState!
-                                      .validate()) {
-                                    controller.clearData();
-                                    Get.back(); // currently
-                                    // await controller.cancelDars();
-                                  }
+                                  controller.clearData();
+                                  Get.back();
                                 },
                                 title: LocaleKeys.back.tr,
                               ),

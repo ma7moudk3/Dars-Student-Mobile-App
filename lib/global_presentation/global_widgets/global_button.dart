@@ -12,6 +12,7 @@ class GlobalButton extends StatelessWidget {
     required this.title,
     this.color,
     this.borderColor,
+    this.fontColor,
     this.width,
     this.fontSize = 15,
     this.borderRadius,
@@ -25,7 +26,7 @@ class GlobalButton extends StatelessWidget {
   final String title;
   final BorderRadiusGeometry? borderRadius;
   final bool? selected, isSkip;
-  final Color? color, borderColor;
+  final Color? color, borderColor, fontColor;
   final FontWeight fontWeight;
   @override
   Widget build(BuildContext context) {
@@ -60,7 +61,7 @@ class GlobalButton extends StatelessWidget {
                       : borderColor ?? ColorManager.accent)
                   : isDarkMoodEnabled()
                       ? ColorManager.white
-                      : ColorManager.primary,
+                      : fontColor ?? ColorManager.primary,
               fontSize: fontSize ?? 15,
               fontWeight: fontWeight,
             ),

@@ -1,10 +1,12 @@
 import 'package:hessa_student/app/constants/exports.dart';
 import 'package:hessa_student/app/core/helper_functions.dart';
+import 'package:hessa_student/global_presentation/global_widgets/loading.dart';
 import 'package:intl/intl.dart';
 
 import '../../../../generated/locales.g.dart';
 import '../../../data/cache_helper.dart';
 import '../../../data/models/classes/classes.dart';
+import '../../../routes/app_pages.dart';
 import '../../home/data/models/dars_order.dart';
 import '../../order_dars/data/repos/order_dars_repo.dart';
 import '../../order_dars/data/repos/order_dars_repo_implement.dart';
@@ -13,6 +15,7 @@ import '../../teacher_details/data/repos/teacher_details_repo_implement.dart';
 import '../data/models/order_details/order_details.dart';
 import '../data/repos/order_details_repo.dart';
 import '../data/repos/order_details_repo_implement.dart';
+import '../widgets/you_cant_cancel_dars_dialog_content.dart';
 
 class OrderDetailsController extends GetxController {
   List<Map<String, dynamic>> orderProperties = [
@@ -139,6 +142,51 @@ class OrderDetailsController extends GetxController {
         });
       }
     });
+  }
+
+  Future cancelOrder() async {
+    showLoadingDialog();
+    await _darsDetailsRepoImplement
+        .cancelDarsOrder(
+      darsOrderId: darsOrder.id ?? -1,
+      reason: cancelReasonController.text,
+    )
+        .then((int statusCode) async {
+      if (statusCode == 200) {
+        await Get.offAllNamed(Routes.BOTTOM_NAV_BAR);
+      } else {
+        await Get.dialog(
+          Container(
+            color: ColorManager.black.withOpacity(0.1),
+            height: 230.h,
+            width: 312.w,
+            child: Center(
+              child: Container(
+                width: Get.width,
+                margin: EdgeInsets.symmetric(
+                  horizontal: 18.w,
+                ),
+                child: const CannotCancelDarsDialogContent(),
+              ),
+            ),
+          ),
+          transitionCurve: Curves.easeInOutBack,
+          barrierDismissible: true,
+        );
+      }
+    });
+  }
+
+  String? validateCancelReason(String? value) {
+    String pattern = r'^[0-9]+$';
+    RegExp regExp = RegExp(pattern);
+    if (value == null || value.isEmpty) {
+      return LocaleKeys.please_enter_cancel_order_reason.tr;
+    } else if (regExp.hasMatch(value)) {
+      return LocaleKeys.check_cancel_order_reason.tr;
+    }
+    update();
+    return null;
   }
 
   Future getOrderDetails() async {

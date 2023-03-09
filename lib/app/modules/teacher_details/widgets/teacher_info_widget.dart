@@ -17,9 +17,13 @@ class TeacherInfo extends GetView<TeacherDetailsController> {
             ? "${Links.baseLink}${Links.profileImageById}?userid=${controller.darsTeacherDetails.result!.providers!.userId.toString()}"
             : "https://www.shareicon.net/data/2016/06/10/586098_guest_512x512.png"
         : "https://www.shareicon.net/data/2016/06/10/586098_guest_512x512.png";
-    String country = controller.darsTeacherDetails.result?.providerAddress?.countryName ?? "",
-        governorate = controller.darsTeacherDetails.result?.providerAddress?.governorateName ?? "";
-    double teacherRate =  0.0;
+    String country = controller
+                .darsTeacherDetails.result?.providerAddress?.countryName ??
+            "",
+        governorate = controller
+                .darsTeacherDetails.result?.providerAddress?.governorateName ??
+            "";
+    double teacherRate = 0.0;
     return GetBuilder<TeacherDetailsController>(
         builder: (TeacherDetailsController controller) {
       return Row(

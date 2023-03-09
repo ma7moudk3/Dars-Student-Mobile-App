@@ -104,35 +104,38 @@ class TeacherDetailsView extends GetView<TeacherDetailsController> {
                       ),
                     ),
                     SizedBox(height: 34.h),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        PrimaryButton(
-                          width: 280.w,
-                          onPressed: () async {
-                                await controller.acceptCandidateProvider();
-                           
-                          },
-                          title: LocaleKeys.approve_teacher.tr,
-                        ),
-                        GestureDetector(
-                          onTap: () async {},
-                          child: Container(
-                            width: 48.w,
-                            height: 50.h,
-                            decoration: BoxDecoration(
-                              color: ColorManager.yellow,
-                              borderRadius: BorderRadius.circular(15),
-                            ),
-                            child: Center(
-                              child: SvgPicture.asset(
-                                ImagesManager.messagingIcon,
-                                color: ColorManager.white,
+                    Visibility(
+                      visible: controller.orderIdForAccept != null &&
+                          controller.orderIdForAccept != -1,
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          PrimaryButton(
+                            width: 280.w,
+                            onPressed: () async {
+                              await controller.acceptCandidateProvider();
+                            },
+                            title: LocaleKeys.approve_teacher.tr,
+                          ),
+                          GestureDetector(
+                            onTap: () async {},
+                            child: Container(
+                              width: 48.w,
+                              height: 50.h,
+                              decoration: BoxDecoration(
+                                color: ColorManager.yellow,
+                                borderRadius: BorderRadius.circular(15),
+                              ),
+                              child: Center(
+                                child: SvgPicture.asset(
+                                  ImagesManager.messagingIcon,
+                                  color: ColorManager.white,
+                                ),
                               ),
                             ),
                           ),
-                        ),
-                      ],
+                        ],
+                      ),
                     )
                   ],
                 ),

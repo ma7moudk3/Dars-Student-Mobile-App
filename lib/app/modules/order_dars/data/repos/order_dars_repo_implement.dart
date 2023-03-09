@@ -1,8 +1,10 @@
 import 'dart:developer';
 
+import 'package:hessa_student/app/constants/constants.dart';
 import 'package:hessa_student/app/data/models/topics/topics.dart';
 import 'package:hessa_student/app/data/models/skills/skills.dart';
 import 'package:hessa_student/app/data/models/classes/classes.dart';
+import 'package:hessa_student/app/modules/order_dars/data/models/order_dars_to_edit/order_dars_to_edit.dart';
 
 import '../../../../../generated/locales.g.dart';
 import '../../../../../global_presentation/global_widgets/custom_snack_bar.dart';
@@ -115,7 +117,7 @@ class OrderDarsRepoImplement extends OrderDarsRepo {
     required List<int> orderTopicsOrSkillsIDs,
     int? id,
     int? paymentMethodId,
-    double? rate,
+    int? rate,
     String? rateNotes,
     int? currencyId,
   }) async {
@@ -216,5 +218,36 @@ class OrderDarsRepoImplement extends OrderDarsRepo {
       }
     }
     return statusCode;
+  }
+
+  @override
+  Future<OrderDarsToEdit> getOrderDarsToEdit(
+      {required int orderDarsToEditId}) async {
+    OrderDarsToEdit orderDarsToEdit = OrderDarsToEdit();
+    try {
+      Map<String, dynamic> queryParameters = {
+        "Id": orderDarsToEditId,
+      };
+      await DioHelper.get(
+        queryParameters: queryParameters,
+        headers: headers,
+        Links.getOrderForEdit,
+        onSuccess: (response) {
+          var result = response.data;
+          orderDarsToEdit = OrderDarsToEdit.fromJson(result);
+        },
+        onError: (error) {
+          if (Get.isDialogOpen!) {
+            Get.back();
+          }
+        },
+      );
+    } catch (e) {
+      log("getOrderDarsToEdit error $e");
+      if (Get.isDialogOpen!) {
+        Get.back();
+      }
+    }
+    return orderDarsToEdit;
   }
 }
