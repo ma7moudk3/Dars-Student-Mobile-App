@@ -279,8 +279,8 @@ class DarsDateAndTimePickerWidget extends GetView<OrderDarsController> {
                                         ],
                                       ),
                                       Visibility(
-                                        visible: controller.darsTimeController
-                                            .text.isNotEmpty,
+                                        visible: controller
+                                            .darsTimeController.text.isNotEmpty,
                                         child: Row(
                                           children: [
                                             SizedBox(width: 5.w),
@@ -347,8 +347,7 @@ class DarsDateAndTimePickerWidget extends GetView<OrderDarsController> {
               margin: EdgeInsets.all(5.w),
               child: Icon(
                 Icons.access_time,
-                color:
-                    controller.darsTimeErrorIconColor ?? ColorManager.yellow,
+                color: controller.darsTimeErrorIconColor ?? ColorManager.yellow,
                 size: 22,
               ),
             ),

@@ -108,6 +108,7 @@ class LocaleKeys {
   static const address_deleted_successfully = 'address_deleted_successfully';
   static const student_deleted_successfully = 'student_deleted_successfully';
   static const school_name = 'school_name';
+  static const school = 'school';
   static const write_school_name = 'write_school_name';
   static const notes_about_dependent = 'notes_about_dependent';
   static const please_enter_fullname = 'please_enter_fullname';
@@ -405,6 +406,7 @@ class LocaleKeys {
   static const april = 'april';
   static const may = 'may';
   static const june = 'june';
+  static const see_all = 'see_all';
   static const july = 'july';
   static const august = 'august';
   static const notification_deleted_successfully =
@@ -429,6 +431,9 @@ class LocaleKeys {
   static const confirm_canceling_dars = 'confirm_canceling_dars';
   static const canceling_dars_reason = 'canceling_dars_reason';
   static const cofirm_canceling = 'cofirm_canceling';
+  static const no_candidate_providers_yet = 'no_candidate_providers_yet';
+  static const candidate_provider_approved_successfully =
+      'candidate_provider_approved_successfully';
   static const back = 'back';
   static const search_for_teacher = 'search_for_teacher';
   static const search_filter = 'search_filter';
@@ -564,6 +569,7 @@ class Locales {
     'address_deleted_successfully': 'تم حذف العنوان بنجاح',
     'student_deleted_successfully': 'تم حذف الطالب بنجاح',
     'school_name': 'اسم المدرسة',
+    'school': 'المدرسة',
     'write_school_name': 'اكتب اسم المدرسة',
     'notes_about_dependent': 'ملاحظات عن التابع',
     'please_enter_fullname': 'الرجاء ادخال الاسم الكامل',
@@ -856,6 +862,7 @@ class Locales {
     'april': 'أبريل',
     'may': 'مايو',
     'june': 'يونيو',
+    'see_all': 'عرض الكل',
     'july': 'يوليو',
     'august': 'أغسطس',
     'notification_deleted_successfully': 'تم حذف الإشعار بنجاح',
@@ -879,6 +886,8 @@ class Locales {
     'confirm_canceling_dars': 'تأكيد الغاء الدرس',
     'canceling_dars_reason': 'سبب الغاء الدرس',
     'cofirm_canceling': 'تأكيد الإلغاء',
+    'no_candidate_providers_yet': 'لا يوجد مُعلّمين مهتمين بعد',
+    'candidate_provider_approved_successfully': 'تم اعتماد مُعلّم بنجاح',
     'back': 'رجوع',
     'search_for_teacher': 'ابحث عن معلم',
     'search_filter': 'فلتر البحث',

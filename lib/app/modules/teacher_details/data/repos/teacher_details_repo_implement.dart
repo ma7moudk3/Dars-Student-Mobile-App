@@ -1,10 +1,10 @@
 import 'dart:developer';
 
-import 'package:hessa_student/app/data/cache_helper.dart';
 import 'package:hessa_student/app/data/network_helper/dio_helper.dart';
 import 'package:hessa_student/app/modules/teacher_details/data/models/teacher_details/dars_teacher_details.dart';
 import 'package:hessa_student/app/modules/teacher_details/data/repos/teacher_details_repo.dart';
 
+import '../../../../constants/constants.dart';
 import '../../../../constants/exports.dart';
 import '../../../../constants/links.dart';
 
@@ -15,15 +15,8 @@ class TeacherDetailsRepoImplement extends TeacherDetailsRepo {
   }) async {
     DarsTeacherDetails darsTeacherDetails = DarsTeacherDetails();
     Map<String, dynamic> queryParameters = {
-          "id": teacherId,
-        },
-        headers = {
-          'Accept-Language':
-              Get.locale != null ? Get.locale!.languageCode : 'ar',
-          'Content-Type': 'application/json',
-          'Accept': 'application/json',
-          'Authorization': 'Bearer ${CacheHelper.instance.getAccessToken()}',
-        };
+      "id": teacherId,
+    };
     await DioHelper.get(
       Links.getDarsTeacher,
       queryParameters: queryParameters,
@@ -44,12 +37,6 @@ class TeacherDetailsRepoImplement extends TeacherDetailsRepo {
     Map<String, dynamic> data = {
       "providerId": teacherId,
       "id": 0,
-    };
-    Map<String, dynamic> headers = {
-      'Accept-Language': Get.locale != null ? Get.locale!.languageCode : 'ar',
-      'Content-Type': 'application/json',
-      'Accept': 'application/json',
-      "Authorization": "Bearer ${CacheHelper.instance.getAccessToken()}"
     };
     await DioHelper.post(
       Links.addTeacherToFavorite,
@@ -72,12 +59,6 @@ class TeacherDetailsRepoImplement extends TeacherDetailsRepo {
     Map<String, dynamic> queryParameters = {
       "providerId": teacherId,
     };
-    Map<String, dynamic> headers = {
-      'Accept-Language': Get.locale != null ? Get.locale!.languageCode : 'ar',
-      'Content-Type': 'application/json',
-      'Accept': 'application/json',
-      "Authorization": "Bearer ${CacheHelper.instance.getAccessToken()}"
-    };
     await DioHelper.delete(
         queryParameters: queryParameters,
         headers: headers,
@@ -87,6 +68,44 @@ class TeacherDetailsRepoImplement extends TeacherDetailsRepo {
       statusCode = error.response?.statusCode ?? 400;
       log("removeTeacherFromFavorite error: $error");
     });
+    return statusCode;
+  }
+
+  @override
+  Future<int> acceptCandidateProviderForOrder({
+    required int candidateProviderId,
+    required int orderId,
+  }) async {
+    int statusCode = 200;
+    try {
+      Map<String, dynamic> queryParameters = {
+        "OrderId": orderId,
+        "ProviderId": candidateProviderId,
+      };
+      await DioHelper.post(
+        queryParameters: queryParameters,
+        headers: headers,
+        Links.acceptCandidateProviderToOrder,
+        onSuccess: (response) {
+          statusCode = response.statusCode ?? 200;
+          if (Get.isDialogOpen ?? false) {
+            Get.back();
+          }
+        },
+        onError: (error) {
+          statusCode = error.response?.statusCode ?? 400;
+          if (Get.isDialogOpen ?? false) {
+            Get.back();
+          }
+        },
+      );
+    } catch (e) {
+      statusCode = 400;
+      log("acceptCandidateProviderForOrder error: $e");
+      if (Get.isDialogOpen ?? false) {
+        Get.back();
+      }
+    }
     return statusCode;
   }
 }

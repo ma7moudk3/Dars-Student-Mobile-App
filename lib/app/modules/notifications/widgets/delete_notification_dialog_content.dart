@@ -53,6 +53,9 @@ class DeleteNotificationDialogContent extends StatelessWidget {
                     if (Get.isDialogOpen!) {
                       Get.back();
                     }
+                    if (Get.isSnackbarOpen) {
+                      Get.back();
+                    }
                     deleteNotificationFunction();
                   },
                   title: LocaleKeys.ok.tr,

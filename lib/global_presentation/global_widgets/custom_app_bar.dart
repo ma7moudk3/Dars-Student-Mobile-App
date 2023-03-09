@@ -104,11 +104,10 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
                   const Spacer(),
                   action ??
                       GestureDetector(
-                        onTap: () async => await Get.toNamed(
-                            Routes.DARS_TEACHERS,
-                            arguments: {
-                              'searchFocus': true,
-                            }),
+                        onTap: () async =>
+                            await Get.toNamed(Routes.DARS_TEACHERS, arguments: {
+                          'searchFocus': true,
+                        }),
                         child: SvgPicture.asset(
                           ImagesManager.searchIcon,
                         ),

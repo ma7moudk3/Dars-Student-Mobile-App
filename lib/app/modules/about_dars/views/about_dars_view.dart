@@ -29,8 +29,8 @@ class AboutDarsView extends GetView<AboutDarsController> {
         ),
         action: const SizedBox.shrink(),
       ),
-      body: GetX<AboutDarsController>(
-          builder: (AboutDarsController controller) {
+      body:
+          GetX<AboutDarsController>(builder: (AboutDarsController controller) {
         if (controller.isInternetConnected.value) {
           if (controller.isLoading.value == false) {
             return SingleChildScrollView(

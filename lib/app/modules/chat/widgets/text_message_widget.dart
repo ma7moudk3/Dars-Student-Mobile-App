@@ -157,8 +157,7 @@ class TextMessageWidget extends GetView<ChatController> {
                               CacheHelper.instance.getUserId().toString()
                           ? ColorManager.fontColor
                           : Colors.white,
-                      fontSize:
-                          EmojiUtil.hasOnlyEmojis(message.text) ? 28 : 16,
+                      fontSize: EmojiUtil.hasOnlyEmojis(message.text) ? 28 : 16,
                       fontWeight: FontWeightManager.softLight,
                       fontFamily: FontConstants.fontFamily,
                     ),

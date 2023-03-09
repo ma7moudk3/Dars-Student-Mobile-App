@@ -96,7 +96,7 @@ class ProfileController extends GetxController {
   @override
   void onInit() {
     userPicture =
-        "${Links.baseLink}${Links.profileImageById}?userId=${currentUserProfileInfo.value?.result?.requester?.userId ?? -1}";
+        "${Links.baseLink}${Links.profileImageById}?userid=${currentUserProfileInfo.value?.result?.requester?.userId ?? -1}";
     super.onInit();
   }
 

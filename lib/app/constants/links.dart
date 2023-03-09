@@ -14,6 +14,8 @@ class Links {
       'api/services/app/VerificationCodes/GenerateCode';
   static const String verifyOTPCodeEmail =
       'api/services/app/Profile/ActivateEmail';
+  static const String acceptCandidateProviderToOrder =
+      'api/services/app/Orders/PostAcceptProviderToOrder';
   static const String verifyOTPCodeMobile =
       'api/services/app/Profile/ActivateMobile';
   static const String getAllNotifications =
@@ -86,5 +88,6 @@ class Links {
   static const String allMyAddresses =
       "api/services/app/Requesters/GetRequesterAddressForEdit";
   static const String deleteAddress = "api/services/app/Addresses/Delete";
-  static const String deleteNotification = "api/services/app/Notification/DeleteNotification";
+  static const String deleteNotification =
+      "api/services/app/Notification/DeleteNotification";
 }

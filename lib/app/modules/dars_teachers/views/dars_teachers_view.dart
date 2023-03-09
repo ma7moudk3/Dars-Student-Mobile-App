@@ -346,7 +346,7 @@ class DarsTeachersView extends GetView<DarsTeachersController> {
                       ],
                     ),
                   ),
-                  SizedBox(height: 25.h),
+                  SizedBox(height: 10.h),
                   GetBuilder<DarsTeachersController>(
                       builder: (DarsTeachersController controller) {
                     return Expanded(

@@ -1,14 +1,14 @@
-class Result {
+class CandidateProvider {
   dynamic orderId;
   dynamic providerId;
-  bool? isSelectecd;
+  dynamic isSelectecd;
   dynamic rate;
   dynamic userId;
   String? userName;
   dynamic assignedProviderId;
   dynamic id;
 
-  Result({
+  CandidateProvider({
     this.orderId,
     this.providerId,
     this.isSelectecd,
@@ -19,16 +19,18 @@ class Result {
     this.id,
   });
 
-  factory Result.fromJson(Map<String, dynamic> json) => Result(
-        orderId: json['orderId'] as dynamic,
-        providerId: json['providerId'] as dynamic,
-        isSelectecd: json['isSelectecd'] as bool?,
-        rate: json['rate'] as dynamic,
-        userId: json['userId'] as dynamic,
-        userName: json['userName'] as String?,
-        assignedProviderId: json['assignedProviderId'] as dynamic,
-        id: json['id'] as dynamic,
-      );
+  factory CandidateProvider.fromJson(Map<String, dynamic> json) {
+    return CandidateProvider(
+      orderId: json['orderId'] as dynamic,
+      providerId: json['providerId'] as dynamic,
+      isSelectecd: json['isSelectecd'] as dynamic,
+      rate: json['rate'] as dynamic,
+      userId: json['userId'] as dynamic,
+      userName: json['userName'] as String?,
+      assignedProviderId: json['assignedProviderId'] as dynamic,
+      id: json['id'] as dynamic,
+    );
+  }
 
   Map<String, dynamic> toJson() => {
         'orderId': orderId,

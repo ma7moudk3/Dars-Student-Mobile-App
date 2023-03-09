@@ -53,25 +53,25 @@ class OrderDetailsRepoImplement extends OrderDetailsRepo {
       {required int darsOrder}) async {
     CandidateProviders candidateProviders = CandidateProviders();
     // try {
-      Map<String, dynamic> headers = {
-        'Accept-Language': Get.locale != null ? Get.locale!.languageCode : 'ar',
-        'Content-Type': 'application/json',
-        'Accept': 'application/json',
-        "Authorization": "Bearer ${CacheHelper.instance.getAccessToken()}"
-      };
-      Map<String, dynamic> queryParameters = {
-        'orderId': darsOrder,
-      };
-      await DioHelper.get(
-        headers: headers,
-        queryParameters: queryParameters,
-        Links.getCandidateProvidersForOrder,
-        onSuccess: (response) {
-          var result = response.data;
-          candidateProviders = CandidateProviders.fromJson(result);
-        },
-        onError: (error) {},
-      );
+    Map<String, dynamic> headers = {
+      'Accept-Language': Get.locale != null ? Get.locale!.languageCode : 'ar',
+      'Content-Type': 'application/json',
+      'Accept': 'application/json',
+      "Authorization": "Bearer ${CacheHelper.instance.getAccessToken()}"
+    };
+    Map<String, dynamic> queryParameters = {
+      'orderId': darsOrder,
+    };
+    await DioHelper.get(
+      headers: headers,
+      queryParameters: queryParameters,
+      Links.getCandidateProvidersForOrder,
+      onSuccess: (response) {
+        var result = response.data;
+        candidateProviders = CandidateProviders.fromJson(result);
+      },
+      onError: (error) {},
+    );
     // } catch (e) {
     //   log("OrderDetailsRepoImplement.getCandidateProviders: $e");
     // }

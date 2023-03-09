@@ -155,7 +155,8 @@ class NotificationWidget extends GetView<NotificationsController> {
                     ),
                     SizedBox(height: 10.h),
                     PrimaryText(
-                      (itemNotification.notification?.creationTime ?? DateTime.now())
+                      (itemNotification.notification?.creationTime ??
+                              DateTime.now())
                           .timeAgoCustom(),
                       fontWeight: FontWeightManager.softLight,
                       color: ColorManager.fontColor7,

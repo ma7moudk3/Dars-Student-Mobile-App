@@ -31,4 +31,3 @@ Future<dynamic> showLoadingDialog() async {
     ),
   );
 }
-

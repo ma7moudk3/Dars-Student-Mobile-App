@@ -34,8 +34,7 @@ class TechnicalSupportRepoImplement extends TechnicalSupportRepo {
         'email': email,
         'title': urgencyType.displayName ?? "",
         'details': message,
-        'urgencyId':
-            urgencyType.id ?? 2, // 2 is a problem in dars message type
+        'urgencyId': urgencyType.id ?? 2, // 2 is a problem in dars message type
       };
       await DioHelper.post(data: data, headers: headers, Links.contactUs,
           onSuccess: (response) {

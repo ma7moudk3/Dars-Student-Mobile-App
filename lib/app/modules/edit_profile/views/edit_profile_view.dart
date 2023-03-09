@@ -26,7 +26,7 @@ class EditProfileView extends GetView<EditProfileController> {
   @override
   Widget build(BuildContext context) {
     String userPicture =
-        "${Links.baseLink}${Links.profileImageById}?userId=${controller.currentUserProfileInfo.result?.requester?.userId ?? -1}";
+        "${Links.baseLink}${Links.profileImageById}?userid=${controller.currentUserProfileInfo.result?.requester?.userId ?? -1}";
     return WillPopScope(
       onWillPop: () async {
         if (controller.isDataChanged()) {
@@ -56,22 +56,26 @@ class EditProfileView extends GetView<EditProfileController> {
           title: LocaleKeys.edit_profile,
           leading: GestureDetector(
             onTap: () async {
-              await Get.dialog(
-                Container(
-                  color: ColorManager.black.withOpacity(0.1),
-                  height: 140.h,
-                  width: 140.w,
-                  child: Center(
-                    child: Container(
-                      width: Get.width,
-                      margin: EdgeInsets.symmetric(
-                        horizontal: 18.w,
+              if (controller.isDataChanged()) {
+                await Get.dialog(
+                  Container(
+                    color: ColorManager.black.withOpacity(0.1),
+                    height: 140.h,
+                    width: 140.w,
+                    child: Center(
+                      child: Container(
+                        width: Get.width,
+                        margin: EdgeInsets.symmetric(
+                          horizontal: 18.w,
+                        ),
+                        child: const ConfirmBackDialogContent(),
                       ),
-                      child: const ConfirmBackDialogContent(),
                     ),
                   ),
-                ),
-              );
+                );
+              } else {
+                Get.back();
+              }
             },
             behavior: HitTestBehavior.opaque,
             child: Padding(

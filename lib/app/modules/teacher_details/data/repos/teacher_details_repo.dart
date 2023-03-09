@@ -4,4 +4,9 @@ abstract class TeacherDetailsRepo {
   Future<DarsTeacherDetails> getTeacherDetails({required int teacherId});
   Future<int> addTeacherToFavorite({required int teacherId});
   Future<int> removeTeacherFromFavorite({required int teacherId});
+
+  Future<int> acceptCandidateProviderForOrder({
+    required int candidateProviderId,
+    required int orderId,
+  });
 }

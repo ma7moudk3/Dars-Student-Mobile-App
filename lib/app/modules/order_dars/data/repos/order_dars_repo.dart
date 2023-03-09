@@ -10,7 +10,7 @@ abstract class OrderDarsRepo {
     required String preferredEndDate,
     required int sessionTypeId,
     required int productId,
-    int? providerId,
+    int? providerId = 0,
     int? preferredProviderId,
     required int addressId,
     required List<int> orderStudentsIDs,

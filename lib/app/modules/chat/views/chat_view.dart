@@ -77,7 +77,7 @@ class ChatView extends GetView<ChatController> {
                             StatefulBuilder(
                                 builder: (BuildContext context, setState) {
                               String teacherPicture =
-                                  "${Links.baseLink}${Links.profileImageById}?userId=${-1}";
+                                  "${Links.baseLink}${Links.profileImageById}?userid=${-1}";
                               return Container(
                                 width: 60.w,
                                 height: 60.h,

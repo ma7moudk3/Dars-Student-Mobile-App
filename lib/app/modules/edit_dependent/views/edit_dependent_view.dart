@@ -70,7 +70,7 @@ class EditDependentView extends GetView<EditDependentController> {
               );
             });
       } else {
-        Get.bottomSheet(
+        await Get.bottomSheet(
           Padding(
             padding: EdgeInsets.symmetric(horizontal: 16.w, vertical: 20.h),
             child: SizedBox(
@@ -164,22 +164,26 @@ class EditDependentView extends GetView<EditDependentController> {
           title: LocaleKeys.edit_dependent,
           leading: GestureDetector(
             onTap: () async {
-              await Get.dialog(
-                Container(
-                  color: ColorManager.black.withOpacity(0.1),
-                  height: 140.h,
-                  width: 140.w,
-                  child: Center(
-                    child: Container(
-                      width: Get.width,
-                      margin: EdgeInsets.symmetric(
-                        horizontal: 18.w,
+              if (controller.isDataChanged()) {
+                await Get.dialog(
+                  Container(
+                    color: ColorManager.black.withOpacity(0.1),
+                    height: 140.h,
+                    width: 140.w,
+                    child: Center(
+                      child: Container(
+                        width: Get.width,
+                        margin: EdgeInsets.symmetric(
+                          horizontal: 18.w,
+                        ),
+                        child: const ConfirmBackDialogContent(),
                       ),
-                      child: const ConfirmBackDialogContent(),
                     ),
                   ),
-                ),
-              );
+                );
+              } else {
+                Get.back();
+              }
             },
             behavior: HitTestBehavior.opaque,
             child: Padding(

@@ -1,4 +1,3 @@
-
 import 'package:hessa_student/app/routes/app_pages.dart';
 import 'package:hessa_student/generated/locales.g.dart';
 import 'package:intl/intl.dart';
@@ -20,12 +19,13 @@ class OrderWidget extends GetView<OrdersController> {
   @override
   Widget build(BuildContext context) {
     Color orderStatusColor = ColorManager.primary;
-    switch (OrderStatus.values[darsOrder.currentStatusId ?? 0]) {
+    OrderStatus orderStatus = OrderStatus.values[darsOrder.currentStatusId ?? 0];
+    switch (orderStatus) {
       case OrderStatus.submitted:
         orderStatusColor = ColorManager.primary;
         break;
       case OrderStatus.confirmed:
-        orderStatusColor = ColorManager.green;
+        orderStatusColor = ColorManager.primary;
         break;
       case OrderStatus.started:
         orderStatusColor = ColorManager.green;
@@ -213,7 +213,7 @@ class OrderWidget extends GetView<OrdersController> {
                   const Spacer(),
                   Container(
                     width: 80.w,
-                    height: 26.h,
+                    height: 30.h,
                     decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(8),
                       color: orderStatusColor.withOpacity(0.15),

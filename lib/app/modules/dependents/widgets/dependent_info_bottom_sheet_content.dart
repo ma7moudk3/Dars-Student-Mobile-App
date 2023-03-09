@@ -52,7 +52,7 @@ class DependentInfoBottomSheetContent extends GetView<DependentsController> {
                         StatefulBuilder(
                             builder: (BuildContext context, setState) {
                           String studentPicture =
-                              "${Links.baseLink}${Links.profileImageById}?userId=${student.requesterStudent?.id ?? -1}";
+                              "${Links.baseLink}${Links.profileImageById}?userid=${student.requesterStudent?.id ?? -1}";
                           return Container(
                             width: 58.w,
                             height: 65.h,

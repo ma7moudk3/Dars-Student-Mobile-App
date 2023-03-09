@@ -29,11 +29,10 @@ void main() async {
   runApp(
     ScreenUtilInit(
       designSize: const Size(375, 812),
-           splitScreenMode: true,
+      splitScreenMode: true,
       minTextAdapt: true,
       builder: (BuildContext context, Widget? child) {
         return GetMaterialApp(
-
           localizationsDelegates: const <LocalizationsDelegate<dynamic>>[
             GlobalMaterialLocalizations.delegate,
             GlobalWidgetsLocalizations.delegate,

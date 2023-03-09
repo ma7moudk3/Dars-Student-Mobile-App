@@ -67,8 +67,7 @@ class OrdersView extends GetView<OrdersController> {
                           padding: EdgeInsets.symmetric(
                               horizontal: 5.w, vertical: 4.h),
                           pagingController: controller.pagingController,
-                          builderDelegate:
-                              PagedChildBuilderDelegate<DarsOrder>(
+                          builderDelegate: PagedChildBuilderDelegate<DarsOrder>(
                             animateTransitions: true,
                             transitionDuration:
                                 const Duration(milliseconds: 350),
@@ -154,8 +153,8 @@ class OrdersView extends GetView<OrdersController> {
                                 ],
                               );
                             },
-                            itemBuilder: (BuildContext context,
-                                DarsOrder order, int index) {
+                            itemBuilder: (BuildContext context, DarsOrder order,
+                                int index) {
                               return OrderWidget(
                                 isFirst: index == 0,
                                 darsOrder: order,

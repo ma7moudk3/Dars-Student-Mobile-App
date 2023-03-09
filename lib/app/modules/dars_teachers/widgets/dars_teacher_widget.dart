@@ -24,7 +24,7 @@ class TeacherWidget extends GetView<DarsTeachersController> {
   @override
   Widget build(BuildContext context) {
     String teacherUserId = teacher.runtimeType == DarsTeacher
-        ? teacher.userId.toString()
+        ? teacher.userId?.toString() ?? "-1"
         : (teacher.preferredProvider != null
             ? teacher.preferredProvider!.providerUserId != null
                 ? teacher.preferredProvider!.providerUserId.toString()
@@ -37,7 +37,6 @@ class TeacherWidget extends GetView<DarsTeachersController> {
                 : "-1"
             : "-1")
         : "-1";
-
     Widget unPreferTeacherBackgroundWidget =
         GetBuilder<PreferredTeachersController>(
             builder: (PreferredTeachersController controller) {
@@ -76,31 +75,23 @@ class TeacherWidget extends GetView<DarsTeachersController> {
     double teacherRate = teacher.runtimeType == DarsTeacher
         ? teacher.rate ?? 0.0
         : teacher.providerRate ?? 0.0;
-    String levelTopic = teacher.runtimeType == DarsTeacher
-        ? teacher.levelTopic ??
-            [""]
-                .map((String subject) => subject.toString())
-                .toSet()
-                .toList()
-                .join(", ")
-        : teacher.levelTopic ??
-            [""]
-                .map((String subject) => subject.toString())
-                .toSet()
-                .toList()
-                .join(", ");
-    String country = teacher.runtimeType == DarsTeacher
-            ? teacher.country ?? ""
-            : teacher.country ?? "",
-        governorate = teacher.runtimeType == DarsTeacher
-            ? teacher.governorate ?? ""
-            : teacher.governorate ?? "";
-    log("${Links.baseLink}${Links.profileImageById}?userId=$teacherUserId");
+    String levelTopic = teacher.levelTopic ??
+        [""]
+            .map((String subject) => subject.toString())
+            .toSet()
+            .toList()
+            .join(", ");
+    String country = teacher.country ?? "",
+        governorate = teacher.governorate ?? "";
+    log("${Links.baseLink}${Links.profileImageById}?userid=$teacherUserId");
     return GestureDetector(
       behavior: HitTestBehavior.opaque,
       onTap: () async {
+        int teacherId = int.parse(teacher.runtimeType == DarsTeacher
+            ? teacher.id?.toString() ?? "-1"
+            : (teacher.preferredProvider?.providerId?.toString() ?? "-1"));
         await Get.toNamed(Routes.TEACHER_DETAILS, arguments: {
-          "teacher": teacher,
+          "teacherId": teacherId,
         });
       },
       child: teacher.runtimeType == PreferredTeacher
@@ -112,10 +103,6 @@ class TeacherWidget extends GetView<DarsTeachersController> {
                   motion: const ScrollMotion(),
                   extentRatio: 0.25,
                   closeThreshold: 0.2,
-                  // dismissible: DismissiblePane(
-                  //   dismissThreshold: 0.2,
-                  //   onDismissed: () {},
-                  // ),
                   dragDismissible: false,
                   children: [unPreferTeacherBackgroundWidget],
                 ),
@@ -149,7 +136,7 @@ class TeacherWidget extends GetView<DarsTeachersController> {
                               borderRadius: BorderRadius.circular(15),
                               child: CachedNetworkImage(
                                 imageUrl:
-                                    "${Links.baseLink}${Links.profileImageById}?userId=$teacherUserId",
+                                    "${Links.baseLink}${Links.profileImageById}?userid=$teacherUserId",
                                 fit: BoxFit.cover,
                                 errorWidget: (BuildContext context, String url,
                                         dynamic error) =>
@@ -248,8 +235,9 @@ class TeacherWidget extends GetView<DarsTeachersController> {
               ),
             )
           : Container(
-              padding: EdgeInsets.symmetric(horizontal: 16.w, vertical: 16.h),
-              margin: EdgeInsets.only(bottom: 10.h),
+              padding: EdgeInsets.symmetric(horizontal: 12.w, vertical: 16.h),
+              margin: EdgeInsets.only(
+                  bottom: 10.h, left: 3.w, right: 3.w, top: 3.h),
               width: Get.width,
               decoration: BoxDecoration(
                 color: const Color(0xfeffffff),
@@ -277,7 +265,7 @@ class TeacherWidget extends GetView<DarsTeachersController> {
                           borderRadius: BorderRadius.circular(15),
                           child: CachedNetworkImage(
                             imageUrl:
-                                "${Links.baseLink}${Links.profileImageById}?userId=$teacherUserId",
+                                "${Links.baseLink}${Links.profileImageById}?userid=$teacherUserId",
                             fit: BoxFit.cover,
                             errorWidget: (BuildContext context, String url,
                                     dynamic error) =>

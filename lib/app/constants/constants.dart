@@ -1,19 +1,14 @@
 import 'package:get/get.dart';
 
 import '../../generated/locales.g.dart';
+import '../data/cache_helper.dart';
 
 const applicationName = "دَرْس - الطالب";
 
 List<int> darsProductTypes = [19, 41];
 // 19 is for studying package, 41 is for one dars, if another product id is added, add it to darsProductTypes list ..
 
-enum SessionStatus {
-  notStarted,
-  inProgress,
-  paused,
-  completed,
-  cancelled
-}
+enum SessionStatus { notStarted, inProgress, paused, completed, cancelled }
 
 enum OrderStatus {
   submitted,
@@ -42,3 +37,10 @@ List<String> months = [
   LocaleKeys.november.tr,
   LocaleKeys.december.tr,
 ];
+
+Map<String, dynamic> headers = {
+  'Accept-Language': Get.locale != null ? Get.locale!.languageCode : 'ar',
+  'Content-Type': 'application/json',
+  'Accept': 'application/json',
+  "Authorization": "Bearer ${CacheHelper.instance.getAccessToken()}"
+};

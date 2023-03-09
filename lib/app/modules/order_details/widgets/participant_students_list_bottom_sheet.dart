@@ -154,6 +154,7 @@ class ParticipantListBottomSheetContent
                                       visible:
                                           false, // TODO: change to true when the requirement is clear
                                       child: Row(
+                                        mainAxisSize: MainAxisSize.min,
                                         children: [
                                           const Spacer(),
                                           GestureDetector(

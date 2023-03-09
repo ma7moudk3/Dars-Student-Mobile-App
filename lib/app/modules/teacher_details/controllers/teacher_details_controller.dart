@@ -3,13 +3,15 @@ import 'dart:developer';
 import 'package:get/get.dart';
 import 'package:hessa_student/app/core/helper_functions.dart';
 import 'package:hessa_student/app/data/cache_helper.dart';
+import 'package:hessa_student/app/modules/order_details/controllers/order_details_controller.dart';
 import 'package:hessa_student/app/modules/teacher_details/data/models/teacher_details/dars_teacher_details.dart';
 import 'package:hessa_student/app/modules/teacher_details/data/models/teacher_details/provider_skill.dart';
 import 'package:hessa_student/app/modules/teacher_details/data/repos/teacher_details_repo.dart';
+import 'package:hessa_student/global_presentation/global_widgets/loading.dart';
 
 import '../../../../generated/locales.g.dart';
 import '../../../../global_presentation/global_features/images_manager.dart';
-import '../../dars_teachers/data/models/dars_teacher.dart';
+import '../../../../global_presentation/global_widgets/custom_snack_bar.dart';
 import '../data/models/teacher_details/provider_teaching_topic.dart';
 import '../data/repos/teacher_details_repo_implement.dart';
 
@@ -17,18 +19,9 @@ class TeacherDetailsController extends GetxController {
   int currentStar = -1;
   RxBool isInternetConnected = true.obs, isLoading = true.obs;
   bool? isFavorite;
-  dynamic darsTeacher = Get.arguments != null
-      ? Get.arguments["teacher"] ?? DarsTeacher()
-      : DarsTeacher();
-  int teacherId = int.parse(
-      Get.arguments != null && Get.arguments["teacher"] != null
-          ? Get.arguments["teacher"].runtimeType == DarsTeacher
-              ? Get.arguments["teacher"].id.toString()
-              : Get.arguments["teacher"].preferredProvider != null
-                  ? Get.arguments["teacher"].preferredProvider!.providerId
-                      .toString()
-                  : "-1"
-          : "-1");
+  int teacherId = Get.arguments["teacherId"] ?? -1;
+  // accept candidate provider (teacher) for order
+  int orderIdForAccept = Get.arguments["orderId"] ?? -1;
   final TeacherDetailsRepo _teacherDetailsRepo = TeacherDetailsRepoImplement();
   DarsTeacherDetails darsTeacherDetails = DarsTeacherDetails();
   List<Map<String, dynamic>> teacherProperties = [
@@ -103,17 +96,37 @@ class TeacherDetailsController extends GetxController {
       update();
       if (isFavorite == true) {
         await _teacherDetailsRepo.addTeacherToFavorite(
-          teacherId: darsTeacher.runtimeType == DarsTeacher
-              ? darsTeacher.id ?? -1
-              : darsTeacher.preferredProvider!.providerId ?? -1,
+          teacherId: teacherId,
         );
       } else {
         await _teacherDetailsRepo.removeTeacherFromFavorite(
-          teacherId: darsTeacher.runtimeType == DarsTeacher
-              ? darsTeacher.id ?? -1
-              : darsTeacher.preferredProvider!.providerId ?? -1,
+          teacherId: teacherId,
         );
       }
+    }
+  }
+
+  Future acceptCandidateProvider() async {
+    if (orderIdForAccept != -1 && teacherId != -1) {
+      showLoadingDialog();
+      await _teacherDetailsRepo
+          .acceptCandidateProviderForOrder(
+        orderId: orderIdForAccept,
+        candidateProviderId: teacherId,
+      )
+          .then((int statusCode) async {
+        if (statusCode == 200) {
+          OrderDetailsController orderDetailsController =
+              Get.find<OrderDetailsController>();
+          await orderDetailsController.getOrderDetails().then((value) {
+            Get.back();
+            CustomSnackBar.showCustomSnackBar(
+              title: LocaleKeys.success.tr,
+              message: LocaleKeys.candidate_provider_approved_successfully.tr,
+            );
+          });
+        }
+      });
     }
   }
 

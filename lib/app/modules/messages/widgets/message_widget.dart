@@ -37,7 +37,8 @@ class MessageWidget extends GetView<MessagesController> {
                   ),
                   child: DeleteMessageDialogContent(
                     deleteMessageFunction: () async {
-                      controller.deleteMessage(); // TODO: implement deleteMessage function
+                      controller
+                          .deleteMessage(); // TODO: implement deleteMessage function
                     },
                   ),
                 ),

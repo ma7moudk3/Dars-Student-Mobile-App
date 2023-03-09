@@ -1,4 +1,5 @@
 import 'address.dart';
+import 'candidate_provider.dart';
 import 'level_topic.dart';
 import 'order.dart';
 import 'student.dart';
@@ -6,7 +7,7 @@ import 'student.dart';
 class Result {
   Order? order;
   List<LevelTopic>? levelTopics;
-  List<dynamic>? candidateProvider;
+  List<CandidateProvider>? candidateProvider;
   dynamic providerName;
   int? providerUserId;
   String? requesterName;
@@ -55,7 +56,9 @@ class Result {
         levelTopics: (json['levelTopics'] as List<dynamic>?)
             ?.map((e) => LevelTopic.fromJson(e as Map<String, dynamic>))
             .toList(),
-        candidateProvider: json['candidateProvider'] as List<dynamic>?,
+        candidateProvider: (json['candidateProvider'] as List<dynamic>?)
+            ?.map((e) => CandidateProvider.fromJson(e as Map<String, dynamic>))
+            .toList(),
         providerName: json['providerName'] as dynamic,
         providerUserId: json['providerUserId'] as int?,
         requesterName: json['requesterName'] as String?,

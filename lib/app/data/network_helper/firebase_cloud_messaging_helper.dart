@@ -117,7 +117,8 @@ class FcmHelper {
         enableLights: true,
         autoCancel: true,
         color: Colors.white,
-        largeIcon: const DrawableResourceAndroidBitmap('@drawable/ic_launcher_foreground'),
+        largeIcon: const DrawableResourceAndroidBitmap(
+            '@drawable/ic_launcher_foreground'),
         additionalFlags: Int32List.fromList(<int>[16 * (0x00000010)]),
         importance: Importance.high,
         priority: Priority.high);

@@ -1,4 +1,3 @@
-
 import '../../../../generated/locales.g.dart';
 import '../../../constants/exports.dart';
 import '../controllers/order_details_controller.dart';

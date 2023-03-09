@@ -16,7 +16,7 @@ class HomeProfileInfoWidget extends GetView<HomeController> {
   @override
   Widget build(BuildContext context) {
     String userPicture =
-        "${Links.baseLink}${Links.profileImageById}?userId=${controller.currentUserProfileInfo.result?.requester?.userId ?? -1}";
+        "${Links.baseLink}${Links.profileImageById}?userid=${controller.currentUserProfileInfo.result?.requester?.userId ?? -1}";
     return GestureDetector(
       behavior: HitTestBehavior.deferToChild,
       onTap: () async {
@@ -61,7 +61,7 @@ class HomeProfileInfoWidget extends GetView<HomeController> {
                 //   borderRadius: BorderRadius.circular(20),
                 //   child: CachedNetworkImage(
                 //     imageUrl:
-                //         "${Links.baseLink}${Links.profileImageById}?userId=${controller.currentUserProfileInfo.result!.requester!.userId.toString()}",
+                //         "${Links.baseLink}${Links.profileImageById}?userid=${controller.currentUserProfileInfo.result!.requester!.userId.toString()}",
                 //     fit: BoxFit.cover,
                 //     errorWidget:
                 //         (BuildContext context, String url, dynamic error) =>

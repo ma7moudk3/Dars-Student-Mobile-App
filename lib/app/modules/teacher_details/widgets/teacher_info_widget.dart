@@ -2,7 +2,6 @@ import 'package:cached_network_image/cached_network_image.dart';
 
 import '../../../constants/exports.dart';
 import '../../../constants/links.dart';
-import '../../dars_teachers/data/models/dars_teacher.dart';
 import '../controllers/teacher_details_controller.dart';
 
 class TeacherInfo extends GetView<TeacherDetailsController> {
@@ -15,18 +14,12 @@ class TeacherInfo extends GetView<TeacherDetailsController> {
     String teacherPicture = controller.darsTeacherDetails.result != null
         ? controller.darsTeacherDetails.result!.providers != null &&
                 controller.darsTeacherDetails.result!.providers!.userId != null
-            ? "${Links.baseLink}${Links.profileImageById}?userId=${controller.darsTeacherDetails.result!.providers!.userId.toString()}"
+            ? "${Links.baseLink}${Links.profileImageById}?userid=${controller.darsTeacherDetails.result!.providers!.userId.toString()}"
             : "https://www.shareicon.net/data/2016/06/10/586098_guest_512x512.png"
         : "https://www.shareicon.net/data/2016/06/10/586098_guest_512x512.png";
-    String country = controller.darsTeacher.runtimeType == DarsTeacher
-            ? controller.darsTeacher.country ?? ""
-            : controller.darsTeacher.country ?? "",
-        governorate = controller.darsTeacher.runtimeType == DarsTeacher
-            ? controller.darsTeacher.governorate ?? ""
-            : controller.darsTeacher.governorate ?? "";
-    double teacherRate = controller.darsTeacher.runtimeType == DarsTeacher
-        ? controller.darsTeacher.rate ?? 0.0
-        : controller.darsTeacher.providerRate ?? 0.0;
+    String country = controller.darsTeacherDetails.result?.providerAddress?.countryName ?? "",
+        governorate = controller.darsTeacherDetails.result?.providerAddress?.governorateName ?? "";
+    double teacherRate =  0.0;
     return GetBuilder<TeacherDetailsController>(
         builder: (TeacherDetailsController controller) {
       return Row(

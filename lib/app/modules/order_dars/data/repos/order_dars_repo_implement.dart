@@ -108,7 +108,7 @@ class OrderDarsRepoImplement extends OrderDarsRepo {
     required String preferredEndDate,
     required int sessionTypeId,
     required int productId,
-    int? providerId,
+    int? providerId = 0,
     int? preferredProviderId,
     required int addressId,
     required List<int> orderStudentsIDs,
@@ -142,7 +142,7 @@ class OrderDarsRepoImplement extends OrderDarsRepo {
         "preferredEndDate": preferredEndDate,
         "sessionTypeId": sessionTypeId,
         "productId": productId,
-        "providerId": 0, // all
+        "providerId": providerId, // all
         "requesterId": (CacheHelper.instance.getCachedCurrentUserInfo() != null
             ? CacheHelper.instance.getCachedCurrentUserInfo()!.result != null &&
                     CacheHelper.instance

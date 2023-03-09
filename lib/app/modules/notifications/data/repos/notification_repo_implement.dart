@@ -18,37 +18,37 @@ class NotificationsRepoImplement extends NotificationsRepo {
   }) async {
     List<Item> notifications = [];
     // try {
-      Map<String, dynamic> queryParameters = {
-        "SkipCount": (page - 1) * perPage,
-        "MaxResultCount": perPage,
-      };
-      Map<String, dynamic> headers = {
-        'Accept-Language': Get.locale != null ? Get.locale!.languageCode : 'ar',
-        'Content-Type': 'application/json',
-        'Accept': 'application/json',
-        "Authorization": "Bearer ${CacheHelper.instance.getAccessToken()}"
-      };
-      await DioHelper.get(
-        headers: headers,
-        queryParameters: queryParameters,
-        Links.getAllNotifications,
-        onSuccess: (response) {
-          var result = response.data;
-          if (result != null &&
-              result["result"] != null &&
-              result["result"]["items"] != null) {
-            for (var notificationItem in result["result"]["items"]) {
-              notifications.add(Item.fromJson(notificationItem));
-            }
+    Map<String, dynamic> queryParameters = {
+      "SkipCount": (page - 1) * perPage,
+      "MaxResultCount": perPage,
+    };
+    Map<String, dynamic> headers = {
+      'Accept-Language': Get.locale != null ? Get.locale!.languageCode : 'ar',
+      'Content-Type': 'application/json',
+      'Accept': 'application/json',
+      "Authorization": "Bearer ${CacheHelper.instance.getAccessToken()}"
+    };
+    await DioHelper.get(
+      headers: headers,
+      queryParameters: queryParameters,
+      Links.getAllNotifications,
+      onSuccess: (response) {
+        var result = response.data;
+        if (result != null &&
+            result["result"] != null &&
+            result["result"]["items"] != null) {
+          for (var notificationItem in result["result"]["items"]) {
+            notifications.add(Item.fromJson(notificationItem));
           }
-        },
-        onError: (error) {
-          CustomSnackBar.showCustomErrorSnackBar(
-            title: LocaleKeys.error.tr,
-            message: error.response?.data["error"]?["message"] ?? error.message,
-          );
-        },
-      );
+        }
+      },
+      onError: (error) {
+        CustomSnackBar.showCustomErrorSnackBar(
+          title: LocaleKeys.error.tr,
+          message: error.response?.data["error"]?["message"] ?? error.message,
+        );
+      },
+    );
     // } catch (e) {
     //   log("getNotifications DioError $e");
     // }

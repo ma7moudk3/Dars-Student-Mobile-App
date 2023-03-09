@@ -1,4 +1,3 @@
-
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:hessa_student/app/constants/exports.dart';
 import 'package:hessa_student/app/modules/addresses/data/models/address_result/address_result.dart';

@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:hessa_student/app/constants/exports.dart';
 import 'package:hessa_student/app/modules/order_details/widgets/one_dars_widget.dart';
@@ -42,6 +44,7 @@ class OrderDetailsView extends GetView<OrderDetailsController> {
                       null ||
                   !darsProductTypes.contains(
                       controller.darsOrderDetails.result?.order?.productId)) {
+                log("Product id is ${controller.darsOrderDetails.result?.order?.productId ?? -1}");
                 return Center(
                   child: SpinKitCircle(
                     duration: const Duration(milliseconds: 1300),
@@ -55,6 +58,7 @@ class OrderDetailsView extends GetView<OrderDetailsController> {
                   backgroundColor: ColorManager.primary,
                   onRefresh: () async => await controller.checkInternet(),
                   child: SingleChildScrollView(
+                    physics: const AlwaysScrollableScrollPhysics(),
                     child: GetBuilder<OrderDetailsController>(
                         builder: (OrderDetailsController controller) {
                       int productId = controller

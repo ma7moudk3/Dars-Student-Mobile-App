@@ -60,8 +60,8 @@ class DarsTeacherBrief extends GetView<TeacherDetailsController> {
                       controller.darsTeacherDetails.result != null
                           ? controller.darsTeacherDetails.result!.providers !=
                                   null
-                              ? controller.darsTeacherDetails.result!
-                                      .providers!.aboutMe ??
+                              ? controller.darsTeacherDetails.result!.providers!
+                                      .aboutMe ??
                                   ""
                               : ""
                           : "")!);
@@ -81,8 +81,8 @@ class DarsTeacherBrief extends GetView<TeacherDetailsController> {
                       text: controller.darsTeacherDetails.result != null
                           ? controller.darsTeacherDetails.result!.providers !=
                                   null
-                              ? controller.darsTeacherDetails.result!
-                                      .providers!.aboutMe ??
+                              ? controller.darsTeacherDetails.result!.providers!
+                                      .aboutMe ??
                                   ""
                               : ""
                           : "")

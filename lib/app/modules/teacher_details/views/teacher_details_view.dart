@@ -74,7 +74,7 @@ class TeacherDetailsView extends GetView<TeacherDetailsController> {
                               SvgPicture.asset(ImagesManager.ratingIcon),
                               SizedBox(width: 8.w),
                               PrimaryText(
-                              LocaleKeys.rating_previous_darses,
+                                LocaleKeys.rating_previous_darses,
                                 fontSize: 14,
                                 fontWeight: FontWeightManager.softLight,
                                 color: ColorManager.fontColor,
@@ -109,7 +109,10 @@ class TeacherDetailsView extends GetView<TeacherDetailsController> {
                       children: [
                         PrimaryButton(
                           width: 280.w,
-                          onPressed: () {},
+                          onPressed: () async {
+                                await controller.acceptCandidateProvider();
+                           
+                          },
                           title: LocaleKeys.approve_teacher.tr,
                         ),
                         GestureDetector(
