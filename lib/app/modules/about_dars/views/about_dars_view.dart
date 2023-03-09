@@ -68,7 +68,7 @@ class AboutDarsView extends GetView<AboutDarsController> {
                           children: [
                             PrimaryText(
                               LocaleKeys.about_dars,
-                              fontSize: 16.sp,
+                              fontSize: 16,
                               fontWeight: FontWeightManager.light,
                               color: ColorManager.primary,
                             ),
@@ -79,7 +79,7 @@ class AboutDarsView extends GetView<AboutDarsController> {
                                   : controller.aboutDars.bodyL ?? "",
                               textStyle: TextStyle(
                                 color: ColorManager.fontColor,
-                                fontSize: 15.sp,
+                                fontSize: 15,
                                 letterSpacing: 0.5,
                                 wordSpacing: 1.2,
                                 fontWeight: FontWeightManager.softLight,
@@ -94,7 +94,7 @@ class AboutDarsView extends GetView<AboutDarsController> {
                                 children: [
                                   PrimaryText(
                                     LocaleKeys.follow_us,
-                                    fontSize: 18.sp,
+                                    fontSize: 18,
                                     fontWeight: FontWeightManager.light,
                                     color: ColorManager.primary,
                                   ),

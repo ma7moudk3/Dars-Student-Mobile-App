@@ -23,13 +23,17 @@ void main() async {
   SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(
     statusBarColor: ColorManager.transparent, // transparent status bar
   ));
+  await ScreenUtil.ensureScreenSize();
   await FcmHelper.initFcm();
   DioHelper.init();
   runApp(
     ScreenUtilInit(
       designSize: const Size(375, 812),
+           splitScreenMode: true,
+      minTextAdapt: true,
       builder: (BuildContext context, Widget? child) {
         return GetMaterialApp(
+
           localizationsDelegates: const <LocalizationsDelegate<dynamic>>[
             GlobalMaterialLocalizations.delegate,
             GlobalWidgetsLocalizations.delegate,

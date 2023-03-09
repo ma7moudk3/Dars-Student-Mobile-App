@@ -61,13 +61,13 @@ class TeacherInfo extends GetView<TeacherDetailsController> {
                 controller.darsTeacherDetails.result != null
                     ? controller.darsTeacherDetails.result!.userName ?? ""
                     : "",
-                fontSize: 16.sp,
+                fontSize: 16,
               ),
               PrimaryText(
                 country.isNotEmpty && governorate.isNotEmpty
                     ? "$country - $governorate"
                     : "$country$governorate",
-                fontSize: 14.sp,
+                fontSize: 14,
                 color: ColorManager.fontColor7,
                 fontWeight: FontWeightManager.softLight,
               ),
@@ -95,13 +95,13 @@ class TeacherInfo extends GetView<TeacherDetailsController> {
                               : Icons.star_outline_rounded,
                           color: ColorManager.orange,
                           textDirection: TextDirection.ltr,
-                          size: 16.sp,
+                          size: 16,
                         ),
                         SizedBox(
                           width: 25.w,
                           child: PrimaryText(
                             teacherRate.toStringAsFixed(1),
-                            fontSize: 13.sp,
+                            fontSize: 13,
                             fontWeight: FontWeightManager.softLight,
                           ),
                         ),

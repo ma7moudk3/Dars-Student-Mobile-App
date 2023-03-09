@@ -54,13 +54,13 @@ class WalletGridViewItem extends GetView<WalletController> {
             ),
             PrimaryText(
               "₪$cash",
-              fontSize: 20.sp,
+              fontSize: 20,
               fontWeight: FontWeightManager.light,
               color: ColorManager.fontColor,
             ),
             PrimaryText(
               title,
-              fontSize: 15.sp,
+              fontSize: 15,
               fontWeight: FontWeightManager.softLight,
               color: ColorManager.fontColor,
             ),

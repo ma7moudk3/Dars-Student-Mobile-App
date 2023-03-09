@@ -26,7 +26,7 @@ class CannotCancelDarsDialogContent extends GetView<OrderDetailsController> {
             SizedBox(height: 20.h),
             PrimaryText(
               LocaleKeys.you_cannot_cancel_this_dars.tr,
-              fontSize: 18.sp,
+              fontSize: 18,
               fontWeight: FontWeightManager.light,
             ),
             SizedBox(height: 10.h),
@@ -34,7 +34,7 @@ class CannotCancelDarsDialogContent extends GetView<OrderDetailsController> {
               width: 240.w,
               child: PrimaryText(
                 LocaleKeys.due_to_the_starting_time_of_the_dars.tr,
-                fontSize: 15.sp,
+                fontSize: 15,
                 textAlign: TextAlign.center,
                 maxLines: 2,
                 fontWeight: FontWeightManager.softLight,

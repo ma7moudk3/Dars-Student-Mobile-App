@@ -45,7 +45,7 @@ class IntlPhoneNumberTextField extends StatelessWidget {
   Widget build(BuildContext context) {
     var textStyle = TextStyle(
       color: ColorManager.fontColor,
-      fontSize: (14).sp,
+      fontSize: (14),
       fontWeight: FontWeightManager.softLight,
       fontFamily: FontConstants.fontFamily,
     );
@@ -60,7 +60,7 @@ class IntlPhoneNumberTextField extends StatelessWidget {
                   SizedBox(width: 2.w),
                   PrimaryText(
                     "*",
-                    fontSize: 16.sp,
+                    fontSize: 16,
                     fontWeight: FontWeightManager.softLight,
                     color: ColorManager.accent,
                   ),
@@ -136,13 +136,13 @@ class IntlPhoneNumberTextField extends StatelessWidget {
               hintText: LocaleKeys.enter_phone_number.tr,
               hintStyle: TextStyle(
                 color: ColorManager.borderColor2,
-                fontSize: (14).sp,
+                fontSize: (14),
                 fontWeight: FontWeightManager.softLight,
                 fontFamily: FontConstants.fontFamily,
               ),
               errorStyle: TextStyle(
                 color: ColorManager.red,
-                fontSize: (11).sp,
+                fontSize: (11),
                 fontWeight: FontWeightManager.softLight,
                 fontFamily: FontConstants.fontFamily,
               ),
@@ -160,7 +160,7 @@ class IntlPhoneNumberTextField extends StatelessWidget {
               ),
               labelStyle: TextStyle(
                 color: ColorManager.borderColor2,
-                fontSize: (14).sp,
+                fontSize: (14),
                 fontWeight: FontWeightManager.softLight,
                 fontFamily: FontConstants.fontFamily,
               ),

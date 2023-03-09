@@ -48,7 +48,7 @@ class AddressesView extends GetView<AddressesController> {
               child: Icon(
                 Icons.add_rounded,
                 color: ColorManager.primary,
-                size: 15.sp,
+                size: 15,
               ),
             ),
           ),
@@ -210,7 +210,7 @@ class AddressesView extends GetView<AddressesController> {
             children: [
               PrimaryText(
                 LocaleKeys.check_your_internet_connection.tr,
-                fontSize: 18.sp,
+                fontSize: 18,
                 fontWeight: FontWeightManager.bold,
                 textAlign: TextAlign.center,
               ),

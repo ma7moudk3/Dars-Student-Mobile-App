@@ -74,13 +74,13 @@ class StaticPageView extends GetView<StaticPageController> {
                           children: [
                             PrimaryText(
                               controller.pageSubTitle,
-                              fontSize: 16.sp,
+                              fontSize: 16,
                               fontWeight: FontWeightManager.light,
                             ),
                             SizedBox(height: 5.h),
                             PrimaryText(
                               "${LocaleKeys.last_updated.tr}: ${DateTime.now().year}/${DateTime.now().month}/${DateTime.now().day}",
-                              fontSize: 12.sp,
+                              fontSize: 12,
                               fontWeight: FontWeightManager.light,
                               color: ColorManager.grey,
                             ),
@@ -137,7 +137,7 @@ class StaticPageView extends GetView<StaticPageController> {
                       },
                       textStyle: TextStyle(
                         color: ColorManager.fontColor,
-                        fontSize: (16).sp,
+                        fontSize: (16),
                         fontWeight: FontWeightManager.light,
                         wordSpacing: 1.5,
                         height: 1.18,

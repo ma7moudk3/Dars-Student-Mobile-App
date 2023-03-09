@@ -83,7 +83,7 @@ class AddStudentOrderDarsWidget extends GetView<OrderDarsController> {
                           SizedBox(width: 10.w),
                           PrimaryText(
                             LocaleKeys.add_student,
-                            fontSize: 14.sp,
+                            fontSize: 14,
                             fontWeight: FontWeightManager.softLight,
                             color: ColorManager.fontColor,
                           ),
@@ -111,14 +111,14 @@ class AddStudentOrderDarsWidget extends GetView<OrderDarsController> {
                               deleteIcon: Icon(
                                 Icons.close,
                                 color: ColorManager.primary,
-                                size: 14.sp,
+                                size: 14,
                               ),
                               label: PrimaryText(
                                 controller.selectedStudents[index]
                                         .requesterStudent?.name ??
                                     "",
                                 color: ColorManager.primary,
-                                fontSize: 12.sp,
+                                fontSize: 12,
                               ),
                             ),
                             Visibility(

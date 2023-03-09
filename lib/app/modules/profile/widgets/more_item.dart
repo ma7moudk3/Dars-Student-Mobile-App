@@ -92,7 +92,7 @@ class MoreItem extends StatelessWidget {
                         color: textSettingsColor,
                         fontWeight: FontWeightManager.softLight,
                         textAlign: TextAlign.end,
-                        fontSize: 14.sp,
+                        fontSize: 14,
                       ),
                       Visibility(
                         visible: subTitle != null,
@@ -105,7 +105,7 @@ class MoreItem extends StatelessWidget {
                               color: ColorManager.fontColor7,
                               fontWeight: FontWeightManager.softLight,
                               textAlign: TextAlign.end,
-                              fontSize: 13.sp,
+                              fontSize: 13,
                             ),
                           ],
                         ),

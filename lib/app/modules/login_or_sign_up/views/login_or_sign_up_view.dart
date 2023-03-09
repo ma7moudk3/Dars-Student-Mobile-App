@@ -62,14 +62,14 @@ class LoginOrSignUpView extends GetView<LoginOrSignUpController> {
                         SizedBox(height: 20.h),
                         PrimaryText(
                           LocaleKeys.darsApp,
-                          fontSize: 26.sp,
+                          fontSize: 26,
                           fontWeight: FontWeightManager.light,
                           color: Colors.white,
                         ),
                         SizedBox(height: 5.h),
                         PrimaryText(
                           LocaleKeys.student,
-                          fontSize: 20.sp,
+                          fontSize: 20,
                           fontWeight: FontWeightManager.light,
                           color: Colors.white,
                         ),
@@ -108,7 +108,7 @@ class LoginOrSignUpView extends GetView<LoginOrSignUpController> {
                     right: 105.w,
                     child: PrimaryText(
                       "${LocaleKeys.contentRight.tr}${DateTime.now().year.toString()}",
-                      fontSize: 12.sp,
+                      fontSize: 12,
                       fontWeight: FontWeightManager.light,
                       color: Colors.white,
                     ),

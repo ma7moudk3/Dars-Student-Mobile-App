@@ -21,13 +21,13 @@ class DarsPropertyWidget extends GetView<OrderDetailsController> {
           SizedBox(width: 10.w),
           PrimaryText(
             title,
-            fontSize: 13.sp,
+            fontSize: 13,
             fontWeight: FontWeightManager.softLight,
           ),
           const Spacer(),
           PrimaryText(
             content,
-            fontSize: 14.sp,
+            fontSize: 14,
             fontWeight: FontWeightManager.softLight,
             color: ColorManager.grey5,
           ),

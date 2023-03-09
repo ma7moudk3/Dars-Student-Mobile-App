@@ -35,7 +35,7 @@ class DarsTeacherBrief extends GetView<TeacherDetailsController> {
               SizedBox(width: 8.w),
               PrimaryText(
                 LocaleKeys.brief,
-                fontSize: 14.sp,
+                fontSize: 14,
                 fontWeight: FontWeightManager.softLight,
                 color: ColorManager.fontColor,
               ),
@@ -98,7 +98,7 @@ class DarsTeacherBrief extends GetView<TeacherDetailsController> {
               textAlign: TextAlign.start,
               style: TextStyle(
                 color: ColorManager.grey5,
-                fontSize: 14.sp,
+                fontSize: 14,
                 fontWeight: FontWeightManager.light,
                 fontFamily: FontConstants.fontFamily,
               ),
@@ -125,7 +125,7 @@ class DarsTeacherBrief extends GetView<TeacherDetailsController> {
           //       : TextDirection.rtl,
           //   textAlign: TextAlign.start,
           //   color: ColorManager.grey5,
-          //   fontSize: 14.sp,
+          //   fontSize: 14,
           // ),
         ],
       ),

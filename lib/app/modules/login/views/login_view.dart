@@ -50,14 +50,14 @@ class LoginView extends GetView<LoginController> {
                         children: [
                           PrimaryText(
                             LocaleKeys.do_your_sign_in,
-                            fontSize: 18.sp,
+                            fontSize: 18,
                             fontWeight: FontWeightManager.medium,
                             color: ColorManager.white,
                           ),
                           SizedBox(height: 5.h),
                           PrimaryText(
                             LocaleKeys.welcome_in_dars_we_missed_you,
-                            fontSize: 14.sp,
+                            fontSize: 14,
                             fontWeight: FontWeightManager.softLight,
                             color: ColorManager.white,
                           ),
@@ -104,7 +104,7 @@ class LoginView extends GetView<LoginController> {
                   right: 105.w,
                   child: PrimaryText(
                     "${LocaleKeys.contentRight.tr}${DateTime.now().year.toString()}",
-                    fontSize: 12.sp,
+                    fontSize: 12,
                     fontWeight: FontWeightManager.light,
                     color: Colors.white,
                   ),

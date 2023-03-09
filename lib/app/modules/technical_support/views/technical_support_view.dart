@@ -106,20 +106,20 @@ class TechnicalSupportView extends GetView<TechnicalSupportController> {
                               children: [
                                 PrimaryText(
                                   LocaleKeys.contact_us,
-                                  fontSize: 16.sp,
+                                  fontSize: 16,
                                   color: ColorManager.primary,
                                   fontWeight: FontWeightManager.softLight,
                                 ),
                                 SizedBox(height: 3.h),
                                 PrimaryText(
                                   LocaleKeys.do_not_hesitate_to_contact_us,
-                                  fontSize: 14.sp,
+                                  fontSize: 14,
                                   color: ColorManager.fontColor7,
                                   fontWeight: FontWeightManager.softLight,
                                 ),
                                 SizedBox(height: 20.h),
                                 PrimaryTextField(
-                                  fontSize: 14.sp,
+                                  fontSize: 14,
                                   isRequired: true,
                                   controller: controller.fullNameController,
                                   title: LocaleKeys.full_name,
@@ -171,7 +171,7 @@ class TechnicalSupportView extends GetView<TechnicalSupportController> {
                                 ),
                                 SizedBox(height: 20.h),
                                 PrimaryTextField(
-                                  fontSize: 14.sp,
+                                  fontSize: 14,
                                   isRequired: true,
                                   controller: controller.emailController,
                                   title: LocaleKeys.email,
@@ -225,14 +225,14 @@ class TechnicalSupportView extends GetView<TechnicalSupportController> {
                                   children: [
                                     PrimaryText(
                                       LocaleKeys.message_type,
-                                      fontSize: 14.sp,
+                                      fontSize: 14,
                                       fontWeight: FontWeightManager.softLight,
                                       color: ColorManager.fontColor,
                                     ),
                                     SizedBox(width: 2.w),
                                     PrimaryText(
                                       "*",
-                                      fontSize: 16.sp,
+                                      fontSize: 16,
                                       fontWeight: FontWeightManager.softLight,
                                       color: ColorManager.accent,
                                     ),
@@ -287,7 +287,7 @@ class TechnicalSupportView extends GetView<TechnicalSupportController> {
                                 ),
                                 SizedBox(height: 20.h),
                                 PrimaryTextField(
-                                  fontSize: 14.sp,
+                                  fontSize: 14,
                                   multiLines: true,
                                   isRequired: true,
                                   maxLines: 8,

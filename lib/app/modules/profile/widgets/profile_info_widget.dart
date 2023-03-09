@@ -66,7 +66,7 @@ class ProfileInfoWidget extends GetView<ProfileController> {
                               null
                       ? "${controller.currentUserProfileInfo.value!.result!.name ?? ""} ${controller.currentUserProfileInfo.value!.result!.surname ?? ""}"
                       : "",
-                  fontSize: 16.sp,
+                  fontSize: 16,
                   fontWeight: FontWeightManager.light,
                   color: ColorManager.primary,
                 ),
@@ -79,7 +79,7 @@ class ProfileInfoWidget extends GetView<ProfileController> {
                               .emailAddress ??
                           ""
                       : "",
-                  fontSize: 14.sp,
+                  fontSize: 14,
                   fontWeight: FontWeightManager.softLight,
                   color: ColorManager.grey5,
                 ),
@@ -88,14 +88,14 @@ class ProfileInfoWidget extends GetView<ProfileController> {
                   children: [
                     PrimaryText(
                       "${LocaleKeys.last_seen.tr}:",
-                      fontSize: 14.sp,
+                      fontSize: 14,
                       fontWeight: FontWeightManager.softLight,
                       color: ColorManager.fontColor,
                     ),
                     SizedBox(width: 5.w),
                     PrimaryText(
                       "18 مارس 2022",
-                      fontSize: 14.sp,
+                      fontSize: 14,
                       fontWeight: FontWeightManager.softLight,
                       color: ColorManager.grey5,
                     ),

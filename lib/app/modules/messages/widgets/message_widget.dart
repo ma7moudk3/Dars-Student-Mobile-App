@@ -164,13 +164,13 @@ class MessageWidget extends GetView<MessagesController> {
                           children: [
                             PrimaryText(
                               "منذ 2 ساعة",
-                              fontSize: 13.sp,
+                              fontSize: 13,
                               fontWeight: FontWeightManager.light,
                               color: ColorManager.fontColor7,
                             ),
                             Icon(
                               Icons.arrow_forward_ios_rounded,
-                              size: 13.sp,
+                              size: 13,
                               color: ColorManager.fontColor7,
                             ),
                           ],

@@ -18,7 +18,7 @@ class RowTextWidget extends StatelessWidget {
       children: [
         PrimaryText(
           leadingTitle,
-          fontSize: 15.sp,
+          fontSize: 15,
           fontWeight: FontWeight.bold,
           color: ColorManager.black18,
         ),

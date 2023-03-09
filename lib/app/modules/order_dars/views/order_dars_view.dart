@@ -120,7 +120,7 @@ class OrderDarsView extends GetView<OrderDarsController> {
                                   SizedBox(width: 10.w),
                                   PrimaryText(
                                     LocaleKeys.order_new_dars,
-                                    fontSize: 16.sp,
+                                    fontSize: 16,
                                     fontWeight: FontWeightManager.softLight,
                                     color: ColorManager.fontColor,
                                   ),
@@ -129,7 +129,7 @@ class OrderDarsView extends GetView<OrderDarsController> {
                               SizedBox(height: 5.h),
                               PrimaryText(
                                 LocaleKeys.fill_the_student_form,
-                                fontSize: 14.sp,
+                                fontSize: 14,
                                 fontWeight: FontWeightManager.softLight,
                                 color: ColorManager.fontColor7,
                               ),
@@ -159,7 +159,7 @@ class OrderDarsView extends GetView<OrderDarsController> {
                                         children: [
                                           PrimaryText(
                                             LocaleKeys.student_name,
-                                            fontSize: 14.sp,
+                                            fontSize: 14,
                                             fontWeight:
                                                 FontWeightManager.softLight,
                                             color: ColorManager.fontColor,
@@ -167,7 +167,7 @@ class OrderDarsView extends GetView<OrderDarsController> {
                                           SizedBox(width: 2.w),
                                           PrimaryText(
                                             "*",
-                                            fontSize: 16.sp,
+                                            fontSize: 16,
                                             fontWeight:
                                                 FontWeightManager.softLight,
                                             color: ColorManager.accent,
@@ -184,7 +184,7 @@ class OrderDarsView extends GetView<OrderDarsController> {
                                       //       children: [
                                       //         PrimaryText(
                                       //           LocaleKeys.studying_class,
-                                      //           fontSize: 14.sp,
+                                      //           fontSize: 14,
                                       //           fontWeight: FontWeightManager
                                       //               .softLight,
                                       //           color: ColorManager.fontColor,
@@ -192,7 +192,7 @@ class OrderDarsView extends GetView<OrderDarsController> {
                                       //         SizedBox(width: 2.w),
                                       //         PrimaryText(
                                       //           "*",
-                                      //           fontSize: 16.sp,
+                                      //           fontSize: 16,
                                       //           fontWeight: FontWeightManager
                                       //               .softLight,
                                       //           color: ColorManager.accent,
@@ -287,7 +287,7 @@ class OrderDarsView extends GetView<OrderDarsController> {
                                         children: [
                                           PrimaryText(
                                             LocaleKeys.order_dars_category,
-                                            fontSize: 14.sp,
+                                            fontSize: 14,
                                             fontWeight:
                                                 FontWeightManager.softLight,
                                             color: ColorManager.fontColor,
@@ -295,7 +295,7 @@ class OrderDarsView extends GetView<OrderDarsController> {
                                           SizedBox(width: 2.w),
                                           PrimaryText(
                                             "*",
-                                            fontSize: 16.sp,
+                                            fontSize: 16,
                                             fontWeight:
                                                 FontWeightManager.softLight,
                                             color: ColorManager.accent,
@@ -367,7 +367,7 @@ class OrderDarsView extends GetView<OrderDarsController> {
                                               children: [
                                                 PrimaryText(
                                                   LocaleKeys.studying_subjects,
-                                                  fontSize: 14.sp,
+                                                  fontSize: 14,
                                                   fontWeight: FontWeightManager
                                                       .softLight,
                                                   color: ColorManager.fontColor,
@@ -375,7 +375,7 @@ class OrderDarsView extends GetView<OrderDarsController> {
                                                 SizedBox(width: 2.w),
                                                 PrimaryText(
                                                   "*",
-                                                  fontSize: 16.sp,
+                                                  fontSize: 16,
                                                   fontWeight: FontWeightManager
                                                       .softLight,
                                                   color: ColorManager.accent,
@@ -459,12 +459,12 @@ class OrderDarsView extends GetView<OrderDarsController> {
                                                   deleteIcon: Icon(
                                                     Icons.close,
                                                     color: ColorManager.primary,
-                                                    size: 14.sp,
+                                                    size: 14,
                                                   ),
                                                   label: PrimaryText(
                                                     item,
                                                     color: ColorManager.primary,
-                                                    fontSize: 12.sp,
+                                                    fontSize: 12,
                                                   ),
                                                 );
                                               }).toList(),
@@ -484,7 +484,7 @@ class OrderDarsView extends GetView<OrderDarsController> {
                                               children: [
                                                 PrimaryText(
                                                   LocaleKeys.skills,
-                                                  fontSize: 14.sp,
+                                                  fontSize: 14,
                                                   fontWeight: FontWeightManager
                                                       .softLight,
                                                   color: ColorManager.fontColor,
@@ -492,7 +492,7 @@ class OrderDarsView extends GetView<OrderDarsController> {
                                                 SizedBox(width: 2.w),
                                                 PrimaryText(
                                                   "*",
-                                                  fontSize: 16.sp,
+                                                  fontSize: 16,
                                                   fontWeight: FontWeightManager
                                                       .softLight,
                                                   color: ColorManager.accent,
@@ -575,12 +575,12 @@ class OrderDarsView extends GetView<OrderDarsController> {
                                                   deleteIcon: Icon(
                                                     Icons.close,
                                                     color: ColorManager.primary,
-                                                    size: 14.sp,
+                                                    size: 14,
                                                   ),
                                                   label: PrimaryText(
                                                     item,
                                                     color: ColorManager.primary,
-                                                    fontSize: 12.sp,
+                                                    fontSize: 12,
                                                   ),
                                                 );
                                               }).toList(),
@@ -595,7 +595,7 @@ class OrderDarsView extends GetView<OrderDarsController> {
                                         children: [
                                           PrimaryText(
                                             LocaleKeys.dars_time_and_date,
-                                            fontSize: 14.sp,
+                                            fontSize: 14,
                                             fontWeight:
                                                 FontWeightManager.softLight,
                                             color: ColorManager.fontColor,
@@ -603,7 +603,7 @@ class OrderDarsView extends GetView<OrderDarsController> {
                                           SizedBox(width: 2.w),
                                           PrimaryText(
                                             "*",
-                                            fontSize: 16.sp,
+                                            fontSize: 16,
                                             fontWeight:
                                                 FontWeightManager.softLight,
                                             color: ColorManager.accent,
@@ -637,7 +637,7 @@ class OrderDarsView extends GetView<OrderDarsController> {
                                                 children: [
                                                   PrimaryText(
                                                     LocaleKeys.location,
-                                                    fontSize: 14.sp,
+                                                    fontSize: 14,
                                                     fontWeight:
                                                         FontWeightManager
                                                             .softLight,
@@ -647,7 +647,7 @@ class OrderDarsView extends GetView<OrderDarsController> {
                                                   SizedBox(width: 2.w),
                                                   PrimaryText(
                                                     "*",
-                                                    fontSize: 16.sp,
+                                                    fontSize: 16,
                                                     fontWeight:
                                                         FontWeightManager
                                                             .softLight,
@@ -677,7 +677,7 @@ class OrderDarsView extends GetView<OrderDarsController> {
                                                 prefixIcon: Icon(
                                                   Icons.location_on_outlined,
                                                   color: ColorManager.yellow,
-                                                  size: 22.sp,
+                                                  size: 22,
                                                 ),
                                                 suffixIcon: GestureDetector(
                                                   behavior:
@@ -693,7 +693,7 @@ class OrderDarsView extends GetView<OrderDarsController> {
                                                   child: Icon(
                                                     Icons.add_rounded,
                                                     color: ColorManager.primary,
-                                                    size: 22.sp,
+                                                    size: 22,
                                                   ),
                                                 ),
                                                 value: controller
@@ -770,7 +770,7 @@ class OrderDarsView extends GetView<OrderDarsController> {
                                           // SizedBox(width: 2.w),
                                           // PrimaryText(
                                           //   "*",
-                                          //   fontSize: 16.sp,
+                                          //   fontSize: 16,
                                           //   fontWeight:
                                           //       FontWeightManager.softLight,
                                           //   color: ColorManager.accent,
@@ -802,7 +802,7 @@ class OrderDarsView extends GetView<OrderDarsController> {
                                               10.0, 15.0, 20.0, 15.0),
                                           style: TextStyle(
                                             color: ColorManager.fontColor,
-                                            fontSize: 14.sp,
+                                            fontSize: 14,
                                             fontFamily:
                                                 FontConstants.fontFamily,
                                           ),
@@ -890,7 +890,7 @@ class OrderDarsView extends GetView<OrderDarsController> {
                                       ),
                                       SizedBox(height: 12.h),
                                       PrimaryTextField(
-                                        fontSize: 14.sp,
+                                        fontSize: 14,
                                         multiLines: true,
                                         maxLines: 8,
                                         contentPadding:
@@ -994,7 +994,7 @@ class OrderDarsView extends GetView<OrderDarsController> {
                 children: [
                   PrimaryText(
                     LocaleKeys.check_your_internet_connection.tr,
-                    fontSize: 18.sp,
+                    fontSize: 18,
                     fontWeight: FontWeightManager.bold,
                     textAlign: TextAlign.center,
                   ),

@@ -67,7 +67,7 @@ class WalletView extends GetView<WalletController> {
                 SizedBox(height: 22.h),
                 PrimaryText(
                   LocaleKeys.payment_ways.tr,
-                  fontSize: 16.sp,
+                  fontSize: 16,
                   fontWeight: FontWeightManager.light,
                   color: ColorManager.fontColor,
                 ),
@@ -121,7 +121,7 @@ class WalletView extends GetView<WalletController> {
                               SizedBox(width: 12.w),
                               PrimaryText(
                                 LocaleKeys.add_new_payment_method.tr,
-                                fontSize: 14.sp,
+                                fontSize: 14,
                                 fontWeight: FontWeightManager.softLight,
                                 color: ColorManager.white,
                               ),
@@ -138,7 +138,7 @@ class WalletView extends GetView<WalletController> {
                   children: [
                     PrimaryText(
                       LocaleKeys.payments.tr,
-                      fontSize: 16.sp,
+                      fontSize: 16,
                       fontWeight: FontWeightManager.light,
                       color: ColorManager.fontColor,
                     ),
@@ -155,7 +155,7 @@ class WalletView extends GetView<WalletController> {
                       child: Center(
                         child: PrimaryText(
                           LocaleKeys.view_all.tr,
-                          fontSize: 12.sp,
+                          fontSize: 12,
                           fontWeight: FontWeightManager.light,
                           color: ColorManager.fontColor7,
                         ),
@@ -199,13 +199,13 @@ class WalletView extends GetView<WalletController> {
                                 children: [
                                   PrimaryText(
                                     '20',
-                                    fontSize: 12.sp,
+                                    fontSize: 12,
                                     color: ColorManager.primary,
                                     fontWeight: FontWeightManager.light,
                                   ),
                                   PrimaryText(
                                     'ديسمبر',
-                                    fontSize: 11.5.sp,
+                                    fontSize: 11.5,
                                     color: ColorManager.primary,
                                     fontWeight: FontWeightManager.softLight,
                                   ),
@@ -219,7 +219,7 @@ class WalletView extends GetView<WalletController> {
                             children: [
                               PrimaryText(
                                 "رياضيات مستوى مبتدئ",
-                                fontSize: 14.sp,
+                                fontSize: 14,
                                 fontWeight: FontWeightManager.softLight,
                               ),
                               SizedBox(height: 10.h),
@@ -235,7 +235,7 @@ class WalletView extends GetView<WalletController> {
                                 child: Center(
                                   child: PrimaryText(
                                     "${LocaleKeys.remaining.tr} 150 ${LocaleKeys.shekel.tr}",
-                                    fontSize: 12.sp,
+                                    fontSize: 12,
                                     color: ColorManager.red,
                                     fontWeight: FontWeightManager.softLight,
                                   ),
@@ -246,7 +246,7 @@ class WalletView extends GetView<WalletController> {
                           const Spacer(),
                           PrimaryText(
                             "400 ₪",
-                            fontSize: 14.sp,
+                            fontSize: 14,
                           ),
                         ],
                       ),
@@ -271,7 +271,7 @@ class WalletView extends GetView<WalletController> {
                 SizedBox(height: 20.h),
                 PrimaryText(
                   LocaleKeys.no_transaction_has_been_made_on_your_payments.tr,
-                  fontSize: 18.sp,
+                  fontSize: 18,
                 ),
                 Visibility(
                   visible:
@@ -285,7 +285,7 @@ class WalletView extends GetView<WalletController> {
                         LocaleKeys
                             .please_complete_your_profile_information_to_benefit_from_dars_services
                             .tr,
-                        fontSize: 16.sp,
+                        fontSize: 16,
                         textAlign: TextAlign.center,
                         color: ColorManager.fontColor7,
                       ),

@@ -158,7 +158,7 @@ class TextMessageWidget extends GetView<ChatController> {
                           ? ColorManager.fontColor
                           : Colors.white,
                       fontSize:
-                          EmojiUtil.hasOnlyEmojis(message.text) ? 28.sp : 16,
+                          EmojiUtil.hasOnlyEmojis(message.text) ? 28 : 16,
                       fontWeight: FontWeightManager.softLight,
                       fontFamily: FontConstants.fontFamily,
                     ),

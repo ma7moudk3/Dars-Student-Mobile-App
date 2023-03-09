@@ -221,7 +221,7 @@ class DarsTeachersView extends GetView<DarsTeachersController> {
                           children: [
                             PrimaryText(
                               LocaleKeys.search_results,
-                              fontSize: 16.sp,
+                              fontSize: 16,
                             ),
                             const Spacer(),
                             GetBuilder<DarsTeachersController>(
@@ -457,7 +457,7 @@ class DarsTeachersView extends GetView<DarsTeachersController> {
                 children: [
                   PrimaryText(
                     LocaleKeys.check_your_internet_connection.tr,
-                    fontSize: 18.sp,
+                    fontSize: 18,
                     fontWeight: FontWeightManager.bold,
                     textAlign: TextAlign.center,
                   ),

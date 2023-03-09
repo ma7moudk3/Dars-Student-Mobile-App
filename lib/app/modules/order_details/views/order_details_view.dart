@@ -85,7 +85,7 @@ class OrderDetailsView extends GetView<OrderDetailsController> {
               children: [
                 PrimaryText(
                   LocaleKeys.check_your_internet_connection.tr,
-                  fontSize: 18.sp,
+                  fontSize: 18,
                   fontWeight: FontWeightManager.bold,
                   textAlign: TextAlign.center,
                 ),

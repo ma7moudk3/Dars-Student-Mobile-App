@@ -145,7 +145,7 @@ class ResetPasswordView extends GetView<ResetPasswordController> {
                             },
                             borderRadius: BorderRadius.circular(15.h),
                             title: LocaleKeys.restore.tr,
-                            fontSize: 14.sp,
+                            fontSize: 14,
                           ),
                         ],
                       ),

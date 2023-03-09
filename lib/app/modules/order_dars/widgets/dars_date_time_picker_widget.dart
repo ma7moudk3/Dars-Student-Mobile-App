@@ -15,7 +15,7 @@ class DarsDateAndTimePickerWidget extends GetView<OrderDarsController> {
   Widget build(BuildContext context) {
     return PrimaryTextField(
       readOnly: true,
-      fontSize: 14.5.sp,
+      fontSize: 14.5,
       focusNode: index == 0
           ? controller.darsDateFocusNode
           : controller.darsTimeFocusNode,
@@ -95,7 +95,7 @@ class DarsDateAndTimePickerWidget extends GetView<OrderDarsController> {
                         selectionRadius: 20,
                         selectionTextStyle: TextStyle(
                           color: ColorManager.primary,
-                          fontSize: 14.sp,
+                          fontSize: 14,
                           fontWeight: FontWeightManager.softLight,
                           fontFamily: FontConstants.fontFamily,
                         ),
@@ -107,27 +107,27 @@ class DarsDateAndTimePickerWidget extends GetView<OrderDarsController> {
                           textAlign: TextAlign.center,
                           textStyle: TextStyle(
                             color: ColorManager.fontColor,
-                            fontSize: 14.sp,
+                            fontSize: 14,
                             fontWeight: FontWeightManager.light,
                             fontFamily: FontConstants.fontFamily,
                           ),
                         ),
                         rangeTextStyle: TextStyle(
                           color: ColorManager.fontColor,
-                          fontSize: 14.sp,
+                          fontSize: 14,
                           fontWeight: FontWeightManager.light,
                           fontFamily: FontConstants.fontFamily,
                         ),
                         monthCellStyle: DateRangePickerMonthCellStyle(
                           textStyle: TextStyle(
                             color: ColorManager.fontColor,
-                            fontSize: 14.sp,
+                            fontSize: 14,
                             fontWeight: FontWeightManager.softLight,
                             fontFamily: FontConstants.fontFamily,
                           ),
                           todayTextStyle: TextStyle(
                             color: ColorManager.fontColor,
-                            fontSize: 14.sp,
+                            fontSize: 14,
                             fontWeight: FontWeightManager.softLight,
                             fontFamily: FontConstants.fontFamily,
                           ),
@@ -137,7 +137,7 @@ class DarsDateAndTimePickerWidget extends GetView<OrderDarsController> {
                           ),
                           disabledDatesTextStyle: TextStyle(
                             color: ColorManager.grey,
-                            fontSize: 14.sp,
+                            fontSize: 14,
                             fontWeight: FontWeightManager.softLight,
                             fontFamily: FontConstants.fontFamily,
                           ),
@@ -200,24 +200,24 @@ class DarsDateAndTimePickerWidget extends GetView<OrderDarsController> {
                       child: TimeRange(
                         fromTitle: PrimaryText(
                           "${LocaleKeys.from.tr}:",
-                          fontSize: 16.sp,
+                          fontSize: 16,
                           color: ColorManager.fontColor,
                         ),
                         toTitle: PrimaryText(
                           "${LocaleKeys.to.tr}:",
-                          fontSize: 16.sp,
+                          fontSize: 16,
                           color: ColorManager.fontColor,
                         ),
                         titlePadding: 20,
                         textStyle: TextStyle(
                           color: ColorManager.fontColor5,
-                          fontSize: 14.sp,
+                          fontSize: 14,
                           fontWeight: FontWeightManager.softLight,
                           fontFamily: FontConstants.fontFamily,
                         ),
                         activeTextStyle: TextStyle(
                           color: ColorManager.white,
-                          fontSize: 14.sp,
+                          fontSize: 14,
                           fontWeight: FontWeightManager.bold,
                           fontFamily: FontConstants.fontFamily,
                         ),
@@ -255,7 +255,7 @@ class DarsDateAndTimePickerWidget extends GetView<OrderDarsController> {
                                         : LocaleKeys
                                             .chosen_dars_time_and_date.tr,
                                     color: ColorManager.fontColor,
-                                    fontSize: 14.sp,
+                                    fontSize: 14,
                                     fontWeight: FontWeightManager.softLight,
                                   ),
                                   SizedBox(height: 10.h),
@@ -274,7 +274,7 @@ class DarsDateAndTimePickerWidget extends GetView<OrderDarsController> {
                                           PrimaryText(
                                             controller.darsDateController.text,
                                             color: ColorManager.grey,
-                                            fontSize: 14.sp,
+                                            fontSize: 14,
                                           ),
                                         ],
                                       ),
@@ -291,14 +291,14 @@ class DarsDateAndTimePickerWidget extends GetView<OrderDarsController> {
                                                 color: controller
                                                         .darsTimeErrorIconColor ??
                                                     ColorManager.yellow,
-                                                size: 22.sp,
+                                                size: 22,
                                               ),
                                             ),
                                             PrimaryText(
                                               controller
                                                   .darsTimeController.text,
                                               color: ColorManager.grey,
-                                              fontSize: 14.sp,
+                                              fontSize: 14,
                                             ),
                                           ],
                                         ),
@@ -341,7 +341,7 @@ class DarsDateAndTimePickerWidget extends GetView<OrderDarsController> {
           // ? Icon(
           //     Icons.calendar_month_rounded,
           //     color: ColorManager.yellow,
-          //     size: 22.sp,
+          //     size: 22,
           //   )
           : Container(
               margin: EdgeInsets.all(5.w),
@@ -349,7 +349,7 @@ class DarsDateAndTimePickerWidget extends GetView<OrderDarsController> {
                 Icons.access_time,
                 color:
                     controller.darsTimeErrorIconColor ?? ColorManager.yellow,
-                size: 22.sp,
+                size: 22,
               ),
             ),
       prefixIconConstraints: index == 0

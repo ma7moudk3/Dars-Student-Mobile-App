@@ -53,7 +53,7 @@ class OneDarsWidget extends GetView<OrderDetailsController> {
                   SizedBox(width: 8.w),
                   PrimaryText(
                     "20 ${LocaleKeys.studying_hour.tr}",
-                    fontSize: 16.sp,
+                    fontSize: 16,
                     fontWeight: FontWeightManager.softLight,
                     color: ColorManager.fontColor,
                   ),
@@ -105,7 +105,7 @@ class OneDarsWidget extends GetView<OrderDetailsController> {
                 },
                 child: PrimaryText(
                   LocaleKeys.participant_students.tr,
-                  fontSize: 14.sp,
+                  fontSize: 14,
                   fontWeight: FontWeightManager.softLight,
                   color: ColorManager.primary,
                 ),
@@ -247,7 +247,7 @@ class OneDarsWidget extends GetView<OrderDetailsController> {
                                     controller.darsOrderDetails.result?.order
                                             ?.preferredprovider?["name"] ??
                                         "",
-                                    fontSize: 14.sp,
+                                    fontSize: 14,
                                     fontWeight: FontWeightManager.softLight,
                                   ),
                                   SizedBox(
@@ -273,7 +273,7 @@ class OneDarsWidget extends GetView<OrderDetailsController> {
                                         triggerMode: TooltipTriggerMode.tap,
                                         child: PrimaryText(
                                           "${controller.darsOrderDetails.result?.order?.preferredprovider?["address"]?["countryName"] ?? ""} - ${controller.darsOrderDetails.result?.order?.preferredprovider?["address"]?["governorateName"] ?? ""} - ${controller.darsOrderDetails.result?.order?.preferredprovider?["address"]?["localityName"] ?? ""}",
-                                          fontSize: 12.sp,
+                                          fontSize: 12,
                                           maxLines: 1,
                                           fontWeight:
                                               FontWeightManager.softLight,
@@ -450,12 +450,12 @@ class OneDarsWidget extends GetView<OrderDetailsController> {
                                                     ?.candidateProvider?[index]
                                                 ?["userName"] ??
                                             "",
-                                        fontSize: 14.sp,
+                                        fontSize: 14,
                                         fontWeight: FontWeightManager.softLight,
                                       ),
                                       PrimaryText(
                                         'نابلس - القدس', // TODO: change to real data
-                                        fontSize: 14.sp,
+                                        fontSize: 14,
                                         color: ColorManager.fontColor7,
                                         fontWeight: FontWeightManager.softLight,
                                       ),
@@ -605,7 +605,7 @@ class OneDarsWidget extends GetView<OrderDetailsController> {
                                                             ColorManager.orange,
                                                         textDirection:
                                                             TextDirection.ltr,
-                                                        size: 20.sp,
+                                                        size: 20,
                                                       ),
                                                       SizedBox(
                                                         width: 25.w,
@@ -615,7 +615,7 @@ class OneDarsWidget extends GetView<OrderDetailsController> {
                                                                   1),
                                                           color: ColorManager
                                                               .fontColor,
-                                                          fontSize: 12.sp,
+                                                          fontSize: 12,
                                                           maxLines: 1,
                                                           fontWeight:
                                                               FontWeightManager
@@ -647,14 +647,14 @@ class OneDarsWidget extends GetView<OrderDetailsController> {
                                                     fontWeight:
                                                         FontWeightManager
                                                             .softLight,
-                                                    fontSize: 11.sp,
+                                                    fontSize: 11,
                                                   ),
                                                   const Spacer(),
                                                   PrimaryText(
                                                     "مدرسة العلمين", // TODO: change to real data
                                                     color:
                                                         ColorManager.fontColor7,
-                                                    fontSize: 12.sp,
+                                                    fontSize: 12,
                                                     maxLines: 1,
                                                     overflow:
                                                         TextOverflow.ellipsis,

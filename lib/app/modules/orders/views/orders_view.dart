@@ -40,7 +40,7 @@ class OrdersView extends GetView<OrdersController> {
               child: Icon(
                 Icons.add_rounded,
                 color: ColorManager.primary,
-                size: 15.sp,
+                size: 15,
               ),
             ),
           ),
@@ -133,13 +133,13 @@ class OrdersView extends GetView<OrdersController> {
                                   ),
                                   PrimaryText(
                                     LocaleKeys.no_orders_currently.tr,
-                                    fontSize: 16.sp,
+                                    fontSize: 16,
                                     fontWeight: FontWeightManager.light,
                                     color: ColorManager.fontColor,
                                   ),
                                   PrimaryText(
                                     LocaleKeys.you_can_add_new_dars_order.tr,
-                                    fontSize: 16.sp,
+                                    fontSize: 16,
                                     fontWeight: FontWeightManager.light,
                                     color: ColorManager.grey5,
                                   ),

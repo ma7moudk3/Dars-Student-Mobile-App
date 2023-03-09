@@ -58,7 +58,7 @@ class DependentsView extends GetView<DependentsController> {
               child: Icon(
                 Icons.add_rounded,
                 color: ColorManager.primary,
-                size: 15.sp,
+                size: 15,
               ),
             ),
           ),
@@ -251,7 +251,7 @@ class DependentsView extends GetView<DependentsController> {
                                                   SizedBox(width: 5.w),
                                                   PrimaryText(
                                                     student.levelName ?? "",
-                                                    fontSize: 14.sp,
+                                                    fontSize: 14,
                                                     color:
                                                         ColorManager.fontColor7,
                                                     fontWeight:
@@ -391,7 +391,7 @@ class DependentsView extends GetView<DependentsController> {
             children: [
               PrimaryText(
                 LocaleKeys.check_your_internet_connection.tr,
-                fontSize: 18.sp,
+                fontSize: 18,
                 fontWeight: FontWeightManager.bold,
                 textAlign: TextAlign.center,
               ),

@@ -118,7 +118,7 @@ class NotificationsView extends GetView<NotificationsController> {
                                     SizedBox(height: 45.h),
                                     PrimaryText(
                                       LocaleKeys.no_notifications.tr,
-                                      fontSize: 18.sp,
+                                      fontSize: 18,
                                       fontWeight: FontWeightManager.light,
                                     ),
                                     SizedBox(height: 10.h),
@@ -126,7 +126,7 @@ class NotificationsView extends GetView<NotificationsController> {
                                       LocaleKeys
                                           .you_do_not_have_notifications_at_the_present_time
                                           .tr,
-                                      fontSize: 16.sp,
+                                      fontSize: 16,
                                       fontWeight: FontWeightManager.light,
                                       color: ColorManager.fontColor7,
                                       textAlign: TextAlign.center,
@@ -167,7 +167,7 @@ class NotificationsView extends GetView<NotificationsController> {
               children: [
                 PrimaryText(
                   LocaleKeys.check_your_internet_connection.tr,
-                  fontSize: 18.sp,
+                  fontSize: 18,
                   fontWeight: FontWeightManager.book,
                   textAlign: TextAlign.center,
                 ),
@@ -183,7 +183,7 @@ class NotificationsView extends GetView<NotificationsController> {
                     await controller.checkInternet();
                   },
                   title: LocaleKeys.retry.tr,
-                  fontSize: 16.sp,
+                  fontSize: 16,
                   width: (Get.width * 0.60).w,
                 ),
               ],

@@ -55,7 +55,7 @@ class StudyingPackageWidget extends GetView<OrderDetailsController> {
                       },
                       child: PrimaryText(
                         LocaleKeys.participant_students.tr,
-                        fontSize: 14.sp,
+                        fontSize: 14,
                         fontWeight: FontWeightManager.softLight,
                         color: ColorManager.primary,
                       ),
@@ -117,7 +117,7 @@ class StudyingPackageWidget extends GetView<OrderDetailsController> {
                                     controller.darsOrderDetails.result
                                             ?.students?[index].name ??
                                         '',
-                                    fontSize: 14.sp,
+                                    fontSize: 14,
                                     fontWeight: FontWeightManager.softLight,
                                   ),
                                 ],
@@ -130,7 +130,7 @@ class StudyingPackageWidget extends GetView<OrderDetailsController> {
                     moreDivider(),
                     PrimaryText(
                       LocaleKeys.teacher.tr,
-                      fontSize: 14.sp,
+                      fontSize: 14,
                       fontWeight: FontWeightManager.softLight,
                       color: ColorManager.primary,
                     ),
@@ -169,12 +169,12 @@ class StudyingPackageWidget extends GetView<OrderDetailsController> {
                             children: [
                               PrimaryText(
                                 'محمد عبد الله',
-                                fontSize: 14.sp,
+                                fontSize: 14,
                                 fontWeight: FontWeightManager.softLight,
                               ),
                               PrimaryText(
                                 'نابلس - القدس',
-                                fontSize: 12.sp,
+                                fontSize: 12,
                                 fontWeight: FontWeightManager.softLight,
                                 color: ColorManager.fontColor7,
                               ),

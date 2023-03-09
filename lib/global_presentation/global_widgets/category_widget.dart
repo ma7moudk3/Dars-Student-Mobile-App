@@ -50,7 +50,7 @@ class CategoryWidget extends StatelessWidget {
                     padding: EdgeInsets.only(top: 8.0.h),
                     child: PrimaryText(
                       title,
-                      fontSize: 14.sp,
+                      fontSize: 14,
                       fontWeight: FontWeight.bold,
                     ),
                   ),

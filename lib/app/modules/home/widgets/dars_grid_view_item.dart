@@ -54,7 +54,7 @@ class DarsGridViewItem extends GetView<HomeController> {
             const SizedBox(height: 10),
             PrimaryText(
               title,
-              fontSize: 16.sp,
+              fontSize: 15,
               fontWeight: FontWeightManager.softLight,
               color: ColorManager.fontColor,
             ),

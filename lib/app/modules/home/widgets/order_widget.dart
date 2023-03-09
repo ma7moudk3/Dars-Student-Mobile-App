@@ -106,7 +106,7 @@ class OrderWidget extends GetView<OrdersController> {
                     children: [
                       PrimaryText(
                         'رياضيات مستوى مبتدىء',
-                        fontSize: 14.sp,
+                        fontSize: 14,
                         color: ColorManager.fontColor,
                         fontWeight: FontWeightManager.softLight,
                       ),
@@ -122,7 +122,7 @@ class OrderWidget extends GetView<OrdersController> {
                           child: Icon(
                             Icons.arrow_forward_rounded,
                             color: ColorManager.primary,
-                            size: 20.sp,
+                            size: 20,
                           ),
                         ),
                       ),
@@ -150,7 +150,7 @@ class OrderWidget extends GetView<OrdersController> {
                           SizedBox(width: 5.w),
                           PrimaryText(
                             'أ. محمد جبريل',
-                            fontSize: 14.sp,
+                            fontSize: 14,
                             color: ColorManager.fontColor7,
                             fontWeight: FontWeightManager.softLight,
                           ),
@@ -163,7 +163,7 @@ class OrderWidget extends GetView<OrdersController> {
                             children: [
                               Icon(
                                 Icons.watch_later_outlined,
-                                size: 18.sp,
+                                size: 18,
                                 color: ColorManager.yellow,
                               ),
                               SizedBox(width: 5.w),
@@ -176,7 +176,7 @@ class OrderWidget extends GetView<OrdersController> {
                                                 darsOrder.preferredStartDate ??
                                                     ''))
                                     : '',
-                                fontSize: 13.sp,
+                                fontSize: 13,
                                 color: ColorManager.fontColor7,
                                 fontWeight: FontWeightManager.softLight,
                                 maxLines: 1,
@@ -189,7 +189,7 @@ class OrderWidget extends GetView<OrdersController> {
                             children: [
                               Icon(
                                 Icons.person_outline_rounded,
-                                size: 18.sp,
+                                size: 18,
                                 color: ColorManager.yellow,
                               ),
                               SizedBox(width: 5.w),

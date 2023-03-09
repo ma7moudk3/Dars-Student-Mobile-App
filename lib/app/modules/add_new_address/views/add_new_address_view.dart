@@ -126,14 +126,14 @@ class AddNewAddressView extends GetView<AddNewAddressController> {
                                   children: [
                                     PrimaryText(
                                       LocaleKeys.country,
-                                      fontSize: 14.sp,
+                                      fontSize: 14,
                                       fontWeight: FontWeightManager.softLight,
                                       color: ColorManager.fontColor,
                                     ),
                                     SizedBox(width: 2.w),
                                     PrimaryText(
                                       "*",
-                                      fontSize: 16.sp,
+                                      fontSize: 16,
                                       fontWeight: FontWeightManager.softLight,
                                       color: ColorManager.accent,
                                     ),
@@ -195,7 +195,7 @@ class AddNewAddressView extends GetView<AddNewAddressController> {
                                           children: [
                                             PrimaryText(
                                               LocaleKeys.city,
-                                              fontSize: 14.sp,
+                                              fontSize: 14,
                                               fontWeight:
                                                   FontWeightManager.softLight,
                                               color: ColorManager.fontColor,
@@ -203,7 +203,7 @@ class AddNewAddressView extends GetView<AddNewAddressController> {
                                             SizedBox(width: 2.w),
                                             PrimaryText(
                                               "*",
-                                              fontSize: 16.sp,
+                                              fontSize: 16,
                                               fontWeight:
                                                   FontWeightManager.softLight,
                                               color: ColorManager.accent,
@@ -312,7 +312,7 @@ class AddNewAddressView extends GetView<AddNewAddressController> {
                                           children: [
                                             PrimaryText(
                                               LocaleKeys.locality,
-                                              fontSize: 14.sp,
+                                              fontSize: 14,
                                               fontWeight:
                                                   FontWeightManager.softLight,
                                               color: ColorManager.fontColor,
@@ -320,7 +320,7 @@ class AddNewAddressView extends GetView<AddNewAddressController> {
                                             SizedBox(width: 2.w),
                                             PrimaryText(
                                               "*",
-                                              fontSize: 16.sp,
+                                              fontSize: 16,
                                               fontWeight:
                                                   FontWeightManager.softLight,
                                               color: ColorManager.accent,
@@ -415,7 +415,7 @@ class AddNewAddressView extends GetView<AddNewAddressController> {
                                 PrimaryTextField(
                                   cursorColor: ColorManager.primary,
                                   focusNode: controller.addressFocusNode,
-                                  titleFontSize: 14.sp,
+                                  titleFontSize: 14,
                                   isRequired: true,
                                   titleFontWeight: FontWeightManager.softLight,
                                   borderRadius: BorderRadius.circular(14),
@@ -451,7 +451,7 @@ class AddNewAddressView extends GetView<AddNewAddressController> {
                                   isRequired: true,
                                   focusNode:
                                       controller.addressDescriptionFocusNode,
-                                  titleFontSize: 14.sp,
+                                  titleFontSize: 14,
                                   titleFontWeight: FontWeightManager.softLight,
                                   borderRadius: BorderRadius.circular(14),
                                   controller:
@@ -526,7 +526,7 @@ class AddNewAddressView extends GetView<AddNewAddressController> {
                             }
                           }
                         },
-                        fontSize: 15.sp,
+                        fontSize: 15,
                         title: LocaleKeys.add_address.tr,
                       ),
                     ),
@@ -548,7 +548,7 @@ class AddNewAddressView extends GetView<AddNewAddressController> {
               children: [
                 PrimaryText(
                   LocaleKeys.check_your_internet_connection.tr,
-                  fontSize: 18.sp,
+                  fontSize: 18,
                   fontWeight: FontWeightManager.bold,
                   textAlign: TextAlign.center,
                 ),

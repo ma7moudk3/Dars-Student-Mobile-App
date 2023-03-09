@@ -50,7 +50,7 @@ class PrimaryButton extends StatelessWidget {
         ),
         child: PrimaryText(
           title!,
-          fontSize: fontSize!.sp,
+          fontSize: fontSize!,
           color: isDisabled ? ColorManager.fontColor7 : fontColor,
           fontWeight: fontWeight,
         ),

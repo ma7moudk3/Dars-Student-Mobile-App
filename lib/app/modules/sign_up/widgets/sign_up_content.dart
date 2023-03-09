@@ -53,12 +53,12 @@ class SignUpContent extends GetView<SignUpController> {
                             LocaleKeys.gender,
                             color: ColorManager.fontColor,
                             fontWeight: FontWeightManager.light,
-                            fontSize: 14.sp,
+                            fontSize: 14,
                           ),
                           SizedBox(width: 2.w),
                           PrimaryText(
                             "*",
-                            fontSize: 16.sp,
+                            fontSize: 16,
                             fontWeight: FontWeightManager.softLight,
                             color: ColorManager.accent,
                           ),
@@ -153,7 +153,7 @@ class SignUpContent extends GetView<SignUpController> {
                   ),
                   SizedBox(height: 10.h),
                   PrimaryTextField(
-                    fontSize: 14.sp,
+                    fontSize: 14,
                     readOnly: true,
                     isRequired: true,
                     ifReadOnlyTextColor: ColorManager.fontColor7,
@@ -261,7 +261,7 @@ class SignUpContent extends GetView<SignUpController> {
                           ? ColorManager.primary
                           : ColorManager.borderColor2,
                     ),
-                    fontSize: 14.5.sp,
+                    fontSize: 14.5,
                     validator: (String? email) =>
                         controller.validateEmail(email),
                   ),
@@ -404,7 +404,7 @@ class SignUpContent extends GetView<SignUpController> {
                           PrimaryText(
                             LocaleKeys.agree_with,
                             color: ColorManager.fontColor,
-                            fontSize: 13.sp,
+                            fontSize: 13,
                             fontWeight: FontWeightManager.softLight,
                           ),
                           GestureDetector(
@@ -422,14 +422,14 @@ class SignUpContent extends GetView<SignUpController> {
                             child: PrimaryText(
                               "${LocaleKeys.terms_and_conditions.tr} ",
                               color: ColorManager.primary,
-                              fontSize: 13.sp,
+                              fontSize: 13,
                               fontWeight: FontWeightManager.softLight,
                             ),
                           ),
                           PrimaryText(
                             LocaleKeys.for_dars,
                             color: ColorManager.fontColor,
-                            fontSize: 13.sp,
+                            fontSize: 13,
                             fontWeight: FontWeightManager.softLight,
                           ),
                         ],
@@ -469,7 +469,7 @@ class SignUpContent extends GetView<SignUpController> {
                     },
                     borderRadius: BorderRadius.circular(15.h),
                     title: LocaleKeys.sign_up_new_account.tr,
-                    fontSize: 14.sp,
+                    fontSize: 14,
                   ),
                   SizedBox(height: 10.h),
                   Row(
@@ -479,7 +479,7 @@ class SignUpContent extends GetView<SignUpController> {
                         LocaleKeys.do_have_an_account.tr,
                         color: ColorManager.fontColor,
                         fontWeight: FontWeightManager.softLight,
-                        fontSize: 14.sp,
+                        fontSize: 14,
                       ),
                       TextButton(
                         style: ButtonStyle(
@@ -497,7 +497,7 @@ class SignUpContent extends GetView<SignUpController> {
                         child: PrimaryText(
                           LocaleKeys.login.tr,
                           color: ColorManager.primary,
-                          fontSize: 13.sp,
+                          fontSize: 13,
                         ),
                       ),
                     ],

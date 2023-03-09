@@ -278,7 +278,7 @@ class EditProfileView extends GetView<EditProfileController> {
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
                                 PrimaryTextField(
-                                  fontSize: 14.sp,
+                                  fontSize: 14,
                                   isRequired: true,
                                   controller: controller.fullNameController,
                                   title: LocaleKeys.full_name,
@@ -363,7 +363,7 @@ class EditProfileView extends GetView<EditProfileController> {
                                         ? ColorManager.primary
                                         : ColorManager.borderColor2,
                                   ),
-                                  fontSize: 14.5.sp,
+                                  fontSize: 14.5,
                                   validator: (String? email) =>
                                       controller.validateEmail(email),
                                 ),
@@ -383,7 +383,7 @@ class EditProfileView extends GetView<EditProfileController> {
                                 ),
                                 SizedBox(height: 12.h),
                                 PrimaryTextField(
-                                  fontSize: 14.sp,
+                                  fontSize: 14,
                                   readOnly: true,
                                   ifReadOnlyTextColor: ColorManager.fontColor7,
                                   controller: controller.dateOfBirthController,
@@ -498,7 +498,7 @@ class EditProfileView extends GetView<EditProfileController> {
                                 //       "${LocaleKeys.gender.tr} : ",
                                 //       color: ColorManager.fontColor,
                                 //       fontWeight: FontWeightManager.light,
-                                //       fontSize: 14.sp,
+                                //       fontSize: 14,
                                 //     ),
                                 //     SizedBox(width: 10.w),
                                 //     PrimaryText(
@@ -507,7 +507,7 @@ class EditProfileView extends GetView<EditProfileController> {
                                 //           : LocaleKeys.female.tr,
                                 //       color: ColorManager.primary,
                                 //       fontWeight: FontWeightManager.light,
-                                //       fontSize: 14.sp,
+                                //       fontSize: 14,
                                 //     ),
                                 //   ],
                                 // ),
@@ -522,12 +522,12 @@ class EditProfileView extends GetView<EditProfileController> {
                                             LocaleKeys.gender.tr,
                                             color: ColorManager.fontColor,
                                             fontWeight: FontWeightManager.light,
-                                            fontSize: 14.sp,
+                                            fontSize: 14,
                                           ),
                                           SizedBox(width: 2.w),
                                           PrimaryText(
                                             "*",
-                                            fontSize: 16.sp,
+                                            fontSize: 16,
                                             fontWeight:
                                                 FontWeightManager.softLight,
                                             color: ColorManager.accent,

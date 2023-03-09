@@ -26,14 +26,14 @@ class DroosListWidget extends GetView<OrderDetailsController> {
                 onExpansionChanged: (bool isExpanded) => log('$isExpanded'),
                 title: PrimaryText(
                   "${LocaleKeys.dars.tr} (${index + 1})",
-                  fontSize: 14.sp,
+                  fontSize: 14,
                   fontWeight: FontWeightManager.softLight,
                 ),
                 subtitle: SizedBox(
                   width: 170.w,
                   child: PrimaryText(
                     "رياضيات الصف الاول",
-                    fontSize: 13.sp,
+                    fontSize: 13,
                     fontWeight: FontWeightManager.softLight,
                     color: ColorManager.primary,
                     maxLines: 2,
@@ -75,7 +75,7 @@ class DroosListWidget extends GetView<OrderDetailsController> {
                     child: Icon(
                       Icons.arrow_upward_rounded,
                       color: ColorManager.primary,
-                      size: 20.sp,
+                      size: 20,
                     ),
                   ),
                 ),

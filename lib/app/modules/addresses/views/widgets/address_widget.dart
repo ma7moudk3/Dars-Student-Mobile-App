@@ -127,7 +127,7 @@ class AddressWidget extends GetView<AddressesController> {
                               addressResult.address?.address1 != null
                           ? "${addressResult.address?.name ?? ""}: ${addressResult.address?.address1 ?? ""}"
                           : "${addressResult.address?.name ?? ""}${addressResult.address?.name ?? ""}",
-                      fontSize: 13.sp,
+                      fontSize: 13,
                       maxLines: 1,
                       color: ColorManager.fontColor7,
                       overflow: TextOverflow.ellipsis,

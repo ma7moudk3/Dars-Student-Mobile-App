@@ -75,7 +75,7 @@ class TeacherDetailsView extends GetView<TeacherDetailsController> {
                               SizedBox(width: 8.w),
                               PrimaryText(
                               LocaleKeys.rating_previous_darses,
-                                fontSize: 14.sp,
+                                fontSize: 14,
                                 fontWeight: FontWeightManager.softLight,
                                 color: ColorManager.fontColor,
                               ),

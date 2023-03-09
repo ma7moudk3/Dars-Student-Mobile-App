@@ -33,7 +33,7 @@ class AboutTeacher extends GetView<TeacherDetailsController> {
               SizedBox(width: 8.w),
               PrimaryText(
                 LocaleKeys.about_teacher,
-                fontSize: 14.sp,
+                fontSize: 14,
                 fontWeight: FontWeightManager.softLight,
                 color: ColorManager.fontColor,
               ),
