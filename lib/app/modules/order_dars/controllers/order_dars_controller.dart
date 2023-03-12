@@ -204,8 +204,9 @@ class OrderDarsController extends GetxController {
       providerId: orderDarsToEdit.result?.order?.providerId,
       rate: orderDarsToEdit.result?.order?.rate,
       rateNotes: orderDarsToEdit.result?.order?.rateNotes,
-      preferredProviderId:
-          chosenPreferredTeacher?.preferredProvider?.providerId ?? -1,
+      preferredProviderId: preferredTeacherNameController.text.isNotEmpty
+          ? chosenPreferredTeacher?.preferredProvider?.providerId ?? -1
+          : null,
       notes: notesController.text,
       id: orderIdToEdit,
     )

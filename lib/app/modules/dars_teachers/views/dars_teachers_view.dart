@@ -299,7 +299,7 @@ class DarsTeachersView extends GetView<DarsTeachersController> {
                                         child: ListTile(
                                           splashColor: Colors.transparent,
                                           leading: Icon(
-                                            Icons.select_all_rounded,
+                                            Icons.checklist_rtl_rounded,
                                             color: ColorManager.fontColor
                                                 .withOpacity(0.7),
                                             size: 23,

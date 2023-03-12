@@ -105,11 +105,16 @@ class OrderWidget extends GetView<OrdersController> {
                 children: [
                   Row(
                     children: [
-                      PrimaryText(
-                        'رياضيات مستوى مبتدىء',
-                        fontSize: 14,
-                        color: ColorManager.fontColor,
-                        fontWeight: FontWeightManager.softLight,
+                      SizedBox(
+                        width: 170.w,
+                        child: PrimaryText(
+                          darsOrder.levelTopic ?? "",
+                          fontSize: 14,
+                          maxLines: 1,
+                          overflow: TextOverflow.ellipsis,
+                          color: ColorManager.fontColor,
+                          fontWeight: FontWeightManager.softLight,
+                        ),
                       ),
                       const Spacer(),
                       Container(

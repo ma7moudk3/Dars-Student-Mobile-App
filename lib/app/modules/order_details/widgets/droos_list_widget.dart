@@ -1,6 +1,7 @@
 import 'dart:developer';
 
 import 'package:flutter_spinkit/flutter_spinkit.dart';
+import 'package:hessa_student/app/constants/constants.dart';
 import 'package:hessa_student/app/modules/order_details/data/models/order_session/order_session.dart';
 import 'package:infinite_scroll_pagination/infinite_scroll_pagination.dart';
 import 'package:intl/intl.dart';
@@ -16,7 +17,10 @@ import 'dars_property_widget.dart';
 class DroosListWidget extends GetView<OrderDetailsController> {
   const DroosListWidget({
     Key? key,
+    required this.orderStatus,
   }) : super(key: key);
+
+  final OrderStatus orderStatus;
 
   @override
   Widget build(BuildContext context) {
@@ -85,7 +89,9 @@ class DroosListWidget extends GetView<OrderDetailsController> {
               SizedBox(height: 20.h),
               Center(
                 child: PrimaryText(
-                  "${LocaleKeys.no_droos_yet.tr} !",
+                  orderStatus == OrderStatus.cancelled
+                      ? "${LocaleKeys.had_no_droos.tr} !"
+                      : "${LocaleKeys.no_droos_yet.tr} !",
                   fontSize: 16,
                   fontWeight: FontWeightManager.softLight,
                   color: ColorManager.fontColor,
@@ -161,6 +167,27 @@ class DroosListWidget extends GetView<OrderDetailsController> {
                   .getStudentsCountString(orderSession.studentCount ?? 0),
             },
           ];
+          Color sessionStatusColor = ColorManager.primary;
+          SessionStatus sessionStatus =
+              SessionStatus.values[orderSession.session?.currentStatusId ?? 0];
+          log("Current Session Status: $sessionStatus");
+          switch (sessionStatus) {
+            case SessionStatus.notStarted:
+              sessionStatusColor = ColorManager.primary;
+              break;
+            case SessionStatus.inProgress:
+              sessionStatusColor = ColorManager.green;
+              break;
+            case SessionStatus.paused:
+              sessionStatusColor = ColorManager.yellow;
+              break;
+            case SessionStatus.completed:
+              sessionStatusColor = ColorManager.green;
+              break;
+            case SessionStatus.cancelled:
+              sessionStatusColor = ColorManager.red;
+              break;
+          }
           return Column(
             children: [
               ExpansionTileCard(
@@ -186,7 +213,58 @@ class DroosListWidget extends GetView<OrderDetailsController> {
                 borderRadius: BorderRadius.circular(14.0),
                 shadowColor: const Color(0x1a000000),
                 animateTrailing: true,
-                trailing: const SizedBox.shrink(),
+                trailing: Container(
+                  width: 100.w,
+                  height: 29.h,
+                  decoration: BoxDecoration(
+                    color: sessionStatusColor.withOpacity(0.15),
+                    borderRadius: BorderRadius.circular(8),
+                  ),
+                  child: Row(
+                    mainAxisSize: MainAxisSize.min,
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Container(
+                        width: 18.w,
+                        height: 18.h,
+                        decoration: BoxDecoration(
+                          color: sessionStatusColor.withOpacity(0.15),
+                          borderRadius: BorderRadius.circular(8),
+                        ),
+                        /* enum SessionStatus { notStarted, inProgress, paused, completed, cancelled } */
+                        child: Icon(
+                          sessionStatus == SessionStatus.notStarted
+                              ? Icons.not_started_rounded
+                              : sessionStatus == SessionStatus.inProgress
+                                  ? Icons.play_arrow_rounded
+                                  : sessionStatus == SessionStatus.paused
+                                      ? Icons.pause_rounded
+                                      : sessionStatus == SessionStatus.completed
+                                          ? Icons.check_rounded
+                                          : Icons.close_rounded, // cancelled
+                          color: sessionStatusColor,
+                          size: 16,
+                        ),
+                      ),
+                      SizedBox(width: 4.w),
+                      PrimaryText(
+                        orderSession.session?.currentStatusName ??
+                            (sessionStatus == SessionStatus.notStarted
+                                ? LocaleKeys.not_started.tr
+                                : sessionStatus == SessionStatus.inProgress
+                                    ? LocaleKeys.in_progress.tr
+                                    : sessionStatus == SessionStatus.paused
+                                        ? LocaleKeys.paused.tr
+                                        : sessionStatus ==
+                                                SessionStatus.completed
+                                            ? LocaleKeys.completed.tr
+                                            : LocaleKeys.cancelled.tr),
+                        color: sessionStatusColor,
+                        fontWeight: FontWeightManager.softLight,
+                      ),
+                    ],
+                  ),
+                ),
                 // TODO: if the requester is allowed to delete the session then show the delete icon
                 // trailing: GestureDetector(
                 //   behavior: HitTestBehavior.opaque,

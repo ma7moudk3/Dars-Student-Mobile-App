@@ -396,6 +396,7 @@ class LocaleKeys {
   static const studying_hour = 'studying_hour';
   static const dars = 'dars';
   static const no_droos_yet = 'no_droos_yet';
+  static const had_no_droos = 'had_no_droos';
   static const droos_list = 'droos_list';
   static const timing = 'timing';
   static const date = 'date';
@@ -435,8 +436,13 @@ class LocaleKeys {
   static const edit_order_dars = 'edit_order_dars';
   static const please_enter_cvv = 'please_enter_cvv';
   static const cvv_is_invalid = 'cvv_is_invalid';
+  static const not_started = 'not_started';
   static const one_session = 'one_session';
+  static const paused = 'paused';
+  static const cancelled = 'cancelled';
+  static const completed = 'completed';
   static const two_sessions = 'two_sessions';
+  static const in_progress = 'in_progress';
   static const please_enter_cancel_order_reason =
       'please_enter_cancel_order_reason';
   static const check_cancel_order_reason = 'check_cancel_order_reason';
@@ -520,7 +526,7 @@ class Locales {
     'sort_descending': 'رتب تنازلي',
     'no_messages_yet': 'لا توجد رسائل بعد',
     'welcoming': 'يسعدنا رؤيتك مرة أخرى',
-    'current_preferred_teacher': 'المعلم المفضّل',
+    'current_preferred_teacher': 'المعلم المُفضّل لهذا الطلب',
     'add_new_dependent': 'اضافة تابع جديد',
     'welcome_back': 'نأمل أن تكون قد قضيت وقتًا رائعًا\nونحن سعداء بالعودة',
     'no_messages_to_see_here': 'لا يوجد رسائل لعرضها هنا',
@@ -876,6 +882,7 @@ class Locales {
     'studying_hour': 'ساعة تدريسية',
     'dars': 'الدرس',
     'no_droos_yet': 'لا يوجد دروس حتى الآن',
+    'had_no_droos': 'لم يكن لديك دروس',
     'droos_list': 'قائمة الدروس',
     'timing': 'التوقيت',
     'date': 'التاريخ',
@@ -910,12 +917,17 @@ class Locales {
     'december': 'ديسمبر',
     'participants': 'مشاركين',
     'cancel_order_dars': 'إلغاء طلب الدرس',
-    'order_already_cancelled': 'تم إلغاء هذا الطلب من قبلك',
+    'order_already_cancelled': 'تم إلغاء هذا الطلب',
     'edit_order_dars': 'تعديل طلب الدرس',
     'please_enter_cvv': 'أدخل CVV',
     'cvv_is_invalid': 'CVV غير صالح',
+    'not_started': 'لم تبدأ',
     'one_session': 'جلسة واحدة',
+    'paused': 'مُعلّقة',
+    'cancelled': 'مُلغاة',
+    'completed': 'مكتملة',
     'two_sessions': 'جلستان',
+    'in_progress': 'قيد التنفيذ',
     'please_enter_cancel_order_reason': 'الرجاء إدخال سبب الغاء الطلب',
     'check_cancel_order_reason': 'تحقق من سبب الغاء الطلب',
     'please_choose_card_type': 'إختر نوع البطاقة',

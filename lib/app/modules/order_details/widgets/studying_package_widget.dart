@@ -60,7 +60,9 @@ class StudyingPackageWidget extends GetView<OrderDetailsController> {
                   orderStatus: orderStatus,
                 ),
                 SizedBox(height: 20.h),
-                const DroosListWidget(),
+                DroosListWidget(
+                  orderStatus: orderStatus,
+                ),
                 SizedBox(height: 5.h),
                 Container(
                   padding:
@@ -372,7 +374,8 @@ class StudyingPackageWidget extends GetView<OrderDetailsController> {
                               SizedBox(height: 20.h),
                             ],
                           );
-                        } else if (orderStatus == OrderStatus.confirmed) {
+                        } else if (orderStatus != OrderStatus.submitted &&
+                            orderStatus != OrderStatus.cancelled) {
                           return Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [

@@ -838,7 +838,6 @@ class OrderDarsView extends GetView<OrderDarsController> {
                                                     searchValue: searchValue
                                                         .toLowerCase());
                                           } else {
-                                            controller.selectTeacher(null);
                                             return <PreferredTeacher>[];
                                           }
                                         },

@@ -41,6 +41,7 @@ class HomeView extends GetView<HomeController> {
                 );
               } else {
                 return SingleChildScrollView(
+                  physics: const AlwaysScrollableScrollPhysics(),
                   child: Column(
                     children: [
                       SizedBox(height: 26.h),
