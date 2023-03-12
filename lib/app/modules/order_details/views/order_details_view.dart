@@ -40,11 +40,11 @@ class OrderDetailsView extends GetView<OrderDetailsController> {
             builder: (OrderDetailsController controller) {
           if (controller.isInternetConnected.value == true) {
             if (controller.isLoading.value == false) {
-              if (controller.darsOrderDetails.result?.order?.productId ==
+              if (controller.darsOrderDetails.value.result?.order?.productId ==
                       null ||
-                  !darsProductTypes.contains(
-                      controller.darsOrderDetails.result?.order?.productId)) {
-                log("Product id is ${controller.darsOrderDetails.result?.order?.productId ?? -1}");
+                  !darsProductTypes.contains(controller
+                      .darsOrderDetails.value.result?.order?.productId)) {
+                log("Product id is ${controller.darsOrderDetails.value.result?.order?.productId ?? -1}");
                 return Center(
                   child: SpinKitCircle(
                     duration: const Duration(milliseconds: 1300),
@@ -61,8 +61,8 @@ class OrderDetailsView extends GetView<OrderDetailsController> {
                     physics: const AlwaysScrollableScrollPhysics(),
                     child: GetBuilder<OrderDetailsController>(
                         builder: (OrderDetailsController controller) {
-                      int productId = controller
-                              .darsOrderDetails.result?.order?.productId ??
+                      int productId = controller.darsOrderDetails.value.result
+                              ?.order?.productId ??
                           -1;
                       if (productId == 41) {
                         // 19 is for studying package, 41 is for one dars

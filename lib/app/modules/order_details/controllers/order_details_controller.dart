@@ -1,9 +1,13 @@
+import 'dart:developer';
+
 import 'package:hessa_student/app/constants/exports.dart';
 import 'package:hessa_student/app/core/helper_functions.dart';
 import 'package:hessa_student/global_presentation/global_widgets/loading.dart';
+import 'package:infinite_scroll_pagination/infinite_scroll_pagination.dart';
 import 'package:intl/intl.dart';
 
 import '../../../../generated/locales.g.dart';
+import '../../../../global_presentation/global_widgets/custom_snack_bar.dart';
 import '../../../data/cache_helper.dart';
 import '../../../data/models/classes/classes.dart';
 import '../../../routes/app_pages.dart';
@@ -13,6 +17,7 @@ import '../../order_dars/data/repos/order_dars_repo_implement.dart';
 import '../../teacher_details/data/repos/teacher_details_repo.dart';
 import '../../teacher_details/data/repos/teacher_details_repo_implement.dart';
 import '../data/models/order_details/order_details.dart';
+import '../data/models/order_session/order_session.dart';
 import '../data/repos/order_details_repo.dart';
 import '../data/repos/order_details_repo_implement.dart';
 import '../widgets/you_cant_cancel_dars_dialog_content.dart';
@@ -48,35 +53,75 @@ class OrderDetailsController extends GetxController {
     //   "title": LocaleKeys.studying_class.tr,
     // },
   ];
+  // Map<int, List<Map<String, dynamic>>> orderPropertiesMap = {};
+
   DarsOrder darsOrder = Get.arguments ?? DarsOrder();
   final TeacherDetailsRepo _teacherDetailsRepo = TeacherDetailsRepoImplement();
   final GlobalKey<FormState> formKey = GlobalKey<FormState>();
   late TextEditingController cancelReasonController;
   Classes classes = Classes();
   bool isPreferredTeacherFavorite = false;
+  static const _pageSize = 5; // 5 sessions per page
+  List<OrderSession> orderSessions = [];
+  PagingController<int, OrderSession> pagingController =
+      PagingController(firstPageKey: 1); // item = order session
   final OrderDarsRepo _orderDarsRepo = OrderDarsRepoImplement();
   final OrderDetailsRepo _darsDetailsRepoImplement =
       OrderDetailsRepoImplement();
-  OrderDetails darsOrderDetails = OrderDetails();
+  Rx<OrderDetails> darsOrderDetails = OrderDetails().obs;
   RxBool isInternetConnected = true.obs, isLoading = true.obs;
   @override
   void onInit() async {
     cancelReasonController = TextEditingController();
+    _initPageRequestListener();
     await checkInternet();
     super.onInit();
   }
 
+  void _initPageRequestListener() {
+    pagingController.addPageRequestListener((int pageKey) async {
+      await getOrderSessions(page: pageKey);
+    });
+  }
+
+  Future deleteSession({
+    required int sessionId,
+  }) async {
+    if (sessionId != -1) {
+      await _darsDetailsRepoImplement
+          .deleteSession(
+        sessionId: sessionId,
+      )
+          .then((int statusCode) {
+        if (statusCode == 200) {
+          CustomSnackBar.showCustomSnackBar(
+            title: LocaleKeys.success.tr,
+            message: LocaleKeys.session_deleted_successfully.tr,
+          );
+          pagingController.refresh();
+        }
+      });
+    } else {
+      CustomSnackBar.showCustomSnackBar(
+        title: LocaleKeys.error.tr,
+        message: LocaleKeys.you_cant_delete_this_session.tr,
+      );
+    }
+  }
+
   void initOrderProperties() {
     DateTime preferredStartDate = DateFormat('yyyy-MM-dd').parse(
-        (darsOrderDetails.result?.order?.preferredStartDate ?? '')
+        (darsOrderDetails.value.result?.order?.preferredStartDate ?? '')
             .split("T")[0]);
     DateTime preferredStartTime = DateFormat('HH:mm:ss').parse(
-        (darsOrderDetails.result?.order?.preferredStartDate ?? '')
+        (darsOrderDetails.value.result?.order?.preferredStartDate ?? '')
             .split("T")[1]);
     DateTime preferredEndDate = DateFormat('yyyy-MM-dd').parse(
-        (darsOrderDetails.result?.order?.preferredEndDate ?? '').split("T")[0]);
+        (darsOrderDetails.value.result?.order?.preferredEndDate ?? '')
+            .split("T")[0]);
     DateTime preferredEndTime = DateFormat('HH:mm:ss').parse(
-        (darsOrderDetails.result?.order?.preferredEndDate ?? '').split("T")[1]);
+        (darsOrderDetails.value.result?.order?.preferredEndDate ?? '')
+            .split("T")[1]);
     orderProperties[0]["content"] = "${DateFormat.jm('ar_SA').format(
       DateTime(
         preferredStartDate.year,
@@ -97,14 +142,15 @@ class OrderDetailsController extends GetxController {
     orderProperties[1]["content"] =
         DateFormat("dd MMMM yyyy", "ar_SA").format(preferredStartDate);
     orderProperties[2]["content"] =
-        darsOrderDetails.result?.order?.sessionTypeId == 0
+        darsOrderDetails.value.result?.order?.sessionTypeId == 0
             ? LocaleKeys.face_to_face.tr
-            : darsOrderDetails.result?.order?.sessionTypeId == 1
+            : darsOrderDetails.value.result?.order?.sessionTypeId == 1
                 ? LocaleKeys.electronic.tr
                 : LocaleKeys.both.tr;
-    orderProperties[3]["content"] = darsOrderDetails.result?.productName ?? "";
+    orderProperties[3]["content"] =
+        darsOrderDetails.value.result?.productName ?? "";
     orderProperties.last["content"] =
-        darsOrderDetails.result?.address?.addressDetails?.name ?? "";
+        darsOrderDetails.value.result?.address?.addressDetails?.name ?? "";
     update();
   }
 
@@ -114,11 +160,13 @@ class OrderDetailsController extends GetxController {
       update();
       if (isPreferredTeacherFavorite == true) {
         await _teacherDetailsRepo.addTeacherToFavorite(
-          teacherId: darsOrderDetails.result?.order?.preferredproviderId ?? -1,
+          teacherId:
+              darsOrderDetails.value.result?.order?.preferredproviderId ?? -1,
         );
       } else {
         await _teacherDetailsRepo.removeTeacherFromFavorite(
-          teacherId: darsOrderDetails.result?.order?.preferredproviderId ?? -1,
+          teacherId:
+              darsOrderDetails.value.result?.order?.preferredproviderId ?? -1,
         );
       }
     }
@@ -189,14 +237,58 @@ class OrderDetailsController extends GetxController {
     return null;
   }
 
+  String getStudentsCountString(int studentsCount) {
+    if (Get.locale!.languageCode == "ar") {
+      if (studentsCount == 1) {
+        return LocaleKeys.one_student.tr;
+      } else if (studentsCount == 2) {
+        return LocaleKeys.two_students.tr;
+      } else if (studentsCount >= 3 && studentsCount <= 10) {
+        return "$studentsCount ${LocaleKeys.students.tr}";
+      } else {
+        return "$studentsCount ${LocaleKeys.student_count.tr}";
+      }
+    } else {
+      if (studentsCount == 1) {
+        return LocaleKeys.one_student.tr;
+      } else {
+        return "$studentsCount ${LocaleKeys.student.tr}";
+      }
+    }
+  }
+
   Future getOrderDetails() async {
     if (darsOrder.id != null) {
-      darsOrderDetails = await _darsDetailsRepoImplement.getDarsOrderDetails(
-          darsOrder: darsOrder.id!);
+      await _darsDetailsRepoImplement
+          .getDarsOrderDetails(darsOrder: darsOrder.id!)
+          .then((OrderDetails orderDetails) async {
+        darsOrderDetails.value = orderDetails;
+      });
     }
-    isPreferredTeacherFavorite = darsOrderDetails.result != null &&
-        darsOrderDetails.result!.order != null &&
-        darsOrderDetails.result!.order!.preferredproviderId != null;
+    isPreferredTeacherFavorite = darsOrderDetails.value.result != null &&
+        darsOrderDetails.value.result!.order != null &&
+        darsOrderDetails.value.result!.order!.preferredproviderId != null;
+    update();
+  }
+
+  Future getOrderSessions({
+    required int page,
+  }) async {
+    try {
+      if (darsOrder.id != null) {
+        orderSessions = await _darsDetailsRepoImplement.getDarsOrderSessions(
+            darsOrderId: darsOrder.id!, page: page, perPage: _pageSize);
+        final isLastPage = orderSessions.length < _pageSize;
+        if (isLastPage) {
+          pagingController.appendLastPage(orderSessions);
+        } else {
+          final nextPageKey = page + 1;
+          pagingController.appendPage(orderSessions, nextPageKey);
+        }
+      }
+    } on Exception catch (e) {
+      log("error in get order sessions $e");
+    }
     update();
   }
 

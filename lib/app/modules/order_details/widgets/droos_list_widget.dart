@@ -1,6 +1,13 @@
 import 'dart:developer';
 
+import 'package:flutter_spinkit/flutter_spinkit.dart';
+import 'package:hessa_student/app/modules/order_details/data/models/order_session/order_session.dart';
+import 'package:infinite_scroll_pagination/infinite_scroll_pagination.dart';
+import 'package:intl/intl.dart';
+import 'package:lottie/lottie.dart';
+
 import '../../../../generated/locales.g.dart';
+import '../../../../global_presentation/global_features/lotties_manager.dart';
 import '../../../../global_presentation/global_widgets/expansion_tile_card.dart';
 import '../../../constants/exports.dart';
 import '../controllers/order_details_controller.dart';
@@ -13,11 +20,147 @@ class DroosListWidget extends GetView<OrderDetailsController> {
 
   @override
   Widget build(BuildContext context) {
-    return ListView.builder(
-        itemCount: 2,
-        shrinkWrap: true,
-        physics: const NeverScrollableScrollPhysics(),
-        itemBuilder: (BuildContext context, int index) {
+    return PagedListView<int, OrderSession>(
+      pagingController: controller.pagingController,
+      shrinkWrap: true,
+      physics: const NeverScrollableScrollPhysics(),
+      builderDelegate: PagedChildBuilderDelegate<OrderSession>(
+        animateTransitions: true,
+        transitionDuration: const Duration(milliseconds: 350),
+        firstPageErrorIndicatorBuilder: (BuildContext context) {
+          return Center(
+            child: SpinKitCircle(
+              duration: const Duration(milliseconds: 1300),
+              size: 50,
+              color: ColorManager.primary,
+            ),
+          );
+        },
+        firstPageProgressIndicatorBuilder: (BuildContext context) {
+          return Column(
+            children: [
+              SizedBox(height: 50.h),
+              Lottie.asset(
+                LottiesManager.searchingLight,
+                animate: true,
+                width: 200.w,
+              ),
+            ],
+          );
+        },
+        newPageErrorIndicatorBuilder: (BuildContext context) {
+          return Center(
+            child: SpinKitCircle(
+              duration: const Duration(milliseconds: 1300),
+              color: ColorManager.primary,
+              size: 50,
+            ),
+          );
+        },
+        newPageProgressIndicatorBuilder: (BuildContext context) {
+          return Column(
+            children: [
+              SizedBox(height: 20.h),
+              Center(
+                child: SpinKitCircle(
+                  duration: const Duration(milliseconds: 1300),
+                  color: ColorManager.primary,
+                  size: 50,
+                ),
+              ),
+              SizedBox(height: 20.h),
+            ],
+          );
+        },
+        noItemsFoundIndicatorBuilder: (BuildContext context) {
+          return Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              PrimaryText(
+                LocaleKeys.droos_list.tr,
+                fontSize: 16,
+                fontWeight: FontWeightManager.softLight,
+                color: ColorManager.primary,
+              ),
+              SizedBox(height: 20.h),
+              Center(
+                child: PrimaryText(
+                  "${LocaleKeys.no_droos_yet.tr} !",
+                  fontSize: 16,
+                  fontWeight: FontWeightManager.softLight,
+                  color: ColorManager.fontColor,
+                ),
+              ),
+              SizedBox(height: 20.h),
+            ],
+          );
+        },
+        itemBuilder:
+            (BuildContext context, OrderSession orderSession, int index) {
+          DateTime preferredStartDate = DateFormat('yyyy-MM-dd')
+              .parse((orderSession.session?.startDate ?? '').split("T")[0]);
+          DateTime preferredStartTime = DateFormat('HH:mm:ss')
+              .parse((orderSession.session?.startDate ?? '').split("T")[1]);
+          DateTime preferredEndDate = DateFormat('yyyy-MM-dd')
+              .parse((orderSession.session?.endDate ?? '').split("T")[0]);
+          DateTime preferredEndTime = DateFormat('HH:mm:ss')
+              .parse((orderSession.session?.endDate ?? '').split("T")[1]);
+          List<Map<String, dynamic>> orderProperties = [
+            {
+              "icon": ImagesManager.clockIocn,
+              "title": LocaleKeys.timing.tr,
+              "content": "${DateFormat.jm('ar_SA').format(
+                DateTime(
+                  preferredStartDate.year,
+                  preferredStartDate.month,
+                  preferredStartDate.day,
+                  preferredStartTime.hour,
+                  preferredStartTime.minute,
+                ),
+              )} - ${DateFormat.jm('ar_SA').format(
+                DateTime(
+                  preferredEndDate.year,
+                  preferredEndDate.month,
+                  preferredEndDate.day,
+                  preferredEndTime.hour,
+                  preferredEndTime.minute,
+                ),
+              )}",
+            },
+            {
+              "icon": ImagesManager.calendarIcon,
+              "title": LocaleKeys.date.tr,
+              "content": DateFormat("dd MMMM yyyy", "ar_SA")
+                  .format(preferredStartDate),
+            },
+            {
+              "icon": ImagesManager.tvIcon,
+              "title": LocaleKeys.session.tr,
+              "content": orderSession.session?.sessionTypeId == 0
+                  ? LocaleKeys.face_to_face.tr
+                  : orderSession.session?.sessionTypeId == 1
+                      ? LocaleKeys.electronic.tr
+                      : LocaleKeys.both.tr,
+            },
+            {
+              "icon": ImagesManager.boardIcon,
+              "title": LocaleKeys.dars_type.tr,
+              "content": orderSession.productName ?? "",
+            },
+            {
+              "icon": ImagesManager.addressIcon,
+              "title": LocaleKeys.address.tr,
+              "content": controller.darsOrderDetails.value.result?.address
+                      ?.addressDetails?.name ??
+                  "",
+            },
+            {
+              "icon": ImagesManager.personIcon,
+              "title": LocaleKeys.students_count.tr,
+              "content": controller
+                  .getStudentsCountString(orderSession.studentCount ?? 0),
+            },
+          ];
           return Column(
             children: [
               ExpansionTileCard(
@@ -43,27 +186,50 @@ class DroosListWidget extends GetView<OrderDetailsController> {
                 borderRadius: BorderRadius.circular(14.0),
                 shadowColor: const Color(0x1a000000),
                 animateTrailing: true,
-                trailing: GestureDetector(
-                  behavior: HitTestBehavior.opaque,
-                  onTap: () async {
-                    log('delete');
-                  },
-                  child: Container(
-                    width: 36.w,
-                    height: 36.h,
-                    decoration: BoxDecoration(
-                      color: ColorManager.red.withOpacity(0.10),
-                      borderRadius: BorderRadius.circular(14),
-                    ),
-                    child: Center(
-                      child: SvgPicture.asset(
-                        ImagesManager.deleteIcon,
-                        height: 20.h,
-                        width: 20.w,
-                      ),
-                    ),
-                  ),
-                ),
+                trailing: const SizedBox.shrink(),
+                // TODO: if the requester is allowed to delete the session then show the delete icon
+                // trailing: GestureDetector(
+                //   behavior: HitTestBehavior.opaque,
+                //   onTap: () async {
+                //     await Get.dialog(
+                //       Container(
+                //         color: ColorManager.black.withOpacity(0.1),
+                //         height: 140.h,
+                //         width: 140.w,
+                //         child: Center(
+                //           child: Container(
+                //             width: Get.width,
+                //             margin: EdgeInsets.symmetric(
+                //               horizontal: 18.w,
+                //             ),
+                //             child: DeleteSessionBottomSheetContent(
+                //               deleteSessionFunction: () async {
+                //                 await controller.deleteSession(
+                //                   sessionId: orderSession.session?.id ?? -1,
+                //                 );
+                //               },
+                //             ),
+                //           ),
+                //         ),
+                //       ),
+                //     );
+                //   },
+                //   child: Container(
+                //     width: 36.w,
+                //     height: 36.h,
+                //     decoration: BoxDecoration(
+                //       color: ColorManager.red.withOpacity(0.10),
+                //       borderRadius: BorderRadius.circular(14),
+                //     ),
+                //     child: Center(
+                //       child: SvgPicture.asset(
+                //         ImagesManager.deleteIcon,
+                //         height: 20.h,
+                //         width: 20.w,
+                //       ),
+                //     ),
+                //   ),
+                // ),
                 leading: Container(
                   height: 40.h,
                   width: 40.w,
@@ -80,12 +246,11 @@ class DroosListWidget extends GetView<OrderDetailsController> {
                   ),
                 ),
                 duration: const Duration(milliseconds: 500),
-                children: List.generate(controller.orderProperties.length,
-                    (int index) {
+                children: List.generate(orderProperties.length, (int index) {
                   return DarsPropertyWidget(
-                    iconPath: controller.orderProperties[index]["icon"],
-                    title: controller.orderProperties[index]["title"],
-                    content: controller.orderProperties[index]["content"] ?? "",
+                    iconPath: orderProperties[index]["icon"],
+                    title: orderProperties[index]["title"],
+                    content: orderProperties[index]["content"] ?? "",
                   );
                 }),
               ),
@@ -95,6 +260,8 @@ class DroosListWidget extends GetView<OrderDetailsController> {
               ),
             ],
           );
-        });
+        },
+      ),
+    );
   }
 }

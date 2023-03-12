@@ -17,7 +17,10 @@ class DarsPropertyWidget extends GetView<OrderDetailsController> {
       child: Row(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          SvgPicture.asset(iconPath),
+          SvgPicture.asset(
+            iconPath,
+            color: ColorManager.yellow,
+          ),
           SizedBox(width: 10.w),
           PrimaryText(
             title,

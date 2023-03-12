@@ -147,12 +147,20 @@ class LocaleKeys {
   static const notifications = 'notifications';
   static const toggle_notifications = 'toggle_notifications';
   static const settings = 'settings';
+  static const one_student = 'one_student';
+  static const two_students = 'two_students';
+  static const students = 'students';
+  static const student_count = 'student_count';
+  static const students_count = 'students_count';
   static const logout = 'logout';
   static const address_deletion = 'address_deletion';
   static const student_deletion = 'student_deletion';
   static const notification_deletion = 'notification_deletion';
+  static const session_deletion = 'session_deletion';
   static const chat_deletion = 'chat_deletion';
+  static const you_cant_delete_this_session = 'you_cant_delete_this_session';
   static const wanna_delete_notification = 'wanna_delete_notification';
+  static const wanna_delete_session = 'wanna_delete_session';
   static const wanna_delete_chat = 'wanna_delete_chat';
   static const wanna_delete_address = 'wanna_delete_address';
   static const wanna_delete_student = 'wanna_delete_student';
@@ -387,12 +395,16 @@ class LocaleKeys {
   static const order_details = 'order_details';
   static const studying_hour = 'studying_hour';
   static const dars = 'dars';
+  static const no_droos_yet = 'no_droos_yet';
+  static const droos_list = 'droos_list';
   static const timing = 'timing';
   static const date = 'date';
   static const session = 'session';
+  static const session_number = 'session_number';
   static const dars_type = 'dars_type';
   static const follow_us = 'follow_us';
   static const expiry_date = 'expiry_date';
+  static const session_deleted_successfully = 'session_deleted_successfully';
   static const choose_expiry_date = 'choose_expiry_date';
   static const enter_card_expiry_date = 'enter_card_expiry_date';
   static const expiry_month_invalid = 'expiry_month_invalid';
@@ -423,6 +435,8 @@ class LocaleKeys {
   static const edit_order_dars = 'edit_order_dars';
   static const please_enter_cvv = 'please_enter_cvv';
   static const cvv_is_invalid = 'cvv_is_invalid';
+  static const one_session = 'one_session';
+  static const two_sessions = 'two_sessions';
   static const please_enter_cancel_order_reason =
       'please_enter_cancel_order_reason';
   static const check_cancel_order_reason = 'check_cancel_order_reason';
@@ -431,11 +445,13 @@ class LocaleKeys {
       'please_choose_a_valid_notification_to_delete';
   static const check_card_type = 'check_card_type';
   static const dars_started = 'dars_started';
+  static const order_status = 'order_status';
   static const intersted_teachers = 'intersted_teachers';
   static const order_added_successfully = 'order_added_successfully';
   static const add_new_order = 'add_new_order';
   static const approve_teacher = 'approve_teacher';
   static const confirm_canceling_dars = 'confirm_canceling_dars';
+  static const sessions = 'sessions';
   static const canceling_dars_reason = 'canceling_dars_reason';
   static const cofirm_canceling = 'cofirm_canceling';
   static const no_candidate_providers = 'no_candidate_providers';
@@ -615,12 +631,20 @@ class Locales {
     'notifications': 'الإشعارات',
     'toggle_notifications': 'تفعيل الإشعارات',
     'settings': 'الإعدادات',
+    'one_student': 'طالب واحد',
+    'two_students': 'طالبان',
+    'students': 'طلاب',
+    'student_count': 'طالب',
+    'students_count': 'عدد الطلاب',
     'logout': 'تسجيل الخروج',
     'address_deletion': 'حذف العنوان',
     'student_deletion': 'حذف الطالب',
     'notification_deletion': 'حذف الإشعار',
+    'session_deletion': 'حذف الجلسة',
     'chat_deletion': 'حذف المحادثة؟',
+    'you_cant_delete_this_session': 'لا يمكنك حذف هذه الجلسة',
     'wanna_delete_notification': 'هل تريد حذف هذا الإشعار؟',
+    'wanna_delete_session': 'هل تريد حذف هذه الجلسة؟',
     'wanna_delete_chat': 'هل تريد حذف هذه المحادثة؟',
     'wanna_delete_address': 'هل تريد حذف هذا العنوان؟',
     'wanna_delete_student': 'هل تريد حذف هذا الطالب؟',
@@ -851,12 +875,16 @@ class Locales {
     'order_details': 'تفاصيل الطلب',
     'studying_hour': 'ساعة تدريسية',
     'dars': 'الدرس',
+    'no_droos_yet': 'لا يوجد دروس حتى الآن',
+    'droos_list': 'قائمة الدروس',
     'timing': 'التوقيت',
     'date': 'التاريخ',
     'session': 'الجلسة',
+    'session_number': 'جلسة',
     'dars_type': 'نوع الطلب',
     'follow_us': 'تابعنا',
     'expiry_date': 'تاريخ الانتهاء',
+    'session_deleted_successfully': 'تم حذف الجلسة بنجاح',
     'choose_expiry_date': 'اختر تاريخ الانتهاء',
     'enter_card_expiry_date': 'أدخل تاريخ الانتهاء',
     'expiry_month_invalid': 'شهر الانتهاء غير صالح',
@@ -886,6 +914,8 @@ class Locales {
     'edit_order_dars': 'تعديل طلب الدرس',
     'please_enter_cvv': 'أدخل CVV',
     'cvv_is_invalid': 'CVV غير صالح',
+    'one_session': 'جلسة واحدة',
+    'two_sessions': 'جلستان',
     'please_enter_cancel_order_reason': 'الرجاء إدخال سبب الغاء الطلب',
     'check_cancel_order_reason': 'تحقق من سبب الغاء الطلب',
     'please_choose_card_type': 'إختر نوع البطاقة',
@@ -893,11 +923,13 @@ class Locales {
         'الرجاء اختيار إشعار صالح للحذف',
     'check_card_type': 'تحقق من نوع البطاقة',
     'dars_started': 'بدأت الدرس',
+    'order_status': 'حالة الطلب',
     'intersted_teachers': 'معلمين مهتمين بتقديم الدرس',
     'order_added_successfully': 'تم إضافة الطلب بنجاح',
     'add_new_order': 'إضافة طلب درس جديد',
     'approve_teacher': 'اعتماد المعلّم',
     'confirm_canceling_dars': 'تأكيد الغاء طلب الدرس',
+    'sessions': 'جلسات',
     'canceling_dars_reason': 'سبب الغاء طلب الدرس',
     'cofirm_canceling': 'تأكيد الإلغاء',
     'no_candidate_providers': 'لم يكن هناك مُعلّمين مهتمين',

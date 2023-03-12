@@ -5,6 +5,7 @@ import 'package:hessa_student/app/constants/links.dart';
 import 'package:hessa_student/app/data/network_helper/dio_helper.dart';
 import 'package:hessa_student/app/modules/order_details/data/models/candidate_providers/candidate_providers.dart';
 import 'package:hessa_student/app/modules/order_details/data/models/order_details/order_details.dart';
+import 'package:hessa_student/app/modules/order_details/data/models/order_session/order_session.dart';
 import 'package:hessa_student/app/modules/order_details/data/repos/order_details_repo.dart';
 
 import '../../../../../generated/locales.g.dart';
@@ -107,6 +108,74 @@ class OrderDetailsRepoImplement extends OrderDetailsRepo {
     } catch (e) {
       statusCode = 400;
       log("OrderDetailsRepoImplement.cancelDarsOrder: $e");
+      if (Get.isDialogOpen!) {
+        Get.back();
+      }
+    }
+    return statusCode;
+  }
+
+  @override
+  Future<List<OrderSession>> getDarsOrderSessions(
+      {required int darsOrderId,
+      required int page,
+      required int perPage}) async {
+    List<OrderSession> orderSessions = [];
+    Map<String, dynamic> queryParameters = {
+      "OrderId": darsOrderId,
+      "SkipCount": (page - 1) * perPage,
+      "MaxResultCount": perPage,
+    };
+    await DioHelper.get(
+      Links.getSessionsByOrderId,
+      queryParameters: queryParameters,
+      headers: headers,
+      onSuccess: (response) {
+        var result = response.data;
+        if (result != null &&
+            result["result"] != null &&
+            result["result"]["items"] != null) {
+          for (var teacher in result["result"]["items"]) {
+            orderSessions.add(OrderSession.fromJson(teacher));
+          }
+        }
+      },
+      onError: (error) {
+        CustomSnackBar.showCustomErrorSnackBar(
+          title: LocaleKeys.error.tr,
+          message: error.response?.data["error"]["message"] ?? error.message,
+        );
+      },
+    );
+    return orderSessions;
+  }
+
+  @override
+  Future<int> deleteSession({required int sessionId}) async {
+    int statusCode = 200;
+    try {
+      await DioHelper.delete(
+        queryParameters: {
+          "id": sessionId,
+        },
+        Links.deleteSession,
+        headers: headers,
+        onSuccess: (response) {
+          statusCode = response.statusCode ?? 200;
+          if (Get.isDialogOpen!) {
+            Get.back();
+          }
+        },
+        onError: (error) {
+          statusCode = error.statusCode ?? 400;
+          if (Get.isDialogOpen!) {
+            Get.back();
+          }
+        },
+      );
+    } catch (e) {
+      statusCode = 400;
+      log("OrderDetailsRepoImplement.deleteSession: $e");
       if (Get.isDialogOpen!) {
         Get.back();
       }

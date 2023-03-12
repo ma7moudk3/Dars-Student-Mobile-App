@@ -52,14 +52,14 @@ class ParticipantListBottomSheetContent
                 Expanded(
                   child: SingleChildScrollView(
                     child: ListView.builder(
-                        itemCount: controller
-                                .darsOrderDetails.result?.students?.length ??
+                        itemCount: controller.darsOrderDetails.value.result
+                                ?.students?.length ??
                             0,
                         shrinkWrap: true,
                         physics: const NeverScrollableScrollPhysics(),
                         itemBuilder: (BuildContext context, int index) {
                           String studentPicture =
-                              "${Links.baseLink}${Links.nonUsersProfileImageByToken}?id=${controller.darsOrderDetails.result?.students?[index].requesterStudentPhoto ?? -1}";
+                              "${Links.baseLink}${Links.nonUsersProfileImageByToken}?id=${controller.darsOrderDetails.value.result?.students?[index].requesterStudentPhoto ?? -1}";
                           return Padding(
                             padding: EdgeInsets.symmetric(vertical: 5.h),
                             child: Column(
@@ -100,8 +100,12 @@ class ParticipantListBottomSheetContent
                                           CrossAxisAlignment.start,
                                       children: [
                                         PrimaryText(
-                                          controller.darsOrderDetails.result
-                                                  ?.students?[index].name ??
+                                          controller
+                                                  .darsOrderDetails
+                                                  .value
+                                                  .result
+                                                  ?.students?[index]
+                                                  .name ??
                                               "",
                                         ),
                                         SizedBox(height: 10.h),
@@ -111,8 +115,7 @@ class ParticipantListBottomSheetContent
                                                 ImagesManager.classIcon),
                                             SizedBox(width: 5.w),
                                             PrimaryText(
-                                              controller.classes.result !=
-                                                          null &&
+                                              controller.classes.result != null &&
                                                       controller.classes.result!
                                                               .items !=
                                                           null
@@ -122,6 +125,7 @@ class ParticipantListBottomSheetContent
                                                                   level.id ==
                                                                   controller
                                                                       .darsOrderDetails
+                                                                      .value
                                                                       .result
                                                                       ?.students?[
                                                                           index]
@@ -134,6 +138,7 @@ class ParticipantListBottomSheetContent
                                                                       level.id ==
                                                                       controller
                                                                           .darsOrderDetails
+                                                                          .value
                                                                           .result
                                                                           ?.students?[index]
                                                                           .levelId)!

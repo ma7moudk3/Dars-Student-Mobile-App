@@ -21,8 +21,8 @@ class OneDarsWidget extends GetView<OrderDetailsController> {
   @override
   Widget build(BuildContext context) {
     Color orderStatusColor = ColorManager.primary;
-    OrderStatus orderStatus =
-        OrderStatus.values[controller.darsOrder.currentStatusId ?? 0];
+    OrderStatus orderStatus = OrderStatus.values[
+        controller.darsOrderDetails.value.result?.order?.currentStatusId ?? 0];
     log("Current Order Status: $orderStatus");
     switch (orderStatus) {
       case OrderStatus.submitted:
@@ -57,7 +57,7 @@ class OneDarsWidget extends GetView<OrderDetailsController> {
                   SvgPicture.asset(ImagesManager.lumbPencilIcon),
                   SizedBox(width: 8.w),
                   PrimaryText(
-                    "20 ${LocaleKeys.studying_hour.tr}",
+                    "${(controller.darsOrderDetails.value.result?.order?.duration ?? 1).toInt()} ${LocaleKeys.studying_hour.tr}",
                     fontSize: 16,
                     fontWeight: FontWeightManager.softLight,
                     color: ColorManager.fontColor,
@@ -133,13 +133,14 @@ class OneDarsWidget extends GetView<OrderDetailsController> {
                 width: Get.width,
                 height: 100.h,
                 child: ListView.builder(
-                  itemCount:
-                      controller.darsOrderDetails.result?.students?.length ?? 0,
+                  itemCount: controller
+                          .darsOrderDetails.value.result?.students?.length ??
+                      0,
                   scrollDirection: Axis.horizontal,
                   shrinkWrap: true,
                   itemBuilder: (BuildContext context, int index) {
                     String studentPicture =
-                        "${Links.baseLink}${Links.nonUsersProfileImageByToken}?id=${controller.darsOrderDetails.result?.students?[index].requesterStudentPhoto ?? -1}";
+                        "${Links.baseLink}${Links.nonUsersProfileImageByToken}?id=${controller.darsOrderDetails.value.result?.students?[index].requesterStudentPhoto ?? -1}";
                     return Padding(
                       padding: EdgeInsets.only(left: 10.w),
                       child: GestureDetector(
@@ -187,7 +188,7 @@ class OneDarsWidget extends GetView<OrderDetailsController> {
                               mainAxisAlignment: MainAxisAlignment.center,
                               children: [
                                 PrimaryText(
-                                  controller.darsOrderDetails.result
+                                  controller.darsOrderDetails.value.result
                                           ?.students?[index].name ??
                                       "",
                                   fontSize: 14,
@@ -196,7 +197,7 @@ class OneDarsWidget extends GetView<OrderDetailsController> {
                                 Row(
                                   children: [
                                     PrimaryText(
-                                      "${LocaleKeys.school.tr}: ${controller.darsOrderDetails.result?.students?[index].schoolName ?? ""}",
+                                      "${LocaleKeys.school.tr}: ${controller.darsOrderDetails.value.result?.students?[index].schoolName ?? ""}",
                                       fontSize: 14,
                                       color: ColorManager.fontColor7,
                                       fontWeight: FontWeightManager.softLight,
@@ -217,10 +218,11 @@ class OneDarsWidget extends GetView<OrderDetailsController> {
               GetBuilder<OrderDetailsController>(
                   builder: (OrderDetailsController controlller) {
                 if (orderStatus == OrderStatus.submitted &&
-                    controller.darsOrderDetails.result?.order
+                    controller.darsOrderDetails.value.result?.order
                             ?.preferredprovider !=
                         null &&
-                    (controller.darsOrderDetails.result?.candidateProvider ??
+                    (controller.darsOrderDetails.value.result
+                                ?.candidateProvider ??
                             [])
                         .isEmpty) {
                   return Column(
@@ -245,7 +247,7 @@ class OneDarsWidget extends GetView<OrderDetailsController> {
                               StatefulBuilder(
                                   builder: (BuildContext context, setState) {
                                 String teacherPicture =
-                                    "${Links.baseLink}${Links.profileImageById}?userid=${controller.darsOrderDetails.result?.order?.preferredprovider?["userId"] ?? -1}";
+                                    "${Links.baseLink}${Links.profileImageById}?userid=${controller.darsOrderDetails.value.result?.order?.preferredprovider?["userId"] ?? -1}";
                                 return Container(
                                   width: 44.w,
                                   height: 44.h,
@@ -280,7 +282,11 @@ class OneDarsWidget extends GetView<OrderDetailsController> {
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
                                   PrimaryText(
-                                    controller.darsOrderDetails.result?.order
+                                    controller
+                                            .darsOrderDetails
+                                            .value
+                                            .result
+                                            ?.order
                                             ?.preferredprovider?["name"] ??
                                         "",
                                     fontSize: 14,
@@ -290,7 +296,7 @@ class OneDarsWidget extends GetView<OrderDetailsController> {
                                       width: 120.w,
                                       child: Tooltip(
                                         message:
-                                            "${controller.darsOrderDetails.result?.order?.preferredprovider?["address"]?["countryName"] ?? ""} - ${controller.darsOrderDetails.result?.order?.preferredprovider?["address"]?["governorateName"] ?? ""} - ${controller.darsOrderDetails.result?.order?.preferredprovider?["address"]?["localityName"] ?? ""}",
+                                            "${controller.darsOrderDetails.value.result?.order?.preferredprovider?["address"]?["countryName"] ?? ""} - ${controller.darsOrderDetails.value.result?.order?.preferredprovider?["address"]?["governorateName"] ?? ""} - ${controller.darsOrderDetails.value.result?.order?.preferredprovider?["address"]?["localityName"] ?? ""}",
                                         padding: const EdgeInsets.all(10),
                                         margin: const EdgeInsets.all(16),
                                         showDuration:
@@ -298,7 +304,7 @@ class OneDarsWidget extends GetView<OrderDetailsController> {
                                         preferBelow: true,
                                         textAlign: detectLang(
                                                 text:
-                                                    "${controller.darsOrderDetails.result?.order?.preferredprovider?["address"]?["countryName"] ?? ""} - ${controller.darsOrderDetails.result?.order?.preferredprovider?["address"]?["governorateName"] ?? ""} - ${controller.darsOrderDetails.result?.order?.preferredprovider?["address"]?["localityName"] ?? ""}")
+                                                    "${controller.darsOrderDetails.value.result?.order?.preferredprovider?["address"]?["countryName"] ?? ""} - ${controller.darsOrderDetails.value.result?.order?.preferredprovider?["address"]?["governorateName"] ?? ""} - ${controller.darsOrderDetails.value.result?.order?.preferredprovider?["address"]?["localityName"] ?? ""}")
                                             ? TextAlign.left
                                             : TextAlign.right,
                                         decoration: BoxDecoration(
@@ -308,7 +314,7 @@ class OneDarsWidget extends GetView<OrderDetailsController> {
                                         ),
                                         triggerMode: TooltipTriggerMode.tap,
                                         child: PrimaryText(
-                                          "${controller.darsOrderDetails.result?.order?.preferredprovider?["address"]?["countryName"] ?? ""} - ${controller.darsOrderDetails.result?.order?.preferredprovider?["address"]?["governorateName"] ?? ""} - ${controller.darsOrderDetails.result?.order?.preferredprovider?["address"]?["localityName"] ?? ""}",
+                                          "${controller.darsOrderDetails.value.result?.order?.preferredprovider?["address"]?["countryName"] ?? ""} - ${controller.darsOrderDetails.value.result?.order?.preferredprovider?["address"]?["governorateName"] ?? ""} - ${controller.darsOrderDetails.value.result?.order?.preferredprovider?["address"]?["localityName"] ?? ""}",
                                           fontSize: 12,
                                           maxLines: 1,
                                           fontWeight:
@@ -403,8 +409,8 @@ class OneDarsWidget extends GetView<OrderDetailsController> {
                         child: GestureDetector(
                           behavior: HitTestBehavior.opaque,
                           onTap: () async {
-                            int teacherId = (controller.darsOrderDetails.result
-                                            ?.candidateProvider ??
+                            int teacherId = (controller.darsOrderDetails.value
+                                            .result?.candidateProvider ??
                                         [])
                                     .firstWhereOrNull(
                                         (CandidateProvider candidateProvider) =>
@@ -426,7 +432,7 @@ class OneDarsWidget extends GetView<OrderDetailsController> {
                               StatefulBuilder(
                                   builder: (BuildContext context, setState) {
                                 String teacherPicture =
-                                    "${Links.baseLink}${Links.profileImageById}?userid=${controller.darsOrderDetails.result?.providerUserId ?? -1}";
+                                    "${Links.baseLink}${Links.profileImageById}?userid=${controller.darsOrderDetails.value.result?.providerUserId ?? -1}";
                                 return Container(
                                   width: 44.w,
                                   height: 44.h,
@@ -461,7 +467,7 @@ class OneDarsWidget extends GetView<OrderDetailsController> {
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
                                   PrimaryText(
-                                    controller.darsOrderDetails.result
+                                    controller.darsOrderDetails.value.result
                                             ?.providerName ??
                                         "",
                                     fontSize: 14,
@@ -471,7 +477,7 @@ class OneDarsWidget extends GetView<OrderDetailsController> {
                                       width: 120.w,
                                       child: Tooltip(
                                         message:
-                                            "${controller.darsOrderDetails.result?.order?.preferredprovider?["address"]?["countryName"] ?? ""} - ${controller.darsOrderDetails.result?.order?.preferredprovider?["address"]?["governorateName"] ?? ""} - ${controller.darsOrderDetails.result?.order?.preferredprovider?["address"]?["localityName"] ?? ""}",
+                                            "${controller.darsOrderDetails.value.result?.order?.preferredprovider?["address"]?["countryName"] ?? ""} - ${controller.darsOrderDetails.value.result?.order?.preferredprovider?["address"]?["governorateName"] ?? ""} - ${controller.darsOrderDetails.value.result?.order?.preferredprovider?["address"]?["localityName"] ?? ""}",
                                         padding: const EdgeInsets.all(10),
                                         margin: const EdgeInsets.all(16),
                                         showDuration:
@@ -479,7 +485,7 @@ class OneDarsWidget extends GetView<OrderDetailsController> {
                                         preferBelow: true,
                                         textAlign: detectLang(
                                                 text:
-                                                    "${controller.darsOrderDetails.result?.order?.preferredprovider?["address"]?["countryName"] ?? ""} - ${controller.darsOrderDetails.result?.order?.preferredprovider?["address"]?["governorateName"] ?? ""} - ${controller.darsOrderDetails.result?.order?.preferredprovider?["address"]?["localityName"] ?? ""}")
+                                                    "${controller.darsOrderDetails.value.result?.order?.preferredprovider?["address"]?["countryName"] ?? ""} - ${controller.darsOrderDetails.value.result?.order?.preferredprovider?["address"]?["governorateName"] ?? ""} - ${controller.darsOrderDetails.value.result?.order?.preferredprovider?["address"]?["localityName"] ?? ""}")
                                             ? TextAlign.left
                                             : TextAlign.right,
                                         decoration: BoxDecoration(
@@ -489,7 +495,7 @@ class OneDarsWidget extends GetView<OrderDetailsController> {
                                         ),
                                         triggerMode: TooltipTriggerMode.tap,
                                         child: PrimaryText(
-                                          "${controller.darsOrderDetails.result?.order?.preferredprovider?["address"]?["countryName"] ?? ""} - ${controller.darsOrderDetails.result?.order?.preferredprovider?["address"]?["governorateName"] ?? ""} - ${controller.darsOrderDetails.result?.order?.preferredprovider?["address"]?["localityName"] ?? ""}",
+                                          "${controller.darsOrderDetails.value.result?.order?.preferredprovider?["address"]?["countryName"] ?? ""} - ${controller.darsOrderDetails.value.result?.order?.preferredprovider?["address"]?["governorateName"] ?? ""} - ${controller.darsOrderDetails.value.result?.order?.preferredprovider?["address"]?["localityName"] ?? ""}",
                                           fontSize: 12,
                                           maxLines: 1,
                                           fontWeight:
@@ -581,18 +587,18 @@ class OneDarsWidget extends GetView<OrderDetailsController> {
                         color: ColorManager.primary,
                       ),
                       SizedBox(height: 15.h),
-                      if (controller.darsOrderDetails.result?.candidateProvider
-                              ?.isNotEmpty ??
+                      if (controller.darsOrderDetails.value.result
+                              ?.candidateProvider?.isNotEmpty ??
                           false)
                         ListView.builder(
-                          itemCount: controller.darsOrderDetails.result
+                          itemCount: controller.darsOrderDetails.value.result
                                   ?.candidateProvider?.length ??
                               0,
                           physics: const NeverScrollableScrollPhysics(),
                           shrinkWrap: true,
                           itemBuilder: (BuildContext context, int index) {
                             double candidateProviderRate = double.parse(
-                                controller.darsOrderDetails.result
+                                controller.darsOrderDetails.value.result
                                         ?.candidateProvider?[index].rate
                                         .toString() ??
                                     "0.0");
@@ -608,13 +614,14 @@ class OneDarsWidget extends GetView<OrderDetailsController> {
                                 //     ),
                                 //   ),
                                 //   OrderCandidateProviderWidget(
-                                //     candidateProvider: controller.darsOrderDetails
+                                //     candidateProvider: controller.darsOrderDetails.value
                                 //         .result?.candidateProvider?[index],
                                 //   ),
                                 // );
                                 Map<String, dynamic> arguments = {
                                   "teacherId": controller
                                           .darsOrderDetails
+                                          .value
                                           .result
                                           ?.candidateProvider?[index]
                                           .providerId ??
@@ -625,7 +632,11 @@ class OneDarsWidget extends GetView<OrderDetailsController> {
                                             0] !=
                                     OrderStatus.confirmed) {
                                   arguments["orderId"] = controller
-                                          .darsOrderDetails.result?.order?.id ??
+                                          .darsOrderDetails
+                                          .value
+                                          .result
+                                          ?.order
+                                          ?.id ??
                                       -1;
                                 }
                                 await Get.toNamed(
@@ -663,7 +674,7 @@ class OneDarsWidget extends GetView<OrderDetailsController> {
                                               (BuildContext context, setState) {
                                             String
                                                 candidateProviderPicture = // provider = teacher
-                                                "${Links.baseLink}${Links.profileImageById}?userid=${controller.darsOrderDetails.result?.candidateProvider?[index].userId ?? -1}";
+                                                "${Links.baseLink}${Links.profileImageById}?userid=${controller.darsOrderDetails.value.result?.candidateProvider?[index].userId ?? -1}";
                                             return Container(
                                               width: 50.w,
                                               height: 50.h,
@@ -709,6 +720,7 @@ class OneDarsWidget extends GetView<OrderDetailsController> {
                                                     PrimaryText(
                                                       controller
                                                               .darsOrderDetails
+                                                              .value
                                                               .result
                                                               ?.candidateProvider?[
                                                                   index]
@@ -850,8 +862,8 @@ class OneDarsWidget extends GetView<OrderDetailsController> {
           child: Column(
             children: [
               PrimaryButton(
-                isDisabled: controller
-                        .darsOrderDetails.result?.order?.currentStatusId ==
+                isDisabled: controller.darsOrderDetails.value.result?.order
+                        ?.currentStatusId ==
                     OrderStatus.cancelled
                         .index, // TODO: if another condition is added, change this
                 onPressed: () async {
@@ -867,8 +879,8 @@ class OneDarsWidget extends GetView<OrderDetailsController> {
                     backgroundColor: ColorManager.white,
                   ).whenComplete(() => controller.clearData());
                 },
-                title: controller
-                            .darsOrderDetails.result?.order?.currentStatusId ==
+                title: controller.darsOrderDetails.value.result?.order
+                            ?.currentStatusId ==
                         OrderStatus.cancelled.index
                     ? LocaleKeys.order_already_cancelled.tr
                     : LocaleKeys.cancel_order_dars.tr,
@@ -887,9 +899,9 @@ class OneDarsWidget extends GetView<OrderDetailsController> {
                       borderRadius: BorderRadius.circular(15.r),
                       onTap: () async {
                         await Get.toNamed(Routes.ORDER_DARS, arguments: {
-                          "orderIdToEdit":
-                              controller.darsOrderDetails.result?.order?.id ??
-                                  -1,
+                          "orderIdToEdit": controller
+                                  .darsOrderDetails.value.result?.order?.id ??
+                              -1,
                         });
                       },
                       fontColor: ColorManager.fontColor4,

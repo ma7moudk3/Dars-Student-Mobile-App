@@ -4,6 +4,7 @@ import 'package:dio/dio.dart';
 import 'package:get/get.dart';
 import 'package:hessa_student/app/modules/home/data/models/dars_order.dart';
 import 'package:hessa_student/app/modules/orders/data/repos/orders_repo.dart';
+import 'package:hessa_student/generated/locales.g.dart';
 import 'package:infinite_scroll_pagination/infinite_scroll_pagination.dart';
 
 import '../../../core/helper_functions.dart';
@@ -20,6 +21,26 @@ class OrdersController extends GetxController {
     await checkInternetConnection(timeout: 5).then((bool internetStatus) {
       isInternetConnected.value = internetStatus;
     });
+  }
+
+  String getSessionString(int sessionCount) {
+    if (Get.locale!.languageCode == "ar") {
+      if (sessionCount == 1) {
+        return LocaleKeys.one_session.tr;
+      } else if (sessionCount == 2) {
+        return LocaleKeys.two_sessions.tr;
+      } else if (sessionCount >= 3 && sessionCount <= 10) {
+        return "$sessionCount ${LocaleKeys.sessions.tr}";
+      } else {
+        return "$sessionCount ${LocaleKeys.session_number.tr}";
+      }
+    } else {
+      if (sessionCount == 1) {
+        return LocaleKeys.one_session.tr;
+      } else {
+        return "$sessionCount ${LocaleKeys.session.tr}";
+      }
+    }
   }
 
   void refreshPagingController() {

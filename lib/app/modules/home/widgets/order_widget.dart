@@ -212,21 +212,91 @@ class OrderWidget extends GetView<OrdersController> {
                     ],
                   ),
                   const Spacer(),
-                  Container(
-                    width: 80.w,
-                    height: 30.h,
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(8),
-                      color: orderStatusColor.withOpacity(0.15),
-                    ),
-                    child: Center(
-                      child: PrimaryText(
-                        darsOrder.currentStatusStr ?? '',
-                        fontSize: 12,
-                        color: orderStatusColor,
-                        fontWeight: FontWeightManager.softLight,
+                  Row(
+                    children: [
+                      Container(
+                        width: 80.w,
+                        height: 30.h,
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(8),
+                          color: orderStatusColor.withOpacity(0.15),
+                        ),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          mainAxisSize: MainAxisSize.min,
+                          children: [
+                            Container(
+                              width: 18.w,
+                              height: 18.h,
+                              decoration: BoxDecoration(
+                                color: orderStatusColor.withOpacity(0.15),
+                                borderRadius: BorderRadius.circular(8),
+                              ),
+                              /*
+                                  enum OrderStatus {
+                                    submitted,
+                                    confirmed,
+                                    started,
+                                    tempPaused,
+                                    completed,
+                                    cancelled
+                                  }
+                            */
+                              child: Icon(
+                                orderStatus == OrderStatus.submitted ||
+                                        orderStatus == OrderStatus.confirmed
+                                    ? Icons.check_rounded
+                                    : orderStatus == OrderStatus.started
+                                        ? Icons.play_arrow_rounded
+                                        : orderStatus == OrderStatus.tempPaused
+                                            ? Icons.pause_rounded
+                                            : orderStatus ==
+                                                    OrderStatus.completed
+                                                ? Icons.check_rounded
+                                                : Icons.close_rounded,
+                                color: orderStatusColor,
+                                size: 16,
+                              ),
+                            ),
+                            SizedBox(width: 5.w),
+                            PrimaryText(
+                              darsOrder.currentStatusStr ?? '',
+                              fontSize: 12,
+                              color: orderStatusColor,
+                              fontWeight: FontWeightManager.softLight,
+                            ),
+                          ],
+                        ),
                       ),
-                    ),
+                      Visibility(
+                        visible: darsOrder.sessionCount != null &&
+                            darsOrder.sessionCount! > 0,
+                        child: Expanded(
+                          child: Row(
+                            children: [
+                              const Spacer(),
+                              Container(
+                                width: 80.w,
+                                height: 30.h,
+                                decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.circular(8),
+                                  color: ColorManager.primary.withOpacity(0.15),
+                                ),
+                                child: Center(
+                                  child: PrimaryText(
+                                    controller.getSessionString(
+                                        darsOrder.sessionCount ?? 0),
+                                    fontSize: 12,
+                                    color: ColorManager.primary,
+                                    fontWeight: FontWeightManager.softLight,
+                                  ),
+                                ),
+                              ),
+                            ],
+                          ),
+                        ),
+                      ),
+                    ],
                   ),
                 ],
               ),

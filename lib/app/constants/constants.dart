@@ -19,7 +19,7 @@ enum OrderStatus {
   cancelled
 }
 
-enum PaymentStatus { fullyPaid, partiallyPaid, unpaid }
+enum PaymentStatus { fullyPaid, partiallyPaid, unPaid }
 
 enum CardType { visaCard, masterCard, madaCard }
 
