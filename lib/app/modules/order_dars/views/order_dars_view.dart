@@ -109,7 +109,7 @@ class OrderDarsView extends GetView<OrderDarsController> {
                         SizedBox(height: 26.h),
                         Padding(
                           padding: EdgeInsets.only(
-                              left: 16.w, right: 16.w, bottom: 30.h),
+                              left: 11.w, right: 11.w, bottom: 30.h),
                           child: Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [

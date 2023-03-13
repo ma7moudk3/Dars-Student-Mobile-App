@@ -465,6 +465,17 @@ class StudyingPackageWidget extends GetView<OrderDetailsController> {
                                                     child: Tooltip(
                                                       message:
                                                           "${controller.darsOrderDetails.value.result?.order?.preferredprovider?["address"]?["countryName"] ?? ""} - ${controller.darsOrderDetails.value.result?.order?.preferredprovider?["address"]?["governorateName"] ?? ""} - ${controller.darsOrderDetails.value.result?.order?.preferredprovider?["address"]?["localityName"] ?? ""}",
+                                                      textStyle: TextStyle(
+                                                        color:
+                                                            ColorManager.white,
+                                                        fontSize: 14,
+                                                        fontWeight:
+                                                            FontWeightManager
+                                                                .softLight,
+                                                        fontFamily:
+                                                            FontConstants
+                                                                .fontFamily,
+                                                      ),
                                                       padding:
                                                           const EdgeInsets.all(
                                                               10),

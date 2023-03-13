@@ -226,6 +226,9 @@ class LocaleKeys {
   static const please_select_class = 'please_select_class';
   static const please_select_subject = 'please_select_subject';
   static const one_dars = 'one_dars';
+  static const total_price = 'total_price';
+  static const droos_count = 'droos_count';
+  static const dars_price = 'dars_price';
   static const school_package = 'school_package';
   static const school_package_description = 'school_package_description';
   static const dars_duration = 'dars_duration';
@@ -400,6 +403,7 @@ class LocaleKeys {
   static const had_no_droos = 'had_no_droos';
   static const droos_list = 'droos_list';
   static const timing = 'timing';
+  static const preferred_timing = 'preferred_timing';
   static const date = 'date';
   static const session = 'session';
   static const session_number = 'session_number';
@@ -441,6 +445,7 @@ class LocaleKeys {
   static const order_already_cancelled = 'order_already_cancelled';
   static const edit_order_dars = 'edit_order_dars';
   static const please_enter_cvv = 'please_enter_cvv';
+  static const not_started_yet = 'not_started_yet';
   static const cvv_is_invalid = 'cvv_is_invalid';
   static const not_started = 'not_started';
   static const one_session = 'one_session';
@@ -496,7 +501,7 @@ class LocaleKeys {
   static const subjects = 'subjects';
   static const classes = 'classes';
   static const skills = 'skills';
-  static const rating_previous_darses = 'rating_previous_darses';
+  static const rating_previous_droos = 'rating_previous_droos';
   static const teacher_rating = 'teacher_rating';
   static const rate = 'rate';
   static const how_was_your_experience_with_the_teacher =
@@ -720,6 +725,9 @@ class Locales {
     'please_select_class': 'الرجاء اختيار الصف الدراسي',
     'please_select_subject': 'الرجاء اختيار المادة الدراسية',
     'one_dars': 'درس واحدة',
+    'total_price': 'السعر الكلي',
+    'droos_count': 'عدد الدروس',
+    'dars_price': 'سعر الدرس الواحد',
     'school_package': 'حقيبة مدرسية',
     'school_package_description': 'حصص مستمرة تصل لمدة 20 ساعة تدريسية',
     'dars_duration': 'مدة الدرس',
@@ -892,6 +900,7 @@ class Locales {
     'had_no_droos': 'لم يكن لديك دروس',
     'droos_list': 'قائمة الدروس',
     'timing': 'التوقيت',
+    'preferred_timing': 'التوقيت المفضل',
     'date': 'التاريخ',
     'session': 'الجلسة',
     'session_number': 'جلسة',
@@ -932,6 +941,7 @@ class Locales {
     'order_already_cancelled': 'تم إلغاء هذا الطلب',
     'edit_order_dars': 'تعديل طلب الدرس',
     'please_enter_cvv': 'أدخل CVV',
+    'not_started_yet': 'لم تبدأ بعد',
     'cvv_is_invalid': 'CVV غير صالح',
     'not_started': 'لم تبدأ',
     'one_session': 'جلسة واحدة',
@@ -985,7 +995,7 @@ class Locales {
     'subjects': 'المواد',
     'classes': 'الصفوف',
     'skills': 'المهارات',
-    'rating_previous_darses': 'تقييم الحصص السابقة',
+    'rating_previous_droos': 'تقييم الدروس السابقة',
     'teacher_rating': 'تقييم المعلم',
     'rate': 'تقييم',
     'how_was_your_experience_with_the_teacher': 'كيف كانت تجربتك مع المعلم؟',

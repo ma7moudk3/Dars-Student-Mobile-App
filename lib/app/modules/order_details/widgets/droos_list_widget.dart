@@ -156,9 +156,7 @@ class DroosListWidget extends GetView<OrderDetailsController> {
             {
               "icon": ImagesManager.addressIcon,
               "title": LocaleKeys.address.tr,
-              "content": controller.darsOrderDetails.value.result?.address
-                      ?.addressDetails?.name ??
-                  "",
+              "content": controller.formatAddress(controller.darsOrderDetails.value.result?.address),
             },
             {
               "icon": ImagesManager.personIcon,
@@ -199,17 +197,34 @@ class DroosListWidget extends GetView<OrderDetailsController> {
                   fontSize: 14,
                   fontWeight: FontWeightManager.softLight,
                 ),
-                subtitle: SizedBox(
-                  width: 170.w,
-                  child: PrimaryText(
-                    "رياضيات الصف الاول",
-                    fontSize: 13,
-                    fontWeight: FontWeightManager.softLight,
-                    color: ColorManager.primary,
-                    maxLines: 2,
-                    overflow: TextOverflow.ellipsis,
-                  ),
-                ),
+                subtitle: (orderSession.topicName != null &&
+                            orderSession.topicName!.isNotEmpty) ||
+                        (orderSession.levelName != null &&
+                            orderSession.levelName!.isNotEmpty) ||
+                        (orderSession.skillName != null &&
+                            orderSession.skillName!.isNotEmpty)
+                    ? SizedBox(
+                        width: 170.w,
+                        child: PrimaryText(
+                          orderSession.skillName != null &&
+                                  orderSession.skillName.runtimeType ==
+                                      String &&
+                                  orderSession.skillName!.isNotEmpty
+                              ? orderSession.skillName ?? ""
+                              : (orderSession.topicName != null &&
+                                          orderSession.topicName!.isNotEmpty) &&
+                                      (orderSession.levelName != null &&
+                                          orderSession.levelName!.isNotEmpty)
+                                  ? "${orderSession.topicName!} - ${orderSession.levelName!}"
+                                  : "${orderSession.topicName ?? ""} ${orderSession.levelName ?? ""}",
+                          fontSize: 13,
+                          fontWeight: FontWeightManager.softLight,
+                          color: ColorManager.primary,
+                          maxLines: 2,
+                          overflow: TextOverflow.ellipsis,
+                        ),
+                      )
+                    : null,
                 borderRadius: BorderRadius.circular(14.0),
                 shadowColor: const Color(0x1a000000),
                 animateTrailing: true,
@@ -250,7 +265,9 @@ class DroosListWidget extends GetView<OrderDetailsController> {
                       PrimaryText(
                         orderSession.session?.currentStatusName ??
                             (sessionStatus == SessionStatus.notStarted
-                                ? LocaleKeys.not_started.tr
+                                ? orderStatus == OrderStatus.cancelled
+                                    ? LocaleKeys.not_started.tr
+                                    : LocaleKeys.not_started_yet.tr
                                 : sessionStatus == SessionStatus.inProgress
                                     ? LocaleKeys.in_progress.tr
                                     : sessionStatus == SessionStatus.paused

@@ -18,6 +18,7 @@ import '../../order_dars/data/repos/order_dars_repo_implement.dart';
 import '../../teacher_details/data/models/teacher_details/dars_teacher_details.dart';
 import '../../teacher_details/data/repos/teacher_details_repo.dart';
 import '../../teacher_details/data/repos/teacher_details_repo_implement.dart';
+import '../data/models/order_details/level_topic.dart';
 import '../data/models/order_details/order_details.dart';
 import '../data/models/order_session/order_session.dart';
 import '../data/repos/order_details_repo.dart';
@@ -28,7 +29,7 @@ class OrderDetailsController extends GetxController {
   List<Map<String, dynamic>> orderProperties = [
     {
       "icon": ImagesManager.clockIocn,
-      "title": LocaleKeys.timing.tr,
+      "title": LocaleKeys.preferred_timing.tr,
     },
     {
       "icon": ImagesManager.calendarIcon,
@@ -50,9 +51,14 @@ class OrderDetailsController extends GetxController {
       "icon": ImagesManager.addressIcon,
       "title": LocaleKeys.address.tr,
     },
-    // {
-    //   "icon": ImagesManager.classIcon,
-    //   "title": LocaleKeys.studying_class.tr,
+    {
+      "icon": ImagesManager.classIcon,
+      "title": LocaleKeys.classes.tr,
+    },
+    {
+      "icon": ImagesManager.bookIcon,
+      "title": LocaleKeys.subjects.tr,
+    },
     {
       "icon": ImagesManager.aboutDarsIcon,
       "title": LocaleKeys.notes.tr,
@@ -124,11 +130,25 @@ class OrderDetailsController extends GetxController {
         (darsOrderDetails.value.result?.order?.preferredStartDate ?? '')
             .split("T")[1]);
     DateTime preferredEndDate = DateFormat('yyyy-MM-dd').parse(
-        (darsOrderDetails.value.result?.order?.preferredEndDate ?? '')
+        (darsOrderDetails.value.result?.order?.preferredEndDate ??
+                darsOrderDetails.value.result?.order?.preferredStartDate ??
+                "")
             .split("T")[0]);
-    DateTime preferredEndTime = DateFormat('HH:mm:ss').parse(
-        (darsOrderDetails.value.result?.order?.preferredEndDate ?? '')
-            .split("T")[1]);
+    DateTime preferredEndTime = DateFormat('HH:mm:ss').parse((darsOrderDetails
+                        .value.result?.order?.preferredEndDate ??
+                    darsOrderDetails.value.result?.order?.preferredStartDate ??
+                    "")
+                .split("T")
+                .length >
+            1
+        ? (darsOrderDetails.value.result?.order?.preferredEndDate ??
+                darsOrderDetails.value.result?.order?.preferredStartDate ??
+                "")
+            .split("T")[1]
+        : (darsOrderDetails.value.result?.order?.preferredEndDate ??
+                darsOrderDetails.value.result?.order?.preferredStartDate ??
+                "")
+            .split("T")[0]);
     orderProperties[0]["content"] = "${DateFormat.jm('ar_SA').format(
       DateTime(
         preferredStartDate.year,
@@ -157,13 +177,22 @@ class OrderDetailsController extends GetxController {
     orderProperties[3]["content"] =
         darsOrderDetails.value.result?.productName ?? "--";
     orderProperties[4]["content"] =
-        _formatAddress(darsOrderDetails.value.result?.address);
-    orderProperties[5]["content"] =
+        formatAddress(darsOrderDetails.value.result?.address);
+    orderProperties[5]["content"] = (darsOrderDetails
+        .value.result?.levelTopics ?? [])
+        .map((LevelTopic levelTopic) =>
+            levelTopic.levelName ?? "")
+        .toSet()
+        .toList()
+        .join(", ");
+    orderProperties[6]["content"] = darsOrderDetails
+        .value.result?.levelTopic ?? "";
+    orderProperties[7]["content"] =
         darsOrderDetails.value.result?.order?.notes ?? "--";
     update();
   }
 
-  String _formatAddress(Address? address) {
+  String formatAddress(Address? address) {
     List<String> addressParts = [];
     if (address == null) {
       return "";

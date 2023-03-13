@@ -12,6 +12,7 @@ import '../../../../constants/exports.dart';
 import '../../../../constants/links.dart';
 import '../../../../data/cache_helper.dart';
 import '../../../../data/network_helper/dio_helper.dart';
+import '../models/product/product.dart';
 import 'order_dars_repo.dart';
 
 class OrderDarsRepoImplement extends OrderDarsRepo {
@@ -249,5 +250,39 @@ class OrderDarsRepoImplement extends OrderDarsRepo {
       }
     }
     return orderDarsToEdit;
+  }
+
+  @override
+  Future<List<Product>> getProducts({int? categoryIdFilter}) async {
+    List<Product> products = [];
+    try {
+      Map<String, dynamic> queryParameters = {
+        "CategoryIdFilter": categoryIdFilter,
+      };
+      await DioHelper.get(
+        headers: headers,
+        queryParameters: queryParameters,
+        Links.getAllProducts,
+        onSuccess: (response) {
+          dynamic result = response.data;
+          if (result != null &&
+              result["result"] != null &&
+              result["result"]["items"] != null) {
+            for (var product in result["result"]["items"]) {
+              products.add(Product.fromJson(product));
+            }
+          }
+        },
+        onError: (error) {
+          CustomSnackBar.showCustomErrorSnackBar(
+            title: LocaleKeys.error.tr,
+            message: error.response?.data["error"]["message"] ?? error.message,
+          );
+        },
+      );
+    } catch (e) {
+      log("getProducts error $e");
+    }
+    return products;
   }
 }

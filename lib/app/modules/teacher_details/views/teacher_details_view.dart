@@ -10,6 +10,7 @@ import '../widgets/about_teacher_widget.dart';
 import '../widgets/teacher_brief_widget.dart';
 import '../widgets/teacher_dars_rating_widget.dart';
 import '../widgets/teacher_info_widget.dart';
+import '../widgets/teacher_rating_previous_droos.dart';
 
 class TeacherDetailsView extends GetView<TeacherDetailsController> {
   const TeacherDetailsView({super.key});
@@ -53,6 +54,8 @@ class TeacherDetailsView extends GetView<TeacherDetailsController> {
                     SizedBox(height: 28.h),
                     const AboutTeacher(),
                     SizedBox(height: 25.h),
+                    const TeacherRatingPreviousDroos(),
+                    SizedBox(height: 34.h),
                     Container(
                       padding:
                           const EdgeInsets.fromLTRB(13.0, 14.0, 14.0, 12.0),
@@ -74,7 +77,7 @@ class TeacherDetailsView extends GetView<TeacherDetailsController> {
                               SvgPicture.asset(ImagesManager.ratingIcon),
                               SizedBox(width: 8.w),
                               PrimaryText(
-                                LocaleKeys.rating_previous_darses,
+                                LocaleKeys.rating_previous_droos,
                                 fontSize: 14,
                                 fontWeight: FontWeightManager.softLight,
                                 color: ColorManager.fontColor,

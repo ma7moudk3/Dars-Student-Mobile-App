@@ -56,7 +56,10 @@ class OrderDetailsView extends GetView<OrderDetailsController> {
                 return RefreshIndicator(
                   color: ColorManager.white,
                   backgroundColor: ColorManager.primary,
-                  onRefresh: () async => await controller.checkInternet(),
+                  onRefresh: () async {
+                    await controller.checkInternet();
+                    controller.pagingController.refresh();
+                  },
                   child: SingleChildScrollView(
                     physics: const AlwaysScrollableScrollPhysics(),
                     child: GetBuilder<OrderDetailsController>(

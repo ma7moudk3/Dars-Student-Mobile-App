@@ -31,13 +31,19 @@ class DarsPropertyWidget extends GetView<OrderDetailsController> {
           ),
           const Spacer(),
           SizedBox(
-            width: 190.w,
+            width: 160.w,
             child: Tooltip(
               message: content,
               padding: const EdgeInsets.all(10),
               margin: const EdgeInsets.all(16),
               showDuration: const Duration(milliseconds: 5500),
               preferBelow: true,
+               textStyle: TextStyle(
+                color: ColorManager.white,
+                fontSize: 14,
+                fontWeight: FontWeightManager.softLight,
+                fontFamily: FontConstants.fontFamily,
+              ),
               textAlign:
                   detectLang(text: content) ? TextAlign.left : TextAlign.right,
               decoration: BoxDecoration(

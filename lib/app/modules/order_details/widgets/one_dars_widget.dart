@@ -11,6 +11,7 @@ import '../../../routes/app_pages.dart';
 import '../controllers/order_details_controller.dart';
 import 'cancel_order_bottom_sheet_content.dart';
 import 'dars_property_widget.dart';
+import 'droos_list_widget.dart';
 
 class OneDarsWidget extends GetView<OrderDetailsController> {
   const OneDarsWidget({
@@ -88,16 +89,26 @@ class OneDarsWidget extends GetView<OrderDetailsController> {
                 Column(
                   children: List.generate(controller.orderProperties.length,
                       (int index) {
-                    return DarsPropertyWidget(
-                      iconPath: controller.orderProperties[index]["icon"],
-                      title: controller.orderProperties[index]["title"],
-                      content:
-                          controller.orderProperties[index]["content"] ?? "",
-                    );
+                    if (controller.orderProperties[index]["content"] != null &&
+                        controller
+                            .orderProperties[index]["content"].isNotEmpty) {
+                      return DarsPropertyWidget(
+                        iconPath: controller.orderProperties[index]["icon"],
+                        title: controller.orderProperties[index]["title"],
+                        content:
+                            controller.orderProperties[index]["content"] ?? "",
+                      );
+                    } else {
+                      return const SizedBox.shrink();
+                    }
                   }),
                 ),
                 moreDivider(),
                 SizedBox(height: 10.h),
+                DroosListWidget(
+                  orderStatus: orderStatus,
+                ),
+                SizedBox(height: 20.h),
                 Row(
                   mainAxisSize: MainAxisSize.min,
                   children: [
@@ -485,6 +496,12 @@ class OneDarsWidget extends GetView<OrderDetailsController> {
                                                     "${controller.darsOrderDetails.value.result?.order?.preferredprovider?["address"]?["countryName"] ?? ""} - ${controller.darsOrderDetails.value.result?.order?.preferredprovider?["address"]?["governorateName"] ?? ""} - ${controller.darsOrderDetails.value.result?.order?.preferredprovider?["address"]?["localityName"] ?? ""}",
                                                 padding:
                                                     const EdgeInsets.all(10),
+                                                     textStyle: TextStyle(
+                color: ColorManager.white,
+                fontSize: 14,
+                fontWeight: FontWeightManager.softLight,
+                fontFamily: FontConstants.fontFamily,
+              ),
                                                 margin:
                                                     const EdgeInsets.all(16),
                                                 showDuration: const Duration(

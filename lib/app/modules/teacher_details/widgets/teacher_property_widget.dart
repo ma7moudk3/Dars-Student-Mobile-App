@@ -34,6 +34,7 @@ class TeacherPropertyWidget extends GetView<TeacherDetailsController> {
               margin: const EdgeInsets.all(16),
               showDuration: const Duration(milliseconds: 5500),
               preferBelow: true,
+              
               textAlign:
                   detectLang(text: content) ? TextAlign.left : TextAlign.right,
               decoration: BoxDecoration(

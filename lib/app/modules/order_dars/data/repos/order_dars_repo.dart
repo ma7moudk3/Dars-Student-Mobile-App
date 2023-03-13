@@ -3,6 +3,7 @@ import 'package:hessa_student/app/data/models/skills/skills.dart';
 import 'package:hessa_student/app/data/models/topics/topics.dart';
 
 import '../models/order_dars_to_edit/order_dars_to_edit.dart';
+import '../models/product/product.dart';
 
 abstract class OrderDarsRepo {
   Future<int> addOrEditOrderDars({
@@ -29,4 +30,6 @@ abstract class OrderDarsRepo {
   Future<Skills> getSkills();
 
   Future<OrderDarsToEdit> getOrderDarsToEdit({required int orderDarsToEditId});
+
+  Future<List<Product>> getProducts({int? categoryIdFilter});
 }

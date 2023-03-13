@@ -1,6 +1,8 @@
 import '../../../../generated/locales.g.dart';
 import '../../../constants/exports.dart';
+import '../../../core/helper_functions.dart';
 import '../controllers/order_dars_controller.dart';
+import '../data/models/product/product.dart';
 
 class OrderDarsOptions extends GetView<OrderDarsController> {
   const OrderDarsOptions({
@@ -199,23 +201,67 @@ class OrderDarsOptions extends GetView<OrderDarsController> {
           ),
           SizedBox(height: 15.h),
           Row(
-            mainAxisSize: MainAxisSize.min,
             children: [
               PrimaryText(
                 "${LocaleKeys.school_package.tr}*: ",
-                fontSize: 11.2,
+                fontSize: 13,
                 fontWeight: FontWeightManager.softLight,
                 color: ColorManager.red,
               ),
               SizedBox(
-                width: Get.width * 0.60,
+                width: 210.w,
                 child: PrimaryText(
                   LocaleKeys.school_package_description,
-                  fontSize: 11,
+                  fontSize: 12,
                   fontWeight: FontWeightManager.softLight,
                   color: ColorManager.fontColor7,
                   overflow: TextOverflow.ellipsis,
                   maxLines: 1,
+                ),
+              ),
+            ],
+          ),
+          SizedBox(height: 15.h),
+          Row(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              PrimaryText(
+                "${LocaleKeys.total_price.tr}: ",
+                fontSize: 13,
+                fontWeight: FontWeightManager.softLight,
+                color: ColorManager.red,
+              ),
+              SizedBox(
+                width: 250.w,
+                child: Tooltip(
+                  message: controller.orderType == 0
+                      ? "${LocaleKeys.dars_price.tr} (${controller.products.firstWhereOrNull((Product product) => product.productDetails != null && product.productDetails!.isActive == true && product.productDetails != null && product.productDetails!.isPackage == false)?.productDetails?.hourlyPrice ?? 0} ${controller.products.firstWhereOrNull((Product product) => product.productDetails != null && product.productDetails!.isActive == true && product.productDetails != null && product.productDetails!.isPackage == false)?.currencyNameL?.replaceAll("ال", "") ?? 0})"
+                      : "${LocaleKeys.dars_price.tr} (${controller.products.firstWhereOrNull((Product product) => product.productDetails != null && product.productDetails!.isActive == true && product.productDetails != null && product.productDetails!.isPackage == false)?.productDetails?.hourlyPrice ?? 0} ${controller.products.firstWhereOrNull((Product product) => product.productDetails != null && product.productDetails!.isActive == true && product.productDetails != null && product.productDetails!.isPackage == true)?.currencyNameL?.replaceAll("ال", "") ?? 0}) * ${LocaleKeys.droos_count.tr} (${controller.products.firstWhereOrNull((Product product) => product.productDetails != null && product.productDetails!.isActive == true && product.productDetails != null && product.productDetails!.isPackage == true)?.productDetails?.totalHours ?? 0}) = ${controller.products.firstWhereOrNull((Product product) => product.productDetails != null && product.productDetails!.isActive == true && product.productDetails != null && product.productDetails!.isPackage == true)?.productDetails?.productPrice ?? 0} ${controller.products.firstWhereOrNull((Product product) => product.productDetails != null && product.productDetails!.isActive == true && product.productDetails != null && product.productDetails!.isPackage == true)?.currencyNameL?.replaceAll("ال", "") ?? 0}",
+                  padding: const EdgeInsets.all(10),
+                  margin: const EdgeInsets.all(16),
+                  showDuration: const Duration(milliseconds: 5500),
+                  preferBelow: true,
+                  textAlign: detectLang(
+                          text: controller.orderType == 0
+                              ? "${LocaleKeys.dars_price.tr} (${controller.products.firstWhereOrNull((Product product) => product.productDetails != null && product.productDetails!.isActive == true && product.productDetails != null && product.productDetails!.isPackage == false)?.productDetails?.hourlyPrice ?? 0} ${controller.products.firstWhereOrNull((Product product) => product.productDetails != null && product.productDetails!.isActive == true && product.productDetails != null && product.productDetails!.isPackage == false)?.currencyNameL ?? 0})"
+                              : "${LocaleKeys.dars_price.tr} (${controller.products.firstWhereOrNull((Product product) => product.productDetails != null && product.productDetails!.isActive == true && product.productDetails != null && product.productDetails!.isPackage == false)?.productDetails?.hourlyPrice ?? 0} ${controller.products.firstWhereOrNull((Product product) => product.productDetails != null && product.productDetails!.isActive == true && product.productDetails != null && product.productDetails!.isPackage == true)?.currencyNameL?.replaceAll("ال", "") ?? 0}) * ${LocaleKeys.droos_count.tr} (${controller.products.firstWhereOrNull((Product product) => product.productDetails != null && product.productDetails!.isActive == true && product.productDetails != null && product.productDetails!.isPackage == true)?.productDetails?.totalHours ?? 0}) = ${controller.products.firstWhereOrNull((Product product) => product.productDetails != null && product.productDetails!.isActive == true && product.productDetails != null && product.productDetails!.isPackage == true)?.productDetails?.productPrice ?? 0} ${controller.products.firstWhereOrNull((Product product) => product.productDetails != null && product.productDetails!.isActive == true && product.productDetails != null && product.productDetails!.isPackage == true)?.currencyNameL?.replaceAll("ال", "") ?? 0}")
+                      ? TextAlign.left
+                      : TextAlign.right,
+                  decoration: BoxDecoration(
+                    color: ColorManager.grey5,
+                    borderRadius: BorderRadius.circular(10),
+                  ),
+                  triggerMode: TooltipTriggerMode.tap,
+                  child: PrimaryText(
+                    controller.orderType == 0
+                        ? "${LocaleKeys.dars_price.tr} (${controller.products.firstWhereOrNull((Product product) => product.productDetails != null && product.productDetails!.isActive == true && product.productDetails != null && product.productDetails!.isPackage == false)?.productDetails?.hourlyPrice ?? 0} ${controller.products.firstWhereOrNull((Product product) => product.productDetails != null && product.productDetails!.isActive == true && product.productDetails != null && product.productDetails!.isPackage == false)?.currencyNameL ?? 0})"
+                        : "${LocaleKeys.dars_price.tr} (${controller.products.firstWhereOrNull((Product product) => product.productDetails != null && product.productDetails!.isActive == true && product.productDetails != null && product.productDetails!.isPackage == false)?.productDetails?.hourlyPrice ?? 0} ${controller.products.firstWhereOrNull((Product product) => product.productDetails != null && product.productDetails!.isActive == true && product.productDetails != null && product.productDetails!.isPackage == true)?.currencyNameL?.replaceAll("ال", "") ?? 0}) * ${LocaleKeys.droos_count.tr} (${controller.products.firstWhereOrNull((Product product) => product.productDetails != null && product.productDetails!.isActive == true && product.productDetails != null && product.productDetails!.isPackage == true)?.productDetails?.totalHours ?? 0}) = ${controller.products.firstWhereOrNull((Product product) => product.productDetails != null && product.productDetails!.isActive == true && product.productDetails != null && product.productDetails!.isPackage == true)?.productDetails?.productPrice ?? 0} ${controller.products.firstWhereOrNull((Product product) => product.productDetails != null && product.productDetails!.isActive == true && product.productDetails != null && product.productDetails!.isPackage == true)?.currencyNameL?.replaceAll("ال", "") ?? 0}",
+                    fontSize: 12,
+                    fontWeight: FontWeightManager.softLight,
+                    color: ColorManager.fontColor,
+                    overflow: TextOverflow.ellipsis,
+                    maxLines: 1,
+                  ),
                 ),
               ),
             ],

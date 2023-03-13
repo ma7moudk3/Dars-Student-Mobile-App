@@ -81,6 +81,12 @@ class AddressWidget extends GetView<AddressesController> {
                       color: ColorManager.grey5,
                       borderRadius: BorderRadius.circular(10),
                     ),
+                        textStyle: TextStyle(
+                color: ColorManager.white,
+                fontSize: 14,
+                fontWeight: FontWeightManager.softLight,
+                fontFamily: FontConstants.fontFamily,
+              ),
                     triggerMode: TooltipTriggerMode.tap,
                     child: PrimaryText(
                       addressResult.countryName != null &&
@@ -106,6 +112,12 @@ class AddressWidget extends GetView<AddressesController> {
                         : "${addressResult.address?.name ?? ""}${addressResult.address?.name ?? ""}",
                     padding: const EdgeInsets.all(10),
                     margin: const EdgeInsets.all(16),
+                         textStyle: TextStyle(
+                color: ColorManager.white,
+                fontSize: 14,
+                fontWeight: FontWeightManager.softLight,
+                fontFamily: FontConstants.fontFamily,
+              ),
                     showDuration: const Duration(milliseconds: 5500),
                     preferBelow: true,
                     textAlign: detectLang(

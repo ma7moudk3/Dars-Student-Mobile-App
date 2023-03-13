@@ -19,7 +19,7 @@ class StudyingPackageOrderDarsStatus extends GetView<OrderDetailsController> {
   Widget build(BuildContext context) {
     return Container(
       width: Get.width,
-      height: 450.h,
+      height: 520.h,
       padding: const EdgeInsets.only(
         top: 10,
         left: 16,
@@ -36,35 +36,33 @@ class StudyingPackageOrderDarsStatus extends GetView<OrderDetailsController> {
       ),
       child: Column(
         children: [
-          Expanded(
-            child: Row(
-              children: [
-                SvgPicture.asset(ImagesManager.lumbPencilIcon),
-                SizedBox(width: 8.w),
-                PrimaryText(
-                  "${(controller.darsOrderDetails.value.result?.order?.duration ?? 20).toInt()} ${LocaleKeys.studying_hour.tr}",
-                  fontSize: 16,
-                  fontWeight: FontWeightManager.softLight,
-                  color: ColorManager.fontColor,
+          Row(
+            children: [
+              SvgPicture.asset(ImagesManager.lumbPencilIcon),
+              SizedBox(width: 8.w),
+              PrimaryText(
+                "${(controller.darsOrderDetails.value.result?.order?.duration ?? 20).toInt()} ${LocaleKeys.studying_hour.tr}",
+                fontSize: 16,
+                fontWeight: FontWeightManager.softLight,
+                color: ColorManager.fontColor,
+              ),
+              const Spacer(),
+              Container(
+                width: 100.w,
+                height: 29.h,
+                decoration: BoxDecoration(
+                  color: ColorManager.primary.withOpacity(0.15),
+                  borderRadius: BorderRadius.circular(8),
                 ),
-                const Spacer(),
-                Container(
-                  width: 100.w,
-                  height: 29.h,
-                  decoration: BoxDecoration(
-                    color: ColorManager.primary.withOpacity(0.15),
-                    borderRadius: BorderRadius.circular(8),
+                child: Center(
+                  child: PrimaryText(
+                    LocaleKeys.school_package.tr,
+                    color: ColorManager.primary,
+                    fontWeight: FontWeightManager.softLight,
                   ),
-                  child: Center(
-                    child: PrimaryText(
-                      LocaleKeys.school_package.tr,
-                      color: ColorManager.primary,
-                      fontWeight: FontWeightManager.softLight,
-                    ),
-                  ),
-                )
-              ],
-            ),
+                ),
+              )
+            ],
           ),
           moreDivider(),
           Expanded(
@@ -144,11 +142,16 @@ class StudyingPackageOrderDarsStatus extends GetView<OrderDetailsController> {
           Column(
             children:
                 List.generate(controller.orderProperties.length, (int index) {
-              return DarsPropertyWidget(
-                iconPath: controller.orderProperties[index]["icon"],
-                title: controller.orderProperties[index]["title"],
-                content: controller.orderProperties[index]["content"] ?? "",
-              );
+              if (controller.orderProperties[index]["content"] != null &&
+                  controller.orderProperties[index]["content"].isNotEmpty) {
+                return DarsPropertyWidget(
+                  iconPath: controller.orderProperties[index]["icon"],
+                  title: controller.orderProperties[index]["title"],
+                  content: controller.orderProperties[index]["content"] ?? "",
+                );
+              } else {
+                return const SizedBox.shrink();
+              }
             }),
           ),
         ],

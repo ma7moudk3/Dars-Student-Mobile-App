@@ -203,29 +203,29 @@ class DioHelper {
             ),
           )
           .timeout(const Duration(seconds: TIME_OUT_DURATION));
-      if (response.statusCode == 401 &&
-          response.data['unAuthorizedRequest'] == true) {
-        await splashRepo.refreshToken().then((UserToken userToken) async {
-          if (userToken.result != null &&
-              userToken.result!.accessToken != null &&
-              CacheHelper.instance.getRefreshToken().isNotEmpty) {
-            await CacheHelper.instance.setLoginTime(
-                DateFormat('yyyy-MM-dd HH:mm:ss').format(DateTime.now()));
-            await CacheHelper.instance.setTokenExpirationSeconds(
-                userToken.result?.expireInSeconds ?? 0);
-            // resend the request
-            get(
-              url,
-              headers: headers,
-              queryParameters: queryParameters,
-              onSuccess: onSuccess,
-              onError: onError,
-              onLoading: onLoading,
-              onReceiveProgress: onReceiveProgress,
-            );
-          }
-        });
-      }
+      // if (response.statusCode == 401 &&
+      //     response.data['unAuthorizedRequest'] == true) {
+      //   await splashRepo.refreshToken().then((UserToken userToken) async {
+      //     if (userToken.result != null &&
+      //         userToken.result!.accessToken != null &&
+      //         CacheHelper.instance.getRefreshToken().isNotEmpty) {
+      //       await CacheHelper.instance.setLoginTime(
+      //           DateFormat('yyyy-MM-dd HH:mm:ss').format(DateTime.now()));
+      //       await CacheHelper.instance.setTokenExpirationSeconds(
+      //           userToken.result?.expireInSeconds ?? 0);
+      //       // resend the request
+      //       get(
+      //         url,
+      //         headers: headers,
+      //         queryParameters: queryParameters,
+      //         onSuccess: onSuccess,
+      //         onError: onError,
+      //         onLoading: onLoading,
+      //         onReceiveProgress: onReceiveProgress,
+      //       );
+      //     }
+      //   });
+      // }
       if (response.data.isNotEmpty) {
         await onSuccess(response);
       } else {

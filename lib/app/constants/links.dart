@@ -20,8 +20,9 @@ class Links {
       'api/services/app/Orders/GetOrderForEdit';
   static const String getSessionsByOrderId =
       'api/services/app/Sessions/GetSessionForRequesterByOrderId';
-  static const String deleteSession =
-      'api/services/app/Sessions/Delete';
+  static const String getAllProducts =
+      'api/services/app/Products/GetAllBySkill';
+  static const String deleteSession = 'api/services/app/Sessions/Delete';
   static const String cancelOrder = 'api/services/app/Orders/PostCancelOrder';
   static const String verifyOTPCodeMobile =
       'api/services/app/Profile/ActivateMobile';

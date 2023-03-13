@@ -34,6 +34,7 @@ import '../../dependents/data/repos/dependents_repo_implement.dart';
 import '../../home/controllers/home_controller.dart';
 import '../../preferred_teachers/data/models/preferred_teacher/preferred_teacher.dart';
 import '../../preferred_teachers/data/repos/preferred_teachers_repo_implement.dart';
+import '../data/models/product/product.dart';
 import '../data/repos/order_dars_repo.dart';
 import '../data/repos/order_dars_repo_implement.dart';
 
@@ -89,6 +90,7 @@ class OrderDarsController extends GetxController {
   List<String> selectedSkills = [];
   List<Student> selectedStudents = [];
   List<AddressResult> addresses = [];
+  List<Product> products = [];
   AddressResult? selectedAddress;
   bool isAddressDropDownLoading = false;
   PreferredTeacher? chosenPreferredTeacher;
@@ -338,6 +340,11 @@ class OrderDarsController extends GetxController {
     update();
   }
 
+  Future getAllProducts() async {
+    products = await _orderDarsRepo.getProducts();
+    update();
+  }
+
   Future showMultiSelectTopics() async {
     final List<String> items = topics.result != null &&
             topics.result!.isNotEmpty
@@ -547,6 +554,7 @@ class OrderDarsController extends GetxController {
         List<Future> futures = [
           getClasses(),
           getTopics(),
+          getAllProducts(),
           getSkills(),
           getMyAddresses(),
         ];
