@@ -5,6 +5,7 @@ import 'package:hessa_student/app/core/helper_functions.dart';
 import 'package:hessa_student/app/data/cache_helper.dart';
 import 'package:hessa_student/app/modules/order_details/controllers/order_details_controller.dart';
 import 'package:hessa_student/app/modules/teacher_details/data/models/teacher_details/dars_teacher_details.dart';
+import 'package:hessa_student/app/modules/teacher_details/data/models/teacher_details/provider_address.dart';
 import 'package:hessa_student/app/modules/teacher_details/data/models/teacher_details/provider_skill.dart';
 import 'package:hessa_student/app/modules/teacher_details/data/repos/teacher_details_repo.dart';
 import 'package:hessa_student/global_presentation/global_widgets/loading.dart';
@@ -45,6 +46,10 @@ class TeacherDetailsController extends GetxController {
       "icon": ImagesManager.skillIcon,
       "title": LocaleKeys.skills.tr,
     },
+    {
+      "icon": ImagesManager.addressIcon,
+      "title": LocaleKeys.teacher_address.tr,
+    },
   ];
 
   @override
@@ -82,12 +87,37 @@ class TeacherDetailsController extends GetxController {
                 .toSet()
                 .toList()
                 .join(", ");
+            teacherProperties[3]["content"] =
+                _formatAddress(darsTeacherDetails.result!.providerAddress);
           }
           isLoading.value = false;
         });
       }
     });
     update();
+  }
+
+  String _formatAddress(ProviderAddress? address) {
+    List<String> addressParts = [];
+    if (address == null) {
+      return "";
+    }
+    if (address.countryName != null && address.countryName!.isNotEmpty) {
+      addressParts.add(address.countryName!);
+    }
+    if (address.governorateName != null &&
+        address.governorateName!.isNotEmpty) {
+      addressParts.add(address.governorateName!);
+    }
+    if (address.localityName != null && address.localityName!.isNotEmpty) {
+      addressParts.add(address.localityName!);
+    }
+    if (address.address != null &&
+        address.address!.name != null &&
+        address.address!.name!.isNotEmpty) {
+      addressParts.add(address.address!.name!);
+    }
+    return addressParts.join(' - ');
   }
 
   Future<void> toggleFavorite() async {

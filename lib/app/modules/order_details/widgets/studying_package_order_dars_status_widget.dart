@@ -4,6 +4,7 @@ import '../../../../generated/locales.g.dart';
 import '../../../constants/exports.dart';
 import '../../../core/helper_functions.dart';
 import '../controllers/order_details_controller.dart';
+import 'dars_property_widget.dart';
 
 class StudyingPackageOrderDarsStatus extends GetView<OrderDetailsController> {
   const StudyingPackageOrderDarsStatus({
@@ -18,8 +19,13 @@ class StudyingPackageOrderDarsStatus extends GetView<OrderDetailsController> {
   Widget build(BuildContext context) {
     return Container(
       width: Get.width,
-      height: 120.h,
-      padding: const EdgeInsets.all(16),
+      height: 450.h,
+      padding: const EdgeInsets.only(
+        top: 10,
+        left: 16,
+        right: 16,
+        bottom: 10,
+      ),
       decoration: BoxDecoration(
         color: const Color(0xfffafafa),
         borderRadius: BorderRadius.circular(14),
@@ -133,6 +139,17 @@ class StudyingPackageOrderDarsStatus extends GetView<OrderDetailsController> {
                 ),
               ],
             ),
+          ),
+          moreDivider(),
+          Column(
+            children:
+                List.generate(controller.orderProperties.length, (int index) {
+              return DarsPropertyWidget(
+                iconPath: controller.orderProperties[index]["icon"],
+                title: controller.orderProperties[index]["title"],
+                content: controller.orderProperties[index]["content"] ?? "",
+              );
+            }),
           ),
         ],
       ),

@@ -19,6 +19,8 @@ enum OrderStatus {
   cancelled
 }
 
+enum DarsCategory { skills, academicTopics }
+
 enum PaymentStatus { fullyPaid, partiallyPaid, unPaid }
 
 enum CardType { visaCard, masterCard, madaCard }

@@ -10,7 +10,6 @@ import '../../../constants/links.dart';
 import '../../../core/helper_functions.dart';
 import '../../../routes/app_pages.dart';
 import '../controllers/order_details_controller.dart';
-import '../data/models/order_details/candidate_provider.dart';
 import 'cancel_order_bottom_sheet_content.dart';
 import 'droos_list_widget.dart';
 
@@ -68,7 +67,6 @@ class StudyingPackageWidget extends GetView<OrderDetailsController> {
                   padding:
                       EdgeInsets.symmetric(horizontal: 16.w, vertical: 16.h),
                   width: Get.width,
-                  height: 300.h,
                   decoration: BoxDecoration(
                     color: const Color(0xfffafafa),
                     borderRadius: BorderRadius.circular(14.0),
@@ -111,7 +109,9 @@ class StudyingPackageWidget extends GetView<OrderDetailsController> {
                           ),
                         ],
                       ),
-                      Expanded(
+                      SizedBox(
+                        width: Get.width,
+                        height: 80.h,
                         child: ListView.builder(
                           // only the first 3 students of itemCount: controller .darsOrderDetails.value.result?.students?,
                           itemCount: (controller.darsOrderDetails.value.result
@@ -184,203 +184,28 @@ class StudyingPackageWidget extends GetView<OrderDetailsController> {
                           },
                         ),
                       ),
-                      moreDivider(),
                       SizedBox(height: 3.h),
                       GetBuilder<OrderDetailsController>(
                           builder: (OrderDetailsController controlller) {
-                        if (orderStatus == OrderStatus.submitted &&
-                            controller.darsOrderDetails.value.result?.order
-                                    ?.preferredprovider !=
+                        if (controller.darsOrderDetails.value.result?.order
+                                    ?.providerId !=
                                 null &&
-                            (controller.darsOrderDetails.value.result
-                                        ?.candidateProvider ??
-                                    [])
-                                .isEmpty) {
+                            controller.darsOrderDetails.value.result?.order
+                                    ?.providerId !=
+                                0 &&
+                            controller.darsOrderDetails.value.result
+                                    ?.providerUserId !=
+                                null &&
+                            controller.darsOrderDetails.value.result
+                                    ?.providerUserId !=
+                                0) {
+                          // if thie condition here is true it means that >> There's an assigned teacher for this order
                           return Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
+                              SizedBox(height: 10.h),
                               PrimaryText(
-                                LocaleKeys.current_preferred_teacher.tr,
-                                fontSize: 14,
-                                fontWeight: FontWeightManager.softLight,
-                                color: ColorManager.primary,
-                              ),
-                              SizedBox(height: 20.h),
-                              Padding(
-                                padding: EdgeInsets.symmetric(
-                                  horizontal: 16.w,
-                                ),
-                                child: GestureDetector(
-                                  behavior: HitTestBehavior.opaque,
-                                  onTap: () async {},
-                                  child: Row(
-                                    children: [
-                                      StatefulBuilder(builder:
-                                          (BuildContext context, setState) {
-                                        String teacherPicture =
-                                            "${Links.baseLink}${Links.profileImageById}?userid=${controller.darsOrderDetails.value.result?.order?.preferredprovider?["userId"] ?? -1}";
-                                        return Container(
-                                          width: 44.w,
-                                          height: 44.h,
-                                          decoration: BoxDecoration(
-                                            image: DecorationImage(
-                                              image: CachedNetworkImageProvider(
-                                                teacherPicture,
-                                                errorListener: () {
-                                                  setState(() {
-                                                    teacherPicture =
-                                                        "https://www.shareicon.net/data/2016/06/10/586098_guest_512x512.png";
-                                                  });
-                                                },
-                                              ),
-                                              fit: BoxFit.cover,
-                                            ),
-                                            borderRadius:
-                                                BorderRadius.circular(12),
-                                            boxShadow: [
-                                              BoxShadow(
-                                                color: const Color(0x19000000)
-                                                    .withOpacity(0.07),
-                                                spreadRadius: 0,
-                                                offset: const Offset(0, 12),
-                                                blurRadius: 15,
-                                              ),
-                                            ],
-                                          ),
-                                        );
-                                      }),
-                                      SizedBox(width: 10.w),
-                                      Column(
-                                        crossAxisAlignment:
-                                            CrossAxisAlignment.start,
-                                        children: [
-                                          PrimaryText(
-                                            controller
-                                                        .darsOrderDetails
-                                                        .value
-                                                        .result
-                                                        ?.order
-                                                        ?.preferredprovider?[
-                                                    "name"] ??
-                                                "",
-                                            fontSize: 14,
-                                            fontWeight:
-                                                FontWeightManager.softLight,
-                                          ),
-                                          SizedBox(
-                                              width: 120.w,
-                                              child: Tooltip(
-                                                message:
-                                                    "${controller.darsOrderDetails.value.result?.order?.preferredprovider?["address"]?["countryName"] ?? ""} - ${controller.darsOrderDetails.value.result?.order?.preferredprovider?["address"]?["governorateName"] ?? ""} - ${controller.darsOrderDetails.value.result?.order?.preferredprovider?["address"]?["localityName"] ?? ""}",
-                                                padding:
-                                                    const EdgeInsets.all(10),
-                                                margin:
-                                                    const EdgeInsets.all(16),
-                                                showDuration: const Duration(
-                                                    milliseconds: 5500),
-                                                preferBelow: true,
-                                                textAlign: detectLang(
-                                                        text:
-                                                            "${controller.darsOrderDetails.value.result?.order?.preferredprovider?["address"]?["countryName"] ?? ""} - ${controller.darsOrderDetails.value.result?.order?.preferredprovider?["address"]?["governorateName"] ?? ""} - ${controller.darsOrderDetails.value.result?.order?.preferredprovider?["address"]?["localityName"] ?? ""}")
-                                                    ? TextAlign.left
-                                                    : TextAlign.right,
-                                                decoration: BoxDecoration(
-                                                  color: ColorManager.grey5,
-                                                  borderRadius:
-                                                      BorderRadius.circular(10),
-                                                ),
-                                                triggerMode:
-                                                    TooltipTriggerMode.tap,
-                                                child: PrimaryText(
-                                                  "${controller.darsOrderDetails.value.result?.order?.preferredprovider?["address"]?["countryName"] ?? ""} - ${controller.darsOrderDetails.value.result?.order?.preferredprovider?["address"]?["governorateName"] ?? ""} - ${controller.darsOrderDetails.value.result?.order?.preferredprovider?["address"]?["localityName"] ?? ""}",
-                                                  fontSize: 12,
-                                                  maxLines: 1,
-                                                  fontWeight: FontWeightManager
-                                                      .softLight,
-                                                  color:
-                                                      ColorManager.fontColor7,
-                                                  overflow:
-                                                      TextOverflow.ellipsis,
-                                                ),
-                                              )),
-                                        ],
-                                      ),
-                                      const Spacer(),
-                                      GetBuilder<OrderDetailsController>(
-                                          builder: (OrderDetailsController
-                                              controller) {
-                                        return Row(
-                                          children: [
-                                            GestureDetector(
-                                              behavior: HitTestBehavior.opaque,
-                                              onTap: () async {
-                                                await controller
-                                                    .toggleTeacherFavorite();
-                                              },
-                                              child: Container(
-                                                width: 40.w,
-                                                height: 40.h,
-                                                decoration: BoxDecoration(
-                                                  color: ColorManager.primary
-                                                      .withOpacity(0.10),
-                                                  borderRadius:
-                                                      BorderRadius.circular(10),
-                                                ),
-                                                child: Center(
-                                                  child: Icon(
-                                                    controller
-                                                            .isPreferredTeacherFavorite
-                                                        ? Icons.favorite_rounded
-                                                        : Icons
-                                                            .favorite_outline_rounded,
-                                                    size: 30,
-                                                    color: controller
-                                                            .isPreferredTeacherFavorite
-                                                        ? ColorManager.red
-                                                        : ColorManager.primary,
-                                                  ),
-                                                ),
-                                              ),
-                                            ),
-                                            SizedBox(width: 10.w),
-                                            GestureDetector(
-                                              behavior: HitTestBehavior.opaque,
-                                              onTap: () {
-                                                log('Messaging');
-                                              },
-                                              child: Container(
-                                                width: 40.w,
-                                                height: 40.h,
-                                                decoration: BoxDecoration(
-                                                  color: ColorManager.yellow
-                                                      .withOpacity(0.15),
-                                                  borderRadius:
-                                                      BorderRadius.circular(10),
-                                                ),
-                                                child: Center(
-                                                  child: SvgPicture.asset(
-                                                    ImagesManager.messagingIcon,
-                                                  ),
-                                                ),
-                                              ),
-                                            ),
-                                          ],
-                                        );
-                                      }),
-                                    ],
-                                  ),
-                                ),
-                              ),
-                              SizedBox(height: 20.h),
-                            ],
-                          );
-                        } else if (orderStatus != OrderStatus.submitted &&
-                            orderStatus != OrderStatus.cancelled) {
-                          return Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              PrimaryText(
-                                LocaleKeys.teacher.tr,
+                                LocaleKeys.assigned_teacher.tr,
                                 fontSize: 14,
                                 fontWeight: FontWeightManager.softLight,
                                 color: ColorManager.primary,
@@ -391,26 +216,15 @@ class StudyingPackageWidget extends GetView<OrderDetailsController> {
                                 child: GestureDetector(
                                   behavior: HitTestBehavior.opaque,
                                   onTap: () async {
-                                    int teacherId = (controller
-                                                    .darsOrderDetails
-                                                    .value
-                                                    .result
-                                                    ?.candidateProvider ??
-                                                [])
-                                            .firstWhereOrNull((CandidateProvider
-                                                    candidateProvider) =>
-                                                candidateProvider.isSelectecd ==
-                                                true)
-                                            ?.providerId ??
+                                    int teacherId = controller.darsOrderDetails
+                                            .value.result?.order?.providerId ??
                                         -1;
-                                    if (teacherId != -1) {
-                                      await Get.toNamed(
-                                        Routes.TEACHER_DETAILS,
-                                        arguments: {
-                                          "teacherId": teacherId,
-                                        },
-                                      );
-                                    }
+                                    await Get.toNamed(
+                                      Routes.TEACHER_DETAILS,
+                                      arguments: {
+                                        "teacherId": teacherId,
+                                      },
+                                    );
                                   },
                                   child: Row(
                                     children: [
@@ -449,55 +263,12 @@ class StudyingPackageWidget extends GetView<OrderDetailsController> {
                                         );
                                       }),
                                       SizedBox(width: 10.w),
-                                      Column(
-                                        crossAxisAlignment:
-                                            CrossAxisAlignment.start,
-                                        children: [
-                                          PrimaryText(
-                                            controller.darsOrderDetails.value
-                                                    .result?.providerName ??
-                                                "",
-                                            fontSize: 14,
-                                            fontWeight:
-                                                FontWeightManager.softLight,
-                                          ),
-                                          SizedBox(
-                                              width: 120.w,
-                                              child: Tooltip(
-                                                message:
-                                                    "${controller.darsOrderDetails.value.result?.order?.preferredprovider?["address"]?["countryName"] ?? ""} - ${controller.darsOrderDetails.value.result?.order?.preferredprovider?["address"]?["governorateName"] ?? ""} - ${controller.darsOrderDetails.value.result?.order?.preferredprovider?["address"]?["localityName"] ?? ""}",
-                                                padding:
-                                                    const EdgeInsets.all(10),
-                                                margin:
-                                                    const EdgeInsets.all(16),
-                                                showDuration: const Duration(
-                                                    milliseconds: 5500),
-                                                preferBelow: true,
-                                                textAlign: detectLang(
-                                                        text:
-                                                            "${controller.darsOrderDetails.value.result?.order?.preferredprovider?["address"]?["countryName"] ?? ""} - ${controller.darsOrderDetails.value.result?.order?.preferredprovider?["address"]?["governorateName"] ?? ""} - ${controller.darsOrderDetails.value.result?.order?.preferredprovider?["address"]?["localityName"] ?? ""}")
-                                                    ? TextAlign.left
-                                                    : TextAlign.right,
-                                                decoration: BoxDecoration(
-                                                  color: ColorManager.grey5,
-                                                  borderRadius:
-                                                      BorderRadius.circular(10),
-                                                ),
-                                                triggerMode:
-                                                    TooltipTriggerMode.tap,
-                                                child: PrimaryText(
-                                                  "${controller.darsOrderDetails.value.result?.order?.preferredprovider?["address"]?["countryName"] ?? ""} - ${controller.darsOrderDetails.value.result?.order?.preferredprovider?["address"]?["governorateName"] ?? ""} - ${controller.darsOrderDetails.value.result?.order?.preferredprovider?["address"]?["localityName"] ?? ""}",
-                                                  fontSize: 12,
-                                                  maxLines: 1,
-                                                  fontWeight: FontWeightManager
-                                                      .softLight,
-                                                  color:
-                                                      ColorManager.fontColor7,
-                                                  overflow:
-                                                      TextOverflow.ellipsis,
-                                                ),
-                                              )),
-                                        ],
+                                      PrimaryText(
+                                        controller.darsOrderDetails.value.result
+                                                ?.providerName ??
+                                            "",
+                                        fontSize: 14,
+                                        fontWeight: FontWeightManager.softLight,
                                       ),
                                       const Spacer(),
                                       GetBuilder<OrderDetailsController>(
@@ -539,8 +310,8 @@ class StudyingPackageWidget extends GetView<OrderDetailsController> {
                                             SizedBox(width: 10.w),
                                             GestureDetector(
                                               behavior: HitTestBehavior.opaque,
-                                              onTap: () {
-                                                log('Messaging');
+                                              onTap: () async {
+                                                await Get.toNamed(Routes.CHAT);
                                               },
                                               child: Container(
                                                 width: 40.w,
@@ -570,284 +341,558 @@ class StudyingPackageWidget extends GetView<OrderDetailsController> {
                           );
                         } else {
                           return Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
-                              PrimaryText(
-                                orderStatus == OrderStatus.confirmed
-                                    ? LocaleKeys.teacher.tr
-                                    : LocaleKeys.intersted_teachers.tr,
-                                fontSize: 14,
-                                fontWeight: FontWeightManager.softLight,
-                                color: ColorManager.primary,
-                              ),
-                              SizedBox(height: 15.h),
-                              if (controller.darsOrderDetails.value.result
-                                      ?.candidateProvider?.isNotEmpty ??
-                                  false)
-                                ListView.builder(
-                                  itemCount: controller.darsOrderDetails.value
-                                          .result?.candidateProvider?.length ??
-                                      0,
-                                  physics: const NeverScrollableScrollPhysics(),
-                                  shrinkWrap: true,
-                                  itemBuilder:
-                                      (BuildContext context, int index) {
-                                    double candidateProviderRate = double.parse(
-                                        controller.darsOrderDetails.value.result
-                                                ?.candidateProvider?[index].rate
-                                                .toString() ??
-                                            "0.0");
-                                    return GestureDetector(
-                                      onTap: () async {
-                                        // await Get.bottomSheet(
-                                        //   backgroundColor: ColorManager.white,
-                                        //   isScrollControlled: true,
-                                        //   shape: const RoundedRectangleBorder(
-                                        //     borderRadius: BorderRadius.only(
-                                        //       topLeft: Radius.circular(20),
-                                        //       topRight: Radius.circular(20),
-                                        //     ),
-                                        //   ),
-                                        //   OrderCandidateProviderWidget(
-                                        //     candidateProvider: controller.darsOrderDetails.value
-                                        //         .result?.candidateProvider?[index],
-                                        //   ),
-                                        // );
-                                        Map<String, dynamic> arguments = {
-                                          "teacherId": controller
-                                                  .darsOrderDetails
-                                                  .value
-                                                  .result
-                                                  ?.candidateProvider?[index]
-                                                  .providerId ??
-                                              -1,
-                                        };
-                                        if (OrderStatus.values[controller
-                                                    .darsOrder
-                                                    .currentStatusId ??
-                                                0] !=
-                                            OrderStatus.confirmed) {
-                                          arguments["orderId"] = controller
+                              Visibility(
+                                visible: controller
+                                            .darsOrderDetails
+                                            .value
+                                            .result
+                                            ?.order
+                                            ?.preferredproviderId !=
+                                        null &&
+                                    controller.darsOrderDetails.value.result
+                                            ?.order?.preferredproviderId !=
+                                        0 &&
+                                    (controller
+                                                .darsOrderDetails
+                                                .value
+                                                .result
+                                                ?.order
+                                                ?.preferredproviderIsReject ==
+                                            null ||
+                                        controller
+                                                .darsOrderDetails
+                                                .value
+                                                .result
+                                                ?.order
+                                                ?.preferredproviderIsReject ==
+                                            false),
+                                child: Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    moreDivider(),
+                                    SizedBox(height: 5.h),
+                                    PrimaryText(
+                                      LocaleKeys.current_preferred_teacher.tr,
+                                      fontSize: 14,
+                                      fontWeight: FontWeightManager.softLight,
+                                      color: ColorManager.primary,
+                                    ),
+                                    SizedBox(height: 20.h),
+                                    Padding(
+                                      padding: EdgeInsets.symmetric(
+                                        horizontal: 16.w,
+                                      ),
+                                      child: GestureDetector(
+                                        behavior: HitTestBehavior.opaque,
+                                        onTap: () async {
+                                          int teacherId = controller
                                                   .darsOrderDetails
                                                   .value
                                                   .result
                                                   ?.order
-                                                  ?.id ??
+                                                  ?.preferredproviderId ??
                                               -1;
-                                        }
-                                        await Get.toNamed(
-                                          Routes.TEACHER_DETAILS,
-                                          arguments: arguments,
-                                        );
-                                      },
-                                      child: Container(
-                                        width: Get.width,
-                                        padding: EdgeInsets.symmetric(
-                                          horizontal: 16.w,
-                                          vertical: 10.h,
-                                        ),
-                                        margin: EdgeInsets.only(bottom: 15.h),
-                                        decoration: BoxDecoration(
-                                          color: ColorManager.white,
-                                          borderRadius:
-                                              BorderRadius.circular(14.0),
-                                          boxShadow: const [
-                                            BoxShadow(
-                                              color: Color(0x1a000000),
-                                              offset: Offset(0, 1),
-                                              blurRadius: 8,
-                                            ),
-                                          ],
-                                        ),
-                                        child: Padding(
-                                          padding: const EdgeInsets.all(5.0),
-                                          child: Row(
-                                            crossAxisAlignment:
-                                                CrossAxisAlignment.end,
-                                            children: [
-                                              StatefulBuilder(builder:
-                                                  (BuildContext context,
-                                                      setState) {
-                                                String
-                                                    candidateProviderPicture = // provider = teacher
-                                                    "${Links.baseLink}${Links.profileImageById}?userid=${controller.darsOrderDetails.value.result?.candidateProvider?[index].userId ?? -1}";
-                                                return Container(
-                                                  width: 50.w,
-                                                  height: 50.h,
-                                                  decoration: BoxDecoration(
-                                                    image: DecorationImage(
-                                                      image:
-                                                          CachedNetworkImageProvider(
-                                                        candidateProviderPicture,
-                                                        errorListener: () {
-                                                          setState(() {
-                                                            candidateProviderPicture =
-                                                                "https://www.shareicon.net/data/2016/06/10/586098_guest_512x512.png";
-                                                          });
-                                                        },
-                                                      ),
-                                                      fit: BoxFit.cover,
+                                          if (teacherId != -1) {
+                                            await Get.toNamed(
+                                              Routes.TEACHER_DETAILS,
+                                              arguments: {
+                                                "teacherId": teacherId,
+                                              },
+                                            );
+                                          }
+                                        },
+                                        child: Row(
+                                          children: [
+                                            StatefulBuilder(builder:
+                                                (BuildContext context,
+                                                    setState) {
+                                              String teacherPicture =
+                                                  "${Links.baseLink}${Links.profileImageById}?userid=${controller.darsOrderDetails.value.result?.order?.preferredprovider?["userId"] ?? -1}";
+                                              return Container(
+                                                width: 44.w,
+                                                height: 44.h,
+                                                decoration: BoxDecoration(
+                                                  image: DecorationImage(
+                                                    image:
+                                                        CachedNetworkImageProvider(
+                                                      teacherPicture,
+                                                      errorListener: () {
+                                                        setState(() {
+                                                          teacherPicture =
+                                                              "https://www.shareicon.net/data/2016/06/10/586098_guest_512x512.png";
+                                                        });
+                                                      },
                                                     ),
-                                                    borderRadius:
-                                                        BorderRadius.circular(
-                                                            12),
-                                                    boxShadow: [
-                                                      BoxShadow(
-                                                        color: const Color(
-                                                                0x19000000)
-                                                            .withOpacity(0.07),
-                                                        spreadRadius: 0,
-                                                        offset:
-                                                            const Offset(0, 12),
-                                                        blurRadius: 15,
-                                                      ),
-                                                    ],
+                                                    fit: BoxFit.cover,
                                                   ),
-                                                );
-                                              }),
-                                              SizedBox(width: 10.w),
-                                              Expanded(
-                                                child: Column(
-                                                  children: [
-                                                    Row(
-                                                      mainAxisSize:
-                                                          MainAxisSize.min,
-                                                      mainAxisAlignment:
-                                                          MainAxisAlignment.end,
-                                                      children: [
-                                                        PrimaryText(
-                                                          controller
-                                                                  .darsOrderDetails
-                                                                  .value
-                                                                  .result
-                                                                  ?.candidateProvider?[
-                                                                      index]
-                                                                  .userName ??
-                                                              "",
-                                                          color: ColorManager
-                                                              .fontColor,
-                                                        ),
-                                                        const Spacer(),
-                                                        Row(
-                                                          mainAxisSize:
-                                                              MainAxisSize.min,
-                                                          mainAxisAlignment:
-                                                              MainAxisAlignment
-                                                                  .end,
-                                                          children: [
-                                                            Icon(
-                                                              (candidateProviderRate <=
-                                                                          5 &&
-                                                                      candidateProviderRate >
-                                                                          4)
-                                                                  ? Icons
-                                                                      .star_rounded
-                                                                  : (candidateProviderRate <=
-                                                                              3.5 &&
-                                                                          candidateProviderRate >=
-                                                                              1)
-                                                                      ? Icons
-                                                                          .star_half_rounded
-                                                                      : Icons
-                                                                          .star_outline_rounded,
-                                                              color:
-                                                                  ColorManager
-                                                                      .orange,
-                                                              textDirection:
-                                                                  TextDirection
-                                                                      .ltr,
-                                                              size: 20,
-                                                            ),
-                                                            SizedBox(
-                                                              width: 25.w,
-                                                              child:
-                                                                  PrimaryText(
-                                                                candidateProviderRate
-                                                                    .toStringAsFixed(
-                                                                        1),
-                                                                color: ColorManager
-                                                                    .fontColor,
-                                                                fontSize: 12,
-                                                                maxLines: 1,
-                                                                fontWeight:
-                                                                    FontWeightManager
-                                                                        .softLight,
-                                                                overflow:
-                                                                    TextOverflow
-                                                                        .ellipsis,
-                                                              ),
-                                                            ),
-                                                          ],
-                                                        ),
-                                                      ],
-                                                    ),
-                                                    SizedBox(height: 5.h),
-                                                    Row(
-                                                      mainAxisSize:
-                                                          MainAxisSize.min,
-                                                      mainAxisAlignment:
-                                                          MainAxisAlignment.end,
-                                                      children: [
-                                                        PrimaryText(
-                                                          [
-                                                            "رياضيات",
-                                                            "علوم",
-                                                            "فيزياء"
-                                                          ] // TODO: change to real data
-                                                              .map((String
-                                                                      subject) =>
-                                                                  subject
-                                                                      .toString())
-                                                              .join(", "),
-                                                          color: ColorManager
-                                                              .primary,
-                                                          fontWeight:
-                                                              FontWeightManager
-                                                                  .softLight,
-                                                          fontSize: 11,
-                                                        ),
-                                                        const Spacer(),
-                                                        PrimaryText(
-                                                          "نابلس, الضفة", // TODO: change to real data
-                                                          color: ColorManager
-                                                              .fontColor7,
-                                                          fontSize: 12,
-                                                          maxLines: 1,
-                                                          overflow: TextOverflow
-                                                              .ellipsis,
-                                                        ),
-                                                      ],
+                                                  borderRadius:
+                                                      BorderRadius.circular(12),
+                                                  boxShadow: [
+                                                    BoxShadow(
+                                                      color: const Color(
+                                                              0x19000000)
+                                                          .withOpacity(0.07),
+                                                      spreadRadius: 0,
+                                                      offset:
+                                                          const Offset(0, 12),
+                                                      blurRadius: 15,
                                                     ),
                                                   ],
                                                 ),
-                                              ),
-                                            ],
-                                          ),
+                                              );
+                                            }),
+                                            SizedBox(width: 10.w),
+                                            Column(
+                                              crossAxisAlignment:
+                                                  CrossAxisAlignment.start,
+                                              children: [
+                                                PrimaryText(
+                                                  controller
+                                                              .darsOrderDetails
+                                                              .value
+                                                              .result
+                                                              ?.order
+                                                              ?.preferredprovider?[
+                                                          "name"] ??
+                                                      "",
+                                                  fontSize: 14,
+                                                  fontWeight: FontWeightManager
+                                                      .softLight,
+                                                ),
+                                                SizedBox(
+                                                    width: 120.w,
+                                                    child: Tooltip(
+                                                      message:
+                                                          "${controller.darsOrderDetails.value.result?.order?.preferredprovider?["address"]?["countryName"] ?? ""} - ${controller.darsOrderDetails.value.result?.order?.preferredprovider?["address"]?["governorateName"] ?? ""} - ${controller.darsOrderDetails.value.result?.order?.preferredprovider?["address"]?["localityName"] ?? ""}",
+                                                      padding:
+                                                          const EdgeInsets.all(
+                                                              10),
+                                                      margin:
+                                                          const EdgeInsets.all(
+                                                              16),
+                                                      showDuration:
+                                                          const Duration(
+                                                              milliseconds:
+                                                                  5500),
+                                                      preferBelow: true,
+                                                      textAlign: detectLang(
+                                                              text:
+                                                                  "${controller.darsOrderDetails.value.result?.order?.preferredprovider?["address"]?["countryName"] ?? ""} - ${controller.darsOrderDetails.value.result?.order?.preferredprovider?["address"]?["governorateName"] ?? ""} - ${controller.darsOrderDetails.value.result?.order?.preferredprovider?["address"]?["localityName"] ?? ""}")
+                                                          ? TextAlign.left
+                                                          : TextAlign.right,
+                                                      decoration: BoxDecoration(
+                                                        color:
+                                                            ColorManager.grey5,
+                                                        borderRadius:
+                                                            BorderRadius
+                                                                .circular(10),
+                                                      ),
+                                                      triggerMode:
+                                                          TooltipTriggerMode
+                                                              .tap,
+                                                      child: PrimaryText(
+                                                        "${controller.darsOrderDetails.value.result?.order?.preferredprovider?["address"]?["countryName"] ?? ""} - ${controller.darsOrderDetails.value.result?.order?.preferredprovider?["address"]?["governorateName"] ?? ""} - ${controller.darsOrderDetails.value.result?.order?.preferredprovider?["address"]?["localityName"] ?? ""}",
+                                                        fontSize: 12,
+                                                        maxLines: 1,
+                                                        fontWeight:
+                                                            FontWeightManager
+                                                                .softLight,
+                                                        color: ColorManager
+                                                            .fontColor7,
+                                                        overflow: TextOverflow
+                                                            .ellipsis,
+                                                      ),
+                                                    )),
+                                              ],
+                                            ),
+                                            const Spacer(),
+                                            GetBuilder<OrderDetailsController>(
+                                                builder: (OrderDetailsController
+                                                    controller) {
+                                              return Row(
+                                                children: [
+                                                  GestureDetector(
+                                                    behavior:
+                                                        HitTestBehavior.opaque,
+                                                    onTap: () async {
+                                                      await controller
+                                                          .toggleTeacherFavorite();
+                                                    },
+                                                    child: Container(
+                                                      width: 40.w,
+                                                      height: 40.h,
+                                                      decoration: BoxDecoration(
+                                                        color: ColorManager
+                                                            .primary
+                                                            .withOpacity(0.10),
+                                                        borderRadius:
+                                                            BorderRadius
+                                                                .circular(10),
+                                                      ),
+                                                      child: Center(
+                                                        child: Icon(
+                                                          controller
+                                                                  .isPreferredTeacherFavorite
+                                                              ? Icons
+                                                                  .favorite_rounded
+                                                              : Icons
+                                                                  .favorite_outline_rounded,
+                                                          size: 30,
+                                                          color: controller
+                                                                  .isPreferredTeacherFavorite
+                                                              ? ColorManager.red
+                                                              : ColorManager
+                                                                  .primary,
+                                                        ),
+                                                      ),
+                                                    ),
+                                                  ),
+                                                  SizedBox(width: 10.w),
+                                                  GestureDetector(
+                                                    behavior:
+                                                        HitTestBehavior.opaque,
+                                                    onTap: () async {
+                                                      await Get.toNamed(
+                                                          Routes.CHAT);
+                                                    },
+                                                    child: Container(
+                                                      width: 40.w,
+                                                      height: 40.h,
+                                                      decoration: BoxDecoration(
+                                                        color: ColorManager
+                                                            .yellow
+                                                            .withOpacity(0.15),
+                                                        borderRadius:
+                                                            BorderRadius
+                                                                .circular(10),
+                                                      ),
+                                                      child: Center(
+                                                        child: SvgPicture.asset(
+                                                          ImagesManager
+                                                              .messagingIcon,
+                                                        ),
+                                                      ),
+                                                    ),
+                                                  ),
+                                                ],
+                                              );
+                                            }),
+                                          ],
                                         ),
                                       ),
-                                    );
-                                  },
-                                )
-                              else ...[
-                                Center(
-                                  child: Column(
-                                    children: [
-                                      SizedBox(height: 10.h),
-                                      PrimaryText(
-                                        orderStatus == OrderStatus.cancelled
-                                            ? LocaleKeys
-                                                .no_candidate_providers.tr
-                                            : LocaleKeys
-                                                .no_candidate_providers_yet.tr,
-                                        color: ColorManager.fontColor3,
-                                        fontSize: 14,
-                                        fontWeight: FontWeightManager.medium,
-                                      ),
-                                      SizedBox(height: 20.h),
-                                    ],
-                                  ),
+                                    ),
+                                    SizedBox(height: 20.h),
+                                  ],
                                 ),
-                              ],
+                              ),
+                              moreDivider(),
+                              SizedBox(height: 5.h),
+                              Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  PrimaryText(
+                                    LocaleKeys.intersted_teachers.tr,
+                                    fontSize: 14,
+                                    fontWeight: FontWeightManager.softLight,
+                                    color: ColorManager.primary,
+                                  ),
+                                  SizedBox(height: 15.h),
+                                  if (controller.darsOrderDetails.value.result
+                                          ?.candidateProvider?.isNotEmpty ??
+                                      false)
+                                    ListView.builder(
+                                      itemCount: controller
+                                              .darsOrderDetails
+                                              .value
+                                              .result
+                                              ?.candidateProvider
+                                              ?.length ??
+                                          0,
+                                      physics:
+                                          const NeverScrollableScrollPhysics(),
+                                      shrinkWrap: true,
+                                      itemBuilder:
+                                          (BuildContext context, int index) {
+                                        double candidateProviderRate =
+                                            double.parse(controller
+                                                    .darsOrderDetails
+                                                    .value
+                                                    .result
+                                                    ?.candidateProvider?[index]
+                                                    .rate
+                                                    .toString() ??
+                                                "0.0");
+                                        return GestureDetector(
+                                          onTap: () async {
+                                            // await Get.bottomSheet(
+                                            //   backgroundColor: ColorManager.white,
+                                            //   isScrollControlled: true,
+                                            //   shape: const RoundedRectangleBorder(
+                                            //     borderRadius: BorderRadius.only(
+                                            //       topLeft: Radius.circular(20),
+                                            //       topRight: Radius.circular(20),
+                                            //     ),
+                                            //   ),
+                                            //   OrderCandidateProviderWidget(
+                                            //     candidateProvider: controller.darsOrderDetails.value
+                                            //         .result?.candidateProvider?[index],
+                                            //   ),
+                                            // );
+                                            Map<String, dynamic> arguments = {
+                                              "teacherId": controller
+                                                      .darsOrderDetails
+                                                      .value
+                                                      .result
+                                                      ?.candidateProvider?[
+                                                          index]
+                                                      .providerId ??
+                                                  -1,
+                                            };
+                                            if (OrderStatus.values[controller
+                                                        .darsOrderDetails
+                                                        .value
+                                                        .result
+                                                        ?.order
+                                                        ?.currentStatusId ??
+                                                    0] !=
+                                                OrderStatus.confirmed) {
+                                              arguments["orderId"] = controller
+                                                      .darsOrderDetails
+                                                      .value
+                                                      .result
+                                                      ?.order
+                                                      ?.id ??
+                                                  -1;
+                                            }
+                                            await Get.toNamed(
+                                              Routes.TEACHER_DETAILS,
+                                              arguments: arguments,
+                                            );
+                                          },
+                                          child: Container(
+                                            width: Get.width,
+                                            padding: EdgeInsets.symmetric(
+                                              horizontal: 16.w,
+                                              vertical: 10.h,
+                                            ),
+                                            margin:
+                                                EdgeInsets.only(bottom: 15.h),
+                                            decoration: BoxDecoration(
+                                              color: ColorManager.white,
+                                              borderRadius:
+                                                  BorderRadius.circular(14.0),
+                                              boxShadow: const [
+                                                BoxShadow(
+                                                  color: Color(0x1a000000),
+                                                  offset: Offset(0, 1),
+                                                  blurRadius: 8,
+                                                ),
+                                              ],
+                                            ),
+                                            child: Padding(
+                                              padding:
+                                                  const EdgeInsets.all(5.0),
+                                              child: Column(
+                                                children: [
+                                                  Row(
+                                                    children: [
+                                                      StatefulBuilder(builder:
+                                                          (BuildContext context,
+                                                              setState) {
+                                                        String
+                                                            candidateProviderPicture = // provider = teacher
+                                                            "${Links.baseLink}${Links.profileImageById}?userid=${controller.darsOrderDetails.value.result?.candidateProvider?[index].userId ?? -1}";
+                                                        return Container(
+                                                          width: 50.w,
+                                                          height: 50.h,
+                                                          decoration:
+                                                              BoxDecoration(
+                                                            image:
+                                                                DecorationImage(
+                                                              image:
+                                                                  CachedNetworkImageProvider(
+                                                                candidateProviderPicture,
+                                                                errorListener:
+                                                                    () {
+                                                                  setState(() {
+                                                                    candidateProviderPicture =
+                                                                        "https://www.shareicon.net/data/2016/06/10/586098_guest_512x512.png";
+                                                                  });
+                                                                },
+                                                              ),
+                                                              fit: BoxFit.cover,
+                                                            ),
+                                                            borderRadius:
+                                                                BorderRadius
+                                                                    .circular(
+                                                                        12),
+                                                            boxShadow: [
+                                                              BoxShadow(
+                                                                color: const Color(
+                                                                        0x19000000)
+                                                                    .withOpacity(
+                                                                        0.07),
+                                                                spreadRadius: 0,
+                                                                offset:
+                                                                    const Offset(
+                                                                        0, 12),
+                                                                blurRadius: 15,
+                                                              ),
+                                                            ],
+                                                          ),
+                                                        );
+                                                      }),
+                                                      SizedBox(width: 10.w),
+                                                      Expanded(
+                                                        child: Column(
+                                                          children: [
+                                                            Row(
+                                                              mainAxisSize:
+                                                                  MainAxisSize
+                                                                      .min,
+                                                              mainAxisAlignment:
+                                                                  MainAxisAlignment
+                                                                      .end,
+                                                              children: [
+                                                                PrimaryText(
+                                                                  controller
+                                                                          .darsOrderDetails
+                                                                          .value
+                                                                          .result
+                                                                          ?.candidateProvider?[
+                                                                              index]
+                                                                          .userName ??
+                                                                      "",
+                                                                  color: ColorManager
+                                                                      .fontColor,
+                                                                ),
+                                                                const Spacer(),
+                                                                Row(
+                                                                  mainAxisSize:
+                                                                      MainAxisSize
+                                                                          .min,
+                                                                  mainAxisAlignment:
+                                                                      MainAxisAlignment
+                                                                          .end,
+                                                                  crossAxisAlignment:
+                                                                      CrossAxisAlignment
+                                                                          .center,
+                                                                  children: [
+                                                                    Icon(
+                                                                      (candidateProviderRate <= 5 &&
+                                                                              candidateProviderRate >
+                                                                                  4)
+                                                                          ? Icons
+                                                                              .star_rounded
+                                                                          : (candidateProviderRate <= 3.5 && candidateProviderRate >= 1)
+                                                                              ? Icons.star_half_rounded
+                                                                              : Icons.star_outline_rounded,
+                                                                      color: ColorManager
+                                                                          .orange,
+                                                                      textDirection:
+                                                                          TextDirection
+                                                                              .ltr,
+                                                                      size: 20,
+                                                                    ),
+                                                                    SizedBox(
+                                                                      width:
+                                                                          25.w,
+                                                                      child:
+                                                                          PrimaryText(
+                                                                        candidateProviderRate
+                                                                            .toStringAsFixed(1),
+                                                                        color: ColorManager
+                                                                            .fontColor,
+                                                                        fontSize:
+                                                                            12,
+                                                                        maxLines:
+                                                                            1,
+                                                                        fontWeight:
+                                                                            FontWeightManager.softLight,
+                                                                        overflow:
+                                                                            TextOverflow.ellipsis,
+                                                                      ),
+                                                                    ),
+                                                                  ],
+                                                                ),
+                                                              ],
+                                                            ),
+                                                            // SizedBox(height: 5.h),
+                                                            // Row(
+                                                            //   mainAxisSize:
+                                                            //       MainAxisSize.min,
+                                                            //   mainAxisAlignment:
+                                                            //       MainAxisAlignment
+                                                            //           .end,
+                                                            //   children: [
+                                                            //     PrimaryText(
+                                                            //       [
+                                                            //         "رياضيات",
+                                                            //         "علوم",
+                                                            //         "فيزياء"
+                                                            //       ] // TODO: change to real data
+                                                            //           .map((String
+                                                            //                   subject) =>
+                                                            //               subject
+                                                            //                   .toString())
+                                                            //           .join(", "),
+                                                            //       color: ColorManager
+                                                            //           .primary,
+                                                            //       fontWeight:
+                                                            //           FontWeightManager
+                                                            //               .softLight,
+                                                            //       fontSize: 11,
+                                                            //     ),
+                                                            //     const Spacer(),
+                                                            //     PrimaryText(
+                                                            //       "نابلس, الضفة", // TODO: change to real data
+                                                            //       color: ColorManager
+                                                            //           .fontColor7,
+                                                            //       fontSize: 12,
+                                                            //       maxLines: 1,
+                                                            //       overflow:
+                                                            //           TextOverflow
+                                                            //               .ellipsis,
+                                                            //     ),
+                                                            //   ],
+                                                            // ),
+                                                          ],
+                                                        ),
+                                                      ),
+                                                    ],
+                                                  ),
+                                                ],
+                                              ),
+                                            ),
+                                          ),
+                                        );
+                                      },
+                                    )
+                                  else ...[
+                                    Center(
+                                      child: Column(
+                                        children: [
+                                          SizedBox(height: 10.h),
+                                          PrimaryText(
+                                            orderStatus == OrderStatus.cancelled
+                                                ? LocaleKeys
+                                                    .no_candidate_providers.tr
+                                                : LocaleKeys
+                                                    .no_candidate_providers_yet
+                                                    .tr,
+                                            color: ColorManager.fontColor3,
+                                            fontSize: 14,
+                                            fontWeight:
+                                                FontWeightManager.medium,
+                                          ),
+                                          SizedBox(height: 20.h),
+                                        ],
+                                      ),
+                                    ),
+                                  ],
+                                ],
+                              ),
                             ],
                           );
                         }

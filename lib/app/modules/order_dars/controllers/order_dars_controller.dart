@@ -205,7 +205,10 @@ class OrderDarsController extends GetxController {
       rate: orderDarsToEdit.result?.order?.rate,
       rateNotes: orderDarsToEdit.result?.order?.rateNotes,
       preferredProviderId: preferredTeacherNameController.text.isNotEmpty
-          ? chosenPreferredTeacher?.preferredProvider?.providerId ?? -1
+          ? preferredTeacherNameController.text ==
+                  chosenPreferredTeacher?.providerName
+              ? chosenPreferredTeacher?.preferredProvider?.providerId
+              : null
           : null,
       notes: notesController.text,
       id: orderIdToEdit,
@@ -589,8 +592,7 @@ class OrderDarsController extends GetxController {
             0; // 0 is for face to face, 1 is for online, 2 is for both
         teacherGender =
             (orderDarsToEdit.result?.order?.targetGenderId ?? 1) - 1;
-        // darsCategory = orderDarsToEdit.result?.order?.darsCategoryId ?? 0; // TODO: get darsCategory
-        //TODO: check darsCategory >> // 0 academic learning, 1 skills
+        darsCategory = orderDarsToEdit.result?.categoryId ?? 0;
         if (darsCategory == 0) {
           selectedTopics = (topics.result ?? <topic.Result>[])
               .where((topic.Result topic) {

@@ -8,15 +8,21 @@ import 'package:dio/adapter.dart';
 import 'package:dio/dio.dart';
 import 'package:get/get.dart' as getx;
 import 'package:hessa_student/app/data/network_helper/strings.dart';
+import 'package:hessa_student/app/modules/splash/data/models/user_token/user_token.dart';
+import 'package:intl/intl.dart';
 
 import '../../../../global_presentation/global_widgets/custom_snack_bar.dart';
 import '../../../generated/locales.g.dart';
 import '../../constants/links.dart';
+import '../../modules/splash/data/repos/splash_repo.dart';
+import '../../modules/splash/data/repos/splash_repo_implement.dart';
 import '../../routes/app_pages.dart';
+import '../cache_helper.dart';
 import 'api_exception.dart';
 
 class DioHelper {
   static late final Dio _dio;
+  static SplashRepo splashRepo = SplashRepoImplement();
 
   static void init() {
     _dio = Dio(
@@ -64,6 +70,31 @@ class DioHelper {
             receiveTimeout: TIME_OUT_DURATION,
             sendTimeout: TIME_OUT_DURATION),
       );
+      if (response.statusCode == 401 &&
+          response.data['unAuthorizedRequest'] == true) {
+        await splashRepo.refreshToken().then((UserToken userToken) async {
+          if (userToken.result != null &&
+              userToken.result!.accessToken != null &&
+              CacheHelper.instance.getRefreshToken().isNotEmpty) {
+            await CacheHelper.instance.setLoginTime(
+                DateFormat('yyyy-MM-dd HH:mm:ss').format(DateTime.now()));
+            await CacheHelper.instance.setTokenExpirationSeconds(
+                userToken.result?.expireInSeconds ?? 0);
+            // resend the request
+            post(
+              url,
+              onSuccess: onSuccess,
+              onError: onError,
+              data: data,
+              headers: headers,
+              queryParameters: queryParameters,
+              onLoading: onLoading,
+              onReceiveProgress: onReceiveProgress,
+              onSendProgress: onSendProgress,
+            );
+          }
+        });
+      }
       // 3) return response (api done successfully)
 
       if (response.data.isNotEmpty) {
@@ -172,6 +203,29 @@ class DioHelper {
             ),
           )
           .timeout(const Duration(seconds: TIME_OUT_DURATION));
+      if (response.statusCode == 401 &&
+          response.data['unAuthorizedRequest'] == true) {
+        await splashRepo.refreshToken().then((UserToken userToken) async {
+          if (userToken.result != null &&
+              userToken.result!.accessToken != null &&
+              CacheHelper.instance.getRefreshToken().isNotEmpty) {
+            await CacheHelper.instance.setLoginTime(
+                DateFormat('yyyy-MM-dd HH:mm:ss').format(DateTime.now()));
+            await CacheHelper.instance.setTokenExpirationSeconds(
+                userToken.result?.expireInSeconds ?? 0);
+            // resend the request
+            get(
+              url,
+              headers: headers,
+              queryParameters: queryParameters,
+              onSuccess: onSuccess,
+              onError: onError,
+              onLoading: onLoading,
+              onReceiveProgress: onReceiveProgress,
+            );
+          }
+        });
+      }
       if (response.data.isNotEmpty) {
         await onSuccess(response);
       } else {
@@ -263,6 +317,30 @@ class DioHelper {
             receiveTimeout: TIME_OUT_DURATION,
             sendTimeout: TIME_OUT_DURATION),
       );
+      if (response.statusCode == 401 &&
+          response.data['unAuthorizedRequest'] == true) {
+        await splashRepo.refreshToken().then((UserToken userToken) async {
+          if (userToken.result != null &&
+              userToken.result!.accessToken != null &&
+              CacheHelper.instance.getRefreshToken().isNotEmpty) {
+            await CacheHelper.instance.setLoginTime(
+                DateFormat('yyyy-MM-dd HH:mm:ss').format(DateTime.now()));
+            await CacheHelper.instance.setTokenExpirationSeconds(
+                userToken.result?.expireInSeconds ?? 0);
+            // resend the request
+            put(
+              url,
+              headers: headers,
+              queryParameters: queryParameters,
+              onSuccess: onSuccess,
+              onError: onError,
+              onLoading: onLoading,
+              onReceiveProgress: onReceiveProgress,
+              data: data,
+            );
+          }
+        });
+      }
       // 3) return response (api done successfully)
       if (response.data.isNotEmpty) {
         await onSuccess.call(response);
@@ -359,6 +437,29 @@ class DioHelper {
             receiveTimeout: TIME_OUT_DURATION,
             sendTimeout: TIME_OUT_DURATION),
       );
+      if (response.statusCode == 401 &&
+          response.data['unAuthorizedRequest'] == true) {
+        await splashRepo.refreshToken().then((UserToken userToken) async {
+          if (userToken.result != null &&
+              userToken.result!.accessToken != null &&
+              CacheHelper.instance.getRefreshToken().isNotEmpty) {
+            await CacheHelper.instance.setLoginTime(
+                DateFormat('yyyy-MM-dd HH:mm:ss').format(DateTime.now()));
+            await CacheHelper.instance.setTokenExpirationSeconds(
+                userToken.result?.expireInSeconds ?? 0);
+            // resend the request
+            delete(
+              url,
+              headers: headers,
+              queryParameters: queryParameters,
+              onSuccess: onSuccess,
+              onError: onError,
+              onLoading: onLoading,
+              data: data,
+            );
+          }
+        });
+      }
       // 3) return response (api done successfully)
       await onSuccess.call(response);
     } on DioError catch (error) {
@@ -431,12 +532,33 @@ class DioHelper {
       Function(int value, int progress)? onReceiveProgress,
       required Function onSuccess}) async {
     try {
-      await _dio.download(
+      var response = await _dio.download(
         url,
         savePath,
         options: Options(receiveTimeout: 999999, sendTimeout: 999999),
         onReceiveProgress: onReceiveProgress,
       );
+      if (response.statusCode == 401 &&
+          response.data['unAuthorizedRequest'] == true) {
+        await splashRepo.refreshToken().then((UserToken userToken) async {
+          if (userToken.result != null &&
+              userToken.result!.accessToken != null &&
+              CacheHelper.instance.getRefreshToken().isNotEmpty) {
+            await CacheHelper.instance.setLoginTime(
+                DateFormat('yyyy-MM-dd HH:mm:ss').format(DateTime.now()));
+            await CacheHelper.instance.setTokenExpirationSeconds(
+                userToken.result?.expireInSeconds ?? 0);
+            // resend the request
+            download(
+              url: url,
+              savePath: savePath,
+              onError: onError,
+              onSuccess: onSuccess,
+              onReceiveProgress: onReceiveProgress,
+            );
+          }
+        });
+      }
       onSuccess();
     } catch (error) {
       var exception = ApiException(url: url, message: error.toString());

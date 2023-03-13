@@ -1,3 +1,5 @@
+import 'package:hessa_student/app/core/helper_functions.dart';
+
 import '../../../constants/exports.dart';
 import '../controllers/order_details_controller.dart';
 
@@ -28,11 +30,31 @@ class DarsPropertyWidget extends GetView<OrderDetailsController> {
             fontWeight: FontWeightManager.softLight,
           ),
           const Spacer(),
-          PrimaryText(
-            content,
-            fontSize: 14,
-            fontWeight: FontWeightManager.softLight,
-            color: ColorManager.grey5,
+          SizedBox(
+            width: 190.w,
+            child: Tooltip(
+              message: content,
+              padding: const EdgeInsets.all(10),
+              margin: const EdgeInsets.all(16),
+              showDuration: const Duration(milliseconds: 5500),
+              preferBelow: true,
+              textAlign:
+                  detectLang(text: content) ? TextAlign.left : TextAlign.right,
+              decoration: BoxDecoration(
+                color: ColorManager.grey5,
+                borderRadius: BorderRadius.circular(10),
+              ),
+              triggerMode: TooltipTriggerMode.tap,
+              child: PrimaryText(
+                content,
+                maxLines: 1,
+                textAlign: TextAlign.end,
+                overflow: TextOverflow.ellipsis,
+                fontSize: 14,
+                fontWeight: FontWeightManager.softLight,
+                color: ColorManager.grey5,
+              ),
+            ),
           ),
           SizedBox(width: (Get.width * 0.04).w),
         ],

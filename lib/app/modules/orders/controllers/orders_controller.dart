@@ -7,6 +7,7 @@ import 'package:hessa_student/app/modules/orders/data/repos/orders_repo.dart';
 import 'package:hessa_student/generated/locales.g.dart';
 import 'package:infinite_scroll_pagination/infinite_scroll_pagination.dart';
 
+import '../../../constants/constants.dart';
 import '../../../core/helper_functions.dart';
 import '../data/repos/orders_repo_implement.dart';
 
@@ -23,9 +24,13 @@ class OrdersController extends GetxController {
     });
   }
 
-  String getSessionString(int sessionCount) {
+  String getSessionString(int sessionCount, OrderStatus orderStatus) {
     if (Get.locale!.languageCode == "ar") {
-      if (sessionCount == 1) {
+      if (sessionCount == 0) {
+        return orderStatus == OrderStatus.cancelled
+            ? LocaleKeys.no_sessions.tr
+            : LocaleKeys.no_sessions_yet.tr;
+      } else if (sessionCount == 1) {
         return LocaleKeys.one_session.tr;
       } else if (sessionCount == 2) {
         return LocaleKeys.two_sessions.tr;
@@ -35,7 +40,11 @@ class OrdersController extends GetxController {
         return "$sessionCount ${LocaleKeys.session_number.tr}";
       }
     } else {
-      if (sessionCount == 1) {
+      if (sessionCount == 0) {
+        return orderStatus == OrderStatus.cancelled
+            ? LocaleKeys.no_sessions.tr
+            : LocaleKeys.no_sessions_yet.tr;
+      } else if (sessionCount == 1) {
         return LocaleKeys.one_session.tr;
       } else {
         return "$sessionCount ${LocaleKeys.session.tr}";

@@ -31,6 +31,7 @@ class LocaleKeys {
   static const sort_ascending = 'sort_ascending';
   static const sort_descending = 'sort_descending';
   static const no_messages_yet = 'no_messages_yet';
+  static const teacher_address = 'teacher_address';
   static const welcoming = 'welcoming';
   static const current_preferred_teacher = 'current_preferred_teacher';
   static const add_new_dependent = 'add_new_dependent';
@@ -409,12 +410,15 @@ class LocaleKeys {
   static const choose_expiry_date = 'choose_expiry_date';
   static const enter_card_expiry_date = 'enter_card_expiry_date';
   static const expiry_month_invalid = 'expiry_month_invalid';
+  static const no_sessions_yet = 'no_sessions_yet';
+  static const no_sessions = 'no_sessions';
   static const expiry_year_invalid = 'expiry_year_invalid';
   static const card_has_expired = 'card_has_expired';
   static const teachers_list = 'teachers_list';
   static const explore_dars_teachers = 'explore_dars_teachers';
   static const participant_students = 'participant_students';
   static const teacher = 'teacher';
+  static const assigned_teacher = 'assigned_teacher';
   static const january = 'january';
   static const february = 'february';
   static const march = 'march';
@@ -423,6 +427,8 @@ class LocaleKeys {
   static const june = 'june';
   static const see_all = 'see_all';
   static const july = 'july';
+  static const had_no_assigned_teacher = 'had_no_assigned_teacher';
+  static const no_teacher_assigned = 'no_teacher_assigned';
   static const august = 'august';
   static const notification_deleted_successfully =
       'notification_deleted_successfully';
@@ -525,6 +531,7 @@ class Locales {
     'sort_ascending': 'رتب تصاعدي',
     'sort_descending': 'رتب تنازلي',
     'no_messages_yet': 'لا توجد رسائل بعد',
+    'teacher_address': 'عنوان المُعلّم',
     'welcoming': 'يسعدنا رؤيتك مرة أخرى',
     'current_preferred_teacher': 'المعلم المُفضّل لهذا الطلب',
     'add_new_dependent': 'اضافة تابع جديد',
@@ -895,12 +902,15 @@ class Locales {
     'choose_expiry_date': 'اختر تاريخ الانتهاء',
     'enter_card_expiry_date': 'أدخل تاريخ الانتهاء',
     'expiry_month_invalid': 'شهر الانتهاء غير صالح',
+    'no_sessions_yet': 'لا جلسات بعد',
+    'no_sessions': 'لا جلسات',
     'expiry_year_invalid': 'سنة الانتهاء غير صالحة',
     'card_has_expired': 'انتهت صلاحية البطاقة',
     'teachers_list': 'قائمة المعلمين',
     'explore_dars_teachers': 'استكشف معلمين درس',
     'participant_students': 'الطلاب المشاركين',
     'teacher': 'المعلّم',
+    'assigned_teacher': 'المعلم المُعيّن لهذا الطلب',
     'january': 'يناير',
     'february': 'فبراير',
     'march': 'مارس',
@@ -909,6 +919,8 @@ class Locales {
     'june': 'يونيو',
     'see_all': 'عرض الكل',
     'july': 'يوليو',
+    'had_no_assigned_teacher': 'لم يكن هناك معلم مُعيّن',
+    'no_teacher_assigned': 'لم يتم تعيين مُعلّم',
     'august': 'أغسطس',
     'notification_deleted_successfully': 'تم حذف الإشعار بنجاح',
     'september': 'سبتمبر',

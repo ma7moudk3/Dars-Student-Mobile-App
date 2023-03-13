@@ -7,6 +7,7 @@ class DarsOrder {
   String? preferredStartDate;
   String? preferredEndDate;
   int? sessionTypeId;
+  dynamic providerUserId, providerName;
   String? sessionTypeStr;
   int? sessionCount;
   int? studentCount;
@@ -30,6 +31,8 @@ class DarsOrder {
     this.levelTopic,
     this.categoryId,
     this.categoryName,
+    this.providerUserId,
+    this.providerName,
     this.id,
   });
 
@@ -42,6 +45,8 @@ class DarsOrder {
             ? null
             : DateTime.parse(json['lastModifiedDate'] as String),
         preferredStartDate: json['preferredStartDate'] as String?,
+        providerUserId: json['providerUserId'] as dynamic,
+        providerName: json['providerName'] as dynamic,
         preferredEndDate: json['preferredEndDate'] as String?,
         sessionTypeId: json['sessionTypeId'] as int?,
         sessionTypeStr: json['sessionTypeStr'] as String?,
@@ -62,6 +67,8 @@ class DarsOrder {
         'preferredStartDate': preferredStartDate,
         'preferredEndDate': preferredEndDate,
         'sessionTypeId': sessionTypeId,
+        'providerUserId': providerUserId,
+        'providerName': providerName,
         'sessionTypeStr': sessionTypeStr,
         'sessionCount': sessionCount,
         'studentCount': studentCount,

@@ -9,7 +9,7 @@ class Result {
   String? currencyName;
   dynamic providersNationalIdNumber2;
   String? addressName;
-
+  dynamic categoryId;
   Result({
     this.order,
     this.productName,
@@ -19,6 +19,7 @@ class Result {
     this.currencyName,
     this.providersNationalIdNumber2,
     this.addressName,
+    this.categoryId,
   });
 
   factory Result.fromJson(Map<String, dynamic> json) => Result(
@@ -33,6 +34,7 @@ class Result {
         providersNationalIdNumber2:
             json['providersNationalIDNumber2'] as dynamic,
         addressName: json['addressName'] as String?,
+        categoryId: json['categoryId'] as dynamic,
       );
 
   Map<String, dynamic> toJson() => {
@@ -44,5 +46,6 @@ class Result {
         'currencyName': currencyName,
         'providersNationalIDNumber2': providersNationalIdNumber2,
         'addressName': addressName,
+        'categoryId': categoryId,
       };
 }

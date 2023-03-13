@@ -55,8 +55,13 @@ class DeleteNotificationDialogContent extends StatelessWidget {
                     }
                     if (Get.isSnackbarOpen) {
                       Get.back();
+                      await Future.delayed(const Duration(seconds: 1))
+                          .then((value) async {
+                        deleteNotificationFunction();
+                      });
+                    } else {
+                      deleteNotificationFunction();
                     }
-                    deleteNotificationFunction();
                   },
                   title: LocaleKeys.ok.tr,
                 ),

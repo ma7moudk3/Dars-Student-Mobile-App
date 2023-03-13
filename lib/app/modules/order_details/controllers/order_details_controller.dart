@@ -2,6 +2,7 @@ import 'dart:developer';
 
 import 'package:hessa_student/app/constants/exports.dart';
 import 'package:hessa_student/app/core/helper_functions.dart';
+import 'package:hessa_student/app/modules/order_details/data/models/order_details/address.dart';
 import 'package:hessa_student/global_presentation/global_widgets/loading.dart';
 import 'package:infinite_scroll_pagination/infinite_scroll_pagination.dart';
 import 'package:intl/intl.dart';
@@ -14,6 +15,7 @@ import '../../../routes/app_pages.dart';
 import '../../home/data/models/dars_order.dart';
 import '../../order_dars/data/repos/order_dars_repo.dart';
 import '../../order_dars/data/repos/order_dars_repo_implement.dart';
+import '../../teacher_details/data/models/teacher_details/dars_teacher_details.dart';
 import '../../teacher_details/data/repos/teacher_details_repo.dart';
 import '../../teacher_details/data/repos/teacher_details_repo_implement.dart';
 import '../data/models/order_details/order_details.dart';
@@ -51,6 +53,10 @@ class OrderDetailsController extends GetxController {
     // {
     //   "icon": ImagesManager.classIcon,
     //   "title": LocaleKeys.studying_class.tr,
+    {
+      "icon": ImagesManager.aboutDarsIcon,
+      "title": LocaleKeys.notes.tr,
+    },
     // },
   ];
   // Map<int, List<Map<String, dynamic>>> orderPropertiesMap = {};
@@ -61,6 +67,7 @@ class OrderDetailsController extends GetxController {
   late TextEditingController cancelReasonController;
   Classes classes = Classes();
   bool isPreferredTeacherFavorite = false;
+  int? favoriteTeacherId;
   static const _pageSize = 5; // 5 sessions per page
   List<OrderSession> orderSessions = [];
   PagingController<int, OrderSession> pagingController =
@@ -148,25 +155,51 @@ class OrderDetailsController extends GetxController {
                 ? LocaleKeys.electronic.tr
                 : LocaleKeys.both.tr;
     orderProperties[3]["content"] =
-        darsOrderDetails.value.result?.productName ?? "";
-    orderProperties.last["content"] =
-        darsOrderDetails.value.result?.address?.addressDetails?.name ?? "";
+        darsOrderDetails.value.result?.productName ?? "--";
+    orderProperties[4]["content"] =
+        _formatAddress(darsOrderDetails.value.result?.address);
+    orderProperties[5]["content"] =
+        darsOrderDetails.value.result?.order?.notes ?? "--";
     update();
   }
 
+  String _formatAddress(Address? address) {
+    List<String> addressParts = [];
+    if (address == null) {
+      return "";
+    }
+    if (address.countryName != null && address.countryName!.isNotEmpty) {
+      addressParts.add(address.countryName!);
+    }
+    if (address.governorateName != null &&
+        address.governorateName!.isNotEmpty) {
+      addressParts.add(address.governorateName!);
+    }
+    if (address.localityName != null && address.localityName!.isNotEmpty) {
+      addressParts.add(address.localityName!);
+    }
+    if (address.addressDetails != null &&
+        address.addressDetails!.name != null &&
+        address.addressDetails!.name!.isNotEmpty) {
+      addressParts.add(address.addressDetails!.name!);
+    }
+    return addressParts.join(' - ');
+  }
+
   Future<void> toggleTeacherFavorite() async {
-    if (CacheHelper.instance.authenticated()) {
+    if (CacheHelper.instance.authenticated() &&
+        favoriteTeacherId != null &&
+        favoriteTeacherId != -1 &&
+        favoriteTeacherId != 0) {
       isPreferredTeacherFavorite = !isPreferredTeacherFavorite;
       update();
       if (isPreferredTeacherFavorite == true) {
         await _teacherDetailsRepo.addTeacherToFavorite(
-          teacherId:
-              darsOrderDetails.value.result?.order?.preferredproviderId ?? -1,
+          teacherId: favoriteTeacherId!,
         );
       } else {
         await _teacherDetailsRepo.removeTeacherFromFavorite(
-          teacherId:
-              darsOrderDetails.value.result?.order?.preferredproviderId ?? -1,
+          teacherId: favoriteTeacherId!,
         );
       }
     }
@@ -265,9 +298,33 @@ class OrderDetailsController extends GetxController {
         darsOrderDetails.value = orderDetails;
       });
     }
-    isPreferredTeacherFavorite = darsOrderDetails.value.result != null &&
+    if (darsOrderDetails.value.result != null &&
         darsOrderDetails.value.result!.order != null &&
-        darsOrderDetails.value.result!.order!.preferredproviderId != null;
+        darsOrderDetails.value.result!.order!.providerId != null &&
+        darsOrderDetails.value.result!.order!.providerId != 0 &&
+        darsOrderDetails.value.result!.order!.providerId != -1) {
+      await _teacherDetailsRepo
+          .getTeacherDetails(
+              teacherId: darsOrderDetails.value.result!.order!.providerId!)
+          .then((DarsTeacherDetails teacherDetails) {
+        isPreferredTeacherFavorite =
+            teacherDetails.result!.isPreferred ?? false;
+        favoriteTeacherId = darsOrderDetails.value.result?.order?.providerId;
+      });
+    } else if (darsOrderDetails.value.result != null &&
+        darsOrderDetails.value.result!.order != null &&
+        darsOrderDetails.value.result!.order!.preferredproviderId != null) {
+      await _teacherDetailsRepo
+          .getTeacherDetails(
+              teacherId:
+                  darsOrderDetails.value.result!.order!.preferredproviderId!)
+          .then((DarsTeacherDetails teacherDetails) {
+        isPreferredTeacherFavorite =
+            teacherDetails.result!.isPreferred ?? false;
+        favoriteTeacherId =
+            darsOrderDetails.value.result?.order?.preferredproviderId;
+      });
+    }
     update();
   }
 

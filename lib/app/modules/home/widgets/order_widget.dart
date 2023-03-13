@@ -1,9 +1,11 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:hessa_student/app/routes/app_pages.dart';
 import 'package:hessa_student/generated/locales.g.dart';
 import 'package:intl/intl.dart';
 
 import '../../../constants/constants.dart';
 import '../../../constants/exports.dart';
+import '../../../constants/links.dart';
 import '../../orders/controllers/orders_controller.dart';
 import '../data/models/dars_order.dart';
 
@@ -41,6 +43,9 @@ class OrderWidget extends GetView<OrdersController> {
         orderStatusColor = ColorManager.red;
         break;
     }
+    String teacherPicture = darsOrder.providerUserId != null
+        ? "${Links.baseLink}${Links.profileImageById}?userid=${darsOrder.providerUserId.toString()}"
+        : "https://www.shareicon.net/data/2016/06/10/586098_guest_512x512.png";
     return GestureDetector(
       behavior: HitTestBehavior.opaque,
       onTap: () async {
@@ -140,6 +145,7 @@ class OrderWidget extends GetView<OrdersController> {
                   ),
                   Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
+                    mainAxisSize: MainAxisSize.min,
                     children: [
                       Row(
                         children: [
@@ -147,15 +153,29 @@ class OrderWidget extends GetView<OrdersController> {
                             width: 25.w,
                             height: 25.h,
                             decoration: BoxDecoration(
-                              image: DecorationImage(
-                                image: AssetImage(ImagesManager.avatar),
-                              ),
                               borderRadius: BorderRadius.circular(8),
+                            ),
+                            child: ClipRRect(
+                              borderRadius: BorderRadius.circular(8),
+                              child: CachedNetworkImage(
+                                imageUrl: teacherPicture,
+                                fit: BoxFit.cover,
+                                errorWidget: (context, url, error) =>
+                                    Image.asset(
+                                  ImagesManager.guest,
+                                  fit: BoxFit.cover,
+                                ),
+                              ),
                             ),
                           ),
                           SizedBox(width: 5.w),
                           PrimaryText(
-                            'أ. محمد جبريل',
+                            darsOrder.providerName != null &&
+                                    darsOrder.providerName!.isNotEmpty
+                                ? darsOrder.providerName!
+                                : (orderStatus == OrderStatus.cancelled
+                                    ? LocaleKeys.had_no_assigned_teacher.tr
+                                    : LocaleKeys.no_teacher_assigned.tr),
                             fontSize: 14,
                             color: ColorManager.fontColor7,
                             fontWeight: FontWeightManager.softLight,
@@ -273,32 +293,33 @@ class OrderWidget extends GetView<OrdersController> {
                           ],
                         ),
                       ),
-                      Visibility(
-                        visible: darsOrder.sessionCount != null &&
-                            darsOrder.sessionCount! > 0,
-                        child: Expanded(
-                          child: Row(
-                            children: [
-                              const Spacer(),
-                              Container(
-                                width: 80.w,
-                                height: 30.h,
-                                decoration: BoxDecoration(
-                                  borderRadius: BorderRadius.circular(8),
-                                  color: ColorManager.primary.withOpacity(0.15),
-                                ),
-                                child: Center(
-                                  child: PrimaryText(
-                                    controller.getSessionString(
-                                        darsOrder.sessionCount ?? 0),
-                                    fontSize: 12,
-                                    color: ColorManager.primary,
-                                    fontWeight: FontWeightManager.softLight,
-                                  ),
+                      Expanded(
+                        child: Row(
+                          children: [
+                            const Spacer(),
+                            Container(
+                              width: 80.w,
+                              height: 30.h,
+                              decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(8),
+                                color: (darsOrder.sessionCount == 0
+                                        ? ColorManager.black18
+                                        : ColorManager.primary)
+                                    .withOpacity(0.15),
+                              ),
+                              child: Center(
+                                child: PrimaryText(
+                                  controller.getSessionString(
+                                      darsOrder.sessionCount ?? 0, orderStatus),
+                                  fontSize: 12,
+                                  color: darsOrder.sessionCount == 0
+                                      ? ColorManager.black18
+                                      : ColorManager.primary,
+                                  fontWeight: FontWeightManager.softLight,
                                 ),
                               ),
-                            ],
-                          ),
+                            ),
+                          ],
                         ),
                       ),
                     ],
